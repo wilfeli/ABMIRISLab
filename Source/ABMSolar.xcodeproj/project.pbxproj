@@ -30,6 +30,8 @@
 		EDDB3FC01C7C477A00A6EA1F /* W.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = W.h; path = ABMSolar/W.h; sourceTree = "<group>"; };
 		EDDB3FC11C7C478D00A6EA1F /* SEM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEM.h; path = ABMSolar/SEM.h; sourceTree = "<group>"; };
 		EDDB3FC21C7C47B900A6EA1F /* MarketingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketingSystem.h; path = ABMSolar/MarketingSystem.h; sourceTree = "<group>"; };
+		EDDB3FC31C7C48BE00A6EA1F /* Geography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Geography.h; path = ABMSolar/Geography.h; sourceTree = "<group>"; };
+		EDDB3FC41C7C496A00A6EA1F /* Documentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Documentation.h; path = ABMSolar/Documentation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +72,14 @@
 		EDDB3FBD1C7C42D900A6EA1F /* ABMSolar */ = {
 			isa = PBXGroup;
 			children = (
+				EDDB3FC41C7C496A00A6EA1F /* Documentation.h */,
 				EDDB3FB51C7C402D00A6EA1F /* main.cpp */,
 				EDDB3FBE1C7C46DC00A6EA1F /* SEI.h */,
 				EDDB3FBF1C7C476900A6EA1F /* H.h */,
 				EDDB3FC01C7C477A00A6EA1F /* W.h */,
 				EDDB3FC11C7C478D00A6EA1F /* SEM.h */,
 				EDDB3FC21C7C47B900A6EA1F /* MarketingSystem.h */,
+				EDDB3FC31C7C48BE00A6EA1F /* Geography.h */,
 			);
 			name = ABMSolar;
 			sourceTree = "<group>";
