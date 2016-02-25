@@ -10,4 +10,22 @@
 #define ABMSolar_MarketingSystem_h
 
 
+
+/**
+ 
+ 
+ will inherit from Insititute
+ 
+ 
+*/
+class MarketingInst
+{
+    
+}
+
+
+
+
+
+
 #endif
