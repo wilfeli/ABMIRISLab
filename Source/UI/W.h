@@ -23,7 +23,7 @@ public:
      
      Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file. 
      
-     DevStage1: serialization: choose custom/binary/to database 
+     @DevStage1: serialization: choose custom/binary/to database 
      
      */
     
