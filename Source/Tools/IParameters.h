@@ -22,6 +22,21 @@ namespace solar_core {
         /**  Number of humans in a household */
         N_H,
         
+        /** Credit score */
+        CreditScore,
+        
+        
+        /** Electric bill */
+        ElectricBill,
+        
+        
+        /** Roof size */
+        RoofSize,
+        
+        
+        
+        
+        
         /** Empty enum for completeness */
         None
         
