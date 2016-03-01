@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
+		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
+		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
+		EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116D1C8515D800763818 /* IMessage.cpp */; };
 		EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDB3FE61C7DA16200A6EA1F /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +27,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
+		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
+		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAgent.h; sourceTree = "<group>"; };
+		EDDA116A1C85145300763818 /* IInstitute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IInstitute.cpp; sourceTree = "<group>"; };
+		EDDA116B1C85145300763818 /* IInstitute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IInstitute.h; sourceTree = "<group>"; };
+		EDDA116D1C8515D800763818 /* IMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IMessage.cpp; sourceTree = "<group>"; };
+		EDDA116E1C8515D800763818 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessage.h; sourceTree = "<group>"; };
 		EDDB3FB21C7C402D00A6EA1F /* ABMSolar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ABMSolar; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDB3FDB1C7DA16200A6EA1F /* H.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = H.h; sourceTree = "<group>"; };
 		EDDB3FDC1C7DA16200A6EA1F /* SEI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEI.h; sourceTree = "<group>"; };
@@ -80,6 +91,8 @@
 				EDDB3FDB1C7DA16200A6EA1F /* H.h */,
 				EDDB3FDC1C7DA16200A6EA1F /* SEI.h */,
 				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
+				EDDA11671C85131100763818 /* IAgent.cpp */,
+				EDDA11681C85131100763818 /* IAgent.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -96,6 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FE11C7DA16200A6EA1F /* MarketingSystem.h */,
+				EDDA11651C8512D400763818 /* MarketingSystem.cpp */,
+				EDDA116A1C85145300763818 /* IInstitute.cpp */,
+				EDDA116B1C85145300763818 /* IInstitute.h */,
+				EDDA116D1C8515D800763818 /* IMessage.cpp */,
+				EDDA116E1C8515D800763818 /* IMessage.h */,
 			);
 			path = Institutions;
 			sourceTree = "<group>";
@@ -175,6 +193,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
+				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
+				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,
+				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
+				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

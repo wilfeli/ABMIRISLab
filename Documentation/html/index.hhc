@@ -4,6 +4,7 @@
 <param name="FrameName" value="right">
 </OBJECT>
 <UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Notes for WP"><param name="Local" value="wp.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="DevStage1"><param name="Local" value="_dev_stage1.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="DevStage2"><param name="Local" value="_dev_stage2.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespaces"><param name="ImageNumber" value="1"></OBJECT>
@@ -31,6 +32,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="location_y"><param name="Local" value="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="House"><param name="Local" value="class_house.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -71,6 +73,9 @@
             </UL>
           </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI.h"><param name="Local" value="_s_e_i_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM.h"><param name="Local" value="_s_e_m_8h.html"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Geography"><param name="Local" value="dir_304873b748335ed84f343394b8136b03.html"><param name="ImageNumber" value="1"></OBJECT>

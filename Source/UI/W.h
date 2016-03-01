@@ -29,6 +29,11 @@ public:
     
     
     //@}
+    
+    
+    
+protected:
+    
 };
 
 

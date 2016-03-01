@@ -17,15 +17,19 @@
 #include "Geography/Geography.h"
 
 
-//MARK: add namespaces, think about name
 
 
-namespace solar_core {
+namespace solar_core
+{
     
 
 /**
  
- Has multiple humans, but they are not modelled as decision agents.
+ Has multiple humans, but they are not modelled as decision agents only the HH is the decision making agent.
+ 
+ 
+ @wp Once survey is completed will have data: what are your choices and decisions on solar panels. The same logic as in SEI. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data.
+ 
  
  
  */
