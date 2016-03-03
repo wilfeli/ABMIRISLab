@@ -19,8 +19,7 @@ W::life_hhs()
 {
     
     
-    //go through households that indicated desire to request information and inform them that action could be taken
-    
+    //go through households that indicated desire to request information and inform them that action to request information could be taken
     for (auto& agent:get_inf_marketing_sei_agents)
     {
         ///@DevStage3 might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place.
@@ -28,5 +27,9 @@ W::life_hhs()
     };
     
     
+    
+    
+    //go through part of agents and call act_tick - staged action for them
+    //MARK: cont.
     
 }

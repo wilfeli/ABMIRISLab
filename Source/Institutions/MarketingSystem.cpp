@@ -18,17 +18,23 @@ MarketingInst::act_tick()
 
     
     //push marketing information to selection
-    
     for (auto& agent:interested_agents)
     {
-        //check if
+        //push all marketing messages
+        for (auto& mes:marketing_mess)
+        {
+            agent->get_inf(mes);
+        };
         
-        agent->get_inf();
     };
     
     
     
     //randomly select agents and push marketing information 
+    
+    
+    
+    
     
     
 }

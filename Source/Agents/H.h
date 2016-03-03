@@ -125,7 +125,19 @@ protected:
     //@}
     
     
+    //@{
+    /**
+     
+     Section with agent's internals
+     
+     */
     
+    
+    /*!<  @DevStage1 research GUID. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
+    
+    
+    
+    //@}
     
     
     

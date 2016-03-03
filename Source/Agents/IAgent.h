@@ -9,15 +9,26 @@
 #ifndef __ABMSolar__IAgent__
 #define __ABMSolar__IAgent__
 
+#include <memory>
+
+
 
 namespace solar_core
 {
+    
+class MesMarketing;
 
 class IAgent
 {
 public:
     virtual void ac_inf_marketing_sei() = 0; /*!< action to request information from SEI when initiative is given from the W */
-
+    virtual void get_inf(std::shared_ptr<MesMarketing>) = 0; /*!< receives marketing information */
+    
+    
+    
+    
+    virtual void act_tick() = 0; /*!< generic actions on a tick, specialize for each type of agents */
+    
     
 };
 

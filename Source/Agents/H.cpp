@@ -11,7 +11,11 @@
 
 using namespace solar_core;
 
-
+void
+Household::get_inf(std::shared_ptr<MesMarketing> mes)
+{
+    ///@DevStage3 check if is interested in the marketing message
+}
 
 
 void
@@ -29,6 +33,22 @@ Household::ac_inf_marketing_sei()
         
         get_inf_marketing_sei_agents.pop_front();
     };
+    
+    
+    
+}
+
+
+
+
+
+
+
+void
+Household::act_tick()
+{
+    ///@DevStage2 add request for information that is internally triggered
+    
     
     
     

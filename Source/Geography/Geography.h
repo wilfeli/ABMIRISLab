@@ -11,15 +11,10 @@
 
 #include <vector>
 
-/**
- 
- 
- MARK: generally have 2-d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10^5 = 10^3 * 10^3. Might need grid with sizes, each lot has a size. 10^3 for rows and columns is OK size.
- 
- Will have patches of houses, each house - 1 tile with size. Also will have empty tiles with sizes also. Will decrease total number of tiles. Will have neighborhoods with different tile sizes, house characteristics, population density as a derivative of tile size.
- 
- */
 
+namespace solar_core
+{
+    
 
 
 /**
@@ -45,10 +40,14 @@ public:
 
 /**
  
+ Each tile has x and y sizes.
  
  */
 class Tile
 {
+protected:
+    double size_x; /*!< length of a tile */
+    double size_y; /*!< width of a tile */
     
 };
 
@@ -58,7 +57,9 @@ class Tile
 /**
  
  
+ @wp generally have 2-d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10^5 = 10^3 * 10^3. Might need grid with sizes, each lot has a size. 10^3 for rows and columns is OK size.
  
+ Will have patches of houses, each house - 1 tile with size. Also will have empty tiles with sizes also. Will decrease total number of tiles. Will have neighborhoods with different tile sizes, house characteristics, population density as a derivative of tile size.
  
  */
 class WorldMap
@@ -68,7 +69,7 @@ public:
 };
 
 
-
+} //end of namespace solar_core
 
 
 
