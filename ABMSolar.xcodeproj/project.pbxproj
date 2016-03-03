@@ -12,6 +12,8 @@
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
 		EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116D1C8515D800763818 /* IMessage.cpp */; };
 		EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDB3FE61C7DA16200A6EA1F /* main.cpp */; };
+		EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
+		EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +46,8 @@
 		EDDB3FE41C7DA16200A6EA1F /* IParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IParameters.h; sourceTree = "<group>"; };
 		EDDB3FE61C7DA16200A6EA1F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EDDB3FE71C7DA16200A6EA1F /* W.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W.h; sourceTree = "<group>"; };
+		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
+		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +92,12 @@
 		EDDB3FDA1C7DA16200A6EA1F /* Agents */ = {
 			isa = PBXGroup;
 			children = (
+				EDEDFCFA1C87BF5800A26BA5 /* H.cpp */,
 				EDDB3FDB1C7DA16200A6EA1F /* H.h */,
-				EDDB3FDC1C7DA16200A6EA1F /* SEI.h */,
-				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
 				EDDA11671C85131100763818 /* IAgent.cpp */,
 				EDDA11681C85131100763818 /* IAgent.h */,
+				EDDB3FDC1C7DA16200A6EA1F /* SEI.h */,
+				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -108,12 +113,12 @@
 		EDDB3FE01C7DA16200A6EA1F /* Institutions */ = {
 			isa = PBXGroup;
 			children = (
-				EDDB3FE11C7DA16200A6EA1F /* MarketingSystem.h */,
-				EDDA11651C8512D400763818 /* MarketingSystem.cpp */,
 				EDDA116A1C85145300763818 /* IInstitute.cpp */,
 				EDDA116B1C85145300763818 /* IInstitute.h */,
 				EDDA116D1C8515D800763818 /* IMessage.cpp */,
 				EDDA116E1C8515D800763818 /* IMessage.h */,
+				EDDA11651C8512D400763818 /* MarketingSystem.cpp */,
+				EDDB3FE11C7DA16200A6EA1F /* MarketingSystem.h */,
 			);
 			path = Institutions;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FE61C7DA16200A6EA1F /* main.cpp */,
+				EDEDFCF81C87BA5100A26BA5 /* W.cpp */,
 				EDDB3FE71C7DA16200A6EA1F /* W.h */,
 			);
 			path = UI;
@@ -193,8 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
+				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
 				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,
+				EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */,
 				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
 			);

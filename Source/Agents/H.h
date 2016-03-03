@@ -11,16 +11,21 @@
 
 
 #include <map>
+#include <deque>
 
 
 #include "Tools/IParameters.h"
 #include "Geography/Geography.h"
-
+#include "Agents/IAgent.h"
 
 
 
 namespace solar_core
 {
+
+    
+class MesMarketingQuote;
+    
     
 
 /**
@@ -33,10 +38,21 @@ namespace solar_core
  
  
  */
-class Household
+class Household: public IAgent
 {
 public:
+    //@{
+    /**
+     
+     Section with actions in the world
+     
+     */
     
+    virtual void ac_inf_marketing_sei() override; /*!< action to request information from SEI when initiative is given from the W */
+    
+    
+    
+    //@}
     
     
 protected:
@@ -91,6 +107,24 @@ protected:
     
     
     //@}
+    
+    
+    
+    //@{
+    /**
+     
+     Section relevant to marketing information
+     
+     */
+    
+    std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< stores list of SEI agents that is interested in geting quotes from */
+    
+    std::deque<std::shared_ptr<MesMarketingQuote>> quotes; /*!< have list of active quotes that need to be acted upon */
+    
+    
+    //@}
+    
+    
     
     
     

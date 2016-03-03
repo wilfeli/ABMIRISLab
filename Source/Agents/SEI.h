@@ -26,8 +26,8 @@ namespace solar_core
  
  */
 class MesMarketing;
-    
-    
+class MesMarketingQuote;
+class Household;
     
 
 /**
@@ -44,7 +44,8 @@ class MesMarketing;
  */
 class SEI
 {
-
+public:
+    std::shared_ptr<MesMarketingQuote> get_quote(Household* agent_in); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
 protected:
     
     
