@@ -30,7 +30,7 @@ public:
      
      Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file. 
      
-     @DevStage1: serialization: choose custom/binary/to database 
+     @DevStage1: serialization: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.  
      
      */
     

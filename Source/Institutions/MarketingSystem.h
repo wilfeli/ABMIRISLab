@@ -20,7 +20,7 @@ namespace solar_core
 
     
     
-class MesMarketing;
+class MesMarketingSEI;
     
     
     
@@ -41,7 +41,7 @@ protected:
     
     std::map<std::string, double> params; /*!<   */
     
-    std::vector<std::shared_ptr<MesMarketing>> marketing_mess; /*!< marketing messages fro SEI */
+    std::vector<std::shared_ptr<MesMarketingSEI>> marketing_mess; /*!< marketing messages fro SEI */
 };
 
 

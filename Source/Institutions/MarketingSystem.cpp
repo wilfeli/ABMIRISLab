@@ -17,7 +17,7 @@ MarketingInst::act_tick()
 {
 
     
-    //push marketing information to selection
+    //push marketing information to the selection of agents that expressed interest in receiving marketing information
     for (auto& agent:interested_agents)
     {
         //push all marketing messages
@@ -31,7 +31,7 @@ MarketingInst::act_tick()
     
     
     //randomly select agents and push marketing information 
-    
+    //MARK: cont.
     
     
     

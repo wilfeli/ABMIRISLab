@@ -6,15 +6,24 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "Institutions/IMessage.h"
+#include "Tools/WorldSettings.h"
 #include "Agents/H.h"
-
+#include "Agents/SEI.h"
 
 using namespace solar_core;
 
 void
-Household::get_inf(std::shared_ptr<MesMarketing> mes)
+Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
-    ///@DevStage3 check if is interested in the marketing message
+    //saves information about advertising agent
+    ///No mutex guards as only other operation is poping from the front, which does not invalidate anything
+    get_inf_marketing_sei_agents.push_back(mes_->sei);
+    
+    ///@DevStage2 might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages 
+    
+    
+    ///@DevStage3 check if this agent is interested in the marketing message
 }
 
 
@@ -26,10 +35,13 @@ Household::ac_inf_marketing_sei()
     {
         auto agent = get_inf_marketing_sei_agents.front();
         
-        //returns quote in the form of a message
-        auto mes = agent->get_quote(this);
         
-        quotes.push_back(mes);
+        ///@DevStage2 think about distinguishing between online and phone quote. Small installers might not have an online presence
+        
+        //returns quote in the form of a message
+        auto mes = agent->get_online_quote(this);
+        
+        preliminary_quotes.push_back(mes);
         
         get_inf_marketing_sei_agents.pop_front();
     };
@@ -39,7 +51,18 @@ Household::ac_inf_marketing_sei()
 }
 
 
-
+std::shared_ptr<MesStateBaseHH>
+Household::get_inf_online_quote(IAgent* agent_to)
+{
+    auto mes = std::make_shared<MesStateBaseHH>();
+    
+    for (auto& param:WorldSettings::instance().params_to_copy_preliminary_quote)
+    {
+        mes->params[param] = params[param];
+    };
+    
+    return mes;
+}
 
 
 

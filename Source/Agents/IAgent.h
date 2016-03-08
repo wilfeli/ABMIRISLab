@@ -16,13 +16,13 @@
 namespace solar_core
 {
     
-class MesMarketing;
+class MesMarketingSEI;
 
 class IAgent
 {
 public:
     virtual void ac_inf_marketing_sei() = 0; /*!< action to request information from SEI when initiative is given from the W */
-    virtual void get_inf(std::shared_ptr<MesMarketing>) = 0; /*!< receives marketing information */
+    virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_) = 0; /*!< receives marketing information */
     
     
     

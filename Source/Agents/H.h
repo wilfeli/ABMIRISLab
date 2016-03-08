@@ -24,8 +24,8 @@ namespace solar_core
 {
 
     
-class MesMarketingQuote;
-    
+class MesMarketingSEIPreliminaryQuote;
+class MesStateBaseHH; 
     
 
 /**
@@ -41,6 +41,33 @@ class MesMarketingQuote;
 class Household: public IAgent
 {
 public:
+    
+    //@{
+    /**
+     
+     Creation and initialization section
+     
+     
+     @DevStage2 need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator
+     
+     C(const C&) = default;               // Copy constructor
+     C(C&&) = default;                    // Move constructor
+     C& operator=(const C&) & = default;  // Copy assignment operator
+     C& operator=(C&&) & = default;       // Move assignment operator
+     virtual ~C() { }                     // Destructor
+     
+     see http://stackoverflow.com/questions/4782757/rule-of-three-becomes-rule-of-five-with-c11
+     
+     */
+    
+    
+    //@}
+    
+    
+    
+    
+    
+    
     //@{
     /**
      
@@ -48,9 +75,11 @@ public:
      
      */
     
+    
+    virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_)  override; /*!< receives marketing information */
+    
     virtual void ac_inf_marketing_sei() override; /*!< action to request information from SEI when initiative is given from the W */
-    
-    
+    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
     
     //@}
     
@@ -119,7 +148,7 @@ protected:
     
     std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< stores list of SEI agents that is interested in geting quotes from */
     
-    std::deque<std::shared_ptr<MesMarketingQuote>> quotes; /*!< have list of active quotes that need to be acted upon */
+    std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with */
     
     
     //@}
@@ -133,7 +162,7 @@ protected:
      */
     
     
-    /*!<  @DevStage1 research GUID. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
+    /*!<  @DevStage1 GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
     
     
