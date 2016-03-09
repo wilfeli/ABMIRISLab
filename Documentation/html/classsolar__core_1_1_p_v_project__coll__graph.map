@@ -1,0 +1,5 @@
+<map id="solar_core::PVProject" name="solar_core::PVProject">
+<area shape="rect" id="node3" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="711,249,867,276"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_i_agent.html" title="solar_core::IAgent" alt="" coords="355,165,485,192"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_house.html" title="solar_core::House" alt="" coords="355,293,485,320"/>
+</map>

@@ -62,25 +62,103 @@
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define ABMSolar_SEI_h</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_s_e_i.html">SEI</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <span class="comment">//end namespace solar_core</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classsolar__core_1_1_s_e_i_html"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a></div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00030">SEI.h:30</a></div></div>
-<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00023">H.h:23</a></div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_external_includes_8h.html">Tools/ExternalIncludes.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_parameters_8h.html">Tools/IParameters.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_agent_8h.html">Agents/IAgent.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_solar_panel_8h.html">Agents/SolarPanel.h</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span>MesMarketingSEI;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>MesMarketingSEIPreliminaryQuote;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>W;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>Household;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_s_e_i.html">SEI</a>: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_i_agent.html">IAgent</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_s_e_i.html#a3dd3a3550f3de5cf4d36c2f83cbd1123">init</a>(<a class="code" href="classsolar__core_1_1_w.html">W</a>* w_); </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">act_tick</a>(); </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_s_e_i.html#a5e3d4492dac9002a31dee817bcea20dd">request_online_quote</a>(<a class="code" href="classsolar__core_1_1_household.html">Household</a>* agent_in);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_s_e_i.html#ad7464d7d5ecad1721c7458358bcfe947">request_preliminary_quote</a>(<a class="code" href="classsolar__core_1_1_household.html">Household</a>* agent_in);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;MesMarketingSEIPreliminaryQuote&gt; <a class="code" href="classsolar__core_1_1_s_e_i.html#aa4cf0e7d6539c591a9762941b1a19bfa">form_online_quote</a>(<a class="code" href="classsolar__core_1_1_household.html">Household</a>* agent_in); </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;MesMarketingSEIPreliminaryQuote&gt; <a class="code" href="classsolar__core_1_1_s_e_i.html#a5aac9c5dad91b137dca29539269ddbe9">form_preliminary_quote</a>(<a class="code" href="classsolar__core_1_1_household.html">Household</a>* agent_in);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html#a2092c19659e7acd194ac326ba6fbdc29">  104</a></span>&#160;    <a class="code" href="classsolar__core_1_1_mes_marketing_s_e_i.html">MesMarketingSEI</a>* <a class="code" href="classsolar__core_1_1_s_e_i.html#a2092c19659e7acd194ac326ba6fbdc29">mes_marketing</a>; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html#a811b998092171224983f9aefaa974707">  123</a></span>&#160;    std::map&lt;EParamTypes, double&gt; <a class="code" href="classsolar__core_1_1_s_e_i.html#a811b998092171224983f9aefaa974707">params</a>; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html#abf17b36abf722993d5ad53710579d402">  126</a></span>&#160;    <a class="code" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">TimeUnit</a> <a class="code" href="classsolar__core_1_1_s_e_i.html#abf17b36abf722993d5ad53710579d402">a_time</a>; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html#a76d9d151e51465d534ff0fd3d64f98bc">  141</a></span>&#160;    std::vector&lt;std::shared_ptr&lt;PVProject&gt;&gt; <a class="code" href="classsolar__core_1_1_s_e_i.html#a76d9d151e51465d534ff0fd3d64f98bc">pvprojects</a>; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_s_e_i.html#a82e0c6b5f6d83639a08c1bc357fd3466">  157</a></span>&#160;    <a class="code" href="classsolar__core_1_1_w.html">W</a>* <a class="code" href="classsolar__core_1_1_s_e_i.html#a82e0c6b5f6d83639a08c1bc357fd3466">w</a>; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;};</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;} <span class="comment">//end namespace solar_core</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a3dd3a3550f3de5cf4d36c2f83cbd1123"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a3dd3a3550f3de5cf4d36c2f83cbd1123">solar_core::SEI::init</a></div><div class="ttdeci">virtual void init(W *w_)</div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_aa4cf0e7d6539c591a9762941b1a19bfa"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#aa4cf0e7d6539c591a9762941b1a19bfa">solar_core::SEI::form_online_quote</a></div><div class="ttdeci">virtual std::shared_ptr&lt; MesMarketingSEIPreliminaryQuote &gt; form_online_quote(Household *agent_in)</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8cpp_source.html#l00037">SEI.cpp:37</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a5e3d4492dac9002a31dee817bcea20dd"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a5e3d4492dac9002a31dee817bcea20dd">solar_core::SEI::request_online_quote</a></div><div class="ttdeci">virtual void request_online_quote(Household *agent_in)</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8cpp_source.html#l00022">SEI.cpp:22</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a></div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00053">SEI.h:53</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_abf17b36abf722993d5ad53710579d402"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#abf17b36abf722993d5ad53710579d402">solar_core::SEI::a_time</a></div><div class="ttdeci">TimeUnit a_time</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00126">SEI.h:126</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html"><div class="ttname"><a href="classsolar__core_1_1_w.html">solar_core::W</a></div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00024">W.h:24</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_mes_marketing_s_e_i_html"><div class="ttname"><a href="classsolar__core_1_1_mes_marketing_s_e_i.html">solar_core::MesMarketingSEI</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_message_8h_source.html#l00030">IMessage.h:30</a></div></div>
+<div class="ttc" id="_solar_panel_8h_html"><div class="ttname"><a href="_solar_panel_8h.html">SolarPanel.h</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_a4b5949d07259da6f8a20d12a30403e90"><div class="ttname"><a href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">solar_core::TimeUnit</a></div><div class="ttdeci">int64_t TimeUnit</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00091">IParameters.h:91</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a811b998092171224983f9aefaa974707"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a811b998092171224983f9aefaa974707">solar_core::SEI::params</a></div><div class="ttdeci">std::map&lt; EParamTypes, double &gt; params</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00123">SEI.h:123</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_agent_html"><div class="ttname"><a href="classsolar__core_1_1_i_agent.html">solar_core::IAgent</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_agent_8h_source.html#l00020">IAgent.h:20</a></div></div>
+<div class="ttc" id="_i_agent_8h_html"><div class="ttname"><a href="_i_agent_8h.html">IAgent.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_ad7464d7d5ecad1721c7458358bcfe947"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#ad7464d7d5ecad1721c7458358bcfe947">solar_core::SEI::request_preliminary_quote</a></div><div class="ttdeci">virtual void request_preliminary_quote(Household *agent_in)</div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html"><div class="ttname"><a href="classsolar__core_1_1_household.html">solar_core::Household</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00041">H.h:41</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a76d9d151e51465d534ff0fd3d64f98bc"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a76d9d151e51465d534ff0fd3d64f98bc">solar_core::SEI::pvprojects</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; PVProject &gt; &gt; pvprojects</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00141">SEI.h:141</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a82e0c6b5f6d83639a08c1bc357fd3466"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a82e0c6b5f6d83639a08c1bc357fd3466">solar_core::SEI::w</a></div><div class="ttdeci">W * w</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00157">SEI.h:157</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a2092c19659e7acd194ac326ba6fbdc29"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a2092c19659e7acd194ac326ba6fbdc29">solar_core::SEI::mes_marketing</a></div><div class="ttdeci">MesMarketingSEI * mes_marketing</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00104">SEI.h:104</a></div></div>
+<div class="ttc" id="_external_includes_8h_html"><div class="ttname"><a href="_external_includes_8h.html">ExternalIncludes.h</a></div></div>
+<div class="ttc" id="_i_parameters_8h_html"><div class="ttname"><a href="_i_parameters_8h.html">IParameters.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_a5aac9c5dad91b137dca29539269ddbe9"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#a5aac9c5dad91b137dca29539269ddbe9">solar_core::SEI::form_preliminary_quote</a></div><div class="ttdeci">virtual std::shared_ptr&lt; MesMarketingSEIPreliminaryQuote &gt; form_preliminary_quote(Household *agent_in)</div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html_ab0bd6ae650afc15fe71ce545373ab16e"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">solar_core::SEI::act_tick</a></div><div class="ttdeci">virtual void act_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8cpp_source.html#l00055">SEI.cpp:55</a></div></div>
+<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00022">H.h:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 28 2016 22:29:58 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 8 2016 21:51:47 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

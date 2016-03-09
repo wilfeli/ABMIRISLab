@@ -6,13 +6,84 @@
 
 
 
+Collaboration diagram for solar\+\_\+core\+:\+:W\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classsolar__core_1_1_w__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{life\+\_\+hhs} ()
+\end{DoxyCompactItemize}
+
+\subsection*{Public Attributes}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}{time}
+\end{DoxyCompactItemize}
+
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ \hyperlink{classsolar__core_1_1_i_agent}{I\+Agent} $\ast$ $>$ \hyperlink{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}
+\end{DoxyCompactItemize}
+
+
 \subsection{Detailed Description}
 
 
-Definition at line 16 of file W.\+h.
+Definition at line 24 of file W.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!life\+\_\+hhs@{life\+\_\+hhs}}
+\index{life\+\_\+hhs@{life\+\_\+hhs}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{life\+\_\+hhs}]{\setlength{\rightskip}{0pt plus 5cm}void W\+::life\+\_\+hhs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}
+Section with initialization and serialization code.
+
+Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file.
+
+\begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000010}{Dev\+Stage1}]\+: serialization\+: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.\end{DoxyRefDesc}
+
+
+Section with main looplife of households \begin{DoxyRefDesc}{Dev\+Stage3}
+\item[\hyperlink{_dev_stage3__DevStage3000005}{Dev\+Stage3}]might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place. \end{DoxyRefDesc}
+
+
+Definition at line 18 of file W.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents@{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}}
+\index{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents@{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<${\bf I\+Agent}$\ast$$>$ solar\+\_\+core\+::\+W\+::get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}
+Agents that requested information, inform \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} that there is request for information for this agent 
+
+Definition at line 72 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!time@{time}}
+\index{time@{time}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+W\+::time}\label{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}
+Section with general world parameters and etc. 
+
+Definition at line 63 of file W.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+U\+I/\hyperlink{_w_8h}{W.\+h}\end{DoxyCompactItemize}
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+U\+I/\hyperlink{_w_8h}{W.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+U\+I/\hyperlink{_w_8cpp}{W.\+cpp}\end{DoxyCompactItemize}

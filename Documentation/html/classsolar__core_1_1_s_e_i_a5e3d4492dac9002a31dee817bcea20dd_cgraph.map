@@ -1,0 +1,4 @@
+<map id="solar_core::SEI::request_online_quote" name="solar_core::SEI::request_online_quote">
+<area shape="rect" id="node2" href="$classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e" title="solar_core::Household\l::get_inf_online_quote" alt="" coords="219,5,375,46"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="425,5,599,46"/>
+</map>

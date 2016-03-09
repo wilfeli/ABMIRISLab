@@ -61,47 +61,91 @@
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef ABMSolar_IParameters_h</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define ABMSolar_IParameters_h</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_external_includes_8h.html">Tools/ExternalIncludes.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a> {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">   17</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">EParamTypes</a>: int64_t</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7">Income</a>,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a62c5cc90270449db38e6fb4f2db71c55">N_H</a>,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">CreditScore</a>,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2260b5ee8e87a0db64c77e42a574c858">ElectricBill</a>,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">   22</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">EParamTypes</a>: int64_t</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7">Income</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a62c5cc90270449db38e6fb4f2db71c55">N_H</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">RoofSize</a>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">CreditScore</a>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579">ElectricityBill</a>,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754">None</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">RoofSize</a>,</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2260b5ee8e87a0db64c77e42a574c858"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2260b5ee8e87a0db64c77e42a574c858">solar_core::EParamTypes::ElectricBill</a></div></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ab7e2248cc39987dd2abd91c05fa003c9">PreliminaryQuote</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032">PreliminaryQuoteEstimatedSavings</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a65e9babf589ac04a35221b97b0449611">EstimatedPricePerWatt</a>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a00420d47e5664414646cd5cc5245c914">AveragePVPrice</a>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">SEISmall</a>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">SEILarge</a>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c">RequestedOnlineQuote</a>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">RequestedPreliminaryQuote</a>,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9">ProvidedOnlineQuote</a>,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">ProvidedPreliminaryQuote</a>,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754">None</a></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    };</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">   91</a></span>&#160;    <span class="keyword">typedef</span> int64_t <a class="code" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">TimeUnit</a>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} <span class="comment">//end of namespace solar_core</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">solar_core::EParamTypes::RequestedPreliminaryQuote</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">solar_core::EParamTypes::ProvidedPreliminaryQuote</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_a4b5949d07259da6f8a20d12a30403e90"><div class="ttname"><a href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">solar_core::TimeUnit</a></div><div class="ttdeci">int64_t TimeUnit</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00091">IParameters.h:91</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032">solar_core::EParamTypes::PreliminaryQuoteEstimatedSavings</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a65e9babf589ac04a35221b97b0449611"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a65e9babf589ac04a35221b97b0449611">solar_core::EParamTypes::EstimatedPricePerWatt</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579">solar_core::EParamTypes::ElectricityBill</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c">solar_core::EParamTypes::RequestedOnlineQuote</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9">solar_core::EParamTypes::ProvidedOnlineQuote</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">solar_core::EParamTypes::RoofSize</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">solar_core::EParamTypes::SEILarge</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a62c5cc90270449db38e6fb4f2db71c55"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a62c5cc90270449db38e6fb4f2db71c55">solar_core::EParamTypes::N_H</a></div></div>
-<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">solar_core::EParamTypes</a></div><div class="ttdeci">EParamTypes</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00017">IParameters.h:17</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a00420d47e5664414646cd5cc5245c914"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a00420d47e5664414646cd5cc5245c914">solar_core::EParamTypes::AveragePVPrice</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">solar_core::EParamTypes</a></div><div class="ttdeci">EParamTypes</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00022">IParameters.h:22</a></div></div>
+<div class="ttc" id="_external_includes_8h_html"><div class="ttname"><a href="_external_includes_8h.html">ExternalIncludes.h</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ab7e2248cc39987dd2abd91c05fa003c9"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ab7e2248cc39987dd2abd91c05fa003c9">solar_core::EParamTypes::PreliminaryQuote</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7">solar_core::EParamTypes::Income</a></div></div>
-<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00023">H.h:23</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">solar_core::EParamTypes::SEISmall</a></div></div>
+<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00022">H.h:22</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">solar_core::EParamTypes::CreditScore</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754">solar_core::EParamTypes::None</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 28 2016 22:29:58 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 8 2016 21:51:47 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -42,15 +42,28 @@
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt><a class="anchor" id="_DevStage2000002"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000003"></a>Member <a class="el" href="classsolar__core_1_1_household.html#add38a49b76c2836a50a89e75318414f1">solar_core::Household::ac_inf_marketing_sei</a>  () override</dt>
+<dd><p class="startdd">need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator</p>
+<p>think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote </p>
+<p class="enddd">think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote  </p>
+</dd>
+<dt><a class="anchor" id="_DevStage2000001"></a>Member <a class="el" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">solar_core::Household::get_inf</a>  (std::shared_ptr&lt; MesMarketingSEI &gt; mes_) override</dt>
+<dd>might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages  </dd>
+<dt><a class="anchor" id="_DevStage2000005"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a>  </dt>
 <dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000001"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb">solar_core::Household::location_y</a>  </dt>
-<dd>think about decreasing size for this field, use uint64_t or smaller for it </dd>
+<dt><a class="anchor" id="_DevStage2000004"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb">solar_core::Household::location_y</a>  </dt>
+<dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
+<dt><a class="anchor" id="_DevStage2000006"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a297842358a2d79db160566106972bc0d">solar_core::Household::preliminary_quotes</a>  </dt>
+<dd>think about replacing raw pointer with. </dd>
+<dt><a class="anchor" id="_DevStage2000007"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">solar_core::SEI::act_tick</a>  ()</dt>
+<dd>might think about checking for the type of the tick in <a class="el" href="classsolar__core_1_1_w.html">W</a> and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap.  </dd>
+<dt><a class="anchor" id="_DevStage2000008"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#aa4cf0e7d6539c591a9762941b1a19bfa">solar_core::SEI::form_online_quote</a>  (<a class="el" href="classsolar__core_1_1_household.html">Household</a> *agent_in)</dt>
+<dd>think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. </dd>
 </dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 28 2016 22:29:58 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 8 2016 21:51:47 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,0 +1,73 @@
+\hypertarget{classsolar__core_1_1_i_agent}{}\section{solar\+\_\+core\+:\+:I\+Agent Class Reference}
+\label{classsolar__core_1_1_i_agent}\index{solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}}
+
+
+{\ttfamily \#include $<$I\+Agent.\+h$>$}
+
+
+
+Inheritance diagram for solar\+\_\+core\+:\+:I\+Agent\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{classsolar__core_1_1_i_agent__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_i_agent_a0333116b8ef74f3321ce7acff5d5332e}{ac\+\_\+inf\+\_\+marketing\+\_\+sei} ()=0
+\item 
+virtual void \hyperlink{classsolar__core_1_1_i_agent_aa9ebc762ed032f7084063199747decb6}{get\+\_\+inf} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i}{Mes\+Marketing\+S\+E\+I} $>$ mes\+\_\+)=0
+\item 
+virtual void \hyperlink{classsolar__core_1_1_i_agent_a6813e8e4f94ab2dc917a29c4d6609149}{act\+\_\+tick} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file I\+Agent.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_i_agent_a0333116b8ef74f3321ce7acff5d5332e}{}\index{solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}!ac\+\_\+inf\+\_\+marketing\+\_\+sei@{ac\+\_\+inf\+\_\+marketing\+\_\+sei}}
+\index{ac\+\_\+inf\+\_\+marketing\+\_\+sei@{ac\+\_\+inf\+\_\+marketing\+\_\+sei}!solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}}
+\subsubsection[{ac\+\_\+inf\+\_\+marketing\+\_\+sei}]{\setlength{\rightskip}{0pt plus 5cm}virtual void solar\+\_\+core\+::\+I\+Agent\+::ac\+\_\+inf\+\_\+marketing\+\_\+sei (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classsolar__core_1_1_i_agent_a0333116b8ef74f3321ce7acff5d5332e}
+action to request information from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} when initiative is given from the \hyperlink{classsolar__core_1_1_w}{W} 
+
+Implemented in \hyperlink{classsolar__core_1_1_household_add38a49b76c2836a50a89e75318414f1}{solar\+\_\+core\+::\+Household}.
+
+\hypertarget{classsolar__core_1_1_i_agent_a6813e8e4f94ab2dc917a29c4d6609149}{}\index{solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}!act\+\_\+tick@{act\+\_\+tick}}
+\index{act\+\_\+tick@{act\+\_\+tick}!solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}}
+\subsubsection[{act\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}virtual void solar\+\_\+core\+::\+I\+Agent\+::act\+\_\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classsolar__core_1_1_i_agent_a6813e8e4f94ab2dc917a29c4d6609149}
+generic actions on a tick, specialize for each type of agents 
+
+Implemented in \hyperlink{classsolar__core_1_1_household_a1e7d20a60dc42b8d09a8d23a4cdb26a6}{solar\+\_\+core\+::\+Household}, and \hyperlink{classsolar__core_1_1_s_e_i_ab0bd6ae650afc15fe71ce545373ab16e}{solar\+\_\+core\+::\+S\+E\+I}.
+
+\hypertarget{classsolar__core_1_1_i_agent_aa9ebc762ed032f7084063199747decb6}{}\index{solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}!get\+\_\+inf@{get\+\_\+inf}}
+\index{get\+\_\+inf@{get\+\_\+inf}!solar\+\_\+core\+::\+I\+Agent@{solar\+\_\+core\+::\+I\+Agent}}
+\subsubsection[{get\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}virtual void solar\+\_\+core\+::\+I\+Agent\+::get\+\_\+inf (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Mes\+Marketing\+S\+E\+I} $>$}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classsolar__core_1_1_i_agent_aa9ebc762ed032f7084063199747decb6}
+receives marketing information 
+
+Implemented in \hyperlink{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{solar\+\_\+core\+::\+Household}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_i_agent_8h}{I\+Agent.\+h}\end{DoxyCompactItemize}

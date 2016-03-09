@@ -6,13 +6,52 @@
 
 
 
-Collaboration diagram for solar\+\_\+core\+:\+:Household\+:\nopagebreak
+Inheritance diagram for solar\+\_\+core\+:\+:Household\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=345pt]{classsolar__core_1_1_household__coll__graph}
+\includegraphics[width=196pt]{classsolar__core_1_1_household__inherit__graph}
 \end{center}
 \end{figure}
+
+
+Collaboration diagram for solar\+\_\+core\+:\+:Household\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_household__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_add38a49b76c2836a50a89e75318414f1}{ac\+\_\+inf\+\_\+marketing\+\_\+sei} () override
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_a1e7d20a60dc42b8d09a8d23a4cdb26a6}{act\+\_\+tick} ()
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{get\+\_\+inf} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i}{Mes\+Marketing\+S\+E\+I} $>$ mes\+\_\+) override
+\item 
+virtual std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_state_base_h_h}{Mes\+State\+Base\+H\+H} $>$ \hyperlink{classsolar__core_1_1_household_a008a18ff8c2d15da72e19876dc896a4e}{get\+\_\+inf\+\_\+online\+\_\+quote} (\hyperlink{classsolar__core_1_1_i_agent}{I\+Agent} $\ast$agent\+\_\+to)
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_a48d1f7b276e546dd9ff903bfc965cc5d}{receive\+\_\+preliminary\+\_\+quote} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote}{Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote} $>$ mes\+\_\+)
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_a39a2cb8b49d8e23c15fb7f7fc67ef0b2}{receive\+\_\+online\+\_\+quote} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote}{Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote} $>$ mes\+\_\+)
+\end{DoxyCompactItemize}
+
+\subsection*{Protected Member Functions}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_household_a733a90456d57f698b3aa974c6c6e0108}{update\+\_\+params} ()
+\end{DoxyCompactItemize}
+
 \subsection*{Protected Attributes}
 {\bf }\par
 \begin{DoxyCompactItemize}
@@ -31,29 +70,204 @@ double \hyperlink{classsolar__core_1_1_household_a1ba6b7af82982096e05d99a70a2647
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_house}{House} $\ast$ \hyperlink{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}{house}
+\hyperlink{classsolar__core_1_1_house}{House} $\ast$ \hyperlink{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}{house}
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i}{Mes\+Marketing\+S\+E\+I} $>$ $>$ \hyperlink{classsolar__core_1_1_household_a3ae4cec5fca43ee5ca3287a01f5a05a2}{get\+\_\+inf\+\_\+marketing\+\_\+sei}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote}{Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote} $>$ $>$ \hyperlink{classsolar__core_1_1_household_a297842358a2d79db160566106972bc0d}{preliminary\+\_\+quotes}
 \end{DoxyCompactItemize}
 
 
 
 \subsection{Detailed Description}
-Has multiple humans, but they are not modelled as decision agents. 
+Has multiple humans, but they are not modelled as decision agents only the H\+H is the decision making agent.
 
-Definition at line 32 of file H.\+h.
+\begin{DoxyRefDesc}{Solar W\+P}
+\item[\hyperlink{wp__wp000001}{Solar W\+P}]Once survey is completed will have data\+: what are your choices and decisions on solar panels. The same logic as in \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I}. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Dev\+Stage3}
+\item[\hyperlink{_dev_stage3__DevStage3000002}{Dev\+Stage3}]think about using \href{http://en.cppreference.com/w/cpp/types/result_of}{\tt http\+://en.\+cppreference.\+com/w/cpp/types/result\+\_\+of} -\/ very neat construction\end{DoxyRefDesc}
+
+
+Definition at line 41 of file H.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_household_add38a49b76c2836a50a89e75318414f1}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!ac\+\_\+inf\+\_\+marketing\+\_\+sei@{ac\+\_\+inf\+\_\+marketing\+\_\+sei}}
+\index{ac\+\_\+inf\+\_\+marketing\+\_\+sei@{ac\+\_\+inf\+\_\+marketing\+\_\+sei}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{ac\+\_\+inf\+\_\+marketing\+\_\+sei}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::ac\+\_\+inf\+\_\+marketing\+\_\+sei (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classsolar__core_1_1_household_add38a49b76c2836a50a89e75318414f1}
+Creation and initialization section
+
+\begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000003}{Dev\+Stage2}]need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator\end{DoxyRefDesc}
+
+
+C(const C\&) = default; // Copy constructor C(\+C\&\&) = default; // Move constructor C\& operator=(const C\&) \& = default; // Copy assignment operator C\& operator=(\+C\&\&) \& = default; // Move assignment operator virtual $\sim$\+C() \{ \} // Destructor
+
+see \href{http://stackoverflow.com/questions/4782757/rule-of-three-becomes-rule-of-five-with-c11}{\tt http\+://stackoverflow.\+com/questions/4782757/rule-\/of-\/three-\/becomes-\/rule-\/of-\/five-\/with-\/c11}
+
+Section with actions in the worldaction to request information from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} when initiative is given from the \hyperlink{classsolar__core_1_1_w}{W} \begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000002}{Dev\+Stage2}]think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote \end{DoxyRefDesc}
+
+
+Implements \hyperlink{classsolar__core_1_1_i_agent_a0333116b8ef74f3321ce7acff5d5332e}{solar\+\_\+core\+::\+I\+Agent}.
+
+
+
+Definition at line 31 of file H.\+cpp.
+
+\hypertarget{classsolar__core_1_1_household_a1e7d20a60dc42b8d09a8d23a4cdb26a6}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!act\+\_\+tick@{act\+\_\+tick}}
+\index{act\+\_\+tick@{act\+\_\+tick}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{act\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::act\+\_\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_household_a1e7d20a60dc42b8d09a8d23a4cdb26a6}
+generic actions on a tick, specialize for each type of agents \begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000002}{Dev\+Stage1}]add request for information/preliminary quotes that is internally triggered -\/ call void \hyperlink{classsolar__core_1_1_household_add38a49b76c2836a50a89e75318414f1}{Household\+::ac\+\_\+inf\+\_\+marketing\+\_\+sei()} \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000003}{Dev\+Stage1}]add selection of the best quotes from preliminary \end{DoxyRefDesc}
+
+
+Implements \hyperlink{classsolar__core_1_1_i_agent_a6813e8e4f94ab2dc917a29c4d6609149}{solar\+\_\+core\+::\+I\+Agent}.
+
+
+
+Definition at line 93 of file H.\+cpp.
+
+\hypertarget{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!get\+\_\+inf@{get\+\_\+inf}}
+\index{get\+\_\+inf@{get\+\_\+inf}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{get\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::get\+\_\+inf (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Mes\+Marketing\+S\+E\+I} $>$}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}
+Section relevant to marketing informationreceives marketing information No mutex guards as only other operation is poping from the front, which does not invalidate anything
+
+\begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000001}{Dev\+Stage2}]might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Dev\+Stage3}
+\item[\hyperlink{_dev_stage3__DevStage3000001}{Dev\+Stage3}]check if this agent is interested in the marketing message \end{DoxyRefDesc}
+
+
+Implements \hyperlink{classsolar__core_1_1_i_agent_aa9ebc762ed032f7084063199747decb6}{solar\+\_\+core\+::\+I\+Agent}.
+
+
+
+Definition at line 17 of file H.\+cpp.
+
+\hypertarget{classsolar__core_1_1_household_a008a18ff8c2d15da72e19876dc896a4e}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!get\+\_\+inf\+\_\+online\+\_\+quote@{get\+\_\+inf\+\_\+online\+\_\+quote}}
+\index{get\+\_\+inf\+\_\+online\+\_\+quote@{get\+\_\+inf\+\_\+online\+\_\+quote}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{get\+\_\+inf\+\_\+online\+\_\+quote}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$ {\bf Mes\+State\+Base\+H\+H} $>$ Household\+::get\+\_\+inf\+\_\+online\+\_\+quote (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Agent} $\ast$}]{agent\+\_\+to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_household_a008a18ff8c2d15da72e19876dc896a4e}
+first request for information from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I}, provides basic information such as credit score and etc. \begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000001}{Dev\+Stage1}]won\textquotesingle{}t work, as some parameters need to be taken from \hyperlink{classsolar__core_1_1_house}{House} directly, have to distinguish them in some way. \end{DoxyRefDesc}
+
+
+Definition at line 76 of file H.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_household_a008a18ff8c2d15da72e19876dc896a4e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_household_a008a18ff8c2d15da72e19876dc896a4e_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_household_a39a2cb8b49d8e23c15fb7f7fc67ef0b2}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!receive\+\_\+online\+\_\+quote@{receive\+\_\+online\+\_\+quote}}
+\index{receive\+\_\+online\+\_\+quote@{receive\+\_\+online\+\_\+quote}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{receive\+\_\+online\+\_\+quote}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::receive\+\_\+online\+\_\+quote (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote} $>$}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_household_a39a2cb8b49d8e23c15fb7f7fc67ef0b2}
+
+
+Definition at line 69 of file H.\+cpp.
+
+\hypertarget{classsolar__core_1_1_household_a48d1f7b276e546dd9ff903bfc965cc5d}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!receive\+\_\+preliminary\+\_\+quote@{receive\+\_\+preliminary\+\_\+quote}}
+\index{receive\+\_\+preliminary\+\_\+quote@{receive\+\_\+preliminary\+\_\+quote}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{receive\+\_\+preliminary\+\_\+quote}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::receive\+\_\+preliminary\+\_\+quote (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote} $>$}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_household_a48d1f7b276e546dd9ff903bfc965cc5d}
+
+
+Definition at line 63 of file H.\+cpp.
+
+\hypertarget{classsolar__core_1_1_household_a733a90456d57f698b3aa974c6c6e0108}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!update\+\_\+params@{update\+\_\+params}}
+\index{update\+\_\+params@{update\+\_\+params}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{update\+\_\+params}]{\setlength{\rightskip}{0pt plus 5cm}void Household\+::update\+\_\+params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classsolar__core_1_1_household_a733a90456d57f698b3aa974c6c6e0108}
+Section with agent\textquotesingle{}s internals
+
+$<$\begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000005}{Dev\+Stage1}]G\+U\+I\+D research. Boost G\+U\+I\+D is almost unique, uses machine and time, so could be repeated if used across machines or time is changed \end{DoxyRefDesc}
+is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. 
+
+Definition at line 106 of file H.\+cpp.
 
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_household_a3ae4cec5fca43ee5ca3287a01f5a05a2}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!get\+\_\+inf\+\_\+marketing\+\_\+sei@{get\+\_\+inf\+\_\+marketing\+\_\+sei}}
+\index{get\+\_\+inf\+\_\+marketing\+\_\+sei@{get\+\_\+inf\+\_\+marketing\+\_\+sei}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{get\+\_\+inf\+\_\+marketing\+\_\+sei}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$std\+::shared\+\_\+ptr$<${\bf Mes\+Marketing\+S\+E\+I}$>$ $>$ solar\+\_\+core\+::\+Household\+::get\+\_\+inf\+\_\+marketing\+\_\+sei\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_household_a3ae4cec5fca43ee5ca3287a01f5a05a2}
+Simplification\+: assume only 1 house per hh. If need to increase number of houses, might switch to vector of pointers to houses. Use R\+A\+I\+I here maybe? for managining raw pointer.\begin{DoxyRefDesc}{Dev\+Stage3}
+\item[\hyperlink{_dev_stage3__DevStage3000003}{Dev\+Stage3}]think about using smart pointers here, it will simplify management of creation of agents. Cons\+: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management. \end{DoxyRefDesc}
+
+
+Section relevant to marketing informationstores list of marketing infiormation from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} agents that this agent is interested in geting quotes from 
+
+Definition at line 168 of file H.\+h.
+
 \hypertarget{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!house@{house}}
 \index{house@{house}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
 \subsubsection[{house}]{\setlength{\rightskip}{0pt plus 5cm}{\bf House}$\ast$ solar\+\_\+core\+::\+Household\+::house\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}
 Location of an agent, y coordinate.\begin{DoxyRefDesc}{Dev\+Stage2}
-\item[\hyperlink{_dev_stage2__DevStage2000002}{Dev\+Stage2}]think about decreasing size for this field, use uint64\+\_\+t or smaller for it \end{DoxyRefDesc}
+\item[\hyperlink{_dev_stage2__DevStage2000005}{Dev\+Stage2}]think about decreasing size for this field, use uint64\+\_\+t or smaller for it \end{DoxyRefDesc}
 
 
-Section with parameters for solar projects, mainly \hyperlink{class_house}{House} for now 
+Section with parameters for solar projects, mainly \hyperlink{classsolar__core_1_1_house}{House} for now 
 
-Definition at line 84 of file H.\+h.
+Definition at line 150 of file H.\+h.
 
 \hypertarget{classsolar__core_1_1_household_a6596375631a366fdd24270f75548841f}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!location\+\_\+x@{location\+\_\+x}}
 \index{location\+\_\+x@{location\+\_\+x}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
@@ -62,26 +276,38 @@ Parameters of a household, such as income, number of humans, etc.
 
 Section with geographical parameters 
 
-Definition at line 64 of file H.\+h.
+Definition at line 130 of file H.\+h.
 
 \hypertarget{classsolar__core_1_1_household_a1ba6b7af82982096e05d99a70a2647eb}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!location\+\_\+y@{location\+\_\+y}}
 \index{location\+\_\+y@{location\+\_\+y}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
 \subsubsection[{location\+\_\+y}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Household\+::location\+\_\+y\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_household_a1ba6b7af82982096e05d99a70a2647eb}
 Location of an agent, x coordinate.\begin{DoxyRefDesc}{Dev\+Stage2}
-\item[\hyperlink{_dev_stage2__DevStage2000001}{Dev\+Stage2}]think about decreasing size for this field, use uint64\+\_\+t or smaller for it \end{DoxyRefDesc}
+\item[\hyperlink{_dev_stage2__DevStage2000004}{Dev\+Stage2}]think about decreasing size for this field, use uint64\+\_\+t or smaller for it \end{DoxyRefDesc}
 
 
-Definition at line 65 of file H.\+h.
+Definition at line 131 of file H.\+h.
 
 \hypertarget{classsolar__core_1_1_household_a41d61dc3bab971cb19170341b77d9df8}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!params@{params}}
 \index{params@{params}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
 \subsubsection[{params}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf E\+Param\+Types}, double$>$ solar\+\_\+core\+::\+Household\+::params\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_household_a41d61dc3bab971cb19170341b77d9df8}
 Section with general parameters that describe hh 
 
-Definition at line 50 of file H.\+h.
+Definition at line 116 of file H.\+h.
+
+\hypertarget{classsolar__core_1_1_household_a297842358a2d79db160566106972bc0d}{}\index{solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}!preliminary\+\_\+quotes@{preliminary\+\_\+quotes}}
+\index{preliminary\+\_\+quotes@{preliminary\+\_\+quotes}!solar\+\_\+core\+::\+Household@{solar\+\_\+core\+::\+Household}}
+\subsubsection[{preliminary\+\_\+quotes}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$std\+::shared\+\_\+ptr$<${\bf Mes\+Marketing\+S\+E\+I\+Preliminary\+Quote}$>$ $>$ solar\+\_\+core\+::\+Household\+::preliminary\+\_\+quotes\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_household_a297842358a2d79db160566106972bc0d}
+have list of active quotes that need to be acted upon\begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000006}{Dev\+Stage2}]think about replacing raw pointer with.\end{DoxyRefDesc}
+\begin{DoxyRefDesc}{Dev\+Stage1}
+\item[\hyperlink{_dev_stage1__DevStage1000004}{Dev\+Stage1}]choose between week\+\_\+ptr and shared\+\_\+ptr need to think about ownership in time and time of destruction for these messages. \end{DoxyRefDesc}
+
+
+Definition at line 170 of file H.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_h_8h}{H.\+h}\end{DoxyCompactItemize}
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_h_8h}{H.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_h_8cpp}{H.\+cpp}\end{DoxyCompactItemize}
