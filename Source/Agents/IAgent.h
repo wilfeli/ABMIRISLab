@@ -9,8 +9,7 @@
 #ifndef __ABMSolar__IAgent__
 #define __ABMSolar__IAgent__
 
-#include <memory>
-
+#include "Tools/ExternalIncludes.h"
 
 
 namespace solar_core

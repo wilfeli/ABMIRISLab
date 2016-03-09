@@ -7,6 +7,7 @@
 //
 
 #include "Tools/IParameters.h"
+#include "UI/W.h"
 #include "Agents/SEI.h"
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"

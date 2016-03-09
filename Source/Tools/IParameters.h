@@ -9,7 +9,7 @@
 #ifndef ABMSolar_IParameters_h
 #define ABMSolar_IParameters_h
 
-#include <cstdint>
+#include "Tools/ExternalIncludes.h"
 
 
 namespace solar_core
@@ -33,8 +33,8 @@ namespace solar_core
         CreditScore,
         
         
-        /** Electric bill */
-        ElectricalBill,
+        /** Electricity Bill */
+        ElectricityBill,
         
         
         /** Roof size */

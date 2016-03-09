@@ -10,8 +10,7 @@
 #define ABMSolar_H_h
 
 
-#include <map>
-#include <deque>
+#include "Tools/ExternalIncludes.h"
 
 
 #include "Tools/IParameters.h"
@@ -25,7 +24,8 @@ namespace solar_core
 
     
 class MesMarketingSEIPreliminaryQuote;
-class MesStateBaseHH; 
+class MesStateBaseHH;
+class SEI;
     
 
 /**
@@ -35,7 +35,7 @@ class MesStateBaseHH;
  
  @wp Once survey is completed will have data: what are your choices and decisions on solar panels. The same logic as in SEI. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data.
  
- 
+ @DevStage3 think about using http://en.cppreference.com/w/cpp/types/result_of - very neat construction
  
  */
 class Household: public IAgent
@@ -76,12 +76,29 @@ public:
      */
     
     
-    virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_)  override; /*!< receives marketing information */
     
     virtual void ac_inf_marketing_sei() override; /*!< action to request information from SEI when initiative is given from the W */
-    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
+    virtual void act_tick();
     
     //@}
+    
+    
+    //@{
+    /**
+     
+     Section relevant to marketing information
+     
+     */
+    
+    virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_)  override; /*!< receives marketing information */
+
+    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
+    
+    virtual void receive_preliminary_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_);
+    virtual void receive_online_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_);
+    
+    //@}
+    
     
     
 protected:
@@ -146,9 +163,11 @@ protected:
      
      */
     
+    
+    
     std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing infiormation from SEI agents that this agent is interested in geting quotes from */
     
-    std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with */
+    std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage1 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
     
     
     //@}

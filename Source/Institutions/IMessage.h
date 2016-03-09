@@ -10,7 +10,7 @@
 #define __ABMSolar__IMessage__
 
 
-#include <map>
+#include "Tools/ExternalIncludes.h"
 
 
 #include "Tools/IParameters.h"

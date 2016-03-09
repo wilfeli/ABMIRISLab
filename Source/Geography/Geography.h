@@ -9,7 +9,7 @@
 #ifndef ABMSolar_Geography_h
 #define ABMSolar_Geography_h
 
-#include <vector>
+#include "Tools/ExternalIncludes.h"
 
 
 namespace solar_core
@@ -19,7 +19,7 @@ namespace solar_core
 
 /**
  
- Belongs to Household.
+ Belongs to a Household.
  
  
  
@@ -27,7 +27,7 @@ namespace solar_core
 class House
 {
 public:
-    double roof_age; /*!< age of a house roof in years (not required to be whole years) */
+    double roof_age; /*!< age of a house's roof in years (not required to be whole years) */
     double roof_size; /*!< size of a roof, in m^2 */
     
     

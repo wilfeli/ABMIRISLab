@@ -35,7 +35,7 @@ Household::ac_inf_marketing_sei()
     {
         auto marketing_inf = get_inf_marketing_sei.front();
         
-        //Distinguishes between online and phone quote. Small installers might not have an online presence
+        //Distinguishes between online and phone quote. Small installers might not have an online presence.
         ///@DevStage2 think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote
         switch (marketing_inf->sei_type)
         {
@@ -60,13 +60,13 @@ Household::ac_inf_marketing_sei()
 
 
 void
-Household::receive_preliminary_quote(std::result_of<decltype(&SEI::request_preliminary_quote)(SEI, Household*)>::type mes_)
+Household::receive_preliminary_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_)
 {
     preliminary_quotes.push_back(mes_);
 }
 
 void
-Household::receive_online_quote(std::result_of<decltype(&SEI::request_online_quote)(SEI, Household*)>::type mes_)
+Household::receive_online_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_)
 {
     preliminary_quotes.push_back(mes_);
 }
@@ -77,6 +77,7 @@ Household::get_inf_online_quote(IAgent* agent_to)
 {
     auto mes = std::make_shared<MesStateBaseHH>();
     
+    ///@DevStage1 won't work, as some parameters need to be taken from House directly, have to distinguish them in some way.
     for (auto& param:WorldSettings::instance().params_to_copy_preliminary_quote)
     {
         mes->params[param] = params[param];

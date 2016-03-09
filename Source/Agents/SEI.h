@@ -11,10 +11,8 @@
 
 
 
+#include "Tools/ExternalIncludes.h"
 
-#include <memory>
-#include <vector>
-#include <map>
 #include "Tools/IParameters.h"
 #include "Agents/IAgent.h"
 #include "Agents/SolarPanel.h"
@@ -69,9 +67,16 @@ public:
     //@}
     
     
+    //@{
+    /**
+     
+     Section with actions in the world
+     
+     */
     
+    virtual void act_tick(); /*!< actions in each tick @DevStage2 might think about checking for the type of the tick in W and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap. */
     
-    
+    //@}
     
     
     //@{
@@ -85,6 +90,7 @@ public:
     virtual void request_preliminary_quote(Household* agent_in);
     
     virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_online_quote(Household* agent_in); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
+    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(Household* agent_in);
     
     //@}
 protected:
@@ -117,7 +123,7 @@ protected:
     std::map<EParamTypes, double> params; /** Parameters of a SEI */
     
     
-    TimeUnit a_time; /*!< internal agent timer */
+    TimeUnit a_time; /*!< internal agent's timer */
     
     
     //@}
@@ -134,6 +140,21 @@ protected:
     
     std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
     
+    
+    
+    //@}
+    
+    
+    
+    
+    //@{
+    /**
+     
+     
+     Sections with interactions with the world
+     */
+    
+    W* w; /*!< raw pointer to the actual world */
     
     
     //@}

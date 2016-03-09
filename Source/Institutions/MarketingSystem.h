@@ -9,8 +9,8 @@
 #ifndef ABMSolar_MarketingSystem_h
 #define ABMSolar_MarketingSystem_h
 
-#include <map>
-#include <vector>
+#include "Tools/ExternalIncludes.h"
+
 #include "Agents/IAgent.h"
 #include "Institutions/IInstitute.h"
 

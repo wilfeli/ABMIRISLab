@@ -10,7 +10,8 @@
 #define __ABMSolar__WorldSettings__
 
 
-#include <unordered_set>
+#include "Tools/ExternalIncludes.h"
+
 #include "Tools/IParameters.h"
 
 
@@ -47,7 +48,7 @@ public:
         }
     };
     
-    std::unordered_set<EParamTypes> params_to_copy_preliminary_quote{EParamTypes::CreditScore, EParamTypes::RoofSize, EParamTypes::ElectricityBill};
+    std::unordered_set<EParamTypes, EHash> params_to_copy_preliminary_quote{EParamTypes::CreditScore, EParamTypes::RoofSize, EParamTypes::ElectricityBill};
     
     //@}
     

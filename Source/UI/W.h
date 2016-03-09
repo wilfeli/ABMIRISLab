@@ -9,8 +9,9 @@
 #ifndef ABMSolar_W_h
 #define ABMSolar_W_h
 
-#include <deque>
+#include "Tools/ExternalIncludes.h"
 
+#include "Tools/IParameters.h"
 
 
 namespace solar_core {
@@ -30,7 +31,7 @@ public:
      
      Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file. 
      
-     @DevStage1: serialization: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.  
+     @DevStage1: serialization: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.
      
      */
     
@@ -50,6 +51,21 @@ public:
     void life_hhs(); /*!< life of households */
     
     //@}
+    
+    
+    //@{
+    /**
+     
+     Section with general world parameters and etc.
+     
+     */
+    
+    TimeUnit time;
+    
+    
+    //@}
+    
+    
     
     
 protected:
