@@ -183,6 +183,7 @@ protected:
     
     /*!<  @DevStage1 GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
+    virtual void update_params(); /*!< is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. */
     
     
     //@}

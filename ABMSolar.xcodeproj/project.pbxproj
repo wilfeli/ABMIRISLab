@@ -139,10 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FE31C7DA16200A6EA1F /* Documentation.h */,
+				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
 				EDDB3FE41C7DA16200A6EA1F /* IParameters.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
-				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";

@@ -45,6 +45,10 @@ namespace solar_core
         PreliminaryQuote,
         
         
+        /** Preliminary estimation of savings based on utility bill */
+        PreliminaryQuoteEstimatedSavings,
+        
+        
         /** Industry standard price per watt that is used in estimating installation cost */
         EstimatedPricePerWatt,
         
@@ -61,17 +65,16 @@ namespace solar_core
         SEILarge,
         
         
-        
-        /** States of a Project */
+        /** State of a Project: preliminary quotes has been requested via online */
         RequestedOnlineQuote,
         
-        
+        /** State of a Project: preliminary quotes has been requested via phone */
         RequestedPreliminaryQuote,
         
-        
+        /** State of a Project: preliminary quotes has been provided via online */
         ProvidedOnlineQuote,
         
-        
+        /** State of a Project: preliminary quotes has been provided via phone */
         ProvidedPreliminaryQuote,
         
         

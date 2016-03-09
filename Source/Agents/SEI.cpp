@@ -43,6 +43,10 @@ SEI::form_online_quote(Household* agent_in)
     
     mes->params[EParamTypes::PreliminaryQuote] = p;
     
+    
+    //MARK: cont.
+    mes->params[EParamTypes::PreliminaryQuoteEstimatedSavings] = 0.0;
+    
     return mes;
 }
 
@@ -57,6 +61,7 @@ SEI::act_tick()
     //go through projects, if online quote was requested - provide it
     for (auto& project:pvprojects)
     {
+        ///for online quotes no check for the time elapced since the request for the quote was received, as it is assumed to be instanteneous process
         if (project->state_project == EParamTypes::RequestedOnlineQuote)
         {
             auto mes = form_online_quote(project->agent);

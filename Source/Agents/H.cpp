@@ -92,9 +92,23 @@ Household::get_inf_online_quote(IAgent* agent_to)
 void
 Household::act_tick()
 {
-    ///@DevStage2 add request for information that is internally triggered - call void Household::ac_inf_marketing_sei()
+    ///@DevStage1 add request for information/preliminary quotes that is internally triggered - call void Household::ac_inf_marketing_sei()
     
-    
+    ///@DevStage1 add selection of the best quotes from preliminary
     
     
 }
+
+
+
+
+void
+Household::update_params()
+{
+    //saves parameters
+    params[EParamTypes::RoofSize] = house->roof_size;
+}
+
+
+
+
