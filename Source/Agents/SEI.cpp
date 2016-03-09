@@ -10,19 +10,31 @@
 #include "Agents/SEI.h"
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"
+#include "Agents/SolarPanel.h"
 
 
 using namespace solar_core;
 
 
 
-std::shared_ptr<MesMarketingSEIPreliminaryQuote>
-SEI::get_online_quote(Household* agent_in)
+void
+SEI::request_online_quote(Household* agent_in)
 {
-    
+    //create new project
+    auto new_project = std::make_shared<PVProject>();
     //request additional information
-    auto inf_in = agent_in->get_inf_online_quote(this);
-    
+    new_project->state_base_agent = agent_in->get_inf_online_quote(this);
+    new_project->agent = agent_in;
+    new_project->state_project = EParamTypes::RequestedOnlineQuote;
+    new_project->begin_time = a_time;
+    //save project
+    pvprojects.push_back(new_project);
+}
+
+
+std::shared_ptr<MesMarketingSEIPreliminaryQuote>
+SEI::form_online_quote(Household* agent_in)
+{
     //from params get stuff such as average price per watt, price of a standard unit
     auto mes = std::make_shared<MesMarketingSEIPreliminaryQuote>();
     
@@ -30,9 +42,30 @@ SEI::get_online_quote(Household* agent_in)
     
     mes->params[EParamTypes::PreliminaryQuote] = p;
     
-    
-    
-   
-    
     return mes;
+}
+
+
+void
+SEI::act_tick()
+{
+    //update internal timer
+    a_time = w->time;
+    
+    
+    //go through projects, if online quote was requested - provide it
+    for (auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::RequestedOnlineQuote)
+        {
+            auto mes = form_online_quote(project->agent);
+            project->agent->receive_online_quote(mes);
+            project->state_project = EParamTypes::ProvidedOnlineQuote;
+        };
+    };
+    
+    
+    
+    //MARK: cont. preliminary quote - mom and pop shop will be separate class, derived from this, so this implementation is for the big SEI, which all have online quotes
+    
 }

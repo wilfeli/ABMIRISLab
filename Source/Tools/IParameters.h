@@ -53,10 +53,40 @@ namespace solar_core
         AveragePVPrice,
         
         
+        /** Small SEI agent - such as mom and pop shop */
+        SEISmall,
+        
+        
+        /** Large SEI */
+        SEILarge,
+        
+        
+        
+        /** States of a Project */
+        RequestedOnlineQuote,
+        
+        
+        RequestedPreliminaryQuote,
+        
+        
+        ProvidedOnlineQuote,
+        
+        
+        ProvidedPreliminaryQuote,
+        
+        
+        /**  MARK: cont. with other project states */
+        
         /** Empty enum for completeness */
         None
         
     };
+    
+    
+    
+    
+    typedef int64_t TimeUnit;
+    
 
 } //end of namespace solar_core
 #endif

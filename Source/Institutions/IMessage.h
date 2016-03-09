@@ -30,8 +30,8 @@ class SEI;
 class MesMarketingSEI
 {
 public:
-    SEI* sei; /*!< agent whose marketing information is presented */
-    
+    SEI* agent; /*!< agent whose marketing information is presented */
+    EParamTypes sei_type; /*!< depending on the type will have online quotes or not */
     
 };
 

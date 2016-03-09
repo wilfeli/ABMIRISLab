@@ -14,6 +14,7 @@
 		EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDB3FE61C7DA16200A6EA1F /* main.cpp */; };
 		EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
 		EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
+		EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
 		EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
 		EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,8 @@
 		EDDC11C01C8E9D6D005670BD /* SEI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = SEI.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldSettings.cpp; sourceTree = "<group>"; };
 		EDDC11C31C8EAF5F005670BD /* WorldSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSettings.h; sourceTree = "<group>"; };
+		EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarPanel.cpp; sourceTree = "<group>"; };
+		EDDC11C61C8F9FF7005670BD /* SolarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarPanel.h; sourceTree = "<group>"; };
 		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
 		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = H.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
@@ -104,6 +107,8 @@
 				EDDC11C01C8E9D6D005670BD /* SEI.cpp */,
 				EDDB3FDC1C7DA16200A6EA1F /* SEI.h */,
 				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
+				EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */,
+				EDDC11C61C8F9FF7005670BD /* SolarPanel.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,

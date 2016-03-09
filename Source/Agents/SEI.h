@@ -13,10 +13,11 @@
 
 
 #include <memory>
+#include <vector>
 #include <map>
 #include "Tools/IParameters.h"
 #include "Agents/IAgent.h"
-
+#include "Agents/SolarPanel.h"
 
 
 
@@ -32,6 +33,7 @@ namespace solar_core
  */
 class MesMarketingSEI;
 class MesMarketingSEIPreliminaryQuote;
+class W;
 class Household;
     
 
@@ -53,7 +55,38 @@ class Household;
 class SEI: public IAgent
 {
 public:
-    std::shared_ptr<MesMarketingSEIPreliminaryQuote> get_online_quote(Household* agent_in); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
+    //@{
+    /**
+    
+     Section containing initialization information
+     
+     */
+    
+    virtual void init(W* w_); /*!< Initialization step */
+    
+    
+    
+    //@}
+    
+    
+    
+    
+    
+    
+    
+    //@{
+    /**
+     
+     Section relevant for marketing
+     
+     */
+    
+    virtual void request_online_quote(Household* agent_in);
+    virtual void request_preliminary_quote(Household* agent_in);
+    
+    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_online_quote(Household* agent_in); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
+    
+    //@}
 protected:
     //@{
     /**
@@ -62,7 +95,14 @@ protected:
      
      */
     
-    MesMarketingSEI* mes_marketing; /*!< is created with agent and updated to reflect new marketing policy */
+    MesMarketingSEI* mes_marketing; /*!< Contains basic marketing information. is created with agent and updated to reflect new marketing policy */
+    
+    
+    
+    
+    
+    
+    
     //@}
     
     //@{
@@ -76,11 +116,36 @@ protected:
     
     std::map<EParamTypes, double> params; /** Parameters of a SEI */
     
+    
+    TimeUnit a_time; /*!< internal agent timer */
+    
+    
     //@}
 
     
+    
+    //@{
+    /**
+     
+     Section with information relevant to potential and active projects
+     
+     */
+    
+    
+    std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
+    
+    
+    
+    //@}
+    
 
 };
+    
+    
+    
+    
+    
+    
 } //end namespace solar_core
 
 

@@ -146,7 +146,7 @@ protected:
      
      */
     
-    std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< stores list of SEI agents that is interested in geting quotes from */
+    std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing infiormation from SEI agents that this agent is interested in geting quotes from */
     
     std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with */
     

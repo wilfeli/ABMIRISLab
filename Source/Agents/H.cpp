@@ -18,7 +18,7 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
     //saves information about advertising agent
     ///No mutex guards as only other operation is poping from the front, which does not invalidate anything
-    get_inf_marketing_sei_agents.push_back(mes_->sei);
+    get_inf_marketing_sei.push_back(mes_);
     
     ///@DevStage2 might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages 
     
@@ -31,23 +31,44 @@ void
 Household::ac_inf_marketing_sei()
 {
     //requests quotes from SEI
-    while (!get_inf_marketing_sei_agents.empty())
+    while (!get_inf_marketing_sei.empty())
     {
-        auto agent = get_inf_marketing_sei_agents.front();
+        auto marketing_inf = get_inf_marketing_sei.front();
         
-        
-        ///@DevStage2 think about distinguishing between online and phone quote. Small installers might not have an online presence
-        
-        //returns quote in the form of a message
-        auto mes = agent->get_online_quote(this);
-        
-        preliminary_quotes.push_back(mes);
-        
-        get_inf_marketing_sei_agents.pop_front();
+        //Distinguishes between online and phone quote. Small installers might not have an online presence
+        ///@DevStage2 think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote
+        switch (marketing_inf->sei_type)
+        {
+            case EParamTypes::SEISmall:
+                //returns quote in the form of a message
+                marketing_inf->agent->request_preliminary_quote(this);
+                break;
+            case EParamTypes::SEILarge:
+                //returns quote in the form of a message
+                marketing_inf->agent->request_online_quote(this);
+                break;
+    
+            default:
+                break;
+        }
+    
+        get_inf_marketing_sei.pop_front();
     };
     
     
-    
+}
+
+
+void
+Household::receive_preliminary_quote(std::result_of<decltype(&SEI::request_preliminary_quote)(SEI, Household*)>::type mes_)
+{
+    preliminary_quotes.push_back(mes_);
+}
+
+void
+Household::receive_online_quote(std::result_of<decltype(&SEI::request_online_quote)(SEI, Household*)>::type mes_)
+{
+    preliminary_quotes.push_back(mes_);
 }
 
 
@@ -70,7 +91,7 @@ Household::get_inf_online_quote(IAgent* agent_to)
 void
 Household::act_tick()
 {
-    ///@DevStage2 add request for information that is internally triggered
+    ///@DevStage2 add request for information that is internally triggered - call void Household::ac_inf_marketing_sei()
     
     
     
