@@ -18,6 +18,8 @@ namespace solar_core
      
      @DevStage1 add factories enum<->std::string
      
+     @DevStage2 think about splitting enum into multiple enums
+     
      */
     enum class EParamTypes: int64_t
     {
@@ -76,6 +78,8 @@ namespace solar_core
         
         /** State of a Project: preliminary quotes has been provided via phone */
         ProvidedPreliminaryQuote,
+        
+        
         
         
         /**  MARK: cont. with other project states */

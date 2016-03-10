@@ -74,4 +74,9 @@ SEI::act_tick()
     
     //MARK: cont. preliminary quote - mom and pop shop will be separate class, derived from this, so this implementation is for the big SEI, which all have online quotes
     
+    
+    //MARK: cont. continue if interest in the project was indicated
+    
+    
+    
 }
