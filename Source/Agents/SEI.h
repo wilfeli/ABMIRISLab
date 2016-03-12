@@ -30,6 +30,7 @@ namespace solar_core
  
  */
 class MesMarketingSEI;
+class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
 class W;
 class Household;
@@ -76,6 +77,9 @@ public:
     
     virtual void act_tick(); /*!< actions in each tick @DevStage2 might think about checking for the type of the tick in W and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap. */
     
+    virtual void get_project(std::shared_ptr<PVProject> project_); /*!< receives project - technical method to synchronoze lists of projects between agents */
+    
+    
     //@}
     
     
@@ -86,11 +90,11 @@ public:
      
      */
     
-    virtual void request_online_quote(Household* agent_in);
-    virtual void request_preliminary_quote(Household* agent_in);
+    virtual void request_online_quote(std::shared_ptr<PVProject> project_);
+    virtual void request_preliminary_quote(std::shared_ptr<PVProject> project_);
     
-    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_online_quote(Household* agent_in); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
-    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(Household* agent_in);
+    virtual std::shared_ptr<MesMarketingSEIOnlineQuote> form_online_quote(std::shared_ptr<PVProject> project_); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
+    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_);
     
     //@}
 protected:
@@ -104,12 +108,22 @@ protected:
     MesMarketingSEI* mes_marketing; /*!< Contains basic marketing information. is created with agent and updated to reflect new marketing policy */
     
     
+    //@}
     
+    //@{
+    /**
+     
+     Section relevant to quoting phase
+     
+     */
     
+    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to MaxLengthWaitPreliminaryQuote */
     
-    
+    std::size_t i_schedule_visits;
     
     //@}
+    
+    
     
     //@{
     /**
@@ -156,6 +170,19 @@ protected:
     
     W* w; /*!< raw pointer to the actual world */
     
+    
+    //@}
+    
+    
+    
+    //@{
+    /**
+     
+     Section with internals of an agent
+     
+     */
+    
+    void ac_update_tick(); /*!< update internals for the tick */
     
     //@}
     

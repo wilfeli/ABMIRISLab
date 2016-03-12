@@ -47,7 +47,7 @@ public:
  
  
  */
-class MesMarketingSEIPreliminaryQuote
+class MesMarketingSEIOnlineQuote
 {
 public:
     std::map<EParamTypes, double> params; /*!< parameters of a quote */
@@ -57,6 +57,19 @@ public:
     
 };
     
+/**
+ 
+ Message with the quote for preliminary stage, separate class for now
+ 
+ 
+ */
+class MesMarketingSEIPreliminaryQuote
+{
+public:
+    std::map<EParamTypes, double> params; /*!< parameters of a quote */
+    
+    
+};
     
     
 /**

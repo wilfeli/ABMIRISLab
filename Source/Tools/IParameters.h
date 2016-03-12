@@ -42,12 +42,31 @@ namespace solar_core
         /** Roof size */
         RoofSize,
         
+        /** If Household is very interested in SP */
+        HHMarketingStateHighlyInterested,
         
-        /** Estimated price of installation */
-        PreliminaryQuote,
+        
+        /** If Household is just interested in SP and ready to ask for quotes */
+        HHMarketingStateInterested,
         
         
-        /** Preliminary estimation of savings based on utility bill */
+        /** If Household is not interested in installing SP */
+        HHMarketingNotInterested,
+        
+        
+        /** Estimated price of installation after the online quote was formed*/
+        OnlineQuotePrice,
+        
+        
+        /** Preliminary estimation of savings based on utility bill for online quote */
+        OnlineQuoteEstimatedSavings,
+        
+        
+        /** Estimated price of installation after the preliminary quote with site visit was made*/
+        PreliminaryQuotePrice,
+        
+        
+        /** Preliminary estimation of savings based on utility bill after site visit */
         PreliminaryQuoteEstimatedSavings,
         
         
@@ -55,8 +74,20 @@ namespace solar_core
         EstimatedPricePerWatt,
         
         
-        /** Industry standard PV */
+        /** Industry standard PV price, used in online estimation */
         AveragePVPrice,
+        
+
+        /** Industry standard PV price, used in online estimation */
+        AveragePVCapacity,
+        
+        
+        /** Electricity price per watt for the demand of electricity from the utility company (UC) */
+        ElectricityPriceUCDemand,
+        
+        
+        /** Electricity price per watt for the supply of electricity to the utility company (UC) */
+        ElectricityPriceUCSupply,
         
         
         /** Small SEI agent - such as mom and pop shop */
@@ -70,6 +101,9 @@ namespace solar_core
         /** State of a Project: preliminary quotes has been requested via online */
         RequestedOnlineQuote,
         
+        /** State of a Project: preliminary quotes need to been requested via phone */
+        RequestPreliminaryQuote,
+        
         /** State of a Project: preliminary quotes has been requested via phone */
         RequestedPreliminaryQuote,
         
@@ -79,17 +113,50 @@ namespace solar_core
         /** State of a Project: preliminary quotes has been provided via phone */
         ProvidedPreliminaryQuote,
         
+    
+        
+        /** Parameters of a SEI, such as processing time before action is taken if preliminary quote is requested */
+        ProcessingTimeRequesForPreliminaryQuote,
+        
+        /** Maximum number of visits per unit of time for SEI */
+        SEIMaxNVisitsPerTimeUnit,
+        
+       
+        /** State of a quoting stage for HH: actively requesting information */
+        ActiveQuoting,
         
         
+        /** State of a quoting stage for HH: not requesting quotes, might be analysing them or committed to the project */
+        InactiveQuoting,
         
-        /**  MARK: cont. with other project states */
         
         /** Empty enum for completeness */
         None
         
     };
     
-    
+    enum class EConstraintParams: uint64_t
+    {
+        
+        /** Maximum number of ticks to collect quotes (online) */
+        MaxNTicksToCollectQuotes,
+        
+        
+        /** Maximum number of open projects to consider */
+        MaxNOpenProjectsHH,
+        
+        
+        /** Maximum number of preliminary quotes to request from received online quotes */
+        MaxNRequestedPreliminaryFromOnlineQuotes,
+        
+        
+        /** Maximum waiting time before the visit to get preliminary quote is made */
+        MaxLengthWaitPreliminaryQuote,
+        
+        
+        
+        None,
+    };
     
     
     typedef int64_t TimeUnit;

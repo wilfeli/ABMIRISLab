@@ -26,6 +26,7 @@ namespace solar_core
 class MesMarketingSEIPreliminaryQuote;
 class MesStateBaseHH;
 class SEI;
+class PVProject;
     
 
 /**
@@ -77,7 +78,7 @@ public:
     
     
     
-    virtual void ac_inf_marketing_sei() override; /*!< action to request information from SEI when initiative is given from the W */
+    virtual void ac_inf_quoting_sei() override; /*!< action to request information from SEI when initiative is given from the W */
     virtual void act_tick();
     
     //@}
@@ -92,12 +93,31 @@ public:
     
     virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_)  override; /*!< receives marketing information */
 
-    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
     
-    virtual void receive_preliminary_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_);
-    virtual void receive_online_quote(std::shared_ptr<MesMarketingSEIPreliminaryQuote> mes_);
     
     //@}
+    
+    
+    
+    //@{
+    /**
+     
+     Section relevant to quoting stage
+     
+     */
+    
+    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
+    
+    virtual void receive_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
+    virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
+    
+    
+    long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
+    
+    
+    
+    //@}
+    
     
     
     
@@ -115,10 +135,22 @@ protected:
     
     std::map<EParamTypes, double> params; /** Parameters of a household, such as income, number of humans, etc. */
     
+    
     //@}
     
+    //@{
+    /**
+     
+     Section with information relevant to potential and active projects
+     
+     */
     
     
+    std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
+    
+    
+    
+    //@}
     
     //@{
     /**
@@ -168,9 +200,24 @@ protected:
     std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing infiormation from SEI agents that this agent is interested in geting quotes from */
     
     std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage1 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
+    EParamTypes marketing_state; /*!< could be interested, very interested or not */
+    
+    //@}
+    
+    
+    
+    //@{
+    /**
+     
+     Section relevant to quoting stage
+     
+     */
+    EParamTypes quote_state; /*!< will be active quoting or inactive quoting */
     
     
     //@}
+    
+    
     
     
     //@{
@@ -185,7 +232,7 @@ protected:
     
     virtual void update_params(); /*!< is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. */
     
-    
+    TimeUnit a_time; /*!< internal agent's timer */
     //@}
     
     
