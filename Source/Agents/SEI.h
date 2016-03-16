@@ -93,8 +93,7 @@ public:
     virtual void request_online_quote(std::shared_ptr<PVProject> project_);
     virtual void request_preliminary_quote(std::shared_ptr<PVProject> project_);
     
-    virtual std::shared_ptr<MesMarketingSEIOnlineQuote> form_online_quote(std::shared_ptr<PVProject> project_); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
-    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_);
+    
     
     //@}
 protected:
@@ -116,6 +115,10 @@ protected:
      Section relevant to quoting phase
      
      */
+    
+    virtual std::shared_ptr<MesMarketingSEIOnlineQuote> form_online_quote(std::shared_ptr<PVProject> project_); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
+    virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_);
+    
     
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to MaxLengthWaitPreliminaryQuote */
     

@@ -244,7 +244,7 @@ ALIASES                = "string_const=\xrefitem string_consts \"String_const\" 
                          "DevStage4=\xrefitem DevStage4 \"DevStage4\" \"DevStage4\"" \
                          "wp=\xrefitem wp \"Solar WP\" \"Notes for WP\"" \
                          "assumption=\xrefitem assumption \"Assumptions\" \"Assumption for the model\"" \
-                         "DevStage1=\xrefitem DevStage1 \"DevStage1\" \"DevStage1\""
+                         "Kelley=\xrefitem Kelley \"Kelley\" \"Kelley\""
 
 # This tag can be used to specify a number of word-keyword mappings (TCL only).
 # A mapping has the form "name=value". For example adding "class=itcl::class"

@@ -8,6 +8,7 @@
 
 #include "Institutions/IMessage.h"
 #include "Tools/WorldSettings.h"
+#include "UI/W.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/H.h"
 #include "Agents/SEI.h"
@@ -20,6 +21,13 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
     //saves information about advertising agent
     ///No mutex guards as only other operation is poping from the front, which does not invalidate anything
     get_inf_marketing_sei.push_back(mes_);
+    
+    if (marketing_state != EParamTypes::HHMarketingStateInterested)
+    {
+        marketing_state = EParamTypes::HHMarketingStateInterested;
+        //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
+        w->get_state_inf(this, marketing_state);
+    };
     
     ///@DevStage2 might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
     
@@ -136,7 +144,7 @@ Household::get_inf_online_quote(IAgent* agent_to)
 {
     auto mes = std::make_shared<MesStateBaseHH>();
     
-    ///@DevStage1 won't work, as some parameters need to be taken from House directly, have to distinguish them in some way.
+    ///Some parameters need to be taken from House directly, they are pushed to the general container when changed
     for (auto& param:WorldSettings::instance().params_to_copy_preliminary_quote)
     {
         mes->params[param] = params[param];
@@ -147,10 +155,62 @@ Household::get_inf_online_quote(IAgent* agent_to)
 
 
 
+bool
+Household::request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
+{
+    std::size_t i = (i_schedule_visits + (visit_time - a_time)) % schedule_visits.size();
+    return schedule_visits[i].size() < params[EParamTypes::HHMaxNVisitsPerTimeUnit];
+}
+
+bool
+Household::schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
+{
+    schedule_visits_lock.lock();
+    std::size_t i = (i_schedule_visits + (visit_time - a_time)) % schedule_visits.size();
+    bool FLAG_SCHEDULED_VISIT = false;
+    
+    if (schedule_visits[i].size() < params[EParamTypes::HHMaxNVisitsPerTimeUnit])
+    {
+        schedule_visits[i].push_back(project);
+        FLAG_SCHEDULED_VISIT = true;
+    };
+    schedule_visits_lock.unlock();
+    return FLAG_SCHEDULED_VISIT;
+}
+
+
+void
+Household::ac_update_tick()
+{
+    //update internal timer
+    a_time = w->time;
+    
+    
+    //clear last day schedule
+    schedule_visits[i_schedule_visits].clear();
+    
+    //move schedule of visits by one
+    //advance index
+    if (i_schedule_visits == WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote] - 1)
+    {
+        i_schedule_visits = 0;
+    }
+    else
+    {
+        ++i_schedule_visits;
+    };
+    
+    
+    
+}
+
 
 void
 Household::act_tick()
 {
+    //update internals for the tick
+    ac_update_tick();
+    
     if (quote_stage_timer < WorldSettings::instance().constraints[EConstraintParams::MaxNTicksToCollectQuotes])
     {
         //initiates and continues collection of quoting information
@@ -161,6 +221,10 @@ Household::act_tick()
         //move to evaluation stage
         dec_evaluate_online_quotes();
     };
+    
+    
+    //evaluate preliminary quotes and commit to the project? 
+    
     
     
     ///@DevStage1 add selection of the best quotes from preliminary

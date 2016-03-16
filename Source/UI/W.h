@@ -71,6 +71,14 @@ public:
     
 protected:
     std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
+    
+    
+    
+    /*!< all H agents */
+    /*!< all SEI agents */
+    /*!< all SEM */
+    /*!< H agents that are active, @DevStage3 think about splitting more fine grained */ 
+    
 };
 
 

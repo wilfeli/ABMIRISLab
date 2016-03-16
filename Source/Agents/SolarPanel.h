@@ -19,6 +19,7 @@ namespace solar_core
 class Household;
 class MesStateBaseHH;
 class MesMarketingSEIOnlineQuote;
+class MesMarketingSEIPreliminaryQuote;
 class SEI;
     
 /**
@@ -34,6 +35,7 @@ public:
     TimeUnit begin_time;
     EParamTypes state_project;
     std::shared_ptr<MesMarketingSEIOnlineQuote> online_quote;
+    std::shared_ptr<MesMarketingSEIPreliminaryQuote> preliminary_quote;
     SEI* sei; /*!< installer of a project */
     
     TimeUnit ac_sei_time; /*!< time of a last action on this projet by sei */

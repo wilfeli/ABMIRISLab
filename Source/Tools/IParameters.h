@@ -42,6 +42,7 @@ namespace solar_core
         /** Roof size */
         RoofSize,
         
+        
         /** If Household is very interested in SP */
         HHMarketingStateHighlyInterested,
         
@@ -54,7 +55,49 @@ namespace solar_core
         HHMarketingNotInterested,
         
         
-        /** Estimated price of installation after the online quote was formed*/
+        /** State of a quoting stage for HH: actively requesting information */
+        ActiveQuoting,
+        
+        
+        /** State of a quoting stage for HH: not requesting quotes, might be analysing them or committed to the project */
+        InactiveQuoting,
+        
+        
+        /** Maximum number of visits per unit of time for HH */
+        HHMaxNVisitsPerTimeUnit,
+        
+        
+        
+        
+        /** State of a Project: preliminary quotes has been requested via online */
+        RequestedOnlineQuote,
+        
+        /** State of a Project: preliminary quotes need to been requested via phone */
+        RequestPreliminaryQuote,
+        
+        /** State of a Project: preliminary quotes has been requested via phone */
+        RequestedPreliminaryQuote,
+        
+        /** State of a Project: preliminary quotes has been provided via online */
+        ProvidedOnlineQuote,
+        
+        /** State of a Project: preliminary quotes has been provided via site visit */
+        ProvidedPreliminaryQuote,
+        
+        /** State of a Project: site visit is scheduled */
+        ScheduledFirstSiteVisit,
+        
+        /** State of a Project: collected information after first site visit */
+        CollectedInfFirstSiteVisit,
+        
+        
+        /** State of a Project: project closed for any reason */
+        Closed,
+        
+        
+        
+        
+        /** Estimated price of installation after the online quote was formed */
         OnlineQuotePrice,
         
         
@@ -77,7 +120,7 @@ namespace solar_core
         /** Industry standard PV price, used in online estimation */
         AveragePVPrice,
         
-
+        
         /** Industry standard PV price, used in online estimation */
         AveragePVCapacity,
         
@@ -96,38 +139,19 @@ namespace solar_core
         
         /** Large SEI */
         SEILarge,
+
         
+        /** Parameters of a SEI, such as processing time before preliminary quote is formed after site visit */
+        ProcessingTimeRequiredForPreliminaryQuote,
         
-        /** State of a Project: preliminary quotes has been requested via online */
-        RequestedOnlineQuote,
-        
-        /** State of a Project: preliminary quotes need to been requested via phone */
-        RequestPreliminaryQuote,
-        
-        /** State of a Project: preliminary quotes has been requested via phone */
-        RequestedPreliminaryQuote,
-        
-        /** State of a Project: preliminary quotes has been provided via online */
-        ProvidedOnlineQuote,
-        
-        /** State of a Project: preliminary quotes has been provided via phone */
-        ProvidedPreliminaryQuote,
-        
-    
-        
-        /** Parameters of a SEI, such as processing time before action is taken if preliminary quote is requested */
-        ProcessingTimeRequesForPreliminaryQuote,
+        /** Parameters of a SEI, such as processing time before action is taken to schedule first site visit */
+        ProcessingTimeRequiredForSchedulingFirstSiteVisit,
         
         /** Maximum number of visits per unit of time for SEI */
         SEIMaxNVisitsPerTimeUnit,
         
        
-        /** State of a quoting stage for HH: actively requesting information */
-        ActiveQuoting,
-        
-        
-        /** State of a quoting stage for HH: not requesting quotes, might be analysing them or committed to the project */
-        InactiveQuoting,
+
         
         
         /** Empty enum for completeness */

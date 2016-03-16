@@ -74,6 +74,28 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
 
 
 
+void
+SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
+{
+    ///@Kelley fill in details
+}
+
+
+
+std::shared_ptr<MesMarketingSEIPreliminaryQuote>
+SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
+{
+    //from params get stuff such as average price per watt, price of a standard unit
+    auto mes = std::make_shared<MesMarketingSEIPreliminaryQuote>();
+    
+    
+    //MARK: cont. create preliminary quote estimate from real data
+    ///@Kelley fill in details
+    //by default provide preliminary quote, but in some cases refuse to proceed with the project and close it
+    project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
+    
+    return mes;
+}
 
 void
 SEI::ac_update_tick()
@@ -127,11 +149,13 @@ SEI::act_tick()
         //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
         if (project->state_project == EParamTypes::RequestedPreliminaryQuote)
         {
-            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequesForPreliminaryQuote])
+            //if preliminary quote was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForSchedulingFirstSiteVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
                 std::size_t i_offset;
                 std::size_t i;
+                std::weak_ptr<PVProject> w_project = project;
                 while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_visits.size())
                 {
                     //check that there is space for the visit
@@ -139,24 +163,52 @@ SEI::act_tick()
                     
                     if (schedule_visits[i].size() < params[EParamTypes::SEIMaxNVisitsPerTimeUnit])
                     {
-                        auto agent_reply = project->agent->request_slot_visit(a_time + i_offset);
+                        auto agent_reply = project->agent->request_time_slot_visit(a_time + i_offset, w_project);
                         
                         if (agent_reply)
                         {
-                            project->agent->schedule_visit(a_time + i_offset);
+                            FLAG_SCHEDULED_VISIT = project->agent->schedule_visit(a_time + i_offset, w_project);
+                            
+                            if (FLAG_SCHEDULED_VISIT)
+                            {
+                                schedule_visits[i].push_back(w_project);
+                                project->state_project = EParamTypes::ScheduledFirstSiteVisit;
+                                project->ac_sei_time = a_time;
+                            }
                         };
-                        
-                        // MARK: cont. add guards for HH as multiple SEI could try and schedule visits at the same time if decide to parallelize SEI cycle 
+                        i_offset++;
                     };
-                }
+                };
             };
         };
         
         
+        //if visited site and processing time for preliminary quote has elapsed -  form preliminary quote
+        if (project->state_project == EParamTypes::CollectedInfFirstSiteVisit)
+        {
+            //if information after first site visit is collected
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForPreliminaryQuote])
+            {
+                auto mes = form_preliminary_quote(project);
+                project->preliminary_quote = mes;
+                project->agent->receive_preliminary_quote(project);
+                project->ac_sei_time = a_time;
+            };
+        };
     };
     
-    
-    //if preliminary quote was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
+    //visit sites and collect information
+    for (auto& w_project:schedule_visits[i_schedule_visits])
+    {
+        //go to sites, collect information
+        auto project = w_project.lock();
+        if (project)
+        {
+            collect_inf_site_visit(project);
+            project->state_project = EParamTypes::CollectedInfFirstSiteVisit;
+            project->ac_sei_time = a_time;
+        };
+    };
     
     
     

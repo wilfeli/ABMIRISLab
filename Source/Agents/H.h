@@ -12,7 +12,7 @@
 
 #include "Tools/ExternalIncludes.h"
 
-
+#include <mutex>
 #include "Tools/IParameters.h"
 #include "Geography/Geography.h"
 #include "Agents/IAgent.h"
@@ -25,6 +25,7 @@ namespace solar_core
     
 class MesMarketingSEIPreliminaryQuote;
 class MesStateBaseHH;
+class W;
 class SEI;
 class PVProject;
     
@@ -78,7 +79,7 @@ public:
     
     
     
-    virtual void ac_inf_quoting_sei() override; /*!< action to request information from SEI when initiative is given from the W */
+    virtual void ac_inf_quoting_sei(); /*!< action to request information from SEI when initiative is given from the W */
     virtual void act_tick();
     
     //@}
@@ -110,7 +111,8 @@ public:
     
     virtual void receive_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
     virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
-    
+    virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< check that could have a visit at this time */
+    virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< schedules visit at this time, returns false if no slots are open */
     
     long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
     
@@ -215,6 +217,12 @@ protected:
     EParamTypes quote_state; /*!< will be active quoting or inactive quoting */
     
     
+    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to MaxLengthWaitPreliminaryQuote */
+    
+    std::size_t i_schedule_visits;
+    
+    std::mutex schedule_visits_lock;
+    
     //@}
     
     
@@ -228,14 +236,30 @@ protected:
      */
     
     
+    virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further */
+    
+    
     /*!<  @DevStage1 GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
     virtual void update_params(); /*!< is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. */
+    
+    virtual void ac_update_tick(); /*!< update internals for the tick */
     
     TimeUnit a_time; /*!< internal agent's timer */
     //@}
     
     
+    //@{
+    /**
+     
+     
+     Sections with interactions with the world
+     */
+    
+    W* w; /*!< raw pointer to the actual world */
+    
+    
+    //@}
     
 };
 
