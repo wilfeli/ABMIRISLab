@@ -42,6 +42,9 @@ namespace solar_core
         /** Roof size */
         RoofSize,
         
+        /** Roof age */
+        RoofAge,
+        
         
         /** If Household is very interested in SP */
         HHMarketingStateHighlyInterested,
@@ -63,10 +66,16 @@ namespace solar_core
         InactiveQuoting,
         
         
+        /** State of a quoting stage for HH: decision on reroofing old roof */
+        HHDecisionReroof,
+        
+        
         /** Maximum number of visits per unit of time for HH */
         HHMaxNVisitsPerTimeUnit,
         
         
+        /** Thetas for decisions: decision on preliminary quotes */
+        HHDecPreliminaryQuote,
         
         
         /** State of a Project: preliminary quotes has been requested via online */
@@ -90,9 +99,20 @@ namespace solar_core
         /** State of a Project: collected information after first site visit */
         CollectedInfFirstSiteVisit,
         
+        /** State of a Project: Roof needs to be changed */
+        RequiredHHReroof,
+        
+        /** State of a Project: Homeowner agreed to reroof thus waiting for reroofing */
+        WaitingHHReroof,
+        
+        /** State of a Project: project is accepted for further development*/
+        AcceptedPreliminaryQuote,
+        
+        /** State of a Project: created design for the project*/
+        DraftedDesign,
         
         /** State of a Project: project closed for any reason */
-        Closed,
+        ClosedProject,
         
         
         
@@ -147,10 +167,15 @@ namespace solar_core
         /** Parameters of a SEI, such as processing time before action is taken to schedule first site visit */
         ProcessingTimeRequiredForSchedulingFirstSiteVisit,
         
+        /** Parameters of a SEI, processing time before design is created after project is accepted by HH */
+        ProcessingTimeRequiredForDesign,
+        
+        
         /** Maximum number of visits per unit of time for SEI */
         SEIMaxNVisitsPerTimeUnit,
         
-       
+        /** Maximum age of the roof to accept for installation */
+        SEIMaxRoofAge,
 
         
         
@@ -173,9 +198,14 @@ namespace solar_core
         /** Maximum number of preliminary quotes to request from received online quotes */
         MaxNRequestedPreliminaryFromOnlineQuotes,
         
+        /** Minimum number of preliminary quotes to consider */
+        MinNReceivedPreliminaryQuotes,
+        
         
         /** Maximum waiting time before the visit to get preliminary quote is made */
         MaxLengthWaitPreliminaryQuote,
+        
+        
         
         
         

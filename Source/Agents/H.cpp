@@ -126,10 +126,49 @@ Household::dec_evaluate_online_quotes()
 }
 
 
+
+void
+Household::dec_evaluate_preliminary_quotes()
+{
+    //sort projects by price, lower price goes first
+    std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
+        //compare only if online quote was received,
+        bool compare_res = false;
+        if (lhs->state_project == EParamTypes::ProvidedPreliminaryQuote && rhs->state_project == EParamTypes::ProvidedPreliminaryQuote)
+        {
+            compare_res = lhs->online_quote->params[EParamTypes::PreliminaryQuoteEstimatedSavings] > rhs->online_quote->params[EParamTypes::PreliminaryQuoteEstimatedSavings];
+        };
+        return compare_res;
+    });
+    
+    
+    std::shared_ptr<PVProject> decision = nullptr;
+    //pick top project and compare price to the income
+    for(auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
+        {
+            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * thetas[EParamTypes::HHDecPreliminaryQuote][0])
+            {
+                decision = project;
+                break;
+            };
+        }
+    };
+    
+    if (decision)
+    {
+        decision->state_project == EParamTypes::AcceptedPreliminaryQuote;
+        decision->sei->accepted_preliminary_quote(decision);
+    };
+    
+}
+
+
 void
 Household::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
-    
+    n_preliminary_quotes++;
 }
 
 void
@@ -179,6 +218,16 @@ Household::schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
 }
 
 
+
+bool
+Household::dec_project_reroof(std::shared_ptr<PVProject> project)
+{
+    //MARK: cont.
+    
+};
+
+
+
 void
 Household::ac_update_tick()
 {
@@ -223,9 +272,11 @@ Household::act_tick()
     };
     
     
-    //evaluate preliminary quotes and commit to the project? 
-    
-    
+    //evaluate preliminary quotes and commit to the project
+    if (n_preliminary_quotes >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedPreliminaryQuotes])
+    {
+        dec_evaluate_preliminary_quotes();
+    };
     
     ///@DevStage1 add selection of the best quotes from preliminary
     

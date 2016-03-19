@@ -1,4 +1,5 @@
 {
-  "EParamTypes::SEIMaxNVisitsPerTimeUnit":"5"
+  "EParamTypes::SEIMaxNVisitsPerTimeUnit":"5",
+  "EParamTypes::SEIMaxRoofAge":"1040",
     //Add other parameters for the model
 }

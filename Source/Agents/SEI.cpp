@@ -43,6 +43,13 @@ SEI::request_preliminary_quote(std::shared_ptr<PVProject> project_)
 }
 
 
+void
+SEI::accepted_preliminary_quote(std::shared_ptr<PVProject> project_)
+{
+    project_->ac_sei_time = a_time;
+}
+
+
 std::shared_ptr<MesMarketingSEIOnlineQuote>
 SEI::form_online_quote(std::shared_ptr<PVProject> project_)
 {
@@ -78,6 +85,21 @@ void
 SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
 {
     ///@Kelley fill in details
+    //add information to the parameters of an agent
+    project_->state_base_agent->params[EParamTypes::RoofAge] = project_->agent->house->roof_age;
+    
+    
+    //if age > age threshold - ask if is willing to reroof
+    if (project_->state_base_agent->params[EParamTypes::RoofAge] > params[EParamTypes::SEIMaxRoofAge])
+    {
+        
+        auto dec = project_->agent->dec_project_reroof(project_);
+        
+        project_->state_base_agent->params[EParamTypes::HHDecisionReroof] = dec;
+        project_->state_project = EParamTypes::RequiredHHReroof;
+        
+    };
+    
 }
 
 
@@ -93,6 +115,25 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     ///@Kelley fill in details
     //by default provide preliminary quote, but in some cases refuse to proceed with the project and close it
     project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
+    
+    
+    //if roof is old and refuses to reroof - close project
+    if (project_->state_project == EParamTypes::RequiredHHReroof)
+    {
+        //if agrees to reroof - transfer into waiting state
+        //otherwise mark as closed
+        if (project_->state_base_agent->params[EParamTypes::HHDecisionReroof])
+        {
+            project_->state_project = EParamTypes::WaitingHHReroof;
+        }
+        else
+        {
+            project_->state_project = EParamTypes::ClosedProject;
+        };
+    };
+    
+
+    
     
     return mes;
 }
@@ -195,6 +236,23 @@ SEI::act_tick()
                 project->ac_sei_time = a_time;
             };
         };
+        
+        
+        
+        if (project->state_project == EParamTypes::AcceptedPreliminaryQuote)
+        {
+            //if enough time has elapsed
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForDesign])
+            {
+                auto mes = form_design(project);
+                project->design = mes;
+                project->agent->receive_design(project);
+                project->ac_sei_time = a_time;
+            };
+            
+        };
+        
+        
     };
     
     //visit sites and collect information
@@ -209,6 +267,10 @@ SEI::act_tick()
             project->ac_sei_time = a_time;
         };
     };
+    
+    
+
+    
     
     
     

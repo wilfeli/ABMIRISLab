@@ -113,8 +113,9 @@ public:
     virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
     virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< check that could have a visit at this time */
     virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< schedules visit at this time, returns false if no slots are open */
+    virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @wp need to ask HH how they decide to reroof */
     
-    long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
+    
     
     
     
@@ -218,10 +219,12 @@ protected:
     
     
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to MaxLengthWaitPreliminaryQuote */
-    
     std::size_t i_schedule_visits;
-    
     std::mutex schedule_visits_lock;
+    
+    long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
+    long n_preliminary_quotes; /*!< number of preliminary quotes */
+
     
     //@}
     
@@ -237,7 +240,7 @@ protected:
     
     
     virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further */
-    
+    virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be persued further */
     
     /*!<  @DevStage1 GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
