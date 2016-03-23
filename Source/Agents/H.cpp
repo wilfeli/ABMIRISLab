@@ -165,6 +165,31 @@ Household::dec_evaluate_preliminary_quotes()
 }
 
 
+
+void
+Household::dec_evaluate_designs()
+{
+    //assume that best design in terms of savings is accepted?
+    //MARK: cont.
+    
+    
+    project->state_project = EParamTypes::AcceptedDesign;
+    project->ac_hh_time = a_time;
+    project->ac_accepted_time = a_time;
+    project->sei->accepted_design(this);
+    
+    
+    
+}
+
+
+void
+Household::receive_design(std::shared_ptr<PVProject> project_)
+{
+    dec_evaluate_designs();
+}
+
+
 void
 Household::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
@@ -277,6 +302,20 @@ Household::act_tick()
     {
         dec_evaluate_preliminary_quotes();
     };
+    
+    for (auto& project:accepted_design)
+    {
+        if (auto payment = project->financing->schedule_payments[a_time - project->ac_accepted_time] > 0)
+        {
+            //make payment
+            //assume that have enough money
+            auto MesPayment = std::make_shared<MesPayment>(MesPayment(payment));
+            project->sei->get_payment(MesPayment);
+        };
+    };
+    
+    //if there is accepted project - check if needs to make payments
+    
     
     ///@DevStage1 add selection of the best quotes from preliminary
     

@@ -50,6 +50,12 @@ SEI::accepted_preliminary_quote(std::shared_ptr<PVProject> project_)
 }
 
 
+void
+SEI::accepted_design(std::shared_ptr<PVProject> project_)
+{
+    
+}
+
 std::shared_ptr<MesMarketingSEIOnlineQuote>
 SEI::form_online_quote(std::shared_ptr<PVProject> project_)
 {
@@ -252,6 +258,21 @@ SEI::act_tick()
             
         };
         
+        //after design is formed - get permit for the installation
+        if (project->state_project == EParamTypes::AcceptedDesign)
+        {
+            g->request_permit(project);
+            project->state_project == EParamTypes::RequestedPermit;
+        };
+        
+        
+        if (project->state_project == EParamTypes::GrantedPermit)
+        {
+            //schedule installation
+            
+        };
+        
+        //includes signing contract and starting payments if nesessary, as payment schedule will be part of the project
         
     };
     
@@ -269,8 +290,11 @@ SEI::act_tick()
     };
     
     
-
     
+    //visit sites and perform installation
+    //MARK: cont.
+
+    //MARK: cont. collect information from SEM and update design examples
     
     
     
@@ -278,7 +302,6 @@ SEI::act_tick()
     //MARK: cont. preliminary quote - mom and pop shop will be separate class, derived from this, so this implementation is for the big SEI, which all have online quotes
     
     
-    //MARK: cont. continue if interest in the project was indicated
     
     
     

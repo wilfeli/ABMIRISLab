@@ -111,6 +111,17 @@ namespace solar_core
         /** State of a Project: created design for the project*/
         DraftedDesign,
         
+        /** State of a Project: accepted design for the project*/
+        AcceptedDesign,
+        
+        /** State of a Project: requested permit for the project*/
+        RequestedPermit,
+        
+        /** State of a Project: granted permit for the project*/
+        GrantedPermit,
+        
+        
+        
         /** State of a Project: project closed for any reason */
         ClosedProject,
         

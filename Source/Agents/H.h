@@ -203,6 +203,7 @@ protected:
     std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing infiormation from SEI agents that this agent is interested in geting quotes from */
     
     std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage1 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
+    
     EParamTypes marketing_state; /*!< could be interested, very interested or not */
     
     //@}
@@ -228,8 +229,15 @@ protected:
     
     //@}
     
+    //@{
+    /**
+     
+     Section relevant to design stage
+     
+     */
+    std::deque<std::shared_ptr<PVProject>> accepted_design;
     
-    
+    //@}
     
     //@{
     /**

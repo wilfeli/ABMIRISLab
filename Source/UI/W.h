@@ -9,8 +9,9 @@
 #ifndef ABMSolar_W_h
 #define ABMSolar_W_h
 
-#include "Tools/ExternalIncludes.h"
 
+#include <mutex>
+#include "Tools/ExternalIncludes.h"
 #include "Tools/IParameters.h"
 
 
@@ -61,8 +62,16 @@ public:
      */
     
     TimeUnit time;
+    std::mutex lock_tick; /*!< lock for tick */
+    std::condition_variable all_update; /*!< waits until all have updated */
     
+    std::atomic<long> updated_counter;
+    std::atomic<long> notified_counter;
     
+    std::atomic<bool> FLAG_SEI_TICK;
+    std::atomic<bool> FLAG_H_TICK;
+    std::atomic<bool> FLAG_G_TICK;
+    std::atomic<bool> FLAG_SEM_TICK;
     
     //@}
     
@@ -77,7 +86,10 @@ protected:
     /*!< all H agents */
     /*!< all SEI agents */
     /*!< all SEM */
-    /*!< H agents that are active, @DevStage3 think about splitting more fine grained */ 
+    /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
+    
+
+    
     
 };
 

@@ -32,6 +32,7 @@ namespace solar_core
 class MesMarketingSEI;
 class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
+class MesDesign;
 class W;
 class Household;
     
@@ -120,9 +121,24 @@ protected:
     virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_);
     
     
-    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to MaxLengthWaitPreliminaryQuote */
+    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to the MaxLengthWaitPreliminaryQuote */
     
     std::size_t i_schedule_visits;
+    
+    //@}
+    
+    
+    //@{
+    /**
+     
+     Section relevant to design phase
+     
+     */
+    
+    
+    virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
+    
+    
     
     //@}
     

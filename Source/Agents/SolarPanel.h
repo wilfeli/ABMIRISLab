@@ -22,6 +22,35 @@ class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
 class SEI;
     
+    
+    
+/**
+ 
+ Basic structure of the Solar Instalation
+ http://www.gogreensolar.com/pages/solar-components-101
+ 
+ 
+ 
+ 
+ 
+ 
+ */
+    
+class PVDesign
+{
+public:
+    
+    
+    
+protected:
+    
+    
+    
+    
+};
+    
+    
+    
 /**
  
  PV Project by SEI
@@ -36,9 +65,14 @@ public:
     EParamTypes state_project;
     std::shared_ptr<MesMarketingSEIOnlineQuote> online_quote;
     std::shared_ptr<MesMarketingSEIPreliminaryQuote> preliminary_quote;
+    std::shared_ptr<MesDesign> design;
+    std::shared_ptr<MesFinance> financing;
     SEI* sei; /*!< installer of a project */
     
     TimeUnit ac_sei_time; /*!< time of a last action on this projet by sei */
+    TimeUnit ac_g_time; /*!< time of a last action on this project by g */
+    TimeUnit ac_hh_time; /*!< time of a last action on the project by h */
+    TimeUnit ac_accepted_time; /*!< when when the project was accepted */
     
 protected:
     

@@ -15,6 +15,57 @@ using namespace solar_core;
 
 
 void
+W::life()
+{
+    bool FLAG_MAX_N_ITERATIONS = params.count("N_ITERATIOMS");
+    long MAX_N_ITERATIONS = 0;
+    if (FLAG_MAX_N_ITERATIONS)
+    {
+        MAX_N_ITERATIONS = std::stol(params["N_ITERATIONS"]);
+    };
+    
+    while (!FLAG_IS_STOPPED)
+    {
+        //stop if max number iterations is exceeded
+        if (FLAG_MAX_N_ITERATIONS)
+        {
+            if ((time - begin_time) > MAX_N_ITERATIONS)
+            {
+                FLAG_IS_STOPPED = true;
+                FLAG_IS_STARTED = false;
+                break;
+            };
+        };
+        
+        if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE)
+        {
+            time++;
+            updated_counter = 0;
+            FLAG_SEI_TICK = true;
+            FLAG_H_TICK = true;
+            FLAG_G_TICK = true;
+            FLAG_SEM_TICK = true;
+            
+            
+            all_update.notify_all();
+            while((notified_counter < constants::NUMBER_AGENT_TYPES_LIFE) && !FLAG_IS_STOPPED)
+            {
+                //need additional notifies, otherwise thread could wake while FLAG_TICK is false and get back to sleep. During the time it takes for it to go to sleep, notify_all could have been called and missed this thread, that was in between state
+                all_update.notify_all();
+            };
+            
+            notified_counter = 0;
+        }
+        else
+        {
+        };
+    };
+}
+
+
+
+
+void
 W::life_hhs()
 {
     
@@ -33,3 +84,37 @@ W::life_hhs()
     //MARK: cont.
     
 }
+
+
+void
+W::life_SEIs()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_SEI_TICK && !FLAG_IS_STOPPED)
+        {
+            notified_counter++;
+            FLAG_SEI_TICK = false;
+            
+            for (auto agent:seis)
+            {
+                //get tick
+                agent->act_tick(time_tick);
+            };
+            updated_counter++;
+        };
+        
+        
+        while (!FLAG_SEI_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEI_TICK || FLAG_IS_STOPPED); });
+        };
+
+        
+    };
+    
+    
+};
