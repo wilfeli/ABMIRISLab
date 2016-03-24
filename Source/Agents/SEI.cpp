@@ -144,6 +144,22 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     return mes;
 }
 
+/**
+ 
+ @wp accroding to the CSI data set there is 50/50 split on owning and leasing SP (see Host Customer Sector and System Owner Sector fields)
+ 
+ 
+ 
+*/
+std::shared_ptr<MesDesign>
+SEI::form_design(std::shared_ptr<PVProject> project_)
+{
+    
+}
+
+
+
+
 void
 SEI::ac_update_tick()
 {
