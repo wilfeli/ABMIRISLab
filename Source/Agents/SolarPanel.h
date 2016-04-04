@@ -24,6 +24,16 @@ class SEI;
     
     
     
+    
+    
+    class SolarModule
+    {
+    public:
+        
+    };
+    
+
+    
 /**
  
  Basic structure of the Solar Instalation

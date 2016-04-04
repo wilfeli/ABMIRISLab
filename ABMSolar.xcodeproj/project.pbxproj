@@ -59,6 +59,7 @@
 		EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarPanel.cpp; sourceTree = "<group>"; };
 		EDDC11C61C8F9FF7005670BD /* SolarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarPanel.h; sourceTree = "<group>"; };
 		EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalIncludes.h; sourceTree = "<group>"; };
+		EDE03AD11CB1F81600C79A22 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
 		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = H.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
@@ -85,6 +86,7 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDE03AD11CB1F81600C79A22 /* solar_module.json */,
 				ED0E14151C98BD2B00A41B24 /* basemodel.json */,
 			);
 			path = BaseModel;

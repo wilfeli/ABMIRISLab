@@ -150,6 +150,25 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
  
  
  
+ Example for California San Jose and REC260PE:
+ Average daily use 30kWh per day. 
+ For California assume 6 hours of solar. (Look at the map http://understandsolar.com/calculating-kilowatt-hours-solar-panels-produce/) It is kWh/m2/day. 
+ 
+ 
+ PTC refers to PVUSA Test Conditions, which were developed to test and compare PV systems as part of the PVUSA (Photovoltaics for Utility Scale Applications) project. PTC are 1,000 Watts per square meter solar irradiance, 20 degrees C air temperature, and wind speed of 1 meter per second at 10 meters above ground level.
+ 
+ Logic: Peak Efficiency (15.76%) = STC Power Rating / Total panel area (=Length * Width)/1000W
+ 
+ 1 panel produces 260Wh if receives 1000Wh, so for 6kWh one panel produces 6 * 0.260 = 6 * 0.1576 * 1.65 = 1.56kWh per day of DC
+ 
+ for AC = 1.56 * 0.8 = 1.248 (as DC -> AC conversion at 80%)
+ 
+ for 30kWh per day need 24 panels if use STC Power Rating
+ 
+ 
+ 
+ 
+ 
 */
 std::shared_ptr<MesDesign>
 SEI::form_design(std::shared_ptr<PVProject> project_)
