@@ -164,8 +164,12 @@ Household::dec_evaluate_preliminary_quotes()
     
 }
 
-
-
+/**
+ 
+ 
+ @DevStage2 may go back and forth over the design 
+ 
+ */
 void
 Household::dec_evaluate_designs()
 {
