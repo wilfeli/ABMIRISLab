@@ -190,6 +190,18 @@ namespace solar_core
 
         
         
+        /** High efficiency choice of a panel */
+        SEIHighEfficiencyDesign,
+        
+        
+        /** Mid range efficiency choice of a panel */
+        SEIMidEfficiencyDesign,
+        
+        
+        /** Low efficiency choice of a panel */
+        SEILowEfficiencyDesign,
+        
+        
         /** Empty enum for completeness */
         None
         

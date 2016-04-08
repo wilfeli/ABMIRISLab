@@ -148,7 +148,7 @@ Household::dec_evaluate_preliminary_quotes()
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
-            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * thetas[EParamTypes::HHDecPreliminaryQuote][0])
+            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * THETA_design[EParamTypes::HHDecPreliminaryQuote][0])
             {
                 decision = project;
                 break;
@@ -167,22 +167,26 @@ Household::dec_evaluate_preliminary_quotes()
 /**
  
  
- @DevStage2 may go back and forth over the design 
+ @DevStage2 may go back and forth over the design
  
  */
 void
 Household::dec_evaluate_designs()
 {
     //assume that best design in terms of savings is accepted?
-    //MARK: cont.
+    std::sort(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &lhs, std::shared_ptr<PVProject> &rhs)
+    {
+        return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
+    });
     
+    auto decision = pvprojects[0];
     
-    project->state_project = EParamTypes::AcceptedDesign;
-    project->ac_hh_time = a_time;
-    project->ac_accepted_time = a_time;
-    project->sei->accepted_design(this);
+    decision->state_project = EParamTypes::AcceptedDesign;
+    decision->ac_hh_time = a_time;
+    decision->ac_accepted_time = a_time;
+    decision->sei->accepted_design(this);
     
-    
+    accepted_design.push_back(decision);
     
 }
 
@@ -190,7 +194,7 @@ Household::dec_evaluate_designs()
 void
 Household::receive_design(std::shared_ptr<PVProject> project_)
 {
-    dec_evaluate_designs();
+    n_pending_designs++;
 }
 
 
@@ -307,6 +311,13 @@ Household::act_tick()
         dec_evaluate_preliminary_quotes();
     };
     
+    //evaluate preliminary quotes and commit to the project
+    if (n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])
+    {
+        dec_evaluate_designs();
+    };
+    
+    
     for (auto& project:accepted_design)
     {
         if (auto payment = project->financing->schedule_payments[a_time - project->ac_accepted_time] > 0)
@@ -319,9 +330,6 @@ Household::act_tick()
     };
     
     //if there is accepted project - check if needs to make payments
-    
-    
-    ///@DevStage1 add selection of the best quotes from preliminary
     
     ///@DevStage1 generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both - agent is broadcasting changed state and behaves differently depending on the state.
 }

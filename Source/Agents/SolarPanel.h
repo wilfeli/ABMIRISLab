@@ -20,17 +20,24 @@ class Household;
 class MesStateBaseHH;
 class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
+class MesDesign;
+class MesFinance;
 class SEI;
     
     
     
     
     
-    class SolarModule
-    {
-    public:
-        
-    };
+class SolarModule
+{
+public:
+    std::string name;
+    double efficiency;
+    double STC_power_rating;
+    double p_sem; /*!< price as quoted by manufacturer */
+    double length;
+    double width;
+};
     
 
     
@@ -49,7 +56,17 @@ class SEI;
 class PVDesign
 {
 public:
-    
+    PVDesign(const PVDesign&) = default;
+    double solar_radiation;
+    double permit_difficulty;
+    std::shared_ptr<SolarModule> PV_module;
+    double N_PANELS;
+    double DC_size;
+    double AC_size;
+    double hard_costs;
+    double soft_costs;
+    double total_costs;
+    double total_savings;
     
     
 protected:

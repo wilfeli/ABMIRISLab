@@ -121,7 +121,19 @@ public:
     
     //@}
     
+    //@{
+    /**
+     
+     Section with geographical parameters
+     
+     */
     
+    double location_x; /** Location of an agent, x coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
+    double location_y; /** Location of an agent, y coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
+    
+    
+    
+    //@}
     
     
 protected:
@@ -155,19 +167,6 @@ protected:
     
     //@}
     
-    //@{
-    /**
-     
-     Section with geographical parameters
-     
-     */
-    
-    double location_x; /** Location of an agent, x coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
-    double location_y; /** Location of an agent, y coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
-    
-    
-    
-    //@}
     
     
     

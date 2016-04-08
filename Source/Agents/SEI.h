@@ -138,8 +138,31 @@ protected:
     
     virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
     
+    std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
+    std::vector<double> dec_project_percentages; /*!< percentage of a utility bill to cover */
+    std::vector<double> THETA_hard_costs; /*!< THETA[0] - price per efficiency unit, THETA[1] discount for the size of a project */
+    std::vector<double> THETA_soft_costs; /*!< THETA[0] - labor costs for installation, THETA[1] - additional labor costs due to the permitting difficulty */
+    std::vector<double> THETA_profit; /*!< THETA[0] - profit margin */
     
     
+    void ac_estimate_savings(PVDesign* design); /*!< estimate savings for the project */
+    
+    TimeUnit ac_designs; /*!< last time information about SEM was updated */
+    
+    //@}
+    
+    
+    //@{
+    /**
+     
+     
+     Section relevant to installation phase
+     
+     */
+    
+    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_installations; /*!< schedule for installations, length is equal to the MaxLengthPlanInstallation */
+    
+    std::size_t i_schedule_installations;
     //@}
     
     
