@@ -48,6 +48,7 @@ class Tile
 protected:
     double size_x; /*!< length of a tile */
     double size_y; /*!< width of a tile */
+    double solar_radiation; /*!< amount of solar radiation per Wh/m2/day for this tile */
     
 };
 

@@ -20,8 +20,28 @@ namespace solar_core
 {
     
 class SEI;
-
-
+class PVDesign;
+    
+    
+    
+class MesFinance
+{
+public:
+    std::vector<double> schedule_payments;
+    EParamTypes state_payments;
+protected:
+};
+    
+    
+class MesDesign
+{
+public:
+    std::shared_ptr<PVDesign> design;
+protected:
+};
+    
+    
+    
 /**
  
  General information about SEI

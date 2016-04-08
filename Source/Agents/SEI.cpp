@@ -174,8 +174,123 @@ std::shared_ptr<MesDesign>
 SEI::form_design(std::shared_ptr<PVProject> project_)
 {
     
+    //depending on the required size
+    
+    //do in multiples of three
+    //check design for full electricity bill, for 80% of it and for 30% of it
+    std::vector<PVDesign> designs;
+    //daily electricity consumption
+    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
+    //amount of solar radiation in Wh/m2/day
+    auto solar_radiation = w->get_solar_radiation(project_->agent->location_x, project_->agent->location_y);
+    //distribution of permit length in different locations
+    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
+    
+    //EParamTypes::ElectricityBill has daily electricity bill
+    for (auto project_percentage:dec_project_percentages)
+    {
+        //for each preferred panel - with high, mid and low efficiency, calculate number of panels to meet the demand
+        for (auto iter: dec_solar_modules)
+        {
+            //create design
+            auto design = PVDesign();
+            
+            design.solar_radiation = solar_radiation;
+            
+            design.permit_difficulty = permit_difficulty;
+            
+            design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]));
+            
+            design.PV_module = iter.second;
+            
+            design.DC_size = design.N_PANELS * iter.second->STC_power_rating;
+            
+            design.AC_size = design.DC_size * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss];
+            
+            ///@DevStage1 add inverter technology here
+            
+            
+            
+            design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1];
+            
+            design.soft_costs = design.N_PANELS * THETA_soft_costs[0] + permit_difficulty * THETA_soft_costs[1];
+            
+            design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
+            
+            
+            ac_estimate_savings(&design);
+            
+            
+            designs.push_back(design);
+            
+        };
+    };
+    
+    
+    //sort by savings and present best option
+    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
+    
+    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
+        return lhs.total_savings > rhs.total_savings;
+    });
+    
+    auto mes = std::make_shared<MesDesign(std::make_shared<PVDesign>(designs[0])));
+    
+    return mes;
 }
 
+/**
+ 
+ 
+ 
+ 
+ 
+*/
+void
+SEI::ac_estimate_savings(PVDesign* design)
+{
+    //estimate savings for each project
+    //get price of kW from the utility, assume increase due to inflation
+    //total life-time of a project
+    
+    
+    
+    //calculate PPA
+    
+    
+    //calculate lease
+
+    //
+    auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate]
+    auto CPI = 1;
+    auto energy_costs = 0.0;
+    for (auto i = 0; i < design->PV_module->warranty_length)
+    {
+        //estimate yearly energy production, if PPA might be used in estimation
+//        auto yearly_production = design->AC_size * design.solar_radiation/1000 * 365.25;
+        energy_costs += project_->state_base_agent->params[EParamTypes::ElectricityBill] * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        
+        CPI = CPI * inflation;
+    };
+    
+    design.total_savings = design.total_costs - energy_cost;
+    
+    
+    
+}
+
+
+
+void
+SEI::form_financing(std::shared_ptr<PVProject> project_)
+{
+    project_->financing = std::make_shared<MesFinance>();
+    
+    //assume that whole sum is due on the beginning of the project
+    project_->financing->schedule_payments = {project_->design->design->total_costs};
+    
+    
+}
 
 
 
@@ -200,7 +315,20 @@ SEI::ac_update_tick()
         ++i_schedule_visits;
     };
 
+    //clear last day schedule
+    schedule_installations[i_schedule_installations].clear();
     
+    //move schedule of visits by one
+    //advance index
+    if (i_schedule_installations == WorldSettings::instance().constraints[EConstraintParams::MaxLengthPlanInstallations] - 1)
+    {
+        i_schedule_installations = 0;
+    }
+    else
+    {
+        ++i_schedule_installations;
+    };
+
     
 }
 
@@ -287,6 +415,7 @@ SEI::act_tick()
             {
                 auto mes = form_design(project);
                 project->design = mes;
+                form_financing(project);
                 project->agent->receive_design(project);
                 project->ac_sei_time = a_time;
             };
@@ -304,7 +433,33 @@ SEI::act_tick()
         if (project->state_project == EParamTypes::GrantedPermit)
         {
             //schedule installation
-            
+            bool FLAG_SCHEDULED_VISIT = false;
+            std::size_t i_offset;
+            std::size_t i;
+            std::weak_ptr<PVProject> w_project = project;
+            while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_installations.size())
+            {
+                //check that there is space for the visit
+                i = (i_schedule_installations + i_offset) % schedule_installations.size();
+                
+                if (schedule_installations[i].size() < params[EParamTypes::SEIMaxNInstallationsPerTimeUnit])
+                {
+                    auto agent_reply = project->agent->request_time_slot_visit(a_time + i_offset, w_project);
+                    
+                    if (agent_reply)
+                    {
+                        FLAG_SCHEDULED_VISIT = project->agent->schedule_installations(a_time + i_offset, w_project);
+                        
+                        if (FLAG_SCHEDULED_VISIT)
+                        {
+                            schedule_installations[i].push_back(w_project);
+                            project->state_project = EParamTypes::ScheduledInstallation;
+                            project->ac_sei_time = a_time;
+                        }
+                    };
+                    i_offset++;
+                };
+            };
         };
         
         //includes signing contract and starting payments if nesessary, as payment schedule will be part of the project
@@ -316,6 +471,7 @@ SEI::act_tick()
     {
         //go to sites, collect information
         auto project = w_project.lock();
+        //check if project is still active
         if (project)
         {
             collect_inf_site_visit(project);
@@ -327,10 +483,32 @@ SEI::act_tick()
     
     
     //visit sites and perform installation
-    //MARK: cont.
+    //visit sites and collect information
+    for (auto& w_project:schedule_installations[i_schedule_installations])
+    {
+        //go to sites, collect information
+        auto project = w_project.lock();
+        //check if project is still active
+        if (project && project->financing->state_payments = EParamTypes::PaymentsOnTime)
+        {
+            install_project(project);
+            project->state_project = EParamTypes::Installed;
+            project->ac_sei_time = a_time;
+        };
+    };
+
+    
+    
 
     //MARK: cont. collect information from SEM and update design examples
-    
+    if ((a_time - ac_designs) > params[EParamTypes::SEIFrequencyUpdateDesignTemplates])
+    {
+        //collect information about current offerings
+        //sort by efficiency
+        
+        
+        
+    };
     
     
     
