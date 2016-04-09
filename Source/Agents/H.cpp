@@ -119,7 +119,7 @@ Household::dec_evaluate_online_quotes()
         auto project = pvprojects[n_request_quotes];
         project->state_project = EParamTypes::RequestedPreliminaryQuote;
         project->sei->request_preliminary_quote(project);
-        n_request_quotes++;
+        ++n_request_quotes;
     };
     
     
@@ -158,7 +158,7 @@ Household::dec_evaluate_preliminary_quotes()
     
     if (decision)
     {
-        decision->state_project == EParamTypes::AcceptedPreliminaryQuote;
+        decision->state_project = EParamTypes::AcceptedPreliminaryQuote;
         decision->sei->accepted_preliminary_quote(decision);
     };
     
@@ -184,7 +184,7 @@ Household::dec_evaluate_designs()
     decision->state_project = EParamTypes::AcceptedDesign;
     decision->ac_hh_time = a_time;
     decision->ac_accepted_time = a_time;
-    decision->sei->accepted_design(this);
+    decision->sei->accepted_design(decision);
     
     accepted_design.push_back(decision);
     
@@ -194,14 +194,14 @@ Household::dec_evaluate_designs()
 void
 Household::receive_design(std::shared_ptr<PVProject> project_)
 {
-    n_pending_designs++;
+    ++n_pending_designs;
 }
 
 
 void
 Household::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
-    n_preliminary_quotes++;
+    ++n_preliminary_quotes;
 }
 
 void
@@ -324,8 +324,8 @@ Household::act_tick()
         {
             //make payment
             //assume that have enough money
-            auto MesPayment = std::make_shared<MesPayment>(MesPayment(payment));
-            project->sei->get_payment(MesPayment);
+            auto mes = std::make_shared<MesPayment>(MesPayment(payment));
+            project->sei->get_payment(mes);
         };
     };
     

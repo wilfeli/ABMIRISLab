@@ -22,6 +22,13 @@ namespace solar_core
 class SEI;
 class PVDesign;
     
+
+    
+class MesPayment{
+public:
+protected:
+};
+    
     
     
 class MesFinance

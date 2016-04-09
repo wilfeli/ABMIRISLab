@@ -1,16 +1,14 @@
 {
-    "WorldSettings":
-    {
-        "params_exog":[
-        {
-        "EParamTypes::DCtoACLoss":0.2
-        }
-        ]
-    },
-    
-
-    "EParamTypes::SEIMaxNVisitsPerTimeUnit":"5",
-    "EParamTypes::SEIMaxRoofAge":"1040",
-    "EParamTypes::ElectricityPriceUCDemand":"0.2",
-    //Add other parameters for the model
+    "WorldSettings": {
+        "params_exog": [
+                        {
+                        "EParamTypes::DCtoACLoss": 0.2
+                        },
+                        {
+                        "EParamTypes::ElectricityPriceUCDemand": "0.2"
+                        }
+                        ]
+    }
 }
+    
+    //Add other parameters for the model
