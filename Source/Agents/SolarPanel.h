@@ -37,6 +37,7 @@ public:
     double p_sem; /*!< price as quoted by manufacturer */
     double length;
     double width;
+    double warranty_length; /*!< in weeks, as it is time period */
 };
     
 

@@ -20,6 +20,10 @@ namespace solar_core {
     
     
 class IAgent;
+class WorldMap;
+class SEI;
+class SEM;
+class Household;
 
 
 class W
@@ -80,7 +84,7 @@ public:
     
     
     TimeUnit time;
-    TimeUnit begin_time;
+    TimeUnit begin_time = 0;
     std::mutex lock_tick; /*!< lock for tick */
     std::condition_variable all_update; /*!< waits until all have updated */
     
@@ -94,7 +98,17 @@ public:
     
     //@}
     
+    //@{
+    /**
+     
+     Interactions on geography
+     
+     */
     
+    double get_solar_radiation(double location_x, double location_y) const; /*!< returns estimated amount of solar radiation for the tile */
+    double get_permit_difficulty(double location_x, double location_y) const; /*!< returns permit difficulty */
+    
+    //@}
     
     
 protected:
@@ -108,6 +122,10 @@ protected:
     /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
     
     std::map<std::string, std::string> params;
+    
+    WorldMap* world_map;
+    
+    
     
     
 };

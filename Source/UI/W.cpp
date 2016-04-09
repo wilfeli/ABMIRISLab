@@ -7,7 +7,9 @@
 //
 
 #include "UI/W.h"
+#include "Geography/Geography.h"
 #include "Agents/IAgent.h"
+#include "Agents/SEI.h"
 
 
 using namespace solar_core;
@@ -71,7 +73,7 @@ W::life()
         
         if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE)
         {
-            time++;
+            ++time;
             updated_counter = 0;
             FLAG_SEI_TICK = true;
             FLAG_H_TICK = true;
@@ -125,7 +127,7 @@ W::life_seis()
     {
         if (FLAG_SEI_TICK && !FLAG_IS_STOPPED)
         {
-            notified_counter++;
+            ++notified_counter;
             FLAG_SEI_TICK = false;
             
             for (auto agent:seis)
@@ -133,7 +135,7 @@ W::life_seis()
                 //get tick
                 agent->act_tick(time);
             };
-            updated_counter++;
+            ++updated_counter;
         };
         
         
@@ -149,4 +151,18 @@ W::life_seis()
     };
     
     
-};
+}
+
+
+
+double
+W::get_solar_radiation(double location_x, double location_y) const
+{
+    return world_map->g_map[location_x][location_y]->solar_radiation;
+}
+
+double
+W::get_permit_difficulty(double location_x, double location_y) const
+{
+    return world_map->g_map[location_x][location_y]->permit_difficulty;
+}

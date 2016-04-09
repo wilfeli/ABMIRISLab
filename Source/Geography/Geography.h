@@ -45,11 +45,11 @@ public:
  */
 class Tile
 {
-protected:
+public:
     double size_x; /*!< length of a tile */
     double size_y; /*!< width of a tile */
-    double solar_radiation; /*!< amount of solar radiation per Wh/m2/day for this tile */
-    
+    double solar_radiation = 4.0; /*!< amount of solar radiation per Wh/m2/day for this tile */
+    double permit_difficulty = 1.0; /*!< length of a permitting process for this tile */
 };
 
 

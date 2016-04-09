@@ -145,7 +145,8 @@ namespace solar_core
         /** State of a Project: granted permit for the project*/
         GrantedPermit,
         
-        
+        /** State of a Project: project is installed */
+        Installed,
         
         /** State of a Project: project closed for any reason */
         ClosedProject,
@@ -189,6 +190,19 @@ namespace solar_core
         ElectricityPriceUCSupply,
         
         
+        /** Expected inflation rate over the next 20 years */
+        InflationRate,
+        
+        
+        /** DC to AC loss */
+        DCtoACLoss,
+        
+        
+        
+        
+        
+        
+        
         /** Small SEI agent - such as mom and pop shop */
         SEISmall,
         
@@ -209,6 +223,11 @@ namespace solar_core
         
         /** Maximum number of visits per unit of time for SEI */
         SEIMaxNVisitsPerTimeUnit,
+        
+        
+        /** Maximum number of installation per unit of time for SEI */
+        SEIMaxNInstallationsPerTimeUnit,
+        
         
         /** Maximum age of the roof to accept for installation */
         SEIMaxRoofAge,
@@ -246,16 +265,21 @@ namespace solar_core
         /** Maximum number of preliminary quotes to request from received online quotes */
         MaxNRequestedPreliminaryFromOnlineQuotes,
         
+        
         /** Minimum number of preliminary quotes to consider */
         MinNReceivedPreliminaryQuotes,
+        
+        
+        /** Minimum number of designs to consider */
+        MinNReceivedDesings,
         
         
         /** Maximum waiting time before the visit to get preliminary quote is made */
         MaxLengthWaitPreliminaryQuote,
         
         
-        
-        
+        /** Maximum forecasting horizon for installations */
+        MaxLengthPlanInstallations,
         
         None,
     };

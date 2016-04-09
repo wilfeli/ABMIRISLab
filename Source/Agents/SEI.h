@@ -176,7 +176,9 @@ protected:
     std::vector<double> THETA_profit; /*!< THETA[0] - profit margin */
     
     
-    void ac_estimate_savings(PVDesign* design); /*!< estimate savings for the project */
+    void ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_); /*!< estimate savings for the project */
+    
+    void form_financing(std::shared_ptr<PVProject> project_); /*!< create financing options to choose from */
     
     TimeUnit ac_designs; /*!< last time information about SEM was updated */
     

@@ -218,7 +218,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
             
             
-            ac_estimate_savings(&design);
+            ac_estimate_savings(design, project_);
             
             
             designs.push_back(design);
@@ -233,8 +233,8 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
         return lhs.total_savings > rhs.total_savings;
     });
-    
-    auto mes = std::make_shared<MesDesign(std::make_shared<PVDesign>(designs[0])));
+    auto design = std::make_shared<PVDesign>(designs[0]);
+    auto mes = std::make_shared<MesDesign>(design);
     
     return mes;
 }
@@ -247,7 +247,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
  
 */
 void
-SEI::ac_estimate_savings(PVDesign* design)
+SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
 {
     //estimate savings for each project
     //get price of kW from the utility, assume increase due to inflation
@@ -261,10 +261,10 @@ SEI::ac_estimate_savings(PVDesign* design)
     //calculate lease
 
     //
-    auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate]
+    auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
     auto energy_costs = 0.0;
-    for (auto i = 0; i < design->PV_module->warranty_length)
+    for (auto i = 0; i < design.PV_module->warranty_length/52; ++i)
     {
         //estimate yearly energy production, if PPA might be used in estimation
 //        auto yearly_production = design->AC_size * design.solar_radiation/1000 * 365.25;
@@ -273,7 +273,7 @@ SEI::ac_estimate_savings(PVDesign* design)
         CPI = CPI * inflation;
     };
     
-    design.total_savings = design.total_costs - energy_cost;
+    design.total_savings = design.total_costs - energy_costs;
     
     
     
@@ -386,7 +386,7 @@ SEI::act_tick()
                                 project->ac_sei_time = a_time;
                             }
                         };
-                        i_offset++;
+                        ++i_offset;
                     };
                 };
             };
@@ -426,7 +426,7 @@ SEI::act_tick()
         if (project->state_project == EParamTypes::AcceptedDesign)
         {
             g->request_permit(project);
-            project->state_project == EParamTypes::RequestedPermit;
+            project->state_project = EParamTypes::RequestedPermit;
         };
         
         
@@ -448,7 +448,7 @@ SEI::act_tick()
                     
                     if (agent_reply)
                     {
-                        FLAG_SCHEDULED_VISIT = project->agent->schedule_installations(a_time + i_offset, w_project);
+                        FLAG_SCHEDULED_VISIT = project->agent->schedule_visit(a_time + i_offset, w_project);
                         
                         if (FLAG_SCHEDULED_VISIT)
                         {
@@ -457,7 +457,7 @@ SEI::act_tick()
                             project->ac_sei_time = a_time;
                         }
                     };
-                    i_offset++;
+                    ++i_offset;
                 };
             };
         };
@@ -489,7 +489,7 @@ SEI::act_tick()
         //go to sites, collect information
         auto project = w_project.lock();
         //check if project is still active
-        if (project && project->financing->state_payments = EParamTypes::PaymentsOnTime)
+        if (project && project->financing->state_payments == EParamTypes::PaymentsOnTime)
         {
             install_project(project);
             project->state_project = EParamTypes::Installed;

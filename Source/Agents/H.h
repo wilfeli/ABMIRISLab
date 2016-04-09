@@ -121,6 +121,21 @@ public:
     
     //@}
     
+    
+    //@{
+    /**
+     
+     Section relevant to design phase
+     
+     */
+    
+    virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
+    
+    //@}
+    
+    
+    
+    
     //@{
     /**
      
@@ -236,6 +251,7 @@ protected:
      
      */
     std::deque<std::shared_ptr<PVProject>> accepted_design;
+    long n_pending_designs;
     
     //@}
     
