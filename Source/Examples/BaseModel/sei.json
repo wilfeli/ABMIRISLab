@@ -1,0 +1,23 @@
+{
+    "dec_solar_modules":[
+              {
+              "EParamTypes::SEIHighEfficiencyDesign":""
+              },
+              {
+              "EParamTypes::SEIMidEfficiencyDesign":"REC260PE"
+              },
+            {
+            "EParamTypes::SEILowEfficiencyDesign":""
+            },
+              ],
+    "params":[
+              {
+              "EParamTypes::EstimatedPricePerWatt":"5.5"
+              },
+              {
+              "EParamTypes::EstimatedPricePerWatt":"5.5"
+              },
+              ],
+    
+    //Add other parameters for the model
+}

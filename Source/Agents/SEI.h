@@ -97,6 +97,34 @@ public:
     
     
     //@}
+    
+    
+    //@{
+    /**
+     
+     Section relevant to quoting phase
+     
+     */
+
+    virtual void accepted_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< indicated that preliminary quote was accepted */
+    
+    
+    //@}
+    
+    //@{
+    /**
+     
+     Section relevant to design phase
+     
+     */
+    
+    
+    virtual void accepted_design(std::shared_ptr<PVProject> project_); /*!< indicates that design was accepted */
+    
+    
+    //@}
+    
+    
 protected:
     //@{
     /**
@@ -124,6 +152,9 @@ protected:
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to the MaxLengthWaitPreliminaryQuote */
     
     std::size_t i_schedule_visits;
+    
+    
+    void collect_inf_site_visit(std::shared_ptr<PVProject> project_); /*!< collects information on site */
     
     //@}
     

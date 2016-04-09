@@ -19,6 +19,7 @@
 		EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD31CB6B43900C79A22 /* IInstitute.cpp */; };
 		EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD51CB6B43900C79A22 /* IMessage.cpp */; };
 		EDE03ADB1CB6B43A00C79A22 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */; };
+		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
 		EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
 		EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,12 @@
 		EDE03AD61CB6B43900C79A22 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessage.h; sourceTree = "<group>"; };
 		EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDE03AD81CB6B43900C79A22 /* MarketingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketingSystem.h; sourceTree = "<group>"; };
+		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
+		EDE03ADD1CB8070500C79A22 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
+		EDE03ADE1CB8070500C79A22 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
+		EDE03ADF1CB8070500C79A22 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
+		EDE03AE01CB8184C00C79A22 /* Serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serialize.h; sourceTree = "<group>"; };
+		EDE03AE11CB88F2200C79A22 /* IParameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IParameters.cpp; sourceTree = "<group>"; };
 		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
 		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = H.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
@@ -95,8 +102,12 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				EDE03AD11CB1F81600C79A22 /* solar_module.json */,
 				ED0E14151C98BD2B00A41B24 /* basemodel.json */,
+				EDE03ADC1CB8070500C79A22 /* g.json */,
+				EDE03ADD1CB8070500C79A22 /* hh.json */,
+				EDE03ADE1CB8070500C79A22 /* sei.json */,
+				EDE03ADF1CB8070500C79A22 /* sem.json */,
+				EDE03AD11CB1F81600C79A22 /* solar_module.json */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -134,6 +145,8 @@
 		EDDB3FDA1C7DA16200A6EA1F /* Agents */ = {
 			isa = PBXGroup;
 			children = (
+				ED3EA2161C9F440000C2B70E /* G.cpp */,
+				ED3EA2171C9F440000C2B70E /* G.h */,
 				EDEDFCFA1C87BF5800A26BA5 /* H.cpp */,
 				EDDB3FDB1C7DA16200A6EA1F /* H.h */,
 				EDDA11671C85131100763818 /* IAgent.cpp */,
@@ -143,8 +156,6 @@
 				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
 				EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */,
 				EDDC11C61C8F9FF7005670BD /* SolarPanel.h */,
-				ED3EA2161C9F440000C2B70E /* G.cpp */,
-				ED3EA2171C9F440000C2B70E /* G.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -175,7 +186,9 @@
 			children = (
 				EDDB3FE31C7DA16200A6EA1F /* Documentation.h */,
 				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
+				EDE03AE11CB88F2200C79A22 /* IParameters.cpp */,
 				EDDB3FE41C7DA16200A6EA1F /* IParameters.h */,
+				EDE03AE01CB8184C00C79A22 /* Serialize.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
 			);
@@ -268,6 +281,7 @@
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */,
 				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
+				EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */,
 				EDE03ADB1CB6B43A00C79A22 /* MarketingSystem.cpp in Sources */,
 				EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */,
 				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,

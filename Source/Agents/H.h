@@ -135,6 +135,23 @@ public:
     
     //@}
     
+    //@{
+    /**
+     
+     Section with parameters for solar projects, mainly House for now
+     
+     
+     
+     
+     
+     */
+    House* house; /** Simplification: assume only 1 house per hh. If need to increase number of houses, might switch to vector of pointers to houses. Use RAII here maybe? for managining raw pointer. @DevStage3 think about using smart pointers here, it will simplify management of creation of agents. Cons: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.    */
+    
+    
+    
+    
+    //@}
+
     
 protected:
     
@@ -171,22 +188,6 @@ protected:
     
     
     
-    //@{
-    /**
-     
-     Section with parameters for solar projects, mainly House for now
-     
-     
-     
-     
-     
-     */
-    House* house; /** Simplification: assume only 1 house per hh. If need to increase number of houses, might switch to vector of pointers to houses. Use RAII here maybe? for managining raw pointer. @DevStage3 think about using smart pointers here, it will simplify management of creation of agents. Cons: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.    */
-    
-    
-    
-    
-    //@}
     
     
     

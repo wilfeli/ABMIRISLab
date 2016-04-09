@@ -17,6 +17,9 @@
 
 namespace solar_core
 {
+    
+class SolarModule;
+    
 /**
  
  
@@ -53,6 +56,9 @@ public:
     std::map<EConstraintParams, double> constraints; /*!< parameters for decision making and etc in a form of imposed exogenous constraints, such as number of ticks to collect quotes, for now have general setting for all agents, later might do individual settings. */
     
     std::map<EParamTypes, double> params_exog; /*!< exogenous parameters, such as price per watt that utility compary is asking, or price per watt that is paid to the connected to the grid solar project */
+    
+    std::map<std::string, std::shared_ptr<SolarModule>> solar_modules; /*!< list of available solar modules */
+    
     
     
     //@}
