@@ -199,7 +199,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             
             design.permit_difficulty = permit_difficulty;
             
-            design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]));
+            design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
             
             design.PV_module = iter.second;
             

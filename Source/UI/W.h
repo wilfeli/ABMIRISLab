@@ -37,6 +37,10 @@ public:
      */
     
     
+    W(std::string path_, std::string mode_ = "NEW"); /*!< */
+    
+    std::string base_path;
+    
     //@}
     
     
@@ -49,7 +53,17 @@ public:
      
      */
     
+    void life(); /*!< general loop */
+    
     void life_hhs(); /*!< life of households */
+    void life_seis(); /*!< life of seis */
+    
+    
+    
+    
+    
+    
+    
     
     //@}
     
@@ -61,7 +75,12 @@ public:
      
      */
     
+    std::atomic<bool> FLAG_IS_STOPPED;
+    std::atomic<bool> FLAG_IS_STARTED;
+    
+    
     TimeUnit time;
+    TimeUnit begin_time;
     std::mutex lock_tick; /*!< lock for tick */
     std::condition_variable all_update; /*!< waits until all have updated */
     
@@ -83,12 +102,12 @@ protected:
     
     
     
-    /*!< all H agents */
-    /*!< all SEI agents */
-    /*!< all SEM */
+    std::vector<Household*> hhs;/*!< all H agents */
+    std::vector<SEI*> seis;/*!< all SEI agents */
+    std::vector<SEM*> sems; /*!< all SEM */
     /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
     
-
+    std::map<std::string, std::string> params;
     
     
 };

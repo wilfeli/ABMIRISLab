@@ -12,6 +12,38 @@
 
 using namespace solar_core;
 
+/**
+ 
+ Assume that world is created from scratch
+ 
+*/
+W::W(std::string path_, std::string mode_)
+{
+    
+    //set ui flags
+    FLAG_IS_STOPPED = true;
+    
+    
+    //saves path to basic template
+    base_path = path_;
+    Log::instance(path_);
+    
+    if (mode_ == "NEW")
+    {
+        
+        //create existing solar modules
+        
+        
+        
+        //create SEI - use template for parameters, use model file for additional parameters
+        
+        
+        
+        
+        
+    };
+}
+
 
 
 void
@@ -87,7 +119,7 @@ W::life_hhs()
 
 
 void
-W::life_SEIs()
+W::life_seis()
 {
     while (!FLAG_IS_STOPPED)
     {
@@ -99,7 +131,7 @@ W::life_SEIs()
             for (auto agent:seis)
             {
                 //get tick
-                agent->act_tick(time_tick);
+                agent->act_tick(time);
             };
             updated_counter++;
         };

@@ -14,6 +14,31 @@
 
 namespace solar_core
 {
+    
+    namespace constants
+    {
+        const int WAIT_MILLISECONDS_ERROR = 100;
+        const int WAIT_MILLISECONDS_LIFE_TICK = 100;
+        const int WAIT_MILLISECONDS_DATA_REQUEST = 2000;
+        const int WAIT_MILLISECONDS_MARKET_CYCLE = 1000;
+        const int WAIT_MILLISECONDS_UIW_PAUSE = 100;
+        const int WAIT_CYCLES_VIEW_REQUEST = 10;
+        const int NUMBER_AGENT_TYPES_LIFE = 4; /*!< number of agents that update in W::life() */
+        static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
+        static constexpr double SOLAR_NAN() {return std::numeric_limits<double>::quiet_NaN();};
+        // ... other related constants
+        
+    } // namespace constants
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      
      @DevStage1 add factories enum<->std::string
@@ -207,7 +232,7 @@ namespace solar_core
         
     };
     
-    enum class EConstraintParams: uint64_t
+    enum class EConstraintParams: int64_t
     {
         
         /** Maximum number of ticks to collect quotes (online) */
@@ -238,6 +263,13 @@ namespace solar_core
     
     typedef int64_t TimeUnit;
     
+    
+    
+    
+    typedef std::underlying_type<EParamTypes>::type EParamTypes_type;
+    
+    std::ostream &operator<<(std::ostream& is, const EParamTypes & item);
+    std::istream& operator>> (std::istream&  os, EParamTypes & item);
 
 } //end of namespace solar_core
 #endif

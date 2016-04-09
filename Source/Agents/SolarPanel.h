@@ -56,6 +56,7 @@ public:
 class PVDesign
 {
 public:
+    PVDesign() = default;
     PVDesign(const PVDesign&) = default;
     double solar_radiation;
     double permit_difficulty;

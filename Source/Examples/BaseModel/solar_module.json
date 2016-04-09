@@ -1,13 +1,16 @@
 {
-    "COMMENT":"http://www.solardesigntool.com/components/module-panel-solar/REC-Solar/2481/REC260PE/specification-data-sheet.html",
-    "Name":"REC260PE",
-    "PTC Power Rating":"234.4",
-    "STC Power Rating":"260.0",
-    "STC Power per unit of area":"157.6",
-    "Peak Efficiency":"0.1576",
-    "Length":"1665",
-    "Width":"991",
-    "Manufacturer":"",
-    ""
-    
+    "COMMENT": "http://www.solardesigntool.com/components/module-panel-solar/REC-Solar/2481/REC260PE/specification-data-sheet.html",
+    "solar_modules": [
+                      {
+                      "Name": "REC260PE",
+                      "PTC Power Rating": "234.4",
+                      "STC Power Rating": "260.0",
+                      "STC Power per unit of area": "157.6",
+                      "Peak Efficiency": "0.1576",
+                      "Length": "1665",
+                      "Width": "991",
+                      "Manufacturer": "",
+                      "": ""
+                      }
+                      ]
 }
