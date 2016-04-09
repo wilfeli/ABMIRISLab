@@ -324,7 +324,7 @@ Household::act_tick()
         {
             //make payment
             //assume that have enough money
-            auto mes = std::make_shared<MesPayment>(MesPayment(payment));
+            auto mes = std::make_shared<MesPayment>(payment);
             project->sei->get_payment(mes);
         };
     };

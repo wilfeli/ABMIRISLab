@@ -145,6 +145,9 @@ namespace solar_core
         /** State of a Project: granted permit for the project*/
         GrantedPermit,
         
+        /** State of a Project: scheduled installation */
+        ScheduledInstallation,
+        
         /** State of a Project: project is installed */
         Installed,
         
@@ -212,26 +215,25 @@ namespace solar_core
 
         
         /** Parameters of a SEI, such as processing time before preliminary quote is formed after site visit */
-        ProcessingTimeRequiredForPreliminaryQuote,
+        SEIProcessingTimeRequiredForPreliminaryQuote,
         
         /** Parameters of a SEI, such as processing time before action is taken to schedule first site visit */
-        ProcessingTimeRequiredForSchedulingFirstSiteVisit,
+        SEIProcessingTimeRequiredForSchedulingFirstSiteVisit,
         
         /** Parameters of a SEI, processing time before design is created after project is accepted by HH */
-        ProcessingTimeRequiredForDesign,
-        
+        SEIProcessingTimeRequiredForDesign,
         
         /** Maximum number of visits per unit of time for SEI */
         SEIMaxNVisitsPerTimeUnit,
         
-        
         /** Maximum number of installation per unit of time for SEI */
         SEIMaxNInstallationsPerTimeUnit,
-        
         
         /** Maximum age of the roof to accept for installation */
         SEIMaxRoofAge,
 
+        /** Parameters of a SEI, frequency of revising designs */
+        SEIFrequencyUpdateDesignTemplates,
         
         
         /** High efficiency choice of a panel */
@@ -244,6 +246,15 @@ namespace solar_core
         
         /** Low efficiency choice of a panel */
         SEILowEfficiencyDesign,
+        
+        
+        
+        
+        
+        
+        /** State of Payments: all payments on time */
+        PaymentsOnTime,
+        
         
         
         /** Empty enum for completeness */

@@ -26,6 +26,10 @@ class PVDesign;
     
 class MesPayment{
 public:
+    
+    MesPayment(double payment_):q(payment_){}
+    
+    double q = 0.0;
 protected:
 };
     

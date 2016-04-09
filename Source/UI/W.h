@@ -21,6 +21,7 @@ namespace solar_core {
     
 class IAgent;
 class WorldMap;
+class G;
 class SEI;
 class SEM;
 class Household;
@@ -107,6 +108,20 @@ public:
     
     double get_solar_radiation(double location_x, double location_y) const; /*!< returns estimated amount of solar radiation for the tile */
     double get_permit_difficulty(double location_x, double location_y) const; /*!< returns permit difficulty */
+    
+    //@}
+    
+    
+    
+    
+    //@{
+    /**
+     
+     Geography
+     
+     */
+    
+    G* g;
     
     //@}
     

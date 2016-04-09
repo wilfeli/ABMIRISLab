@@ -360,7 +360,7 @@ SEI::act_tick()
         if (project->state_project == EParamTypes::RequestedPreliminaryQuote)
         {
             //if preliminary quote was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForSchedulingFirstSiteVisit])
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
                 std::size_t i_offset;
@@ -397,7 +397,7 @@ SEI::act_tick()
         if (project->state_project == EParamTypes::CollectedInfFirstSiteVisit)
         {
             //if information after first site visit is collected
-            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForPreliminaryQuote])
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote])
             {
                 auto mes = form_preliminary_quote(project);
                 project->preliminary_quote = mes;
@@ -411,7 +411,7 @@ SEI::act_tick()
         if (project->state_project == EParamTypes::AcceptedPreliminaryQuote)
         {
             //if enough time has elapsed
-            if ((a_time - project->ac_sei_time) >= params[EParamTypes::ProcessingTimeRequiredForDesign])
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForDesign])
             {
                 auto mes = form_design(project);
                 project->design = mes;
@@ -425,7 +425,7 @@ SEI::act_tick()
         //after design is formed - get permit for the installation
         if (project->state_project == EParamTypes::AcceptedDesign)
         {
-            g->request_permit(project);
+            w->g->request_permit(project);
             project->state_project = EParamTypes::RequestedPermit;
         };
         
