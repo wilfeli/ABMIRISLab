@@ -10,10 +10,16 @@
 #define ABMSolar_Serialize_h
 
 #include "Tools/ExternalIncludes.h"
+#include "Tools/IParameters.h"
 
 
 namespace serialize
 {
+
+    
+    
+    
+    
     
 /**
  
@@ -211,7 +217,27 @@ public:
 };
 
 //@}
+
+template <class >
+void prepare_formula(std::string& formula_)
+{
     
+    
+    if ((formula_.find("FORMULA::") != std::string::npos))
+    {
+        std::regex e("");
+        e.assign("FORMULA\\u003A\\u003A");
+        formula_ = std::regex_replace(formula_, e, "");
+        
+        auto formula = serialize::get_value(formula_, source_->FREQUENCY);
+    }
+    else
+    {
+        dest_ = WTime(&pt_);
+    };
+    
+    
+};
     
 
 } //end of namespace serialize

@@ -18,6 +18,6 @@
 #include <deque>
 #include <istream>
 #include <list>
-
+#include <stack>
 
 #endif
