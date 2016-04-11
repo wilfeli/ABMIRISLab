@@ -1,0 +1,10 @@
+{
+    "N_TILE_X": "10",
+    "N_TILE_Y": "10",
+    "solar_radiation":"FORMULA::5.0",
+    "permit_difficulty":"FORMULA::1.0",
+    "size_x":"FORMULA::1.0",
+    "size_y":"FORMULA::1.0"
+}
+    
+    //Add other parameters for the model

@@ -8,7 +8,9 @@
                         "EParamTypes::ElectricityPriceUCDemand": "0.2"
                         }
                         ]
-    }
+    },
+    "N_SEI":10,
+    
 }
     
     //Add other parameters for the model

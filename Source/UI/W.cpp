@@ -6,6 +6,19 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/exceptions.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/filesystem.hpp>
+using boost::property_tree::ptree;
+using boost::property_tree::ptree_error;
+using boost::property_tree::read_json;
+using boost::property_tree::write_json;
+
+
+
+#include "Tools/Serialize.h"
+
 #include "UI/W.h"
 #include "Geography/Geography.h"
 #include "Agents/IAgent.h"
@@ -21,20 +34,48 @@ using namespace solar_core;
 */
 W::W(std::string path_, std::string mode_)
 {
-    
+
     //set ui flags
     FLAG_IS_STOPPED = true;
     
     
     //saves path to basic template
     base_path = path_;
+    boost::filesystem::path path_to_model_file(path_);
+    boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
     Log::instance(path_);
     
     if (mode_ == "NEW")
     {
+        std::string path = path_to_model_file.string();
+        //baseline model
+        PropertyTree pt;
+        read_json(path, pt);
+        
+        auto N_SEI = pt.get<long>("N_SEI");
+        auto N_HH = pt.get<long>("N_HH");
+        
+        //solar_module.json
+        path = path_to_dir +/ "solar_module.json";
+        read_json(path, pt);
         
         //create existing solar modules
+        serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
         
+        
+        //create grid
+        path = path_to_dir +/ "geography.json";
+        read_json(path, pt);
+        world_map = new WorldMap(pt);
+        
+        //hh.json
+        path = path_to_dir +/ "hh.json";
+        read_json(path, pt);
+        //create HH
+        for (auto i = 0; i < N_HH; ++i)
+        {
+            //
+        };
         
         
         //create SEI - use template for parameters, use model file for additional parameters

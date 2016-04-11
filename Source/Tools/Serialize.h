@@ -165,6 +165,53 @@ void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
     return DeserializeMap<K, V>::deserialize(pt, r);
 };
 
+
+//@{
+/**
+ 
+ 
+ Simple algorithm to solve mathematical formulas
+ 
+ 
+ */
+double solve_formula(std::string str_);
+
+double evaluate_rpn(std::list<std::string>& tokens);
+
+std::list<std::string> infixToRPN_SYAlg(const std::string& expression_);
+
+std::vector<std::string> split_expression_SYAlg(const std::string& expression_);
+
+bool is_parenthesis(const std::string& token_);
+
+bool is_operator(const std::string& token_);
+
+
+    
+class SYAlg
+{
+public:
+    std::map<std::string, std::pair<long, std::string>> ops;
+    
+    SYAlg()
+    {
+        std::string R = "Right";
+        std::string L = "Left";
+        
+        //create ops
+        ops["^"] = std::make_pair(4, R);
+        ops["*"] = std::make_pair(3, L);
+        ops["/"] = std::make_pair(3, L);
+        ops["+"] = std::make_pair(2, L);
+        ops["-"] = std::make_pair(2, L);
+        ops["("] = std::make_pair(9, L);
+        ops[")"] = std::make_pair(0, L);
+    }
+    
+};
+
+//@}
+    
     
 
 } //end of namespace serialize

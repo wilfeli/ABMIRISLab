@@ -16,8 +16,8 @@
 #include <map>
 #include <vector>
 #include <deque>
-
-
+#include <istream>
+#include <list>
 
 
 #endif
