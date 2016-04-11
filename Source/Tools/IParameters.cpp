@@ -8,19 +8,19 @@
 
 #include "IParameters.h"
 
+using namespace solar_core;
 
-
-std::istream& operator >> (std::istream& is, solar_core::EParamTypes& item)
+std::istream& solar_core::operator >> (std::istream& is, EParamTypes& item)
 {
-    solar_core::EParamTypes_type value = 0;
+    EParamTypes_type value = 0;
     is >> value;
-    item = static_cast<solar_core::EParamTypes>(value);
+    item = static_cast<EParamTypes>(value);
     return is;
 }
 
-std::ostream& operator << (std::ostream& os, const solar_core::EParamTypes& item)
+std::ostream& solar_core::operator << (std::ostream& os, const EParamTypes& item)
 {
-    solar_core::EParamTypes_type value = static_cast<solar_core::EParamTypes_type>(item);
+    EParamTypes_type value = static_cast<EParamTypes_type>(item);
     os << value;
     return os;
 }

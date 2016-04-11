@@ -20,6 +20,8 @@
 		EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD51CB6B43900C79A22 /* IMessage.cpp */; };
 		EDE03ADB1CB6B43A00C79A22 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */; };
 		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
+		EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
+		EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
 		EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
 		EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,9 @@
 		EDE03ADF1CB8070500C79A22 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
 		EDE03AE01CB8184C00C79A22 /* Serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serialize.h; sourceTree = "<group>"; };
 		EDE03AE11CB88F2200C79A22 /* IParameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IParameters.cpp; sourceTree = "<group>"; };
+		EDE03AE31CBB395B00C79A22 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
+		EDE03AE41CBB3A5400C79A22 /* Geography.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geography.cpp; sourceTree = "<group>"; };
+		EDE03AE61CBBF68900C79A22 /* Serialize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Serialize.cpp; sourceTree = "<group>"; };
 		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
 		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = H.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
@@ -102,6 +107,7 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDE03AE31CBB395B00C79A22 /* geography.json */,
 				ED0E14151C98BD2B00A41B24 /* basemodel.json */,
 				EDE03ADC1CB8070500C79A22 /* g.json */,
 				EDE03ADD1CB8070500C79A22 /* hh.json */,
@@ -164,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FDF1C7DA16200A6EA1F /* Geography.h */,
+				EDE03AE41CBB3A5400C79A22 /* Geography.cpp */,
 			);
 			path = Geography;
 			sourceTree = "<group>";
@@ -188,6 +195,7 @@
 				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
 				EDE03AE11CB88F2200C79A22 /* IParameters.cpp */,
 				EDDB3FE41C7DA16200A6EA1F /* IParameters.h */,
+				EDE03AE61CBBF68900C79A22 /* Serialize.cpp */,
 				EDE03AE01CB8184C00C79A22 /* Serialize.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
@@ -278,6 +286,7 @@
 				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
+				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */,
 				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
@@ -289,6 +298,7 @@
 				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
 				EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */,
+				EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,16 +382,26 @@
 		EDDB3FBA1C7C402D00A6EA1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					/opt/local/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				USER_HEADER_SEARCH_PATHS = "/opt/local/include ./Source";
 			};
 			name = Debug;
 		};
 		EDDB3FBB1C7C402D00A6EA1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					/opt/local/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				USER_HEADER_SEARCH_PATHS = "/opt/local/include ./Source";
 			};
 			name = Release;
 		};

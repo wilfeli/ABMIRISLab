@@ -10,7 +10,7 @@
 #define ABMSolar_Geography_h
 
 #include "Tools/ExternalIncludes.h"
-
+#include "Tools/IParameters.h"
 
 namespace solar_core
 {
@@ -66,6 +66,8 @@ public:
 class WorldMap
 {
 public:
+    WorldMap(PropertyTree& pt); 
+    
     std::vector<std::vector<Tile*>> g_map; /*!< grid of location tiles */
 };
 

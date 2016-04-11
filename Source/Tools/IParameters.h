@@ -10,6 +10,7 @@
 #define ABMSolar_IParameters_h
 
 #include "Tools/ExternalIncludes.h"
+#include <boost/property_tree/ptree.hpp>
 
 
 namespace solar_core
@@ -297,7 +298,7 @@ namespace solar_core
     
     
     typedef int64_t TimeUnit;
-    
+    typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
     
     
     
