@@ -1,0 +1,6 @@
+<map id="solar_core::SEI::form_design" name="solar_core::SEI::form_design">
+<area shape="rect" id="node2" href="$classsolar__core_1_1_w.html#a39001b1adeb816c80cb63637801c4b9c" title="solar_core::W::get\l_solar_radiation" alt="" coords="203,5,333,46"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_w.html#a7906874c5180d8114e1acba095ace3f5" title="solar_core::W::get\l_permit_difficulty" alt="" coords="203,70,333,111"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="385,158,559,199"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d" title="solar_core::SEI::ac\l_estimate_savings" alt="" coords="201,187,335,229"/>
+</map>
