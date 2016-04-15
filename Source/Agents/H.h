@@ -39,6 +39,10 @@ class PVProject;
  
  @DevStage3 think about using http://en.cppreference.com/w/cpp/types/result_of - very neat construction
  
+ 
+ @DevStage2 might change from actually assigning house to assigning house type (memory considerations)
+ 
+ 
  */
 class Household: public IAgent
 {
@@ -61,6 +65,9 @@ public:
      see http://stackoverflow.com/questions/4782757/rule-of-three-becomes-rule-of-five-with-c11
      
      */
+    
+    
+    Household(PropertyTree& pt_, W* w_);
     
     
     //@}

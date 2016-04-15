@@ -69,54 +69,62 @@
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a>&amp; <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">instance</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structsolar__core_1_1_world_settings_1_1_e_hash.html">   42</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsolar__core_1_1_world_settings_1_1_e_hash.html">EHash</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">   45</a></span>&#160;        std::size_t <a class="code" href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">operator()</a>(T t)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(t);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    };</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">   51</a></span>&#160;    std::unordered_set&lt;EParamTypes, EHash&gt; <a class="code" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">params_to_copy_preliminary_quote</a>{<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">EParamTypes::CreditScore</a>, <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">EParamTypes::RoofSize</a>, <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579">EParamTypes::ElectricityBill</a>};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">//end of namespace solar_core</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(__ABMSolar__WorldSettings__) */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>SolarModule;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> <a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a>&amp; <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">instance</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structsolar__core_1_1_world_settings_1_1_e_hash.html">   45</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsolar__core_1_1_world_settings_1_1_e_hash.html">EHash</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">   48</a></span>&#160;        std::size_t <a class="code" href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">operator()</a>(T t)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(t);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">   54</a></span>&#160;    std::unordered_set&lt;EParamTypes, EHash&gt; <a class="code" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">params_to_copy_preliminary_quote</a>{<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">EParamTypes::CreditScore</a>, <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">EParamTypes::RoofSize</a>, <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579">EParamTypes::ElectricityBill</a>}; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">   56</a></span>&#160;    std::map&lt;EConstraintParams, double&gt; <a class="code" href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">constraints</a>; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html#a2bf0de816c9c0b51e01e88b8ff0f779e">   58</a></span>&#160;    std::map&lt;EParamTypes, double&gt; <a class="code" href="classsolar__core_1_1_world_settings.html#a2bf0de816c9c0b51e01e88b8ff0f779e">params_exog</a>; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_world_settings.html#acb33be8576dd4f60836373ea1b573fe6">   60</a></span>&#160;    std::map&lt;std::string, std::shared_ptr&lt;SolarModule&gt;&gt; <a class="code" href="classsolar__core_1_1_world_settings.html#acb33be8576dd4f60836373ea1b573fe6">solar_modules</a>; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classsolar__core_1_1_world_settings.html">WorldSettings</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">//end of namespace solar_core</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(__ABMSolar__WorldSettings__) */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classsolar__core_1_1_world_settings_html_a719e11b52a0e087f8c0dd11d9f65da88"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">solar_core::WorldSettings::instance</a></div><div class="ttdeci">static WorldSettings &amp; instance()</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8cpp_source.html#l00025">WorldSettings.cpp:25</a></div></div>
-<div class="ttc" id="structsolar__core_1_1_world_settings_1_1_e_hash_html_aabc40342ca3ed6e79168a292a7b98f74"><div class="ttname"><a href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">solar_core::WorldSettings::EHash::operator()</a></div><div class="ttdeci">std::size_t operator()(T t) const </div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00045">WorldSettings.h:45</a></div></div>
-<div class="ttc" id="structsolar__core_1_1_world_settings_1_1_e_hash_html"><div class="ttname"><a href="structsolar__core_1_1_world_settings_1_1_e_hash.html">solar_core::WorldSettings::EHash</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00042">WorldSettings.h:42</a></div></div>
+<div class="ttc" id="structsolar__core_1_1_world_settings_1_1_e_hash_html_aabc40342ca3ed6e79168a292a7b98f74"><div class="ttname"><a href="structsolar__core_1_1_world_settings_1_1_e_hash.html#aabc40342ca3ed6e79168a292a7b98f74">solar_core::WorldSettings::EHash::operator()</a></div><div class="ttdeci">std::size_t operator()(T t) const </div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00048">WorldSettings.h:48</a></div></div>
+<div class="ttc" id="structsolar__core_1_1_world_settings_1_1_e_hash_html"><div class="ttname"><a href="structsolar__core_1_1_world_settings_1_1_e_hash.html">solar_core::WorldSettings::EHash</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00045">WorldSettings.h:45</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579">solar_core::EParamTypes::ElectricityBill</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_world_settings_html"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html">solar_core::WorldSettings</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00026">WorldSettings.h:26</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html">solar_core::WorldSettings</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00029">WorldSettings.h:29</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">solar_core::EParamTypes::RoofSize</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_world_settings_html_a728f0b1c11f8ec1816d269aedc1cd80e"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">solar_core::WorldSettings::params_to_copy_preliminary_quote</a></div><div class="ttdeci">std::unordered_set&lt; EParamTypes, EHash &gt; params_to_copy_preliminary_quote</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00051">WorldSettings.h:51</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_a728f0b1c11f8ec1816d269aedc1cd80e"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">solar_core::WorldSettings::params_to_copy_preliminary_quote</a></div><div class="ttdeci">std::unordered_set&lt; EParamTypes, EHash &gt; params_to_copy_preliminary_quote</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00054">WorldSettings.h:54</a></div></div>
 <div class="ttc" id="_external_includes_8h_html"><div class="ttname"><a href="_external_includes_8h.html">ExternalIncludes.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_a2bf0de816c9c0b51e01e88b8ff0f779e"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a2bf0de816c9c0b51e01e88b8ff0f779e">solar_core::WorldSettings::params_exog</a></div><div class="ttdeci">std::map&lt; EParamTypes, double &gt; params_exog</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00058">WorldSettings.h:58</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_ab9108a4169d6508f8e03f0298088ac69"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">solar_core::WorldSettings::constraints</a></div><div class="ttdeci">std::map&lt; EConstraintParams, double &gt; constraints</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00056">WorldSettings.h:56</a></div></div>
 <div class="ttc" id="_i_parameters_8h_html"><div class="ttname"><a href="_i_parameters_8h.html">IParameters.h</a></div></div>
-<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00022">H.h:22</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_acb33be8576dd4f60836373ea1b573fe6"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#acb33be8576dd4f60836373ea1b573fe6">solar_core::WorldSettings::solar_modules</a></div><div class="ttdeci">std::map&lt; std::string, std::shared_ptr&lt; SolarModule &gt; &gt; solar_modules</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00060">WorldSettings.h:60</a></div></div>
+<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00018">G.h:18</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e">solar_core::EParamTypes::CreditScore</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 8 2016 21:51:47 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -196,6 +196,9 @@ protected:
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_installations; /*!< schedule for installations, length is equal to the MaxLengthPlanInstallation */
     
     std::size_t i_schedule_installations;
+    
+    void install_project(std::shared_ptr<PVProject> project); /*!< performs actual installation */
+    
     //@}
     
     

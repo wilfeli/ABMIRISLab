@@ -8,11 +8,14 @@ Class \hyperlink{classsolar__core_1_1_household}{solar\+\_\+core\+:\+:Household}
 Member \hyperlink{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{solar\+\_\+core\+:\+:Household\+:\+:get\+\_\+inf} (std\+::shared\+\_\+ptr$<$ Mes\+Marketing\+S\+E\+I $>$ mes\+\_\+) override]check if this agent is interested in the marketing message  
 \item[\label{_dev_stage3__DevStage3000003}%
 \hypertarget{_dev_stage3__DevStage3000003}{}%
-Member \hyperlink{classsolar__core_1_1_household_a3ae4cec5fca43ee5ca3287a01f5a05a2}{solar\+\_\+core\+:\+:Household\+:\+:get\+\_\+inf\+\_\+marketing\+\_\+sei} ]think about using smart pointers here, it will simplify management of creation of agents. Cons\+: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.  
+Member \hyperlink{classsolar__core_1_1_household_a41d61dc3bab971cb19170341b77d9df8}{solar\+\_\+core\+:\+:Household\+:\+:params} ]think about using smart pointers here, it will simplify management of creation of agents. Cons\+: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.  
 \item[\label{_dev_stage3__DevStage3000004}%
 \hypertarget{_dev_stage3__DevStage3000004}{}%
 Class \hyperlink{classsolar__core_1_1_mes_state_base_h_h}{solar\+\_\+core\+:\+:Mes\+State\+Base\+H\+H} ]if decide to have agent specific messages might later collapse them all into the same class 
 \item[\label{_dev_stage3__DevStage3000005}%
 \hypertarget{_dev_stage3__DevStage3000005}{}%
-Member \hyperlink{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{solar\+\_\+core\+:\+:W\+:\+:life\+\_\+hhs} ()]might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place. 
+Member \hyperlink{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{solar\+\_\+core\+:\+:W\+:\+:life\+\_\+hhs} ()]might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place.  
+\item[\label{_dev_stage3__DevStage3000006}%
+\hypertarget{_dev_stage3__DevStage3000006}{}%
+Member \hyperlink{classsolar__core_1_1_w_ab6349cbc751747a05618dad4ebb1b726}{solar\+\_\+core\+:\+:W\+:\+:sems} ]think about splitting more fine grained 
 \end{DoxyRefList}

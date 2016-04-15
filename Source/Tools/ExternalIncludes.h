@@ -10,14 +10,16 @@
 #define ABMSolar_ExternalIncludes_h
 
 #include <cstdint>
+#include <istream>
+#include <sstream>
 #include <string>
 #include <memory>
 #include <unordered_set>
 #include <map>
 #include <vector>
 #include <deque>
-#include <istream>
 #include <list>
 #include <stack>
+#include <regex>
 
 #endif

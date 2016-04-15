@@ -1,5 +1,6 @@
 {
     "EParamTypes::ElectricityBill":"FORMULA::p.d.f.::N_trunc(50, 100)",
     "location":"FORMULA::p.d.f.::u(0, 1)",
+    
     //Add other parameters for the model
 }

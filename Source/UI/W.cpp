@@ -20,9 +20,11 @@ using boost::property_tree::write_json;
 #include "Tools/Serialize.h"
 
 #include "UI/W.h"
+#include "Tools/WorldSettings.h"
 #include "Geography/Geography.h"
 #include "Agents/IAgent.h"
 #include "Agents/SEI.h"
+#include "Agents/H.h"
 
 
 using namespace solar_core;
@@ -43,7 +45,8 @@ W::W(std::string path_, std::string mode_)
     base_path = path_;
     boost::filesystem::path path_to_model_file(path_);
     boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
-    Log::instance(path_);
+    boost::filesystem::path path_to_template;
+//    Log::instance(path_);
     
     if (mode_ == "NEW")
     {
@@ -56,7 +59,9 @@ W::W(std::string path_, std::string mode_)
         auto N_HH = pt.get<long>("N_HH");
         
         //solar_module.json
-        path = path_to_dir +/ "solar_module.json";
+        path_to_template = path_to_dir;
+        path_to_template /= "solar_module.json";
+        path = path_to_template.string();
         read_json(path, pt);
         
         //create existing solar modules
@@ -64,17 +69,24 @@ W::W(std::string path_, std::string mode_)
         
         
         //create grid
-        path = path_to_dir +/ "geography.json";
+        path_to_template = path_to_dir;
+        path_to_template /= "geography.json";
+        path = path_to_template.string();
         read_json(path, pt);
-        world_map = new WorldMap(pt);
+        world_map = new WorldMap(pt, this);
         
         //hh.json
-        path = path_to_dir +/ "hh.json";
+        path_to_template = path_to_dir;
+        path_to_template /= "hh.json";
+        path = path_to_template.string();
         read_json(path, pt);
         //create HH
         for (auto i = 0; i < N_HH; ++i)
         {
-            //
+            //read configuration file
+            //replace parameters if necessary
+            hhs.push_back(new Household(pt, this))
+            
         };
         
         

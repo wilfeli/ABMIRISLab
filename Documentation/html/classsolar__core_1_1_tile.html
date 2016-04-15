@@ -50,7 +50,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classsolar__core_1_1_tile-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">solar_core::Tile Class Reference</div>  </div>
@@ -66,34 +66,45 @@ Collaboration diagram for solar_core::Tile:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
 <tr class="memitem:ae8615b87d6d0c614de01b497fa63c27b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_tile.html#ae8615b87d6d0c614de01b497fa63c27b">size_x</a></td></tr>
 <tr class="separator:ae8615b87d6d0c614de01b497fa63c27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698ac57539f58ed4e0a54b3135be6fb9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_tile.html#a698ac57539f58ed4e0a54b3135be6fb9">size_y</a></td></tr>
 <tr class="separator:a698ac57539f58ed4e0a54b3135be6fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae222e441b1dfe68cc6b78bb946f5e02"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_tile.html#aae222e441b1dfe68cc6b78bb946f5e02">solar_radiation</a> = 4.0</td></tr>
+<tr class="separator:aae222e441b1dfe68cc6b78bb946f5e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4cdbb55f06b95bd8c4a11a25d0b6635"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_tile.html#ac4cdbb55f06b95bd8c4a11a25d0b6635">permit_difficulty</a> = 1.0</td></tr>
+<tr class="separator:ac4cdbb55f06b95bd8c4a11a25d0b6635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Each tile has x and y sizes. </p>
 
 <p>Definition at line <a class="el" href="_geography_8h_source.html#l00046">46</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="ac4cdbb55f06b95bd8c4a11a25d0b6635"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double solar_core::Tile::permit_difficulty = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>length of a permitting process for this tile </p>
+
+<p>Definition at line <a class="el" href="_geography_8h_source.html#l00052">52</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ae8615b87d6d0c614de01b497fa63c27b"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">double solar_core::Tile::size_x</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>length of a tile </p>
 
@@ -104,23 +115,30 @@ Protected Attributes</h2></td></tr>
 <a class="anchor" id="a698ac57539f58ed4e0a54b3135be6fb9"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">double solar_core::Tile::size_y</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>width of a tile </p>
 
 <p>Definition at line <a class="el" href="_geography_8h_source.html#l00050">50</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aae222e441b1dfe68cc6b78bb946f5e02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double solar_core::Tile::solar_radiation = 4.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>amount of solar radiation per Wh/m2/day for this tile </p>
+
+<p>Definition at line <a class="el" href="_geography_8h_source.html#l00051">51</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
 
 </div>
 </div>
@@ -130,7 +148,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 8 2016 21:51:47 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

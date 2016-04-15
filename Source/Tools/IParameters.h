@@ -143,6 +143,12 @@ namespace solar_core
         /** State of a Project: requested permit for the project*/
         RequestedPermit,
         
+        /** State of a Project: scheduled visit to grant permit*/
+        ScheduledPermitVisit,
+        
+        /** State of a Project: collected information for granting permit */
+        CollectedInfPermitVisit,
+        
         /** State of a Project: granted permit for the project*/
         GrantedPermit,
         
@@ -248,6 +254,19 @@ namespace solar_core
         /** Low efficiency choice of a panel */
         SEILowEfficiencyDesign,
         
+    
+        
+        
+        /** G parameters: processing time before visit is scheduled */
+        GProcessingTimeRequiredForSchedulingPermitVisit,
+        
+        
+        /** G parameters: maximum number of visits per time unit */
+        GMaxNVisitsPerTimeUnit,
+        
+        
+        /** G parameters: time to process permit */
+        GProcessingTimeRequiredForProcessingPermit,
         
         
         
@@ -293,6 +312,10 @@ namespace solar_core
         /** Maximum forecasting horizon for installations */
         MaxLengthPlanInstallations,
         
+        
+        /** Maximum forecasting horizon for scheduling permit visits */
+        MaxLengthWaitPermitVisit,
+        
         None,
     };
     
@@ -306,6 +329,42 @@ namespace solar_core
     
     std::ostream &operator<<(std::ostream& is, const EParamTypes & item);
     std::istream& operator>> (std::istream&  os, EParamTypes & item);
+    
+    
+    
+    
+    class EnumFactory{
+    public:
+        static EParamTypes ToEParamTypes(std::string param_type)
+        {
+            //case insensitive
+            std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
+            
+            if (param_type == "income")
+            {
+                return EParamTypes::Income;
+            }
+            else if (param_type == "n_h")
+            {
+                return EParamTypes::N_H;
+            }
+            else
+            {
+                return EParamTypes::None;
+            };
+        }
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 } //end of namespace solar_core
 #endif

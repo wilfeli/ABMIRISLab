@@ -1,6 +1,7 @@
 \hypertarget{_i_parameters_8h}{}\section{/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Tools/\+I\+Parameters.h File Reference}
 \label{_i_parameters_8h}\index{/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Tools/\+I\+Parameters.\+h@{/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Tools/\+I\+Parameters.\+h}}
 {\ttfamily \#include \char`\"{}Tools/\+External\+Includes.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$boost/property\+\_\+tree/ptree.\+hpp$>$}\\*
 Include dependency graph for I\+Parameters.\+h\+:
 \nopagebreak
 \begin{figure}[H]
@@ -21,11 +22,17 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactItemize}
 \item 
  \hyperlink{namespacesolar__core}{solar\+\_\+core}
+\item 
+ \hyperlink{namespacesolar__core_1_1constants}{solar\+\_\+core\+::constants}
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef int64\+\_\+t \hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{solar\+\_\+core\+::\+Time\+Unit}
+\item 
+typedef boost\+::property\+\_\+tree\+::ptree \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{solar\+\_\+core\+::\+Property\+Tree}
+\item 
+typedef std\+::underlying\+\_\+type$<$ E\+Param\+Types $>$\+::type \hyperlink{namespacesolar__core_a256e8e2dc052f522b522d3f90b294caf}{solar\+\_\+core\+::\+E\+Param\+Types\+\_\+type}
 \end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -37,18 +44,104 @@ enum \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{solar\+\
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Electricity\+Bill}, 
 \\*
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Roof\+Size}, 
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ab7e2248cc39987dd2abd91c05fa003c9}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Preliminary\+Quote}, 
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Preliminary\+Quote\+Estimated\+Savings}, 
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a65e9babf589ac04a35221b97b0449611}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Estimated\+Price\+Per\+Watt}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362abff61b25127aa53b8eb7343edf48166b}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Roof\+Age}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Marketing\+State\+Highly\+Interested}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Marketing\+State\+Interested}, 
 \\*
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a00420d47e5664414646cd5cc5245c914}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Average\+P\+V\+Price}, 
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Small}, 
-\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Large}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ab970e992ff02930a86716c0390fa42df}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Marketing\+Not\+Interested}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a5a8012f218ced859bad78be09e8e46e7}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Active\+Quoting}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a31ead751600c8439e0897f8dc736154b}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Inactive\+Quoting}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a374a1855dae7569f1de9514f0cdf09f5}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Decision\+Reroof}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Max\+N\+Visits\+Per\+Time\+Unit}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+H\+H\+Dec\+Preliminary\+Quote}, 
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Requested\+Online\+Quote}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a6d84e672f96624f4c6323a7543a5de1f}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Request\+Preliminary\+Quote}, 
 \\*
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Requested\+Preliminary\+Quote}, 
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Provided\+Online\+Quote}, 
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Provided\+Preliminary\+Quote}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a6f85c2280e06a0a94e796e2c6dfbfce2}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Scheduled\+First\+Site\+Visit}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a1944aa6a68e41524b170bb07ba22fb54}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Collected\+Inf\+First\+Site\+Visit}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a94beae8137095b64c636645a10f779a9}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Required\+H\+H\+Reroof}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a7a0186947edeb230395b02fc6f9a8c37}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Waiting\+H\+H\+Reroof}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ae04bb6f7c490d1f5e1e19b790ac4bd48}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Accepted\+Preliminary\+Quote}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a8662266053d427b356392cc9fdff7b5e}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Drafted\+Design}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362acc5c79b9e52a3187a8b3bfdf7796f6e5}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Accepted\+Design}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362aca58ef2d2dad5072c87d596308db83d0}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Requested\+Permit}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a9a4ff00bed0dd4c2cbcd986eb71654b5}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Granted\+Permit}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a1246349928f17a03f4bc9fc73929013a}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Scheduled\+Installation}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a98dd43dfae05b11befe1f140e0ec787a}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Installed}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a36011ab25e125345f76caf5e8f027175}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Closed\+Project}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Online\+Quote\+Price}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a9cdd993b8d48601635f529f0e4d93299}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Online\+Quote\+Estimated\+Savings}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a581329dc30b846b1b05267c8bbfb3dc2}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Preliminary\+Quote\+Price}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Preliminary\+Quote\+Estimated\+Savings}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a65e9babf589ac04a35221b97b0449611}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Estimated\+Price\+Per\+Watt}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a00420d47e5664414646cd5cc5245c914}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Average\+P\+V\+Price}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ab820b21cf6b896d9ffe4f3180344aaad}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Average\+P\+V\+Capacity}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a95318d634060f210ca2cbc8487913a23}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Electricity\+Price\+U\+C\+Demand}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a57bd39ffa6aea05e5ffe8481417466f8}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Electricity\+Price\+U\+C\+Supply}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a7f416fbc5b5a75a37caa766533274218}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Inflation\+Rate}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ab49cdbc17a92df4982fae394c33aac83}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+D\+Cto\+A\+C\+Loss}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Small}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Large}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a159b446def618d2defa97ad1818ad6dc}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Processing\+Time\+Required\+For\+Preliminary\+Quote}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362aee8260c2afdde8270a04e738d6dfd61e}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Processing\+Time\+Required\+For\+Scheduling\+First\+Site\+Visit}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a21df8a580ed978b021e23a928d19b29e}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Processing\+Time\+Required\+For\+Design}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ad6e334fa57e5846cf4ba4b182dadca1d}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Max\+N\+Visits\+Per\+Time\+Unit}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362acd42418f4ce0736c05d2aa8b36694774}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Max\+N\+Installations\+Per\+Time\+Unit}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a79d36b9c925b7e55309fd4436f67c4ee}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Max\+Roof\+Age}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ae48d553d39bcd7d207890c610fa1e74c}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Frequency\+Update\+Design\+Templates}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ad03dae753c26cb012acd3a7dcd41dc8c}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+High\+Efficiency\+Design}, 
+\\*
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a2b4390775acd3d31e3049d242a1dd196}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Mid\+Efficiency\+Design}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362ab2592ca389b1a29cf91ddefe8d6769a2}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+S\+E\+I\+Low\+Efficiency\+Design}, 
+\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a7863d48ef49981916e8a483f2171b306}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+Payments\+On\+Time}, 
 \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754}{solar\+\_\+core\+::\+E\+Param\+Types\+::\+None}
  \}
+\item 
+enum \hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49}{solar\+\_\+core\+::\+E\+Constraint\+Params} \+: int64\+\_\+t \{ \\*
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a79b059203dc39b55d85046f355d1fa95}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Max\+N\+Ticks\+To\+Collect\+Quotes}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a5d0891420ec7c6769c9ece305c98daac}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Max\+N\+Open\+Projects\+H\+H}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49ae497930a8f22e14387bac31ebe737a64}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Max\+N\+Requested\+Preliminary\+From\+Online\+Quotes}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a2e66c9bd577b41e92fd40c619a886559}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Min\+N\+Received\+Preliminary\+Quotes}, 
+\\*
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a177186685b2d9651d26b48cb4ad61cc6}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Min\+N\+Received\+Desings}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49aa27f1df5083a611e423ed8531aad5cd3}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Max\+Length\+Wait\+Preliminary\+Quote}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a343e282b2f49a70e6df068f1bca38402}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+Max\+Length\+Plan\+Installations}, 
+\hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49a6adf97f83acf6453d4a6a4b1070f3754}{solar\+\_\+core\+::\+E\+Constraint\+Params\+::\+None}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{namespacesolar__core_aa8fea9dac434e9830aad9dea4f5ebf53}{solar\+\_\+core\+::operator$<$$<$} (std\+::ostream \&is, const \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{E\+Param\+Types} \&item)
+\item 
+std\+::istream \& \hyperlink{namespacesolar__core_a82ed442d50159b64b565838515df1dba}{solar\+\_\+core\+::operator$>$$>$} (std\+::istream \&os, \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{E\+Param\+Types} \&item)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_a4cddd8d733f9237d6fb56197354fed46}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+M\+I\+L\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+E\+R\+R\+O\+R} = 100
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_ab90981a98985a16f6e239808f36186d7}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+M\+I\+L\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+L\+I\+F\+E\+\_\+\+T\+I\+C\+K} = 100
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_a88d556c323e6871de3313428289b6cb6}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+M\+I\+L\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+Q\+U\+E\+S\+T} = 2000
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_ab3dddf011f92328166c5f93e3951107e}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+M\+I\+L\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+A\+R\+K\+E\+T\+\_\+\+C\+Y\+C\+L\+E} = 1000
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_abebba44aef8bbf544a330b8b20229320}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+M\+I\+L\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+U\+I\+W\+\_\+\+P\+A\+U\+S\+E} = 100
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_ae4d0a481c94f57be3e97f1c8463e631a}{solar\+\_\+core\+::constants\+::\+W\+A\+I\+T\+\_\+\+C\+Y\+C\+L\+E\+S\+\_\+\+V\+I\+E\+W\+\_\+\+R\+E\+Q\+U\+E\+S\+T} = 10
+\item 
+const int \hyperlink{namespacesolar__core_1_1constants_a2ec52da705235aa418b0def4e509ef81}{solar\+\_\+core\+::constants\+::\+N\+U\+M\+B\+E\+R\+\_\+\+A\+G\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+S\+\_\+\+L\+I\+F\+E} = 4
 \end{DoxyCompactItemize}

@@ -6,14 +6,18 @@
 
 
 
-Collaboration diagram for solar\+\_\+core\+:\+:World\+Map\+:
-\nopagebreak
+Collaboration diagram for solar\+\_\+core\+:\+:World\+Map\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=196pt]{classsolar__core_1_1_world_map__coll__graph}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_world_map_adb4ade0405f6de1affb3f413496b4dd6}{World\+Map} (\hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt)
+\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,12 +27,26 @@ std\+::vector$<$ std\+::vector$<$ \hyperlink{classsolar__core_1_1_tile}{Tile} $\
 
 \subsection{Detailed Description}
 \begin{DoxyRefDesc}{Solar W\+P}
-\item[\hyperlink{wp__wp000003}{Solar W\+P}]generally have 2-\/d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10$^\wedge$5 = 10$^\wedge$3 $\ast$ 10$^\wedge$3. Might need grid with sizes, each lot has a size. 10$^\wedge$3 for rows and columns is O\+K size.\end{DoxyRefDesc}
+\item[\hyperlink{wp__wp000006}{Solar W\+P}]generally have 2-\/d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10$^\wedge$5 = 10$^\wedge$3 $\ast$ 10$^\wedge$3. Might need grid with sizes, each lot has a size. 10$^\wedge$3 for rows and columns is O\+K size.\end{DoxyRefDesc}
 
 
 Will have patches of houses, each house -\/ 1 tile with size. Also will have empty tiles with sizes also. Will decrease total number of tiles. Will have neighborhoods with different tile sizes, house characteristics, population density as a derivative of tile size. 
 
-Definition at line 65 of file Geography.\+h.
+Definition at line 66 of file Geography.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolar__core_1_1_world_map_adb4ade0405f6de1affb3f413496b4dd6}{}\index{solar\+\_\+core\+::\+World\+Map@{solar\+\_\+core\+::\+World\+Map}!World\+Map@{World\+Map}}
+\index{World\+Map@{World\+Map}!solar\+\_\+core\+::\+World\+Map@{solar\+\_\+core\+::\+World\+Map}}
+\subsubsection[{World\+Map}]{\setlength{\rightskip}{0pt plus 5cm}World\+Map\+::\+World\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf Property\+Tree} \&}]{pt}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_world_map_adb4ade0405f6de1affb3f413496b4dd6}
+
+
+Definition at line 12 of file Geography.\+cpp.
 
 
 
@@ -38,10 +56,11 @@ Definition at line 65 of file Geography.\+h.
 \subsubsection[{g\+\_\+map}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<${\bf Tile}$\ast$$>$ $>$ solar\+\_\+core\+::\+World\+Map\+::g\+\_\+map}\label{classsolar__core_1_1_world_map_a2b94f74fcea57d3e01d8cab8348e1c48}
 grid of location tiles 
 
-Definition at line 68 of file Geography.\+h.
+Definition at line 71 of file Geography.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Geography/\hyperlink{_geography_8h}{Geography.\+h}\end{DoxyCompactItemize}
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Geography/\hyperlink{_geography_8h}{Geography.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Geography/\hyperlink{_geography_8cpp}{Geography.\+cpp}\end{DoxyCompactItemize}

@@ -13,7 +13,7 @@
 #include <mutex>
 #include "Tools/ExternalIncludes.h"
 #include "Tools/IParameters.h"
-
+#include "Tools/IRandom.h"
 
 namespace solar_core {
 
@@ -97,6 +97,9 @@ public:
     std::atomic<bool> FLAG_G_TICK;
     std::atomic<bool> FLAG_SEM_TICK;
     
+    
+    IRandom rand; /*!< random number generator, same for everyone for now */
+    
     //@}
     
     //@{
@@ -121,9 +124,25 @@ public:
      
      */
     
-    G* g;
+    
+    WorldMap* world_map;
+    
     
     //@}
+    
+    
+    //@{
+    /**
+     
+     Institutions
+     
+     */
+    
+    G* g; /*!< government */
+    
+    //@}
+    
+    
     
     
 protected:
@@ -138,7 +157,7 @@ protected:
     
     std::map<std::string, std::string> params;
     
-    WorldMap* world_map;
+    
     
     
     

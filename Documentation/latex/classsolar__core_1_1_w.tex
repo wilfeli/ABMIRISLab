@@ -11,38 +11,186 @@ Collaboration diagram for solar\+\_\+core\+:\+:W\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=286pt]{classsolar__core_1_1_w__coll__graph}
+\includegraphics[width=350pt]{classsolar__core_1_1_w__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{classsolar__core_1_1_w_a5e64e5a7ef41c07fddf7994cd3f2693e}{life} ()
+\item 
 void \hyperlink{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{life\+\_\+hhs} ()
+\item 
+void \hyperlink{classsolar__core_1_1_w_a77b206056c9440059f7b78e1424b0921}{life\+\_\+seis} ()
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classsolar__core_1_1_w_a39001b1adeb816c80cb63637801c4b9c}{get\+\_\+solar\+\_\+radiation} (double location\+\_\+x, double location\+\_\+y) const 
+\item 
+double \hyperlink{classsolar__core_1_1_w_a7906874c5180d8114e1acba095ace3f5}{get\+\_\+permit\+\_\+difficulty} (double location\+\_\+x, double location\+\_\+y) const 
 \end{DoxyCompactItemize}
 
 \subsection*{Public Attributes}
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_a9bb998c65a7427961de179f41e25daea}{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D}
+\item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_a8456f88d45f2e8bf67eccd7f0c8d08fa}{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D}
+\item 
 \hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}{time}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_w_aec1b9014ad296dc9b8b132ba9b67c08a}{begin\+\_\+time} = 0
+\item 
+std\+::mutex \hyperlink{classsolar__core_1_1_w_a56ba20ee51f5db7288e55bb65f12511b}{lock\+\_\+tick}
+\item 
+std\+::condition\+\_\+variable \hyperlink{classsolar__core_1_1_w_aa6cba0dba8a566978e51fb4204aac4b9}{all\+\_\+update}
+\item 
+std\+::atomic$<$ long $>$ \hyperlink{classsolar__core_1_1_w_a775d817c6117b462571c3fca62fe0c86}{updated\+\_\+counter}
+\item 
+std\+::atomic$<$ long $>$ \hyperlink{classsolar__core_1_1_w_afee32d515534826a60ddf12936f85a3d}{notified\+\_\+counter}
+\item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_a65d2047e574ed6201a8e21ec1ba1bec4}{F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K}
+\item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_a4cd32940e21bfc20919cc2d4447d66d3}{F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K}
+\item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_aae63ce0d440f2c8d475d6eeafac58238}{F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K}
+\item 
+std\+::atomic$<$ bool $>$ \hyperlink{classsolar__core_1_1_w_ae383b7a595cb28d52aa747fc7e5bb619}{F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K}
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_g}{G} $\ast$ \hyperlink{classsolar__core_1_1_w_a9e50ef0da579cdfc3da22c16a492bc44}{g}
 \end{DoxyCompactItemize}
 
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::deque$<$ \hyperlink{classsolar__core_1_1_i_agent}{I\+Agent} $\ast$ $>$ \hyperlink{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}
+\item 
+std\+::vector$<$ \hyperlink{classsolar__core_1_1_household}{Household} $\ast$ $>$ \hyperlink{classsolar__core_1_1_w_a17c012ff8b17890ed33923cec6d87be3}{hhs}
+\item 
+std\+::vector$<$ \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} $\ast$ $>$ \hyperlink{classsolar__core_1_1_w_a311baa30390494ae8e79f26e372e716d}{seis}
+\item 
+std\+::vector$<$ S\+E\+M $\ast$ $>$ \hyperlink{classsolar__core_1_1_w_ab6349cbc751747a05618dad4ebb1b726}{sems}
+\item 
+std\+::map$<$ std\+::string, std\+::string $>$ \hyperlink{classsolar__core_1_1_w_a0d06bc7242f8b3958986118eb217583f}{params}
+\item 
+\hyperlink{classsolar__core_1_1_world_map}{World\+Map} $\ast$ \hyperlink{classsolar__core_1_1_w_a8ed6f1aa7fd4ef2c3488147b38a670b7}{world\+\_\+map}
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classsolar__core_1_1_w_acf6e7dd195573ba04b406cde2e5b80fb}{base\+\_\+path}
+\item 
+\hyperlink{classsolar__core_1_1_w_aa252edac9babf33b41e22a816648a9a5}{W} (std\+::string path\+\_\+, std\+::string mode\+\_\+=\char`\"{}N\+E\+W\char`\"{})
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 24 of file W.\+h.
+Definition at line 30 of file W.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolar__core_1_1_w_aa252edac9babf33b41e22a816648a9a5}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!W@{W}}
+\index{W@{W}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{W}]{\setlength{\rightskip}{0pt plus 5cm}W\+::\+W (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path\+\_\+, }
+\item[{std\+::string}]{mode\+\_\+ = {\ttfamily \char`\"{}NEW\char`\"{}}}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_w_aa252edac9babf33b41e22a816648a9a5}
+Section with initialization and serialization code.
+
+Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file.
+
+\+: serialization\+: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.
+
+Assume that world is created from scratch 
+
+Definition at line 35 of file W.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_w_aa252edac9babf33b41e22a816648a9a5_cgraph}
+\end{center}
+\end{figure}
+
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_w_a7906874c5180d8114e1acba095ace3f5}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!get\+\_\+permit\+\_\+difficulty@{get\+\_\+permit\+\_\+difficulty}}
+\index{get\+\_\+permit\+\_\+difficulty@{get\+\_\+permit\+\_\+difficulty}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{get\+\_\+permit\+\_\+difficulty}]{\setlength{\rightskip}{0pt plus 5cm}double W\+::get\+\_\+permit\+\_\+difficulty (
+\begin{DoxyParamCaption}
+\item[{double}]{location\+\_\+x, }
+\item[{double}]{location\+\_\+y}
+\end{DoxyParamCaption}
+) const}\label{classsolar__core_1_1_w_a7906874c5180d8114e1acba095ace3f5}
+returns permit difficulty 
+
+Definition at line 206 of file W.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_w_a7906874c5180d8114e1acba095ace3f5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_w_a39001b1adeb816c80cb63637801c4b9c}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!get\+\_\+solar\+\_\+radiation@{get\+\_\+solar\+\_\+radiation}}
+\index{get\+\_\+solar\+\_\+radiation@{get\+\_\+solar\+\_\+radiation}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{get\+\_\+solar\+\_\+radiation}]{\setlength{\rightskip}{0pt plus 5cm}double W\+::get\+\_\+solar\+\_\+radiation (
+\begin{DoxyParamCaption}
+\item[{double}]{location\+\_\+x, }
+\item[{double}]{location\+\_\+y}
+\end{DoxyParamCaption}
+) const}\label{classsolar__core_1_1_w_a39001b1adeb816c80cb63637801c4b9c}
+Interactions on geographyreturns estimated amount of solar radiation for the tile 
+
+Definition at line 200 of file W.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_w_a39001b1adeb816c80cb63637801c4b9c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_w_a5e64e5a7ef41c07fddf7994cd3f2693e}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!life@{life}}
+\index{life@{life}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{life}]{\setlength{\rightskip}{0pt plus 5cm}void W\+::life (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_w_a5e64e5a7ef41c07fddf7994cd3f2693e}
+Section with main loopgeneral loop 
+
+Definition at line 93 of file W.\+cpp.
+
 \hypertarget{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!life\+\_\+hhs@{life\+\_\+hhs}}
 \index{life\+\_\+hhs@{life\+\_\+hhs}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
 \subsubsection[{life\+\_\+hhs}]{\setlength{\rightskip}{0pt plus 5cm}void W\+::life\+\_\+hhs (
@@ -50,36 +198,167 @@ Definition at line 24 of file W.\+h.
 {}
 \end{DoxyParamCaption}
 )}\label{classsolar__core_1_1_w_a08283dbea7c7f3fe8b7f094a96f73a78}
-Section with initialization and serialization code.
-
-Multiple step initialization from the project file. Keep structure of a project file simple, all parameters in one file.
-
-\begin{DoxyRefDesc}{Dev\+Stage1}
-\item[\hyperlink{_dev_stage1__DevStage1000010}{Dev\+Stage1}]\+: serialization\+: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.\end{DoxyRefDesc}
-
-
-Section with main looplife of households \begin{DoxyRefDesc}{Dev\+Stage3}
+life of households \begin{DoxyRefDesc}{Dev\+Stage3}
 \item[\hyperlink{_dev_stage3__DevStage3000005}{Dev\+Stage3}]might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place. \end{DoxyRefDesc}
 
 
-Definition at line 18 of file W.\+cpp.
+Definition at line 144 of file W.\+cpp.
+
+\hypertarget{classsolar__core_1_1_w_a77b206056c9440059f7b78e1424b0921}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!life\+\_\+seis@{life\+\_\+seis}}
+\index{life\+\_\+seis@{life\+\_\+seis}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{life\+\_\+seis}]{\setlength{\rightskip}{0pt plus 5cm}void W\+::life\+\_\+seis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_w_a77b206056c9440059f7b78e1424b0921}
+life of seis 
+
+Definition at line 165 of file W.\+cpp.
 
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_w_aa6cba0dba8a566978e51fb4204aac4b9}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!all\+\_\+update@{all\+\_\+update}}
+\index{all\+\_\+update@{all\+\_\+update}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{all\+\_\+update}]{\setlength{\rightskip}{0pt plus 5cm}std\+::condition\+\_\+variable solar\+\_\+core\+::\+W\+::all\+\_\+update}\label{classsolar__core_1_1_w_aa6cba0dba8a566978e51fb4204aac4b9}
+waits until all have updated 
+
+Definition at line 90 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_acf6e7dd195573ba04b406cde2e5b80fb}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!base\+\_\+path@{base\+\_\+path}}
+\index{base\+\_\+path@{base\+\_\+path}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{base\+\_\+path}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string solar\+\_\+core\+::\+W\+::base\+\_\+path}\label{classsolar__core_1_1_w_acf6e7dd195573ba04b406cde2e5b80fb}
+
+
+Definition at line 47 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_aec1b9014ad296dc9b8b132ba9b67c08a}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!begin\+\_\+time@{begin\+\_\+time}}
+\index{begin\+\_\+time@{begin\+\_\+time}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{begin\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+W\+::begin\+\_\+time = 0}\label{classsolar__core_1_1_w_aec1b9014ad296dc9b8b132ba9b67c08a}
+
+
+Definition at line 88 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_aae63ce0d440f2c8d475d6eeafac58238}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K}}
+\index{F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+G\+\_\+\+T\+I\+C\+K}\label{classsolar__core_1_1_w_aae63ce0d440f2c8d475d6eeafac58238}
+
+
+Definition at line 97 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a4cd32940e21bfc20919cc2d4447d66d3}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K}}
+\index{F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+H\+\_\+\+T\+I\+C\+K}\label{classsolar__core_1_1_w_a4cd32940e21bfc20919cc2d4447d66d3}
+
+
+Definition at line 96 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a8456f88d45f2e8bf67eccd7f0c8d08fa}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D@{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D}}
+\index{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D@{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+E\+D}\label{classsolar__core_1_1_w_a8456f88d45f2e8bf67eccd7f0c8d08fa}
+
+
+Definition at line 84 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a9bb998c65a7427961de179f41e25daea}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D@{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D}}
+\index{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D@{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+E\+D}\label{classsolar__core_1_1_w_a9bb998c65a7427961de179f41e25daea}
+Section with general world parameters and etc. 
+
+Definition at line 83 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a65d2047e574ed6201a8e21ec1ba1bec4}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K}}
+\index{F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+S\+E\+I\+\_\+\+T\+I\+C\+K}\label{classsolar__core_1_1_w_a65d2047e574ed6201a8e21ec1ba1bec4}
+
+
+Definition at line 95 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_ae383b7a595cb28d52aa747fc7e5bb619}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K}}
+\index{F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K@{F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ solar\+\_\+core\+::\+W\+::\+F\+L\+A\+G\+\_\+\+S\+E\+M\+\_\+\+T\+I\+C\+K}\label{classsolar__core_1_1_w_ae383b7a595cb28d52aa747fc7e5bb619}
+
+
+Definition at line 98 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a9e50ef0da579cdfc3da22c16a492bc44}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!g@{g}}
+\index{g@{g}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G}$\ast$ solar\+\_\+core\+::\+W\+::g}\label{classsolar__core_1_1_w_a9e50ef0da579cdfc3da22c16a492bc44}
+Geography 
+
+Definition at line 124 of file W.\+h.
+
 \hypertarget{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents@{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}}
 \index{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents@{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
 \subsubsection[{get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<${\bf I\+Agent}$\ast$$>$ solar\+\_\+core\+::\+W\+::get\+\_\+inf\+\_\+marketing\+\_\+sei\+\_\+agents\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a81b5469757f203c9619ff69323ac0f77}
 Agents that requested information, inform \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} that there is request for information for this agent 
 
-Definition at line 72 of file W.\+h.
+Definition at line 130 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a17c012ff8b17890ed33923cec6d87be3}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!hhs@{hhs}}
+\index{hhs@{hhs}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{hhs}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Household}$\ast$$>$ solar\+\_\+core\+::\+W\+::hhs\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a17c012ff8b17890ed33923cec6d87be3}
+all H agents 
+
+Definition at line 134 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a56ba20ee51f5db7288e55bb65f12511b}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!lock\+\_\+tick@{lock\+\_\+tick}}
+\index{lock\+\_\+tick@{lock\+\_\+tick}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{lock\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}std\+::mutex solar\+\_\+core\+::\+W\+::lock\+\_\+tick}\label{classsolar__core_1_1_w_a56ba20ee51f5db7288e55bb65f12511b}
+lock for tick 
+
+Definition at line 89 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_afee32d515534826a60ddf12936f85a3d}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!notified\+\_\+counter@{notified\+\_\+counter}}
+\index{notified\+\_\+counter@{notified\+\_\+counter}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{notified\+\_\+counter}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$long$>$ solar\+\_\+core\+::\+W\+::notified\+\_\+counter}\label{classsolar__core_1_1_w_afee32d515534826a60ddf12936f85a3d}
+
+
+Definition at line 93 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a0d06bc7242f8b3958986118eb217583f}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!params@{params}}
+\index{params@{params}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{params}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$std\+::string, std\+::string$>$ solar\+\_\+core\+::\+W\+::params\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a0d06bc7242f8b3958986118eb217583f}
+
+
+Definition at line 139 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a311baa30390494ae8e79f26e372e716d}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!seis@{seis}}
+\index{seis@{seis}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{seis}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf S\+E\+I}$\ast$$>$ solar\+\_\+core\+::\+W\+::seis\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a311baa30390494ae8e79f26e372e716d}
+all \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} agents 
+
+Definition at line 135 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_ab6349cbc751747a05618dad4ebb1b726}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!sems@{sems}}
+\index{sems@{sems}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{sems}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$S\+E\+M$\ast$$>$ solar\+\_\+core\+::\+W\+::sems\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_ab6349cbc751747a05618dad4ebb1b726}
+all S\+E\+M H agents that are active,\begin{DoxyRefDesc}{Dev\+Stage3}
+\item[\hyperlink{_dev_stage3__DevStage3000006}{Dev\+Stage3}]think about splitting more fine grained \end{DoxyRefDesc}
+
+
+Definition at line 136 of file W.\+h.
 
 \hypertarget{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!time@{time}}
 \index{time@{time}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
 \subsubsection[{time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+W\+::time}\label{classsolar__core_1_1_w_ae96b30122adc9fae8fc2f209a4c89b0a}
-Section with general world parameters and etc. 
 
-Definition at line 63 of file W.\+h.
+
+Definition at line 87 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a775d817c6117b462571c3fca62fe0c86}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!updated\+\_\+counter@{updated\+\_\+counter}}
+\index{updated\+\_\+counter@{updated\+\_\+counter}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{updated\+\_\+counter}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$long$>$ solar\+\_\+core\+::\+W\+::updated\+\_\+counter}\label{classsolar__core_1_1_w_a775d817c6117b462571c3fca62fe0c86}
+
+
+Definition at line 92 of file W.\+h.
+
+\hypertarget{classsolar__core_1_1_w_a8ed6f1aa7fd4ef2c3488147b38a670b7}{}\index{solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}!world\+\_\+map@{world\+\_\+map}}
+\index{world\+\_\+map@{world\+\_\+map}!solar\+\_\+core\+::\+W@{solar\+\_\+core\+::\+W}}
+\subsubsection[{world\+\_\+map}]{\setlength{\rightskip}{0pt plus 5cm}{\bf World\+Map}$\ast$ solar\+\_\+core\+::\+W\+::world\+\_\+map\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_w_a8ed6f1aa7fd4ef2c3488147b38a670b7}
+
+
+Definition at line 141 of file W.\+h.
 
 
 

@@ -6,7 +6,9 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
-#include "G.h"
+#include "UI/W.h"
+#include "Tools/WorldSettings.h"
+#include "Agents/G.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/H.h"
 
@@ -24,6 +26,15 @@ G::request_permit(std::shared_ptr<PVProject> project_)
     
     
 }
+
+
+
+void
+G::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
+{
+    
+}
+
 
 void
 G::grant_permit(std::shared_ptr<PVProject> project_)
@@ -73,7 +84,7 @@ G::act_tick()
         if (project->state_project == EParamTypes::RequestedPermit)
         {
             //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            if ((a_time - project->ac_g_time) >= params[EParamTypes::ProcessingTimeRequiredForSchedulingPermitVisit])
+            if ((a_time - project->ac_g_time) >= params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
                 std::size_t i_offset;
@@ -107,7 +118,7 @@ G::act_tick()
         if (project->state_project == EParamTypes::RequestedPermit)
         {
             //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            if ((a_time - project->ac_g_time) >= params[EParamTypes::ProcessingTimeRequiredForProcessingPermit])
+            if ((a_time - project->ac_g_time) >= params[EParamTypes::GProcessingTimeRequiredForProcessingPermit])
             {
                 grant_permit(project);
             };
