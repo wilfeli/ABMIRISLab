@@ -1,0 +1,125 @@
+\hypertarget{classsolar__core_1_1_g}{}\section{solar\+\_\+core\+:\+:G Class Reference}
+\label{classsolar__core_1_1_g}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+
+
+{\ttfamily \#include $<$G.\+h$>$}
+
+
+
+Collaboration diagram for solar\+\_\+core\+:\+:G\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_g__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}{act\+\_\+tick} ()
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}{request\+\_\+permit} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ project\+\_\+)
+\end{DoxyCompactItemize}
+
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_g_a4d5b2845fc790c0f14b13fe922821f4b}{a\+\_\+time}
+\end{DoxyCompactItemize}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ $>$ \hyperlink{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}{pending\+\_\+projects}
+\item 
+std\+::vector$<$ std\+::vector$<$ std\+::weak\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ $>$ $>$ \hyperlink{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}{schedule\+\_\+visits}
+\item 
+std\+::size\+\_\+t \hyperlink{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}{i\+\_\+schedule\+\_\+visits}
+\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file G.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!act\+\_\+tick@{act\+\_\+tick}}
+\index{act\+\_\+tick@{act\+\_\+tick}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{act\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void G\+::act\+\_\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}
+Section with actions in the world 
+
+Definition at line 63 of file G.\+cpp.
+
+\hypertarget{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!request\+\_\+permit@{request\+\_\+permit}}
+\index{request\+\_\+permit@{request\+\_\+permit}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{request\+\_\+permit}]{\setlength{\rightskip}{0pt plus 5cm}void G\+::request\+\_\+permit (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf P\+V\+Project} $>$}]{project\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}
+Section relevant for permitting processrequest permit for the project 
+
+Definition at line 17 of file G.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_g_a4d5b2845fc790c0f14b13fe922821f4b}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!a\+\_\+time@{a\+\_\+time}}
+\index{a\+\_\+time@{a\+\_\+time}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{a\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+G\+::a\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a4d5b2845fc790c0f14b13fe922821f4b}
+
+
+Definition at line 79 of file G.\+h.
+
+\hypertarget{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!i\+\_\+schedule\+\_\+visits@{i\+\_\+schedule\+\_\+visits}}
+\index{i\+\_\+schedule\+\_\+visits@{i\+\_\+schedule\+\_\+visits}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{i\+\_\+schedule\+\_\+visits}]{\setlength{\rightskip}{0pt plus 5cm}std\+::size\+\_\+t solar\+\_\+core\+::\+G\+::i\+\_\+schedule\+\_\+visits\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}
+
+
+Definition at line 70 of file G.\+h.
+
+\hypertarget{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!pending\+\_\+projects@{pending\+\_\+projects}}
+\index{pending\+\_\+projects@{pending\+\_\+projects}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{pending\+\_\+projects}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$std\+::shared\+\_\+ptr$<${\bf P\+V\+Project}$>$ $>$ solar\+\_\+core\+::\+G\+::pending\+\_\+projects\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}
+Section relevant for permitting process 
+
+Definition at line 66 of file G.\+h.
+
+\hypertarget{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!schedule\+\_\+visits@{schedule\+\_\+visits}}
+\index{schedule\+\_\+visits@{schedule\+\_\+visits}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{schedule\+\_\+visits}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$std\+::weak\+\_\+ptr$<${\bf P\+V\+Project}$>$ $>$ $>$ solar\+\_\+core\+::\+G\+::schedule\+\_\+visits\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}
+schedule for visits for the permitting accessment, length is equal to the Max\+Length\+Wait\+Permit\+Visit 
+
+Definition at line 68 of file G.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_g_8h}{G.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_g_8cpp}{G.\+cpp}\end{DoxyCompactItemize}

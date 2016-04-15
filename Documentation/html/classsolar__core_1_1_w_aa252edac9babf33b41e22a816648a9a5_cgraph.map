@@ -1,0 +1,6 @@
+<map id="solar_core::W::W" name="solar_core::W::W">
+<area shape="rect" id="node2" href="$namespaceserialize.html#af7e18cf15b955d078b7fc036042cb083" title="serialize::deserialize" alt="" coords="195,12,338,39"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="179,63,354,105"/>
+<area shape="rect" id="node3" href="$classserialize_1_1_deserialize_map.html#af4827270beb08c018e840b9cec766cde" title="serialize::DeserializeMap\l::deserialize" alt="" coords="403,5,573,46"/>
+<area shape="rect" id="node4" href="$classserialize_1_1_deserialize_value.html#ae086cfe3996b96c0a82785afe0af81b1" title="serialize::DeserializeValue\l::deserialize_value" alt="" coords="621,5,800,46"/>
+</map>
