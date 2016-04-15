@@ -13,7 +13,7 @@
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"
 #include "Agents/SolarPanel.h"
-
+#include "Agents/G.h"
 
 using namespace solar_core;
 
@@ -255,12 +255,12 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     
     
-    //calculate PPA
+    ///@DevStage2: calculate PPA
     
     
-    //calculate lease
+    ///@DevStage2: calculate lease
 
-    //
+    //simple calculation when HH owns the system
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
     auto energy_costs = 0.0;
@@ -292,6 +292,10 @@ SEI::form_financing(std::shared_ptr<PVProject> project_)
     
 }
 
+
+
+void
+SEI::install_project(std::shared_ptr<PVProject> project){}
 
 
 void

@@ -22,6 +22,7 @@
 		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
 		EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
 		EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
+		EDE0FD931CC0058100115115 /* IRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE0FD911CC0058100115115 /* IRandom.cpp */; };
 		EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
 		EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
 /* End PBXBuildFile section */
@@ -69,7 +70,7 @@
 		EDE03AD31CB6B43900C79A22 /* IInstitute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IInstitute.cpp; sourceTree = "<group>"; };
 		EDE03AD41CB6B43900C79A22 /* IInstitute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IInstitute.h; sourceTree = "<group>"; };
 		EDE03AD51CB6B43900C79A22 /* IMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IMessage.cpp; sourceTree = "<group>"; };
-		EDE03AD61CB6B43900C79A22 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessage.h; sourceTree = "<group>"; };
+		EDE03AD61CB6B43900C79A22 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDE03AD81CB6B43900C79A22 /* MarketingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketingSystem.h; sourceTree = "<group>"; };
 		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
@@ -81,6 +82,8 @@
 		EDE03AE31CBB395B00C79A22 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
 		EDE03AE41CBB3A5400C79A22 /* Geography.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geography.cpp; sourceTree = "<group>"; };
 		EDE03AE61CBBF68900C79A22 /* Serialize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Serialize.cpp; sourceTree = "<group>"; };
+		EDE0FD911CC0058100115115 /* IRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRandom.cpp; sourceTree = "<group>"; };
+		EDE0FD921CC0058100115115 /* IRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRandom.h; sourceTree = "<group>"; };
 		EDEDFCF81C87BA5100A26BA5 /* W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W.cpp; sourceTree = "<group>"; };
 		EDEDFCFA1C87BF5800A26BA5 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = H.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
@@ -195,6 +198,8 @@
 				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
 				EDE03AE11CB88F2200C79A22 /* IParameters.cpp */,
 				EDDB3FE41C7DA16200A6EA1F /* IParameters.h */,
+				EDE0FD911CC0058100115115 /* IRandom.cpp */,
+				EDE0FD921CC0058100115115 /* IRandom.h */,
 				EDE03AE61CBBF68900C79A22 /* Serialize.cpp */,
 				EDE03AE01CB8184C00C79A22 /* Serialize.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE0FD931CC0058100115115 /* IRandom.cpp in Sources */,
 				ED3EA2181C9F440000C2B70E /* G.cpp in Sources */,
 				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,

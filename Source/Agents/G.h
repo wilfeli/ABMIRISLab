@@ -69,15 +69,31 @@ protected:
     
     std::size_t i_schedule_visits;
     
+    void collect_inf_site_visit(std::shared_ptr<PVProject> project_);
+    void grant_permit(std::shared_ptr<PVProject> project_);
+    
     
     //@}
     
     
+    //@{
+    
+    /**
+     
+     Section with internal parameters
+     
+     */
     
     
+    std::map<EParamTypes, double> params; /** Parameters of government */
+    
+    void ac_update_tick();
+    
+    
+    W* w;
     
     TimeUnit a_time;
-    
+    //@}
     
     
 };

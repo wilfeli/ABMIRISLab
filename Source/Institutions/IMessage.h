@@ -47,6 +47,7 @@ protected:
 class MesDesign
 {
 public:
+    MesDesign(std::shared_ptr<PVDesign> design_): design(design_){}
     std::shared_ptr<PVDesign> design;
 protected:
 };

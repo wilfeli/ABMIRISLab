@@ -1,5 +1,12 @@
 <map id="solar_core::PVProject" name="solar_core::PVProject">
-<area shape="rect" id="node3" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="711,249,867,276"/>
-<area shape="rect" id="node4" href="$classsolar__core_1_1_i_agent.html" title="solar_core::IAgent" alt="" coords="355,165,485,192"/>
-<area shape="rect" id="node5" href="$classsolar__core_1_1_house.html" title="solar_core::House" alt="" coords="355,293,485,320"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_s_e_i.html" title="solar_core::SEI" alt="" coords="729,680,842,707"/>
+<area shape="rect" id="node14" href="$classsolar__core_1_1_mes_marketing_s_e_i.html" title="solar_core::MesMarketingSEI" alt="" coords="1075,676,1272,703"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_i_agent.html" title="solar_core::IAgent" alt="" coords="337,852,468,879"/>
+<area shape="rect" id="node24" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="1881,781,2037,808"/>
+<area shape="rect" id="node25" href="$classsolar__core_1_1_house.html" title="solar_core::House" alt="" coords="541,233,672,260"/>
+<area shape="rect" id="node39" href="$classsolar__core_1_1_g.html" title="solar_core::G" alt="" coords="734,1253,837,1280"/>
+<area shape="rect" id="node15" href="$classsolar__core_1_1_w.html" title="solar_core::W" alt="" coords="1507,1348,1611,1375"/>
+<area shape="rect" id="node20" href="$classsolar__core_1_1_world_map.html" title="solar_core::WorldMap" alt="" coords="1097,1723,1249,1749"/>
+<area shape="rect" id="node36" title="STL class. " alt="" coords="745,1661,825,1688"/>
+<area shape="rect" id="node37" title="STL class. " alt="" coords="339,1734,466,1775"/>
 </map>

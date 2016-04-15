@@ -15,7 +15,7 @@
 namespace solar_core
 {
     
-
+class W;
 
 /**
  
@@ -46,6 +46,7 @@ public:
 class Tile
 {
 public:
+    Tile(double size_x_, double size_y_, double solar_radiation_, double permit_difficulty_): size_x(size_x_), size_y(size_y_), solar_radiation(solar_radiation_), permit_difficulty(permit_difficulty_);
     double size_x; /*!< length of a tile */
     double size_y; /*!< width of a tile */
     double solar_radiation = 4.0; /*!< amount of solar radiation per Wh/m2/day for this tile */
@@ -66,7 +67,7 @@ public:
 class WorldMap
 {
 public:
-    WorldMap(PropertyTree& pt); 
+    WorldMap(PropertyTree& pt, W* w_);
     
     std::vector<std::vector<Tile*>> g_map; /*!< grid of location tiles */
 };

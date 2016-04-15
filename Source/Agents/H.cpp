@@ -8,12 +8,33 @@
 
 #include "Institutions/IMessage.h"
 #include "Tools/WorldSettings.h"
+#include "Tools/Serialize.h"
 #include "UI/W.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/H.h"
 #include "Agents/SEI.h"
 
 using namespace solar_core;
+
+
+
+Household::Household(PropertyTree& pt_, W* w_)
+{
+    w = w_;
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, w);
+    };
+
+
+}
+
+
 
 void
 Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
@@ -143,7 +164,7 @@ Household::dec_evaluate_preliminary_quotes()
     
     
     std::shared_ptr<PVProject> decision = nullptr;
-    //pick top project and compare price to the income
+    //pick top project and compare price to income
     for(auto& project:pvprojects)
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)

@@ -11,7 +11,7 @@ Collaboration diagram for solar\+\_\+core\+:\+:World\+Settings\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=277pt]{classsolar__core_1_1_world_settings__coll__graph}
+\includegraphics[width=350pt]{classsolar__core_1_1_world_settings__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Classes}
@@ -29,6 +29,12 @@ static \hyperlink{classsolar__core_1_1_world_settings}{World\+Settings} \& \hype
 \begin{DoxyCompactItemize}
 \item 
 std\+::unordered\+\_\+set$<$ \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{E\+Param\+Types}, \hyperlink{structsolar__core_1_1_world_settings_1_1_e_hash}{E\+Hash} $>$ \hyperlink{classsolar__core_1_1_world_settings_a728f0b1c11f8ec1816d269aedc1cd80e}{params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote} \{\hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a417bef7b89fce8abf638b9983a79a70e}{E\+Param\+Types\+::\+Credit\+Score}, \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6}{E\+Param\+Types\+::\+Roof\+Size}, \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362a9b8cd62150c419c61129f736404b0579}{E\+Param\+Types\+::\+Electricity\+Bill}\}
+\item 
+std\+::map$<$ \hyperlink{namespacesolar__core_ac827fdef4412a3c0d5e44d3f31908e49}{E\+Constraint\+Params}, double $>$ \hyperlink{classsolar__core_1_1_world_settings_ab9108a4169d6508f8e03f0298088ac69}{constraints}
+\item 
+std\+::map$<$ \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{E\+Param\+Types}, double $>$ \hyperlink{classsolar__core_1_1_world_settings_a2bf0de816c9c0b51e01e88b8ff0f779e}{params\+\_\+exog}
+\item 
+std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_solar_module}{Solar\+Module} $>$ $>$ \hyperlink{classsolar__core_1_1_world_settings_acb33be8576dd4f60836373ea1b573fe6}{solar\+\_\+modules}
 \end{DoxyCompactItemize}
 
 
@@ -36,7 +42,7 @@ std\+::unordered\+\_\+set$<$ \hyperlink{namespacesolar__core_aa1147341e5ef7a40d6
 \subsection{Detailed Description}
 Settings for the simulations 
 
-Definition at line 26 of file World\+Settings.\+h.
+Definition at line 29 of file World\+Settings.\+h.
 
 
 
@@ -67,12 +73,35 @@ Here is the caller graph for this function\+:
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_world_settings_ab9108a4169d6508f8e03f0298088ac69}{}\index{solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}!constraints@{constraints}}
+\index{constraints@{constraints}!solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}}
+\subsubsection[{constraints}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf E\+Constraint\+Params}, double$>$ solar\+\_\+core\+::\+World\+Settings\+::constraints}\label{classsolar__core_1_1_world_settings_ab9108a4169d6508f8e03f0298088ac69}
+parameters for decision making and etc in a form of imposed exogenous constraints, such as number of ticks to collect quotes, for now have general setting for all agents, later might do individual settings. 
+
+Definition at line 56 of file World\+Settings.\+h.
+
+\hypertarget{classsolar__core_1_1_world_settings_a2bf0de816c9c0b51e01e88b8ff0f779e}{}\index{solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}!params\+\_\+exog@{params\+\_\+exog}}
+\index{params\+\_\+exog@{params\+\_\+exog}!solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}}
+\subsubsection[{params\+\_\+exog}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf E\+Param\+Types}, double$>$ solar\+\_\+core\+::\+World\+Settings\+::params\+\_\+exog}\label{classsolar__core_1_1_world_settings_a2bf0de816c9c0b51e01e88b8ff0f779e}
+exogenous parameters, such as price per watt that utility compary is asking, or price per watt that is paid to the connected to the grid solar project 
+
+Definition at line 58 of file World\+Settings.\+h.
+
 \hypertarget{classsolar__core_1_1_world_settings_a728f0b1c11f8ec1816d269aedc1cd80e}{}\index{solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}!params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote@{params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote}}
 \index{params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote@{params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote}!solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}}
 \subsubsection[{params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+set$<${\bf E\+Param\+Types}, {\bf E\+Hash}$>$ solar\+\_\+core\+::\+World\+Settings\+::params\+\_\+to\+\_\+copy\+\_\+preliminary\+\_\+quote \{{\bf E\+Param\+Types\+::\+Credit\+Score}, {\bf E\+Param\+Types\+::\+Roof\+Size}, {\bf E\+Param\+Types\+::\+Electricity\+Bill}\}}\label{classsolar__core_1_1_world_settings_a728f0b1c11f8ec1816d269aedc1cd80e}
+\begin{DoxyRefDesc}{Solar W\+P}
+\item[\hyperlink{wp__wp000008}{Solar W\+P}]small installers priorities based on the source of information. During online quote stage they do not ask about credit score it is moved to the preliminary quote. \end{DoxyRefDesc}
 
 
-Definition at line 51 of file World\+Settings.\+h.
+Definition at line 54 of file World\+Settings.\+h.
+
+\hypertarget{classsolar__core_1_1_world_settings_acb33be8576dd4f60836373ea1b573fe6}{}\index{solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}!solar\+\_\+modules@{solar\+\_\+modules}}
+\index{solar\+\_\+modules@{solar\+\_\+modules}!solar\+\_\+core\+::\+World\+Settings@{solar\+\_\+core\+::\+World\+Settings}}
+\subsubsection[{solar\+\_\+modules}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$std\+::string, std\+::shared\+\_\+ptr$<${\bf Solar\+Module}$>$ $>$ solar\+\_\+core\+::\+World\+Settings\+::solar\+\_\+modules}\label{classsolar__core_1_1_world_settings_acb33be8576dd4f60836373ea1b573fe6}
+list of available solar modules 
+
+Definition at line 60 of file World\+Settings.\+h.
 
 
 

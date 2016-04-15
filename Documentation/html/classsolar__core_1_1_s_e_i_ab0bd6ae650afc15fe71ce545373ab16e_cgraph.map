@@ -1,3 +1,13 @@
 <map id="solar_core::SEI::act_tick" name="solar_core::SEI::act_tick">
-<area shape="rect" id="node2" href="$classsolar__core_1_1_s_e_i.html#aa4cf0e7d6539c591a9762941b1a19bfa" title="solar_core::SEI::form\l_online_quote" alt="" coords="219,5,365,46"/>
+<area shape="rect" id="node2" href="$classsolar__core_1_1_s_e_i.html#a51873235b9ab1795b5616e672c75e499" title="solar_core::SEI::ac\l_update_tick" alt="" coords="433,5,567,46"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241" title="solar_core::SEI::form\l_online_quote" alt="" coords="427,70,573,111"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_s_e_i.html#af598032ee3e4506cf5123aceee67cbfd" title="solar_core::SEI::form\l_preliminary_quote" alt="" coords="225,125,372,166"/>
+<area shape="rect" id="node6" href="$classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df" title="solar_core::SEI::form\l_design" alt="" coords="225,190,372,231"/>
+<area shape="rect" id="node10" href="$classsolar__core_1_1_s_e_i.html#a7f29b9fee74b984ed9b1c6983b2960e3" title="solar_core::SEI::form\l_financing" alt="" coords="225,255,372,297"/>
+<area shape="rect" id="node11" href="$classsolar__core_1_1_g.html#a10289bd4ea370e0e994f69603e11fc6c" title="solar_core::G::request\l_permit" alt="" coords="222,321,375,362"/>
+<area shape="rect" id="node12" href="$classsolar__core_1_1_s_e_i.html#abdcbd57fa145ee55eb8455a8bc3b4c7c" title="solar_core::SEI::collect\l_inf_site_visit" alt="" coords="219,386,378,427"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="622,99,797,141"/>
+<area shape="rect" id="node7" href="$classsolar__core_1_1_w.html#a39001b1adeb816c80cb63637801c4b9c" title="solar_core::W::get\l_solar_radiation" alt="" coords="435,187,565,229"/>
+<area shape="rect" id="node8" href="$classsolar__core_1_1_w.html#a7906874c5180d8114e1acba095ace3f5" title="solar_core::W::get\l_permit_difficulty" alt="" coords="435,253,565,294"/>
+<area shape="rect" id="node9" href="$classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d" title="solar_core::SEI::ac\l_estimate_savings" alt="" coords="433,318,567,359"/>
 </map>
