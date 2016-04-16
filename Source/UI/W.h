@@ -22,6 +22,7 @@ namespace solar_core {
 class IAgent;
 class WorldMap;
 class G;
+class MarketingInst;
 class SEI;
 class SEM;
 class Household;
@@ -98,7 +99,7 @@ public:
     std::atomic<bool> FLAG_SEM_TICK;
     
     
-    IRandom rand; /*!< random number generator, same for everyone for now */
+    IRandom* rand = nullptr; /*!< random number generator, same for everyone for now */
     
     //@}
     
@@ -112,6 +113,8 @@ public:
     double get_solar_radiation(double location_x, double location_y) const; /*!< returns estimated amount of solar radiation for the tile */
     double get_permit_difficulty(double location_x, double location_y) const; /*!< returns permit difficulty */
     
+    WorldMap* world_map;
+    
     //@}
     
     
@@ -120,12 +123,12 @@ public:
     //@{
     /**
      
-     Geography
+     Interactions with other agents
      
      */
     
     
-    WorldMap* world_map;
+    void get_state_inf(Household* agent_, EParamTypes state_); /*!< gets information about state change from agent */
     
     
     //@}
@@ -139,6 +142,7 @@ public:
      */
     
     G* g; /*!< government */
+    MarketingInst* marketing;
     
     //@}
     

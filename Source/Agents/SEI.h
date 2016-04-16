@@ -33,6 +33,7 @@ class MesMarketingSEI;
 class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
 class MesDesign;
+class MesPayment;
 class W;
 class Household;
     
@@ -125,6 +126,23 @@ public:
     //@}
     
     
+    
+    
+    //@{
+    /**
+     
+     Section relevant to payments
+     
+     */
+    
+    
+    void get_payment(std::shared_ptr<MesPayment> mes_);
+    
+    
+    //@}
+    
+    
+    
 protected:
     //@{
     /**
@@ -213,7 +231,8 @@ protected:
     
     
     std::map<EParamTypes, double> params; /** Parameters of a SEI */
-    
+    EParamTypes sei_type;
+    double money = 0.0; 
     
     TimeUnit a_time; /*!< internal agent's timer */
     

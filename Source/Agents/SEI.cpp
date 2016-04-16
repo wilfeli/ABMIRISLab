@@ -12,11 +12,20 @@
 #include "Agents/SEI.h"
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"
+#include "Institutions/MarketingSystem.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/G.h"
 
 using namespace solar_core;
 
+
+void
+SEI::init(W *w_)
+{
+    //send marketing information out
+    w->marketing->get_marketing_inf_sei(std::make_shared<MesMarketingSEI>(this, sei_type));
+    
+}
 
 
 
@@ -298,6 +307,16 @@ void
 SEI::install_project(std::shared_ptr<PVProject> project){}
 
 
+
+
+void
+SEI::get_payment(std::shared_ptr<MesPayment> mes_)
+{
+    money += mes_->q;
+}
+
+
+
 void
 SEI::ac_update_tick()
 {
@@ -342,6 +361,8 @@ SEI::act_tick()
 {
     //update internals for the tick
     ac_update_tick();
+    
+    
     
     
     
@@ -487,7 +508,6 @@ SEI::act_tick()
     
     
     //visit sites and perform installation
-    //visit sites and collect information
     for (auto& w_project:schedule_installations[i_schedule_installations])
     {
         //go to sites, collect information

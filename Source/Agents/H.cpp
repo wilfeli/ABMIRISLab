@@ -7,6 +7,7 @@
 //
 
 #include "Institutions/IMessage.h"
+#include "Institutions/MarketingSystem.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/Serialize.h"
 #include "UI/W.h"
@@ -28,7 +29,7 @@ Household::Household(PropertyTree& pt_, W* w_)
 
     for (auto& iter:params_str)
     {
-        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, w);
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
 
 
@@ -54,6 +55,12 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
     
     
     ///@DevStage3 check if this agent is interested in the marketing message
+}
+
+void
+Household::ac_inf_marketing_sei()
+{
+    w->marketing->request_inf_marketing_sei(this);
 }
 
 
@@ -277,8 +284,8 @@ bool
 Household::dec_project_reroof(std::shared_ptr<PVProject> project)
 {
     //MARK: cont.
-    
-};
+    return false;
+}
 
 
 
@@ -321,18 +328,18 @@ Household::act_tick()
     }
     else
     {
-        //move to evaluation stage
+        //moves to the evaluation stage
         dec_evaluate_online_quotes();
     };
     
     
-    //evaluate preliminary quotes and commit to the project
+    //evaluates preliminary quotes and commits to the project
     if (n_preliminary_quotes >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedPreliminaryQuotes])
     {
         dec_evaluate_preliminary_quotes();
     };
     
-    //evaluate preliminary quotes and commit to the project
+    //evaluates designs
     if (n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])
     {
         dec_evaluate_designs();
@@ -350,7 +357,7 @@ Household::act_tick()
         };
     };
     
-    //if there is accepted project - check if needs to make payments
+    //if there is an accepted project - check if needs to make payments
     
     ///@DevStage1 generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both - agent is broadcasting changed state and behaves differently depending on the state.
 }

@@ -16,9 +16,17 @@
 		EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
 		EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
 		EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
+		EDDFEC031CC2E03B005580A5 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF81CC2E03B005580A5 /* operations.cpp */; };
+		EDDFEC041CC2E03B005580A5 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */; };
+		EDDFEC051CC2E03B005580A5 /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */; };
+		EDDFEC061CC2E03B005580A5 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFB1CC2E03B005580A5 /* path.cpp */; };
+		EDDFEC071CC2E03B005580A5 /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFC1CC2E03B005580A5 /* portability.cpp */; };
+		EDDFEC081CC2E03B005580A5 /* unique_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFD1CC2E03B005580A5 /* unique_path.cpp */; };
+		EDDFEC091CC2E03B005580A5 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFE1CC2E03B005580A5 /* utf8_codecvt_facet.cpp */; };
+		EDDFEC0A1CC2E03B005580A5 /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFF1CC2E03B005580A5 /* windows_file_codecvt.cpp */; };
+		EDDFEC0B1CC2E03B005580A5 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEC021CC2E03B005580A5 /* error_code.cpp */; };
 		EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD31CB6B43900C79A22 /* IInstitute.cpp */; };
 		EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD51CB6B43900C79A22 /* IMessage.cpp */; };
-		EDE03ADB1CB6B43A00C79A22 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */; };
 		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
 		EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
 		EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
@@ -66,13 +74,24 @@
 		EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarPanel.cpp; sourceTree = "<group>"; };
 		EDDC11C61C8F9FF7005670BD /* SolarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarPanel.h; sourceTree = "<group>"; };
 		EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalIncludes.h; sourceTree = "<group>"; };
+		EDDFEBF81CC2E03B005580A5 /* operations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operations.cpp; path = ExternalTools/boost/operations.cpp; sourceTree = "<group>"; };
+		EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = codecvt_error_category.cpp; path = ExternalTools/boost/codecvt_error_category.cpp; sourceTree = "<group>"; };
+		EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path_traits.cpp; path = ExternalTools/boost/path_traits.cpp; sourceTree = "<group>"; };
+		EDDFEBFB1CC2E03B005580A5 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = ExternalTools/boost/path.cpp; sourceTree = "<group>"; };
+		EDDFEBFC1CC2E03B005580A5 /* portability.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = portability.cpp; path = ExternalTools/boost/portability.cpp; sourceTree = "<group>"; };
+		EDDFEBFD1CC2E03B005580A5 /* unique_path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unique_path.cpp; path = ExternalTools/boost/unique_path.cpp; sourceTree = "<group>"; };
+		EDDFEBFE1CC2E03B005580A5 /* utf8_codecvt_facet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utf8_codecvt_facet.cpp; path = ExternalTools/boost/utf8_codecvt_facet.cpp; sourceTree = "<group>"; };
+		EDDFEBFF1CC2E03B005580A5 /* windows_file_codecvt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = windows_file_codecvt.cpp; path = ExternalTools/boost/windows_file_codecvt.cpp; sourceTree = "<group>"; };
+		EDDFEC001CC2E03B005580A5 /* windows_file_codecvt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = windows_file_codecvt.hpp; path = ExternalTools/boost/windows_file_codecvt.hpp; sourceTree = "<group>"; };
+		EDDFEC011CC2E03B005580A5 /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = description.txt; path = ExternalTools/boost/description.txt; sourceTree = "<group>"; };
+		EDDFEC021CC2E03B005580A5 /* error_code.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_code.cpp; path = ExternalTools/boost/error_code.cpp; sourceTree = "<group>"; };
 		EDE03AD11CB1F81600C79A22 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		EDE03AD31CB6B43900C79A22 /* IInstitute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IInstitute.cpp; sourceTree = "<group>"; };
 		EDE03AD41CB6B43900C79A22 /* IInstitute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IInstitute.h; sourceTree = "<group>"; };
 		EDE03AD51CB6B43900C79A22 /* IMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IMessage.cpp; sourceTree = "<group>"; };
 		EDE03AD61CB6B43900C79A22 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDE03AD71CB6B43900C79A22 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
-		EDE03AD81CB6B43900C79A22 /* MarketingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketingSystem.h; sourceTree = "<group>"; };
+		EDE03AD81CB6B43900C79A22 /* MarketingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketingSystem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDE03ADD1CB8070500C79A22 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
 		EDE03ADE1CB8070500C79A22 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
@@ -140,6 +159,7 @@
 		EDDB3FD91C7DA16200A6EA1F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EDDFEBF61CC2E01D005580A5 /* ExternalTools */,
 				EDE03AD21CB6B43900C79A22 /* Institutions */,
 				ED0E14131C98BD2B00A41B24 /* Examples */,
 				EDDB3FDA1C7DA16200A6EA1F /* Agents */,
@@ -218,6 +238,32 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		EDDFEBF61CC2E01D005580A5 /* ExternalTools */ = {
+			isa = PBXGroup;
+			children = (
+				EDDFEBF71CC2E028005580A5 /* boost */,
+			);
+			name = ExternalTools;
+			sourceTree = "<group>";
+		};
+		EDDFEBF71CC2E028005580A5 /* boost */ = {
+			isa = PBXGroup;
+			children = (
+				EDDFEBF81CC2E03B005580A5 /* operations.cpp */,
+				EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */,
+				EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */,
+				EDDFEBFB1CC2E03B005580A5 /* path.cpp */,
+				EDDFEBFC1CC2E03B005580A5 /* portability.cpp */,
+				EDDFEBFD1CC2E03B005580A5 /* unique_path.cpp */,
+				EDDFEBFE1CC2E03B005580A5 /* utf8_codecvt_facet.cpp */,
+				EDDFEBFF1CC2E03B005580A5 /* windows_file_codecvt.cpp */,
+				EDDFEC001CC2E03B005580A5 /* windows_file_codecvt.hpp */,
+				EDDFEC011CC2E03B005580A5 /* description.txt */,
+				EDDFEC021CC2E03B005580A5 /* error_code.cpp */,
+			);
+			name = boost;
+			sourceTree = "<group>";
+		};
 		EDE03AD21CB6B43900C79A22 /* Institutions */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,17 +336,25 @@
 				EDE0FD931CC0058100115115 /* IRandom.cpp in Sources */,
 				ED3EA2181C9F440000C2B70E /* G.cpp in Sources */,
 				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
+				EDDFEC081CC2E03B005580A5 /* unique_path.cpp in Sources */,
+				EDDFEC071CC2E03B005580A5 /* portability.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
+				EDDFEC0B1CC2E03B005580A5 /* error_code.cpp in Sources */,
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */,
+				EDDFEC061CC2E03B005580A5 /* path.cpp in Sources */,
 				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
+				EDDFEC041CC2E03B005580A5 /* codecvt_error_category.cpp in Sources */,
 				EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */,
-				EDE03ADB1CB6B43A00C79A22 /* MarketingSystem.cpp in Sources */,
+				EDDFEC0A1CC2E03B005580A5 /* windows_file_codecvt.cpp in Sources */,
+				EDDFEC031CC2E03B005580A5 /* operations.cpp in Sources */,
 				EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */,
 				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,
+				EDDFEC091CC2E03B005580A5 /* utf8_codecvt_facet.cpp in Sources */,
 				EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */,
+				EDDFEC051CC2E03B005580A5 /* path_traits.cpp in Sources */,
 				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
 				EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */,

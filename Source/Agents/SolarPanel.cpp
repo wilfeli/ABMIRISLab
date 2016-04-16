@@ -7,3 +7,27 @@
 //
 
 #include "SolarPanel.h"
+
+
+using namespace solar_core;
+
+std::shared_ptr<SolarModule>
+SolarModule::deserialize(const PropertyTree& pt_)
+{
+    return std::make_shared<SolarModule>(pt_);
+}
+
+
+
+
+
+SolarModule::SolarModule(const PropertyTree& pt_)
+{
+    name = pt_.get<std::string>("Name");
+    efficiency = pt_.get<double>("Peak Efficiency");
+    STC_power_rating = pt_.get<double>("STC Power Rating");
+    p_sem = pt_.get<double>("Price (from manufacturer)");
+    length = pt_.get<double>("Length");
+    width = pt_.get<double>("Width");
+    warranty_length = pt_.get<double>("Warranty length");
+}
