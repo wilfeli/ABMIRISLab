@@ -7,9 +7,31 @@
 //
 
 #include "Institutions/MarketingSystem.h"
+#include "Institutions/IMessage.h"
 
 
 using namespace solar_core;
+
+
+
+void
+MarketingInst::request_inf_marketing_sei(IAgent* agent_)
+{
+    //push all marketing messages
+    for (auto& mes:marketing_mess)
+    {
+        agent_->get_inf(mes);
+    };
+}
+
+
+void
+MarketingInst::get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_)
+{
+    marketing_mess.push_back(mes_);
+}
+
+
 
 
 void

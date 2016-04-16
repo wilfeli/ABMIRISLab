@@ -58,6 +58,12 @@ W::W(std::string path_, std::string mode_)
         auto N_SEI = pt.get<long>("N_SEI");
         auto N_HH = pt.get<long>("N_HH");
         
+        
+        //create RNG
+        
+        
+        
+        
         //solar_module.json
         path_to_template = path_to_dir;
         path_to_template /= "solar_module.json";
@@ -85,7 +91,7 @@ W::W(std::string path_, std::string mode_)
         {
             //read configuration file
             //replace parameters if necessary
-            hhs.push_back(new Household(pt, this))
+            hhs.push_back(new Household(pt, this));
             
         };
         
@@ -186,7 +192,7 @@ W::life_seis()
             for (auto agent:seis)
             {
                 //get tick
-                agent->act_tick(time);
+                agent->act_tick();
             };
             ++updated_counter;
         };
@@ -219,3 +225,11 @@ W::get_permit_difficulty(double location_x, double location_y) const
 {
     return world_map->g_map[location_x][location_y]->permit_difficulty;
 }
+
+
+void
+W::get_state_inf(Household* agent_, EParamTypes state_)
+{
+}
+
+

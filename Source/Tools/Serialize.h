@@ -181,6 +181,34 @@ public:
 };
 
     
+    
+template<class K, class V>
+class DeserializeMap<K, std::shared_ptr<V>>
+{
+public:
+    static void deserialize(const PropertyTree& pt, std::map<K, std::shared_ptr<V>>&  r)
+    {
+        K key;
+        std::shared_ptr<V> value;
+        
+        //node is of the form "" : { "key": "value"}
+        for (const auto& node: pt)
+        {
+            for (const auto& item : node.second)
+            {
+                DeserializeValue<K>::deserialize_value(item.first, key);
+                
+                //create new object passing in PropertyTree
+                value = V::deserialize(item.second);
+                
+                r.insert(std::make_pair(key, value));
+            };
+        };
+    }
+};
+
+    
+    
 /**
  
  Deserialize into map
@@ -245,39 +273,40 @@ public:
  
  */
 template <class T>
-T solve_str_formula(std::string& formula_, IRandom& rand_)
+T solve_str_formula(const std::string& formula_, IRandom& rand_)
 {
     T dest_;
+    std::string formula = formula_;
     
-    if (formula_.find("FORMULA::") != std::string::npos)
+    if (formula.find("FORMULA::") != std::string::npos)
     {
         std::regex e("");
         e.assign("FORMULA\\u003A\\u003A");
-        formula_ = std::regex_replace(formula_, e, "");
+        formula = std::regex_replace(formula, e, "");
         
         //check if it is requesting random number generation
-        if (formula_.find("p.d.f.") != std::string::npos)
+        if (formula.find("p.d.f.") != std::string::npos)
         {
             e.assign("p.d.f.\\u003A\\u003A");
-            formula_ = std::regex_replace(formula_, e, "");
+            formula = std::regex_replace(formula, e, "");
             
             //parse formula
             //case of a truncated normal
-            if (formula_.find("N_trunc") != std::string::npos)
+            if (formula.find("N_trunc") != std::string::npos)
             {
-                double mean = std::stod(formula_.substr(formula_.find("(") + 1, formula_.find(",") - formula_.find("(") - 1));
-                double sigma2 = std::stod(formula_.substr(formula_.find(",") + 1, formula_.find(",") - formula_.find(")") - 1));
+                double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                 
                 ///@DevStage1 change to Truncated generation
-                formula_ = std::to_string((rand_.rnd() + mean) * std::pow(sigma2, 0.5));
+                formula = std::to_string((rand_.rnd() + mean) * std::pow(sigma2, 0.5));
                 
             }
-            else if (formula_.find("u") != std::string::npos)
+            else if (formula.find("u") != std::string::npos)
             {
-                double min = std::stod(formula_.substr(formula_.find("(") + 1, formula_.find(",") - formula_.find("(") - 1));
-                double max = std::stod(formula_.substr(formula_.find(",") + 1, formula_.find(",") - formula_.find(")") - 1));
+                double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                 
-                formula_ = std::to_string(rand_.rnd() * (max - min) + min);
+                formula = std::to_string(rand_.rnd() * (max - min) + min);
             };
             
         };
@@ -288,7 +317,7 @@ T solve_str_formula(std::string& formula_, IRandom& rand_)
     };
     
     //convert string into value
-    DeserializeValue<T>::deserialize_value(std::to_string(solve_formula(formula_)), dest_);
+    DeserializeValue<T>::deserialize_value(std::to_string(solve_formula(formula)), dest_);
     
     return dest_;
 }

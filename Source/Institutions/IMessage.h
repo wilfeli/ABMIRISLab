@@ -62,6 +62,7 @@ protected:
 class MesMarketingSEI
 {
 public:
+    MesMarketingSEI(SEI* agent_, const EParamTypes& sei_type_):agent(agent_), sei_type(sei_type_){}
     SEI* agent; /*!< agent whose marketing information is presented */
     EParamTypes sei_type; /*!< depending on the type will have online quotes or not */
     

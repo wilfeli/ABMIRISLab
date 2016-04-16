@@ -99,6 +99,8 @@ public:
      
      */
     
+    virtual void ac_inf_marketing_sei() override; /*!< implements actions for requesting marketing information */
+    
     virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_)  override; /*!< receives marketing information */
 
     
@@ -257,8 +259,15 @@ protected:
      Section relevant to design stage
      
      */
+    
+    void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
+    
     std::deque<std::shared_ptr<PVProject>> accepted_design;
     long n_pending_designs;
+    
+    std::map<EParamTypes, std::vector<double>> THETA_design; /*!< parameters for decision making  */
+    
+    
     
     //@}
     

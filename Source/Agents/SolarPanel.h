@@ -31,6 +31,11 @@ class SEI;
 class SolarModule
 {
 public:
+
+    static std::shared_ptr<SolarModule> deserialize(const PropertyTree& pt_);
+    SolarModule(const PropertyTree& pt_);
+    
+    
     std::string name;
     double efficiency;
     double STC_power_rating;
