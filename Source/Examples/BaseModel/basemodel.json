@@ -7,9 +7,15 @@
                         {
                         "EParamTypes::ElectricityPriceUCDemand": "0.2"
                         }
-                        ]
+                        ],
+        "constraints":[
+        {
+        "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+        }
+        ]
     },
     "N_SEI":10,
+    "N_HHMarketingStateHighlyInterested":100
     
 }
     

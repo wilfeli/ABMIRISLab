@@ -27,14 +27,46 @@ Household::Household(PropertyTree& pt_, W* w_)
     std::map<std::string, std::string> params_str;
     serialize::deserialize(pt_.get_child("params"), params_str);
 
+    ///@DevStage2 move to W to speed up, but test before that
     for (auto& iter:params_str)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
 
-
+    marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
+    
+    //location
+    location_x = pt_.get<long>("location_x");
+    location_y = pt_.get<long>("location_y");
+    
+    //House
+    house = new House(pt_.get_child("House"));
+    
+    
+    //decision parameters
+    serialize::deserialize(pt_.get_child("THETA_design"), THETA_design);
+    
+    
+    
+    quote_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("quote_state"));
+    
+    schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_visits = 0;
+    
+    quote_stage_timer = 0;
+    n_preliminary_quotes = 0;
+    n_pending_designs = 0;
+    
+    w = w_;
+    
 }
 
+
+void
+Household::init(W* w_)
+{
+    a_time = w_->time;
+}
 
 
 void

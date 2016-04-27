@@ -12,6 +12,15 @@
 
 using namespace solar_core;
 
+
+House::House(const PropertyTree& pt_)
+{
+    roof_age = pt_.get<double>("roof_age");
+    roof_size = pt_.get<double>("roof_size");
+
+}
+
+
 WorldMap::WorldMap(PropertyTree& pt, W* w_)
 {
     auto N_TILE_X = pt.get<long>("N_TILE_X");

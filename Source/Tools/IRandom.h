@@ -28,8 +28,7 @@ class IRandom
 public:
     IRandom(double seed_):rng(seed_), rnd(rng, boost::normal_distribution<>(0.0, 1.0)), ru(rng, boost::uniform_01<>()){} /*!< creates random number generator and seeds it */
 
-
-protected:
+public:
     boost::mt19937 rng; /*!< random number generator */
     
 public:
