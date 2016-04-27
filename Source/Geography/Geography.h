@@ -27,6 +27,7 @@ class W;
 class House
 {
 public:
+    House(const PropertyTree& pt_);
     double roof_age; /*!< age of a house's roof in years (not required to be whole years) */
     double roof_size; /*!< size of a roof, in m^2 */
     

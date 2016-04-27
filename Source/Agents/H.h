@@ -68,6 +68,7 @@ public:
     
     
     Household(PropertyTree& pt_, W* w_);
+    void init(W* w_);
     
     
     //@}

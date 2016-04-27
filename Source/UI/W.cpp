@@ -51,17 +51,22 @@ W::W(std::string path_, std::string mode_)
     if (mode_ == "NEW")
     {
         std::string path = path_to_model_file.string();
+        
         //baseline model
         PropertyTree pt;
         read_json(path, pt);
         
         auto N_SEI = pt.get<long>("N_SEI");
         auto N_HH = pt.get<long>("N_HH");
-        
+        auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
         
         //create RNG
+        //MARK: cont.
         
         
+        //set internals
+        //MARK: cont.
+        time = 0;
         
         
         //solar_module.json
@@ -86,12 +91,109 @@ W::W(std::string path_, std::string mode_)
         path_to_template /= "hh.json";
         path = path_to_template.string();
         read_json(path, pt);
+        
+        
+        
+        //create random number generators for locations
+        //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
+        //check that it is uniform distribution
+        if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported hh specification rule");
+        };
+        auto max_ = world_map->g_map[0].size();
+        auto pdf_location_x = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_location_x = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_x);
+        max_ = world_map->g_map.size();
+        auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
+        
+        
+        auto formula_roof_age = pt.get<std::string>("House.roof_age");
+        auto formula_roof_size = pt.get<std::string>("House.roof_size");
+        //create rundom number generators for House
+        if (formula_roof_age.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported hh specification rule");
+        };
+        if (formula_roof_size.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported hh specification rule");
+        };
+        
+        double mean_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find("(") + 1, formula_roof_age.find(",") - formula_roof_age.find("(") - 1));
+        double sigma2_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find(",") + 1, formula_roof_age.find(",") - formula_roof_age.find(")") - 1));
+        
+        auto pdf_roof_age = boost::normal_distribution<>(mean_roof_age, std::pow(sigma2_roof_age, 0.5));
+        auto rng_roof_age = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_age);
+        
+        
+        double mean_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find("(") + 1, formula_roof_size.find(",") - formula_roof_size.find("(") - 1));
+        double sigma2_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find(",") + 1, formula_roof_size.find(",") - formula_roof_size.find(")") - 1));
+        
+        auto pdf_roof_size = boost::normal_distribution<>(mean_roof_size, std::pow(sigma2_roof_size, 0.5));
+        auto rng_roof_size = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_size);
+        
+        
+        
+        //create THETA_design
+        std::map<std::string, std::vector<std::string>> THETA_design_str;
+        serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
+        
+        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HHDecPreliminaryQuote)];
+        
+        if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported hh specification rule");
+        };
+        
+        auto pdf_THETA = boost::uniform_01<>();
+        auto rng_THETA = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(rand->rng, pdf_THETA);
+        
+        
+        std::map<EParamTypes, std::vector<double>> THETA_design;
+        for (auto& iter:THETA_design_str)
+        {
+            THETA_design[EnumFactory::ToEParamTypes(iter.first)] = std::vector<double>{};
+        };
+        
+        
         //create HH
+        auto j = 0;
         for (auto i = 0; i < N_HH; ++i)
         {
+            if (j < N_HHMarketingStateHighlyInterested)
+            {
+                //create few highly interested agents
+                //put specific parameters into template
+                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HHMarketingStateHighlyInterested));
+            };
+            
+            ++j;
+            
+            //generate location
+            pt.put("location_x", rng_location_x());
+            pt.put("location_y", rng_location_y());
+            
+            
+            //generate House
+            //roof_age
+            //roof_size
+            pt.put("House.roof_age", std::max(0.0, rng_roof_age()));
+            pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
+            
+            //create decision parameters
+            THETA_design[EParamTypes::HHDecPreliminaryQuote][0] = rng_THETA();
+            pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
+            
+            
+            
             //read configuration file
             //replace parameters if necessary
             hhs.push_back(new Household(pt, this));
+            
+            
+
             
         };
         

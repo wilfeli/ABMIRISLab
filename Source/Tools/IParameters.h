@@ -353,6 +353,32 @@ namespace solar_core
                 return EParamTypes::None;
             };
         }
+        
+        
+        
+        static std::string FromEParamTypes(EParamTypes param_)
+        {
+            if (param_ == EParamTypes::HHMarketingStateHighlyInterested)
+            {
+                return "HHMarketingStateHighlyInterested";
+            }
+            else if (param_ == EParamTypes::HHMarketingStateInterested)
+            {
+                return "HHMarketingStateInterested";
+            }
+            else if (param_ == EParamTypes::HHMarketingNotInterested)
+            {
+                return "HHMarketingNotInterested";
+            }
+            else
+            {
+                return "None";
+            };
+        }
+        
+        
+        
+        
     };
     
     

@@ -20,6 +20,21 @@ namespace serialize
     
     
 using namespace solar_core;
+
+    
+template<typename T>
+class is_vector{
+public:
+    static const bool value = false;
+};
+
+template <typename T>
+class is_vector<std::vector<T>>
+{
+public:
+    static const bool value = true;
+};
+    
     
     
 /**
@@ -40,6 +55,50 @@ void serialize_value(In& in_, std::string& out_)
 }
     
     
+/**
+ 
+ General template for serializatio of a vector or deque of objects. Code for vector and deque is exactly the same
+ 
+ */
+template<class T, class Enable = void>
+class SerializeContainer
+{
+public:
+    
+    static PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key)
+    {
+        PropertyTree pt;
+        PropertyTree child;
+        PropertyTree children;
+        
+        for (auto elem:container_)
+        {
+            child.put("", elem);
+            children.push_back(std::make_pair("", child));
+        };
+        
+        pt.add_child(key, children);
+        return pt;
+    }
+    
+    
+    static PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key)
+    {
+        PropertyTree pt;
+        PropertyTree child;
+        PropertyTree children;
+        
+        for (auto elem:container_)
+        {
+            child.put("", elem);
+            children.push_back(std::make_pair("", child));
+        };
+        
+        pt.add_child(key, children);
+        return pt;
+    }
+    
+};
     
     
     
@@ -48,7 +107,7 @@ void serialize_value(In& in_, std::string& out_)
  General template for serialization of a map
  */
 template<class K, class V, class Enable = void>
-class SerializeImpl2
+class SerializeMap
 {
 public:
     
@@ -85,6 +144,50 @@ public:
 };
     
     
+//here could add serialization of complex maps
+template<class K, class V>
+class SerializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
+{
+public:
+    /**
+     
+     
+     Serialize simple map
+     
+     It is going through output stream to accomodate maps with complex data types
+     
+     */
+    static PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key)
+    {
+        PropertyTree pt;
+        PropertyTree child;
+        PropertyTree children;
+        
+        std::string value;
+        std::string key_value;
+        
+        typedef typename V::value_type ValueType;
+        
+        
+        for (auto elem:container_)
+        {
+            serialize::serialize_value(elem.first, key_value);
+            child.put_child(key_value, SerializeContainer<ValueType>::serialize(elem.second, "dummy").get_child("dummy"));
+            children.push_back(std::make_pair("", child));
+            child.clear();
+        };
+        
+        
+        pt.add_child(key, children);
+        
+        return pt;
+    }
+};
+    
+template <typename K, typename V>
+PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key){ return SerializeMap<K, V>::serialize(container_, key);};
+    
+    
 template<class T, class Enable = void>
 class DeserializeValue
 {
@@ -119,6 +222,28 @@ public:
 };
     
     
+template<class T, class Enable = void>
+class DeserializeContainer
+{
+public:
+    
+    static void deserialize(const PropertyTree& pt, std::vector<T>& r)
+    {
+        for (auto& item : pt)
+        {
+            r.push_back(item.second.get_value<T>());
+        };
+    }
+    
+    static void deserialize(const PropertyTree& pt, std::deque<T>& r)
+    {
+        for (auto& item : pt)
+        {
+            r.push_back(item.second.get_value<T>());
+        };
+    }
+};
+
     
 
 /**
@@ -207,6 +332,37 @@ public:
     }
 };
 
+
+
+/**
+ 
+ 
+ */
+template<class K, class V>
+class DeserializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
+{
+public:
+    static void deserialize(const PropertyTree& pt, std::map<K, V>& r)
+    {
+        K key{};
+        V value{};
+        typedef typename V::value_type ValueType;
+        
+        for (auto& node: pt)
+        {
+            for (auto& item : node.second)
+            {
+                DeserializeValue<K>::deserialize_value(item.first, key);
+                DeserializeContainer<ValueType>::deserialize(item.second, value);
+                r.insert(std::make_pair(key, value));
+                value.clear();
+            };
+        };
+    };
+    
+};
+
+    
     
     
 /**
@@ -298,9 +454,10 @@ T solve_str_formula(const std::string& formula_, IRandom& rand_)
                 double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                 
                 ///@DevStage1 change to Truncated generation
-                formula = std::to_string((rand_.rnd() + mean) * std::pow(sigma2, 0.5));
+                formula = std::to_string(std::max((rand_.rnd() + mean) * std::pow(sigma2, 0.5), 0.0));
                 
             }
+            ///careful here - will find both u and u_int
             else if (formula.find("u") != std::string::npos)
             {
                 double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
