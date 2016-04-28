@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "Tools/Serialize.h"
 #include "Tools/IParameters.h"
 #include "Tools/WorldSettings.h"
 #include "UI/W.h"
@@ -17,6 +18,79 @@
 #include "Agents/G.h"
 
 using namespace solar_core;
+
+
+
+SEI::SEI(const PropertyTree& pt_, W* w_)
+{
+    //read solar modules to be used in decisions
+    std::map<std::string, std::string> dec_solar_modules_str;
+    serialize::deserialize(pt_.get_child("dec_solar_modules"), dec_solar_modules_str);
+    
+    for (auto& iter:dec_solar_modules_str)
+    {
+        dec_solar_modules[EnumFactory::ToEParamTypes(iter.first)] = WorldSettings::instance().solar_modules[iter.second];
+    };
+    
+    serialize::deserialize(pt_.get_child("dec_project_percentages"),dec_project_percentages);
+    
+    std::vector<std::string> THETA_hard_costs_str;
+    serialize::deserialize(pt_.get_child("THETA_hard_costs"), THETA_hard_costs_str);
+    
+    for (auto& iter:THETA_hard_costs_str)
+    {
+        THETA_hard_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    std::vector<std::string> THETA_soft_costs_str;
+    serialize::deserialize(pt_.get_child("THETA_soft_costs"), THETA_soft_costs_str);
+    for (auto& iter:THETA_soft_costs_str)
+    {
+        THETA_soft_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    std::vector<std::string> THETA_profit_str;
+    serialize::deserialize(pt_.get_child("THETA_design"), THETA_profit_str);
+    for (auto& iter:THETA_profit_str)
+    {
+        THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    
+    
+    schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_visits = 0;
+    
+    
+    schedule_installations = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthPlanInstallations], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_installations = 0;
+    
+    
+    
+    //set other parameters
+    ac_designs = 0;
+    
+    
+    sei_type = EnumFactory::ToEParamTypes(pt_.get<std::string>("sei_type"));
+    money = serialize::solve_str_formula<double>(pt_.get<std::string>("money"), *w->rand);
+    a_time = 0;
+    
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+    
+    ///@DevStage2 move to W to speed up, but test before that
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+    };
+
+    
+    
+    
+    w = w_;
+}
 
 
 void

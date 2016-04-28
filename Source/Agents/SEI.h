@@ -62,7 +62,7 @@ public:
      Section containing initialization information
      
      */
-    
+    SEI(const PropertyTree& pt_, W* w_);
     virtual void init(W* w_); /*!< Initialization step */
     
     
@@ -168,7 +168,6 @@ protected:
     
     
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to the MaxLengthWaitPreliminaryQuote */
-    
     std::size_t i_schedule_visits;
     
     

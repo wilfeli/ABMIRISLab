@@ -12,14 +12,56 @@
                           ],
     "params": [
                {
-               "EParamTypes::EstimatedPricePerWatt": "5.5"
+               "EParamTypes::EstimatedPricePerWatt": 5.5
                },
                {
-               "EParamTypes::SEIMaxNVisitsPerTimeUnit": "5"
+               "EParamTypes::SEIMaxNVisitsPerTimeUnit": 5
                },
                {
-               "EParamTypes::SEIMaxRoofAge": "1040"
+               "EParamTypes::SEIMaxRoofAge": 1040
+               },
+               {
+               "EParamTypes::AveragePVCapacity": 3000
+               },
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote":0
                }
-               ]
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit":1
+               },
+               {
+               "EparamTypes::SEIMaxNVisitsPerTimeUnit":10
+               },
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForDesign":1
+               },
+               {
+               "EParamTypes::SEIMaxNInstallationsPerTimeUnit":"FORMULA::p.d.f.::N_trunc(1,4)"
+               },
+               {
+               "EParamTypes::SEIFrequencyUpdateDesignTemplates":10
+               }
+               ],
+    "mes_marketing":"",
+    "dec_project_percentage":[
+                              0.5,
+                              0.8,
+                              1.0
+                              
+    ],
+    "THETA_hard_costs":[
+                        "FORMULA::p.d.f.::N_trunc(2.5, 0.05)",
+                        "FORMULA::p.d.f.::N_trunc(-0.5, 0.05)"
+    ],
+    "THETA_soft_costs":
+    [
+     "FORMULA::p.d.f.::N_trunc(100, 0.05)",
+     "FORMULA::p.d.f.::N_trunc(150, 0.05)"
+    ]
+    "THETA_profit":[
+        "FORMULA::p.d.f.::N_trunc(0.3, 0.05)"
+    ],
+    "money"::"FORMULA::p.d.f.::U(0, 10000)"
+    
 }
     //Add other parameters for the model
