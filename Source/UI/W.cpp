@@ -57,6 +57,7 @@ W::W(std::string path_, std::string mode_)
         read_json(path, pt);
         
         auto N_SEI = pt.get<long>("N_SEI");
+        auto N_SEILarge = pt.get<long>("N_SEILarge");
         auto N_HH = pt.get<long>("N_HH");
         auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
         
@@ -199,6 +200,21 @@ W::W(std::string path_, std::string mode_)
         
         
         //create SEI - use template for parameters, use model file for additional parameters
+        //create sei_type
+        for (auto i = 0; i < N_SEI; ++i)
+        {
+            //put sei_type
+            pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
+            if (j < N_SEILarge)
+            {
+                pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
+            };
+            ++j;
+            
+            
+            
+            
+        };
         
         
         
