@@ -1,4 +1,4 @@
-//
+////Kelley reviewed 4/24/16 see lines 75, 88, 113, 250, 296, 349
 //  IParameters.h
 //  ABMSolar
 //
@@ -72,7 +72,9 @@ namespace solar_core
         RoofAge,
         
         
-        /** If Household is very interested in SP */
+		/*Why couldn't we use an enum class to show different levels of interest for HHMarketingState?*/
+		
+		/** If Household is very interested in SP */
         HHMarketingStateHighlyInterested,
         
         
@@ -83,7 +85,8 @@ namespace solar_core
         /** If Household is not interested in installing SP */
         HHMarketingNotInterested,
         
-        
+		/*Is it possible to have a bool quoting stage active = true, inactive = false?*/
+
         /** State of a quoting stage for HH: actively requesting information */
         ActiveQuoting,
         
@@ -107,6 +110,8 @@ namespace solar_core
         /** State of a Project: preliminary quotes has been requested via online */
         RequestedOnlineQuote,
         
+		/*What is the difference between RequestPreliminaryQuote and RequestedPreliminaryQuote*/
+
         /** State of a Project: preliminary quotes need to been requested via phone */
         RequestPreliminaryQuote,
         
@@ -242,7 +247,8 @@ namespace solar_core
         /** Parameters of a SEI, frequency of revising designs */
         SEIFrequencyUpdateDesignTemplates,
         
-        
+		/*Could you also use an enumerated class for high efficiency, mid and low efficiency design?*/
+
         /** High efficiency choice of a panel */
         SEIHighEfficiencyDesign,
         
@@ -286,7 +292,7 @@ namespace solar_core
     {
         
         /** Maximum number of ticks to collect quotes (online) */
-        MaxNTicksToCollectQuotes,
+        MaxNTicksToCollectQuotes, //Can you explain what this variable means?
         
         
         /** Maximum number of open projects to consider */
@@ -340,6 +346,8 @@ namespace solar_core
             //case insensitive
             std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
             
+			//why do we only make income and N_H case insensitive?
+
             if (param_type == "income")
             {
                 return EParamTypes::Income;
