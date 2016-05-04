@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
+		EDAC55781CD278F6004D8DA5 /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDAC55771CD278F6004D8DA5 /* SEM.cpp */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -51,6 +52,7 @@
 		ED0E14151C98BD2B00A41B24 /* basemodel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = basemodel.json; sourceTree = "<group>"; };
 		ED3EA2161C9F440000C2B70E /* G.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = G.cpp; sourceTree = "<group>"; };
 		ED3EA2171C9F440000C2B70E /* G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G.h; sourceTree = "<group>"; };
+		EDAC55771CD278F6004D8DA5 /* SEM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEM.cpp; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -185,6 +187,7 @@
 				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
 				EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */,
 				EDDC11C61C8F9FF7005670BD /* SolarPanel.h */,
+				EDAC55771CD278F6004D8DA5 /* SEM.cpp */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
 				EDDFEC0B1CC2E03B005580A5 /* error_code.cpp in Sources */,
+				EDAC55781CD278F6004D8DA5 /* SEM.cpp in Sources */,
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDE03AD91CB6B43A00C79A22 /* IInstitute.cpp in Sources */,
 				EDDFEC061CC2E03B005580A5 /* path.cpp in Sources */,

@@ -1,7 +1,8 @@
 {
     "COMMENT": "http://www.solardesigntool.com/components/module-panel-solar/REC-Solar/2481/REC260PE/specification-data-sheet.html",
     "solar_modules": [
-                      {"REC260PE":{
+                      {
+                      "REC260PE": {
                       "Name": "REC260PE",
                       "PTC Power Rating": "234.4",
                       "STC Power Rating": "260.0",
@@ -11,12 +12,7 @@
                       "Width": "991",
                       "Manufacturer": "",
                       "Price (from manufacturer)": "1.0",
-                      "Warranty length":"25.0"
-                      }
-                      },
-                      {"":
-                      {
-                      "Name": ""
+                      "Warranty length": "25.0"
                       }
                       }
                       ]

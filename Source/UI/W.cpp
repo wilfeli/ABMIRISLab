@@ -22,8 +22,11 @@ using boost::property_tree::write_json;
 #include "UI/W.h"
 #include "Tools/WorldSettings.h"
 #include "Geography/Geography.h"
+#include "Institutions/MarketingSystem.h"
 #include "Agents/IAgent.h"
 #include "Agents/SEI.h"
+#include "Agents/SEM.h"
+#include "Agents/G.h"
 #include "Agents/H.h"
 
 
@@ -58,12 +61,13 @@ W::W(std::string path_, std::string mode_)
         
         auto N_SEI = pt.get<long>("N_SEI");
         auto N_SEILarge = pt.get<long>("N_SEILarge");
+        auto N_SEM = pt.get<long>("N_SEM");
         auto N_HH = pt.get<long>("N_HH");
         auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
         
         //create RNG
         //MARK: cont.
-        
+        rand = new IRandom(pt.get<double>("SEED"));
         
         //set internals
         //MARK: cont.
@@ -184,7 +188,7 @@ W::W(std::string path_, std::string mode_)
             pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
             
             //create decision parameters
-            THETA_design[EParamTypes::HHDecPreliminaryQuote][0] = rng_THETA();
+            THETA_design[EParamTypes::HHDecPreliminaryQuote].push_back(rng_THETA());
             pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
             
             
@@ -198,9 +202,15 @@ W::W(std::string path_, std::string mode_)
             
         };
         
+        //sei.json
+        path_to_template = path_to_dir;
+        path_to_template /= "sei.json";
+        path = path_to_template.string();
+        read_json(path, pt);
         
         //create SEI - use template for parameters, use model file for additional parameters
         //create sei_type
+        j = 0;
         for (auto i = 0; i < N_SEI; ++i)
         {
             //put sei_type
@@ -211,16 +221,67 @@ W::W(std::string path_, std::string mode_)
             };
             ++j;
             
-            
+            seis.push_back(new SEI(pt, this));
             
             
         };
         
+        //SEM are missing for now
+        //sem.json
+        path_to_template = path_to_dir;
+        path_to_template /= "sem.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+
+        for (auto i = 0; i < N_SEM; ++i)
+        {
+            sems.push_back(new SEM(pt, this));
+        };
         
+        
+        //create G
+        //g.json
+        path_to_template = path_to_dir;
+        path_to_template /= "g.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        g = new G(pt, this);
+        
+        //create marketing
+        marketing = new MarketingInst(this);
         
         
         
     };
+}
+
+
+void
+W::init()
+{
+    
+    marketing->init(this);
+    g->init(this);
+    
+    
+    
+    for (auto& agent:hhs)
+    {
+        agent->init(this);
+    };
+    
+    for (auto& agent:seis)
+    {
+        agent->init(this);
+    };
+    
+    for (auto& agent:sems)
+    {
+        agent->init(this);
+    };
+    
+    
+    
 }
 
 
@@ -256,6 +317,7 @@ W::life()
             FLAG_H_TICK = true;
             FLAG_G_TICK = true;
             FLAG_SEM_TICK = true;
+            FLAG_MARKET_TICK = true;
             
             
             all_update.notify_all();
@@ -307,14 +369,13 @@ W::life_seis()
             ++notified_counter;
             FLAG_SEI_TICK = false;
             
-            for (auto agent:seis)
+            for (auto& agent:seis)
             {
                 //get tick
                 agent->act_tick();
             };
             ++updated_counter;
         };
-        
         
         while (!FLAG_SEI_TICK && !FLAG_IS_STOPPED)
         {
@@ -323,12 +384,98 @@ W::life_seis()
             //takes a predicate that is used to loop until it returns false
             all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEI_TICK || FLAG_IS_STOPPED); });
         };
-
-        
     };
-    
-    
 }
+
+
+void
+W::life_sems()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_SEM_TICK = false;
+            
+            for (auto& agent:seis)
+            {
+                //get tick
+                agent->act_tick();
+            };
+            ++updated_counter;
+        };
+        
+        while (!FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEM_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+
+
+
+void
+W::life_gs()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_G_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_G_TICK = false;
+            
+            auto& agent = g;
+            
+                //get tick
+                agent->act_tick();
+            
+            ++updated_counter;
+        };
+        
+        while (!FLAG_G_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_G_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+void
+W::life_markets()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_MARKET_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_MARKET_TICK = false;
+            
+            auto& agent = marketing;
+            
+            //get tick
+            agent->act_tick();
+            
+            ++updated_counter;
+        };
+        
+        while (!FLAG_MARKET_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_MARKET_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+
 
 
 

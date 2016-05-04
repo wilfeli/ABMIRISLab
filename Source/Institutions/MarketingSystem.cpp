@@ -6,12 +6,23 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "UI/W.h"
 #include "Institutions/MarketingSystem.h"
 #include "Institutions/IMessage.h"
 
 
 using namespace solar_core;
 
+MarketingInst::MarketingInst(W* w_)
+{
+    
+}
+
+
+void
+MarketingInst::init(W* w_)
+{
+}
 
 
 void

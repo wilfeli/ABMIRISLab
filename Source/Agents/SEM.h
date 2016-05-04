@@ -9,8 +9,15 @@
 #ifndef ABMSolar_SEM_h
 #define ABMSolar_SEM_h
 
+#include "Tools/IParameters.h"
 
 
+namespace solar_core
+{
+
+    
+class W;
+    
 /**
  
  @wp Research for the structure of costs 
@@ -23,10 +30,23 @@
  
  
  */
-
-
-
-
+class SEM
+{
+public:
+    //@{
+    /**
+     
+     Initializations
+     
+     */
+    
+    SEM(const PropertyTree& pt_, W* w_);
+    void init(W* w_);
+    
+    //@}
+    
+};
+} //end namespace solar_core
 
 
 #endif

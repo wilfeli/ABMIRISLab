@@ -8,11 +8,49 @@
 
 #include "UI/W.h"
 #include "Tools/WorldSettings.h"
+#include "Tools/Serialize.h"
 #include "Agents/G.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/H.h"
 
 using namespace solar_core;
+
+
+
+G::G(const PropertyTree& pt_, W* w_)
+{
+    
+    //create empty container
+    schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_visits = 0;
+    
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+    
+    ///@DevStage2 move to W to speed up, but test before that
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+    };
+    
+    
+    
+    
+    w = w_;
+    
+    
+}
+
+
+void
+G::init(W* w_)
+{
+    
+    a_time = w_->time;
+    
+}
 
 
 void
@@ -84,7 +122,8 @@ G::act_tick()
         if (project->state_project == EParamTypes::RequestedPermit)
         {
             //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            if ((a_time - project->ac_g_time) >= params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit])
+            auto project_scheduling_time = params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
+            if ((a_time - project->ac_g_time) >= project_scheduling_time)
             {
                 bool FLAG_SCHEDULED_VISIT = false;
                 std::size_t i_offset;
@@ -118,7 +157,8 @@ G::act_tick()
         if (project->state_project == EParamTypes::RequestedPermit)
         {
             //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            if ((a_time - project->ac_g_time) >= params[EParamTypes::GProcessingTimeRequiredForProcessingPermit])
+            auto project_processing_time = params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
+            if ((a_time - project->ac_g_time) >= project_processing_time)
             {
                 grant_permit(project);
             };

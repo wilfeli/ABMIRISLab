@@ -183,9 +183,25 @@ public:
         return pt;
     }
 };
+
+    
+    
+/**
+ 
+ 
+ 
+ Wrapper for call to serialize vector, deque, map. Does not change.
+ 
+ */
+
+template<class T>
+PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
+
+template<class T>
+PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
     
 template <typename K, typename V>
-PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key){ return SerializeMap<K, V>::serialize(container_, key);};
+PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key){ return SerializeMap<K, V>::serialize(container_, key);}
     
     
 template<class T, class Enable = void>
@@ -363,7 +379,12 @@ public:
 };
 
     
-    
+template<class T>
+void deserialize(const PropertyTree& pt, std::vector<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
+
+
+template<class T>
+void deserialize(const PropertyTree& pt, std::deque<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
     
 /**
  
@@ -454,7 +475,7 @@ T solve_str_formula(const std::string& formula_, IRandom& rand_)
                 double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                 
                 ///@DevStage1 change to Truncated generation
-                formula = std::to_string(std::max((rand_.rnd() + mean) * std::pow(sigma2, 0.5), 0.0));
+                formula = std::to_string(std::max(rand_.rnd() * std::pow(sigma2, 0.5) + mean, 0.0));
                 
             }
             ///careful here - will find both u and u_int
