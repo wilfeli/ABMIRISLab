@@ -32,7 +32,8 @@ public:
      
      */
     
-    
+    G(const PropertyTree& pt_, W* w_);
+    void init(W* w_);
     virtual void act_tick() ;
     //@}
     
@@ -65,7 +66,8 @@ protected:
     
     std::deque<std::shared_ptr<PVProject>> pending_projects;
     
-    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting accessment, length is equal to the MaxLengthWaitPermitVisit */
+    std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting accessment, length is equal to the MaxLengthWaitPermitVisit
+                                                                         */
     
     std::size_t i_schedule_visits;
     

@@ -44,7 +44,7 @@ public:
     
     
     W(std::string path_, std::string mode_ = "NEW"); /*!< */
-    
+    void init();
     std::string base_path;
     
     //@}
@@ -63,6 +63,9 @@ public:
     
     void life_hhs(); /*!< life of households */
     void life_seis(); /*!< life of seis */
+    void life_sems(); /*!< life of sems */
+    void life_gs(); /*!< life of g */
+    void life_markets(); /*!< life of marketing */
     
     
     
@@ -83,7 +86,7 @@ public:
     
     std::atomic<bool> FLAG_IS_STOPPED;
     std::atomic<bool> FLAG_IS_STARTED;
-    
+    std::atomic<bool> FLAG_IS_PAUSED;
     
     TimeUnit time;
     TimeUnit begin_time = 0;
@@ -96,6 +99,7 @@ public:
     std::atomic<bool> FLAG_SEI_TICK;
     std::atomic<bool> FLAG_H_TICK;
     std::atomic<bool> FLAG_G_TICK;
+    std::atomic<bool> FLAG_MARKET_TICK;
     std::atomic<bool> FLAG_SEM_TICK;
     
     

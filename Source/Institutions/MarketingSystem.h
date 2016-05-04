@@ -20,7 +20,7 @@ namespace solar_core
     
     
 class MesMarketingSEI;
-    
+class W;
     
     
 /**
@@ -34,6 +34,8 @@ class MarketingInst: public IInstitute
 {
 public:
     virtual ~MarketingInst() = default;
+    MarketingInst(W* w_);
+    void init(W* w_);
     virtual void act_tick() override; /*!< */
     
     //@{

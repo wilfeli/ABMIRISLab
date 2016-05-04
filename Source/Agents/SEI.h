@@ -94,8 +94,8 @@ public:
     
     virtual void request_online_quote(std::shared_ptr<PVProject> project_);
     virtual void request_preliminary_quote(std::shared_ptr<PVProject> project_);
-    
-    
+    virtual void ac_inf_marketing_sei() override;
+    virtual void get_inf(std::shared_ptr<MesMarketingSEI> mes_) override;
     
     //@}
     

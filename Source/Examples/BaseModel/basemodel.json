@@ -17,14 +17,19 @@
         },
                        {
                        "EConstraintParams::MaxLengthPlanInstallations":10
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPermitVisit":10
                        }
         ]
     },
+    "N_HH":100,
     "N_SEI":10,
     "N_SEILarge": 3,
-    "N_HHMarketingStateHighlyInterested":100
+    "N_SEM":7,
+    "N_HHMarketingStateHighlyInterested":100,
+    "SEED":2016
     
     
 }
     
-    //Add other parameters for the model

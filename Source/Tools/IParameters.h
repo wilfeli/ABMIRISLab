@@ -24,7 +24,7 @@ namespace solar_core
         const int WAIT_MILLISECONDS_MARKET_CYCLE = 1000;
         const int WAIT_MILLISECONDS_UIW_PAUSE = 100;
         const int WAIT_CYCLES_VIEW_REQUEST = 10;
-        const int NUMBER_AGENT_TYPES_LIFE = 4; /*!< number of agents that update in W::life() */
+        const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
         static constexpr double SOLAR_NAN() {return std::numeric_limits<double>::quiet_NaN();};
         // ... other related constants
@@ -350,6 +350,9 @@ namespace solar_core
             }
             else
             {
+#ifdef DEBUG
+                throw std::runtime_error("missing conversion");
+#endif
                 return EParamTypes::None;
             };
         }
@@ -360,18 +363,33 @@ namespace solar_core
         {
             if (param_ == EParamTypes::HHMarketingStateHighlyInterested)
             {
-                return "HHMarketingStateHighlyInterested";
+                return "EParamTypes::HHMarketingStateHighlyInterested";
             }
             else if (param_ == EParamTypes::HHMarketingStateInterested)
             {
-                return "HHMarketingStateInterested";
+                return "EParamTypes::HHMarketingStateInterested";
             }
             else if (param_ == EParamTypes::HHMarketingNotInterested)
             {
-                return "HHMarketingNotInterested";
+                return "EParamTypes::HHMarketingNotInterested";
+            }
+            else if (param_ == EParamTypes::HHDecPreliminaryQuote)
+            {
+                return "EParamTypes::HHDecPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::SEISmall)
+            {
+                return "EParamTypes::SEISmall";
+            }
+            else if (param_ == EParamTypes::SEILarge)
+            {
+                return "EParamTypes::SEILarge";
             }
             else
             {
+#ifdef DEBUG
+                throw std::runtime_error("missing conversion");
+#endif
                 return "None";
             };
         }

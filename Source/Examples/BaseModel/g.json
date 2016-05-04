@@ -1,4 +1,13 @@
 {
-  
-    //Add other parameters for the model
+    "params": [
+               {
+               "EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit": 2
+               },
+               {
+               "EParamTypes:GMaxNVisitsPerTimeUnit":1
+               },
+               {
+               "EParamTypes::GProcessingTimeRequiredForProcessingPermit":2
+               }
+               ],
 }

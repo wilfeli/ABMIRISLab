@@ -96,6 +96,8 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
 void
 SEI::init(W *w_)
 {
+    a_time = w_->time;
+    
     //send marketing information out
     w->marketing->get_marketing_inf_sei(std::make_shared<MesMarketingSEI>(this, sei_type));
     
@@ -617,3 +619,15 @@ SEI::act_tick()
     
     
 }
+
+
+void
+SEI::ac_inf_marketing_sei()
+{
+}
+
+void
+SEI::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
+{
+}
+
