@@ -2,6 +2,7 @@
 //  main.cpp
 //  ABMSolar
 //
+// Hi there
 //  Created by Ekaterina Sinitskaya on 2/22/16.
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //

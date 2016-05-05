@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\agents\G.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\agents\H.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\agents\IAgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\agents\SEI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\agents\SolarPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\codecvt_error_category.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\error_code.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\operations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\path_traits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\portability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\unique_path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\utf8_codecvt_facet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\externaltools\boost\windows_file_codecvt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\geography\Geography.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\institutions\IInstitute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\institutions\IMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\institutions\MarketingSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tools\IParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tools\IRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tools\Serialize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tools\WorldSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ui\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ui\W.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\agents\G.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\agents\H.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\agents\IAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\agents\SEI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\agents\SEM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\agents\SolarPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\externaltools\boost\windows_file_codecvt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\geography\Geography.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\institutions\IInstitute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\institutions\IMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\institutions\MarketingSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\Documentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\ExternalIncludes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\IParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\IRandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\Serialize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\tools\WorldSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\W.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="documentation\html\annotated.html" />
+    <None Include="documentation\html\classes.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_map-members.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_map.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ice23169578dfc551799d60ee447067a9.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_value-members.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_value.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambc4bb2b40dcc8b30285e8bdc35bf8b03.html" />
+    <None Include="documentation\html\classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambe60461cee9699c7c11b18f2d8ad7197.html" />
+    <None Include="documentation\html\classserialize_1_1_serialize_impl2-members.html" />
+    <None Include="documentation\html\classserialize_1_1_serialize_impl2.html" />
+    <None Include="documentation\html\classserialize_1_1_s_y_alg-members.html" />
+    <None Include="documentation\html\classserialize_1_1_s_y_alg.html" />
+    <None Include="documentation\html\classsolar__core_1_1_g-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_g.html" />
+    <None Include="documentation\html\classsolar__core_1_1_house-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_house.html" />
+    <None Include="documentation\html\classsolar__core_1_1_household-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_household.html" />
+    <None Include="documentation\html\classsolar__core_1_1_i_agent-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_i_agent.html" />
+    <None Include="documentation\html\classsolar__core_1_1_i_institute-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_i_institute.html" />
+    <None Include="documentation\html\classsolar__core_1_1_marketing_inst-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_marketing_inst.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_design-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_design.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_finance-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_finance.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i_online_quote-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i_online_quote.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_payment-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_payment.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_state_base_h_h-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_mes_state_base_h_h.html" />
+    <None Include="documentation\html\classsolar__core_1_1_p_v_design-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_p_v_design.html" />
+    <None Include="documentation\html\classsolar__core_1_1_p_v_project-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_p_v_project.html" />
+    <None Include="documentation\html\classsolar__core_1_1_solar_module-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_solar_module.html" />
+    <None Include="documentation\html\classsolar__core_1_1_s_e_i-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_s_e_i.html" />
+    <None Include="documentation\html\classsolar__core_1_1_tile-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_tile.html" />
+    <None Include="documentation\html\classsolar__core_1_1_w-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_w.html" />
+    <None Include="documentation\html\classsolar__core_1_1_world_map-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_world_map.html" />
+    <None Include="documentation\html\classsolar__core_1_1_world_settings-members.html" />
+    <None Include="documentation\html\classsolar__core_1_1_world_settings.html" />
+    <None Include="documentation\html\class_house-members.html" />
+    <None Include="documentation\html\class_house.html" />
+    <None Include="documentation\html\class_marketing_inst.html" />
+    <None Include="documentation\html\class_tile.html" />
+    <None Include="documentation\html\class_world_map-members.html" />
+    <None Include="documentation\html\class_world_map.html" />
+    <None Include="documentation\html\dir_000001_000002.html" />
+    <None Include="documentation\html\dir_000001_000003.html" />
+    <None Include="documentation\html\dir_000001_000004.html" />
+    <None Include="documentation\html\dir_000001_000005.html" />
+    <None Include="documentation\html\dir_000002_000004.html" />
+    <None Include="documentation\html\dir_000003_000001.html" />
+    <None Include="documentation\html\dir_000003_000004.html" />
+    <None Include="documentation\html\dir_000005_000001.html" />
+    <None Include="documentation\html\dir_000005_000002.html" />
+    <None Include="documentation\html\dir_000005_000004.html" />
+    <None Include="documentation\html\dir_304873b748335ed84f343394b8136b03.html" />
+    <None Include="documentation\html\dir_67a2ef648b55ccb7cb666a90aa142d42.html" />
+    <None Include="documentation\html\dir_74389ed8173ad57b461b9d623a1f3867.html" />
+    <None Include="documentation\html\dir_ad68fd99ee46e73a145661c4c85612bf.html" />
+    <None Include="documentation\html\dir_c0ecaa2a95c53166943329f844e22402.html" />
+    <None Include="documentation\html\dir_cc3071c9757e84c48c790e930d3fab52.html" />
+    <None Include="documentation\html\files.html" />
+    <None Include="documentation\html\functions.html" />
+    <None Include="documentation\html\functions_func.html" />
+    <None Include="documentation\html\functions_vars.html" />
+    <None Include="documentation\html\graph_legend.html" />
+    <None Include="documentation\html\hierarchy.html" />
+    <None Include="documentation\html\index.html" />
+    <None Include="documentation\html\inherits.html" />
+    <None Include="documentation\html\main_8cpp.html" />
+    <None Include="documentation\html\main_8cpp_source.html" />
+    <None Include="documentation\html\namespacemembers.html" />
+    <None Include="documentation\html\namespacemembers_enum.html" />
+    <None Include="documentation\html\namespacemembers_func.html" />
+    <None Include="documentation\html\namespacemembers_type.html" />
+    <None Include="documentation\html\namespacemembers_vars.html" />
+    <None Include="documentation\html\namespaces.html" />
+    <None Include="documentation\html\namespaceserialize.html" />
+    <None Include="documentation\html\namespacesolar__core.html" />
+    <None Include="documentation\html\namespacesolar__core_1_1constants.html" />
+    <None Include="documentation\html\pages.html" />
+    <None Include="documentation\html\structsolar__core_1_1_world_settings_1_1_e_hash-members.html" />
+    <None Include="documentation\html\structsolar__core_1_1_world_settings_1_1_e_hash.html" />
+    <None Include="documentation\html\wp.html" />
+    <None Include="documentation\html\_dev_stage1.html" />
+    <None Include="documentation\html\_dev_stage2.html" />
+    <None Include="documentation\html\_dev_stage3.html" />
+    <None Include="documentation\html\_documentation_8h.html" />
+    <None Include="documentation\html\_documentation_8h_source.html" />
+    <None Include="documentation\html\_external_includes_8h.html" />
+    <None Include="documentation\html\_external_includes_8h_source.html" />
+    <None Include="documentation\html\_geography_8cpp.html" />
+    <None Include="documentation\html\_geography_8cpp_source.html" />
+    <None Include="documentation\html\_geography_8h.html" />
+    <None Include="documentation\html\_geography_8h_source.html" />
+    <None Include="documentation\html\_g_8cpp.html" />
+    <None Include="documentation\html\_g_8cpp_source.html" />
+    <None Include="documentation\html\_g_8h.html" />
+    <None Include="documentation\html\_g_8h_source.html" />
+    <None Include="documentation\html\_h_8cpp.html" />
+    <None Include="documentation\html\_h_8cpp_source.html" />
+    <None Include="documentation\html\_h_8h.html" />
+    <None Include="documentation\html\_h_8h_source.html" />
+    <None Include="documentation\html\_i_agent_8cpp.html" />
+    <None Include="documentation\html\_i_agent_8cpp_source.html" />
+    <None Include="documentation\html\_i_agent_8h.html" />
+    <None Include="documentation\html\_i_agent_8h_source.html" />
+    <None Include="documentation\html\_i_institute_8cpp.html" />
+    <None Include="documentation\html\_i_institute_8cpp_source.html" />
+    <None Include="documentation\html\_i_institute_8h.html" />
+    <None Include="documentation\html\_i_institute_8h_source.html" />
+    <None Include="documentation\html\_i_message_8cpp.html" />
+    <None Include="documentation\html\_i_message_8cpp_source.html" />
+    <None Include="documentation\html\_i_message_8h.html" />
+    <None Include="documentation\html\_i_message_8h_source.html" />
+    <None Include="documentation\html\_i_parameters_8cpp.html" />
+    <None Include="documentation\html\_i_parameters_8cpp_source.html" />
+    <None Include="documentation\html\_i_parameters_8h.html" />
+    <None Include="documentation\html\_i_parameters_8h_source.html" />
+    <None Include="documentation\html\_kelley.html" />
+    <None Include="documentation\html\_marketing_system_8cpp.html" />
+    <None Include="documentation\html\_marketing_system_8cpp_source.html" />
+    <None Include="documentation\html\_marketing_system_8h.html" />
+    <None Include="documentation\html\_marketing_system_8h_source.html" />
+    <None Include="documentation\html\_serialize_8cpp.html" />
+    <None Include="documentation\html\_serialize_8cpp_source.html" />
+    <None Include="documentation\html\_serialize_8h.html" />
+    <None Include="documentation\html\_serialize_8h_source.html" />
+    <None Include="documentation\html\_solar_panel_8cpp.html" />
+    <None Include="documentation\html\_solar_panel_8cpp_source.html" />
+    <None Include="documentation\html\_solar_panel_8h.html" />
+    <None Include="documentation\html\_solar_panel_8h_source.html" />
+    <None Include="documentation\html\_s_e_i_8cpp.html" />
+    <None Include="documentation\html\_s_e_i_8cpp_source.html" />
+    <None Include="documentation\html\_s_e_i_8h.html" />
+    <None Include="documentation\html\_s_e_i_8h_source.html" />
+    <None Include="documentation\html\_s_e_m_8h.html" />
+    <None Include="documentation\html\_s_e_m_8h_source.html" />
+    <None Include="documentation\html\_world_settings_8cpp.html" />
+    <None Include="documentation\html\_world_settings_8cpp_source.html" />
+    <None Include="documentation\html\_world_settings_8h.html" />
+    <None Include="documentation\html\_world_settings_8h_source.html" />
+    <None Include="documentation\html\_w_8cpp.html" />
+    <None Include="documentation\html\_w_8cpp_source.html" />
+    <None Include="documentation\html\_w_8h.html" />
+    <None Include="documentation\html\_w_8h_source.html" />
+  </ItemGroup>
+</Project>
