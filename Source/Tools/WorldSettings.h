@@ -1,4 +1,5 @@
 //
+//Kelley reviewed 4/26/16 line 24
 //  WorldSettings.h
 //  ABMSolar
 //
@@ -19,6 +20,8 @@ namespace solar_core
 {
     
 class SolarModule;
+
+//should the geographical layer also be initialized here?
     
 /**
  
@@ -35,7 +38,7 @@ public:
     //@{
     /**
      
-     Parameteres, setting up, etc. section
+     Parameters, setting up, etc. section
      
      
      
