@@ -19,6 +19,7 @@ using namespace solar_core;
 
 G::G(const PropertyTree& pt_, W* w_)
 {
+    w = w_;
     
     //create empty container
     schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
@@ -34,13 +35,6 @@ G::G(const PropertyTree& pt_, W* w_)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
-    
-    
-    
-    
-    w = w_;
-    
-    
 }
 
 

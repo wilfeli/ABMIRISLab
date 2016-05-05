@@ -44,7 +44,15 @@ serialize::split_expression_SYAlg(const std::string& expression_)
                 tokens_.push_back(str_);
             };
             str_ = "";
-            tokens_.push_back(token);
+            
+            if ((token == "-") && ((tokens_.size() == 0) || is_operator(tokens_.back()) || (is_parenthesis(tokens_.back()))))
+            {
+                str_.append(token);
+            }
+            else
+            {
+                tokens_.push_back(token);
+            };
         }
         else
         {
@@ -92,8 +100,10 @@ serialize::infixToRPN_SYAlg(const std::string& expression_)
     
     auto tokens = split_expression_SYAlg(expression_);
     
-    for (std::string token:tokens)
+//    for (std::string token:tokens)
+    for (auto iter = tokens.begin(); iter != tokens.end(); ++iter)
     {
+        auto token = *iter;
         if (!is_parenthesis(token) && !(is_operator(token)))
         {
             outq.push_back(token);
@@ -181,7 +191,6 @@ serialize::evaluate_rpn(std::list<std::string>& tokens)
         if (is_operator(token))
         {
             //evaluate stack
-            
             double secondOperand = stack.top();
             stack.pop();
             double firstOperand = stack.top();

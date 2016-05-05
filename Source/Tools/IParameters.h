@@ -13,6 +13,12 @@
 #include <boost/property_tree/ptree.hpp>
 
 
+#ifdef DEBUG
+
+#include <iostream>
+
+#endif
+
 namespace solar_core
 {
     
@@ -340,17 +346,122 @@ namespace solar_core
             //case insensitive
             std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
             
-            if (param_type == "income")
+            if (param_type == "eparamtypes::income")
             {
                 return EParamTypes::Income;
             }
-            else if (param_type == "n_h")
+            else if (param_type == "eparamtypes::n_h")
             {
                 return EParamTypes::N_H;
+            }
+            else if (param_type == "eparamtypes::hhdecpreliminaryquote")
+            {
+                return EParamTypes::HHDecPreliminaryQuote;
+            }
+            else if (param_type == "eparamtypes::creditscore")
+            {
+                return EParamTypes::CreditScore;
+            }
+            else if (param_type == "eparamtypes::electricitybill")
+            {
+                return EParamTypes::ElectricityBill;
+            }
+            else if (param_type == "eparamtypes::hhmaxnvisitspertimeunit")
+            {
+                return EParamTypes::HHMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::hhmarketingstatehighlyinterested")
+            {
+                return EParamTypes::HHMarketingStateHighlyInterested;
+            }
+            else if (param_type == "eparamtypes::inactivequoting")
+            {
+                return EParamTypes::InactiveQuoting;
+            }
+            else if (param_type == "eparamtypes::seihighefficiencydesign")
+            {
+                return EParamTypes::SEIHighEfficiencyDesign;
+            }
+            else if (param_type == "eparamtypes::seimidefficiencydesign")
+            {
+                return EParamTypes::SEIMidEfficiencyDesign;
+            }
+            else if (param_type == "eparamtypes::seilowefficiencydesign")
+            {
+                return EParamTypes::SEILowEfficiencyDesign;
+            }
+            else if (param_type == "eparamtypes::seismall")
+            {
+                return EParamTypes::SEISmall;
+            }
+            else if (param_type == "eparamtypes::seilarge")
+            {
+                return EParamTypes::SEILarge;
+            }
+            else if (param_type == "eparamtypes::averagepvcapacity")
+            {
+                return EParamTypes::AveragePVCapacity;
+            }
+            else if (param_type == "eparamtypes::estimatedpriceperwatt")
+            {
+                return EParamTypes::EstimatedPricePerWatt;
+            }
+            else if (param_type == "eparamtypes::seifrequencyupdatedesigntemplates")
+            {
+                return EParamTypes::SEIFrequencyUpdateDesignTemplates;
+            }
+            else if (param_type == "eparamtypes::seimaxninstallationspertimeunit")
+            {
+                return EParamTypes::SEIMaxNInstallationsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::seimaxnvisitspertimeunit")
+            {
+                return EParamTypes::SEIMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::seimaxroofage")
+            {
+                return EParamTypes::SEIMaxRoofAge;
+            }
+            else if (param_type == "eparamtypes::seiprocessingtimerequiredfordesign")
+            {
+                return EParamTypes::SEIProcessingTimeRequiredForDesign;
+            }
+            else if (param_type == "eparamtypes::seiprocessingtimerequiredforpreliminaryquote")
+            {
+                return EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote;
+            }
+            else if (param_type == "eparamtypes::seiprocessingtimerequiredforschedulingfirstsitevisit")
+            {
+                return EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit;
+            }
+            else if (param_type == "eparamtypes::gprocessingtimerequiredforprocessingpermit")
+            {
+                return EParamTypes::GProcessingTimeRequiredForProcessingPermit;
+            }
+            else if (param_type == "eparamtypes::gprocessingtimerequiredforschedulingpermitvisit")
+            {
+                return EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit;
+            }
+            else if (param_type == "eparamtypes:gmaxnvisitspertimeunit")
+            {
+                return EParamTypes::GMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::dctoacloss")
+            {
+                return EParamTypes::DCtoACLoss;
+            }
+            else if (param_type == "eparamtypes::electricitypriceucdemand")
+            {
+                return EParamTypes::ElectricityPriceUCDemand;
+            }
+            else if (param_type == "eparamtypes::inflationrate")
+            {
+                return EParamTypes::InflationRate;
             }
             else
             {
 #ifdef DEBUG
+                std::cout << param_type;
                 throw std::runtime_error("missing conversion");
 #endif
                 return EParamTypes::None;
@@ -394,8 +505,41 @@ namespace solar_core
             };
         }
         
-        
-        
+        static EConstraintParams ToEConstraintParams(std::string param_type)
+        {
+            //case insensitive
+            std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
+            
+            if (param_type == "econstraintparams::maxlengthplaninstallations")
+            {
+                return EConstraintParams::MaxLengthPlanInstallations;
+            }
+            else if (param_type == "econstraintparams::maxlengthwaitpermitvisit")
+            {
+                return EConstraintParams::MaxLengthWaitPermitVisit;
+            }
+            else if (param_type == "econstraintparams::maxlengthwaitpreliminaryquote")
+            {
+                return EConstraintParams::MaxLengthWaitPreliminaryQuote;
+            }
+            else if (param_type == "econstraintparams::minnreceiveddesings")
+            {
+                return EConstraintParams::MinNReceivedDesings;
+            }
+            else if (param_type == "")
+            {
+                return EConstraintParams::MaxNTicksToCollectQuotes;
+            }
+            else
+            {
+#ifdef DEBUG
+                std::cout << param_type;
+                throw std::runtime_error("missing conversion");
+#endif
+                return EConstraintParams::None;
+            };
+
+        }
         
     };
     

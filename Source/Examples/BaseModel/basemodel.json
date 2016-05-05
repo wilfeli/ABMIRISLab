@@ -20,6 +20,9 @@
                        },
                        {
                        "EConstraintParams::MaxLengthWaitPermitVisit":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
                        }
         ]
     },

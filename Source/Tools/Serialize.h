@@ -484,7 +484,7 @@ T solve_str_formula(const std::string& formula_, IRandom& rand_)
                 double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
                 double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                 
-                formula = std::to_string(rand_.rnd() * (max - min) + min);
+                formula = std::to_string(rand_.ru() * (max - min) + min);
             };
             
         };
