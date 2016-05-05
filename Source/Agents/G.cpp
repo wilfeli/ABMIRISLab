@@ -1,4 +1,4 @@
-//
+//Kelley reviewed 4/26/16 question again about use of semicolons in certain instances
 //  G.cpp
 //  ABMSolar
 //
@@ -78,7 +78,7 @@ G::act_tick()
 
     
     //go through projects, if permit has been requested and processing time has elapsed - schedule a visit
-    //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
+    //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapsed - get back and schedule time
     for (auto& project:pending_projects)
     {
         if (project->state_project == EParamTypes::RequestedPermit)
