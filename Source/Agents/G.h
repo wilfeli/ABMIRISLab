@@ -1,4 +1,4 @@
-//  Kelley reviewed 4/26/16 line 17, 22, 24, 49, 65, 67-69, 73-75, 97
+//  Kelley reviewed 4/26/16 line 17, 22, 24, 49, 65, 67-69, 73-77, 97
 //  G.h
 //  ABMSolar
 //
@@ -67,10 +67,12 @@ protected:
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting assessment, length is equal to the MaxLengthWaitPermitVisit */
     //because of lack of standardization, some jurisdictions require visits while others do not
 	//should jurisdiction be considered a class, kind of like PVProject to account for wait times, online/in-person turn-in requirements, etc. or can this still be modeled as an agent?
-    std::size_t i_schedule_visits; //this would most likely be for inspection
+    std::size_t i_schedule_visits; //what does this variable measure?
+	//this should most likely be for inspection
     
 
     void collect_inf_site_visit(std::shared_ptr<PVProject> project_); //what does this void mean?
+	//I would say that the installer does this and G passively receives the information; they do not do site_visit
     void grant_permit(std::shared_ptr<PVProject> project_); //I think better to rename approve_permit
 	void pass_inspection(std::shared_ptr<PVProject> project_); //added this because this is one more area of interaction between SEI and G
     
