@@ -23,6 +23,8 @@ using namespace solar_core;
 
 SEI::SEI(const PropertyTree& pt_, W* w_)
 {
+    w = w_;
+    
     //read solar modules to be used in decisions
     std::map<std::string, std::string> dec_solar_modules_str;
     serialize::deserialize(pt_.get_child("dec_solar_modules"), dec_solar_modules_str);
@@ -50,7 +52,7 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     }
     
     std::vector<std::string> THETA_profit_str;
-    serialize::deserialize(pt_.get_child("THETA_design"), THETA_profit_str);
+    serialize::deserialize(pt_.get_child("THETA_profit"), THETA_profit_str);
     for (auto& iter:THETA_profit_str)
     {
         THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
@@ -89,7 +91,7 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     
     
     
-    w = w_;
+
 }
 
 

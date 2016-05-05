@@ -57,7 +57,7 @@ Household::Household(PropertyTree& pt_, W* w_)
     n_preliminary_quotes = 0;
     n_pending_designs = 0;
     
-    w = w_;
+
     
 }
 

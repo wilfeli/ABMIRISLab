@@ -66,8 +66,29 @@ W::W(std::string path_, std::string mode_)
         auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
         
         //create RNG
-        //MARK: cont.
         rand = new IRandom(pt.get<double>("SEED"));
+        
+        
+        //create parameters
+        std::map<std::string, std::string> params_str;
+        serialize::deserialize(pt.get_child("WorldSettings.params_exog"),params_str);
+        
+        for (auto& iter:params_str)
+        {
+            WorldSettings::instance().params_exog[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
+        };
+        
+        
+        
+        params_str.clear();
+        serialize::deserialize(pt.get_child("WorldSettings.constraints"),params_str);
+        for (auto& iter:params_str)
+        {
+            WorldSettings::instance().constraints[EnumFactory::ToEConstraintParams(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
+        };
+
+        
+        
         
         //set internals
         //MARK: cont.
@@ -82,6 +103,7 @@ W::W(std::string path_, std::string mode_)
         
         //create existing solar modules
         serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
+        
         
         
         //create grid
@@ -252,6 +274,16 @@ W::W(std::string path_, std::string mode_)
         
         
         
+        //set flags
+        FLAG_H_TICK = true;
+        FLAG_G_TICK = true;
+        FLAG_SEI_TICK = true;
+        FLAG_SEM_TICK = true;
+        FLAG_MARKET_TICK = true;
+        updated_counter = 0;
+//        updated_counter = constants::NUMBER_AGENT_TYPES_LIFE;
+        notified_counter = 0;
+        
     };
 }
 
@@ -354,7 +386,33 @@ W::life_hhs()
     
     
     //go through part of agents and call act_tick - staged action for them
-    //MARK: cont.
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_H_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_H_TICK = false;
+            
+            for (auto& agent:hhs)
+            {
+                //get tick
+                agent->act_tick();
+            };
+            ++updated_counter;
+        };
+        
+        while (!FLAG_H_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_H_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+
+    
+    
+    
     
 }
 
