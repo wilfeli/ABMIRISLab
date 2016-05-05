@@ -1,4 +1,4 @@
-//
+// Kelley reviewed 54, 63,64,65 why is semicolon needed after declaration?, 233
 //  Serialize.cpp
 //  ABMSolar
 //
@@ -45,14 +45,14 @@ serialize::split_expression_SYAlg(const std::string& expression_)
             };
             str_ = "";
             tokens_.push_back(token);
-        }
+		}
         else
         {
             // Append the numbers
             if ( !token.empty() && (token != " ") )
             {
-                str_.append(token);
-            }
+                str_.append(token) //eliminated semicolon red lines disappear
+			}
             else
             {
                 if (str_ != "")
@@ -60,9 +60,9 @@ serialize::split_expression_SYAlg(const std::string& expression_)
                     tokens_.push_back(str_);
                     str_ = "";
                 };
-            };
-        };
-    };
+            } //eliminated semicolon
+        } //eliminated semicolon
+    } //eliminated semicolon
     
     
     //flash last string
@@ -70,7 +70,7 @@ serialize::split_expression_SYAlg(const std::string& expression_)
     {
         tokens_.push_back(str_);
         str_ = "";
-    };
+	};
     
     return tokens_;
 }
@@ -138,7 +138,7 @@ serialize::infixToRPN_SYAlg(const std::string& expression_)
                             break;
                         };
                         
-                    };
+					};
                 }
                 else
                 {
@@ -230,7 +230,7 @@ serialize::evaluate_rpn(std::list<std::string>& tokens)
  
  */
 double
-serialize::solve_formula(std::string str_)
+serialize::solve_formula(std::string str_) //is this an algorithm to convert to binary code or something else?
 {
     //algortithm to solve formula
     auto rpn = infixToRPN_SYAlg(str_);
