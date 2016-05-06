@@ -1,4 +1,4 @@
-//
+//Kelley reviewed 4/26/16 lines 117-118, 123, 125-132, 147, 163, 206, 271
 //  H.h
 //  ABMSolar
 //
@@ -96,7 +96,7 @@ public:
     /**
      
      Section relevant to marketing information
-     
+
      */
     
     virtual void ac_inf_marketing_sei() override; /*!< implements actions for requesting marketing information */
@@ -113,17 +113,23 @@ public:
     /**
      
      Section relevant to quoting stage
+
+	 //will this include parameters about utility of cost considerations?
+	 //will this just incorporate initial quoting or the revised quoting following the site visit
      
      */
     
     virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
-    
-    virtual void receive_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
-    virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
+    //will this command initialize relationship between HH and SEI?
+
+	//switched order to be more chronological
+	virtual void receive_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
+	virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
     virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< check that could have a visit at this time */
     virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< schedules visit at this time, returns false if no slots are open */
-    virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @wp need to ask HH how they decide to reroof */
-    
+	//virtual bool receive_revised_quote(std::shared_ptr<PVProject> project_); //added this virtual bool because they do get a revised quote? wasn't sure if there was a parameter specifically for this or if you make a variable for this revised quote?
+	virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @wp need to ask HH how they decide to reroof */
+    //can receive_preliminary_quote recursively update?
     
     
     
@@ -139,7 +145,7 @@ public:
      */
     
     virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
-    
+    //is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
     //@}
     
     
@@ -155,7 +161,7 @@ public:
     double location_x; /** Location of an agent, x coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
     double location_y; /** Location of an agent, y coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
     
-    
+    //can we alternatively assign each agent a zipcode and that informs us of their geography? or is that too high-level?
     
     //@}
     
@@ -198,6 +204,7 @@ protected:
     /**
      
      Section with information relevant to potential and active projects
+	 //should this type of section be in H or SEI?
      
      */
     
@@ -224,7 +231,7 @@ protected:
     
     
     
-    std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing infiormation from SEI agents that this agent is interested in geting quotes from */
+    std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing information from SEI agents that this agent is interested in geting quotes from */
     
     std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage1 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
     
@@ -262,7 +269,7 @@ protected:
     
     void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
     
-    std::deque<std::shared_ptr<PVProject>> accepted_design;
+    std::deque<std::shared_ptr<PVProject>> accepted_design; //why is this coming from a deque?
     long n_pending_designs;
     
     std::map<EParamTypes, std::vector<double>> THETA_design; /*!< parameters for decision making  */
@@ -274,7 +281,7 @@ protected:
     //@{
     /**
      
-     Section with agent's internals
+     Section with agent's internals //internal preferences? what is the difference between this section and parameters of H
      
      */
     

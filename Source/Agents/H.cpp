@@ -1,4 +1,4 @@
-//
+//Kelley reviewed 4/26/16 line 64, 72, 79, 163, 225, 289, 300
 //  H.cpp
 //  ABMSolar
 //
@@ -41,7 +41,7 @@ void
 Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
     //saves information about advertising agent
-    ///No mutex guards as only other operation is poping from the front, which does not invalidate anything
+    ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
     get_inf_marketing_sei.push_back(mes_);
     
     if (marketing_state != EParamTypes::HHMarketingStateInterested)
@@ -51,7 +51,7 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         w->get_state_inf(this, marketing_state);
     };
     
-    ///@DevStage2 might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
+    ///@DevStage2 might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
     
     
     ///@DevStage3 check if this agent is interested in the marketing message
@@ -61,6 +61,7 @@ void
 Household::ac_inf_marketing_sei()
 {
     w->marketing->request_inf_marketing_sei(this);
+	//what does H do with resquest_inf_marketing_sei?
 }
 
 
@@ -68,7 +69,7 @@ void
 Household::ac_inf_quoting_sei()
 {
     //requests quotes from SEI
-    //restricts number of projects
+    //restricts number of projects //on part of SEI?
     while ((!get_inf_marketing_sei.empty()) && (pvprojects.size() <= WorldSettings::instance().constraints[EConstraintParams::MaxNOpenProjectsHH]))
     {
         auto marketing_inf = get_inf_marketing_sei.front();
@@ -159,6 +160,7 @@ void
 Household::dec_evaluate_preliminary_quotes()
 {
     //sort projects by price, lower price goes first
+	//would this be affected by utility? can we assume that sorting by price is always the case?
     std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
         //compare only if online quote was received,
         bool compare_res = false;
@@ -220,7 +222,7 @@ Household::dec_evaluate_designs()
 
 
 void
-Household::receive_design(std::shared_ptr<PVProject> project_)
+Household::receive_design(std::shared_ptr<PVProject> project_) //why is receive_design after dec_evaluate_designs()
 {
     ++n_pending_designs;
 }
@@ -284,7 +286,7 @@ bool
 Household::dec_project_reroof(std::shared_ptr<PVProject> project)
 {
     //MARK: cont.
-    return false;
+    return false; //why do you always return false here?
 }
 
 
@@ -295,7 +297,7 @@ Household::ac_update_tick()
     //update internal timer
     a_time = w->time;
     
-    
+    //should this scheduling of visits be in SEI?
     //clear last day schedule
     schedule_visits[i_schedule_visits].clear();
     
@@ -346,7 +348,7 @@ Household::act_tick()
     };
     
     
-    for (auto& project:accepted_design)
+    for (auto& project:accepted_design) //need to double check to see if sending payments before system is installed
     {
         if (auto payment = project->financing->schedule_payments[a_time - project->ac_accepted_time] > 0)
         {
