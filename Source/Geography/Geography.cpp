@@ -27,17 +27,19 @@ WorldMap::WorldMap(PropertyTree& pt, W* w_)
     auto N_TILE_Y = pt.get<long>("N_TILE_Y");
     double solar_radiation;
     double permit_difficulty;
+    bool requires_permit_visit;
     
     solar_radiation = serialize::solve_str_formula<decltype(solar_radiation)>(pt.get<std::string>("solar_radiation"), *w_->rand);
     permit_difficulty = serialize::solve_str_formula<decltype(permit_difficulty)>(pt.get<std::string>("permit_difficulty"), *w_->rand);
-    
+    requires_permit_visit = serialize::solve_str_formula<decltype(requires_permit_visit)>(pt.get<std::string>("requires_permit_visit"), *w_->rand);
+
     
     for (auto i = 0; i < N_TILE_Y; ++i)
     {
         g_map.push_back({});
         for (auto j = 0; j < N_TILE_X; ++j)
         {
-            g_map[i].push_back(new Tile(1.0, 1.0, solar_radiation, permit_difficulty));
+            g_map[i].push_back(new Tile(1.0, 1.0, solar_radiation, permit_difficulty, requires_permit_visit));
         };
     };
     

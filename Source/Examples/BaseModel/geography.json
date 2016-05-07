@@ -4,7 +4,8 @@
     "solar_radiation":"FORMULA::5.0",
     "permit_difficulty":"FORMULA::p.d.f.::u(0.5, 1.5)",
     "size_x":"FORMULA::1.0",
-    "size_y":"FORMULA::1.0"
+    "size_y":"FORMULA::1.0",
+    "requires_permit_visit":"FORMULA::1.0"
 }
     
     //Add other parameters for the model
