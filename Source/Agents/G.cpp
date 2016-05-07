@@ -53,7 +53,7 @@ G::request_permit(std::shared_ptr<PVProject> project_)
     project_->ac_g_time = a_time;
     
     
-    pending_projects.push_back(project_);
+    pending_pvprojects_to_add.push_back(project_);
     
     
     
@@ -80,6 +80,14 @@ G::ac_update_tick()
 {
     //update internal timer
     a_time = w->time;
+    
+    
+    pending_pvprojects_lock.lock();
+    //pove pending projects into active projects
+    pending_pvprojects.insert(pending_pvprojects.end(), pending_pvprojects_to_add.begin(), pending_pvprojects_to_add.end());
+    pending_pvprojects_to_add.clear();
+    pending_pvprojects_lock.unlock();
+
     
     
     //clear last day schedule
@@ -111,7 +119,7 @@ G::act_tick()
     
     //go through projects, if permit has been requested and processing time has elapsed - schedule a visit
     //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
-    for (auto& project:pending_projects)
+    for (auto& project:pending_pvprojects)
     {
         if (project->state_project == EParamTypes::RequestedPermit)
         {

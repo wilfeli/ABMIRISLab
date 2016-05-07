@@ -126,10 +126,10 @@ W::W(std::string path_, std::string mode_)
         {
             throw std::runtime_error("unsupported hh specification rule");
         };
-        auto max_ = world_map->g_map[0].size();
+        auto max_ = world_map->g_map[0].size() - 1;
         auto pdf_location_x = boost::uniform_int<uint64_t>(0, max_);
         auto rng_location_x = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_x);
-        max_ = world_map->g_map.size();
+        max_ = world_map->g_map.size() - 1;
         auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
         
@@ -228,6 +228,15 @@ W::W(std::string path_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
+        //create random number generators for locations
+        //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
+        //check that it is uniform distribution
+        if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported hh specification rule");
+        };
+
+        
         //create SEI - use template for parameters, use model file for additional parameters
         //create sei_type
         j = 0;
@@ -240,6 +249,12 @@ W::W(std::string path_, std::string mode_)
                 pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
             };
             ++j;
+            
+            
+            //generate location
+            pt.put("location_x", rng_location_x());
+            pt.put("location_y", rng_location_y());
+
             
             seis.push_back(new SEI(pt, this));
             

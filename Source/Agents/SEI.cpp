@@ -25,6 +25,12 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
 {
     w = w_;
     
+    //location
+    location_x = pt_.get<long>("location_x");
+    location_y = pt_.get<long>("location_y");
+
+    
+    
     //read solar modules to be used in decisions
     std::map<std::string, std::string> dec_solar_modules_str;
     serialize::deserialize(pt_.get_child("dec_solar_modules"), dec_solar_modules_str);
@@ -244,7 +250,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     
     auto design = PVDesign();
     
-    form_design_for_params(project_, demand, solar_radiation, permit_difficulty, dec_project_percentages[1], *dec_solar_modules.begin(), design);
+    form_design_for_params(project_, demand, solar_radiation, permit_difficulty, dec_project_percentages[1], *(++dec_solar_modules.begin()), design);
     
     ac_estimate_savings(design, project_);
 
