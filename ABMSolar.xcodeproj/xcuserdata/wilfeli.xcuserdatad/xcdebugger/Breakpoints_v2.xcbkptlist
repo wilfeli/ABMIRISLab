@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/H.cpp"
-            timestampString = "484239695.537017"
+            timestampString = "484284706.833792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
             landmarkName = "Household::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/H.cpp"
-            timestampString = "484240446.998533"
+            timestampString = "484284706.833792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "Household::update_params()"
             landmarkType = "5">
          </BreakpointContent>
@@ -160,6 +160,23 @@
             startingLineNumber = "400"
             endingLineNumber = "400"
             landmarkName = "SEI::ac_estimate_savings(PVDesign&amp; design, std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "time &gt; 200"
+            continueAfterRunningActions = "No"
+            filePath = "Source/UI/W.cpp"
+            timestampString = "484285141.398532"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "W::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
