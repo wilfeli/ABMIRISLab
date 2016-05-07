@@ -53,6 +53,14 @@ G::request_permit(std::shared_ptr<PVProject> project_)
     project_->ac_g_time = a_time;
     
     
+    //check if needs visits at all
+    if (!w->world_map->g_map[project_->agent->location_y][project_->agent->location_x]->requires_permit_visit)
+    {
+        project_->state_project = EParamTypes::CollectedInfPermitVisit;
+        project_->ac_g_time = a_time;
+    };
+    
+    
     pending_pvprojects_to_add.push_back(project_);
     
     
@@ -156,10 +164,10 @@ G::act_tick()
                 };
             };
         };
-        if (project->state_project == EParamTypes::RequestedPermit)
+        if (project->state_project == EParamTypes::CollectedInfPermitVisit)
         {
-            //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
-            auto project_processing_time = params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
+            //if permit was requested - check that processing time after request has elapsed
+            auto project_processing_time = params[EParamTypes::GProcessingTimeRequiredForProcessingPermit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
             if ((a_time - project->ac_g_time) >= project_processing_time)
             {
                 approve_permit(project);

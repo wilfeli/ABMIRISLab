@@ -17,6 +17,34 @@
 		EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
 		EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
 		EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
+		EDDE4C281CDE682E005D1C49 /* IRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE0FD911CC0058100115115 /* IRandom.cpp */; };
+		EDDE4C291CDE682E005D1C49 /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
+		EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
+		EDDE4C2B1CDE682E005D1C49 /* unique_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFD1CC2E03B005580A5 /* unique_path.cpp */; };
+		EDDE4C2C1CDE682E005D1C49 /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFC1CC2E03B005580A5 /* portability.cpp */; };
+		EDDE4C2D1CDE682E005D1C49 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDB3FE61C7DA16200A6EA1F /* main.cpp */; };
+		EDDE4C2E1CDE682E005D1C49 /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
+		EDDE4C2F1CDE682E005D1C49 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
+		EDDE4C301CDE682E005D1C49 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEC021CC2E03B005580A5 /* error_code.cpp */; };
+		EDDE4C311CDE682E005D1C49 /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
+		EDDE4C321CDE682E005D1C49 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* H.cpp */; };
+		EDDE4C331CDE682E005D1C49 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD31CB6B43900C79A22 /* IInstitute.cpp */; };
+		EDDE4C341CDE682E005D1C49 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFB1CC2E03B005580A5 /* path.cpp */; };
+		EDDE4C351CDE682E005D1C49 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
+		EDDE4C361CDE682E005D1C49 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */; };
+		EDDE4C371CDE682E005D1C49 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
+		EDDE4C381CDE682E005D1C49 /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFF1CC2E03B005580A5 /* windows_file_codecvt.cpp */; };
+		EDDE4C391CDE682E005D1C49 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF81CC2E03B005580A5 /* operations.cpp */; };
+		EDDE4C3A1CDE682E005D1C49 /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
+		EDDE4C3B1CDE682E005D1C49 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
+		EDDE4C3C1CDE682E005D1C49 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFE1CC2E03B005580A5 /* utf8_codecvt_facet.cpp */; };
+		EDDE4C3D1CDE682E005D1C49 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
+		EDDE4C3E1CDE682E005D1C49 /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */; };
+		EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116D1C8515D800763818 /* IMessage.cpp */; };
+		EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
+		EDDE4C411CDE682E005D1C49 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD51CB6B43900C79A22 /* IMessage.cpp */; };
+		EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
+		EDDE4C4C1CDE6B3B005D1C49 /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */; };
 		EDDFEC031CC2E03B005580A5 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF81CC2E03B005580A5 /* operations.cpp */; };
 		EDDFEC041CC2E03B005580A5 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */; };
 		EDDFEC051CC2E03B005580A5 /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */; };
@@ -38,6 +66,15 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		EDDB3FB01C7C402D00A6EA1F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		EDDE4C441CDE682E005D1C49 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -1957,6 +1994,8 @@
 		EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarPanel.cpp; sourceTree = "<group>"; };
 		EDDC11C61C8F9FF7005670BD /* SolarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarPanel.h; sourceTree = "<group>"; };
 		EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalIncludes.h; sourceTree = "<group>"; };
+		EDDE4C481CDE682E005D1C49 /* ABMSolar copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ABMSolar copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = Source/ExternalTools/gtest/gtest.framework; sourceTree = "<group>"; };
 		EDDFEBF81CC2E03B005580A5 /* operations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operations.cpp; path = ExternalTools/boost/operations.cpp; sourceTree = "<group>"; };
 		EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = codecvt_error_category.cpp; path = ExternalTools/boost/codecvt_error_category.cpp; sourceTree = "<group>"; };
 		EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path_traits.cpp; path = ExternalTools/boost/path_traits.cpp; sourceTree = "<group>"; };
@@ -1995,6 +2034,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDDE4C431CDE682E005D1C49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDDE4C4C1CDE6B3B005D1C49 /* gtest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5659,6 +5706,7 @@
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
+				EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */,
 				EDDB3FD91C7DA16200A6EA1F /* Source */,
 				EDDB3FB31C7C402D00A6EA1F /* Products */,
 			);
@@ -5668,6 +5716,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FB21C7C402D00A6EA1F /* ABMSolar */,
+				EDDE4C481CDE682E005D1C49 /* ABMSolar copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5815,6 +5864,23 @@
 			productReference = EDDB3FB21C7C402D00A6EA1F /* ABMSolar */;
 			productType = "com.apple.product-type.tool";
 		};
+		EDDE4C261CDE682E005D1C49 /* Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildPhases = (
+				EDDE4C271CDE682E005D1C49 /* Sources */,
+				EDDE4C431CDE682E005D1C49 /* Frameworks */,
+				EDDE4C441CDE682E005D1C49 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test;
+			productName = ABMSolar;
+			productReference = EDDE4C481CDE682E005D1C49 /* ABMSolar copy */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -5842,6 +5908,7 @@
 			projectRoot = "";
 			targets = (
 				EDDB3FB11C7C402D00A6EA1F /* ABMSolar */,
+				EDDE4C261CDE682E005D1C49 /* Test */,
 			);
 		};
 /* End PBXProject section */
@@ -5878,6 +5945,40 @@
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
 				EDE03ADA1CB6B43A00C79A22 /* IMessage.cpp in Sources */,
 				EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDDE4C271CDE682E005D1C49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDDE4C281CDE682E005D1C49 /* IRandom.cpp in Sources */,
+				EDDE4C291CDE682E005D1C49 /* G.cpp in Sources */,
+				EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */,
+				EDDE4C2B1CDE682E005D1C49 /* unique_path.cpp in Sources */,
+				EDDE4C2C1CDE682E005D1C49 /* portability.cpp in Sources */,
+				EDDE4C2D1CDE682E005D1C49 /* main.cpp in Sources */,
+				EDDE4C2E1CDE682E005D1C49 /* SEI.cpp in Sources */,
+				EDDE4C2F1CDE682E005D1C49 /* Geography.cpp in Sources */,
+				EDDE4C301CDE682E005D1C49 /* error_code.cpp in Sources */,
+				EDDE4C311CDE682E005D1C49 /* SEM.cpp in Sources */,
+				EDDE4C321CDE682E005D1C49 /* H.cpp in Sources */,
+				EDDE4C331CDE682E005D1C49 /* IInstitute.cpp in Sources */,
+				EDDE4C341CDE682E005D1C49 /* path.cpp in Sources */,
+				EDDE4C351CDE682E005D1C49 /* IInstitute.cpp in Sources */,
+				EDDE4C361CDE682E005D1C49 /* codecvt_error_category.cpp in Sources */,
+				EDDE4C371CDE682E005D1C49 /* IParameters.cpp in Sources */,
+				EDDE4C381CDE682E005D1C49 /* windows_file_codecvt.cpp in Sources */,
+				EDDE4C391CDE682E005D1C49 /* operations.cpp in Sources */,
+				EDDE4C3A1CDE682E005D1C49 /* WorldSettings.cpp in Sources */,
+				EDDE4C3B1CDE682E005D1C49 /* MarketingSystem.cpp in Sources */,
+				EDDE4C3C1CDE682E005D1C49 /* utf8_codecvt_facet.cpp in Sources */,
+				EDDE4C3D1CDE682E005D1C49 /* W.cpp in Sources */,
+				EDDE4C3E1CDE682E005D1C49 /* path_traits.cpp in Sources */,
+				EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */,
+				EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */,
+				EDDE4C411CDE682E005D1C49 /* IMessage.cpp in Sources */,
+				EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5984,6 +6085,42 @@
 			};
 			name = Release;
 		};
+		EDDE4C461CDE682E005D1C49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/wilfeli/Dropbox/ABM/Testing,
+					"$(PROJECT_DIR)/Source/ExternalTools/gtest",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					/opt/local/include,
+				);
+				PRODUCT_NAME = "ABMSolar copy";
+				USER_HEADER_SEARCH_PATHS = "/opt/local/include ./Source";
+			};
+			name = Debug;
+		};
+		EDDE4C471CDE682E005D1C49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/wilfeli/Dropbox/ABM/Testing,
+					"$(PROJECT_DIR)/Source/ExternalTools/gtest",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					/opt/local/include,
+				);
+				PRODUCT_NAME = "ABMSolar copy";
+				USER_HEADER_SEARCH_PATHS = "/opt/local/include ./Source";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6001,6 +6138,15 @@
 			buildConfigurations = (
 				EDDB3FBA1C7C402D00A6EA1F /* Debug */,
 				EDDB3FBB1C7C402D00A6EA1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDDE4C461CDE682E005D1C49 /* Debug */,
+				EDDE4C471CDE682E005D1C49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

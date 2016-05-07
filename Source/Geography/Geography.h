@@ -47,11 +47,12 @@ namespace solar_core
     class Tile
     {
     public:
-        Tile(double size_x_, double size_y_, double solar_radiation_, double permit_difficulty_): size_x(size_x_), size_y(size_y_), solar_radiation(solar_radiation_), permit_difficulty(permit_difficulty_){}
+        Tile(double size_x_, double size_y_, double solar_radiation_, double permit_difficulty_, bool requires_permit_visit_): size_x(size_x_), size_y(size_y_), solar_radiation(solar_radiation_), permit_difficulty(permit_difficulty_), requires_permit_visit(requires_permit_visit_){}
         double size_x; /*!< length of a tile */
         double size_y; /*!< width of a tile */
         double solar_radiation = 4.0; /*!< amount of solar radiation per Wh/m2/day for this tile */
         double permit_difficulty = 1.0; /*!< length of a permitting process for this tile */
+        bool requires_permit_visit = 1.0; /*!< if this locations needs to visit to give permit */
     };
     
     
