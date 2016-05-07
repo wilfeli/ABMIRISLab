@@ -162,7 +162,7 @@ G::act_tick()
             auto project_processing_time = params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
             if ((a_time - project->ac_g_time) >= project_processing_time)
             {
-                grant_permit(project);
+                approve_permit(project);
             };
         };
     };
