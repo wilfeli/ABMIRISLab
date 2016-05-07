@@ -73,7 +73,7 @@ void
 Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
     //saves information about advertising agent
-    ///No mutex guards as only other operation is poping from the front, which does not invalidate anything
+    ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
     get_inf_marketing_sei.push_back(mes_);
     
     if (marketing_state != EParamTypes::HHMarketingStateInterested)
@@ -83,7 +83,7 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         w->get_state_inf(this, marketing_state);
     };
     
-    ///@DevStage2 might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
+    ///@DevStage2 might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
     
     
     ///@DevStage3 check if this agent is interested in the marketing message
@@ -384,6 +384,7 @@ Household::act_tick()
     
     for (auto& project:accepted_design)
     {
+        //@DevStage2 need to double check to see if sending payments before system is installed
         if (auto payment = project->financing->schedule_payments[a_time - project->ac_accepted_time] > 0)
         {
             //make payment
