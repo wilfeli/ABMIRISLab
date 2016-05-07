@@ -45,6 +45,7 @@
 		EDDE4C411CDE682E005D1C49 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AD51CB6B43900C79A22 /* IMessage.cpp */; };
 		EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
 		EDDE4C4C1CDE6B3B005D1C49 /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */; };
+		EDDE4C501CDE7067005D1C49 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
 		EDDFEC031CC2E03B005580A5 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF81CC2E03B005580A5 /* operations.cpp */; };
 		EDDFEC041CC2E03B005580A5 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */; };
 		EDDFEC051CC2E03B005580A5 /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */; };
@@ -1996,6 +1997,7 @@
 		EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalIncludes.h; sourceTree = "<group>"; };
 		EDDE4C481CDE682E005D1C49 /* ABMSolar copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ABMSolar copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = Source/ExternalTools/gtest/gtest.framework; sourceTree = "<group>"; };
+		EDDE4C4F1CDE7067005D1C49 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Tests/UI/main.cpp; sourceTree = "<group>"; };
 		EDDFEBF81CC2E03B005580A5 /* operations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operations.cpp; path = ExternalTools/boost/operations.cpp; sourceTree = "<group>"; };
 		EDDFEBF91CC2E03B005580A5 /* codecvt_error_category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = codecvt_error_category.cpp; path = ExternalTools/boost/codecvt_error_category.cpp; sourceTree = "<group>"; };
 		EDDFEBFA1CC2E03B005580A5 /* path_traits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path_traits.cpp; path = ExternalTools/boost/path_traits.cpp; sourceTree = "<group>"; };
@@ -5706,6 +5708,7 @@
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
+				EDDE4C4D1CDE6C8A005D1C49 /* Tests */,
 				EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */,
 				EDDB3FD91C7DA16200A6EA1F /* Source */,
 				EDDB3FB31C7C402D00A6EA1F /* Products */,
@@ -5804,6 +5807,22 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		EDDE4C4D1CDE6C8A005D1C49 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EDDE4C4E1CDE6C94005D1C49 /* UI */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		EDDE4C4E1CDE6C94005D1C49 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EDDE4C4F1CDE7067005D1C49 /* main.cpp */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		EDDFEBF61CC2E01D005580A5 /* ExternalTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -5864,9 +5883,9 @@
 			productReference = EDDB3FB21C7C402D00A6EA1F /* ABMSolar */;
 			productType = "com.apple.product-type.tool";
 		};
-		EDDE4C261CDE682E005D1C49 /* Test */ = {
+		EDDE4C261CDE682E005D1C49 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildConfigurationList = EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				EDDE4C271CDE682E005D1C49 /* Sources */,
 				EDDE4C431CDE682E005D1C49 /* Frameworks */,
@@ -5876,7 +5895,7 @@
 			);
 			dependencies = (
 			);
-			name = Test;
+			name = Tests;
 			productName = ABMSolar;
 			productReference = EDDE4C481CDE682E005D1C49 /* ABMSolar copy */;
 			productType = "com.apple.product-type.tool";
@@ -5908,7 +5927,7 @@
 			projectRoot = "";
 			targets = (
 				EDDB3FB11C7C402D00A6EA1F /* ABMSolar */,
-				EDDE4C261CDE682E005D1C49 /* Test */,
+				EDDE4C261CDE682E005D1C49 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -5936,6 +5955,7 @@
 				EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */,
 				EDDFEC0A1CC2E03B005580A5 /* windows_file_codecvt.cpp in Sources */,
 				EDDFEC031CC2E03B005580A5 /* operations.cpp in Sources */,
+				EDDE4C501CDE7067005D1C49 /* main.cpp in Sources */,
 				EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */,
 				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,
 				EDDFEC091CC2E03B005580A5 /* utf8_codecvt_facet.cpp in Sources */,
@@ -6142,7 +6162,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Test" */ = {
+		EDDE4C451CDE682E005D1C49 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDDE4C461CDE682E005D1C49 /* Debug */,
