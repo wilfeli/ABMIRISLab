@@ -64,7 +64,9 @@ protected:
      
      */
     
-    std::deque<std::shared_ptr<PVProject>> pending_projects;
+    std::deque<std::shared_ptr<PVProject>> pending_pvprojects;
+    std::deque<std::shared_ptr<PVProject>> pending_pvprojects_to_add;
+    std::mutex pending_pvprojects_lock;
     
     std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting accessment, length is equal to the MaxLengthWaitPermitVisit
                                                                          */
