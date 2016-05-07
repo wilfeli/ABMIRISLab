@@ -35,7 +35,7 @@ namespace solar_core
         //@{
         /**
          
-         Parameteres, setting up, etc. section
+         Parameters, setting up, etc. section
          
          
          

@@ -123,13 +123,13 @@ public:
     //will this command initialize relationship between HH and SEI?
 
 	//switched order to be more chronological
+    virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
 	virtual void receive_preliminary_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
-	virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
     virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< check that could have a visit at this time */
     virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< schedules visit at this time, returns false if no slots are open */
 	//virtual bool receive_revised_quote(std::shared_ptr<PVProject> project_); //added this virtual bool because they do get a revised quote? wasn't sure if there was a parameter specifically for this or if you make a variable for this revised quote?
-	virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @wp need to ask HH how they decide to reroof */
-    //can receive_preliminary_quote recursively update?
+	virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @DevStage2 need to ask HH how they decide to reroof */
+    //@DevStage2 can receive_preliminary_quote recursively update?
     
     
     
@@ -145,7 +145,7 @@ public:
      */
     
     virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
-    //is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
+    //@DevStage2 is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
     //@}
     
     

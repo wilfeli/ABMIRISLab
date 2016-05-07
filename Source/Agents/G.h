@@ -68,13 +68,15 @@ namespace solar_core
         std::deque<std::shared_ptr<PVProject>> pending_pvprojects_to_add;
         std::mutex pending_pvprojects_lock;
         
-        std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting accessment, length is equal to the MaxLengthWaitPermitVisit
-                                                                             */
+        std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the permitting accessment, length is equal to the MaxLengthWaitPermitVisit. @DevStage2 think about it, not every jurisdiction will need it */
         
         std::size_t i_schedule_visits;
         
         void collect_inf_site_visit(std::shared_ptr<PVProject> project_);
-        void grant_permit(std::shared_ptr<PVProject> project_);
+        void approve_permit(std::shared_ptr<PVProject> project_);
+        //void pass_inspection(std::shared_ptr<PVProject> project_); //added this because this is one more area of interaction between SEI and G
+ 
+
         
         
         //@}

@@ -69,7 +69,7 @@ G::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
 
 
 void
-G::grant_permit(std::shared_ptr<PVProject> project_)
+G::approve_permit(std::shared_ptr<PVProject> project_)
 {
     project_->state_project = EParamTypes::GrantedPermit;
 }
