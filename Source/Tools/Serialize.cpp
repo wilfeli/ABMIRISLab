@@ -100,7 +100,7 @@ serialize::infixToRPN_SYAlg(const std::string& expression_)
     
     auto tokens = split_expression_SYAlg(expression_);
     
-//    for (std::string token:tokens)
+    //    for (std::string token:tokens)
     for (auto iter = tokens.begin(); iter != tokens.end(); ++iter)
     {
         auto token = *iter;
@@ -234,7 +234,7 @@ serialize::evaluate_rpn(std::list<std::string>& tokens)
 /**
  
  
-    Simple algorithm to solve mathematical formulas
+ Simple algorithm to solve mathematical formulas
  
  
  */

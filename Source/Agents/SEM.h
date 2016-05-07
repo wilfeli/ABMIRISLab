@@ -14,41 +14,41 @@
 
 namespace solar_core
 {
-
     
-class W;
     
-/**
- 
- @wp Research for the structure of costs 
- 
- Hanwha Q CELLS, 3d quater 2015 report. http://investors.hanwha-qcells.com/releasedetail.cfm?ReleaseID=943563
- Total all-in processing costs approached US$0.39 per watt in September for in-house production
-
- 
- 
- 
- 
- */
-class SEM
-{
-public:
-    //@{
+    class W;
+    
     /**
      
-     Initializations
+     @wp Research for the structure of costs
+     
+     Hanwha Q CELLS, 3d quater 2015 report. http://investors.hanwha-qcells.com/releasedetail.cfm?ReleaseID=943563
+     Total all-in processing costs approached US$0.39 per watt in September for in-house production
+     
+     
+     
+     
      
      */
-    
-    SEM(const PropertyTree& pt_, W* w_);
-    void init(W* w_);
-    
-    //@}
-    
-    
-    void act_tick();
-    
-};
+    class SEM
+    {
+    public:
+        //@{
+        /**
+         
+         Initializations
+         
+         */
+        
+        SEM(const PropertyTree& pt_, W* w_);
+        void init(W* w_);
+        
+        //@}
+        
+        
+        void act_tick();
+        
+    };
 } //end namespace solar_core
 
 

@@ -45,7 +45,7 @@
                        {
                        "EConstraintParams::MaxNOpenProjectsHH":10
                        }
-        ]
+                       ]
     },
     "N_HH":500,
     "N_SEI":10,
@@ -54,11 +54,11 @@
     "N_HHMarketingStateHighlyInterested":100,
     "SEED":2016,
     "params":[
-            {
-            "N_ITERATIONS":520
-            }
-    ]
+              {
+              "N_ITERATIONS":520
+              }
+              ]
     
     
 }
-    
+

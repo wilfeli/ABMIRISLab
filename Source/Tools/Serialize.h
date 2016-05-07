@@ -16,490 +16,490 @@
 
 namespace serialize
 {
-
-    
-    
-using namespace solar_core;
-
-    
-template<typename T>
-class is_vector{
-public:
-    static const bool value = false;
-};
-
-template <typename T>
-class is_vector<std::vector<T>>
-{
-public:
-    static const bool value = true;
-};
     
     
     
-/**
- 
- 
- Service function for serialization through string stream.
- 
- 
- */
-template <typename In>
-void serialize_value(In& in_, std::string& out_)
-{
-    std::stringstream ss;
-    
-    ss << in_;
-    
-    out_ = ss.str();
-}
+    using namespace solar_core;
     
     
-/**
- 
- General template for serializatio of a vector or deque of objects. Code for vector and deque is exactly the same
- 
- */
-template<class T, class Enable = void>
-class SerializeContainer
-{
-public:
+    template<typename T>
+    class is_vector{
+    public:
+        static const bool value = false;
+    };
     
-    static PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key)
+    template <typename T>
+    class is_vector<std::vector<T>>
     {
-        PropertyTree pt;
-        PropertyTree child;
-        PropertyTree children;
-        
-        for (auto elem:container_)
-        {
-            child.put("", elem);
-            children.push_back(std::make_pair("", child));
-        };
-        
-        pt.add_child(key, children);
-        return pt;
-    }
+    public:
+        static const bool value = true;
+    };
     
     
-    static PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key)
-    {
-        PropertyTree pt;
-        PropertyTree child;
-        PropertyTree children;
-        
-        for (auto elem:container_)
-        {
-            child.put("", elem);
-            children.push_back(std::make_pair("", child));
-        };
-        
-        pt.add_child(key, children);
-        return pt;
-    }
-    
-};
-    
-    
-    
-/**
- 
- General template for serialization of a map
- */
-template<class K, class V, class Enable = void>
-class SerializeMap
-{
-public:
     
     /**
      
      
-     Serialize simple map
+     Service function for serialization through string stream.
      
-     It is going through output stream to accomodate maps with complex data types
      
      */
-    static PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key)
+    template <typename In>
+    void serialize_value(In& in_, std::string& out_)
     {
-        PropertyTree pt;
-        PropertyTree child;
-        PropertyTree children;
+        std::stringstream ss;
         
-        std::string value;
-        std::string key_value;
+        ss << in_;
         
-        for (auto elem:container_)
+        out_ = ss.str();
+    }
+    
+    
+    /**
+     
+     General template for serializatio of a vector or deque of objects. Code for vector and deque is exactly the same
+     
+     */
+    template<class T, class Enable = void>
+    class SerializeContainer
+    {
+    public:
+        
+        static PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key)
         {
-            serialize::serialize_value(elem.second, value);
-            serialize::serialize_value(elem.first, key_value);
+            PropertyTree pt;
+            PropertyTree child;
+            PropertyTree children;
             
-            child.put(key_value, value);
-            children.push_back(std::make_pair("", child));
-            child.clear();
-        };
+            for (auto elem:container_)
+            {
+                child.put("", elem);
+                children.push_back(std::make_pair("", child));
+            };
+            
+            pt.add_child(key, children);
+            return pt;
+        }
         
-        pt.add_child(key, children);
-        return pt;
+        
+        static PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key)
+        {
+            PropertyTree pt;
+            PropertyTree child;
+            PropertyTree children;
+            
+            for (auto elem:container_)
+            {
+                child.put("", elem);
+                children.push_back(std::make_pair("", child));
+            };
+            
+            pt.add_child(key, children);
+            return pt;
+        }
+        
     };
-};
     
     
-//here could add serialization of complex maps
-template<class K, class V>
-class SerializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
-{
-public:
+    
+    /**
+     
+     General template for serialization of a map
+     */
+    template<class K, class V, class Enable = void>
+    class SerializeMap
+    {
+    public:
+        
+        /**
+         
+         
+         Serialize simple map
+         
+         It is going through output stream to accomodate maps with complex data types
+         
+         */
+        static PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key)
+        {
+            PropertyTree pt;
+            PropertyTree child;
+            PropertyTree children;
+            
+            std::string value;
+            std::string key_value;
+            
+            for (auto elem:container_)
+            {
+                serialize::serialize_value(elem.second, value);
+                serialize::serialize_value(elem.first, key_value);
+                
+                child.put(key_value, value);
+                children.push_back(std::make_pair("", child));
+                child.clear();
+            };
+            
+            pt.add_child(key, children);
+            return pt;
+        };
+    };
+    
+    
+    //here could add serialization of complex maps
+    template<class K, class V>
+    class SerializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
+    {
+    public:
+        /**
+         
+         
+         Serialize simple map
+         
+         It is going through output stream to accomodate maps with complex data types
+         
+         */
+        static PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key)
+        {
+            PropertyTree pt;
+            PropertyTree child;
+            PropertyTree children;
+            
+            std::string value;
+            std::string key_value;
+            
+            typedef typename V::value_type ValueType;
+            
+            
+            for (auto elem:container_)
+            {
+                serialize::serialize_value(elem.first, key_value);
+                child.put_child(key_value, SerializeContainer<ValueType>::serialize(elem.second, "dummy").get_child("dummy"));
+                children.push_back(std::make_pair("", child));
+                child.clear();
+            };
+            
+            
+            pt.add_child(key, children);
+            
+            return pt;
+        }
+    };
+    
+    
+    
     /**
      
      
-     Serialize simple map
      
-     It is going through output stream to accomodate maps with complex data types
+     Wrapper for call to serialize vector, deque, map. Does not change.
      
      */
-    static PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key)
+    
+    template<class T>
+    PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
+    
+    template<class T>
+    PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
+    
+    template <typename K, typename V>
+    PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key){ return SerializeMap<K, V>::serialize(container_, key);}
+    
+    
+    template<class T, class Enable = void>
+    class DeserializeValue
     {
-        PropertyTree pt;
-        PropertyTree child;
-        PropertyTree children;
-        
-        std::string value;
-        std::string key_value;
-        
-        typedef typename V::value_type ValueType;
-        
-        
-        for (auto elem:container_)
+    public:
+        static void deserialize_value(const std::string& in_, T& out_)
         {
-            serialize::serialize_value(elem.first, key_value);
-            child.put_child(key_value, SerializeContainer<ValueType>::serialize(elem.second, "dummy").get_child("dummy"));
-            children.push_back(std::make_pair("", child));
-            child.clear();
-        };
+            std::stringstream ss(in_);
+            ss >> out_;
+        }
         
-        
-        pt.add_child(key, children);
-        
-        return pt;
-    }
-};
-
-    
-    
-/**
- 
- 
- 
- Wrapper for call to serialize vector, deque, map. Does not change.
- 
- */
-
-template<class T>
-PropertyTree serialize(std::vector<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
-
-template<class T>
-PropertyTree serialize(std::deque<T>& container_, PropertyTree::key_type const& key) { return SerializeContainer<T>::serialize(container_, key); }
-    
-template <typename K, typename V>
-PropertyTree serialize(std::map<K, V>& container_, PropertyTree::key_type const& key){ return SerializeMap<K, V>::serialize(container_, key);}
-    
-    
-template<class T, class Enable = void>
-class DeserializeValue
-{
-public:
-    static void deserialize_value(const std::string& in_, T& out_)
-    {
-        std::stringstream ss(in_);
-        ss >> out_;
-    }
-    
-    static void deserialize_value(std::stringstream& ss, T& out_)
-    {
-        ss >> out_;
-    }
-};
-
-
-template<class T>
-class DeserializeValue<T, typename std::enable_if<std::is_same<T, std::string>::value>::type>
-{
-public:
-    static void deserialize_value(const std::string& in_, T& out_)
-    {
-        std::stringstream ss(in_);
-        out_ = ss.str();
-    }
-    
-    static void deserialize_value(std::stringstream& ss, T& out_)
-    {
-        out_ = ss.str();
-    }
-};
-    
-    
-template<class T, class Enable = void>
-class DeserializeContainer
-{
-public:
-    
-    static void deserialize(const PropertyTree& pt, std::vector<T>& r)
-    {
-        for (auto& item : pt)
+        static void deserialize_value(std::stringstream& ss, T& out_)
         {
-            r.push_back(item.second.get_value<T>());
-        };
-    }
-    
-    static void deserialize(const PropertyTree& pt, std::deque<T>& r)
-    {
-        for (auto& item : pt)
-        {
-            r.push_back(item.second.get_value<T>());
-        };
-    }
-};
-
-    
-
-/**
- 
- General template for serializatio of a map
- */
-template<class K, class V, class Enable = void>
-class DeserializeMap
-{
-public:
-    static void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
-    {
-        K key;
-        V value;
-        
-        for (const auto& node: pt)
-        {
-            for (const auto& item : node.second)
-            {
-                DeserializeValue<K>::deserialize_value(item.first, key);
-                std::stringstream ss;
-                
-                ss << item.second.get_value<std::string>();
-                
-                DeserializeValue<V>::deserialize_value(ss, value);
-                
-                r.insert(std::make_pair(key, value));
-            };
-        };
-    }
-    
-    
-    
-};
-    
-    
-template<class K, class V>
-class DeserializeMap<K, V, typename std::enable_if<std::is_pointer<V>::value>::type>
-{
-public:
-    static void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
-    {
-        K key;
-        V value;
-        
-        //node is of the form "" : { "key": "value"}
-        for (const auto& node: pt)
-        {
-            for (const auto& item : node.second)
-            {
-                DeserializeValue<K>::deserialize_value(item.first, key);
-                
-                //create new object passing in PropertyTree
-                value = V::element_type::deserialize(item.second);
-                
-                r.insert(std::make_pair(key, value));
-            };
-        };
-    }
-};
-
-    
-    
-template<class K, class V>
-class DeserializeMap<K, std::shared_ptr<V>>
-{
-public:
-    static void deserialize(const PropertyTree& pt, std::map<K, std::shared_ptr<V>>&  r)
-    {
-        K key;
-        std::shared_ptr<V> value;
-        
-        //node is of the form "" : { "key": "value"}
-        for (const auto& node: pt)
-        {
-            for (const auto& item : node.second)
-            {
-                DeserializeValue<K>::deserialize_value(item.first, key);
-                
-                //create new object passing in PropertyTree
-                value = V::deserialize(item.second);
-                
-                r.insert(std::make_pair(key, value));
-            };
-        };
-    }
-};
-
-
-
-/**
- 
- 
- */
-template<class K, class V>
-class DeserializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
-{
-public:
-    static void deserialize(const PropertyTree& pt, std::map<K, V>& r)
-    {
-        K key{};
-        V value{};
-        typedef typename V::value_type ValueType;
-        
-        for (auto& node: pt)
-        {
-            for (auto& item : node.second)
-            {
-                DeserializeValue<K>::deserialize_value(item.first, key);
-                DeserializeContainer<ValueType>::deserialize(item.second, value);
-                r.insert(std::make_pair(key, value));
-                value.clear();
-            };
-        };
+            ss >> out_;
+        }
     };
     
-};
-
     
-template<class T>
-void deserialize(const PropertyTree& pt, std::vector<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
-
-
-template<class T>
-void deserialize(const PropertyTree& pt, std::deque<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
-    
-/**
- 
- Deserialize into map
- 
- 
- */
-template<typename K, typename V>
-void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
-{
-    return DeserializeMap<K, V>::deserialize(pt, r);
-};
-
-
-//@{
-/**
- 
- 
- Simple algorithm to solve mathematical formulas
- 
- 
- */
-double solve_formula(std::string str_);
-
-double evaluate_rpn(std::list<std::string>& tokens);
-
-std::list<std::string> infixToRPN_SYAlg(const std::string& expression_);
-
-std::vector<std::string> split_expression_SYAlg(const std::string& expression_);
-
-bool is_parenthesis(const std::string& token_);
-
-bool is_operator(const std::string& token_);
-
-
-    
-class SYAlg
-{
-public:
-    std::map<std::string, std::pair<long, std::string>> ops;
-    
-    SYAlg()
+    template<class T>
+    class DeserializeValue<T, typename std::enable_if<std::is_same<T, std::string>::value>::type>
     {
-        std::string R = "Right";
-        std::string L = "Left";
-        
-        //create ops
-        ops["^"] = std::make_pair(4, R);
-        ops["*"] = std::make_pair(3, L);
-        ops["/"] = std::make_pair(3, L);
-        ops["+"] = std::make_pair(2, L);
-        ops["-"] = std::make_pair(2, L);
-        ops["("] = std::make_pair(9, L);
-        ops[")"] = std::make_pair(0, L);
-    }
-    
-};
-
-//@}
-/**
- 
- MARK: cont.
- 
- */
-template <class T>
-T solve_str_formula(const std::string& formula_, IRandom& rand_)
-{
-    T dest_;
-    std::string formula = formula_;
-    
-    if (formula.find("FORMULA::") != std::string::npos)
-    {
-        std::regex e("");
-        e.assign("FORMULA\\u003A\\u003A");
-        formula = std::regex_replace(formula, e, "");
-        
-        //check if it is requesting random number generation
-        if (formula.find("p.d.f.") != std::string::npos)
+    public:
+        static void deserialize_value(const std::string& in_, T& out_)
         {
-            e.assign("p.d.f.\\u003A\\u003A");
+            std::stringstream ss(in_);
+            out_ = ss.str();
+        }
+        
+        static void deserialize_value(std::stringstream& ss, T& out_)
+        {
+            out_ = ss.str();
+        }
+    };
+    
+    
+    template<class T, class Enable = void>
+    class DeserializeContainer
+    {
+    public:
+        
+        static void deserialize(const PropertyTree& pt, std::vector<T>& r)
+        {
+            for (auto& item : pt)
+            {
+                r.push_back(item.second.get_value<T>());
+            };
+        }
+        
+        static void deserialize(const PropertyTree& pt, std::deque<T>& r)
+        {
+            for (auto& item : pt)
+            {
+                r.push_back(item.second.get_value<T>());
+            };
+        }
+    };
+    
+    
+    
+    /**
+     
+     General template for serializatio of a map
+     */
+    template<class K, class V, class Enable = void>
+    class DeserializeMap
+    {
+    public:
+        static void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
+        {
+            K key;
+            V value;
+            
+            for (const auto& node: pt)
+            {
+                for (const auto& item : node.second)
+                {
+                    DeserializeValue<K>::deserialize_value(item.first, key);
+                    std::stringstream ss;
+                    
+                    ss << item.second.get_value<std::string>();
+                    
+                    DeserializeValue<V>::deserialize_value(ss, value);
+                    
+                    r.insert(std::make_pair(key, value));
+                };
+            };
+        }
+        
+        
+        
+    };
+    
+    
+    template<class K, class V>
+    class DeserializeMap<K, V, typename std::enable_if<std::is_pointer<V>::value>::type>
+    {
+    public:
+        static void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
+        {
+            K key;
+            V value;
+            
+            //node is of the form "" : { "key": "value"}
+            for (const auto& node: pt)
+            {
+                for (const auto& item : node.second)
+                {
+                    DeserializeValue<K>::deserialize_value(item.first, key);
+                    
+                    //create new object passing in PropertyTree
+                    value = V::element_type::deserialize(item.second);
+                    
+                    r.insert(std::make_pair(key, value));
+                };
+            };
+        }
+    };
+    
+    
+    
+    template<class K, class V>
+    class DeserializeMap<K, std::shared_ptr<V>>
+    {
+    public:
+        static void deserialize(const PropertyTree& pt, std::map<K, std::shared_ptr<V>>&  r)
+        {
+            K key;
+            std::shared_ptr<V> value;
+            
+            //node is of the form "" : { "key": "value"}
+            for (const auto& node: pt)
+            {
+                for (const auto& item : node.second)
+                {
+                    DeserializeValue<K>::deserialize_value(item.first, key);
+                    
+                    //create new object passing in PropertyTree
+                    value = V::deserialize(item.second);
+                    
+                    r.insert(std::make_pair(key, value));
+                };
+            };
+        }
+    };
+    
+    
+    
+    /**
+     
+     
+     */
+    template<class K, class V>
+    class DeserializeMap<K, V, typename std::enable_if<is_vector<V>::value>::type>
+    {
+    public:
+        static void deserialize(const PropertyTree& pt, std::map<K, V>& r)
+        {
+            K key{};
+            V value{};
+            typedef typename V::value_type ValueType;
+            
+            for (auto& node: pt)
+            {
+                for (auto& item : node.second)
+                {
+                    DeserializeValue<K>::deserialize_value(item.first, key);
+                    DeserializeContainer<ValueType>::deserialize(item.second, value);
+                    r.insert(std::make_pair(key, value));
+                    value.clear();
+                };
+            };
+        };
+        
+    };
+    
+    
+    template<class T>
+    void deserialize(const PropertyTree& pt, std::vector<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
+    
+    
+    template<class T>
+    void deserialize(const PropertyTree& pt, std::deque<T>& r) { DeserializeContainer<T>::deserialize(pt, r); }
+    
+    /**
+     
+     Deserialize into map
+     
+     
+     */
+    template<typename K, typename V>
+    void deserialize(const PropertyTree& pt, std::map<K, V>&  r)
+    {
+        return DeserializeMap<K, V>::deserialize(pt, r);
+    };
+    
+    
+    //@{
+    /**
+     
+     
+     Simple algorithm to solve mathematical formulas
+     
+     
+     */
+    double solve_formula(std::string str_);
+    
+    double evaluate_rpn(std::list<std::string>& tokens);
+    
+    std::list<std::string> infixToRPN_SYAlg(const std::string& expression_);
+    
+    std::vector<std::string> split_expression_SYAlg(const std::string& expression_);
+    
+    bool is_parenthesis(const std::string& token_);
+    
+    bool is_operator(const std::string& token_);
+    
+    
+    
+    class SYAlg
+    {
+    public:
+        std::map<std::string, std::pair<long, std::string>> ops;
+        
+        SYAlg()
+        {
+            std::string R = "Right";
+            std::string L = "Left";
+            
+            //create ops
+            ops["^"] = std::make_pair(4, R);
+            ops["*"] = std::make_pair(3, L);
+            ops["/"] = std::make_pair(3, L);
+            ops["+"] = std::make_pair(2, L);
+            ops["-"] = std::make_pair(2, L);
+            ops["("] = std::make_pair(9, L);
+            ops[")"] = std::make_pair(0, L);
+        }
+        
+    };
+    
+    //@}
+    /**
+     
+     MARK: cont.
+     
+     */
+    template <class T>
+    T solve_str_formula(const std::string& formula_, IRandom& rand_)
+    {
+        T dest_;
+        std::string formula = formula_;
+        
+        if (formula.find("FORMULA::") != std::string::npos)
+        {
+            std::regex e("");
+            e.assign("FORMULA\\u003A\\u003A");
             formula = std::regex_replace(formula, e, "");
             
-            //parse formula
-            //case of a truncated normal
-            if (formula.find("N_trunc") != std::string::npos)
+            //check if it is requesting random number generation
+            if (formula.find("p.d.f.") != std::string::npos)
             {
-                double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
-                double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
+                e.assign("p.d.f.\\u003A\\u003A");
+                formula = std::regex_replace(formula, e, "");
                 
-                ///@DevStage1 change to Truncated generation
-                formula = std::to_string(std::max(rand_.rnd() * std::pow(sigma2, 0.5) + mean, 0.0));
+                //parse formula
+                //case of a truncated normal
+                if (formula.find("N_trunc") != std::string::npos)
+                {
+                    double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                    double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
+                    
+                    ///@DevStage1 change to Truncated generation
+                    formula = std::to_string(std::max(rand_.rnd() * std::pow(sigma2, 0.5) + mean, 0.0));
+                    
+                }
+                ///careful here - will find both u and u_int
+                else if (formula.find("u") != std::string::npos)
+                {
+                    double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                    double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
+                    
+                    formula = std::to_string(rand_.ru() * (max - min) + min);
+                };
                 
-            }
-            ///careful here - will find both u and u_int
-            else if (formula.find("u") != std::string::npos)
-            {
-                double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
-                double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
-                
-                formula = std::to_string(rand_.ru() * (max - min) + min);
             };
             
+        }
+        else
+        {
         };
- 
+        
+        //convert string into value
+        DeserializeValue<T>::deserialize_value(std::to_string(solve_formula(formula)), dest_);
+        
+        return dest_;
     }
-    else
-    {
-    };
     
-    //convert string into value
-    DeserializeValue<T>::deserialize_value(std::to_string(solve_formula(formula)), dest_);
     
-    return dest_;
-}
-    
-
 } //end of namespace serialize
 #endif

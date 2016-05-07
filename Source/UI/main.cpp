@@ -78,12 +78,12 @@ int main(int argc, const char * argv[])
     {
         throw std::runtime_error("Unsupported mode");
     };
-
+    
     
     w->FLAG_IS_STARTED = true;
     w->FLAG_IS_STOPPED = false;
     w->FLAG_IS_PAUSED = false;
-
+    
     
     
     //start threads with fs, bs, main cycle, markets
@@ -102,7 +102,7 @@ int main(int argc, const char * argv[])
     
     func = &W::life_sems;
     threads.push_back(std::thread(func, w));
-
+    
     func = &W::life_gs;
     threads.push_back(std::thread(func, w));
     
@@ -128,16 +128,16 @@ int main(int argc, const char * argv[])
     timeinfo = localtime(&rawtime);
     std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
-
+    
     
     
     
     return 0;
-
     
     
-
-
+    
+    
+    
 }
 
 

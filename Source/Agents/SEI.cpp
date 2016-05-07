@@ -675,4 +675,3 @@ void
 SEI::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
 }
-

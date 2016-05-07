@@ -36,10 +36,10 @@ using namespace solar_core;
  
  Assume that world is created from scratch
  
-*/
+ */
 W::W(std::string path_, std::string mode_)
 {
-
+    
     //set ui flags
     FLAG_IS_STOPPED = true;
     
@@ -49,7 +49,7 @@ W::W(std::string path_, std::string mode_)
     boost::filesystem::path path_to_model_file(path_);
     boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
     boost::filesystem::path path_to_template;
-//    Log::instance(path_);
+    //    Log::instance(path_);
     
     if (mode_ == "NEW")
     {
@@ -86,7 +86,7 @@ W::W(std::string path_, std::string mode_)
         {
             WorldSettings::instance().constraints[EnumFactory::ToEConstraintParams(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
         };
-
+        
         serialize::deserialize(pt.get_child("params"),params);
         
         //set internals
@@ -218,7 +218,7 @@ W::W(std::string path_, std::string mode_)
             hhs.push_back(new Household(pt, this));
             
             
-
+            
             
         };
         
@@ -235,7 +235,7 @@ W::W(std::string path_, std::string mode_)
         {
             throw std::runtime_error("unsupported hh specification rule");
         };
-
+        
         
         //create SEI - use template for parameters, use model file for additional parameters
         //create sei_type
@@ -254,7 +254,7 @@ W::W(std::string path_, std::string mode_)
             //generate location
             pt.put("location_x", rng_location_x());
             pt.put("location_y", rng_location_y());
-
+            
             
             seis.push_back(new SEI(pt, this));
             
@@ -267,7 +267,7 @@ W::W(std::string path_, std::string mode_)
         path_to_template /= "sem.json";
         path = path_to_template.string();
         read_json(path, pt);
-
+        
         for (auto i = 0; i < N_SEM; ++i)
         {
             sems.push_back(new SEM(pt, this));
@@ -294,7 +294,7 @@ W::W(std::string path_, std::string mode_)
         FLAG_SEM_TICK = true;
         FLAG_MARKET_TICK = true;
         updated_counter = 0;
-//        updated_counter = constants::NUMBER_AGENT_TYPES_LIFE;
+        //        updated_counter = constants::NUMBER_AGENT_TYPES_LIFE;
         notified_counter = 0;
         
     };
@@ -422,7 +422,7 @@ W::life_hhs()
             all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_H_TICK || FLAG_IS_STOPPED); });
         };
     };
-
+    
     
     
     
@@ -502,8 +502,8 @@ W::life_gs()
             
             auto& agent = g;
             
-                //get tick
-                agent->act_tick();
+            //get tick
+            agent->act_tick();
             
             ++updated_counter;
         };

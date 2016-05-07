@@ -27,6 +27,7 @@ MarketingInst::init(W* w_)
 }
 
 
+
 void
 MarketingInst::request_inf_marketing_sei(IAgent* agent_)
 {

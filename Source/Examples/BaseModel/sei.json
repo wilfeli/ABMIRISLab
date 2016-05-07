@@ -44,10 +44,10 @@
                ],
     "mes_marketing": "",
     "dec_project_percentages": [
-                               0.5,
-                               0.8,
-                               1
-                               ],
+                                0.5,
+                                0.8,
+                                1
+                                ],
     "THETA_hard_costs": [
                          "FORMULA::p.d.f.::N_trunc(2.5, 0.05)",
                          "FORMULA::p.d.f.::N_trunc(-0.5, 0.05)"

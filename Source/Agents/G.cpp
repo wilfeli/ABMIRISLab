@@ -87,7 +87,7 @@ G::ac_update_tick()
     pending_pvprojects.insert(pending_pvprojects.end(), pending_pvprojects_to_add.begin(), pending_pvprojects_to_add.end());
     pending_pvprojects_to_add.clear();
     pending_pvprojects_lock.unlock();
-
+    
     
     
     //clear last day schedule
@@ -115,7 +115,7 @@ G::act_tick()
 {
     //update internals for the tick
     ac_update_tick();
-
+    
     
     //go through projects, if permit has been requested and processing time has elapsed - schedule a visit
     //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
