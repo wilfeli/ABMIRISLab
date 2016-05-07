@@ -289,6 +289,10 @@ namespace solar_core
         
         
         
+        /** Marketing part: number of HH to draw per unit of time to push marketing information */
+        MarketingMaxNToDrawPerTimeUnit,
+        
+        
         /** Empty enum for completeness */
         None
         
@@ -464,6 +468,10 @@ namespace solar_core
             {
                 return EParamTypes::InflationRate;
             }
+            else if (param_type == "eparamtypes::marketingmaxntodrawpertimeunit")
+            {
+                return EParamTypes::MarketingMaxNToDrawPerTimeUnit;
+            }
             else
             {
 #ifdef DEBUG
@@ -532,9 +540,21 @@ namespace solar_core
             {
                 return EConstraintParams::MinNReceivedDesings;
             }
-            else if (param_type == "")
+            else if (param_type == "econstraintparams::maxntickstocollectquotes")
             {
                 return EConstraintParams::MaxNTicksToCollectQuotes;
+            }
+            else if (param_type == "econstraintparams:minnreceivedpreliminaryquotes")
+            {
+                return EConstraintParams::MinNReceivedPreliminaryQuotes;
+            }
+            else if (param_type == "econstraintparams::maxnrequestedpreliminaryfromonlinequotes")
+            {
+                return EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes;
+            }
+            else if (param_type == "econstraintparams::maxnopenprojectshh")
+            {
+                return EConstraintParams::MaxNOpenProjectsHH;
             }
             else
             {

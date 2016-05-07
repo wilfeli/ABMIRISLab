@@ -30,6 +30,7 @@ class Household;
 
 class W
 {
+    friend class MarketingInst;
 public:
     //@{
     /**

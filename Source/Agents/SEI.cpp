@@ -110,8 +110,10 @@ SEI::init(W *w_)
 void
 SEI::get_project(std::shared_ptr<PVProject> project_)
 {
+    pvprojects_lock.lock();
     //save project
-    pvprojects.push_back(project_);
+    pvprojects_to_add.push_back(project_);
+    pvprojects_lock.unlock();
 }
 
 void
@@ -125,6 +127,14 @@ SEI::request_online_quote(std::shared_ptr<PVProject> project_)
 void
 SEI::request_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
+    //if SEISmall - request information
+    if ((sei_type == EParamTypes::SEISmall) && (!project_->state_base_agent))
+    {
+        //request additional information
+        project_->state_base_agent = project_->agent->get_inf_online_quote(this);
+    };
+    
+    
     //update time of a last action
     project_->ac_sei_time = a_time;
 }
@@ -177,7 +187,6 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
 void
 SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
 {
-    ///@Kelley fill in details
     //add information to the parameters of an agent
     project_->state_base_agent->params[EParamTypes::RoofAge] = project_->agent->house->roof_age;
     
@@ -205,10 +214,9 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     
     
     //MARK: cont. create preliminary quote estimate from real data
-    ///@Kelley fill in details
-    //by default provide preliminary quote, but in some cases refuse to proceed with the project and close it
+    //by default provide prelminary quote, but in some cases refuse to proceed with the project and close it
+    //is here because otherwise later assigning will override this
     project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
-    
     
     //if roof is old and refuses to reroof - close project
     if (project_->state_project == EParamTypes::RequiredHHReroof)
@@ -225,8 +233,24 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
         };
     };
     
-
+    //forms design by default
+    //mid percentage to be used for estimating size
+    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
+    //amount of solar radiation in Wh/m2/day
+    auto solar_radiation = w->get_solar_radiation(project_->agent->location_x, project_->agent->location_y);
+    //distribution of permit length in different locations
+    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
     
+    
+    auto design = PVDesign();
+    
+    form_design_for_params(project_, demand, solar_radiation, permit_difficulty, dec_project_percentages[1], *dec_solar_modules.begin(), design);
+    
+    ac_estimate_savings(design, project_);
+
+
+    mes->params[EParamTypes::PreliminaryQuotePrice] = design.total_costs;
+    mes->params[EParamTypes::PreliminaryQuoteEstimatedSavings] = design.total_savings;
     
     return mes;
 }
@@ -282,34 +306,11 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             //create design
             auto design = PVDesign();
             
-            design.solar_radiation = solar_radiation;
-            
-            design.permit_difficulty = permit_difficulty;
-            
-            design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
-            
-            design.PV_module = iter.second;
-            
-            design.DC_size = design.N_PANELS * iter.second->STC_power_rating;
-            
-            design.AC_size = design.DC_size * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss];
-            
-            ///@DevStage1 add inverter technology here
-            
-            
-            
-            design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1];
-            
-            design.soft_costs = design.N_PANELS * THETA_soft_costs[0] + permit_difficulty * THETA_soft_costs[1];
-            
-            design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
-            
+            form_design_for_params(project_, demand, solar_radiation, permit_difficulty, project_percentage, iter, design);
             
             ac_estimate_savings(design, project_);
             
-            
             designs.push_back(design);
-            
         };
     };
     
@@ -325,6 +326,35 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     
     return mes;
 }
+
+
+void
+SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
+{
+    design.solar_radiation = solar_radiation;
+    
+    design.permit_difficulty = permit_difficulty;
+    
+    design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
+    design.PV_module = iter.second;
+    
+    design.DC_size = design.N_PANELS * iter.second->STC_power_rating;
+    
+    design.AC_size = design.DC_size * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss];
+    
+    ///@DevStage1 add inverter technology here
+    
+    
+    
+    design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1];
+    
+    design.soft_costs = design.N_PANELS * THETA_soft_costs[0] + permit_difficulty * THETA_soft_costs[1];
+    
+    design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
+
+}
+
 
 /**
  
@@ -354,13 +384,14 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     for (auto i = 0; i < design.PV_module->warranty_length/52; ++i)
     {
         //estimate yearly energy production, if PPA might be used in estimation
-//        auto yearly_production = design->AC_size * design.solar_radiation/1000 * 365.25;
-        energy_costs += project_->state_base_agent->params[EParamTypes::ElectricityBill] * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        auto daily_production = design.AC_size * design.solar_radiation/1000;
+        energy_costs += (daily_production) * 365.25 * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
         
         CPI = CPI * inflation;
     };
     
-    design.total_savings = design.total_costs - energy_costs;
+    //MARK: cont. redo
+    design.total_savings = energy_costs - design.total_costs;
     
     
     
@@ -401,13 +432,19 @@ SEI::ac_update_tick()
     //update internal timer
     a_time = w->time;
     
+    pvprojects_lock.lock();
+    //pove pending projects into active projects
+    pvprojects.insert(pvprojects.end(), pvprojects_to_add.begin(), pvprojects_to_add.end());
+    pvprojects_to_add.clear();
+    pvprojects_lock.unlock();
+    
     
     //clear last day schedule
     schedule_visits[i_schedule_visits].clear();
     
     //move schedule of visits by one
     //advance index
-    if (i_schedule_visits == WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote] - 1)
+    if (i_schedule_visits == (WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote] - 1))
     {
         i_schedule_visits = 0;
     }

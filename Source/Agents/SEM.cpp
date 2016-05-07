@@ -20,3 +20,9 @@ void
 SEM::init(W* w_)
 {
 }
+
+
+void
+SEM::act_tick()
+{
+}

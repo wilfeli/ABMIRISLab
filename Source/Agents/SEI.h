@@ -187,6 +187,11 @@ protected:
     virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
     
     std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
+    typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
+    
+    void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
+    
+    
     std::vector<double> dec_project_percentages; /*!< percentage of a utility bill to cover */
     std::vector<double> THETA_hard_costs; /*!< THETA[0] - price per efficiency unit, THETA[1] discount for the size of a project */
     std::vector<double> THETA_soft_costs; /*!< THETA[0] - labor costs for installation, THETA[1] - additional labor costs due to the permitting difficulty */
@@ -250,7 +255,8 @@ protected:
     
     std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
     
-    
+    std::vector<std::shared_ptr<PVProject>> pvprojects_to_add;
+    std::mutex pvprojects_lock;
     
     //@}
     

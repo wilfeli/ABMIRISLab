@@ -45,6 +45,9 @@ public:
     
     //@}
     
+    
+    void act_tick();
+    
 };
 } //end namespace solar_core
 

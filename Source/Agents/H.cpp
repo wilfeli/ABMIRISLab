@@ -99,6 +99,13 @@ Household::ac_inf_marketing_sei()
 void
 Household::ac_inf_quoting_sei()
 {
+    
+    //move timer here
+    if ((!get_inf_marketing_sei.empty()) || quote_stage_timer > 0.0)
+    {
+        ++quote_stage_timer;
+    };
+    
     //requests quotes from SEI
     //restricts number of projects
     while ((!get_inf_marketing_sei.empty()) && (pvprojects.size() <= WorldSettings::instance().constraints[EConstraintParams::MaxNOpenProjectsHH]))
@@ -150,9 +157,6 @@ Household::ac_inf_quoting_sei()
         
         get_inf_marketing_sei.pop_front();
     };
-    
-    
-    ++quote_stage_timer;
     
 }
 
