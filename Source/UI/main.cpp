@@ -109,13 +109,26 @@ int main(int argc, const char * argv[])
     func = &W::life_markets;
     threads.push_back(std::thread(func, w));
     
+    time_t rawtime;
+    tm* timeinfo;
     
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+    
+    char mbstr[100];
+    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+    std::cout << "time: " <<  mbstr << " "<< "INFO: " << "started running" << std::endl;
     
     // work for the workers to finish
     for(auto& t : threads)
     {
         t.join();
     };
+    
+    timeinfo = localtime(&rawtime);
+    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+    std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
+
     
     
     

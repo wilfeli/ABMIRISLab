@@ -9,12 +9,15 @@
                         },
                         {
                         "EParamTypes::InflationRate": 0.03
+                        },
+                        {
+                        "EParamTypes::MarketingMaxNToDrawPerTimeUnit":100
                         }
                         ],
         "constraints":[
-        {
-        "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
-        },
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
                        {
                        "EConstraintParams::MaxLengthPlanInstallations":10
                        },
@@ -23,15 +26,38 @@
                        },
                        {
                        "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxNTicksToCollectQuotes":10
+                       },
+                       {
+                       "EConstraintParams:MinNReceivedPreliminaryQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNOpenProjectsHH":10
                        }
         ]
     },
-    "N_HH":100,
+    "N_HH":500,
     "N_SEI":10,
     "N_SEILarge": 3,
     "N_SEM":7,
     "N_HHMarketingStateHighlyInterested":100,
-    "SEED":2016
+    "SEED":2016,
+    "params":[
+            {
+            "N_ITERATIONS":520
+            }
+    ]
     
     
 }

@@ -64,16 +64,16 @@ class PVDesign
 public:
     PVDesign() = default;
     PVDesign(const PVDesign&) = default;
-    double solar_radiation;
-    double permit_difficulty;
+    double solar_radiation = 0.0;
+    double permit_difficulty = 0.0;
     std::shared_ptr<SolarModule> PV_module;
-    double N_PANELS;
-    double DC_size;
-    double AC_size;
-    double hard_costs;
-    double soft_costs;
-    double total_costs;
-    double total_savings;
+    double N_PANELS = 0.0;
+    double DC_size = 0.0;
+    double AC_size = 0.0;
+    double hard_costs = 0.0;
+    double soft_costs = 0.0;
+    double total_costs = 0.0;
+    double total_savings = 0.0;
     
     
 protected:
@@ -103,10 +103,10 @@ public:
     std::shared_ptr<MesFinance> financing;
     SEI* sei; /*!< installer of a project */
     
-    TimeUnit ac_sei_time; /*!< time of a last action on this projet by sei */
-    TimeUnit ac_g_time; /*!< time of a last action on this project by g */
-    TimeUnit ac_hh_time; /*!< time of a last action on the project by h */
-    TimeUnit ac_accepted_time; /*!< when when the project was accepted */
+    TimeUnit ac_sei_time = 0; /*!< time of a last action on this projet by sei */
+    TimeUnit ac_g_time = 0; /*!< time of a last action on this project by g */
+    TimeUnit ac_hh_time = 0; /*!< time of a last action on the project by h */
+    TimeUnit ac_accepted_time = 0; /*!< when when the project was accepted */
     
 protected:
     

@@ -87,11 +87,9 @@ W::W(std::string path_, std::string mode_)
             WorldSettings::instance().constraints[EnumFactory::ToEConstraintParams(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
         };
 
-        
-        
+        serialize::deserialize(pt.get_child("params"),params);
         
         //set internals
-        //MARK: cont.
         time = 0;
         
         
@@ -210,7 +208,7 @@ W::W(std::string path_, std::string mode_)
             pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
             
             //create decision parameters
-            THETA_design[EParamTypes::HHDecPreliminaryQuote].push_back(rng_THETA());
+            THETA_design[EParamTypes::HHDecPreliminaryQuote] = std::vector<double>{rng_THETA()};
             pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
             
             
@@ -321,7 +319,7 @@ W::init()
 void
 W::life()
 {
-    bool FLAG_MAX_N_ITERATIONS = params.count("N_ITERATIOMS");
+    bool FLAG_MAX_N_ITERATIONS = params.count("N_ITERATIONS");
     long MAX_N_ITERATIONS = 0;
     if (FLAG_MAX_N_ITERATIONS)
     {
@@ -456,7 +454,7 @@ W::life_sems()
             ++notified_counter;
             FLAG_SEM_TICK = false;
             
-            for (auto& agent:seis)
+            for (auto& agent:sems)
             {
                 //get tick
                 agent->act_tick();
