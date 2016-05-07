@@ -16,53 +16,53 @@
 
 namespace solar_core
 {
-
     
     
-class MesMarketingSEI;
-class W;
+    
+    class MesMarketingSEI;
+    class W;
     
     
-/**
- 
- 
- Is one of institutions
- 
- 
-*/
-class MarketingInst: public IInstitute
-{
-public:
-    virtual ~MarketingInst() = default;
-    MarketingInst(W* w_);
-    void init(W* w_);
-    virtual void act_tick() override; /*!< */
-    
-    //@{
     /**
      
-     Section with marketing interactions
+     
+     Is one of institutions
+     
      
      */
+    class MarketingInst: public IInstitute
+    {
+    public:
+        virtual ~MarketingInst() = default;
+        MarketingInst(W* w_);
+        void init(W* w_);
+        virtual void act_tick() override; /*!< */
+        
+        //@{
+        /**
+         
+         Section with marketing interactions
+         
+         */
+        
+        
+        void get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_); /*!< receives marketing information from SEI */
+        void request_inf_marketing_sei(IAgent* agent_); /*!< marketing information from SEI is requested by agent */
+        //@}
+        
+        
+    protected:
+        std::vector<IAgent*> interested_agents; /*!< Vector of agents that are interested in receiving marketing information  */
+        
+        std::map<std::string, double> params; /*!<   */
+        
+        std::vector<std::shared_ptr<MesMarketingSEI>> marketing_mess; /*!< marketing messages from SEI */
+        
+        
+        W* w;
+    };
     
     
-    void get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_); /*!< receives marketing information from SEI */
-    void request_inf_marketing_sei(IAgent* agent_); /*!< marketing information from SEI is requested by agent */
-    //@}
-    
-    
-protected:
-    std::vector<IAgent*> interested_agents; /*!< Vector of agents that are interested in receiving marketing information  */
-    
-    std::map<std::string, double> params; /*!<   */
-    
-    std::vector<std::shared_ptr<MesMarketingSEI>> marketing_mess; /*!< marketing messages from SEI */
-    
-    
-    W* w;
-};
-
-
 } //end of solar_core namespace
 
 

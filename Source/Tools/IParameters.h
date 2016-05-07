@@ -12,7 +12,6 @@
 #include "Tools/ExternalIncludes.h"
 #include <boost/property_tree/ptree.hpp>
 
-
 #ifdef DEBUG
 
 #include <iostream>

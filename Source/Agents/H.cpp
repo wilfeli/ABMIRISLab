@@ -26,13 +26,13 @@ Household::Household(PropertyTree& pt_, W* w_)
     //read parameters
     std::map<std::string, std::string> params_str;
     serialize::deserialize(pt_.get_child("params"), params_str);
-
+    
     ///@DevStage2 move to W to speed up, but test before that
     for (auto& iter:params_str)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
-
+    
     marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
     
     //location
@@ -57,7 +57,7 @@ Household::Household(PropertyTree& pt_, W* w_)
     n_preliminary_quotes = 0;
     n_pending_designs = 0;
     
-
+    
     
 }
 
@@ -133,7 +133,7 @@ Household::ac_inf_quoting_sei()
                 marketing_inf->agent->request_preliminary_quote(new_project);
             case EParamTypes::HHMarketingStateInterested:
                 switch (marketing_inf->sei_type)
-                {
+            {
                 case EParamTypes::SEISmall:
                     //returns quote in the form of a message
                     // assume no online presence, so requests preliminary quote
@@ -148,8 +148,8 @@ Household::ac_inf_quoting_sei()
                     
                 default:
                     break;
-                }
-
+            }
+                
             default:
                 //otherwise do nothing as is not interested
                 break;
@@ -239,9 +239,9 @@ Household::dec_evaluate_designs()
 {
     //assume that best design in terms of savings is accepted?
     std::sort(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &lhs, std::shared_ptr<PVProject> &rhs)
-    {
-        return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
-    });
+              {
+                  return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
+              });
     
     auto decision = pvprojects[0];
     

@@ -23,18 +23,18 @@
 namespace solar_core
 {
     
-class IRandom
-{
-public:
-    IRandom(double seed_):rng(seed_), rnd(rng, boost::normal_distribution<>(0.0, 1.0)), ru(rng, boost::uniform_01<>()){} /*!< creates random number generator and seeds it */
-
-public:
-    boost::mt19937 rng; /*!< random number generator */
-    
-public:
-    boost::variate_generator<boost::mt19937&, boost::normal_distribution<>> rnd;
-    boost::variate_generator<boost::mt19937&, boost::uniform_01<>> ru;
-};
+    class IRandom
+    {
+    public:
+        IRandom(double seed_):rng(seed_), rnd(rng, boost::normal_distribution<>(0.0, 1.0)), ru(rng, boost::uniform_01<>()){} /*!< creates random number generator and seeds it */
+        
+    public:
+        boost::mt19937 rng; /*!< random number generator */
+        
+    public:
+        boost::variate_generator<boost::mt19937&, boost::normal_distribution<>> rnd;
+        boost::variate_generator<boost::mt19937&, boost::uniform_01<>> ru;
+    };
 } //end solar_core namespace
 
 #endif /* defined(__ABMSolar__IRandom__) */
