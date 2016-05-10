@@ -21,6 +21,7 @@ using boost::property_tree::write_json;
 
 #include "UI/W.h"
 #include "Tools/WorldSettings.h"
+#include "Tools/ParsingTools.h"
 #include "Geography/Geography.h"
 #include "Institutions/MarketingSystem.h"
 #include "Agents/IAgent.h"
@@ -53,7 +54,26 @@ W::W(std::string path_, std::string mode_)
     
     if (mode_ == "NEW")
     {
-        std::string path = path_to_model_file.string();
+        
+        std::map<std::string, std::string> parsed_model;
+        
+        tools::parse_model_file(path_to_model_file.string(), parsed_model);
+        
+        std::string w_file_name = "";
+        if (parsed_model.count("path_to_save") > 0)
+        {
+            params["path_to_save"] = parsed_model["path_to_save"];
+        }
+        else
+        {
+            throw std::runtime_error("Wrong configuration file");
+        };
+
+        
+        path_to_template = path_to_dir;
+        path_to_template /= "w.json";
+        
+        std::string path = path_to_template.string();
         
         //baseline model
         PropertyTree pt;
@@ -566,6 +586,14 @@ W::get_permit_difficulty(double location_x, double location_y) const
 void
 W::get_state_inf(Household* agent_, EParamTypes state_)
 {
+}
+
+
+
+void
+W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
+{
+    installed_projects.push_back(project_);
 }
 
 

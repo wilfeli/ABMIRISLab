@@ -419,7 +419,10 @@ SEI::form_financing(std::shared_ptr<PVProject> project_)
 
 
 void
-SEI::install_project(std::shared_ptr<PVProject> project){}
+SEI::install_project(std::shared_ptr<PVProject> project)
+{
+    w->get_state_inf_installed_project(project);
+}
 
 
 
