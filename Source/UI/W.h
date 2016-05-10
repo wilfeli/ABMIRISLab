@@ -15,6 +15,13 @@
 #include "Tools/IParameters.h"
 #include "Tools/IRandom.h"
 
+
+namespace solar_ui
+{
+    class UI;
+}
+
+
 namespace solar_core {
     
     
@@ -26,11 +33,13 @@ namespace solar_core {
     class SEI;
     class SEM;
     class Household;
+    class PVProject;
     
     
     class W
     {
         friend class MarketingInst;
+        friend class solar_ui::UI;
     public:
         //@{
         /**
@@ -134,6 +143,8 @@ namespace solar_core {
         
         
         void get_state_inf(Household* agent_, EParamTypes state_); /*!< gets information about state change from agent */
+        void get_state_inf_installed_project(std::shared_ptr<PVProject> project_); /*!< is called when project is finished to record it */
+        
         
         
         //@}
@@ -167,7 +178,7 @@ namespace solar_core {
         std::map<std::string, std::string> params;
         
         
-        
+        std::vector<std::shared_ptr<PVProject>> installed_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
         
         
         

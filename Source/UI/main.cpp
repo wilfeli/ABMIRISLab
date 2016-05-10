@@ -34,7 +34,7 @@
 #include <iostream>
 #include "ExternalTools/boost_1_57_0/boost/filesystem.hpp"
 #include "UI/W.h"
-
+#include "UI/UI.h"
 
 
 using namespace solar_core;
@@ -84,7 +84,7 @@ int main(int argc, const char * argv[])
     w->FLAG_IS_STOPPED = false;
     w->FLAG_IS_PAUSED = false;
     
-    
+    solar_ui::UI* ui = new solar_ui::UI();
     
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;
@@ -130,6 +130,8 @@ int main(int argc, const char * argv[])
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
     
     
+    //save model here
+    ui->save();
     
     
     return 0;
