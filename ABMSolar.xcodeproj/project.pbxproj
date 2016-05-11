@@ -60,6 +60,8 @@
 		EDDE57A81CE2D51E005D1C49 /* unique_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56121CDEBDB3005D1C49 /* unique_path.cpp */; };
 		EDDE57A91CE2D51E005D1C49 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56131CDEBDB3005D1C49 /* utf8_codecvt_facet.cpp */; };
 		EDDE57AA1CE2D51E005D1C49 /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56141CDEBDB3005D1C49 /* windows_file_codecvt.cpp */; };
+		EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
+		EDDE57AE1CE2E99D005D1C49 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
 		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
 		EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
 		EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
@@ -4448,6 +4450,8 @@
 		EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParsingTools.cpp; sourceTree = "<group>"; };
 		EDDE57951CE17D3D005D1C49 /* ParsingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParsingTools.h; sourceTree = "<group>"; };
 		EDDE57981CE21A55005D1C49 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
+		EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
+		EDDE57AC1CE2E99D005D1C49 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		EDE03AD11CB1F81600C79A22 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDE03ADD1CB8070500C79A22 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
@@ -8188,6 +8192,8 @@
 				EDDB3FDD1C7DA16200A6EA1F /* SEM.h */,
 				EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */,
 				EDDC11C61C8F9FF7005670BD /* SolarPanel.h */,
+				EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */,
+				EDDE57AC1CE2E99D005D1C49 /* Utility.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -13115,6 +13121,7 @@
 			files = (
 				EDDE57A31CE2D51E005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE57A41CE2D51E005D1C49 /* operations.cpp in Sources */,
+				EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */,
 				EDDE57A51CE2D51E005D1C49 /* path.cpp in Sources */,
 				EDDE57A61CE2D51E005D1C49 /* path_traits.cpp in Sources */,
 				EDDE57A71CE2D51E005D1C49 /* portability.cpp in Sources */,
@@ -13169,6 +13176,7 @@
 				EDDE4C311CDE682E005D1C49 /* SEM.cpp in Sources */,
 				EDDE4C321CDE682E005D1C49 /* H.cpp in Sources */,
 				EDDE57871CDEF2D2005D1C49 /* UI.cpp in Sources */,
+				EDDE57AE1CE2E99D005D1C49 /* Utility.cpp in Sources */,
 				EDDE4C351CDE682E005D1C49 /* IInstitute.cpp in Sources */,
 				EDDE4C371CDE682E005D1C49 /* IParameters.cpp in Sources */,
 				EDDE4C3A1CDE682E005D1C49 /* WorldSettings.cpp in Sources */,
