@@ -1,2 +1,21 @@
 {
+    "params": [
+               {
+               "EParamTypes::SEMFrequencyProduction": 1
+               },
+               {
+               "EParamTypes::SEMProductionQuantity": 1000
+               },
+               {
+               "EParamTypes::SEMFrequencyResearchTemplates": 52
+               },
+               {
+               "EParamTypes::SEMNSolarPanelsResearch": 1
+               },
+               {
+               "EParamTypes::SEMEfficiencyUpgradeResearch" : 0.05
+               }
+            ],
+    
+
 }

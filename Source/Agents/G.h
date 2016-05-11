@@ -20,8 +20,24 @@ namespace solar_core
     
     class PVProject;
     
-    
-    
+    /**
+     
+     @DevStage1 Two separate permit process, one for general permit one for interconnection
+     
+     @DevStage1 having the probability of passing the inspection 
+     
+     
+     1. permit to install 2. install 3. request for inspection 4. inspection - pass or fail 5. apply for interconnection if pass 6. pass or not interconnection - variable time depending on  7.
+     
+     
+     @DevStage1 make Utility - param - already connected amount of energy, param - potential amount of energy that could be connected (also add inflation to that), chances of connecting will depend on the difference between the two. 
+     
+     Degradation of PV - 0.5% per year
+     
+     Check that payment is before or after installation
+     
+     
+     */
     class G
     {
     public:
