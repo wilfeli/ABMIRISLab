@@ -8,7 +8,11 @@
 
 #include "UI/UI.h"
 #include "UI/W.h"
-#include "ExternalTools/boost_1_57_0/boost/filesystem.hpp"
+#include <boost/filesystem.hpp>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
 
 #include "Agents/SolarPanel.h"
 #include "Institutions/IMessage.h"
@@ -85,9 +89,8 @@ UI::save(std::string path_to_save_file_)
     //convert to path, get parent path
     boost::filesystem::path path(path_to_save_file_);
     boost::filesystem::path path_to_dir = path.parent_path();
-    std::string file_name = "";
-//    boost::uuids::uuid file_name_short(boost::uuids::random_generator()());
-//    std::string file_name = to_string(file_name_short) + ".csv";
+    boost::uuids::uuid file_name_short = boost::uuids::random_generator()();
+    std::string file_name = boost::uuids::to_string(file_name_short) + ".csv";
     boost::filesystem::path path_tmp = path_to_dir;
     path_tmp /= file_name;
     

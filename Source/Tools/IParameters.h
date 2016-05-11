@@ -115,11 +115,6 @@ namespace solar_core
         /** State of a Project: preliminary quotes has been requested via online */
         RequestedOnlineQuote,
         
-		/*What is the difference between RequestPreliminaryQuote and RequestedPreliminaryQuote*/
-
-        /** State of a Project: preliminary quotes need to been requested via phone */
-        RequestPreliminaryQuote,
-        
         /** State of a Project: preliminary quotes has been requested via phone */
         RequestedPreliminaryQuote,
         
@@ -267,6 +262,25 @@ namespace solar_core
         
     
         
+        /** SEM parameters: Length of a production cycle  */
+        SEMFrequencyProduction,
+        
+        
+        /** SEM parameters: Amount of solar panels produced during each cycle */
+        SEMProductionQuantity,
+        
+        
+        /** SEM parameters: Length of a research cycle */
+        SEMFrequencyResearchTemplates,
+        
+        /** SEM parameters: Number of modifications researched per cycle*/
+        SEMNSolarPanelsResearch,
+        
+        
+        /** SEM parameters: Amount of percentage that efficiency goes up after research */
+        SEMEfficiencyUpgradeResearch,
+        
+        
         
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
@@ -290,6 +304,14 @@ namespace solar_core
         
         /** Marketing part: number of HH to draw per unit of time to push marketing information */
         MarketingMaxNToDrawPerTimeUnit,
+        
+        
+        /** Technology block: inverters technology type standard */
+        TechnologyInverterStandard,
+        
+        
+        /** Technology block: inverters technology type micro */
+        TechnologyInverterMicro,
         
         
         /** Empty enum for completeness */

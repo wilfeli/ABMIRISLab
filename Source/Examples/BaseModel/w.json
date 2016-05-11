@@ -25,6 +25,9 @@
                        "EConstraintParams::MaxLengthWaitPermitVisit":10
                        },
                        {
+                       "EConstraintParams::MaxLengthSEMRecordHistory":10
+                       }
+                       {
                        "EConstraintParams::MinNReceivedDesings":2
                        },
                        {

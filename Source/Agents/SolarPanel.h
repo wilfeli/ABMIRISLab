@@ -28,6 +28,18 @@ class SEI;
     
     
     
+    class Inverter
+    {
+    public:
+        std::string name;
+        EParamTypes technology; 
+    protected:
+        
+        
+    };
+    
+    
+    
 class SolarModule
 {
 public:
@@ -58,7 +70,6 @@ public:
  
  
  */
-    
 class PVDesign
 {
 public:

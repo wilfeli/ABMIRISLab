@@ -283,6 +283,7 @@ W::W(std::string path_, std::string mode_)
         
         //SEM are missing for now
         //sem.json
+        ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
         path_to_template = path_to_dir;
         path_to_template /= "sem.json";
         path = path_to_template.string();

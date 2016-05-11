@@ -44,6 +44,16 @@ protected:
 };
     
     
+    
+    class MesSellOrder
+    {
+    public:
+        std::string item;
+        SEI* buyer;
+    protected:
+    };
+    
+    
 class MesDesign
 {
 public:
