@@ -23,7 +23,7 @@ class MesMarketingSEIPreliminaryQuote;
 class MesDesign;
 class MesFinance;
 class SEI;
-    
+class SEM;
     
     
     
@@ -55,6 +55,8 @@ public:
     double length;
     double width;
     double warranty_length; /*!< in weeks, as it is time period */
+    std::string manufacturer_id = "";
+    SEM* manufacturer = nullptr;
 };
     
 
@@ -108,6 +110,7 @@ public:
     std::shared_ptr<MesStateBaseHH> state_base_agent;/*!< additional information about the agent for whom this project is made */
     TimeUnit begin_time;
     EParamTypes state_project;
+    EParamTypes state_materials;
     std::shared_ptr<MesMarketingSEIOnlineQuote> online_quote;
     std::shared_ptr<MesMarketingSEIPreliminaryQuote> preliminary_quote;
     std::shared_ptr<MesDesign> design;

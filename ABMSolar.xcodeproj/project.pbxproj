@@ -62,6 +62,8 @@
 		EDDE57AA1CE2D51E005D1C49 /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56141CDEBDB3005D1C49 /* windows_file_codecvt.cpp */; };
 		EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
 		EDDE57AE1CE2E99D005D1C49 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
+		EDDE57B11CE3A234005D1C49 /* ID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AF1CE3A234005D1C49 /* ID.cpp */; };
+		EDDE57B21CE3A234005D1C49 /* ID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AF1CE3A234005D1C49 /* ID.cpp */; };
 		EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
 		EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
 		EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
@@ -4452,6 +4454,8 @@
 		EDDE57981CE21A55005D1C49 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
 		EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
 		EDDE57AC1CE2E99D005D1C49 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		EDDE57AF1CE3A234005D1C49 /* ID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ID.cpp; sourceTree = "<group>"; };
+		EDDE57B01CE3A234005D1C49 /* ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID.h; sourceTree = "<group>"; };
 		EDE03AD11CB1F81600C79A22 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDE03ADD1CB8070500C79A22 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
@@ -8225,18 +8229,20 @@
 			children = (
 				EDDB3FE31C7DA16200A6EA1F /* Documentation.h */,
 				EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */,
+				EDDE57AF1CE3A234005D1C49 /* ID.cpp */,
+				EDDE57B01CE3A234005D1C49 /* ID.h */,
 				EDE03AE11CB88F2200C79A22 /* IParameters.cpp */,
 				EDDB3FE41C7DA16200A6EA1F /* IParameters.h */,
 				EDE0FD911CC0058100115115 /* IRandom.cpp */,
 				EDE0FD921CC0058100115115 /* IRandom.h */,
 				EDDE57881CDEF359005D1C49 /* Log.cpp */,
 				EDDE57891CDEF359005D1C49 /* Log.h */,
+				EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */,
+				EDDE57951CE17D3D005D1C49 /* ParsingTools.h */,
 				EDE03AE61CBBF68900C79A22 /* Serialize.cpp */,
 				EDE03AE01CB8184C00C79A22 /* Serialize.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
-				EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */,
-				EDDE57951CE17D3D005D1C49 /* ParsingTools.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -13119,6 +13125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDE57B11CE3A234005D1C49 /* ID.cpp in Sources */,
 				EDDE57A31CE2D51E005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE57A41CE2D51E005D1C49 /* operations.cpp in Sources */,
 				EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */,
@@ -13159,6 +13166,7 @@
 				EDDE579A1CE2CB9B005D1C49 /* operations.cpp in Sources */,
 				EDDE579B1CE2CB9B005D1C49 /* path.cpp in Sources */,
 				EDDE579C1CE2CB9B005D1C49 /* path_traits.cpp in Sources */,
+				EDDE57B21CE3A234005D1C49 /* ID.cpp in Sources */,
 				EDDE579D1CE2CB9B005D1C49 /* portability.cpp in Sources */,
 				EDDE579E1CE2CB9B005D1C49 /* unique_path.cpp in Sources */,
 				EDDE579F1CE2CB9B005D1C49 /* utf8_codecvt_facet.cpp in Sources */,

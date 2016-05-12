@@ -10,6 +10,7 @@
 #include "Tools/IParameters.h"
 #include "Tools/WorldSettings.h"
 #include "UI/W.h"
+#include "Agents/SEM.h"
 #include "Agents/SEI.h"
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"
@@ -116,6 +117,7 @@ SEI::init(W *w_)
 void
 SEI::get_project(std::shared_ptr<PVProject> project_)
 {
+    project_->state_materials = EParamTypes::None;
     pvprojects_lock.lock();
     //save project
     pvprojects_to_add.push_back(project_);
@@ -396,11 +398,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
         CPI = CPI * inflation;
     };
     
-    //MARK: cont. redo
     design.total_savings = energy_costs - design.total_costs;
-    
-    
-    
 }
 
 
@@ -416,11 +414,43 @@ SEI::form_financing(std::shared_ptr<PVProject> project_)
     
 }
 
+/**
 
-
+Here also have buying and payment
+ 
+*/
 void
 SEI::install_project(std::shared_ptr<PVProject> project)
 {
+    auto mes = MesSellOrder(project->design->design->PV_module->name, project->design->design->N_PANELS, this);
+    
+    //check that has enough money
+    auto money_need = mes.qn * project->design->design->PV_module->manufacturer->prices[mes.item];
+    
+    
+    
+    
+    if ((money_need >= money) || (project->state_materials == EParamTypes::PendingMaterials))
+    {
+        
+        money -= money_need;
+        
+        if (project->design->design->PV_module->manufacturer->sell_SolarModule(mes))
+        {
+            //money are already paid
+        }
+        else
+        {
+            project->state_materials = EParamTypes::PendingMaterials;
+            money += money_need;
+        };
+        
+    }
+    else
+    {
+        project->state_materials = EParamTypes::PendingMaterials;
+    };
+    
     w->get_state_inf_installed_project(project);
 }
 
@@ -579,7 +609,7 @@ SEI::act_tick()
         };
         
         
-        if (project->state_project == EParamTypes::GrantedPermit)
+        if ((project->state_project == EParamTypes::GrantedPermit) || (project->state_project == EParamTypes::ScheduleInstallation))
         {
             //schedule installation
             bool FLAG_SCHEDULED_VISIT = false;
@@ -640,8 +670,22 @@ SEI::act_tick()
         if (project && project->financing->state_payments == EParamTypes::PaymentsOnTime)
         {
             install_project(project);
-            project->state_project = EParamTypes::Installed;
+            if (project->state_materials == EParamTypes::PendingMaterials)
+            {
+                //reschedule
+                project->state_project = EParamTypes::ScheduleInstallation;
+            }
+            else
+            {
+                project->state_project = EParamTypes::Installed;
+            };
             project->ac_sei_time = a_time;
+        }
+        else
+        {
+            //reschedule
+            project->state_project = EParamTypes::ScheduleInstallation;
+            
         };
     };
 

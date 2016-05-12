@@ -48,7 +48,9 @@ protected:
     class MesSellOrder
     {
     public:
+        MesSellOrder(std::string item_, double qn_, SEI* buyer_):item(item_), qn(qn_), buyer(buyer_){};
         std::string item;
+        double qn;
         SEI* buyer;
     protected:
     };
