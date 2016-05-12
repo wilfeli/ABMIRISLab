@@ -123,7 +123,6 @@ W::W(std::string path_, std::string mode_)
         serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
         
         
-        
         //create grid
         path_to_template = path_to_dir;
         path_to_template /= "geography.json";
@@ -347,6 +346,26 @@ W::init()
     };
     
     
+    auto max_ = WorldSettings::instance().solar_modules.size() - 1;
+    auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
+    
+    //set producers
+    for (auto iter: WorldSettings::instance().solar_modules)
+    {
+        if (iter.second->manufacturer_id == "FORMULA::RANDOM")
+        {
+            iter.second->manufacturer = sems[rng_i()];
+            iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
+            
+        }
+        else
+        {
+            throw std::runtime_error("unsupported formula");
+        };
+    };
+    
+
     
 }
 

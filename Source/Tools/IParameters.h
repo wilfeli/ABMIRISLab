@@ -160,6 +160,12 @@ namespace solar_core
         /** State of a Project: scheduled installation */
         ScheduledInstallation,
         
+        /** State of a Project: need to schedule installation */
+        ScheduleInstallation,
+        
+        /** State of a Project: need to purchase materials */
+        PendingMaterials,
+        
         /** State of a Project: project is installed */
         Installed,
         
@@ -276,9 +282,18 @@ namespace solar_core
         /** SEM parameters: Number of modifications researched per cycle*/
         SEMNSolarPanelsResearch,
         
-        
         /** SEM parameters: Amount of percentage that efficiency goes up after research */
         SEMEfficiencyUpgradeResearch,
+        
+        /** SEM parameter: Frequency of making price decisions */
+        SEMFrequencyPriceDecisions,
+        
+        /** SEM parameter: Base level of efficiency with 1.0 as price adjustment */
+        SEMPriceBaseEfficiency,
+        
+        /** SEM parameter: Marrkup to the price for the increased efficiency */
+        SEMPriceMarkupEfficiency,
+        
         
         
         
@@ -352,6 +367,15 @@ namespace solar_core
         
         /** Maximum forecasting horizon for scheduling permit visits */
         MaxLengthWaitPermitVisit,
+        
+        
+        /** Maximum length of collecting past information by SEM */
+        SEMMaxLengthRecordHistory,
+        
+        
+        
+        
+        
         
         None,
     };
@@ -576,6 +600,10 @@ namespace solar_core
             else if (param_type == "econstraintparams::maxnopenprojectshh")
             {
                 return EConstraintParams::MaxNOpenProjectsHH;
+            }
+            else if (param_type == "econstraintparams::semmaxlengthrecordhistory")
+            {
+                return EConstraintParams::SEMMaxLengthRecordHistory;
             }
             else
             {

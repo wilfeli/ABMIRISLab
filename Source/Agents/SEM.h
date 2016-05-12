@@ -11,6 +11,7 @@
 
 #include "Tools/IParameters.h"
 #include "Tools/ExternalIncludes.h"
+#include "Tools/ID.h"
 
 
 namespace solar_core
@@ -80,6 +81,33 @@ namespace solar_core
         //@}
         
         
+        //@{
+        /**
+         
+         Section with pricing decisions
+         
+         
+         */
+
+        std::map<std::string, double> prices; /*!< prices for solar panels */
+        
+        //@}
+        
+        
+        
+        //@{
+        /**
+         
+         Public parameters
+         
+         */
+        
+        UID uid;
+        
+        
+        //@}
+        
+        
     protected:
         //@{
         /**
@@ -91,18 +119,16 @@ namespace solar_core
         
         W* w;
         TimeUnit a_time; /*!< agent time */
-        
+        std::mutex lock;
         
         void ac_update_tick(); /*!< updates before tick */
-        
-        std::map<std::string, double> prices; /*!< prices for solar panels */
         
         double money; /*!< money of an agent */
         std::map<EParamTypes, double> params; /*!< parameters of an agent */
         
         TimeUnit sem_production_time; /*!< last time production cycle took place */
         TimeUnit sem_research_time; /*!< last time research cycle ended */
-        
+
         
         //@}
         
@@ -128,9 +154,10 @@ namespace solar_core
          
          
          */
-        
+        TimeUnit sem_dec_time; /*!< last time price decision was made */ 
         std::vector<double> history_sales;
-        
+        double costs_base = 0.39;
+        std::vector<double> THETA_profit; /*!< THETA[0] - base markup, THETA[1] - */
         
         
         //@}

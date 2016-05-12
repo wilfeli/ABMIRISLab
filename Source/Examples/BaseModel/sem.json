@@ -14,8 +14,17 @@
                },
                {
                "EParamTypes::SEMEfficiencyUpgradeResearch" : 0.05
+               },
+               {
+               "EParamTypes::SEMPriceMarkupEfficiency": 0.1
+               },
+               {
+               "EParamTypes::SEMPriceBaseEfficiency": 0.15
                }
             ],
-    
+    "costs_base":0.39,
+    "THETA_profit":[
+                0.35
+    ]
 
 }

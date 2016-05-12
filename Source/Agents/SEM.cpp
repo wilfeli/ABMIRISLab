@@ -10,6 +10,8 @@
 #include "UI/W.h"
 #include "Agents/SEM.h"
 #include "Agents/SolarPanel.h"
+#include "Institutions/IMessage.h"
+#include "Tools/Serialize.h"
 
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
@@ -22,11 +24,27 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
     
     w = w_;
     
-    history_sales = std::vector<double>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthSEMRecordHistory], 0.0);
+    history_sales = std::vector<double>(WorldSettings::instance().constraints[EConstraintParams::SEMMaxLengthRecordHistory], 0.0);
+    
+    
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+    
+    ///@DevStage2 move to W to speed up, but test before that
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+    };
+
     
     
     
     
+    sem_production_time = -params[EParamTypes::SEMFrequencyProduction];
+    sem_research_time = 0;
+    a_time = w->time;
     
 }
 
@@ -42,16 +60,29 @@ SEM::init(W* w_)
 bool
 SEM::sell_SolarModule(solar_core::MesSellOrder &mes_)
 {
-    return false;
+    bool FLAG_TRANSACTION = false;
+    if (inventories.count(mes_.item) > 0 && inventories[mes_.item] >= mes_.qn)
+    {
+        inventories[mes_.item] -= mes_.qn;
+        FLAG_TRANSACTION = true;
+    };
+    
+    lock.lock();
+    history_sales[a_time % history_sales.size()] += mes_.qn;
+    lock.unlock();
+    
+    return FLAG_TRANSACTION;
 }
 
 
 void
 SEM::ac_update_tick()
 {
+    lock.lock();
     //update internal timer
     a_time = w->time;
-
+    history_sales[a_time % history_sales.size()] = 0.0;
+    lock.unlock();
 }
 
 
@@ -101,11 +132,32 @@ SEM::act_tick()
     };
     
     //change prices if demand is increasing
-    if ()
+    if ((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions])
     {
-        //
-        a_time % schedule_visits.size()
-        a_time - 
+        
+        auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
+        auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
+        
+        if (qn_t > 0.0 && qn_t_1 > 0.0)
+        {
+            //base markup is here
+            THETA_profit[0] *= qn_t/qn_t_1;
+        };
+        
+        
+        for (auto iter:prices)
+        {
+            auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
+            auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+            
+            iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+            
+        };
+        
+        
+        sem_dec_time = a_time;
+        
+        
     };
     
     
