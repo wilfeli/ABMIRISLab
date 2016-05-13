@@ -59,7 +59,8 @@ namespace solar_core
          Section relevant for permitting process
          
          */
-        virtual void request_permit(std::shared_ptr<PVProject> project_); /*!< request permit for the project */
+        virtual void request_permit_for_installation(std::shared_ptr<PVProject> project_); /*!< request permit for the project */
+        void request_inspection(std::shared_ptr<PVProject> project_); /*!< request inspection after installation */
         
         //@}
         
@@ -93,7 +94,7 @@ namespace solar_core
         //void pass_inspection(std::shared_ptr<PVProject> project_); //added this because this is one more area of interaction between SEI and G
  
 
-        
+        std::set<EParamTypes> project_states_to_delete;
         
         //@}
         

@@ -154,9 +154,6 @@ namespace solar_core
         /** State of a Project: collected information for granting permit */
         CollectedInfPermitVisit,
         
-        /** State of a Project: granted permit for the project*/
-        GrantedPermit,
-        
         /** State of a Project: scheduled installation */
         ScheduledInstallation,
         
@@ -168,6 +165,24 @@ namespace solar_core
         
         /** State of a Project: project is installed */
         Installed,
+        
+        /** State of a Project: request permit to install project */
+        RequestedPermitForInstallation,
+        
+        /** State of a Project: project could be installed */
+        GrantedPermitForInstallation,
+        
+        /** State of a Project: request inspection after installation */
+        RequestedInspectionAfterInstallation,
+        
+        /** State of a Project: passed inspection after installation */
+        PassedInspectionAfterInstallation,
+        
+        /** State of a Project: request permission to connect to the grid */
+        RequestedPermitForInterconnection,
+        
+        /** State of a Project: granted permit to connect to the grid */
+        GrantedPermitForInterconnection,
         
         /** State of a Project: project closed for any reason */
         ClosedProject,
@@ -300,16 +315,23 @@ namespace solar_core
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
         
-        
         /** G parameters: maximum number of visits per time unit */
         GMaxNVisitsPerTimeUnit,
-        
         
         /** G parameters: time to process permit */
         GProcessingTimeRequiredForProcessingPermit,
         
+        /** G parameters: processing time for granting installation permit */
+        GProcessingTimeRequiredForGrantingPermitForInstallation,
         
+        /** Utility parameters: time to investigate request for interconnection */
+        UtilityProcessingTimeRequiredForPermit,
         
+        /** Utility parameters: Max capacity of the grid */
+        UtilityMaxCapacity,
+        
+        /** Utility parameters: Current capacity of the grid */
+        UtilityCurrentCapacity,
         
         
         /** State of Payments: all payments on time */

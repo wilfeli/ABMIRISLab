@@ -121,6 +121,7 @@ public:
     TimeUnit ac_g_time = 0; /*!< time of a last action on this project by g */
     TimeUnit ac_hh_time = 0; /*!< time of a last action on the project by h */
     TimeUnit ac_accepted_time = 0; /*!< when when the project was accepted */
+    TimeUnit ac_utility_time = 0; /*! when request was accepted by utility company */
     
 protected:
     

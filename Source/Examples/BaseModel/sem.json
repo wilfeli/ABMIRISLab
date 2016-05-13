@@ -20,11 +20,16 @@
                },
                {
                "EParamTypes::SEMPriceBaseEfficiency": 0.15
+               },
+               {
+               "EParamTypes::SEMFrequencyPriceDecisions":4
                }
             ],
     "costs_base":0.39,
     "THETA_profit":[
                 0.35
-    ]
+    ],
+    "N_solar_panel_templates":3,
+    "N_PANELS_inventories":1000
 
 }

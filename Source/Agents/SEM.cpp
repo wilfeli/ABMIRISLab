@@ -37,13 +37,25 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
+    
+    
+    std::vector<std::string> THETA_profit_str;
+    serialize::deserialize(pt_.get_child("THETA_profit"), THETA_profit_str);
+    for (auto& iter:THETA_profit_str)
+    {
+        THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
 
+    money = serialize::solve_str_formula<double>(pt_.get<std::string>("money"), *w->rand);
+    
+    costs_base = serialize::solve_str_formula<double>(pt_.get<std::string>("costs_base"), *w->rand);
     
     
-    
+    N_PANELS_inventories = pt_.get<double>("N_PANELS_inventories");
     
     sem_production_time = -params[EParamTypes::SEMFrequencyProduction];
     sem_research_time = 0;
+    sem_dec_time = 0;
     a_time = w->time;
     
 }
@@ -53,6 +65,30 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
 void
 SEM::init(W* w_)
 {
+    //collect solar panels
+    for (auto iter:WorldSettings::instance().solar_modules)
+    {
+        if (iter.second->manufacturer == this)
+        {
+            solar_panel_templates.push_back(iter.second);
+        };
+    };
+    
+    
+    //for each solar module create inventories
+    for (auto iter:solar_panel_templates)
+    {
+        inventories[iter->name] = N_PANELS_inventories;
+    };
+    
+    //set prices
+    for (auto iter:solar_panel_templates)
+    {
+        auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+    
+        prices[iter->name] = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+    };
+    
 }
 
 
@@ -131,8 +167,9 @@ SEM::act_tick()
         
     };
     
-    //change prices if demand is increasing
-    if ((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions])
+    //change prices if demand is changing
+    //@DevStage2 change to avoid check at every cycle
+    if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
     {
         
         auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
