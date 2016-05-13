@@ -152,9 +152,16 @@ SEM::act_tick()
         //pick random template and innovate on it
         if (params[EParamTypes::SEMNSolarPanelsResearch] > 0.0)
         {
-            auto pdf_i = boost::uniform_int<uint64_t>(0, params[EParamTypes::SEMNSolarPanelsResearch] - 1);
+            //wrong redo
+            auto pdf_i = boost::uniform_int<uint64_t>(0, std::min(solar_panel_templates.size() - 1, ));
             auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
-            auto i = rng_i();
+            
+            for (int i = 0; i < params[EParamTypes::SEMNSolarPanelsResearch]; ++i)
+            {
+               auto j = rng_i();
+                
+            };
+            
             std::shared_ptr<SolarModule> new_pv(new SolarModule(*solar_panel_templates[i]));
             new_pv->name = boost::uuids::to_string(boost::uuids::random_generator()());
             new_pv->efficiency *= (1 + params[EParamTypes::SEMEfficiencyUpgradeResearch]);

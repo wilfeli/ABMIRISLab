@@ -30,6 +30,7 @@
                 0.35
     ],
     "N_solar_panel_templates":3,
-    "N_PANELS_inventories":1000
+    "N_PANELS_inventories":1000,
+    "money": "FORMULA::p.d.f.::u(10000, 50000)"
 
 }
