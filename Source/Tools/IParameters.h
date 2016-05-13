@@ -539,6 +539,50 @@ namespace solar_core
             {
                 return EParamTypes::MarketingMaxNToDrawPerTimeUnit;
             }
+            else if (param_type == "eparamtypes::semefficiencyupgraderesearch")
+            {
+                return EParamTypes::SEMEfficiencyUpgradeResearch;
+            }
+            else if (param_type == "eparamtypes::semfrequencypricedecisions")
+            {
+                return EParamTypes::SEMFrequencyPriceDecisions;
+            }
+            else if (param_type == "eparamtypes::semfrequencyproduction")
+            {
+                return EParamTypes::SEMFrequencyProduction;
+            }
+            else if (param_type == "eparamtypes::semfrequencyresearchtemplates")
+            {
+                return EParamTypes::SEMFrequencyResearchTemplates;
+            }
+            else if (param_type == "eparamtypes::semnsolarpanelsresearch")
+            {
+                return EParamTypes::SEMNSolarPanelsResearch;
+            }
+            else if (param_type == "eparamtypes::sempricebaseefficiency")
+            {
+                return EParamTypes::SEMPriceBaseEfficiency;
+            }
+            else if (param_type == "eparamtypes::sempricemarkupefficiency")
+            {
+                return EParamTypes::SEMPriceMarkupEfficiency;
+            }
+            else if (param_type == "eparamtypes::semproductionquantity")
+            {
+                return EParamTypes::SEMProductionQuantity;
+            }
+            else if (param_type == "eparamtypes::utilitycurrentcapacity")
+            {
+                return EParamTypes::UtilityCurrentCapacity;
+            }
+            else if (param_type == "eparamtypes::utilitymaxcapacity")
+            {
+                return EParamTypes::UtilityMaxCapacity;
+            }
+            else if (param_type == "eparamtypes::utilityprocessingtimerequiredforpermit")
+            {
+                return EParamTypes::UtilityProcessingTimeRequiredForPermit;
+            }
             else
             {
 #ifdef DEBUG

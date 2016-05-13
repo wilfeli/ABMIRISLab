@@ -43,7 +43,7 @@ UI::save(std::string path_to_save_file_)
     auto save_data_raw = std::vector<std::deque<std::shared_ptr<solar_core::PVProject>>>(simulation_length, {});
     
     //go through all installed projects and sort them by the date they were installed
-    for (auto& project:w->installed_projects)
+    for (auto& project:w->interconnected_projects)
     {
         save_data_raw[project->ac_sei_time].push_back(project);
     };

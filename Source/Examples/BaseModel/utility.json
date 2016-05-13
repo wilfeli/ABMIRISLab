@@ -9,6 +9,9 @@
                {
                "EParamTypes::UtilityCurrentCapacity":15000000
                }
-               ]
+               ],
+    "THETA_dec":[
+                2.0
+    ]
 
 }
