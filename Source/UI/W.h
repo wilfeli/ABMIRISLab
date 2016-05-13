@@ -30,6 +30,7 @@ namespace solar_core {
     class WorldMap;
     class G;
     class MarketingInst;
+    class Utility;
     class SEI;
     class SEM;
     class Household;
@@ -144,7 +145,7 @@ namespace solar_core {
         
         void get_state_inf(Household* agent_, EParamTypes state_); /*!< gets information about state change from agent */
         void get_state_inf_installed_project(std::shared_ptr<PVProject> project_); /*!< is called when project is finished to record it */
-        
+        void get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_); /*!< is called when project is interconnected to record it */
         
         
         //@}
@@ -159,7 +160,7 @@ namespace solar_core {
         
         G* g; /*!< government */
         MarketingInst* marketing;
-        
+        Utility* utility; 
         //@}
         
         
@@ -178,7 +179,7 @@ namespace solar_core {
         std::map<std::string, std::string> params;
         
         
-        std::vector<std::shared_ptr<PVProject>> installed_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
+        std::vector<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
         
         
         

@@ -22,6 +22,7 @@
 #include <deque>
 #include <list>
 #include <stack>
+#include <set>
 #include <regex>
 
 #endif

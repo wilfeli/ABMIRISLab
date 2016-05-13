@@ -12,6 +12,7 @@
 #include "UI/W.h"
 #include "Agents/SEM.h"
 #include "Agents/SEI.h"
+#include "Agents/Utility.h"
 #include "Agents/H.h"
 #include "Institutions/IMessage.h"
 #include "Institutions/MarketingSystem.h"
@@ -392,6 +393,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     for (auto i = 0; i < design.PV_module->warranty_length/52; ++i)
     {
         //estimate yearly energy production, if PPA might be used in estimation
+        //MARK: cont. check again
         auto daily_production = design.AC_size * design.solar_radiation/1000;
         energy_costs += (daily_production) * 365.25 * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
         
@@ -604,12 +606,12 @@ SEI::act_tick()
         //after design is formed - get permit for the installation
         if (project->state_project == EParamTypes::AcceptedDesign)
         {
-            w->g->request_permit(project);
-            project->state_project = EParamTypes::RequestedPermit;
+            w->g->request_permit_for_installation(project);
+            project->state_project = EParamTypes::RequestedPermitForInstallation;
         };
         
         
-        if ((project->state_project == EParamTypes::GrantedPermit) || (project->state_project == EParamTypes::ScheduleInstallation))
+        if ((project->state_project == EParamTypes::GrantedPermitForInstallation) || (project->state_project == EParamTypes::ScheduleInstallation))
         {
             //schedule installation
             bool FLAG_SCHEDULED_VISIT = false;
@@ -642,6 +644,29 @@ SEI::act_tick()
         };
         
         //includes signing contract and starting payments if nesessary, as payment schedule will be part of the project
+        
+        
+        
+        if (project->state_project == EParamTypes::Installed)
+        {
+            //request inspection
+            w->g->request_inspection(project);
+            project->state_project = EParamTypes::RequestedInspectionAfterInstallation;
+        };
+        
+        
+        if (project->state_project == EParamTypes::PassedInspectionAfterInstallation)
+        {
+            w->utility->request_permit_for_interconnection(project);
+            project->state_project = EParamTypes::RequestedPermitForInterconnection;
+        };
+        
+        if (project->state_project == EParamTypes::GrantedPermitForInterconnection)
+        {
+            w->get_state_inf_interconnected_project(project);
+        };
+        
+        
         
     };
     
@@ -689,6 +714,9 @@ SEI::act_tick()
         };
     };
 
+    
+    
+    
     
     
 

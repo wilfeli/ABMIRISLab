@@ -27,6 +27,7 @@ using boost::property_tree::write_json;
 #include "Agents/IAgent.h"
 #include "Agents/SEI.h"
 #include "Agents/SEM.h"
+#include "Agents/Utility.h"
 #include "Agents/G.h"
 #include "Agents/H.h"
 
@@ -280,7 +281,7 @@ W::W(std::string path_, std::string mode_)
             
         };
         
-        //SEM are missing for now
+        
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
         path_to_template = path_to_dir;
@@ -293,6 +294,27 @@ W::W(std::string path_, std::string mode_)
             sems.push_back(new SEM(pt, this));
         };
         
+        max_ = WorldSettings::instance().solar_modules.size() - 1;
+        auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
+
+        
+        //set producers
+        for (auto iter: WorldSettings::instance().solar_modules)
+        {
+            if (iter.second->manufacturer_id == "FORMULA::RANDOM")
+            {
+                iter.second->manufacturer = sems[rng_i()];
+                iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
+                
+            }
+            else
+            {
+                throw std::runtime_error("unsupported formula");
+            };
+        };
+
+        
         
         //create G
         //g.json
@@ -301,6 +323,16 @@ W::W(std::string path_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         g = new G(pt, this);
+        
+        
+        //create Utility
+        //utility.json
+        path_to_template = path_to_dir;
+        path_to_template /= "utility.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        utility = new Utility(pt, this);
+        
         
         //create marketing
         marketing = new MarketingInst(this);
@@ -346,24 +378,7 @@ W::init()
     };
     
     
-    auto max_ = WorldSettings::instance().solar_modules.size() - 1;
-    auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
     
-    //set producers
-    for (auto iter: WorldSettings::instance().solar_modules)
-    {
-        if (iter.second->manufacturer_id == "FORMULA::RANDOM")
-        {
-            iter.second->manufacturer = sems[rng_i()];
-            iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
-            
-        }
-        else
-        {
-            throw std::runtime_error("unsupported formula");
-        };
-    };
     
 
     
@@ -613,7 +628,13 @@ W::get_state_inf(Household* agent_, EParamTypes state_)
 void
 W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 {
-    installed_projects.push_back(project_);
+    
 }
 
+
+void
+W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
+{
+    interconnected_projects.push_back(project_);
+}
 

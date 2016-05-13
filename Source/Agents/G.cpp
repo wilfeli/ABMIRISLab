@@ -35,6 +35,20 @@ G::G(const PropertyTree& pt_, W* w_)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
+    
+    
+    //form set with "closed" states
+    project_states_to_delete.insert(EParamTypes::GrantedPermitForInstallation);
+    project_states_to_delete.insert(EParamTypes::GrantedPermitForInterconnection);
+    project_states_to_delete.insert(EParamTypes::ClosedProject);
+    project_states_to_delete.insert(EParamTypes::Installed);
+    project_states_to_delete.insert(EParamTypes::PassedInspectionAfterInstallation);
+    project_states_to_delete.insert(EParamTypes::RequestedPermitForInterconnection);
+    project_states_to_delete.insert(EParamTypes::ScheduledInstallation);
+    project_states_to_delete.insert(EParamTypes::ScheduleInstallation);
+    
+    
+    
 }
 
 
@@ -47,24 +61,14 @@ G::init(W* w_)
 }
 
 
+
 void
-G::request_permit(std::shared_ptr<PVProject> project_)
+G::request_permit_for_installation(std::shared_ptr<PVProject> project_)
 {
     project_->ac_g_time = a_time;
-    
-    
-    //check if needs visits at all
-    if (!w->world_map->g_map[project_->agent->location_y][project_->agent->location_x]->requires_permit_visit)
-    {
-        project_->state_project = EParamTypes::CollectedInfPermitVisit;
-        project_->ac_g_time = a_time;
-    };
-    
-    
+    pending_pvprojects_lock.lock();
     pending_pvprojects_to_add.push_back(project_);
-    
-    
-    
+    pending_pvprojects_lock.unlock();
 }
 
 
@@ -75,11 +79,23 @@ G::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
     
 }
 
+void
+G::request_inspection(std::shared_ptr<PVProject> project_)
+{
+    project_->ac_g_time = a_time;
+    pending_pvprojects_lock.lock();
+    pending_pvprojects_to_add.push_back(project_);
+    pending_pvprojects_lock.unlock();
+
+    //MARK: cont. check if some areas do not require visit after installation
+    
+}
+
 
 void
 G::approve_permit(std::shared_ptr<PVProject> project_)
 {
-    project_->state_project = EParamTypes::GrantedPermit;
+    project_->state_project = EParamTypes::PassedInspectionAfterInstallation;
 }
 
 
@@ -94,6 +110,14 @@ G::ac_update_tick()
     //pove pending projects into active projects
     pending_pvprojects.insert(pending_pvprojects.end(), pending_pvprojects_to_add.begin(), pending_pvprojects_to_add.end());
     pending_pvprojects_to_add.clear();
+    
+    //remove all projects that are granted permit
+    
+    
+    pending_pvprojects.erase(std::remove_if(pending_pvprojects.begin(), pending_pvprojects.end(),
+                                            [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pending_pvprojects.end());
+    
+    
     pending_pvprojects_lock.unlock();
     
     
@@ -129,7 +153,21 @@ G::act_tick()
     //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
     for (auto& project:pending_pvprojects)
     {
-        if (project->state_project == EParamTypes::RequestedPermit)
+        if (project->state_project == EParamTypes::RequestedPermitForInstallation)
+        {
+            auto project_permitting_time = params[EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
+            if ((a_time - project->ac_g_time) >= project_permitting_time)
+            {
+                //grant permit
+                project->state_project = EParamTypes::GrantedPermitForInstallation;
+                project->ac_g_time = a_time;
+            };
+            
+        };
+        
+        
+        
+        if (project->state_project == EParamTypes::RequestedInspectionAfterInstallation)
         {
             //if permit was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
             auto project_scheduling_time = params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;

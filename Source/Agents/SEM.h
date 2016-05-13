@@ -143,7 +143,7 @@ namespace solar_core
         std::vector<std::shared_ptr<Inverter>> inverter_templates;
         
         std::map<std::string, double> inventories;
-
+        double N_PANELS_inventories = 0.0;
         
         //@}
         
