@@ -125,6 +125,7 @@ int main(int argc, const char * argv[])
         t.join();
     };
     
+    time (&rawtime);
     timeinfo = localtime(&rawtime);
     std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;

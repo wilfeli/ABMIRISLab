@@ -16,9 +16,9 @@ using namespace solar_core;
 
 
 void
-SEIMock::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
+SEIMock::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
 {
     
-    SEI::form_design_for_params(project_, demand, solar_radiation, permit_difficulty, project_percentage, iter, design);
+    SEI::form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
     
 }

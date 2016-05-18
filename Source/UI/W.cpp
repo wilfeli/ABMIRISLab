@@ -606,9 +606,9 @@ W::life_markets()
 
 
 double
-W::get_solar_radiation(double location_x, double location_y) const
+W::get_solar_irradiation(double location_x, double location_y) const
 {
-    return world_map->g_map[location_x][location_y]->solar_radiation;
+    return world_map->g_map[location_x][location_y]->solar_irradiation;
 }
 
 double

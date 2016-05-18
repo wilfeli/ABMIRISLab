@@ -50,7 +50,7 @@ namespace solar_core
      
      
      
-     @DevStage1 might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit
+     @DevStage2 might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit
      
      */
     class SEI: public IAgent
@@ -206,7 +206,7 @@ namespace solar_core
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
         typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
         
-        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
+        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
         
         
         std::vector<double> dec_project_percentages; /*!< percentage of a utility bill to cover */

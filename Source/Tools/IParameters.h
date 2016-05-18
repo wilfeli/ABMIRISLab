@@ -47,7 +47,7 @@ namespace solar_core
     
     /**
      
-     @DevStage1 add factories enum<->std::string
+     factories enum<->std::string
      
      @DevStage2 think about splitting enum into multiple enums
      

@@ -118,7 +118,7 @@ namespace solar_tests
         static void TearDownTestCase()
         {
             //deletes world
-            //now DevStage1 does nothing, later will clean agents
+            //now does nothing, @DevStage2 later will clean agents
             
             delete w;
             w = nullptr;
@@ -191,14 +191,14 @@ namespace solar_tests
         project->sei = seimock;
         project->agent = get_hhs()[rng_i()];
         double demand = 300;
-        double solar_radiation = 5;
+        double solar_irradiation = 5;
         double permit_difficulty = 2;
         double project_percentage = 0.8;
         auto design = PVDesign();
         auto iter = project->sei->dec_solar_modules.begin();
         
         
-        project->sei->form_design_from_param(project, demand, solar_radiation, permit_difficulty, project_percentage, iter, design);
+        project->sei->form_design_from_param(project, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
         
         
         
