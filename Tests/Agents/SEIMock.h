@@ -20,7 +20,7 @@ namespace solar_tests
     class SEIMock: public SEI
     {
     public:
-        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design);
+        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design);
         
         
         

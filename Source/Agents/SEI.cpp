@@ -245,15 +245,15 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     //forms design by default
     //mid percentage to be used for estimating size
     auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
-    //amount of solar radiation in Wh/m2/day
-    auto solar_radiation = w->get_solar_radiation(project_->agent->location_x, project_->agent->location_y);
+    //amount of solar irradiation in Wh/m2/day
+    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
     //distribution of permit length in different locations
     auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
     
     
     auto design = PVDesign();
     
-    form_design_for_params(project_, demand, solar_radiation, permit_difficulty, dec_project_percentages[1], *(++dec_solar_modules.begin()), design);
+    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[1], *(++dec_solar_modules.begin()), design);
     
     ac_estimate_savings(design, project_);
 
@@ -286,7 +286,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
  for 30kWh per day need 24 panels if use STC Power Rating
  
  
- 
+ @DevStage1 need estimation on the distribution of roof sizes and usable roof sizes
  
  
 */
@@ -301,8 +301,8 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     std::vector<PVDesign> designs;
     //daily electricity consumption
     auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
-    //amount of solar radiation in Wh/m2/day
-    auto solar_radiation = w->get_solar_radiation(project_->agent->location_x, project_->agent->location_y);
+    //amount of solar irradiation in kWh/m2/day
+    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
     //distribution of permit length in different locations
     auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
     
@@ -315,7 +315,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             //create design
             auto design = PVDesign();
             
-            form_design_for_params(project_, demand, solar_radiation, permit_difficulty, project_percentage, iter, design);
+            form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
             
             ac_estimate_savings(design, project_);
             
@@ -338,19 +338,19 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
 
 
 void
-SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_radiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
+SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
 {
-    design.solar_radiation = solar_radiation;
+    design.solar_irradiation = solar_irradiation;
     
     design.permit_difficulty = permit_difficulty;
     
-    design.N_PANELS = std::ceil(demand * project_percentage / ((solar_radiation/1000) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    design.N_PANELS = std::ceil(demand * project_percentage / ((solar_irradiation) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     
     design.PV_module = iter.second;
     
-    design.DC_size = design.N_PANELS * iter.second->STC_power_rating;
+    design.DC_size = design.N_PANELS * iter.second->STC_power_rating / 1000;
     
-    design.AC_size = design.DC_size * WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss];
+    design.AC_size = design.DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     
     ///@DevStage1 add inverter technology here
     
@@ -390,11 +390,11 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
     auto energy_costs = 0.0;
-    for (auto i = 0; i < design.PV_module->warranty_length/52; ++i)
+    for (auto i = 0; i < design.PV_module->warranty_length; ++i)
     {
         //estimate yearly energy production, if PPA might be used in estimation
         //MARK: cont. check again
-        auto daily_production = design.AC_size * design.solar_radiation/1000;
+        auto daily_production = design.AC_size * design.solar_irradiation;
         energy_costs += (daily_production) * 365.25 * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
         
         CPI = CPI * inflation;

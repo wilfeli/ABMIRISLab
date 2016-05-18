@@ -77,7 +77,7 @@ class PVDesign
 public:
     PVDesign() = default;
     PVDesign(const PVDesign&) = default;
-    double solar_radiation = 0.0;
+    double solar_irradiation = 0.0;
     double permit_difficulty = 0.0;
     std::shared_ptr<SolarModule> PV_module;
     double N_PANELS = 0.0;

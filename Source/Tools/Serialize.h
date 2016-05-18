@@ -474,7 +474,7 @@ namespace serialize
                     double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
                     double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                     
-                    ///@DevStage1 change to Truncated generation
+                    ///@DevStage2 change to better Truncated generation
                     formula = std::to_string(std::max(rand_.rnd() * std::pow(sigma2, 0.5) + mean, 0.0));
                     
                 }
