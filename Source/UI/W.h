@@ -11,6 +11,7 @@
 
 
 #include <mutex>
+#include <atomic>
 #include "Tools/ExternalIncludes.h"
 #include "Tools/IParameters.h"
 #include "Tools/IRandom.h"
