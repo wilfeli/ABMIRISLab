@@ -57,6 +57,16 @@
             ReferencedContainer = "container:ABMSolar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "NEW"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Examples/UnitTestModel/unittestmodel.model"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "DYLD_FRAMEWORK_PATH"

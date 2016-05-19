@@ -96,7 +96,7 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
     };
 
-    
+    mes_marketing = std::make_shared<MesMarketingSEI>(this, sei_type);
     
     
 
@@ -109,7 +109,7 @@ SEI::init(W *w_)
     a_time = w_->time;
     
     //send marketing information out
-    w->marketing->get_marketing_inf_sei(std::make_shared<MesMarketingSEI>(this, sei_type));
+    w->marketing->get_marketing_inf_sei(mes_marketing);
     
 }
 
@@ -168,19 +168,21 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
     //from params get stuff such as average price per watt, price of a standard unit
     auto mes = std::make_shared<MesMarketingSEIOnlineQuote>();
     
-    ///@Kelley actually form function
+
     ///@wp for now it is price per watt
     double p;
-    auto estimated_demand  = project_->state_base_agent->params[EParamTypes::ElectricityBill] / WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+    /// in kWh
+    //ElectricityBill in dollars, ElectricityPriceUCDemand in dollars per kWh
+    auto estimated_demand  = project_->state_base_agent->params[EParamTypes::ElectricityBill] / WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
     if (estimated_demand <= params[EParamTypes::AveragePVCapacity])
     {
         //if standard panel gives enough capacity - install it as a unit
-        p = params[EParamTypes::EstimatedPricePerWatt] * params[EParamTypes::AveragePVCapacity];
+        p = params[EParamTypes::EstimatedPricePerWatt] * params[EParamTypes::AveragePVCapacity] * constants::NUMBER_WATTS_IN_KILOWATT;
     }
     else
     {
         //if it is not enough use industry price per watt and estimated electricity demand from the utility bill
-        p = params[EParamTypes::EstimatedPricePerWatt] * estimated_demand;
+        p = params[EParamTypes::EstimatedPricePerWatt] * estimated_demand * constants::NUMBER_WATTS_IN_KILOWATT;
     };
     
     mes->params[EParamTypes::OnlineQuotePrice] = p;
@@ -244,7 +246,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     
     //forms design by default
     //mid percentage to be used for estimating size
-    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
+    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
     //amount of solar irradiation in Wh/m2/day
     auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
     //distribution of permit length in different locations
@@ -299,8 +301,8 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     //do in multiples of three
     //check design for full electricity bill, for 80% of it and for 30% of it
     std::vector<PVDesign> designs;
-    //daily electricity consumption
-    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill];
+    //daily electricity consumption from bill in kWh
+    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
     //amount of solar irradiation in kWh/m2/day
     auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
     //distribution of permit length in different locations
@@ -348,7 +350,7 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
     
     design.PV_module = iter.second;
     
-    design.DC_size = design.N_PANELS * iter.second->STC_power_rating / 1000;
+    design.DC_size = design.N_PANELS * iter.second->STC_power_rating / constants::NUMBER_WATTS_IN_KILOWATT;
     
     design.AC_size = design.DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     
