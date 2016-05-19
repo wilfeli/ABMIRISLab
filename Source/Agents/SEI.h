@@ -168,7 +168,7 @@ namespace solar_core
          
          */
         
-        MesMarketingSEI* mes_marketing; /*!< Contains basic marketing information. is created with agent and updated to reflect new marketing policy */
+        std::shared_ptr<MesMarketingSEI> mes_marketing; /*!< Contains basic marketing information. is created with agent and updated to reflect new marketing policy */
         
         
         //@}

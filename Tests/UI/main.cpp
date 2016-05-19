@@ -190,7 +190,7 @@ namespace solar_tests
         SEIMock seimock = *get_seis()[0];
         project->sei = seimock;
         project->agent = get_hhs()[rng_i()];
-        double demand = 300;
+        double demand = 30;
         double solar_irradiation = 5;
         double permit_difficulty = 2;
         double project_percentage = 0.8;
@@ -203,6 +203,18 @@ namespace solar_tests
         
         
         EXPECT_EQ(design.N_PANELS, 1.0);
+        //MARK: cont.
+        
+        
+        
+        
+        
+    }
+    
+    TEST_F(WTest, SendMarketingInf)
+    {
+        //testing if marketing information is sent out
+        
         
         
         

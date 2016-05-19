@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
 		ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
+		EDC006B41CED792C0024347C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -20,7 +21,6 @@
 		EDDE4C281CDE682E005D1C49 /* IRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE0FD911CC0058100115115 /* IRandom.cpp */; };
 		EDDE4C291CDE682E005D1C49 /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
 		EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
-		EDDE4C2D1CDE682E005D1C49 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDB3FE61C7DA16200A6EA1F /* main.cpp */; };
 		EDDE4C2E1CDE682E005D1C49 /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
 		EDDE4C2F1CDE682E005D1C49 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
 		EDDE4C311CDE682E005D1C49 /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
@@ -1980,6 +1980,16 @@
 		ED749B2C1CDD830E00FB61FB /* cpu_timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cpu_timer.cpp; sourceTree = "<group>"; };
 		ED749B7D1CDD991500FB61FB /* SEM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEM.cpp; sourceTree = "<group>"; };
 		ED95AE121CE521580074845C /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
+		EDC006AA1CECB4EB0024347C /* unittestmodel.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unittestmodel.model; sourceTree = "<group>"; };
+		EDC006AB1CECB4EB0024347C /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
+		EDC006AC1CECB4EB0024347C /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
+		EDC006AD1CECB4EB0024347C /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
+		EDC006AE1CECB4EB0024347C /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
+		EDC006AF1CECB4EB0024347C /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
+		EDC006B01CECB4EB0024347C /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
+		EDC006B11CECB4EB0024347C /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
+		EDC006B21CECB4EB0024347C /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
+		EDC006B31CECB4EB0024347C /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -4495,6 +4505,7 @@
 		ED0E14131C98BD2B00A41B24 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				EDC006A91CECB4EB0024347C /* UnitTestModel */,
 				ED0E14141C98BD2B00A41B24 /* BaseModel */,
 			);
 			path = Examples;
@@ -8148,6 +8159,23 @@
 				ED749B2C1CDD830E00FB61FB /* cpu_timer.cpp */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		EDC006A91CECB4EB0024347C /* UnitTestModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDC006AA1CECB4EB0024347C /* unittestmodel.model */,
+				EDC006AB1CECB4EB0024347C /* g.json */,
+				EDC006AC1CECB4EB0024347C /* geography.json */,
+				EDC006AD1CECB4EB0024347C /* hh.json */,
+				EDC006AE1CECB4EB0024347C /* inverters.json */,
+				EDC006AF1CECB4EB0024347C /* sei.json */,
+				EDC006B01CECB4EB0024347C /* sem.json */,
+				EDC006B11CECB4EB0024347C /* solar_module.json */,
+				EDC006B21CECB4EB0024347C /* utility.json */,
+				EDC006B31CECB4EB0024347C /* w.json */,
+			);
+			path = UnitTestModel;
 			sourceTree = "<group>";
 		};
 		EDDB3FA91C7C402D00A6EA1F = {
@@ -13164,6 +13192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC006B41CED792C0024347C /* main.cpp in Sources */,
 				EDDE57A11CE2D4B0005D1C49 /* error_code.cpp in Sources */,
 				EDDE579A1CE2CB9B005D1C49 /* operations.cpp in Sources */,
 				EDDE579B1CE2CB9B005D1C49 /* path.cpp in Sources */,
@@ -13180,7 +13209,6 @@
 				EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */,
 				EDDE578F1CE0E7AF005D1C49 /* WMock.cpp in Sources */,
 				EDDE57971CE17D3D005D1C49 /* ParsingTools.cpp in Sources */,
-				EDDE4C2D1CDE682E005D1C49 /* main.cpp in Sources */,
 				EDDE4C2E1CDE682E005D1C49 /* SEI.cpp in Sources */,
 				EDDE4C2F1CDE682E005D1C49 /* Geography.cpp in Sources */,
 				EDDE4C311CDE682E005D1C49 /* SEM.cpp in Sources */,
@@ -13307,8 +13335,11 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/wilfeli/Dropbox/ABM/Testing,
 					"$(PROJECT_DIR)/Source/ExternalTools/gtest",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -13316,7 +13347,7 @@
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
 				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include";
 			};
 			name = Debug;
 		};
@@ -13325,8 +13356,11 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/wilfeli/Dropbox/ABM/Testing,
 					"$(PROJECT_DIR)/Source/ExternalTools/gtest",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -13334,7 +13368,7 @@
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
 				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include";
 			};
 			name = Release;
 		};

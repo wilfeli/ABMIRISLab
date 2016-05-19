@@ -1,0 +1,67 @@
+{
+    "WorldSettings": {
+        "params_exog": [
+                        {
+                        "EParamTypes::DCtoACLoss": 0.2
+                        },
+                        {
+                        "EParamTypes::ElectricityPriceUCDemand": 0.2
+                        },
+                        {
+                        "EParamTypes::InflationRate": 0.03
+                        },
+                        {
+                        "EParamTypes::MarketingMaxNToDrawPerTimeUnit":100
+                        }
+                        ],
+        "constraints":[
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
+                       {
+                       "EConstraintParams::MaxLengthPlanInstallations":10
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPermitVisit":10
+                       },
+                       {
+                       "EConstraintParams::SEMMaxLengthRecordHistory":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxNTicksToCollectQuotes":10
+                       },
+                       {
+                       "EConstraintParams:MinNReceivedPreliminaryQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNOpenProjectsHH":10
+                       }
+                       ]
+    },
+    "N_HH":50,
+    "N_SEI":3,
+    "N_SEILarge": 1,
+    "N_SEM":7,
+    "N_HHMarketingStateHighlyInterested":10,
+    "SEED":2016,
+    "params":[
+              {
+              "N_ITERATIONS":520
+              }
+              ]
+    
+    
+}
+

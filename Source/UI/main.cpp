@@ -36,6 +36,9 @@
 #include "UI/W.h"
 #include "UI/UI.h"
 
+#ifdef _WIN64
+#include  <io.h>
+#endif
 
 using namespace solar_core;
 
@@ -53,10 +56,15 @@ int main(int argc, const char * argv[])
     
     std::string MODE = argv[1];
     
-    
+#ifdef __APPLE__    
     //check that there is file, otherwise use default
     if (access(path_to_model_file.string().c_str(), F_OK) != -1)
-    {
+#endif
+
+#ifdef _WIN64
+	if (_access(path_to_model_file.string().c_str(), 00) != -1)
+#endif
+	{
     }
     else
     {
