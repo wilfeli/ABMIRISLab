@@ -10,15 +10,23 @@
 #define __ABMSolar__WMock__
 
 #include "UI/W.h"
+#include "UI/HelperW.h"
 
 namespace solar_tests{
 
 
     class WMock: public solar_core::W
     {
+
     public:
-        WMock(std::string path_, std::string mode_): solar_core::W(path_, mode_){};
+        WMock(std::string path_, solar_core::HelperW* helper_, std::string mode_): solar_core::W(path_, helper_, mode_){};
         std::vector<solar_core::Household*>& get_hhs();
+        std::vector<solar_core::SEI*>& get_seis();
+        
+        static WMock* create(std::string path_, std::string mode_);
+        
+    protected:
+        
     };
 
 

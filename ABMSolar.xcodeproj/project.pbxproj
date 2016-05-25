@@ -10,6 +10,8 @@
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
 		ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
 		EDC006B41CED792C0024347C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
+		EDC006B71CEFF00A0024347C /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
+		EDC006B81CEFF00B0024347C /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -1990,6 +1992,8 @@
 		EDC006B11CECB4EB0024347C /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		EDC006B21CECB4EB0024347C /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
 		EDC006B31CECB4EB0024347C /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
+		EDC006B51CEFF00A0024347C /* HelperW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperW.cpp; sourceTree = "<group>"; };
+		EDC006B61CEFF00A0024347C /* HelperW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperW.h; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -8285,6 +8289,8 @@
 				EDDE57851CDEF2D2005D1C49 /* UI.h */,
 				EDEDFCF81C87BA5100A26BA5 /* W.cpp */,
 				EDDB3FE71C7DA16200A6EA1F /* W.h */,
+				EDC006B51CEFF00A0024347C /* HelperW.cpp */,
+				EDC006B61CEFF00A0024347C /* HelperW.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -13173,6 +13179,7 @@
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
 				ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */,
+				EDC006B71CEFF00A0024347C /* HelperW.cpp in Sources */,
 				EDEDFCFB1C87BF5800A26BA5 /* H.cpp in Sources */,
 				EDDE57861CDEF2D2005D1C49 /* UI.cpp in Sources */,
 				EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */,
@@ -13222,6 +13229,7 @@
 				EDDE4C3D1CDE682E005D1C49 /* W.cpp in Sources */,
 				EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */,
 				EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */,
+				EDC006B81CEFF00B0024347C /* HelperW.cpp in Sources */,
 				EDDE578B1CDEF359005D1C49 /* Log.cpp in Sources */,
 				EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */,
 			);
@@ -13347,7 +13355,7 @@
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
 				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include";
+				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include $(PROJECT_DIR)";
 			};
 			name = Debug;
 		};
@@ -13368,7 +13376,7 @@
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
 				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include";
+				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include $(PROJECT_DIR)";
 			};
 			name = Release;
 		};

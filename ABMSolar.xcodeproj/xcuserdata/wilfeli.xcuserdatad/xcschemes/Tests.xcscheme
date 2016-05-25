@@ -59,18 +59,14 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "NEW"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Examples/UnitTestModel/unittestmodel.model"
+            argument = "$(PROJECT_DIR)/Source/Examples/UnitTestModel/unittestmodel.model"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "DYLD_FRAMEWORK_PATH"
-            value = "/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/ExternalTools/gtest"
+            value = "$(PROJECT_DIR)/Source/ExternalTools/gtest"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

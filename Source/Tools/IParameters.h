@@ -30,6 +30,7 @@ namespace solar_core
         const int WAIT_MILLISECONDS_UIW_PAUSE = 100;
         const int WAIT_CYCLES_VIEW_REQUEST = 10;
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
+        const double NUMBER_DAYS_IN_YEAR = 365.25;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
@@ -236,8 +237,8 @@ namespace solar_core
         DCtoACLoss,
         
         
-        
-        
+        /** Length of a definition for degradation rate */
+        DegradationDefinitionLength,
         
         
         
@@ -528,6 +529,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::dctoacloss")
             {
                 return EParamTypes::DCtoACLoss;
+            }
+            else if (param_type == "eparamtypes::degradationdefinitionlength")
+            {
+                return EParamTypes::DegradationDefinitionLength;
             }
             else if (param_type == "eparamtypes::electricitypriceucdemand")
             {

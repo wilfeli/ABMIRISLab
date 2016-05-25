@@ -57,6 +57,7 @@ public:
     double warranty_length; /*!< in weeks, as it is time period */
     std::string manufacturer_id = "";
     SEM* manufacturer = nullptr;
+    double degradation = 0.0;
 };
     
 
@@ -87,6 +88,7 @@ public:
     double soft_costs = 0.0;
     double total_costs = 0.0;
     double total_savings = 0.0;
+    double energy_savings_money = 0.0;
     
     
 protected:

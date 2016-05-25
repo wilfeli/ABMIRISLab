@@ -36,6 +36,7 @@ namespace solar_core {
     class SEM;
     class Household;
     class PVProject;
+    class HelperW;
     
     
     class W
@@ -55,9 +56,13 @@ namespace solar_core {
          */
         
         
-        W(std::string path_, std::string mode_ = "NEW"); /*!< */
+        W(std::string path_, HelperW* w_, std::string mode_ = "NEW"); /*!< */
         void init();
         std::string base_path;
+        
+        
+        virtual void create_seis(PropertyTree& pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y);
+        
         
         //@}
         

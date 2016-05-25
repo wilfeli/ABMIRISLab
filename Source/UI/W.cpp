@@ -6,14 +6,7 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/exceptions.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/filesystem.hpp>
-using boost::property_tree::ptree;
-using boost::property_tree::ptree_error;
-using boost::property_tree::read_json;
-using boost::property_tree::write_json;
+
 
 
 
@@ -30,7 +23,12 @@ using boost::property_tree::write_json;
 #include "Agents/Utility.h"
 #include "Agents/G.h"
 #include "Agents/H.h"
+#include "UI/HelperW.h"
 
+using boost::property_tree::ptree;
+using boost::property_tree::ptree_error;
+using boost::property_tree::read_json;
+using boost::property_tree::write_json;
 
 using namespace solar_core;
 
@@ -39,7 +37,7 @@ using namespace solar_core;
  Assume that world is created from scratch
  
  */
-W::W(std::string path_, std::string mode_)
+W::W(std::string path_, HelperW* helper_, std::string mode_)
 {
     
     //set ui flags
@@ -248,38 +246,8 @@ W::W(std::string path_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        //create random number generators for locations
-        //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
-        //check that it is uniform distribution
-        if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
-        {
-            throw std::runtime_error("unsupported hh specification rule");
-        };
+        seis = helper_->create_seis(pt, mode_, N_SEI, N_SEILarge, rng_location_x, rng_location_y, this);
         
-        
-        //create SEI - use template for parameters, use model file for additional parameters
-        //create sei_type
-        j = 0;
-        for (auto i = 0; i < N_SEI; ++i)
-        {
-            //put sei_type
-            pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
-            if (j < N_SEILarge)
-            {
-                pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
-            };
-            ++j;
-            
-            
-            //generate location
-            pt.put("location_x", rng_location_x());
-            pt.put("location_y", rng_location_y());
-            
-            
-            seis.push_back(new SEI(pt, this));
-            
-            
-        };
         
         
         //sem.json
@@ -351,6 +319,48 @@ W::W(std::string path_, std::string mode_)
         
     };
 }
+
+
+
+void
+W::create_seis(PropertyTree &pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y)
+{
+    //create random number generators for locations
+    //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
+    //check that it is uniform distribution
+    if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
+    {
+        throw std::runtime_error("unsupported hh specification rule");
+    };
+    
+    
+    //create SEI - use template for parameters, use model file for additional parameters
+    //create sei_type
+    auto j = 0;
+    for (auto i = 0; i < N_SEI; ++i)
+    {
+        //put sei_type
+        pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
+        if (j < N_SEILarge)
+        {
+            pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
+        };
+        ++j;
+        
+        
+        //generate location
+        pt.put("location_x", rng_location_x());
+        pt.put("location_y", rng_location_y());
+        
+        
+        seis.push_back(new SEI(pt, this));
+        
+        
+    };
+
+}
+
+
 
 
 void
