@@ -31,4 +31,5 @@ SolarModule::SolarModule(const PropertyTree& pt_)
     width = pt_.get<double>("Width");
     warranty_length = pt_.get<double>("Warranty length");
     manufacturer_id = pt_.get<std::string>("Manufacturer Id");
+    degradation = pt_.get<double>("Degradation after 10 years");
 }

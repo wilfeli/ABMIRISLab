@@ -14,7 +14,8 @@
                       "Price (from manufacturer)": "1.0",
                       "Warranty length": "25.0",
                       "Color":"Black",
-                      "Pattern":"Window-paint"
+                      "Pattern":"Window-paint",
+                      "Degradation after 10 years":0.1
                       }
                       }
                       ]

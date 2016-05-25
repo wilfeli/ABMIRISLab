@@ -384,24 +384,25 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     
     ///@DevStage2: calculate PPA
-    
-    
     ///@DevStage2: calculate lease
 
     //simple calculation when HH owns the system
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
     auto energy_costs = 0.0;
+    auto AC_size = design.AC_size;
+    auto degradation_t = std::exp(std::log((1 - design.PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
     for (auto i = 0; i < design.PV_module->warranty_length; ++i)
     {
         //estimate yearly energy production, if PPA might be used in estimation
         //MARK: cont. check again
-        auto daily_production = design.AC_size * design.solar_irradiation;
-        energy_costs += (daily_production) * 365.25 * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
-        
+        auto yearly_production = AC_size * design.solar_irradiation * constants::NUMBER_DAYS_IN_YEAR;
+        energy_costs += yearly_production * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        AC_size = AC_size * degradation_t;
         CPI = CPI * inflation;
     };
     
+    design.energy_savings_money = energy_costs;
     design.total_savings = energy_costs - design.total_costs;
 }
 

@@ -36,9 +36,10 @@
 #include <thread>
 #include <iostream>
 #include <boost/filesystem.hpp>
-#include "UI/W.h"
-
-
+#include "Tests/UI/WMock.h"
+#include "Tests/Agents/SEIMock.h"
+#include "UI/UI.h"
+#include "Agents/H.h"
 
 
 
@@ -49,6 +50,7 @@ using namespace solar_core;
 
 namespace solar_tests
 {
+    static boost::filesystem::path path_to_model_file;
     
     
     // The fixture for testing payment system
@@ -71,14 +73,14 @@ namespace solar_tests
             EXPECT_NE(access(path_to_model_file.string().c_str(), F_OK), -1);
             
             //create world
-            w = new WMock(path_to_model_file.string(), "NEW");
+            w = WMock::create(path_to_model_file.string(), "NEW");
             
             //initialize world
             w->init();
             
             
             //create ui
-            ui = new solar_ui::UIW(w);
+            ui = new solar_ui::UI();
             
             w->FLAG_IS_STARTED = true;
             w->FLAG_IS_STOPPED = false;
@@ -147,23 +149,52 @@ namespace solar_tests
         
         virtual solar_core::Household* get_hh(std::size_t i)
         {
-            return w->hhs[i];
+            return w->get_hhs()[i];
         };
         
         
         
         
-        
-        
+        //@{
+        /** Main parameters  */
         
         static WMock* w;
-        static solar_ui::UIW* ui;
+        static solar_ui::UI* ui;
+        
+        //@}
+        
+        
+        //@{
+        /** Parameters to be shared between test runs */
+        
+        
+        static double demand;
+        static double solar_irradiation;
+        static double permit_difficulty;
+        static double project_percentage;
+        
+        //@}
+        
         
         
     };
     
+    
+    //@{
+    /** Initialization of static data members */
+    
+    
+    double WTest::demand = 30;
+    double WTest::solar_irradiation = 5;
+    double WTest::permit_difficulty = 2;
+    double WTest::project_percentage = 0.8;
+    
     WMock* WTest::w = nullptr;
-    solar_ui::UIW* WTest::ui = nullptr;
+    solar_ui::UI* WTest::ui = nullptr;
+    
+    
+    //@}
+    
     
     /**
      
@@ -180,36 +211,65 @@ namespace solar_tests
         
     }
     
+    
+
+    
+    
     TEST_F(WTest, DesignPV)
     {
         
-        auto pdf_i = boost::uniform_int<uint64_t>(0, get_hhs().size() - 1);
+        auto pdf_i = boost::uniform_int<uint64_t>(0, w->get_hhs().size() - 1);
         auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
         
         auto project = std::make_shared<PVProject>();
-        SEIMock seimock = *get_seis()[0];
+        SEIMock* seimock = dynamic_cast<SEIMock*>(w->get_seis()[0]);
         project->sei = seimock;
-        project->agent = get_hhs()[rng_i()];
-        double demand = 30;
-        double solar_irradiation = 5;
-        double permit_difficulty = 2;
-        double project_percentage = 0.8;
+        project->agent = w->get_hhs()[rng_i()];
         auto design = PVDesign();
-        auto iter = project->sei->dec_solar_modules.begin();
+        auto decs = seimock->get_dec_solar_modules();
         
         
-        project->sei->form_design_from_param(project, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
+        seimock->form_design_for_params(project, demand, solar_irradiation, permit_difficulty, project_percentage, *(++decs.begin()), design);
         
         
         
-        EXPECT_EQ(design.N_PANELS, 1.0);
-        //MARK: cont.
+        EXPECT_NE(design.N_PANELS, 1.0);
+        EXPECT_EQ(design.N_PANELS, 24.0);
         
+        EXPECT_EQ(design.DC_size, 6.24);
+        EXPECT_EQ(design.AC_size, 4.99);
+        
+        EXPECT_EQ(design.energy_savings_money, 34320);
         
         
         
         
     }
+    
+    
+    TEST_F(WTest, DesignPVMoney)
+    {
+        auto pdf_i = boost::uniform_int<uint64_t>(0, w->get_hhs().size() - 1);
+        auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+        
+        auto project = std::make_shared<PVProject>();
+        SEIMock* seimock = dynamic_cast<SEIMock*>(w->get_seis()[0]);
+        project->sei = seimock;
+        project->agent = w->get_hhs()[rng_i()];
+        auto design = PVDesign();
+        auto decs = seimock->get_dec_solar_modules();
+        
+        
+        seimock->form_design_for_params(project, demand, solar_irradiation, permit_difficulty, project_percentage, *(++decs.begin()), design);
+        
+        seimock->ac_estimate_savings(design, project);
+        
+        EXPECT_EQ(design.energy_savings_money, 34320.00);
+        
+        
+        
+    }
+    
     
     TEST_F(WTest, SendMarketingInf)
     {
@@ -236,7 +296,7 @@ namespace solar_tests
 int main(int argc, char * argv[])
 {
     
-    static boost::filesystem::path path_to_model_file(argv[1]);
+    solar_tests::path_to_model_file = boost::filesystem::path(argv[1]);
     
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
