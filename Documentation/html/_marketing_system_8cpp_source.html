@@ -58,48 +58,114 @@
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//  Copyright (c) 2016 IRIS Lab. All rights reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_marketing_system_8h.html">Institutions/MarketingSystem.h</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_w_8h.html">UI/W.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_marketing_system_8h.html">Institutions/MarketingSystem.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_message_8h.html">Institutions/IMessage.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_settings_8h.html">Tools/WorldSettings.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_h_8h.html">Agents/H.h</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">   16</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">MarketingInst::act_tick</a>()</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">//push marketing information to the selection of agents that expressed interest in receiving marketing information</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; agent:<a class="code" href="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447">interested_agents</a>)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment">//push all marketing messages</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mes:<a class="code" href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">marketing_mess</a>)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            agent-&gt;get_inf(mes);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        };</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//randomly select agents and push marketing information </span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//MARK: cont.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#abd9e85a42a8052a9baeaa09ef87710a2">   18</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#abd9e85a42a8052a9baeaa09ef87710a2">MarketingInst::MarketingInst</a>(<a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb">w</a> = w_;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#ae83f5529280d28b312e8e723b811d75b">   25</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#ae83f5529280d28b312e8e723b811d75b">MarketingInst::init</a>(<a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#a0eb7c3b990063684a04c7b5f38138cbf">   32</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#a0eb7c3b990063684a04c7b5f38138cbf">MarketingInst::request_inf_marketing_sei</a>(<a class="code" href="classsolar__core_1_1_i_agent.html">IAgent</a>* agent_)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//push all marketing messages</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mes:<a class="code" href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">marketing_mess</a>)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        agent_-&gt;<a class="code" href="classsolar__core_1_1_i_agent.html#aa9ebc762ed032f7084063199747decb6">get_inf</a>(mes);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#af9ff802d6373dc91177959508e80d563">   43</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#af9ff802d6373dc91177959508e80d563">MarketingInst::get_marketing_inf_sei</a>(std::shared_ptr&lt;MesMarketingSEI&gt; mes_)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">marketing_mess</a>.push_back(mes_);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">   52</a></span>&#160;<a class="code" href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">MarketingInst::act_tick</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//push marketing information to the selection of agents that expressed interest in receiving marketing information</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; agent:<a class="code" href="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447">interested_agents</a>)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//push all marketing messages</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mes:<a class="code" href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">marketing_mess</a>)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            agent-&gt;get_inf(mes);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//randomly select agents and push marketing information</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">auto</span> pdf_agents = boost::uniform_int&lt;uint64_t&gt;(0, <a class="code" href="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#a17c012ff8b17890ed33923cec6d87be3">hhs</a>.size()-1);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">auto</span> rng_agents = boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;(<a class="code" href="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">rand</a>-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_agents);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::size_t j = 0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().<a class="code" href="classsolar__core_1_1_world_settings.html#a2bf0de816c9c0b51e01e88b8ff0f779e">params_exog</a>[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a56319e8e21c87c38fb797f23a73f5fe3">EParamTypes::MarketingMaxNToDrawPerTimeUnit</a>]; ++i)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        j = rng_agents();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment">//push all marketing messages</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mes:<a class="code" href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">marketing_mess</a>)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <a class="code" href="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#a17c012ff8b17890ed33923cec6d87be3">hhs</a>[j]-&gt;get_inf(mes);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    };</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_a719e11b52a0e087f8c0dd11d9f65da88"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">solar_core::WorldSettings::instance</a></div><div class="ttdeci">static WorldSettings &amp; instance()</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8cpp_source.html#l00025">WorldSettings.cpp:25</a></div></div>
 <div class="ttc" id="_marketing_system_8h_html"><div class="ttname"><a href="_marketing_system_8h.html">MarketingSystem.h</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_a6ad2e259f3ea536cee2c744ac177d470"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">solar_core::MarketingInst::act_tick</a></div><div class="ttdeci">virtual void act_tick() override</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00016">MarketingSystem.cpp:16</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_af386df7399502fc26c6625600a68edb3"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">solar_core::MarketingInst::marketing_mess</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; MesMarketingSEI &gt; &gt; marketing_mess</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8h_source.html#l00044">MarketingSystem.h:44</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_a5e0f3d40db44d0779a944ecdad24d447"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447">solar_core::MarketingInst::interested_agents</a></div><div class="ttdeci">std::vector&lt; IAgent * &gt; interested_agents</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8h_source.html#l00040">MarketingSystem.h:40</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html"><div class="ttname"><a href="classsolar__core_1_1_w.html">solar_core::W</a></div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00042">W.h:42</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_af9ff802d6373dc91177959508e80d563"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#af9ff802d6373dc91177959508e80d563">solar_core::MarketingInst::get_marketing_inf_sei</a></div><div class="ttdeci">void get_marketing_inf_sei(std::shared_ptr&lt; MesMarketingSEI &gt; mes_)</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00043">MarketingSystem.cpp:43</a></div></div>
+<div class="ttc" id="_w_8h_html"><div class="ttname"><a href="_w_8h.html">W.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_agent_html"><div class="ttname"><a href="classsolar__core_1_1_i_agent.html">solar_core::IAgent</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_agent_8h_source.html#l00020">IAgent.h:20</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_a6ad2e259f3ea536cee2c744ac177d470"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470">solar_core::MarketingInst::act_tick</a></div><div class="ttdeci">virtual void act_tick() override</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00052">MarketingSystem.cpp:52</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_a0eb7c3b990063684a04c7b5f38138cbf"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#a0eb7c3b990063684a04c7b5f38138cbf">solar_core::MarketingInst::request_inf_marketing_sei</a></div><div class="ttdeci">void request_inf_marketing_sei(IAgent *agent_)</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00032">MarketingSystem.cpp:32</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_agent_html_aa9ebc762ed032f7084063199747decb6"><div class="ttname"><a href="classsolar__core_1_1_i_agent.html#aa9ebc762ed032f7084063199747decb6">solar_core::IAgent::get_inf</a></div><div class="ttdeci">virtual void get_inf(std::shared_ptr&lt; MesMarketingSEI &gt; mes_)=0</div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html_aa60afb55012cd72e304ac2c133e5a245"><div class="ttname"><a href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">solar_core::W::rand</a></div><div class="ttdeci">IRandom * rand</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00123">W.h:123</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_aaa4baafee95460ccda0e4b580c88e8cb"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb">solar_core::MarketingInst::w</a></div><div class="ttdeci">W * w</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8h_source.html#l00062">MarketingSystem.h:62</a></div></div>
+<div class="ttc" id="_world_settings_8h_html"><div class="ttname"><a href="_world_settings_8h.html">WorldSettings.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_abd9e85a42a8052a9baeaa09ef87710a2"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#abd9e85a42a8052a9baeaa09ef87710a2">solar_core::MarketingInst::MarketingInst</a></div><div class="ttdeci">MarketingInst(W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00018">MarketingSystem.cpp:18</a></div></div>
+<div class="ttc" id="_i_message_8h_html"><div class="ttname"><a href="_i_message_8h.html">IMessage.h</a></div></div>
+<div class="ttc" id="_h_8h_html"><div class="ttname"><a href="_h_8h.html">H.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_ae83f5529280d28b312e8e723b811d75b"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#ae83f5529280d28b312e8e723b811d75b">solar_core::MarketingInst::init</a></div><div class="ttdeci">void init(W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8cpp_source.html#l00025">MarketingSystem.cpp:25</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_af386df7399502fc26c6625600a68edb3"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3">solar_core::MarketingInst::marketing_mess</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; MesMarketingSEI &gt; &gt; marketing_mess</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8h_source.html#l00059">MarketingSystem.h:59</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a56319e8e21c87c38fb797f23a73f5fe3"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a56319e8e21c87c38fb797f23a73f5fe3">solar_core::EParamTypes::MarketingMaxNToDrawPerTimeUnit</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_a2bf0de816c9c0b51e01e88b8ff0f779e"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a2bf0de816c9c0b51e01e88b8ff0f779e">solar_core::WorldSettings::params_exog</a></div><div class="ttdeci">std::map&lt; EParamTypes, double &gt; params_exog</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00058">WorldSettings.h:58</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_random_html_a5d02ddbfd7b3c7a2932166b9ddba5f02"><div class="ttname"><a href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">solar_core::IRandom::rng</a></div><div class="ttdeci">boost::mt19937 rng</div><div class="ttdef"><b>Definition:</b> <a href="_i_random_8h_source.html#l00032">IRandom.h:32</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_marketing_inst_html_a5e0f3d40db44d0779a944ecdad24d447"><div class="ttname"><a href="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447">solar_core::MarketingInst::interested_agents</a></div><div class="ttdeci">std::vector&lt; IAgent * &gt; interested_agents</div><div class="ttdef"><b>Definition:</b> <a href="_marketing_system_8h_source.html#l00055">MarketingSystem.h:55</a></div></div>
 <div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00018">G.h:18</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html_a17c012ff8b17890ed33923cec6d87be3"><div class="ttname"><a href="classsolar__core_1_1_w.html#a17c012ff8b17890ed33923cec6d87be3">solar_core::W::hhs</a></div><div class="ttdeci">std::vector&lt; Household * &gt; hhs</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00180">W.h:180</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 28 2016 09:55:17 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

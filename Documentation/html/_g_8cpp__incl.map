@@ -1,9 +1,13 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/G.cpp" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/G.cpp">
-<area shape="rect" id="node2" href="$_g_8h.html" title="G.h" alt="" coords="33,184,76,211"/>
-<area shape="rect" id="node16" href="$_solar_panel_8h.html" title="Agents/SolarPanel.h" alt="" coords="101,184,245,211"/>
-<area shape="rect" id="node17" href="$_h_8h.html" title="Agents/H.h" alt="" coords="423,109,511,136"/>
-<area shape="rect" id="node5" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="211,259,353,285"/>
-<area shape="rect" id="node6" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="339,341,507,368"/>
-<area shape="rect" id="node19" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="321,184,489,211"/>
-<area shape="rect" id="node20" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="584,259,701,285"/>
+<area shape="rect" id="node2" href="$_w_8h.html" title="UI/W.h" alt="" coords="1225,109,1287,136"/>
+<area shape="rect" id="node30" href="$_world_settings_8h.html" title="Tools/WorldSettings.h" alt="" coords="791,184,943,211"/>
+<area shape="rect" id="node31" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="1407,109,1527,136"/>
+<area shape="rect" id="node32" href="$_g_8h.html" title="Agents/G.h" alt="" coords="1850,184,1939,211"/>
+<area shape="rect" id="node33" href="$_solar_panel_8h.html" title="Agents/SolarPanel.h" alt="" coords="1049,184,1193,211"/>
+<area shape="rect" id="node34" href="$_h_8h.html" title="Agents/H.h" alt="" coords="648,109,736,136"/>
+<area shape="rect" id="node5" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="905,349,1073,376"/>
+<area shape="rect" id="node25" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="1026,267,1168,293"/>
+<area shape="rect" id="node26" href="$_i_random_8h.html" title="Tools/IRandom.h" alt="" coords="1455,184,1579,211"/>
+<area shape="rect" id="node35" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="546,184,715,211"/>
+<area shape="rect" id="node36" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="561,267,679,293"/>
 </map>

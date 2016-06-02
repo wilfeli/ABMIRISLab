@@ -114,7 +114,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         //solar_module.json
         path_to_template = path_to_dir;
-        path_to_template /= "solar_module.json";
+        path_to_template /= "solar_equipment.json";
         path = path_to_template.string();
         read_json(path, pt);
         

@@ -1,0 +1,352 @@
+\hypertarget{classsolar__core_1_1_s_e_m}{}\section{solar\+\_\+core\+:\+:S\+E\+M Class Reference}
+\label{classsolar__core_1_1_s_e_m}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+
+
+{\ttfamily \#include $<$S\+E\+M.\+h$>$}
+
+
+
+Collaboration diagram for solar\+\_\+core\+:\+:S\+E\+M\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_s_e_m__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_s_e_m_a60d13fcadec26853d8461d32eefb97da}{S\+E\+M} (const \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
+\item 
+void \hyperlink{classsolar__core_1_1_s_e_m_a33c9571de22adca46acb3759f4f4e82e}{init} (\hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classsolar__core_1_1_s_e_m_a797046cfc7b6150f44f49baa1b32abfc}{act\+\_\+tick} ()
+\item 
+bool \hyperlink{classsolar__core_1_1_s_e_m_a2717afd98e9ab7284df79945d882511a}{sell\+\_\+\+Solar\+Module} (\hyperlink{classsolar__core_1_1_mes_sell_order}{Mes\+Sell\+Order} \&mes\+\_\+)
+\end{DoxyCompactItemize}
+
+\subsection*{Public Attributes}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, double $>$ \hyperlink{classsolar__core_1_1_s_e_m_a69aaf0be4ed0edf8a52e48f97a0de5f6}{prices}
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_u_i_d}{U\+I\+D} \hyperlink{classsolar__core_1_1_s_e_m_a9d8fcdda966f46763b83c280c4ba4dbf}{uid}
+\end{DoxyCompactItemize}
+
+\subsection*{Protected Attributes}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_solar_module}{Solar\+Module} $>$ $>$ \hyperlink{classsolar__core_1_1_s_e_m_adc6d6784a11bd0243efddbdc0d6e9bb0}{solar\+\_\+panel\+\_\+templates}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_inverter}{Inverter} $>$ $>$ \hyperlink{classsolar__core_1_1_s_e_m_acd9f1a494059476a06de5cb4fe9f750a}{inverter\+\_\+templates}
+\item 
+std\+::map$<$ std\+::string, double $>$ \hyperlink{classsolar__core_1_1_s_e_m_a2fa619a45dc7e3ecc29026042337bd2d}{inventories}
+\item 
+double \hyperlink{classsolar__core_1_1_s_e_m_a6822b2c6d30e2aaaf5dbe0b50ce221a1}{N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories} = 0.\+0
+\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_s_e_m_a37a50821d1926b9028e70431fb383a7a}{sem\+\_\+dec\+\_\+time}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classsolar__core_1_1_s_e_m_ab3d8795e8601541ebcefcaf76d77c67a}{history\+\_\+sales}
+\item 
+double \hyperlink{classsolar__core_1_1_s_e_m_a923827d4aefd8df93e1e49944f96a6be}{costs\+\_\+base} = 0.\+39
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classsolar__core_1_1_s_e_m_a42278e550f44276e0bb6c966f37c0033}{T\+H\+E\+T\+A\+\_\+profit}
+\end{DoxyCompactItemize}
+
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_w}{W} $\ast$ \hyperlink{classsolar__core_1_1_s_e_m_a6ef9eb7ba22b2c76c73635843b6cac4e}{w}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_s_e_m_a522bb3ecb869a396a797765c9078de12}{a\+\_\+time}
+\item 
+std\+::mutex \hyperlink{classsolar__core_1_1_s_e_m_a4b62648f9638185e279a801b8c0eb39b}{lock}
+\item 
+double \hyperlink{classsolar__core_1_1_s_e_m_ac2c452b6783b521c59d3b82dba6d08cb}{money}
+\item 
+std\+::map$<$ \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{E\+Param\+Types}, double $>$ \hyperlink{classsolar__core_1_1_s_e_m_a52adde99943cf97f4a024927ca57c087}{params}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_s_e_m_aa4a21386cf6942df0b5e501a2588aaad}{sem\+\_\+production\+\_\+time}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_s_e_m_a89e5a54de1bb68b94f176e6585a23148}{sem\+\_\+research\+\_\+time}
+\item 
+void \hyperlink{classsolar__core_1_1_s_e_m_a5c40b26576923ee560a73aeeed31685c}{ac\+\_\+update\+\_\+tick} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyRefDesc}{Solar W\+P}
+\item[\hyperlink{wp__wp000005}{Solar W\+P}]Research for the structure of costs\end{DoxyRefDesc}
+
+
+Hanwha Q C\+E\+L\+L\+S, 3d quater 2015 report. \href{http://investors.hanwha-qcells.com/releasedetail.cfm?ReleaseID=943563}{\tt http\+://investors.\+hanwha-\/qcells.\+com/releasedetail.\+cfm?\+Release\+I\+D=943563} Total all-\/in processing costs approached U\+S\$0.\+39 per watt in September for in-\/house production
+
+Assume that base cost is fixed -\/ for example \$0.\+39 for 15\% efficiency. If efficiency is higher -\/ cost becomes x$\ast$(1+theta\+\_\+\{1\}$\ast$\{pv efficiency\}\{base efficiency\})
+
+In time x becomes lower and theta\+\_\+1 becomes lower
+
+Starts with the existing selection of solar panels and could innovate with some fixed frequency
+
+\begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000023}{Dev\+Stage2}]add market for solar panels and price feedback \end{DoxyRefDesc}
+
+
+Production happens every tick, with fixed number of panels being produced and stored as inventories. Production for invertors happens also every tick. For now \hyperlink{classsolar__core_1_1_s_e_m}{S\+E\+M} produce both panels and inverters. 
+
+Definition at line 54 of file S\+E\+M.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolar__core_1_1_s_e_m_a60d13fcadec26853d8461d32eefb97da}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!S\+E\+M@{S\+E\+M}}
+\index{S\+E\+M@{S\+E\+M}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{S\+E\+M}]{\setlength{\rightskip}{0pt plus 5cm}S\+E\+M\+::\+S\+E\+M (
+\begin{DoxyParamCaption}
+\item[{const {\bf Property\+Tree} \&}]{pt\+\_\+, }
+\item[{{\bf W} $\ast$}]{w\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_s_e_m_a60d13fcadec26853d8461d32eefb97da}
+Initializations \begin{DoxyRefDesc}{Dev\+Stage2}
+\item[\hyperlink{_dev_stage2__DevStage2000022}{Dev\+Stage2}]move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that \end{DoxyRefDesc}
+
+
+Definition at line 22 of file S\+E\+M.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_s_e_m_a60d13fcadec26853d8461d32eefb97da_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_s_e_m_a5c40b26576923ee560a73aeeed31685c}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!ac\+\_\+update\+\_\+tick@{ac\+\_\+update\+\_\+tick}}
+\index{ac\+\_\+update\+\_\+tick@{ac\+\_\+update\+\_\+tick}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{ac\+\_\+update\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void S\+E\+M\+::ac\+\_\+update\+\_\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a5c40b26576923ee560a73aeeed31685c}
+updates before tick 
+
+Definition at line 115 of file S\+E\+M.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_s_e_m_a5c40b26576923ee560a73aeeed31685c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_s_e_m_a797046cfc7b6150f44f49baa1b32abfc}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!act\+\_\+tick@{act\+\_\+tick}}
+\index{act\+\_\+tick@{act\+\_\+tick}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{act\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void S\+E\+M\+::act\+\_\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_s_e_m_a797046cfc7b6150f44f49baa1b32abfc}
+Section with actions in the world 
+
+Definition at line 128 of file S\+E\+M.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_s_e_m_a797046cfc7b6150f44f49baa1b32abfc_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_s_e_m_a33c9571de22adca46acb3759f4f4e82e}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!init@{init}}
+\index{init@{init}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void S\+E\+M\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf W} $\ast$}]{w\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_s_e_m_a33c9571de22adca46acb3759f4f4e82e}
+
+
+Definition at line 66 of file S\+E\+M.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_s_e_m_a33c9571de22adca46acb3759f4f4e82e_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_s_e_m_a2717afd98e9ab7284df79945d882511a}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!sell\+\_\+\+Solar\+Module@{sell\+\_\+\+Solar\+Module}}
+\index{sell\+\_\+\+Solar\+Module@{sell\+\_\+\+Solar\+Module}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{sell\+\_\+\+Solar\+Module}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+E\+M\+::sell\+\_\+\+Solar\+Module (
+\begin{DoxyParamCaption}
+\item[{{\bf solar\+\_\+core\+::\+Mes\+Sell\+Order} \&}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_s_e_m_a2717afd98e9ab7284df79945d882511a}
+
+
+Definition at line 97 of file S\+E\+M.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_s_e_m_a522bb3ecb869a396a797765c9078de12}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!a\+\_\+time@{a\+\_\+time}}
+\index{a\+\_\+time@{a\+\_\+time}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{a\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+S\+E\+M\+::a\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a522bb3ecb869a396a797765c9078de12}
+agent time 
+
+Definition at line 121 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a923827d4aefd8df93e1e49944f96a6be}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!costs\+\_\+base@{costs\+\_\+base}}
+\index{costs\+\_\+base@{costs\+\_\+base}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{costs\+\_\+base}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+S\+E\+M\+::costs\+\_\+base = 0.\+39\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a923827d4aefd8df93e1e49944f96a6be}
+
+
+Definition at line 159 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_ab3d8795e8601541ebcefcaf76d77c67a}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!history\+\_\+sales@{history\+\_\+sales}}
+\index{history\+\_\+sales@{history\+\_\+sales}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{history\+\_\+sales}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ solar\+\_\+core\+::\+S\+E\+M\+::history\+\_\+sales\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_ab3d8795e8601541ebcefcaf76d77c67a}
+
+
+Definition at line 158 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a2fa619a45dc7e3ecc29026042337bd2d}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!inventories@{inventories}}
+\index{inventories@{inventories}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{inventories}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$std\+::string, double$>$ solar\+\_\+core\+::\+S\+E\+M\+::inventories\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a2fa619a45dc7e3ecc29026042337bd2d}
+
+
+Definition at line 145 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_acd9f1a494059476a06de5cb4fe9f750a}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!inverter\+\_\+templates@{inverter\+\_\+templates}}
+\index{inverter\+\_\+templates@{inverter\+\_\+templates}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{inverter\+\_\+templates}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Inverter}$>$ $>$ solar\+\_\+core\+::\+S\+E\+M\+::inverter\+\_\+templates\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_acd9f1a494059476a06de5cb4fe9f750a}
+
+
+Definition at line 143 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a4b62648f9638185e279a801b8c0eb39b}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!lock@{lock}}
+\index{lock@{lock}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}std\+::mutex solar\+\_\+core\+::\+S\+E\+M\+::lock\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a4b62648f9638185e279a801b8c0eb39b}
+
+
+Definition at line 122 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_ac2c452b6783b521c59d3b82dba6d08cb}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!money@{money}}
+\index{money@{money}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{money}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+S\+E\+M\+::money\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_ac2c452b6783b521c59d3b82dba6d08cb}
+money of an agent 
+
+Definition at line 126 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a6822b2c6d30e2aaaf5dbe0b50ce221a1}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories@{N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories}}
+\index{N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories@{N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+S\+E\+M\+::\+N\+\_\+\+P\+A\+N\+E\+L\+S\+\_\+inventories = 0.\+0\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a6822b2c6d30e2aaaf5dbe0b50ce221a1}
+
+
+Definition at line 146 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a52adde99943cf97f4a024927ca57c087}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!params@{params}}
+\index{params@{params}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{params}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf E\+Param\+Types}, double$>$ solar\+\_\+core\+::\+S\+E\+M\+::params\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a52adde99943cf97f4a024927ca57c087}
+parameters of an agent 
+
+Definition at line 127 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a69aaf0be4ed0edf8a52e48f97a0de5f6}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!prices@{prices}}
+\index{prices@{prices}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{prices}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$std\+::string, double$>$ solar\+\_\+core\+::\+S\+E\+M\+::prices}\label{classsolar__core_1_1_s_e_m_a69aaf0be4ed0edf8a52e48f97a0de5f6}
+Section with pricing decisionsprices for solar panels 
+
+Definition at line 92 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a37a50821d1926b9028e70431fb383a7a}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!sem\+\_\+dec\+\_\+time@{sem\+\_\+dec\+\_\+time}}
+\index{sem\+\_\+dec\+\_\+time@{sem\+\_\+dec\+\_\+time}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{sem\+\_\+dec\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+S\+E\+M\+::sem\+\_\+dec\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a37a50821d1926b9028e70431fb383a7a}
+Section with pricing decisionslast time price decision was made 
+
+Definition at line 157 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_aa4a21386cf6942df0b5e501a2588aaad}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!sem\+\_\+production\+\_\+time@{sem\+\_\+production\+\_\+time}}
+\index{sem\+\_\+production\+\_\+time@{sem\+\_\+production\+\_\+time}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{sem\+\_\+production\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+S\+E\+M\+::sem\+\_\+production\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_aa4a21386cf6942df0b5e501a2588aaad}
+last time production cycle took place 
+
+Definition at line 129 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a89e5a54de1bb68b94f176e6585a23148}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!sem\+\_\+research\+\_\+time@{sem\+\_\+research\+\_\+time}}
+\index{sem\+\_\+research\+\_\+time@{sem\+\_\+research\+\_\+time}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{sem\+\_\+research\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+S\+E\+M\+::sem\+\_\+research\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a89e5a54de1bb68b94f176e6585a23148}
+last time research cycle ended 
+
+Definition at line 130 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_adc6d6784a11bd0243efddbdc0d6e9bb0}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!solar\+\_\+panel\+\_\+templates@{solar\+\_\+panel\+\_\+templates}}
+\index{solar\+\_\+panel\+\_\+templates@{solar\+\_\+panel\+\_\+templates}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{solar\+\_\+panel\+\_\+templates}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Solar\+Module}$>$ $>$ solar\+\_\+core\+::\+S\+E\+M\+::solar\+\_\+panel\+\_\+templates\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_adc6d6784a11bd0243efddbdc0d6e9bb0}
+Section relevant to productionlist of solar panels to produce 
+
+Definition at line 142 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a42278e550f44276e0bb6c966f37c0033}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!T\+H\+E\+T\+A\+\_\+profit@{T\+H\+E\+T\+A\+\_\+profit}}
+\index{T\+H\+E\+T\+A\+\_\+profit@{T\+H\+E\+T\+A\+\_\+profit}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{T\+H\+E\+T\+A\+\_\+profit}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ solar\+\_\+core\+::\+S\+E\+M\+::\+T\+H\+E\+T\+A\+\_\+profit\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a42278e550f44276e0bb6c966f37c0033}
+T\+H\+E\+T\+A\mbox{[}0\mbox{]} -\/ base markup, T\+H\+E\+T\+A\mbox{[}1\mbox{]} -\/ 
+
+Definition at line 160 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a9d8fcdda966f46763b83c280c4ba4dbf}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!uid@{uid}}
+\index{uid@{uid}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{uid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf U\+I\+D} solar\+\_\+core\+::\+S\+E\+M\+::uid}\label{classsolar__core_1_1_s_e_m_a9d8fcdda966f46763b83c280c4ba4dbf}
+Public parameters 
+
+Definition at line 105 of file S\+E\+M.\+h.
+
+\hypertarget{classsolar__core_1_1_s_e_m_a6ef9eb7ba22b2c76c73635843b6cac4e}{}\index{solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}!w@{w}}
+\index{w@{w}!solar\+\_\+core\+::\+S\+E\+M@{solar\+\_\+core\+::\+S\+E\+M}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf W}$\ast$ solar\+\_\+core\+::\+S\+E\+M\+::w\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_s_e_m_a6ef9eb7ba22b2c76c73635843b6cac4e}
+Section with internals 
+
+Definition at line 120 of file S\+E\+M.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_s_e_m_8h}{S\+E\+M.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_s_e_m_8cpp}{S\+E\+M.\+cpp}\end{DoxyCompactItemize}

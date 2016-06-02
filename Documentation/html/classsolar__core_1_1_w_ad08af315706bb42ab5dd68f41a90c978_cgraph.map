@@ -1,0 +1,7 @@
+<map id="solar_core::W::life_gs" name="solar_core::W::life_gs">
+<area shape="rect" id="node2" href="$classsolar__core_1_1_g.html#ad3c9fb1da4db51b296c29a6b94b0f139" title="solar_core::G::act_tick" alt="" coords="205,71,360,97"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_g.html#ae01d6ea43c397cc79356884c98caf277" title="solar_core::G::ac_update_tick" alt="" coords="409,12,607,39"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_g.html#af7498122edc4bfda69724fbd1d59c53d" title="solar_core::G::approve\l_permit" alt="" coords="429,63,587,105"/>
+<area shape="rect" id="node6" href="$classsolar__core_1_1_g.html#aecc948919b4cadba36d15b458eb0b7c3" title="solar_core::G::collect\l_inf_site_visit" alt="" coords="435,129,581,170"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="657,5,831,46"/>
+</map>

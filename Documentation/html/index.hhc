@@ -5,7 +5,6 @@
 </OBJECT>
 <UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Notes for WP"><param name="Local" value="wp.html"><param name="ImageNumber" value="11"></OBJECT>
-<LI><OBJECT type="text/sitemap"><param name="Name" value="Kelley"><param name="Local" value="_kelley.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="DevStage2"><param name="Local" value="_dev_stage2.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="DevStage3"><param name="Local" value="_dev_stage3.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespaces"><param name="ImageNumber" value="1"></OBJECT>
@@ -16,7 +15,9 @@
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core"><param name="Local" value="namespacesolar__core.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="constants"><param name="Local" value="namespacesolar__core_1_1constants.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="tools"><param name="Local" value="namespacesolar__core_1_1tools.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_ui"><param name="Local" value="namespacesolar__ui.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespace Members"><param name="Local" value="namespacemembers.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
@@ -33,7 +34,16 @@
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize"><param name="Local" value="namespaceserialize.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeContainer"><param name="Local" value="classserialize_1_1_deserialize_container.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap"><param name="Local" value="classserialize_1_1_deserialize_map.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, std::shared_ptr&lt; V &gt; &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__ptr_3_01_v_01_4_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vected2d1ee1f8886a5a92a6dbc69e18bdcd.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, V, typename std::enable_if&lt; std::is_pointer&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -45,7 +55,19 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeValue&lt; T, typename std::enable_if&lt; std::is_same&lt; T, std::string &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambc4bb2b40dcc8b30285e8bdc35bf8b03.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
         </UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeImpl2"><param name="Local" value="classserialize_1_1_serialize_impl2.html"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="is_vector"><param name="Local" value="classserialize_1_1is__vector.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="is_vector&lt; std::vector&lt; T &gt; &gt;"><param name="Local" value="classserialize_1_1is__vector_3_01std_1_1vector_3_01_t_01_4_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeContainer"><param name="Local" value="classserialize_1_1_serialize_container.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeMap"><param name="Local" value="classserialize_1_1_serialize_map.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_serialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vector3a4a5c31f236854fe1872e17684001d1.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="SYAlg"><param name="Local" value="classserialize_1_1_s_y_alg.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -56,30 +78,66 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core"><param name="Local" value="namespacesolar__core.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="BaselineModel"><param name="Local" value="classsolar__core_1_1_baseline_model.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="EnumFactory"><param name="Local" value="classsolar__core_1_1_enum_factory.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classsolar__core_1_1_g.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classsolar__core_1_1_g.html#a624adac31ade604e0335717bad4fc9cd"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_g.html#ae01d6ea43c397cc79356884c98caf277"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_g.html#ad3c9fb1da4db51b296c29a6b94b0f139"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit"><param name="Local" value="classsolar__core_1_1_g.html#a10289bd4ea370e0e994f69603e11fc6c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="approve_permit"><param name="Local" value="classsolar__core_1_1_g.html#af7498122edc4bfda69724fbd1d59c53d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf_site_visit"><param name="Local" value="classsolar__core_1_1_g.html#aecc948919b4cadba36d15b458eb0b7c3"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_g.html#a0734da633e88ea0f6ff782d4b6521c09"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="request_inspection"><param name="Local" value="classsolar__core_1_1_g.html#ae5836aff26a74e47cd26081fb94641bb"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit_for_installation"><param name="Local" value="classsolar__core_1_1_g.html#a615600f35d73a38ea48e99909fff5085"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_g.html#a4d5b2845fc790c0f14b13fe922821f4b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_visits"><param name="Local" value="classsolar__core_1_1_g.html#a5c79440fcadc7d3e9212c5e7c05f84f7"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_projects"><param name="Local" value="classsolar__core_1_1_g.html#a471a7f64e44432bd6d2f2974f507d669"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_g.html#a045f1db40b15301ed5ec8aefb5327b0e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects"><param name="Local" value="classsolar__core_1_1_g.html#a3a87f9e5c14cd5bae4be8a4da538181e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_lock"><param name="Local" value="classsolar__core_1_1_g.html#a7ae124e062dbd50b0da66f34c9633965"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_g.html#a053a3d2c00c5af66925ebe359c4b4228"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="project_states_to_delete"><param name="Local" value="classsolar__core_1_1_g.html#a26b220870264c1927d282dfe9412725e"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_g.html#a7239d05d617261f97c46b641a0229c14"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperW"><param name="Local" value="classsolar__core_1_1_helper_w.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization"><param name="Local" value="classsolar__core_1_1_helper_w_specialization.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization&lt; T, BaselineModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization&lt; T, UnitTestModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="House"><param name="Local" value="classsolar__core_1_1_house.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="House"><param name="Local" value="classsolar__core_1_1_house.html#a1babbd79506a4acf93c16ceec093b924"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="roof_age"><param name="Local" value="classsolar__core_1_1_house.html#aa6491ce4f3fc6d99a59ea80cfb8194fc"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="roof_size"><param name="Local" value="classsolar__core_1_1_house.html#a7f872cb768b83e70e263590078fa4c7d"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Household"><param name="Local" value="classsolar__core_1_1_household.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Household"><param name="Local" value="classsolar__core_1_1_household.html#a5f84bf614d0ec70abf9597ec97e07b1a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_household.html#add38a49b76c2836a50a89e75318414f1"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_quoting_sei"><param name="Local" value="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_designs"><param name="Local" value="classsolar__core_1_1_household.html#aaa1f1e52009d8aef32d3c5a9367b93b7"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_online_quotes"><param name="Local" value="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_preliminary_quotes"><param name="Local" value="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_project_reroof"><param name="Local" value="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf"><param name="Local" value="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf_online_quote"><param name="Local" value="classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_household.html#ab8c15758602643f2290ef1b9ddf2a2ca"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_design"><param name="Local" value="classsolar__core_1_1_household.html#a7df346780d3d9683293af565d5831d05"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_online_quote"><param name="Local" value="classsolar__core_1_1_household.html#a306aed410a39e8062ab5f1b4a3216b8b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_preliminary_quote"><param name="Local" value="classsolar__core_1_1_household.html#a31a1c8d006fb9e95a2460aa392eaa830"><param name="ImageNumber" value="11"></OBJECT>
@@ -103,6 +161,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="quote_state"><param name="Local" value="classsolar__core_1_1_household.html#a4ae618de9a28895317824b185b57ab24"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits_lock"><param name="Local" value="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_design"><param name="Local" value="classsolar__core_1_1_household.html#a7c0f5fb9f84a1d971e770fc677e7d8de"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_household.html#a01ac4643c725f397ba7485209a906e4d"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IAgent"><param name="Local" value="classsolar__core_1_1_i_agent.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -116,15 +175,39 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="~IInstitute"><param name="Local" value="classsolar__core_1_1_i_institute.html#a70718cc95e99d10369e3fe85d62007d1"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_i_institute.html#ad27e64b6bdad198bb04d7ddd9c5a3252"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Inverter"><param name="Local" value="classsolar__core_1_1_inverter.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="name"><param name="Local" value="classsolar__core_1_1_inverter.html#a0a63c42804f6d96c298f11c1425075d2"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="technology"><param name="Local" value="classsolar__core_1_1_inverter.html#a793b76816cee47c3348f8854b0fec9b1"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom"><param name="Local" value="classsolar__core_1_1_i_random.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom"><param name="Local" value="classsolar__core_1_1_i_random.html#a2d9a927aebfdeed274152871f7f66516"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="rnd"><param name="Local" value="classsolar__core_1_1_i_random.html#a5a9593271657fe327d1e1ee1b456796c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="rng"><param name="Local" value="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ru"><param name="Local" value="classsolar__core_1_1_i_random.html#ab6a4ab724b521abecbcc87cd736edfd2"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="classsolar__core_1_1_log.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="log"><param name="Local" value="classsolar__core_1_1_log.html#a2162de95feb02b60387ea86c8fb3fad6"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="log"><param name="Local" value="classsolar__core_1_1_log.html#a9976b4394d20e3157b3c0b2e6436ce89"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="~MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#ac61af6e8886ffff29e040c98f1500c77"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#abd9e85a42a8052a9baeaa09ef87710a2"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_marketing_inf_sei"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#af9ff802d6373dc91177959508e80d563"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#ae83f5529280d28b312e8e723b811d75b"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="request_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a0eb7c3b990063684a04c7b5f38138cbf"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="interested_agents"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="marketing_mess"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a58a4f5acc2492edebfde65bee94802b9"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="MesDesign"><param name="Local" value="classsolar__core_1_1_mes_design.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MesDesign"><param name="Local" value="classsolar__core_1_1_mes_design.html#a29c0de1da8ebd663d94c02bc65ef8539"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="design"><param name="Local" value="classsolar__core_1_1_mes_design.html#a85bd3d4d32c763ac3f9c6547ab4002ab"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="MesFinance"><param name="Local" value="classsolar__core_1_1_mes_finance.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -134,6 +217,7 @@
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="MesMarketingSEI"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MesMarketingSEI"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#ad6069a718526cffd0d74e9bcda12bd8a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="agent"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#a5bc5eb8bf309e6ba96cfdc0feb01baa9"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="sei_type"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#a8897df83278137d8ff4b04c068e4370e"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
@@ -150,6 +234,13 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="MesPayment"><param name="Local" value="classsolar__core_1_1_mes_payment.html#a1f1892acd5c8da372d061a69445d68bd"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="q"><param name="Local" value="classsolar__core_1_1_mes_payment.html#a5d137def5ff6f3659650c08f90d07ca2"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="MesSellOrder"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MesSellOrder"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#adb6422a3f71c86ed02d4ef576fc44899"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="buyer"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a02e3045834f188382cad87aecd7bfbab"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="item"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a4ef673afdc40170ef0e99d459bdf8d62"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="qn"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a14d9034fdc15d82ce04bd132d3d838f0"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="MesStateBaseHH"><param name="Local" value="classsolar__core_1_1_mes_state_base_h_h.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_mes_state_base_h_h.html#a75575469dfbf7a86bd1ea95fb85c5194"><param name="ImageNumber" value="11"></OBJECT>
@@ -160,12 +251,13 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="PVDesign"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ad599fa6820474d64dcc9142a5e76e983"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="AC_size"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a79a70e7fe3adcbc4e9256db9df38e444"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="DC_size"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a21148518ef58004be10b91dc75fdd5b5"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="energy_savings_money"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a6b777b1d9dbd1f5a06b8d67d5204340b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="hard_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a18cec349cd8f04efcb67562e30416860"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="N_PANELS"><param name="Local" value="classsolar__core_1_1_p_v_design.html#abef277ad010afb4ab6c6c13113a8c017"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="permit_difficulty"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a8c2897033c697a6dcfb96787358dc64f"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="PV_module"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a89f2b59847de64cab26b56f21ace4e6c"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="soft_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ac1220011d65d7cc442cd143f93123f31"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_radiation"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a1a20c72743528802ed5498fe848559df"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_irradiation"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ae74d98b592c49c7bb44a2e2ec07093c4"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="total_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ac015f1cf090279e45861f2860f008cc2"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="total_savings"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a7628fe2e1ea95f8df79aca11dd5a356d"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
@@ -175,6 +267,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_g_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a9be23309024672b4be445f68c73e42a6"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_hh_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#ab6196935ca6f777b28a944642efdbf84"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_sei_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a0a78a4b527a897aac39e5572fbb5a842"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_utility_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a7a44008469a8db9a47038e2945a5d723"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="agent"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a20e8115154979d2f856f1acceb6bb2b1"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="begin_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a5b8869c2a2580e5183a7796580074555"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="design"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a0e3e8228c8129ccd07e44503ef8577a8"><param name="ImageNumber" value="11"></OBJECT>
@@ -183,22 +276,30 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="preliminary_quote"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a5d75e9dfe664f7307b0dc24c1f00d8a9"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="sei"><param name="Local" value="classsolar__core_1_1_p_v_project.html#af8fdd82137a3b0aa277ae6b9663fcb33"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="state_base_agent"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a1a3576ddac7b82f9a2d7c139af9850d2"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="state_materials"><param name="Local" value="classsolar__core_1_1_p_v_project.html#aaac22e629b55f970a4ad43b1fcd756d1"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="state_project"><param name="Local" value="classsolar__core_1_1_p_v_project.html#ab25a22c1202f2314a55dc9a759922183"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="IterTypeDecSM"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a039ba7d0f4561aec82bd96636de534a5"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html#af885d50c89decf5b6ff208c24cedd82b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_estimate_savings"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aa44745e1e93c45d163981751848e21e9"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a51873235b9ab1795b5616e672c75e499"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="accepted_design"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a007004337169bac4c67b66e37ca89767"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="accepted_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad683e480828c042d311a18cefbf2e95d"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf_site_visit"><param name="Local" value="classsolar__core_1_1_s_e_i.html#abdcbd57fa145ee55eb8455a8bc3b4c7c"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="form_design"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="form_design_for_params"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a0019e2ad3504adcb5a44e5002f1d0002"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="form_financing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a7f29b9fee74b984ed9b1c6983b2960e3"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="form_online_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="form_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#af598032ee3e4506cf5123aceee67cbfd"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aefbf747021fcb1f48742b0dd3bc7757f"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_payment"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a7f24aa13f3d62ec8890f526e12a3351c"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="get_project"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad3730a5f71a2932744916a5a62753c97"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3dd3a3550f3de5cf4d36c2f83cbd1123"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aecd2436dcb77c31480dc3ef3fcda172d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="install_project"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a1ab2217b83050e4320afa11c4d838fde"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="request_online_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a704af1e2cacd1aba86d5ac406f2231ce"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="request_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aa34d9c40613ff61fc0c8c911e0734441"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_s_e_i.html#abf17b36abf722993d5ad53710579d402"><param name="ImageNumber" value="11"></OBJECT>
@@ -207,20 +308,55 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_solar_modules"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a79728143af5752e09c2be29cfa1cfd8f"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_installations"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad906dcd5b638e405a7daf14539096377"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_visits"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3ff238346bd126ee39aa37bfee41be43"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="mes_marketing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a2092c19659e7acd194ac326ba6fbdc29"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="location_x"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3de17f788667889770edaf7dc0fc054d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="location_y"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a5fc331197d08788392c3af1903f25763"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="mes_marketing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad5326c45ccd4a5512a6c0a296656264d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="money"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a8ab5ab03ef726a3354b7c0e0d18da82a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a811b998092171224983f9aefaa974707"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a76d9d151e51465d534ff0fd3d64f98bc"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects_lock"><param name="Local" value="classsolar__core_1_1_s_e_i.html#adc031a01a6acf03d68b6d0037a2c8a30"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a99fe003b8fd35b6ef44dec39ed374ffe"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_installations"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aacda4fae2c17d58672b60eba9c8cdc63"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a8729d1aaf89da5d7d8b52761b65c881c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="sei_type"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a788ef7ae27cee8b9b99b57eba9ab2981"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_hard_costs"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a4723f6d0e5098b9b2f553c9ef6c5545f"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_profit"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a9137f81a58ab1325d8b37590afe267aa"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_soft_costs"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a1be690a943dc872af0ed3540c81f1d6b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a82e0c6b5f6d83639a08c1bc357fd3466"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM"><param name="Local" value="classsolar__core_1_1_s_e_m.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a60d13fcadec26853d8461d32eefb97da"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a5c40b26576923ee560a73aeeed31685c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a797046cfc7b6150f44f49baa1b32abfc"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a33c9571de22adca46acb3759f4f4e82e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="sell_SolarModule"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a2717afd98e9ab7284df79945d882511a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a522bb3ecb869a396a797765c9078de12"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="costs_base"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a923827d4aefd8df93e1e49944f96a6be"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="history_sales"><param name="Local" value="classsolar__core_1_1_s_e_m.html#ab3d8795e8601541ebcefcaf76d77c67a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="inventories"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a2fa619a45dc7e3ecc29026042337bd2d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="inverter_templates"><param name="Local" value="classsolar__core_1_1_s_e_m.html#acd9f1a494059476a06de5cb4fe9f750a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="lock"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a4b62648f9638185e279a801b8c0eb39b"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="money"><param name="Local" value="classsolar__core_1_1_s_e_m.html#ac2c452b6783b521c59d3b82dba6d08cb"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="N_PANELS_inventories"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a6822b2c6d30e2aaaf5dbe0b50ce221a1"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a52adde99943cf97f4a024927ca57c087"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="prices"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a69aaf0be4ed0edf8a52e48f97a0de5f6"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_dec_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a37a50821d1926b9028e70431fb383a7a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_production_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#aa4a21386cf6942df0b5e501a2588aaad"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_research_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a89e5a54de1bb68b94f176e6585a23148"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_panel_templates"><param name="Local" value="classsolar__core_1_1_s_e_m.html#adc6d6784a11bd0243efddbdc0d6e9bb0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_profit"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a42278e550f44276e0bb6c966f37c0033"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="uid"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a9d8fcdda966f46763b83c280c4ba4dbf"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a6ef9eb7ba22b2c76c73635843b6cac4e"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarModule"><param name="Local" value="classsolar__core_1_1_solar_module.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarModule"><param name="Local" value="classsolar__core_1_1_solar_module.html#ae972f46a6c3bd9a1c3e7761ab1516524"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="degradation"><param name="Local" value="classsolar__core_1_1_solar_module.html#a9c6d7e0ef28958ac1da73a1e48a1373d"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="efficiency"><param name="Local" value="classsolar__core_1_1_solar_module.html#a0303a0da750be23a4a408645d838ed24"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="length"><param name="Local" value="classsolar__core_1_1_solar_module.html#a34cc7ce18770e51c87a3655f6f481be0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="manufacturer"><param name="Local" value="classsolar__core_1_1_solar_module.html#a32c10820046565c531a3e1a0fd8107b0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="manufacturer_id"><param name="Local" value="classsolar__core_1_1_solar_module.html#a24c71dfff1a0503fe967d11c52be05b8"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="name"><param name="Local" value="classsolar__core_1_1_solar_module.html#abc9bb9bae1546dee017d598ef7baa952"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="p_sem"><param name="Local" value="classsolar__core_1_1_solar_module.html#a34233be4549eb826fa5a4cc6a20993e3"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="STC_power_rating"><param name="Local" value="classsolar__core_1_1_solar_module.html#ada72a54d3a914a88fd3942f1a09065c1"><param name="ImageNumber" value="11"></OBJECT>
@@ -229,43 +365,83 @@
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Tile"><param name="Local" value="classsolar__core_1_1_tile.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Tile"><param name="Local" value="classsolar__core_1_1_tile.html#ac0304f116ac4ab3d130e7dc4233f12e2"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="permit_difficulty"><param name="Local" value="classsolar__core_1_1_tile.html#ac4cdbb55f06b95bd8c4a11a25d0b6635"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="requires_permit_visit"><param name="Local" value="classsolar__core_1_1_tile.html#a489ba61bbe83f143b98d8a866cf06f13"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="size_x"><param name="Local" value="classsolar__core_1_1_tile.html#ae8615b87d6d0c614de01b497fa63c27b"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="size_y"><param name="Local" value="classsolar__core_1_1_tile.html#a698ac57539f58ed4e0a54b3135be6fb9"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_radiation"><param name="Local" value="classsolar__core_1_1_tile.html#aae222e441b1dfe68cc6b78bb946f5e02"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_irradiation"><param name="Local" value="classsolar__core_1_1_tile.html#a2062d4ffe05c6f6282975f71f2d24441"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html#af5d790831cd429becae2f5143b0f8e92"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html#a23f8078dea147aecd914d1676f09a98a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_string"><param name="Local" value="classsolar__core_1_1_u_i_d.html#a4d0f76d77dd4d4fa9ebcb85e31cd9209"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="UnitTestModel"><param name="Local" value="classsolar__core_1_1_unit_test_model.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility"><param name="Local" value="classsolar__core_1_1_utility.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility"><param name="Local" value="classsolar__core_1_1_utility.html#aa52a4877b6281d4ffa8f003b831e802c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_utility.html#a64c5f71eb62d4ee87fcacb77624b8c09"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_utility.html#a71da8601e6cbd65575b8d1b3180484dd"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_utility.html#aec8717094f41f296a2b50310f0faa169"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit_for_interconnection"><param name="Local" value="classsolar__core_1_1_utility.html#ac38a138fae309c8f1a0c67f19b621fdb"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_utility.html#acc68b5e07894b8c3918a7512391c6f7e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_utility.html#a9df3a727c125d50170b7c0e190de460a"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects"><param name="Local" value="classsolar__core_1_1_utility.html#a80f37d5cc4772161923aaacb73e45e81"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_lock"><param name="Local" value="classsolar__core_1_1_utility.html#a7100cb063e2dbdf0f5ac2cff9cf3d030"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_utility.html#ae3b66140590b19d4c448aa8f8f559906"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_dec"><param name="Local" value="classsolar__core_1_1_utility.html#a32f7a95da732c6e48c15804277886a45"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_utility.html#af46cb137dd05f7b0cabe2aed249498fb"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html#aa252edac9babf33b41e22a816648a9a5"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_w.html#a0b92657c681579dacc29821f41650541"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="get_permit_difficulty"><param name="Local" value="classsolar__core_1_1_w.html#a7906874c5180d8114e1acba095ace3f5"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_solar_radiation"><param name="Local" value="classsolar__core_1_1_w.html#a39001b1adeb816c80cb63637801c4b9c"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_solar_irradiation"><param name="Local" value="classsolar__core_1_1_w.html#af3adfe566e6db1a7f7df18aa7df22c25"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf"><param name="Local" value="classsolar__core_1_1_w.html#a7fd073f0ebbf06378919f677bc28c2d1"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf_installed_project"><param name="Local" value="classsolar__core_1_1_w.html#a1d99a46827c504a542ecda81b201a8f5"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf_interconnected_project"><param name="Local" value="classsolar__core_1_1_w.html#a04252bc7247e71aa41798e98e42b6c15"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_w.html#af58a19a39fb9fb34258803c613924613"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="life"><param name="Local" value="classsolar__core_1_1_w.html#a5e64e5a7ef41c07fddf7994cd3f2693e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="life_gs"><param name="Local" value="classsolar__core_1_1_w.html#ad08af315706bb42ab5dd68f41a90c978"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="life_hhs"><param name="Local" value="classsolar__core_1_1_w.html#a08283dbea7c7f3fe8b7f094a96f73a78"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="life_markets"><param name="Local" value="classsolar__core_1_1_w.html#a03a16fe70a11b947735709cf0a0b277e"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="life_seis"><param name="Local" value="classsolar__core_1_1_w.html#a77b206056c9440059f7b78e1424b0921"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="life_sems"><param name="Local" value="classsolar__core_1_1_w.html#a655c14c2a3d10952ab1217eedd21443f"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_w.html#ac01e54f17f927af30196b551d235d7ba"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_ui::UI"><param name="Local" value="classsolar__core_1_1_w.html#a8f3690c82c493af3a66f999410fe891d"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="all_update"><param name="Local" value="classsolar__core_1_1_w.html#aa6cba0dba8a566978e51fb4204aac4b9"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="base_path"><param name="Local" value="classsolar__core_1_1_w.html#acf6e7dd195573ba04b406cde2e5b80fb"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="begin_time"><param name="Local" value="classsolar__core_1_1_w.html#aec1b9014ad296dc9b8b132ba9b67c08a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_G_TICK"><param name="Local" value="classsolar__core_1_1_w.html#aae63ce0d440f2c8d475d6eeafac58238"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_H_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a4cd32940e21bfc20919cc2d4447d66d3"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_PAUSED"><param name="Local" value="classsolar__core_1_1_w.html#a1c0ebdba727a7a5cbf322072ab5c9184"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_STARTED"><param name="Local" value="classsolar__core_1_1_w.html#a8456f88d45f2e8bf67eccd7f0c8d08fa"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_STOPPED"><param name="Local" value="classsolar__core_1_1_w.html#a9bb998c65a7427961de179f41e25daea"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_MARKET_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a7aa8b882244539e098e45207045d7d88"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_SEI_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a65d2047e574ed6201a8e21ec1ba1bec4"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_SEM_TICK"><param name="Local" value="classsolar__core_1_1_w.html#ae383b7a595cb28d52aa747fc7e5bb619"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="g"><param name="Local" value="classsolar__core_1_1_w.html#a9e50ef0da579cdfc3da22c16a492bc44"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf_marketing_sei_agents"><param name="Local" value="classsolar__core_1_1_w.html#a81b5469757f203c9619ff69323ac0f77"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="hhs"><param name="Local" value="classsolar__core_1_1_w.html#a17c012ff8b17890ed33923cec6d87be3"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="interconnected_projects"><param name="Local" value="classsolar__core_1_1_w.html#a1d35d6501eef6d673bd2b28e2c1724c4"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="lock_tick"><param name="Local" value="classsolar__core_1_1_w.html#a56ba20ee51f5db7288e55bb65f12511b"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="marketing"><param name="Local" value="classsolar__core_1_1_w.html#a93f277fb3a9d9e7b1e911c6a494c8ec8"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="notified_counter"><param name="Local" value="classsolar__core_1_1_w.html#afee32d515534826a60ddf12936f85a3d"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_w.html#a0d06bc7242f8b3958986118eb217583f"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="rand"><param name="Local" value="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="seis"><param name="Local" value="classsolar__core_1_1_w.html#a311baa30390494ae8e79f26e372e716d"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="sems"><param name="Local" value="classsolar__core_1_1_w.html#ab6349cbc751747a05618dad4ebb1b726"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="time"><param name="Local" value="classsolar__core_1_1_w.html#ae96b30122adc9fae8fc2f209a4c89b0a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="updated_counter"><param name="Local" value="classsolar__core_1_1_w.html#a775d817c6117b462571c3fca62fe0c86"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="utility"><param name="Local" value="classsolar__core_1_1_w.html#a6d6fa51d4bdc40dac8b76aa4967030b5"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="world_map"><param name="Local" value="classsolar__core_1_1_w.html#a8ed6f1aa7fd4ef2c3488147b38a670b7"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html#adb4ade0405f6de1affb3f413496b4dd6"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html#a9e3b75ab78e2754c06a777c1cf55c43a"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="g_map"><param name="Local" value="classsolar__core_1_1_world_map.html#a2b94f74fcea57d3e01d8cab8348e1c48"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldSettings"><param name="Local" value="classsolar__core_1_1_world_settings.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -280,16 +456,38 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_modules"><param name="Local" value="classsolar__core_1_1_world_settings.html#acb33be8576dd4f60836373ea1b573fe6"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_ui"><param name="Local" value="namespacesolar__ui.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="UI"><param name="Local" value="classsolar__ui_1_1_u_i.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="UI"><param name="Local" value="classsolar__ui_1_1_u_i.html#ac4cb44ab75c785388a021a0ec95ac968"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf"><param name="Local" value="classsolar__ui_1_1_u_i.html#a73345abf9e55fd9e4fd4e4d53aa340ae"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__ui_1_1_u_i.html#a3387001fd956e28627081d2edc673bb0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="save"><param name="Local" value="classsolar__ui_1_1_u_i.html#ac64293023e1f26e2d9d319e1af936520"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__ui_1_1_u_i.html#af3bb455922ee0b7b8e3dbe613cd37be5"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Index"><param name="Local" value="classes.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Hierarchy"><param name="Local" value="hierarchy.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::BaselineModel"><param name="Local" value="classsolar__core_1_1_baseline_model.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeContainer&lt; T, Enable &gt;"><param name="Local" value="classserialize_1_1_deserialize_container.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeMap&lt; K, V, Enable &gt;"><param name="Local" value="classserialize_1_1_deserialize_map.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeMap&lt; K, std::shared_ptr&lt; V &gt; &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__ptr_3_01_v_01_4_01_4.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vected2d1ee1f8886a5a92a6dbc69e18bdcd.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeMap&lt; K, V, typename std::enable_if&lt; std::is_pointer&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeValue&lt; T, Enable &gt;"><param name="Local" value="classserialize_1_1_deserialize_value.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::DeserializeValue&lt; T, typename std::enable_if&lt; std::is_same&lt; T, std::string &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambc4bb2b40dcc8b30285e8bdc35bf8b03.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::WorldSettings::EHash"><param name="Local" value="structsolar__core_1_1_world_settings_1_1_e_hash.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::EnumFactory"><param name="Local" value="classsolar__core_1_1_enum_factory.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::G"><param name="Local" value="classsolar__core_1_1_g.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::HelperW"><param name="Local" value="classsolar__core_1_1_helper_w.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::HelperWSpecialization&lt; T, Param &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::HelperWSpecialization&lt; T, BaselineModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::HelperWSpecialization&lt; T, UnitTestModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::House"><param name="Local" value="classsolar__core_1_1_house.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::IAgent"><param name="Local" value="classsolar__core_1_1_i_agent.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -300,28 +498,67 @@
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::Inverter"><param name="Local" value="classsolar__core_1_1_inverter.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::IRandom"><param name="Local" value="classsolar__core_1_1_i_random.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::is_vector&lt; T &gt;"><param name="Local" value="classserialize_1_1is__vector.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::is_vector&lt; std::vector&lt; T &gt; &gt;"><param name="Local" value="classserialize_1_1is__vector_3_01std_1_1vector_3_01_t_01_4_01_4.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::Log"><param name="Local" value="classsolar__core_1_1_log.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesDesign"><param name="Local" value="classsolar__core_1_1_mes_design.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesFinance"><param name="Local" value="classsolar__core_1_1_mes_finance.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesMarketingSEI"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesMarketingSEIOnlineQuote"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i_online_quote.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesMarketingSEIPreliminaryQuote"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i_preliminary_quote.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesPayment"><param name="Local" value="classsolar__core_1_1_mes_payment.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesSellOrder"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::MesStateBaseHH"><param name="Local" value="classsolar__core_1_1_mes_state_base_h_h.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::PVDesign"><param name="Local" value="classsolar__core_1_1_p_v_design.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::PVProject"><param name="Local" value="classsolar__core_1_1_p_v_project.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::SerializeImpl2&lt; K, V, Enable &gt;"><param name="Local" value="classserialize_1_1_serialize_impl2.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::SEM"><param name="Local" value="classsolar__core_1_1_s_e_m.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::SerializeContainer&lt; T, Enable &gt;"><param name="Local" value="classserialize_1_1_serialize_container.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::SerializeMap&lt; K, V, Enable &gt;"><param name="Local" value="classserialize_1_1_serialize_map.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::SerializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_serialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vector3a4a5c31f236854fe1872e17684001d1.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::SolarModule"><param name="Local" value="classsolar__core_1_1_solar_module.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize::SYAlg"><param name="Local" value="classserialize_1_1_s_y_alg.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::Tile"><param name="Local" value="classsolar__core_1_1_tile.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_ui::UI"><param name="Local" value="classsolar__ui_1_1_u_i.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::UnitTestModel"><param name="Local" value="classsolar__core_1_1_unit_test_model.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::Utility"><param name="Local" value="classsolar__core_1_1_utility.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::W"><param name="Local" value="classsolar__core_1_1_w.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_core::WorldSettings"><param name="Local" value="classsolar__core_1_1_world_settings.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Members"><param name="Local" value="functions.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="All"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="All"><param name="Local" value="functions.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="a"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="b"><param name="Local" value="functions_b.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="c"><param name="Local" value="functions_c.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="d"><param name="Local" value="functions_d.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="e"><param name="Local" value="functions_e.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="f"><param name="Local" value="functions_f.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="g"><param name="Local" value="functions_g.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="h"><param name="Local" value="functions_h.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="i"><param name="Local" value="functions_i.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="l"><param name="Local" value="functions_l.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="m"><param name="Local" value="functions_m.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="n"><param name="Local" value="functions_n.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="o"><param name="Local" value="functions_o.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="p"><param name="Local" value="functions_p.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="q"><param name="Local" value="functions_q.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="r"><param name="Local" value="functions_r.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="s"><param name="Local" value="functions_s.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="t"><param name="Local" value="functions_t.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="u"><param name="Local" value="functions_u.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="v"><param name="Local" value="functions_v.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="functions_w.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~"><param name="Local" value="functions_~.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="Local" value="functions_func.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="Local" value="functions_vars.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Typedefs"><param name="Local" value="functions_type.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Related Functions"><param name="Local" value="functions_rela.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   </UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Files"><param name="ImageNumber" value="1"></OBJECT>
@@ -337,12 +574,23 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classsolar__core_1_1_g.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classsolar__core_1_1_g.html#a624adac31ade604e0335717bad4fc9cd"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_g.html#ae01d6ea43c397cc79356884c98caf277"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_g.html#ad3c9fb1da4db51b296c29a6b94b0f139"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit"><param name="Local" value="classsolar__core_1_1_g.html#a10289bd4ea370e0e994f69603e11fc6c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="approve_permit"><param name="Local" value="classsolar__core_1_1_g.html#af7498122edc4bfda69724fbd1d59c53d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf_site_visit"><param name="Local" value="classsolar__core_1_1_g.html#aecc948919b4cadba36d15b458eb0b7c3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_g.html#a0734da633e88ea0f6ff782d4b6521c09"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="request_inspection"><param name="Local" value="classsolar__core_1_1_g.html#ae5836aff26a74e47cd26081fb94641bb"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit_for_installation"><param name="Local" value="classsolar__core_1_1_g.html#a615600f35d73a38ea48e99909fff5085"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_g.html#a4d5b2845fc790c0f14b13fe922821f4b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_visits"><param name="Local" value="classsolar__core_1_1_g.html#a5c79440fcadc7d3e9212c5e7c05f84f7"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_projects"><param name="Local" value="classsolar__core_1_1_g.html#a471a7f64e44432bd6d2f2974f507d669"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_g.html#a045f1db40b15301ed5ec8aefb5327b0e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects"><param name="Local" value="classsolar__core_1_1_g.html#a3a87f9e5c14cd5bae4be8a4da538181e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_lock"><param name="Local" value="classsolar__core_1_1_g.html#a7ae124e062dbd50b0da66f34c9633965"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_g.html#a053a3d2c00c5af66925ebe359c4b4228"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="project_states_to_delete"><param name="Local" value="classsolar__core_1_1_g.html#a26b220870264c1927d282dfe9412725e"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_g.html#a7239d05d617261f97c46b641a0229c14"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="H.cpp"><param name="Local" value="_h_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -350,14 +598,18 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="Household"><param name="Local" value="classsolar__core_1_1_household.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="Household"><param name="Local" value="classsolar__core_1_1_household.html#a5f84bf614d0ec70abf9597ec97e07b1a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_household.html#add38a49b76c2836a50a89e75318414f1"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_quoting_sei"><param name="Local" value="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_designs"><param name="Local" value="classsolar__core_1_1_household.html#aaa1f1e52009d8aef32d3c5a9367b93b7"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_online_quotes"><param name="Local" value="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_evaluate_preliminary_quotes"><param name="Local" value="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_project_reroof"><param name="Local" value="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf"><param name="Local" value="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf_online_quote"><param name="Local" value="classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_household.html#ab8c15758602643f2290ef1b9ddf2a2ca"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_design"><param name="Local" value="classsolar__core_1_1_household.html#a7df346780d3d9683293af565d5831d05"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_online_quote"><param name="Local" value="classsolar__core_1_1_household.html#a306aed410a39e8062ab5f1b4a3216b8b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="receive_preliminary_quote"><param name="Local" value="classsolar__core_1_1_household.html#a31a1c8d006fb9e95a2460aa392eaa830"><param name="ImageNumber" value="11"></OBJECT>
@@ -381,6 +633,7 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="quote_state"><param name="Local" value="classsolar__core_1_1_household.html#a4ae618de9a28895317824b185b57ab24"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits_lock"><param name="Local" value="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_design"><param name="Local" value="classsolar__core_1_1_household.html#a7c0f5fb9f84a1d971e770fc677e7d8de"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_household.html#a01ac4643c725f397ba7485209a906e4d"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
@@ -399,18 +652,25 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="IterTypeDecSM"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a039ba7d0f4561aec82bd96636de534a5"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEI"><param name="Local" value="classsolar__core_1_1_s_e_i.html#af885d50c89decf5b6ff208c24cedd82b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_estimate_savings"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aa44745e1e93c45d163981751848e21e9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a51873235b9ab1795b5616e672c75e499"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="accepted_design"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a007004337169bac4c67b66e37ca89767"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="accepted_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad683e480828c042d311a18cefbf2e95d"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf_site_visit"><param name="Local" value="classsolar__core_1_1_s_e_i.html#abdcbd57fa145ee55eb8455a8bc3b4c7c"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="form_design"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="form_design_for_params"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a0019e2ad3504adcb5a44e5002f1d0002"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="form_financing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a7f29b9fee74b984ed9b1c6983b2960e3"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="form_online_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="form_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#af598032ee3e4506cf5123aceee67cbfd"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aefbf747021fcb1f48742b0dd3bc7757f"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_payment"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a7f24aa13f3d62ec8890f526e12a3351c"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="get_project"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad3730a5f71a2932744916a5a62753c97"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3dd3a3550f3de5cf4d36c2f83cbd1123"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aecd2436dcb77c31480dc3ef3fcda172d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="install_project"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a1ab2217b83050e4320afa11c4d838fde"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="request_online_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a704af1e2cacd1aba86d5ac406f2231ce"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="request_preliminary_quote"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aa34d9c40613ff61fc0c8c911e0734441"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_s_e_i.html#abf17b36abf722993d5ad53710579d402"><param name="ImageNumber" value="11"></OBJECT>
@@ -419,25 +679,68 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="dec_solar_modules"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a79728143af5752e09c2be29cfa1cfd8f"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_installations"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad906dcd5b638e405a7daf14539096377"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="i_schedule_visits"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3ff238346bd126ee39aa37bfee41be43"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="mes_marketing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a2092c19659e7acd194ac326ba6fbdc29"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="location_x"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a3de17f788667889770edaf7dc0fc054d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="location_y"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a5fc331197d08788392c3af1903f25763"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="mes_marketing"><param name="Local" value="classsolar__core_1_1_s_e_i.html#ad5326c45ccd4a5512a6c0a296656264d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="money"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a8ab5ab03ef726a3354b7c0e0d18da82a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a811b998092171224983f9aefaa974707"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a76d9d151e51465d534ff0fd3d64f98bc"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects_lock"><param name="Local" value="classsolar__core_1_1_s_e_i.html#adc031a01a6acf03d68b6d0037a2c8a30"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a99fe003b8fd35b6ef44dec39ed374ffe"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_installations"><param name="Local" value="classsolar__core_1_1_s_e_i.html#aacda4fae2c17d58672b60eba9c8cdc63"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_visits"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a8729d1aaf89da5d7d8b52761b65c881c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="sei_type"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a788ef7ae27cee8b9b99b57eba9ab2981"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_hard_costs"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a4723f6d0e5098b9b2f553c9ef6c5545f"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_profit"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a9137f81a58ab1325d8b37590afe267aa"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_soft_costs"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a1be690a943dc872af0ed3540c81f1d6b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_s_e_i.html#a82e0c6b5f6d83639a08c1bc357fd3466"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM.cpp"><param name="Local" value="_s_e_m_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM.h"><param name="Local" value="_s_e_m_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM"><param name="Local" value="classsolar__core_1_1_s_e_m.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEM"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a60d13fcadec26853d8461d32eefb97da"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a5c40b26576923ee560a73aeeed31685c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a797046cfc7b6150f44f49baa1b32abfc"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a33c9571de22adca46acb3759f4f4e82e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="sell_SolarModule"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a2717afd98e9ab7284df79945d882511a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a522bb3ecb869a396a797765c9078de12"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="costs_base"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a923827d4aefd8df93e1e49944f96a6be"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="history_sales"><param name="Local" value="classsolar__core_1_1_s_e_m.html#ab3d8795e8601541ebcefcaf76d77c67a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="inventories"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a2fa619a45dc7e3ecc29026042337bd2d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="inverter_templates"><param name="Local" value="classsolar__core_1_1_s_e_m.html#acd9f1a494059476a06de5cb4fe9f750a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="lock"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a4b62648f9638185e279a801b8c0eb39b"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="money"><param name="Local" value="classsolar__core_1_1_s_e_m.html#ac2c452b6783b521c59d3b82dba6d08cb"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="N_PANELS_inventories"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a6822b2c6d30e2aaaf5dbe0b50ce221a1"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a52adde99943cf97f4a024927ca57c087"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="prices"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a69aaf0be4ed0edf8a52e48f97a0de5f6"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_dec_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a37a50821d1926b9028e70431fb383a7a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_production_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#aa4a21386cf6942df0b5e501a2588aaad"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="sem_research_time"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a89e5a54de1bb68b94f176e6585a23148"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_panel_templates"><param name="Local" value="classsolar__core_1_1_s_e_m.html#adc6d6784a11bd0243efddbdc0d6e9bb0"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_profit"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a42278e550f44276e0bb6c966f37c0033"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="uid"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a9d8fcdda966f46763b83c280c4ba4dbf"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_s_e_m.html#a6ef9eb7ba22b2c76c73635843b6cac4e"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarPanel.cpp"><param name="Local" value="_solar_panel_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarPanel.h"><param name="Local" value="_solar_panel_8h.html"><param name="ImageNumber" value="11"></OBJECT>
           <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Inverter"><param name="Local" value="classsolar__core_1_1_inverter.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="name"><param name="Local" value="classsolar__core_1_1_inverter.html#a0a63c42804f6d96c298f11c1425075d2"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="technology"><param name="Local" value="classsolar__core_1_1_inverter.html#a793b76816cee47c3348f8854b0fec9b1"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarModule"><param name="Local" value="classsolar__core_1_1_solar_module.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SolarModule"><param name="Local" value="classsolar__core_1_1_solar_module.html#ae972f46a6c3bd9a1c3e7761ab1516524"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="degradation"><param name="Local" value="classsolar__core_1_1_solar_module.html#a9c6d7e0ef28958ac1da73a1e48a1373d"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="efficiency"><param name="Local" value="classsolar__core_1_1_solar_module.html#a0303a0da750be23a4a408645d838ed24"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="length"><param name="Local" value="classsolar__core_1_1_solar_module.html#a34cc7ce18770e51c87a3655f6f481be0"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="manufacturer"><param name="Local" value="classsolar__core_1_1_solar_module.html#a32c10820046565c531a3e1a0fd8107b0"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="manufacturer_id"><param name="Local" value="classsolar__core_1_1_solar_module.html#a24c71dfff1a0503fe967d11c52be05b8"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="name"><param name="Local" value="classsolar__core_1_1_solar_module.html#abc9bb9bae1546dee017d598ef7baa952"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="p_sem"><param name="Local" value="classsolar__core_1_1_solar_module.html#a34233be4549eb826fa5a4cc6a20993e3"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="STC_power_rating"><param name="Local" value="classsolar__core_1_1_solar_module.html#ada72a54d3a914a88fd3942f1a09065c1"><param name="ImageNumber" value="11"></OBJECT>
@@ -450,12 +753,13 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="PVDesign"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ad599fa6820474d64dcc9142a5e76e983"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="AC_size"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a79a70e7fe3adcbc4e9256db9df38e444"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="DC_size"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a21148518ef58004be10b91dc75fdd5b5"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="energy_savings_money"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a6b777b1d9dbd1f5a06b8d67d5204340b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="hard_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a18cec349cd8f04efcb67562e30416860"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="N_PANELS"><param name="Local" value="classsolar__core_1_1_p_v_design.html#abef277ad010afb4ab6c6c13113a8c017"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="permit_difficulty"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a8c2897033c697a6dcfb96787358dc64f"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="PV_module"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a89f2b59847de64cab26b56f21ace4e6c"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="soft_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ac1220011d65d7cc442cd143f93123f31"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_radiation"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a1a20c72743528802ed5498fe848559df"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_irradiation"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ae74d98b592c49c7bb44a2e2ec07093c4"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="total_costs"><param name="Local" value="classsolar__core_1_1_p_v_design.html#ac015f1cf090279e45861f2860f008cc2"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="total_savings"><param name="Local" value="classsolar__core_1_1_p_v_design.html#a7628fe2e1ea95f8df79aca11dd5a356d"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
@@ -465,6 +769,7 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_g_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a9be23309024672b4be445f68c73e42a6"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_hh_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#ab6196935ca6f777b28a944642efdbf84"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_sei_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a0a78a4b527a897aac39e5572fbb5a842"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_utility_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a7a44008469a8db9a47038e2945a5d723"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="agent"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a20e8115154979d2f856f1acceb6bb2b1"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="begin_time"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a5b8869c2a2580e5183a7796580074555"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="design"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a0e3e8228c8129ccd07e44503ef8577a8"><param name="ImageNumber" value="11"></OBJECT>
@@ -473,7 +778,27 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="preliminary_quote"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a5d75e9dfe664f7307b0dc24c1f00d8a9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="sei"><param name="Local" value="classsolar__core_1_1_p_v_project.html#af8fdd82137a3b0aa277ae6b9663fcb33"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="state_base_agent"><param name="Local" value="classsolar__core_1_1_p_v_project.html#a1a3576ddac7b82f9a2d7c139af9850d2"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="state_materials"><param name="Local" value="classsolar__core_1_1_p_v_project.html#aaac22e629b55f970a4ad43b1fcd756d1"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="state_project"><param name="Local" value="classsolar__core_1_1_p_v_project.html#ab25a22c1202f2314a55dc9a759922183"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility.cpp"><param name="Local" value="_utility_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility.h"><param name="Local" value="_utility_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility"><param name="Local" value="classsolar__core_1_1_utility.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="Utility"><param name="Local" value="classsolar__core_1_1_utility.html#aa52a4877b6281d4ffa8f003b831e802c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ac_update_tick"><param name="Local" value="classsolar__core_1_1_utility.html#a64c5f71eb62d4ee87fcacb77624b8c09"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_utility.html#a71da8601e6cbd65575b8d1b3180484dd"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_utility.html#aec8717094f41f296a2b50310f0faa169"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="request_permit_for_interconnection"><param name="Local" value="classsolar__core_1_1_utility.html#ac38a138fae309c8f1a0c67f19b621fdb"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="a_time"><param name="Local" value="classsolar__core_1_1_utility.html#acc68b5e07894b8c3918a7512391c6f7e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_utility.html#a9df3a727c125d50170b7c0e190de460a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects"><param name="Local" value="classsolar__core_1_1_utility.html#a80f37d5cc4772161923aaacb73e45e81"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_lock"><param name="Local" value="classsolar__core_1_1_utility.html#a7100cb063e2dbdf0f5ac2cff9cf3d030"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="pending_pvprojects_to_add"><param name="Local" value="classsolar__core_1_1_utility.html#ae3b66140590b19d4c448aa8f8f559906"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="THETA_dec"><param name="Local" value="classsolar__core_1_1_utility.html#a32f7a95da732c6e48c15804277886a45"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_utility.html#af46cb137dd05f7b0cabe2aed249498fb"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
         </UL>
@@ -484,19 +809,22 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="House"><param name="Local" value="classsolar__core_1_1_house.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="House"><param name="Local" value="classsolar__core_1_1_house.html#a1babbd79506a4acf93c16ceec093b924"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="roof_age"><param name="Local" value="classsolar__core_1_1_house.html#aa6491ce4f3fc6d99a59ea80cfb8194fc"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="roof_size"><param name="Local" value="classsolar__core_1_1_house.html#a7f872cb768b83e70e263590078fa4c7d"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="Tile"><param name="Local" value="classsolar__core_1_1_tile.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="Tile"><param name="Local" value="classsolar__core_1_1_tile.html#ac0304f116ac4ab3d130e7dc4233f12e2"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="permit_difficulty"><param name="Local" value="classsolar__core_1_1_tile.html#ac4cdbb55f06b95bd8c4a11a25d0b6635"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="requires_permit_visit"><param name="Local" value="classsolar__core_1_1_tile.html#a489ba61bbe83f143b98d8a866cf06f13"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="size_x"><param name="Local" value="classsolar__core_1_1_tile.html#ae8615b87d6d0c614de01b497fa63c27b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="size_y"><param name="Local" value="classsolar__core_1_1_tile.html#a698ac57539f58ed4e0a54b3135be6fb9"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_radiation"><param name="Local" value="classsolar__core_1_1_tile.html#aae222e441b1dfe68cc6b78bb946f5e02"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_irradiation"><param name="Local" value="classsolar__core_1_1_tile.html#a2062d4ffe05c6f6282975f71f2d24441"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html#adb4ade0405f6de1affb3f413496b4dd6"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldMap"><param name="Local" value="classsolar__core_1_1_world_map.html#a9e3b75ab78e2754c06a777c1cf55c43a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="g_map"><param name="Local" value="classsolar__core_1_1_world_map.html#a2b94f74fcea57d3e01d8cab8348e1c48"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
@@ -525,12 +853,21 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="schedule_payments"><param name="Local" value="classsolar__core_1_1_mes_finance.html#aa5f0c5370821ad09da5aea0da9c03a29"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="state_payments"><param name="Local" value="classsolar__core_1_1_mes_finance.html#a5411785779f982be49c7e14584ce2fe2"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="MesSellOrder"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MesSellOrder"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#adb6422a3f71c86ed02d4ef576fc44899"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="buyer"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a02e3045834f188382cad87aecd7bfbab"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="item"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a4ef673afdc40170ef0e99d459bdf8d62"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="qn"><param name="Local" value="classsolar__core_1_1_mes_sell_order.html#a14d9034fdc15d82ce04bd132d3d838f0"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="MesDesign"><param name="Local" value="classsolar__core_1_1_mes_design.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MesDesign"><param name="Local" value="classsolar__core_1_1_mes_design.html#a29c0de1da8ebd663d94c02bc65ef8539"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="design"><param name="Local" value="classsolar__core_1_1_mes_design.html#a85bd3d4d32c763ac3f9c6547ab4002ab"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="MesMarketingSEI"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MesMarketingSEI"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#ad6069a718526cffd0d74e9bcda12bd8a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="agent"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#a5bc5eb8bf309e6ba96cfdc0feb01baa9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="sei_type"><param name="Local" value="classsolar__core_1_1_mes_marketing_s_e_i.html#a8897df83278137d8ff4b04c068e4370e"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
@@ -552,10 +889,16 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="~MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#ac61af6e8886ffff29e040c98f1500c77"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#abd9e85a42a8052a9baeaa09ef87710a2"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="act_tick"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a6ad2e259f3ea536cee2c744ac177d470"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_marketing_inf_sei"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#af9ff802d6373dc91177959508e80d563"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#ae83f5529280d28b312e8e723b811d75b"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="request_inf_marketing_sei"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a0eb7c3b990063684a04c7b5f38138cbf"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="interested_agents"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a5e0f3d40db44d0779a944ecdad24d447"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="marketing_mess"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#af386df7399502fc26c6625600a68edb3"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#a58a4f5acc2492edebfde65bee94802b9"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__core_1_1_marketing_inst.html#aaa4baafee95460ccda0e4b580c88e8cb"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>
         </UL>
@@ -563,9 +906,22 @@
         <UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="Documentation.h"><param name="Local" value="_documentation_8h.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="ExternalIncludes.h"><param name="Local" value="_external_includes_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ID.cpp"><param name="Local" value="_i_d_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ID.h"><param name="Local" value="_i_d_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html#af5d790831cd429becae2f5143b0f8e92"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UID"><param name="Local" value="classsolar__core_1_1_u_i_d.html#a23f8078dea147aecd914d1676f09a98a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_string"><param name="Local" value="classsolar__core_1_1_u_i_d.html#a4d0f76d77dd4d4fa9ebcb85e31cd9209"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="IParameters.cpp"><param name="Local" value="_i_parameters_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="IParameters.h"><param name="Local" value="_i_parameters_8h.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="EnumFactory"><param name="Local" value="classsolar__core_1_1_enum_factory.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="EParamTypes_type"><param name="Local" value="_i_parameters_8h.html#a256e8e2dc052f522b522d3f90b294caf"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="PropertyTree"><param name="Local" value="_i_parameters_8h.html#adeda2737d6938c190eb774a5b2495045"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="TimeUnit"><param name="Local" value="_i_parameters_8h.html#a4b5949d07259da6f8a20d12a30403e90"><param name="ImageNumber" value="11"></OBJECT>
@@ -578,6 +934,8 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="MinNReceivedDesings"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49a177186685b2d9651d26b48cb4ad61cc6"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="MaxLengthWaitPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49aa27f1df5083a611e423ed8531aad5cd3"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="MaxLengthPlanInstallations"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49a343e282b2f49a70e6df068f1bca38402"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MaxLengthWaitPermitVisit"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49a8c0f94b4a281d1e2221b3160596f4283"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMMaxLengthRecordHistory"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49ac75cfee3c5e5c1d3c4b15f53ab4cc718"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="None"><param name="Local" value="_i_parameters_8h.html#ac827fdef4412a3c0d5e44d3f31908e49a6adf97f83acf6453d4a6a4b1070f3754"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="EParamTypes"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362"><param name="ImageNumber" value="1"></OBJECT>
@@ -597,7 +955,6 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="HHMaxNVisitsPerTimeUnit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="HHDecPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedOnlineQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a6d84e672f96624f4c6323a7543a5de1f"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ProvidedOnlineQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ProvidedPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383"><param name="ImageNumber" value="11"></OBJECT>
@@ -609,9 +966,18 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="DraftedDesign"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a8662266053d427b356392cc9fdff7b5e"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="AcceptedDesign"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362acc5c79b9e52a3187a8b3bfdf7796f6e5"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedPermit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362aca58ef2d2dad5072c87d596308db83d0"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="GrantedPermit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a9a4ff00bed0dd4c2cbcd986eb71654b5"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ScheduledPermitVisit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ac94e40a26296afb13a3493d00eb8303d"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="CollectedInfPermitVisit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362aeb03d3042b95f0913a2646ec6d9a6ec4"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ScheduledInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a1246349928f17a03f4bc9fc73929013a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ScheduleInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362afd25fc3a551ab850c92076e52142705c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="PendingMaterials"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a84b4af953e4b4f4bcc1af7105e43cfaf"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="Installed"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a98dd43dfae05b11befe1f140e0ec787a"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedPermitForInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a62e7c876fbc842b593d4473c0ae28521"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GrantedPermitForInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362afe8a13c6d0eddf9ed3a0686bf03fb5dc"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedInspectionAfterInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362afad1d49bf654e94e0db269cbf0d6dc5e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="PassedInspectionAfterInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a95e2095019cb1db25213fde329af40a3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="RequestedPermitForInterconnection"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a5437744a7fb1f45fdf5d109c4444e7d6"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GrantedPermitForInterconnection"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362af915b5ae43a4c3adc79b2ce7d6e3a679"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ClosedProject"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a36011ab25e125345f76caf5e8f027175"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="OnlineQuotePrice"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="OnlineQuoteEstimatedSavings"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a9cdd993b8d48601635f529f0e4d93299"><param name="ImageNumber" value="11"></OBJECT>
@@ -624,6 +990,7 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ElectricityPriceUCSupply"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a57bd39ffa6aea05e5ffe8481417466f8"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="InflationRate"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a7f416fbc5b5a75a37caa766533274218"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="DCtoACLoss"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ab49cdbc17a92df4982fae394c33aac83"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="DegradationDefinitionLength"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a0aa925df388c8a6dc119a25298b58831"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEISmall"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEILarge"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEIProcessingTimeRequiredForPreliminaryQuote"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a159b446def618d2defa97ad1818ad6dc"><param name="ImageNumber" value="11"></OBJECT>
@@ -636,12 +1003,33 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEIHighEfficiencyDesign"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ad03dae753c26cb012acd3a7dcd41dc8c"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEIMidEfficiencyDesign"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a2b4390775acd3d31e3049d242a1dd196"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SEILowEfficiencyDesign"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ab2592ca389b1a29cf91ddefe8d6769a2"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMFrequencyProduction"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ad82c5bc04656736eec60bb0ae5cc1c86"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMProductionQuantity"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a34756d8af48afa073b9b1a99c343eaf8"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMFrequencyResearchTemplates"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ac04aa42bb11a9e4ac99570dea8ff6ccb"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMNSolarPanelsResearch"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ae758a4ed2eec01e6e3fd3a88f04879db"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMEfficiencyUpgradeResearch"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a9624aa5f0b1cb060f06e659e6ad0bb32"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMFrequencyPriceDecisions"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362acd0c33f5dd54f7b8969a1abe3fff6395"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMPriceBaseEfficiency"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a6dcf74cc979e2b36553e512f5d945dda"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="SEMPriceMarkupEfficiency"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a378a3f0391921c61ec958fd2ff297533"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GProcessingTimeRequiredForSchedulingPermitVisit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a67c3e4e1576f6ca5335ad02183c045d9"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GMaxNVisitsPerTimeUnit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a7b4067a4358525ace9b7673fe62412d7"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GProcessingTimeRequiredForProcessingPermit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362abc0e6872c4d8b9e3f47fa58db0cbf5b7"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="GProcessingTimeRequiredForGrantingPermitForInstallation"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a6333f5438608185430ed6a4320c9624b"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UtilityProcessingTimeRequiredForPermit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a07eca072965a434d37bad8ecedd352d2"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UtilityMaxCapacity"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a3f69bebe61422371b4b411bdaa9486fb"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UtilityCurrentCapacity"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362ae5a11f9f2a59691e2e7b32c8ac7f5fce"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="PaymentsOnTime"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a7863d48ef49981916e8a483f2171b306"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingMaxNToDrawPerTimeUnit"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a56319e8e21c87c38fb797f23a73f5fe3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="TechnologyInverterStandard"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a1a190aa7a38d2e8a842cd07e17dfac09"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="TechnologyInverterMicro"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362acff31f4237035a33c80d603fd67f6abd"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="None"><param name="Local" value="_i_parameters_8h.html#aa1147341e5ef7a40d68d1bd68e149362a6adf97f83acf6453d4a6a4b1070f3754"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="operator&lt;&lt;"><param name="Local" value="_i_parameters_8h.html#aa8fea9dac434e9830aad9dea4f5ebf53"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="operator&gt;&gt;"><param name="Local" value="_i_parameters_8h.html#a82ed442d50159b64b565838515df1dba"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="NUMBER_AGENT_TYPES_LIFE"><param name="Local" value="_i_parameters_8h.html#a2ec52da705235aa418b0def4e509ef81"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="NUMBER_DAYS_IN_MONTH"><param name="Local" value="_i_parameters_8h.html#ad1ba09888c65cd255ec5e71f9121b1ed"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="NUMBER_DAYS_IN_YEAR"><param name="Local" value="_i_parameters_8h.html#ae81a48fc5b3417f74d5fc9b57cb023cd"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="NUMBER_WATTS_IN_KILOWATT"><param name="Local" value="_i_parameters_8h.html#adecfde74aa5d1f05002f04c42035bfd2"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WAIT_CYCLES_VIEW_REQUEST"><param name="Local" value="_i_parameters_8h.html#ae4d0a481c94f57be3e97f1c8463e631a"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WAIT_MILLISECONDS_DATA_REQUEST"><param name="Local" value="_i_parameters_8h.html#a88d556c323e6871de3313428289b6cb6"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WAIT_MILLISECONDS_ERROR"><param name="Local" value="_i_parameters_8h.html#a4cddd8d733f9237d6fb56197354fed46"><param name="ImageNumber" value="11"></OBJECT>
@@ -649,10 +1037,47 @@
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WAIT_MILLISECONDS_MARKET_CYCLE"><param name="Local" value="_i_parameters_8h.html#ab3dddf011f92328166c5f93e3951107e"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="WAIT_MILLISECONDS_UIW_PAUSE"><param name="Local" value="_i_parameters_8h.html#abebba44aef8bbf544a330b8b20229320"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom.cpp"><param name="Local" value="_i_random_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom.h"><param name="Local" value="_i_random_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom"><param name="Local" value="classsolar__core_1_1_i_random.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="IRandom"><param name="Local" value="classsolar__core_1_1_i_random.html#a2d9a927aebfdeed274152871f7f66516"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="rnd"><param name="Local" value="classsolar__core_1_1_i_random.html#a5a9593271657fe327d1e1ee1b456796c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="rng"><param name="Local" value="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="ru"><param name="Local" value="classsolar__core_1_1_i_random.html#ab6a4ab724b521abecbcc87cd736edfd2"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Log.cpp"><param name="Local" value="_log_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Log.h"><param name="Local" value="_log_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="classsolar__core_1_1_log.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="log"><param name="Local" value="classsolar__core_1_1_log.html#a2162de95feb02b60387ea86c8fb3fad6"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="log"><param name="Local" value="classsolar__core_1_1_log.html#a9976b4394d20e3157b3c0b2e6436ce89"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ParsingTools.cpp"><param name="Local" value="_parsing_tools_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ParsingTools.h"><param name="Local" value="_parsing_tools_8h.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="parse_model_file"><param name="Local" value="_parsing_tools_8h.html#ad27b346e42787b5220c80cd386eae266"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="Serialize.cpp"><param name="Local" value="_serialize_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="Serialize.h"><param name="Local" value="_serialize_8h.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeImpl2"><param name="Local" value="classserialize_1_1_serialize_impl2.html"><param name="ImageNumber" value="1"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="is_vector"><param name="Local" value="classserialize_1_1is__vector.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="is_vector&lt; std::vector&lt; T &gt; &gt;"><param name="Local" value="classserialize_1_1is__vector_3_01std_1_1vector_3_01_t_01_4_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeContainer"><param name="Local" value="classserialize_1_1_serialize_container.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeMap"><param name="Local" value="classserialize_1_1_serialize_map.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SerializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_serialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vector3a4a5c31f236854fe1872e17684001d1.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeValue"><param name="Local" value="classserialize_1_1_deserialize_value.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -661,10 +1086,19 @@
           <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeValue&lt; T, typename std::enable_if&lt; std::is_same&lt; T, std::string &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambc4bb2b40dcc8b30285e8bdc35bf8b03.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
             </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeContainer"><param name="Local" value="classserialize_1_1_deserialize_container.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap"><param name="Local" value="classserialize_1_1_deserialize_map.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, V, typename std::enable_if&lt; std::is_pointer&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, std::shared_ptr&lt; V &gt; &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__ptr_3_01_v_01_4_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="DeserializeMap&lt; K, V, typename std::enable_if&lt; is_vector&lt; V &gt;::value &gt;::type &gt;"><param name="Local" value="classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vected2d1ee1f8886a5a92a6dbc69e18bdcd.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
             </UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="SYAlg"><param name="Local" value="classserialize_1_1_s_y_alg.html"><param name="ImageNumber" value="1"></OBJECT>
@@ -672,13 +1106,19 @@
             <LI><OBJECT type="text/sitemap"><param name="Name" value="SYAlg"><param name="Local" value="classserialize_1_1_s_y_alg.html#a0e57b976c122fc29293c26e3e4c3ae55"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="ops"><param name="Local" value="classserialize_1_1_s_y_alg.html#a1e3689b2ee1e8e0f088407e854fca3ab"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="deserialize"><param name="Local" value="_serialize_8h.html#a4c500beb6e6b8eb1c9e62376d3f5ce83"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="deserialize"><param name="Local" value="_serialize_8h.html#a067bdd480e2966e4a61457e64dfbca9e"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="deserialize"><param name="Local" value="_serialize_8h.html#af7e18cf15b955d078b7fc036042cb083"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="evaluate_rpn"><param name="Local" value="_serialize_8h.html#ade99c17935e107385ad259ba3111457e"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="infixToRPN_SYAlg"><param name="Local" value="_serialize_8h.html#a2876e5d84edeaa969e25a176eb582bb3"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="is_operator"><param name="Local" value="_serialize_8h.html#a897be0f6c9fe37021e11bfeb732d3500"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="is_parenthesis"><param name="Local" value="_serialize_8h.html#a38acccd96ada5f0927f924531ac1498e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize"><param name="Local" value="_serialize_8h.html#a48d3582d3d99189f6f067e77d962574f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize"><param name="Local" value="_serialize_8h.html#aa60e366236e42c68f437ea409aa0e056"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize"><param name="Local" value="_serialize_8h.html#a585cc862a49aec3bc1deca353af0b53c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="serialize_value"><param name="Local" value="_serialize_8h.html#afcd8d07d106f4bf71ce8813e6c2ccbd8"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="solve_formula"><param name="Local" value="_serialize_8h.html#a8efbe7c32352f8ff750211235e3d5361"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="solve_str_formula"><param name="Local" value="_serialize_8h.html#a2c1ea7730402ca3407bced2235efe3fd"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="solve_str_formula"><param name="Local" value="_serialize_8h.html#aa5ee0bad0c960a3f06430066217d8c12"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="split_expression_SYAlg"><param name="Local" value="_serialize_8h.html#a06d144912d025816fe84c532295d274a"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="WorldSettings.cpp"><param name="Local" value="_world_settings_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -703,37 +1143,87 @@
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="UI"><param name="Local" value="dir_ad68fd99ee46e73a145661c4c85612bf.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperW.cpp"><param name="Local" value="_helper_w_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperW.h"><param name="Local" value="_helper_w_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="BaselineModel"><param name="Local" value="classsolar__core_1_1_baseline_model.html"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="UnitTestModel"><param name="Local" value="classsolar__core_1_1_unit_test_model.html"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperW"><param name="Local" value="classsolar__core_1_1_helper_w.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization"><param name="Local" value="classsolar__core_1_1_helper_w_specialization.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization&lt; T, BaselineModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="HelperWSpecialization&lt; T, UnitTestModel &gt;"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="main.cpp"><param name="Local" value="main_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="UI.cpp"><param name="Local" value="_u_i_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="UI.h"><param name="Local" value="_u_i_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="UI"><param name="Local" value="classsolar__ui_1_1_u_i.html"><param name="ImageNumber" value="1"></OBJECT>
+            <UL>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="UI"><param name="Local" value="classsolar__ui_1_1_u_i.html#ac4cb44ab75c785388a021a0ec95ac968"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="collect_inf"><param name="Local" value="classsolar__ui_1_1_u_i.html#a73345abf9e55fd9e4fd4e4d53aa340ae"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__ui_1_1_u_i.html#a3387001fd956e28627081d2edc673bb0"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="save"><param name="Local" value="classsolar__ui_1_1_u_i.html#ac64293023e1f26e2d9d319e1af936520"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classsolar__ui_1_1_u_i.html#af3bb455922ee0b7b8e3dbe613cd37be5"><param name="ImageNumber" value="11"></OBJECT>
+            </UL>
+          </UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="W.cpp"><param name="Local" value="_w_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="W.h"><param name="Local" value="_w_8h.html"><param name="ImageNumber" value="11"></OBJECT>
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html"><param name="ImageNumber" value="1"></OBJECT>
             <UL>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html#aa252edac9babf33b41e22a816648a9a5"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="W"><param name="Local" value="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="create_seis"><param name="Local" value="classsolar__core_1_1_w.html#a0b92657c681579dacc29821f41650541"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="get_permit_difficulty"><param name="Local" value="classsolar__core_1_1_w.html#a7906874c5180d8114e1acba095ace3f5"><param name="ImageNumber" value="11"></OBJECT>
-            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_solar_radiation"><param name="Local" value="classsolar__core_1_1_w.html#a39001b1adeb816c80cb63637801c4b9c"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_solar_irradiation"><param name="Local" value="classsolar__core_1_1_w.html#af3adfe566e6db1a7f7df18aa7df22c25"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf"><param name="Local" value="classsolar__core_1_1_w.html#a7fd073f0ebbf06378919f677bc28c2d1"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf_installed_project"><param name="Local" value="classsolar__core_1_1_w.html#a1d99a46827c504a542ecda81b201a8f5"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="get_state_inf_interconnected_project"><param name="Local" value="classsolar__core_1_1_w.html#a04252bc7247e71aa41798e98e42b6c15"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="classsolar__core_1_1_w.html#af58a19a39fb9fb34258803c613924613"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="life"><param name="Local" value="classsolar__core_1_1_w.html#a5e64e5a7ef41c07fddf7994cd3f2693e"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="life_gs"><param name="Local" value="classsolar__core_1_1_w.html#ad08af315706bb42ab5dd68f41a90c978"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="life_hhs"><param name="Local" value="classsolar__core_1_1_w.html#a08283dbea7c7f3fe8b7f094a96f73a78"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="life_markets"><param name="Local" value="classsolar__core_1_1_w.html#a03a16fe70a11b947735709cf0a0b277e"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="life_seis"><param name="Local" value="classsolar__core_1_1_w.html#a77b206056c9440059f7b78e1424b0921"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="life_sems"><param name="Local" value="classsolar__core_1_1_w.html#a655c14c2a3d10952ab1217eedd21443f"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="MarketingInst"><param name="Local" value="classsolar__core_1_1_w.html#ac01e54f17f927af30196b551d235d7ba"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="solar_ui::UI"><param name="Local" value="classsolar__core_1_1_w.html#a8f3690c82c493af3a66f999410fe891d"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="all_update"><param name="Local" value="classsolar__core_1_1_w.html#aa6cba0dba8a566978e51fb4204aac4b9"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="base_path"><param name="Local" value="classsolar__core_1_1_w.html#acf6e7dd195573ba04b406cde2e5b80fb"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="begin_time"><param name="Local" value="classsolar__core_1_1_w.html#aec1b9014ad296dc9b8b132ba9b67c08a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_G_TICK"><param name="Local" value="classsolar__core_1_1_w.html#aae63ce0d440f2c8d475d6eeafac58238"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_H_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a4cd32940e21bfc20919cc2d4447d66d3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_PAUSED"><param name="Local" value="classsolar__core_1_1_w.html#a1c0ebdba727a7a5cbf322072ab5c9184"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_STARTED"><param name="Local" value="classsolar__core_1_1_w.html#a8456f88d45f2e8bf67eccd7f0c8d08fa"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_IS_STOPPED"><param name="Local" value="classsolar__core_1_1_w.html#a9bb998c65a7427961de179f41e25daea"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_MARKET_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a7aa8b882244539e098e45207045d7d88"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_SEI_TICK"><param name="Local" value="classsolar__core_1_1_w.html#a65d2047e574ed6201a8e21ec1ba1bec4"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="FLAG_SEM_TICK"><param name="Local" value="classsolar__core_1_1_w.html#ae383b7a595cb28d52aa747fc7e5bb619"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="g"><param name="Local" value="classsolar__core_1_1_w.html#a9e50ef0da579cdfc3da22c16a492bc44"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="get_inf_marketing_sei_agents"><param name="Local" value="classsolar__core_1_1_w.html#a81b5469757f203c9619ff69323ac0f77"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="hhs"><param name="Local" value="classsolar__core_1_1_w.html#a17c012ff8b17890ed33923cec6d87be3"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="interconnected_projects"><param name="Local" value="classsolar__core_1_1_w.html#a1d35d6501eef6d673bd2b28e2c1724c4"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="lock_tick"><param name="Local" value="classsolar__core_1_1_w.html#a56ba20ee51f5db7288e55bb65f12511b"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="marketing"><param name="Local" value="classsolar__core_1_1_w.html#a93f277fb3a9d9e7b1e911c6a494c8ec8"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="notified_counter"><param name="Local" value="classsolar__core_1_1_w.html#afee32d515534826a60ddf12936f85a3d"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="params"><param name="Local" value="classsolar__core_1_1_w.html#a0d06bc7242f8b3958986118eb217583f"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="rand"><param name="Local" value="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="seis"><param name="Local" value="classsolar__core_1_1_w.html#a311baa30390494ae8e79f26e372e716d"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="sems"><param name="Local" value="classsolar__core_1_1_w.html#ab6349cbc751747a05618dad4ebb1b726"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="time"><param name="Local" value="classsolar__core_1_1_w.html#ae96b30122adc9fae8fc2f209a4c89b0a"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="updated_counter"><param name="Local" value="classsolar__core_1_1_w.html#a775d817c6117b462571c3fca62fe0c86"><param name="ImageNumber" value="11"></OBJECT>
+            <LI><OBJECT type="text/sitemap"><param name="Name" value="utility"><param name="Local" value="classsolar__core_1_1_w.html#a6d6fa51d4bdc40dac8b76aa4967030b5"><param name="ImageNumber" value="11"></OBJECT>
             <LI><OBJECT type="text/sitemap"><param name="Name" value="world_map"><param name="Local" value="classsolar__core_1_1_w.html#a8ed6f1aa7fd4ef2c3488147b38a670b7"><param name="ImageNumber" value="11"></OBJECT>
             </UL>
           </UL>

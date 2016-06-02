@@ -1,6 +1,7 @@
 <map id="serialize::is_operator" name="serialize::is_operator">
 <area shape="rect" id="node2" href="$namespaceserialize.html#a06d144912d025816fe84c532295d274a" title="serialize::split_expression\l_SYAlg" alt="" coords="200,5,373,46"/>
 <area shape="rect" id="node3" href="$namespaceserialize.html#a2876e5d84edeaa969e25a176eb582bb3" title="serialize::infixToRPN\l_SYAlg" alt="" coords="427,55,573,97"/>
-<area shape="rect" id="node5" href="$namespaceserialize.html#ade99c17935e107385ad259ba3111457e" title="serialize::evaluate_rpn" alt="" coords="422,121,578,148"/>
+<area shape="rect" id="node6" href="$namespaceserialize.html#ade99c17935e107385ad259ba3111457e" title="serialize::evaluate_rpn" alt="" coords="422,121,578,148"/>
 <area shape="rect" id="node4" href="$namespaceserialize.html#a8efbe7c32352f8ff750211235e3d5361" title="serialize::solve_formula" alt="" coords="627,92,789,119"/>
+<area shape="rect" id="node5" href="$namespaceserialize.html#aa5ee0bad0c960a3f06430066217d8c12" title="serialize::solve_str\l_formula" alt="" coords="838,85,970,126"/>
 </map>

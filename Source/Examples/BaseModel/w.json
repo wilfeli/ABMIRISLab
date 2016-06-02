@@ -12,6 +12,9 @@
                         },
                         {
                         "EParamTypes::MarketingMaxNToDrawPerTimeUnit":100
+                        },
+                        {
+                        "EParamTypes::DegradationDefinitionLength":10
                         }
                         ],
         "constraints":[

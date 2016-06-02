@@ -21,7 +21,7 @@
                "EParamTypes::SEIMaxRoofAge": 1040
                },
                {
-               "EParamTypes::AveragePVCapacity": 3000
+               "EParamTypes::AveragePVCapacity": 5
                },
                {
                "EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote": 0

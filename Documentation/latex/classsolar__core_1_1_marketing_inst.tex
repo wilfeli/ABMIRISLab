@@ -15,7 +15,8 @@ Inheritance diagram for solar\+\_\+core\+:\+:Marketing\+Inst\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for solar\+\_\+core\+:\+:Marketing\+Inst\+:\nopagebreak
+Collaboration diagram for solar\+\_\+core\+:\+:Marketing\+Inst\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -25,8 +26,22 @@ Collaboration diagram for solar\+\_\+core\+:\+:Marketing\+Inst\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+virtual \hyperlink{classsolar__core_1_1_marketing_inst_ac61af6e8886ffff29e040c98f1500c77}{$\sim$\+Marketing\+Inst} ()=default
+\item 
+\hyperlink{classsolar__core_1_1_marketing_inst_abd9e85a42a8052a9baeaa09ef87710a2}{Marketing\+Inst} (\hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
+\item 
+void \hyperlink{classsolar__core_1_1_marketing_inst_ae83f5529280d28b312e8e723b811d75b}{init} (\hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
+\item 
 virtual void \hyperlink{classsolar__core_1_1_marketing_inst_a6ad2e259f3ea536cee2c744ac177d470}{act\+\_\+tick} () override
 \end{DoxyCompactItemize}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classsolar__core_1_1_marketing_inst_af9ff802d6373dc91177959508e80d563}{get\+\_\+marketing\+\_\+inf\+\_\+sei} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i}{Mes\+Marketing\+S\+E\+I} $>$ mes\+\_\+)
+\item 
+void \hyperlink{classsolar__core_1_1_marketing_inst_a0eb7c3b990063684a04c7b5f38138cbf}{request\+\_\+inf\+\_\+marketing\+\_\+sei} (\hyperlink{classsolar__core_1_1_i_agent}{I\+Agent} $\ast$agent\+\_\+)
+\end{DoxyCompactItemize}
+
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,13 +50,36 @@ std\+::vector$<$ \hyperlink{classsolar__core_1_1_i_agent}{I\+Agent} $\ast$ $>$ \
 std\+::map$<$ std\+::string, double $>$ \hyperlink{classsolar__core_1_1_marketing_inst_a58a4f5acc2492edebfde65bee94802b9}{params}
 \item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i}{Mes\+Marketing\+S\+E\+I} $>$ $>$ \hyperlink{classsolar__core_1_1_marketing_inst_af386df7399502fc26c6625600a68edb3}{marketing\+\_\+mess}
+\item 
+\hyperlink{classsolar__core_1_1_w}{W} $\ast$ \hyperlink{classsolar__core_1_1_marketing_inst_aaa4baafee95460ccda0e4b580c88e8cb}{w}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Will inherit from Insititute 
+Is one of institutions 
 
-Definition at line 34 of file Marketing\+System.\+h.
+Definition at line 33 of file Marketing\+System.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolar__core_1_1_marketing_inst_ac61af6e8886ffff29e040c98f1500c77}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!````~Marketing\+Inst@{$\sim$\+Marketing\+Inst}}
+\index{````~Marketing\+Inst@{$\sim$\+Marketing\+Inst}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{$\sim$\+Marketing\+Inst}]{\setlength{\rightskip}{0pt plus 5cm}virtual solar\+\_\+core\+::\+Marketing\+Inst\+::$\sim$\+Marketing\+Inst (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\label{classsolar__core_1_1_marketing_inst_ac61af6e8886ffff29e040c98f1500c77}
+\hypertarget{classsolar__core_1_1_marketing_inst_abd9e85a42a8052a9baeaa09ef87710a2}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!Marketing\+Inst@{Marketing\+Inst}}
+\index{Marketing\+Inst@{Marketing\+Inst}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{Marketing\+Inst}]{\setlength{\rightskip}{0pt plus 5cm}Marketing\+Inst\+::\+Marketing\+Inst (
+\begin{DoxyParamCaption}
+\item[{{\bf W} $\ast$}]{w\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_marketing_inst_abd9e85a42a8052a9baeaa09ef87710a2}
+
+
+Definition at line 18 of file Marketing\+System.\+cpp.
 
 
 
@@ -59,7 +97,112 @@ Implements \hyperlink{classsolar__core_1_1_i_institute_ad27e64b6bdad198bb04d7ddd
 
 
 
-Definition at line 16 of file Marketing\+System.\+cpp.
+Definition at line 52 of file Marketing\+System.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_marketing_inst_a6ad2e259f3ea536cee2c744ac177d470_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classsolar__core_1_1_marketing_inst_a6ad2e259f3ea536cee2c744ac177d470_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_marketing_inst_af9ff802d6373dc91177959508e80d563}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!get\+\_\+marketing\+\_\+inf\+\_\+sei@{get\+\_\+marketing\+\_\+inf\+\_\+sei}}
+\index{get\+\_\+marketing\+\_\+inf\+\_\+sei@{get\+\_\+marketing\+\_\+inf\+\_\+sei}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{get\+\_\+marketing\+\_\+inf\+\_\+sei}]{\setlength{\rightskip}{0pt plus 5cm}void Marketing\+Inst\+::get\+\_\+marketing\+\_\+inf\+\_\+sei (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Mes\+Marketing\+S\+E\+I} $>$}]{mes\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_marketing_inst_af9ff802d6373dc91177959508e80d563}
+Section with marketing interactionsreceives marketing information from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} 
+
+Definition at line 43 of file Marketing\+System.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_marketing_inst_af9ff802d6373dc91177959508e80d563_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_marketing_inst_ae83f5529280d28b312e8e723b811d75b}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!init@{init}}
+\index{init@{init}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Marketing\+Inst\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf W} $\ast$}]{w\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_marketing_inst_ae83f5529280d28b312e8e723b811d75b}
+
+
+Definition at line 25 of file Marketing\+System.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classsolar__core_1_1_marketing_inst_ae83f5529280d28b312e8e723b811d75b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classsolar__core_1_1_marketing_inst_a0eb7c3b990063684a04c7b5f38138cbf}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!request\+\_\+inf\+\_\+marketing\+\_\+sei@{request\+\_\+inf\+\_\+marketing\+\_\+sei}}
+\index{request\+\_\+inf\+\_\+marketing\+\_\+sei@{request\+\_\+inf\+\_\+marketing\+\_\+sei}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{request\+\_\+inf\+\_\+marketing\+\_\+sei}]{\setlength{\rightskip}{0pt plus 5cm}void Marketing\+Inst\+::request\+\_\+inf\+\_\+marketing\+\_\+sei (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Agent} $\ast$}]{agent\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_marketing_inst_a0eb7c3b990063684a04c7b5f38138cbf}
+marketing information from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} is requested by agent 
+
+Definition at line 32 of file Marketing\+System.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_marketing_inst_a0eb7c3b990063684a04c7b5f38138cbf_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_marketing_inst_a0eb7c3b990063684a04c7b5f38138cbf_icgraph}
+\end{center}
+\end{figure}
+
 
 
 
@@ -69,21 +212,28 @@ Definition at line 16 of file Marketing\+System.\+cpp.
 \subsubsection[{interested\+\_\+agents}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf I\+Agent}$\ast$$>$ solar\+\_\+core\+::\+Marketing\+Inst\+::interested\+\_\+agents\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_marketing_inst_a5e0f3d40db44d0779a944ecdad24d447}
 Vector of agents that are interested in receiving marketing information 
 
-Definition at line 40 of file Marketing\+System.\+h.
+Definition at line 55 of file Marketing\+System.\+h.
 
 \hypertarget{classsolar__core_1_1_marketing_inst_af386df7399502fc26c6625600a68edb3}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!marketing\+\_\+mess@{marketing\+\_\+mess}}
 \index{marketing\+\_\+mess@{marketing\+\_\+mess}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
 \subsubsection[{marketing\+\_\+mess}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Mes\+Marketing\+S\+E\+I}$>$ $>$ solar\+\_\+core\+::\+Marketing\+Inst\+::marketing\+\_\+mess\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_marketing_inst_af386df7399502fc26c6625600a68edb3}
-marketing messages fro \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} 
+marketing messages from \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} 
 
-Definition at line 44 of file Marketing\+System.\+h.
+Definition at line 59 of file Marketing\+System.\+h.
 
 \hypertarget{classsolar__core_1_1_marketing_inst_a58a4f5acc2492edebfde65bee94802b9}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!params@{params}}
 \index{params@{params}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
 \subsubsection[{params}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$std\+::string, double$>$ solar\+\_\+core\+::\+Marketing\+Inst\+::params\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_marketing_inst_a58a4f5acc2492edebfde65bee94802b9}
 
 
-Definition at line 42 of file Marketing\+System.\+h.
+Definition at line 57 of file Marketing\+System.\+h.
+
+\hypertarget{classsolar__core_1_1_marketing_inst_aaa4baafee95460ccda0e4b580c88e8cb}{}\index{solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}!w@{w}}
+\index{w@{w}!solar\+\_\+core\+::\+Marketing\+Inst@{solar\+\_\+core\+::\+Marketing\+Inst}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf W}$\ast$ solar\+\_\+core\+::\+Marketing\+Inst\+::w\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_marketing_inst_aaa4baafee95460ccda0e4b580c88e8cb}
+
+
+Definition at line 62 of file Marketing\+System.\+h.
 
 
 

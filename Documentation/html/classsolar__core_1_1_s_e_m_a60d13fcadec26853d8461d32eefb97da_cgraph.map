@@ -1,0 +1,6 @@
+<map id="solar_core::SEM::SEM" name="solar_core::SEM::SEM">
+<area shape="rect" id="node2" href="$classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88" title="solar_core::WorldSettings\l::instance" alt="" coords="211,5,386,46"/>
+<area shape="rect" id="node3" href="$namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83" title="serialize::deserialize" alt="" coords="227,71,370,97"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8" title="solar_core::EnumFactory\l::ToEParamTypes" alt="" coords="213,122,384,163"/>
+<area shape="rect" id="node4" href="$classserialize_1_1_deserialize_container.html#a81bdeaff0ef56f203cc65b1d0691c471" title="serialize::DeserializeContainer\l::deserialize" alt="" coords="435,63,637,105"/>
+</map>

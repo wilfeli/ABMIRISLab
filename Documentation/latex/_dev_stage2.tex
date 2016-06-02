@@ -1,37 +1,97 @@
 
 \begin{DoxyRefList}
-\item[\label{_dev_stage2__DevStage2000012}%
-\hypertarget{_dev_stage2__DevStage2000012}{}%
+\item[\label{_dev_stage2__DevStage2000027}%
+\hypertarget{_dev_stage2__DevStage2000027}{}%
+Member \hyperlink{namespaceserialize_aa5ee0bad0c960a3f06430066217d8c12}{serialize\+:\+:solve\+\_\+str\+\_\+formula} (const std\+::string \&formula\+\_\+, I\+Random \&rand\+\_\+)]change to better Truncated generation  
+\item[\label{_dev_stage2__DevStage2000026}%
+\hypertarget{_dev_stage2__DevStage2000026}{}%
 Member \hyperlink{namespacesolar__core_aa1147341e5ef7a40d68d1bd68e149362}{solar\+\_\+core\+:\+:E\+Param\+Types} ]think about splitting enum into multiple enums 
-\item[\label{_dev_stage2__DevStage2000004}%
-\hypertarget{_dev_stage2__DevStage2000004}{}%
+\item[\label{_dev_stage2__DevStage2000001}%
+\hypertarget{_dev_stage2__DevStage2000001}{}%
+Member \hyperlink{classsolar__core_1_1_g_a624adac31ade604e0335717bad4fc9cd}{solar\+\_\+core\+:\+:G\+:\+:G} (const Property\+Tree \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)]move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that  
+\item[\label{_dev_stage2__DevStage2000002}%
+\hypertarget{_dev_stage2__DevStage2000002}{}%
+Member \hyperlink{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}{solar\+\_\+core\+:\+:G\+:\+:schedule\+\_\+visits} ]think about it, not every jurisdiction will need it  
+\item[\label{_dev_stage2__DevStage2000008}%
+\hypertarget{_dev_stage2__DevStage2000008}{}%
 Class \hyperlink{classsolar__core_1_1_household}{solar\+\_\+core\+:\+:Household} ]might change from actually assigning house to assigning house type (memory considerations) 
 \item[\label{_dev_stage2__DevStage2000005}%
 \hypertarget{_dev_stage2__DevStage2000005}{}%
-Member \hyperlink{classsolar__core_1_1_household_a165b7c64c72e5ed4ea08307e32082517}{solar\+\_\+core\+:\+:Household\+:\+:ac\+\_\+inf\+\_\+quoting\+\_\+sei} ()]need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator
-
-think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote 
-
-think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote  
-\item[\label{_dev_stage2__DevStage2000001}%
-\hypertarget{_dev_stage2__DevStage2000001}{}%
-Member \hyperlink{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{solar\+\_\+core\+:\+:Household\+:\+:get\+\_\+inf} (std\+::shared\+\_\+ptr$<$ Mes\+Marketing\+S\+E\+I $>$ mes\+\_\+) override]might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)  
+Member \hyperlink{classsolar__core_1_1_household_a165b7c64c72e5ed4ea08307e32082517}{solar\+\_\+core\+:\+:Household\+:\+:ac\+\_\+inf\+\_\+quoting\+\_\+sei} ()]think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote  
 \item[\label{_dev_stage2__DevStage2000007}%
 \hypertarget{_dev_stage2__DevStage2000007}{}%
-Member \hyperlink{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}{solar\+\_\+core\+:\+:Household\+:\+:house} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
+Member \hyperlink{classsolar__core_1_1_household_a1e7d20a60dc42b8d09a8d23a4cdb26a6}{solar\+\_\+core\+:\+:Household\+:\+:act\+\_\+tick} ()]generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both -\/ agent is broadcasting changed state and behaves differently depending on the state.  
 \item[\label{_dev_stage2__DevStage2000006}%
 \hypertarget{_dev_stage2__DevStage2000006}{}%
-Member \hyperlink{classsolar__core_1_1_household_a1ba6b7af82982096e05d99a70a2647eb}{solar\+\_\+core\+:\+:Household\+:\+:location\+\_\+y} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
-\item[\label{_dev_stage2__DevStage2000008}%
-\hypertarget{_dev_stage2__DevStage2000008}{}%
-Member \hyperlink{classsolar__core_1_1_household_a297842358a2d79db160566106972bc0d}{solar\+\_\+core\+:\+:Household\+:\+:preliminary\+\_\+quotes} ]think about replacing raw pointer with.  choose between week\+\_\+ptr and shared\+\_\+ptr need to think about ownership in time and time of destruction for these messages.  
+Member \hyperlink{classsolar__core_1_1_household_aaa1f1e52009d8aef32d3c5a9367b93b7}{solar\+\_\+core\+:\+:Household\+:\+:dec\+\_\+evaluate\+\_\+designs} ()]may go back and forth over the design 
 \item[\label{_dev_stage2__DevStage2000010}%
 \hypertarget{_dev_stage2__DevStage2000010}{}%
-Member \hyperlink{classsolar__core_1_1_s_e_i_ab0bd6ae650afc15fe71ce545373ab16e}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:act\+\_\+tick} ()]might think about checking for the type of the tick in \hyperlink{classsolar__core_1_1_w}{W} and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap.  
+Member \hyperlink{classsolar__core_1_1_household_aa63241ca3fcc1f2374d10b5c7f44124a}{solar\+\_\+core\+:\+:Household\+:\+:dec\+\_\+project\+\_\+reroof} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project)]need to ask H\+H how they decide to reroof  
+\item[\label{_dev_stage2__DevStage2000004}%
+\hypertarget{_dev_stage2__DevStage2000004}{}%
+Member \hyperlink{classsolar__core_1_1_household_ac9d26af7b52f0cdc357fc5dca4b86ad9}{solar\+\_\+core\+:\+:Household\+:\+:get\+\_\+inf} (std\+::shared\+\_\+ptr$<$ Mes\+Marketing\+S\+E\+I $>$ mes\+\_\+) override]might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)  
+\item[\label{_dev_stage2__DevStage2000012}%
+\hypertarget{_dev_stage2__DevStage2000012}{}%
+Member \hyperlink{classsolar__core_1_1_household_a1104d8264fe733937e1fd2e9ad0f8fc1}{solar\+\_\+core\+:\+:Household\+:\+:house} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
 \item[\label{_dev_stage2__DevStage2000009}%
 \hypertarget{_dev_stage2__DevStage2000009}{}%
-Member \hyperlink{classsolar__core_1_1_s_e_i_a807561ad055ddc0df91b80ba406ee6df}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:form\+\_\+design} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]bootstrap here for different savings dynamics depending on parameters  
+Member \hyperlink{classsolar__core_1_1_household_a5f84bf614d0ec70abf9597ec97e07b1a}{solar\+\_\+core\+:\+:Household\+:\+:Household} (Property\+Tree \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)]need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator
+
+move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that 
+
+move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that  
 \item[\label{_dev_stage2__DevStage2000011}%
 \hypertarget{_dev_stage2__DevStage2000011}{}%
-Member \hyperlink{classsolar__core_1_1_s_e_i_ad532ca9d30d5988e051b75e33ce6c241}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:form\+\_\+online\+\_\+quote} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]think about transforming this call into interface based one, with agent\+\_\+in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. 
+Member \hyperlink{classsolar__core_1_1_household_a1ba6b7af82982096e05d99a70a2647eb}{solar\+\_\+core\+:\+:Household\+:\+:location\+\_\+y} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
+\item[\label{_dev_stage2__DevStage2000013}%
+\hypertarget{_dev_stage2__DevStage2000013}{}%
+Member \hyperlink{classsolar__core_1_1_household_a297842358a2d79db160566106972bc0d}{solar\+\_\+core\+:\+:Household\+:\+:preliminary\+\_\+quotes} ]think about replacing raw pointer with. 
+
+choose between week\+\_\+ptr and shared\+\_\+ptr need to think about ownership in time and time of destruction for these messages.  
+\item[\label{_dev_stage2__DevStage2000025}%
+\hypertarget{_dev_stage2__DevStage2000025}{}%
+Class \hyperlink{classsolar__core_1_1_mes_marketing_s_e_i_online_quote}{solar\+\_\+core\+:\+:Mes\+Marketing\+S\+E\+I\+Online\+Quote} ]think, for now this message is used in the first stage of quoting. If decide to use in the next stage might have to add field to indicate from what stage of quoting this message is. Alternative is to have separate classes for different quotes from different stages. Actually like it more. Need to have base message class to avoid multiple containers for them. But at the same time it might be actually more efficient to have multiple containers for different stages of quoting. It will make search and compare much quicker... 
+\item[\label{_dev_stage2__DevStage2000017}%
+\hypertarget{_dev_stage2__DevStage2000017}{}%
+Class \hyperlink{classsolar__core_1_1_s_e_i}{solar\+\_\+core\+:\+:S\+E\+I} ]might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit 
+\item[\label{_dev_stage2__DevStage2000016}%
+\hypertarget{_dev_stage2__DevStage2000016}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_ab84401c625f5c459accf430535e4a06d}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:ac\+\_\+estimate\+\_\+savings} (\hyperlink{classsolar__core_1_1_p_v_design}{P\+V\+Design} \&design, std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]\+: calculate P\+P\+A \+: calculate lease  
+\item[\label{_dev_stage2__DevStage2000018}%
+\hypertarget{_dev_stage2__DevStage2000018}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_ab0bd6ae650afc15fe71ce545373ab16e}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:act\+\_\+tick} ()]might think about checking for the type of the tick in \hyperlink{classsolar__core_1_1_w}{W} and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap.  
+\item[\label{_dev_stage2__DevStage2000015}%
+\hypertarget{_dev_stage2__DevStage2000015}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_a807561ad055ddc0df91b80ba406ee6df}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:form\+\_\+design} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]bootstrap here for different savings dynamics depending on parameters  
+\item[\label{_dev_stage2__DevStage2000021}%
+\hypertarget{_dev_stage2__DevStage2000021}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_ad532ca9d30d5988e051b75e33ce6c241}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:form\+\_\+online\+\_\+quote} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]think about transforming this call into interface based one, with agent\+\_\+in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change.  
+\item[\label{_dev_stage2__DevStage2000019}%
+\hypertarget{_dev_stage2__DevStage2000019}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_a5fc331197d08788392c3af1903f25763}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:location\+\_\+y} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
+\item[\label{_dev_stage2__DevStage2000020}%
+\hypertarget{_dev_stage2__DevStage2000020}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_ad5326c45ccd4a5512a6c0a296656264d}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:mes\+\_\+marketing} ]think about decreasing size for this field, use uint64\+\_\+t or smaller for it  
+\item[\label{_dev_stage2__DevStage2000014}%
+\hypertarget{_dev_stage2__DevStage2000014}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_i_af885d50c89decf5b6ff208c24cedd82b}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:S\+E\+I} (const Property\+Tree \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)]move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that  
+\item[\label{_dev_stage2__DevStage2000023}%
+\hypertarget{_dev_stage2__DevStage2000023}{}%
+Class \hyperlink{classsolar__core_1_1_s_e_m}{solar\+\_\+core\+:\+:S\+E\+M} ]add market for solar panels and price feedback  
+\item[\label{_dev_stage2__DevStage2000022}%
+\hypertarget{_dev_stage2__DevStage2000022}{}%
+Member \hyperlink{classsolar__core_1_1_s_e_m_a60d13fcadec26853d8461d32eefb97da}{solar\+\_\+core\+:\+:S\+E\+M\+:\+:S\+E\+M} (const Property\+Tree \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)]move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that  
+\item[\label{_dev_stage2__DevStage2000024}%
+\hypertarget{_dev_stage2__DevStage2000024}{}%
+Member \hyperlink{classsolar__core_1_1_utility_aa52a4877b6281d4ffa8f003b831e802c}{solar\+\_\+core\+:\+:Utility\+:\+:Utility} (const Property\+Tree \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)]move to \hyperlink{classsolar__core_1_1_w}{W} to speed up, but test before that  
+\item[\label{_dev_stage2__DevStage2000030}%
+\hypertarget{_dev_stage2__DevStage2000030}{}%
+Member \hyperlink{classsolar__core_1_1_w_a1d35d6501eef6d673bd2b28e2c1724c4}{solar\+\_\+core\+:\+:W\+:\+:interconnected\+\_\+projects} ]think here, might change to weak\+\_\+ptr, but will pay the cost of checking each time if it is still alive  
+\item[\label{_dev_stage2__DevStage2000029}%
+\hypertarget{_dev_stage2__DevStage2000029}{}%
+Member \hyperlink{classsolar__core_1_1_w_a969ad4de57020878a91873868c9bdb45}{solar\+\_\+core\+:\+:W\+:\+:W} (std\+::string path\+\_\+, \hyperlink{classsolar__core_1_1_helper_w}{Helper\+W} $\ast$w\+\_\+, std\+::string mode\+\_\+=\char`\"{}\+N\+E\+W\char`\"{})]\+: serialization\+: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.
+
+each sem will pick initial templates by name? -\/ could make it base creation mode 
+
+each sem will pick initial templates by name? -\/ could make it base creation mode 
 \end{DoxyRefList}

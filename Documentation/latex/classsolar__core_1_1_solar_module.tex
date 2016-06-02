@@ -11,9 +11,19 @@ Collaboration diagram for solar\+\_\+core\+:\+:Solar\+Module\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=257pt]{classsolar__core_1_1_solar_module__coll__graph}
+\includegraphics[width=350pt]{classsolar__core_1_1_solar_module__coll__graph}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolar__core_1_1_solar_module_ae972f46a6c3bd9a1c3e7761ab1516524}{Solar\+Module} (const \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt\+\_\+)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_solar_module}{Solar\+Module} $>$ \hyperlink{classsolar__core_1_1_solar_module_ad640027b60c3e9d3670938d0cea9f410}{deserialize} (const \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt\+\_\+)
+\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,68 +40,124 @@ double \hyperlink{classsolar__core_1_1_solar_module_a34cc7ce18770e51c87a3655f6f4
 double \hyperlink{classsolar__core_1_1_solar_module_a72b5c417f88deb65818e96b5fcf52ef9}{width}
 \item 
 double \hyperlink{classsolar__core_1_1_solar_module_a88f461fc1142688294bf19ca02b7ec0d}{warranty\+\_\+length}
+\item 
+std\+::string \hyperlink{classsolar__core_1_1_solar_module_a24c71dfff1a0503fe967d11c52be05b8}{manufacturer\+\_\+id} = \char`\"{}\char`\"{}
+\item 
+\hyperlink{classsolar__core_1_1_s_e_m}{S\+E\+M} $\ast$ \hyperlink{classsolar__core_1_1_solar_module_a32c10820046565c531a3e1a0fd8107b0}{manufacturer} = nullptr
+\item 
+double \hyperlink{classsolar__core_1_1_solar_module_a9c6d7e0ef28958ac1da73a1e48a1373d}{degradation} = 0.\+0
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 31 of file Solar\+Panel.\+h.
+Definition at line 43 of file Solar\+Panel.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolar__core_1_1_solar_module_ae972f46a6c3bd9a1c3e7761ab1516524}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!Solar\+Module@{Solar\+Module}}
+\index{Solar\+Module@{Solar\+Module}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
+\subsubsection[{Solar\+Module}]{\setlength{\rightskip}{0pt plus 5cm}Solar\+Module\+::\+Solar\+Module (
+\begin{DoxyParamCaption}
+\item[{const {\bf Property\+Tree} \&}]{pt\+\_\+}
+\end{DoxyParamCaption}
+)}\label{classsolar__core_1_1_solar_module_ae972f46a6c3bd9a1c3e7761ab1516524}
+
+
+Definition at line 24 of file Solar\+Panel.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_solar_module_ad640027b60c3e9d3670938d0cea9f410}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!deserialize@{deserialize}}
+\index{deserialize@{deserialize}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
+\subsubsection[{deserialize}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$ {\bf Solar\+Module} $>$ Solar\+Module\+::deserialize (
+\begin{DoxyParamCaption}
+\item[{const {\bf Property\+Tree} \&}]{pt\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classsolar__core_1_1_solar_module_ad640027b60c3e9d3670938d0cea9f410}
+
+
+Definition at line 15 of file Solar\+Panel.\+cpp.
 
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classsolar__core_1_1_solar_module_a9c6d7e0ef28958ac1da73a1e48a1373d}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!degradation@{degradation}}
+\index{degradation@{degradation}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
+\subsubsection[{degradation}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::degradation = 0.\+0}\label{classsolar__core_1_1_solar_module_a9c6d7e0ef28958ac1da73a1e48a1373d}
+
+
+Definition at line 60 of file Solar\+Panel.\+h.
+
 \hypertarget{classsolar__core_1_1_solar_module_a0303a0da750be23a4a408645d838ed24}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!efficiency@{efficiency}}
 \index{efficiency@{efficiency}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{efficiency}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::efficiency}\label{classsolar__core_1_1_solar_module_a0303a0da750be23a4a408645d838ed24}
 
 
-Definition at line 35 of file Solar\+Panel.\+h.
+Definition at line 52 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_a34cc7ce18770e51c87a3655f6f481be0}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!length@{length}}
 \index{length@{length}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::length}\label{classsolar__core_1_1_solar_module_a34cc7ce18770e51c87a3655f6f481be0}
 
 
-Definition at line 38 of file Solar\+Panel.\+h.
+Definition at line 55 of file Solar\+Panel.\+h.
+
+\hypertarget{classsolar__core_1_1_solar_module_a32c10820046565c531a3e1a0fd8107b0}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!manufacturer@{manufacturer}}
+\index{manufacturer@{manufacturer}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
+\subsubsection[{manufacturer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\+E\+M}$\ast$ solar\+\_\+core\+::\+Solar\+Module\+::manufacturer = nullptr}\label{classsolar__core_1_1_solar_module_a32c10820046565c531a3e1a0fd8107b0}
+
+
+Definition at line 59 of file Solar\+Panel.\+h.
+
+\hypertarget{classsolar__core_1_1_solar_module_a24c71dfff1a0503fe967d11c52be05b8}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!manufacturer\+\_\+id@{manufacturer\+\_\+id}}
+\index{manufacturer\+\_\+id@{manufacturer\+\_\+id}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
+\subsubsection[{manufacturer\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string solar\+\_\+core\+::\+Solar\+Module\+::manufacturer\+\_\+id = \char`\"{}\char`\"{}}\label{classsolar__core_1_1_solar_module_a24c71dfff1a0503fe967d11c52be05b8}
+
+
+Definition at line 58 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_abc9bb9bae1546dee017d598ef7baa952}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!name@{name}}
 \index{name@{name}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string solar\+\_\+core\+::\+Solar\+Module\+::name}\label{classsolar__core_1_1_solar_module_abc9bb9bae1546dee017d598ef7baa952}
 
 
-Definition at line 34 of file Solar\+Panel.\+h.
+Definition at line 51 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_a34233be4549eb826fa5a4cc6a20993e3}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!p\+\_\+sem@{p\+\_\+sem}}
 \index{p\+\_\+sem@{p\+\_\+sem}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{p\+\_\+sem}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::p\+\_\+sem}\label{classsolar__core_1_1_solar_module_a34233be4549eb826fa5a4cc6a20993e3}
 price as quoted by manufacturer 
 
-Definition at line 37 of file Solar\+Panel.\+h.
+Definition at line 54 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_ada72a54d3a914a88fd3942f1a09065c1}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!S\+T\+C\+\_\+power\+\_\+rating@{S\+T\+C\+\_\+power\+\_\+rating}}
 \index{S\+T\+C\+\_\+power\+\_\+rating@{S\+T\+C\+\_\+power\+\_\+rating}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{S\+T\+C\+\_\+power\+\_\+rating}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::\+S\+T\+C\+\_\+power\+\_\+rating}\label{classsolar__core_1_1_solar_module_ada72a54d3a914a88fd3942f1a09065c1}
 
 
-Definition at line 36 of file Solar\+Panel.\+h.
+Definition at line 53 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_a88f461fc1142688294bf19ca02b7ec0d}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!warranty\+\_\+length@{warranty\+\_\+length}}
 \index{warranty\+\_\+length@{warranty\+\_\+length}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{warranty\+\_\+length}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::warranty\+\_\+length}\label{classsolar__core_1_1_solar_module_a88f461fc1142688294bf19ca02b7ec0d}
 in weeks, as it is time period 
 
-Definition at line 40 of file Solar\+Panel.\+h.
+Definition at line 57 of file Solar\+Panel.\+h.
 
 \hypertarget{classsolar__core_1_1_solar_module_a72b5c417f88deb65818e96b5fcf52ef9}{}\index{solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}!width@{width}}
 \index{width@{width}!solar\+\_\+core\+::\+Solar\+Module@{solar\+\_\+core\+::\+Solar\+Module}}
 \subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+Solar\+Module\+::width}\label{classsolar__core_1_1_solar_module_a72b5c417f88deb65818e96b5fcf52ef9}
 
 
-Definition at line 39 of file Solar\+Panel.\+h.
+Definition at line 56 of file Solar\+Panel.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_solar_panel_8h}{Solar\+Panel.\+h}\end{DoxyCompactItemize}
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_solar_panel_8h}{Solar\+Panel.\+h}\item 
+/\+Users/wilfeli/\+Dropbox/\+A\+B\+M/\+Solar\+Panels/\+A\+B\+M\+I\+R\+I\+S\+Lab/\+Source/\+Agents/\hyperlink{_solar_panel_8cpp}{Solar\+Panel.\+cpp}\end{DoxyCompactItemize}
