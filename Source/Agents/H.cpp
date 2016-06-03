@@ -19,13 +19,11 @@ using namespace solar_core;
 
 
 
-<<<<<<< HEAD
 std::set<EParamTypes> Household::project_states_to_delete{EParamTypes::ClosedProject};
 
 
 
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+
 Household::Household(PropertyTree& pt_, W* w_)
 {
     w = w_;
@@ -65,10 +63,8 @@ Household::Household(PropertyTree& pt_, W* w_)
     n_pending_designs = 0;
     
     
-<<<<<<< HEAD
     project_states_to_delete.insert(EParamTypes::ClosedProject);
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+
     
 }
 
@@ -83,14 +79,9 @@ Household::init(W* w_)
 void
 Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
-<<<<<<< HEAD
+
     //saves information about advertising agent only if not already commited to installing project
     ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
-=======
-    //saves information about advertising agent
-    ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
-    get_inf_marketing_sei.push_back(mes_);
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     
     if (marketing_state != EParamTypes::HHMarketingCommitedToInstallation)
     {
@@ -205,7 +196,6 @@ Household::dec_evaluate_online_quotes()
         project->state_project = EParamTypes::RequestedPreliminaryQuote;
         project->sei->request_preliminary_quote(project);
         ++n_request_quotes;
-<<<<<<< HEAD
     };
     
     
@@ -214,8 +204,6 @@ Household::dec_evaluate_online_quotes()
     while (i < pvprojects.size())
     {
         pvprojects[i]->state_project = EParamTypes::ClosedProject;
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     };
     
     
@@ -289,20 +277,8 @@ Household::dec_evaluate_designs()
               {
                   return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
               });
-<<<<<<< HEAD
     
     auto decision = (pvprojects[0]->design) ? pvprojects[0] : nullptr;
-=======
-    
-    auto decision = pvprojects[0];
-    
-    decision->state_project = EParamTypes::AcceptedDesign;
-    decision->ac_hh_time = a_time;
-    decision->ac_accepted_time = a_time;
-    decision->sei->accepted_design(decision);
-    
-    accepted_design.push_back(decision);
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     
     if (decision)
     {
@@ -470,11 +446,8 @@ Household::act_tick()
         };
     };
     
-<<<<<<< HEAD
     //@DevStage2 if there is an accepted project - check if needs to make payments
-=======
-    //if there is an accepted project - check if needs to make payments
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+
     
     ///@DevStage2 generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both - agent is broadcasting changed state and behaves differently depending on the state.
 }

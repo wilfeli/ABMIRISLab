@@ -195,10 +195,6 @@ SEM::act_tick()
         
         for (auto iter:prices)
         {
-<<<<<<< HEAD
-            
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
             auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
             auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
             

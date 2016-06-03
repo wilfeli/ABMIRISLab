@@ -35,10 +35,8 @@
 #include <boost/filesystem.hpp>
 #include "UI/W.h"
 #include "UI/UI.h"
-<<<<<<< HEAD
 #include "UI/HelperW.h"
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+
 
 #ifdef _WIN64
 #include  <io.h>
@@ -81,15 +79,11 @@ int main(int argc, const char * argv[])
     
     if (MODE == "NEW")
     {
-<<<<<<< HEAD
         auto helper = new solar_core::HelperWSpecialization<solar_core::W, solar_core::BaselineModel>();
         
         //create world
         w = new W(path_to_model_file.string(), helper, "NEW");
-=======
-        //create world
-        w = new W(path_to_model_file.string(), "NEW");
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+
         //initialize world
         w->init();
     }
