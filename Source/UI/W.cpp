@@ -121,6 +121,8 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         //create existing solar modules
         serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
         
+
+        
         
         //create grid
         path_to_template = path_to_dir;
@@ -262,7 +264,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             sems.push_back(new SEM(pt, this));
         };
         
-        max_ = WorldSettings::instance().solar_modules.size() - 1;
+        max_ = sems.size() - 1;
         auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
         auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
 

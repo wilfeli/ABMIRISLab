@@ -29,12 +29,13 @@
                       "Width": "969.0",
                       "Color": "Black",
                       "Pattern": "Window-paint",
-                      "Price (from reseller)": "300"
+                      "Price (from reseller)": "300",
+                      "Peak Efficiency": "0.1639"
                       }
                       },
                       {
                       "KU265-6ZPA": {
-                      "Name": "KU260-6ZPA",
+                      "Name": "KU265-6ZPA",
                       "STC Power Rating": "265.0",
                       "Length": "1637.0",
                       "Width": "969.0",

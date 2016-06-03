@@ -12,7 +12,7 @@
 #include "Tools/ExternalIncludes.h"
 #include "Tools/IRandom.h"
 #include "Agents/SEI.h"
-#include "Tests/Agents/SEIMock.h"
+#include "../Tests/Agents/SEIMock.h"
 
 namespace solar_core {
 
