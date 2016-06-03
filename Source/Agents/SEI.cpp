@@ -114,6 +114,97 @@ SEI::init(W *w_)
 }
 
 
+SEI::SEI(const PropertyTree& pt_, W* w_)
+{
+    w = w_;
+    
+    //location
+    location_x = pt_.get<long>("location_x");
+    location_y = pt_.get<long>("location_y");
+
+    
+    
+    //read solar modules to be used in decisions
+    std::map<std::string, std::string> dec_solar_modules_str;
+    serialize::deserialize(pt_.get_child("dec_solar_modules"), dec_solar_modules_str);
+    
+    for (auto& iter:dec_solar_modules_str)
+    {
+        dec_solar_modules[EnumFactory::ToEParamTypes(iter.first)] = WorldSettings::instance().solar_modules[iter.second];
+    };
+    
+    serialize::deserialize(pt_.get_child("dec_project_percentages"),dec_project_percentages);
+    
+    std::vector<std::string> THETA_hard_costs_str;
+    serialize::deserialize(pt_.get_child("THETA_hard_costs"), THETA_hard_costs_str);
+    
+    for (auto& iter:THETA_hard_costs_str)
+    {
+        THETA_hard_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    std::vector<std::string> THETA_soft_costs_str;
+    serialize::deserialize(pt_.get_child("THETA_soft_costs"), THETA_soft_costs_str);
+    for (auto& iter:THETA_soft_costs_str)
+    {
+        THETA_soft_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    std::vector<std::string> THETA_profit_str;
+    serialize::deserialize(pt_.get_child("THETA_profit"), THETA_profit_str);
+    for (auto& iter:THETA_profit_str)
+    {
+        THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+    }
+    
+    
+    
+    schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_visits = 0;
+    
+    
+    schedule_installations = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthPlanInstallations], std::vector<std::weak_ptr<PVProject>>{});
+    i_schedule_installations = 0;
+    
+    
+    
+    //set other parameters
+    ac_designs = 0;
+    
+    
+    sei_type = EnumFactory::ToEParamTypes(pt_.get<std::string>("sei_type"));
+    money = serialize::solve_str_formula<double>(pt_.get<std::string>("money"), *w->rand);
+    a_time = 0;
+    
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+    
+    ///@DevStage2 move to W to speed up, but test before that
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+    };
+
+    mes_marketing = std::make_shared<MesMarketingSEI>(this, sei_type);
+    
+    
+
+}
+
+
+void
+SEI::init(W *w_)
+{
+    a_time = w_->time;
+    
+    //send marketing information out
+    w->marketing->get_marketing_inf_sei(mes_marketing);
+    
+}
+
+
 
 void
 SEI::get_project(std::shared_ptr<PVProject> project_)
@@ -324,7 +415,19 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             designs.push_back(design);
         };
     };
+<<<<<<< HEAD
+=======
     
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+    
+    //sort by savings and present best option
+    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
+    
+    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
+        return lhs.total_savings > rhs.total_savings;
+    });
+    auto design = std::make_shared<PVDesign>(designs[0]);
+    auto mes = std::make_shared<MesDesign>(design);
     
     //sort by savings and present best option
     ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
@@ -480,6 +583,7 @@ SEI::ac_update_tick()
     //pove pending projects into active projects
     pvprojects.insert(pvprojects.end(), pvprojects_to_add.begin(), pvprojects_to_add.end());
     pvprojects_to_add.clear();
+<<<<<<< HEAD
     
     
     //delete closed projects
@@ -487,6 +591,8 @@ SEI::ac_update_tick()
                                     [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pvprojects.end());
     
     
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     pvprojects_lock.unlock();
     
     

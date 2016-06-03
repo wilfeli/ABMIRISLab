@@ -137,6 +137,7 @@ public:
     //@}
     
     
+<<<<<<< HEAD
     //@{
     /**
      
@@ -160,25 +161,47 @@ public:
     
     double location_x; /** Location of an agent, x coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
     double location_y; /** Location of an agent, y coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
+=======
+    //@{
+    /**
+     
+     Section relevant to design phase
+     
+     */
+    
+    virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
+    //@DevStage2 is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
+    //@}
+    
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     
     //can we alternatively assign each agent a zipcode and that informs us of their geography? or is that too high-level?
     
-    //@}
     
     //@{
     /**
      
+<<<<<<< HEAD
      Section with parameters for solar projects, mainly House for now
      
      
      
      
+=======
+     Section with geographical parameters
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
      
      */
     House* house; /** Simplification: assume only 1 house per hh. If need to increase number of houses, might switch to vector of pointers to houses. Use RAII here maybe? for managining raw pointer. @DevStage3 think about using smart pointers here, it will simplify management of creation of agents. Cons: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.    */
     
+    double location_x; /** Location of an agent, x coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
+    double location_y; /** Location of an agent, y coordinate. @DevStage2 think about decreasing size for this field, use uint64_t or smaller for it */
     
+<<<<<<< HEAD
     
+=======
+    //can we alternatively assign each agent a zipcode and that informs us of their geography? or is that too high-level?
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     
     //@}
     
@@ -186,18 +209,35 @@ public:
     //@{
     /**
      
+<<<<<<< HEAD
      Section with technical members
+=======
+     Section with parameters for solar projects, mainly House for now
+     
+     
+     
+     
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
      
      */
+    House* house; /** Simplification: assume only 1 house per hh. If need to increase number of houses, might switch to vector of pointers to houses. Use RAII here maybe? for managining raw pointer. @DevStage3 think about using smart pointers here, it will simplify management of creation of agents. Cons: it will be bigger, management will add time. As house is created once, no need to complicated lifetime management.    */
     
+<<<<<<< HEAD
     static std::set<EParamTypes> project_states_to_delete;
+=======
+    
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
     
     
     //@}
+
     
+<<<<<<< HEAD
     
 
     
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 protected:
     
     

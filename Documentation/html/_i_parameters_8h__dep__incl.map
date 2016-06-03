@@ -1,4 +1,5 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Tools/IParameters.h" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Tools/IParameters.h">
+<<<<<<< HEAD
 <area shape="rect" id="node2" href="$_g_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/G.h" alt="" coords="100,213,310,269"/>
 <area shape="rect" id="node4" href="$_s_e_i_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.cpp" alt="" coords="1716,317,1926,373"/>
 <area shape="rect" id="node6" href="$_h_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/H.h" alt="" coords="670,213,881,269"/>
@@ -28,4 +29,25 @@
 <area shape="rect" id="node25" href="$_i_random_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/IRandom.cpp" alt="" coords="1140,213,1350,269"/>
 <area shape="rect" id="node27" href="$_serialize_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/Serialize.cpp" alt="" coords="905,317,1116,373"/>
 <area shape="rect" id="node30" href="$_world_settings_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/WorldSettings.cpp" alt="" coords="73,317,289,373"/>
+=======
+<area shape="rect" id="node2" href="$_g_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/G.h" alt="" coords="52,109,263,165"/>
+<area shape="rect" id="node4" href="$_h_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/H.h" alt="" coords="744,213,955,269"/>
+<area shape="rect" id="node6" href="$_s_e_i_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.cpp" alt="" coords="979,317,1189,373"/>
+<area shape="rect" id="node7" href="$_s_e_i_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.h" alt="" coords="979,213,1189,269"/>
+<area shape="rect" id="node9" href="$_solar_panel_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SolarPanel.h" alt="" coords="576,109,787,165"/>
+<area shape="rect" id="node11" href="$_geography_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Geography/Geography.h" alt="" coords="1733,109,1952,165"/>
+<area shape="rect" id="node13" href="$_i_message_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Institutions/IMessage.h" alt="" coords="173,213,384,269"/>
+<area shape="rect" id="node15" href="$_i_parameters_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/IParameters.cpp" alt="" coords="2243,109,2453,165"/>
+<area shape="rect" id="node16" href="$_serialize_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/Serialize.h" alt="" coords="2008,109,2219,165"/>
+<area shape="rect" id="node18" href="$_world_settings_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/WorldSettings.h" alt="" coords="1213,213,1424,269"/>
+<area shape="rect" id="node20" href="$_w_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/W.h" alt="" coords="1448,213,1659,269"/>
+<area shape="rect" id="node3" href="$_g_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/G.cpp" alt="" coords="5,317,216,373"/>
+<area shape="rect" id="node5" href="$_h_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/H.cpp" alt="" coords="744,317,955,373"/>
+<area shape="rect" id="node8" href="$_w_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/W.cpp" alt="" coords="1547,317,1757,373"/>
+<area shape="rect" id="node10" href="$_solar_panel_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SolarPanel.cpp" alt="" coords="408,213,619,269"/>
+<area shape="rect" id="node12" href="$_geography_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Geography/Geography.cpp" alt="" coords="1784,213,2016,269"/>
+<area shape="rect" id="node14" href="$_i_message_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Institutions/IMessage.cpp" alt="" coords="241,317,463,373"/>
+<area shape="rect" id="node17" href="$_serialize_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/Serialize.cpp" alt="" coords="2040,213,2251,269"/>
+<area shape="rect" id="node19" href="$_world_settings_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Tools/WorldSettings.cpp" alt="" coords="1213,317,1429,373"/>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

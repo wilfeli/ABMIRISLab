@@ -70,6 +70,7 @@
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="namespacesolar__core.html">   18</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_p_v_project.html">PVProject</a>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html">   39</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_g.html">G</a></div>
@@ -157,6 +158,70 @@
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 28 2016 09:55:17 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+=======
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_p_v_project.html">PVProject</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsolar__core_1_1_g.html">G</a></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_g.html#ad3c9fb1da4db51b296c29a6b94b0f139">act_tick</a>() ;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsolar__core_1_1_g.html#a10289bd4ea370e0e994f69603e11fc6c">request_permit</a>(std::shared_ptr&lt;PVProject&gt; project_); </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html#a471a7f64e44432bd6d2f2974f507d669">   66</a></span>&#160;    std::deque&lt;std::shared_ptr&lt;PVProject&gt;&gt; <a class="code" href="classsolar__core_1_1_g.html#a471a7f64e44432bd6d2f2974f507d669">pending_projects</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3">   68</a></span>&#160;    std::vector&lt;std::vector&lt;std::weak_ptr&lt;PVProject&gt;&gt;&gt; <a class="code" href="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3">schedule_visits</a>; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html#a5c79440fcadc7d3e9212c5e7c05f84f7">   70</a></span>&#160;    std::size_t <a class="code" href="classsolar__core_1_1_g.html#a5c79440fcadc7d3e9212c5e7c05f84f7">i_schedule_visits</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_g.html#a4d5b2845fc790c0f14b13fe922821f4b">   79</a></span>&#160;    <a class="code" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">TimeUnit</a> <a class="code" href="classsolar__core_1_1_g.html#a4d5b2845fc790c0f14b13fe922821f4b">a_time</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <span class="comment">//end namespace solar_core</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(__ABMSolar__G__) */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_a33472d3b331a303ec8a9b61e2da163d3"><div class="ttname"><a href="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3">solar_core::G::schedule_visits</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; std::weak_ptr&lt; PVProject &gt; &gt; &gt; schedule_visits</div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00068">G.h:68</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_a4b5949d07259da6f8a20d12a30403e90"><div class="ttname"><a href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">solar_core::TimeUnit</a></div><div class="ttdeci">int64_t TimeUnit</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00300">IParameters.h:300</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_ad3c9fb1da4db51b296c29a6b94b0f139"><div class="ttname"><a href="classsolar__core_1_1_g.html#ad3c9fb1da4db51b296c29a6b94b0f139">solar_core::G::act_tick</a></div><div class="ttdeci">virtual void act_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_g_8cpp_source.html#l00063">G.cpp:63</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_a5c79440fcadc7d3e9212c5e7c05f84f7"><div class="ttname"><a href="classsolar__core_1_1_g.html#a5c79440fcadc7d3e9212c5e7c05f84f7">solar_core::G::i_schedule_visits</a></div><div class="ttdeci">std::size_t i_schedule_visits</div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00070">G.h:70</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_a4d5b2845fc790c0f14b13fe922821f4b"><div class="ttname"><a href="classsolar__core_1_1_g.html#a4d5b2845fc790c0f14b13fe922821f4b">solar_core::G::a_time</a></div><div class="ttdeci">TimeUnit a_time</div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00079">G.h:79</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_p_v_project_html"><div class="ttname"><a href="classsolar__core_1_1_p_v_project.html">solar_core::PVProject</a></div><div class="ttdef"><b>Definition:</b> <a href="_solar_panel_8h_source.html#l00088">SolarPanel.h:88</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html"><div class="ttname"><a href="classsolar__core_1_1_g.html">solar_core::G</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00025">G.h:25</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_a471a7f64e44432bd6d2f2974f507d669"><div class="ttname"><a href="classsolar__core_1_1_g.html#a471a7f64e44432bd6d2f2974f507d669">solar_core::G::pending_projects</a></div><div class="ttdeci">std::deque&lt; std::shared_ptr&lt; PVProject &gt; &gt; pending_projects</div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00066">G.h:66</a></div></div>
+<div class="ttc" id="_i_parameters_8h_html"><div class="ttname"><a href="_i_parameters_8h.html">IParameters.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_g_html_a10289bd4ea370e0e994f69603e11fc6c"><div class="ttname"><a href="classsolar__core_1_1_g.html#a10289bd4ea370e0e994f69603e11fc6c">solar_core::G::request_permit</a></div><div class="ttdeci">virtual void request_permit(std::shared_ptr&lt; PVProject &gt; project_)</div><div class="ttdef"><b>Definition:</b> <a href="_g_8cpp_source.html#l00017">G.cpp:17</a></div></div>
+<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00018">G.h:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

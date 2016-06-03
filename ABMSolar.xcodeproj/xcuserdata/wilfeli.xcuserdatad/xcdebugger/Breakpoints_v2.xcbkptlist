@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
-            landmarkName = "SEI::form_online_quote(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkName = "SEI::SEI(const PropertyTree&amp; pt_, W* w_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "536"
             endingLineNumber = "536"
-            landmarkName = "SEI::act_tick()"
+            landmarkName = "SEI::install_project(std::shared_ptr&lt;PVProject&gt; project)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "569"
             endingLineNumber = "569"
-            landmarkName = "SEI::act_tick()"
+            landmarkName = "SEI::get_payment(std::shared_ptr&lt;MesPayment&gt; mes_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "547"
             endingLineNumber = "547"
-            landmarkName = "SEI::act_tick()"
+            landmarkName = "SEI::install_project(std::shared_ptr&lt;PVProject&gt; project)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
             endingLineNumber = "132"
-            landmarkName = "SEI::request_online_quote(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkName = "SEI::SEI(const PropertyTree&amp; pt_, W* w_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "586"
             endingLineNumber = "586"
-            landmarkName = "SEI::act_tick()"
+            landmarkName = "SEI::ac_update_tick()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"
             endingLineNumber = "209"
-            landmarkName = "SEI::collect_inf_site_visit(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkName = "SEI::get_project(std::shared_ptr&lt;PVProject&gt; project_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -176,7 +176,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "459"
             endingLineNumber = "459"
-            landmarkName = "SEI::install_project(std::shared_ptr&lt;PVProject&gt; project)"
+            landmarkName = "SEI::form_design_for_params(std::shared_ptr&lt;PVProject&gt; project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM&amp; iter, PVDesign&amp; design)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -208,7 +208,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "345"
             endingLineNumber = "345"
-            landmarkName = "SEI::form_design_for_params(std::shared_ptr&lt;PVProject&gt; project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM&amp; iter, PVDesign&amp; design)"
+            landmarkName = "SEI::form_preliminary_quote(std::shared_ptr&lt;PVProject&gt; project_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -240,7 +240,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "351"
             endingLineNumber = "351"
-            landmarkName = "SEI::form_design_for_params(std::shared_ptr&lt;PVProject&gt; project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM&amp; iter, PVDesign&amp; design)"
+            landmarkName = "SEI::form_preliminary_quote(std::shared_ptr&lt;PVProject&gt; project_)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

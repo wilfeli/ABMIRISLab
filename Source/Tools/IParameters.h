@@ -93,11 +93,16 @@ namespace solar_core
         /** If Household is not interested in installing SP */
         HHMarketingNotInterested,
         
+<<<<<<< HEAD
         
         /** If Household is already installed */
         HHMarketingCommitedToInstallation,
 
         
+=======
+		/*Is it possible to have a bool quoting stage active = true, inactive = false?*/
+
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
         /** State of a quoting stage for HH: actively requesting information */
         ActiveQuoting,
         

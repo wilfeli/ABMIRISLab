@@ -1,7 +1,11 @@
 {
     "params": [
                {
+<<<<<<< HEAD
                "EParamTypes::ElectricityBill": "FORMULA::p.d.f.::N_trunc(180, 100)"
+=======
+               "EParamTypes::ElectricityBill": "FORMULA::p.d.f.::N_trunc(50, 100)"
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
                },
                {"EParamTypes::HHMaxNVisitsPerTimeUnit":5},
                {"EParamTypes::CreditScore":680}

@@ -59,6 +59,7 @@
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_message_8h.html">Institutions/IMessage.h</a>&quot;</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_marketing_system_8h.html">Institutions/MarketingSystem.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_settings_8h.html">Tools/WorldSettings.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_serialize_8h.html">Tools/Serialize.h</a>&quot;</span></div>
@@ -490,11 +491,373 @@
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c">solar_core::EParamTypes::RequestedOnlineQuote</a></div></div>
 <div class="ttc" id="_world_settings_8h_html"><div class="ttname"><a href="_world_settings_8h.html">WorldSettings.h</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_household_html_a15e598cfc419040a23f75fe08a8ef1d8"><div class="ttname"><a href="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8">solar_core::Household::schedule_visits_lock</a></div><div class="ttdeci">std::mutex schedule_visits_lock</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00255">H.h:255</a></div></div>
+=======
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_settings_8h.html">Tools/WorldSettings.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_w_8h.html">UI/W.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_solar_panel_8h.html">Agents/SolarPanel.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_h_8h.html">Agents/H.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_s_e_i_8h.html">Agents/SEI.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">   19</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">Household::get_inf</a>(std::shared_ptr&lt;MesMarketingSEI&gt; mes_)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">//saves information about advertising agent</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span>    <a class="code" href="classsolar__core_1_1_household.html#a3ae4cec5fca43ee5ca3287a01f5a05a2">get_inf_marketing_sei</a>.push_back(mes_);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#a3ee8b2654cad46236d11f85a4ccd9574">marketing_state</a> != <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0">EParamTypes::HHMarketingStateInterested</a>)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a3ee8b2654cad46236d11f85a4ccd9574">marketing_state</a> = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0">EParamTypes::HHMarketingStateInterested</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="comment">//tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a01ac4643c725f397ba7485209a906e4d">w</a>-&gt;get_state_inf(<span class="keyword">this</span>, <a class="code" href="classsolar__core_1_1_household.html#a3ee8b2654cad46236d11f85a4ccd9574">marketing_state</a>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">   40</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">Household::ac_inf_quoting_sei</a>()</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//requests quotes from SEI</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//restricts number of projects</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">while</span> ((!<a class="code" href="classsolar__core_1_1_household.html#a3ae4cec5fca43ee5ca3287a01f5a05a2">get_inf_marketing_sei</a>.empty()) &amp;&amp; (<a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.size() &lt;= <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().<a class="code" href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">constraints</a>[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a5d0891420ec7c6769c9ece305c98daac">EConstraintParams::MaxNOpenProjectsHH</a>]))</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">auto</span> marketing_inf = <a class="code" href="classsolar__core_1_1_household.html#a3ae4cec5fca43ee5ca3287a01f5a05a2">get_inf_marketing_sei</a>.front();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">//create project</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="comment">//create new project</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">auto</span> new_project = std::make_shared&lt;PVProject&gt;();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">//request additional information</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        new_project-&gt;agent = <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        new_project-&gt;begin_time = <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        new_project-&gt;sei = marketing_inf-&gt;agent;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="comment">//save project</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.push_back(new_project);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        marketing_inf-&gt;agent-&gt;get_project(new_project);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//Distinguishes between online and phone quote. Small installers might not have an online presence.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>        <span class="keywordflow">switch</span> (<a class="code" href="classsolar__core_1_1_household.html#a3ee8b2654cad46236d11f85a4ccd9574">marketing_state</a>)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e">EParamTypes::HHMarketingStateHighlyInterested</a>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="comment">//requests preliminary quote with site visit</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                new_project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">EParamTypes::RequestedPreliminaryQuote</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                marketing_inf-&gt;agent-&gt;request_preliminary_quote(new_project);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0">EParamTypes::HHMarketingStateInterested</a>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">switch</span> (marketing_inf-&gt;sei_type)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">EParamTypes::SEISmall</a>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    <span class="comment">//returns quote in the form of a message</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="comment">// assume no online presence, so requests preliminary quote</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    new_project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">EParamTypes::RequestedPreliminaryQuote</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    marketing_inf-&gt;agent-&gt;request_preliminary_quote(new_project);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">EParamTypes::SEILarge</a>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="comment">//requests online quote, it will be provided in a separate call</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    new_project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c">EParamTypes::RequestedOnlineQuote</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    marketing_inf-&gt;agent-&gt;request_online_quote(new_project);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="comment">//otherwise do nothing as is not interested</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        };</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a3ae4cec5fca43ee5ca3287a01f5a05a2">get_inf_marketing_sei</a>.pop_front();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ++<a class="code" href="classsolar__core_1_1_household.html#a6b35426fd691daa6d352ec34a6ec6e4d">quote_stage_timer</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b">  100</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b">Household::dec_evaluate_online_quotes</a>()</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">//sort projects by price, lower price goes first</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    std::sort(<a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.begin(), <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.end(), [](<span class="keyword">const</span> std::shared_ptr&lt;PVProject&gt; lhs, <span class="keyword">const</span> std::shared_ptr&lt;PVProject&gt; rhs){</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">//compare only if online quote was received,</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">bool</span> compare_res = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">if</span> (lhs-&gt;state_project == <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9">EParamTypes::ProvidedOnlineQuote</a> &amp;&amp; rhs-&gt;state_project == <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9">EParamTypes::ProvidedOnlineQuote</a>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            compare_res = lhs-&gt;online_quote-&gt;params[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497">EParamTypes::OnlineQuotePrice</a>] &lt; rhs-&gt;online_quote-&gt;params[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497">EParamTypes::OnlineQuotePrice</a>];</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        };</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> compare_res;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    });</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">//mark first N projects for requesting preliminary quotes and request them</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">auto</span> n_request_quotes = 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">auto</span> max_n_request_quotes = <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().<a class="code" href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">constraints</a>[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49ae497930a8f22e14387bac31ebe737a64">EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes</a>];</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">while</span> (n_request_quotes &lt; max_n_request_quotes)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keyword">auto</span> project = <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>[n_request_quotes];</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">EParamTypes::RequestedPreliminaryQuote</a>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        project-&gt;sei-&gt;request_preliminary_quote(project);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        ++n_request_quotes;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    };</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e">  131</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e">Household::dec_evaluate_preliminary_quotes</a>()</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="comment">//sort projects by price, lower price goes first</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    std::sort(<a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.begin(), <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.end(), [](<span class="keyword">const</span> std::shared_ptr&lt;PVProject&gt; lhs, <span class="keyword">const</span> std::shared_ptr&lt;PVProject&gt; rhs){</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="comment">//compare only if online quote was received,</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">bool</span> compare_res = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">if</span> (lhs-&gt;state_project == <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">EParamTypes::ProvidedPreliminaryQuote</a> &amp;&amp; rhs-&gt;state_project == <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">EParamTypes::ProvidedPreliminaryQuote</a>)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            compare_res = lhs-&gt;online_quote-&gt;params[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032">EParamTypes::PreliminaryQuoteEstimatedSavings</a>] &gt; rhs-&gt;online_quote-&gt;params[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032">EParamTypes::PreliminaryQuoteEstimatedSavings</a>];</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        };</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">return</span> compare_res;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    });</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    std::shared_ptr&lt;PVProject&gt; decision = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="comment">//pick top project and compare price to the income</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; project:<a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">if</span> (project-&gt;state_project == <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">EParamTypes::ProvidedPreliminaryQuote</a>)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">if</span> (project-&gt;preliminary_quote-&gt;params[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a581329dc30b846b1b05267c8bbfb3dc2">EParamTypes::PreliminaryQuotePrice</a>] &lt;= <a class="code" href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">params</a>[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7">EParamTypes::Income</a>] * THETA_design[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df">EParamTypes::HHDecPreliminaryQuote</a>][0])</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                decision = project;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            };</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    };</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">if</span> (decision)</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        decision-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ae04bb6f7c490d1f5e1e19b790ac4bd48">EParamTypes::AcceptedPreliminaryQuote</a>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        decision-&gt;sei-&gt;accepted_preliminary_quote(decision);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    };</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;Household::dec_evaluate_designs()</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;{</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="comment">//assume that best design in terms of savings is accepted?</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    std::sort(<a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.begin(), <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>.end(), [&amp;](std::shared_ptr&lt;PVProject&gt; &amp;lhs, std::shared_ptr&lt;PVProject&gt; &amp;rhs)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">return</span> (lhs-&gt;design &amp;&amp; rhs-&gt;design)? lhs-&gt;design-&gt;design-&gt;total_savings &gt; rhs-&gt;design-&gt;design-&gt;total_savings: (lhs-&gt;design)? <span class="keyword">true</span>: <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    });</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">auto</span> decision = <a class="code" href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">pvprojects</a>[0];</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    decision-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362acc5c79b9e52a3187a8b3bfdf7796f6e5">EParamTypes::AcceptedDesign</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    decision-&gt;ac_hh_time = <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    decision-&gt;ac_accepted_time = <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    decision-&gt;sei-&gt;accepted_design(decision);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#ad4409e81251bdd33d9dca1cd1225dc75">accepted_design</a>.push_back(decision);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a7df346780d3d9683293af565d5831d05">  195</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a7df346780d3d9683293af565d5831d05">Household::receive_design</a>(std::shared_ptr&lt;PVProject&gt; project_)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    ++<a class="code" href="classsolar__core_1_1_household.html#ac82a6ebca38ecaf971845f6fa5791559">n_pending_designs</a>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a31a1c8d006fb9e95a2460aa392eaa830">  202</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a31a1c8d006fb9e95a2460aa392eaa830">Household::receive_preliminary_quote</a>(std::shared_ptr&lt;PVProject&gt; project_)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    ++<a class="code" href="classsolar__core_1_1_household.html#aedfc08b7837a3e2fa6ad9e62309694f3">n_preliminary_quotes</a>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a306aed410a39e8062ab5f1b4a3216b8b">  208</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a306aed410a39e8062ab5f1b4a3216b8b">Household::receive_online_quote</a>(std::shared_ptr&lt;PVProject&gt; project_)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;{</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;std::shared_ptr&lt;MesStateBaseHH&gt;</div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e">  215</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e">Household::get_inf_online_quote</a>(<a class="code" href="classsolar__core_1_1_i_agent.html">IAgent</a>* agent_to)</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">auto</span> mes = std::make_shared&lt;MesStateBaseHH&gt;();</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; param:<a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().<a class="code" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">params_to_copy_preliminary_quote</a>)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        mes-&gt;params[param] = <a class="code" href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">params</a>[param];</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    };</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">return</span> mes;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a8c9635bac11c9bd93e65dbb5be5b9d85">  231</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a8c9635bac11c9bd93e65dbb5be5b9d85">Household::request_time_slot_visit</a>(<a class="code" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">TimeUnit</a> visit_time, std::weak_ptr&lt;PVProject&gt; project)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;{</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    std::size_t i = (<a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a> + (visit_time - <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a>)) % <a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>.size();</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>[i].size() &lt; <a class="code" href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">params</a>[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b">EParamTypes::HHMaxNVisitsPerTimeUnit</a>];</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a8d4b9c4a5cf59c93f33489eccbfba7db">  238</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a8d4b9c4a5cf59c93f33489eccbfba7db">Household::schedule_visit</a>(<a class="code" href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">TimeUnit</a> visit_time, std::weak_ptr&lt;PVProject&gt; project)</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;{</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8">schedule_visits_lock</a>.lock();</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    std::size_t i = (<a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a> + (visit_time - <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a>)) % <a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>.size();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">bool</span> FLAG_SCHEDULED_VISIT = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>[i].size() &lt; <a class="code" href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">params</a>[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b">EParamTypes::HHMaxNVisitsPerTimeUnit</a>])</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>[i].push_back(project);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        FLAG_SCHEDULED_VISIT = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    };</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8">schedule_visits_lock</a>.unlock();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> FLAG_SCHEDULED_VISIT;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">  256</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">Household::dec_project_reroof</a>(std::shared_ptr&lt;PVProject&gt; project)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="comment">//MARK: cont.</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;};</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2">  265</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2">Household::ac_update_tick</a>()</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;{</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment">//update internal timer</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a> = <a class="code" href="classsolar__core_1_1_household.html#a01ac4643c725f397ba7485209a906e4d">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#ae96b30122adc9fae8fc2f209a4c89b0a">time</a>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="comment">//clear last day schedule</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">schedule_visits</a>[<a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a>].clear();</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="comment">//move schedule of visits by one</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="comment">//advance index</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a> == <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().constraints[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49aa27f1df5083a611e423ed8531aad5cd3">EConstraintParams::MaxLengthWaitPreliminaryQuote</a>] - 1)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a> = 0;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        ++<a class="code" href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">i_schedule_visits</a>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    };</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;}</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6">  291</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6">Household::act_tick</a>()</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;{</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="comment">//update internals for the tick</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2">ac_update_tick</a>();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#a6b35426fd691daa6d352ec34a6ec6e4d">quote_stage_timer</a> &lt; <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().constraints[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a79b059203dc39b55d85046f355d1fa95">EConstraintParams::MaxNTicksToCollectQuotes</a>])</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="comment">//initiates and continues collection of quoting information</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">ac_inf_quoting_sei</a>();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="comment">//move to evaluation stage</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b">dec_evaluate_online_quotes</a>();</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    };</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="comment">//evaluate preliminary quotes and commit to the project</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#aedfc08b7837a3e2fa6ad9e62309694f3">n_preliminary_quotes</a> &gt;= <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().constraints[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a2e66c9bd577b41e92fd40c619a886559">EConstraintParams::MinNReceivedPreliminaryQuotes</a>])</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <a class="code" href="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e">dec_evaluate_preliminary_quotes</a>();</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    };</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="comment">//evaluate preliminary quotes and commit to the project</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classsolar__core_1_1_household.html#ac82a6ebca38ecaf971845f6fa5791559">n_pending_designs</a> &gt;= <a class="code" href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">WorldSettings::instance</a>().constraints[<a class="code" href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a177186685b2d9651d26b48cb4ad61cc6">EConstraintParams::MinNReceivedDesings</a>])</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        dec_evaluate_designs();</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    };</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; project:<a class="code" href="classsolar__core_1_1_household.html#ad4409e81251bdd33d9dca1cd1225dc75">accepted_design</a>)</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> payment = project-&gt;financing-&gt;schedule_payments[<a class="code" href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">a_time</a> - project-&gt;ac_accepted_time] &gt; 0)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="comment">//make payment</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="comment">//assume that have enough money</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keyword">auto</span> mes = std::make_shared&lt;MesPayment&gt;(payment);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            project-&gt;sei-&gt;get_payment(mes);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        };</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    };</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="comment">//if there is accepted project - check if needs to make payments</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;}</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_household.html#a733a90456d57f698b3aa974c6c6e0108">  341</a></span>&#160;<a class="code" href="classsolar__core_1_1_household.html#a733a90456d57f698b3aa974c6c6e0108">Household::update_params</a>()</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="comment">//saves parameters</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <a class="code" href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">params</a>[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">EParamTypes::RoofSize</a>] = <a class="code" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">house</a>-&gt;<a class="code" href="classsolar__core_1_1_house.html#a7f872cb768b83e70e263590078fa4c7d">roof_size</a>;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;}</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a985f6ff4deb35454155c9e992bfcdbb0">solar_core::EParamTypes::HHMarketingStateInterested</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_ad323100235079f34537ccda656e86e64"><div class="ttname"><a href="classsolar__core_1_1_household.html#ad323100235079f34537ccda656e86e64">solar_core::Household::a_time</a></div><div class="ttdeci">TimeUnit a_time</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00279">H.h:279</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49a79b059203dc39b55d85046f355d1fa95"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a79b059203dc39b55d85046f355d1fa95">solar_core::EConstraintParams::MaxNTicksToCollectQuotes</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a3f1645b895f679824026ca1de865ca81">solar_core::EParamTypes::RequestedPreliminaryQuote</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_ad4409e81251bdd33d9dca1cd1225dc75"><div class="ttname"><a href="classsolar__core_1_1_household.html#ad4409e81251bdd33d9dca1cd1225dc75">solar_core::Household::accepted_design</a></div><div class="ttdeci">std::deque&lt; std::shared_ptr&lt; PVProject &gt; &gt; accepted_design</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00257">H.h:257</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a1e7d20a60dc42b8d09a8d23a4cdb26a6"><div class="ttname"><a href="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6">solar_core::Household::act_tick</a></div><div class="ttdeci">virtual void act_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00291">H.cpp:291</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac3d9027c79b1821115c110ce9b706383">solar_core::EParamTypes::ProvidedPreliminaryQuote</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_a719e11b52a0e087f8c0dd11d9f65da88"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a719e11b52a0e087f8c0dd11d9f65da88">solar_core::WorldSettings::instance</a></div><div class="ttdeci">static WorldSettings &amp; instance()</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8cpp_source.html#l00025">WorldSettings.cpp:25</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a4580119737f0c25977ece80cbac3d58b">solar_core::EParamTypes::HHMaxNVisitsPerTimeUnit</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a6b35426fd691daa6d352ec34a6ec6e4d"><div class="ttname"><a href="classsolar__core_1_1_household.html#a6b35426fd691daa6d352ec34a6ec6e4d">solar_core::Household::quote_stage_timer</a></div><div class="ttdeci">long quote_stage_timer</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00245">H.h:245</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a008a18ff8c2d15da72e19876dc896a4e"><div class="ttname"><a href="classsolar__core_1_1_household.html#a008a18ff8c2d15da72e19876dc896a4e">solar_core::Household::get_inf_online_quote</a></div><div class="ttdeci">virtual std::shared_ptr&lt; MesStateBaseHH &gt; get_inf_online_quote(IAgent *agent_to)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00215">H.cpp:215</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_aa63241ca3fcc1f2374d10b5c7f44124a"><div class="ttname"><a href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">solar_core::Household::dec_project_reroof</a></div><div class="ttdeci">virtual bool dec_project_reroof(std::shared_ptr&lt; PVProject &gt; project)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00256">H.cpp:256</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49aa27f1df5083a611e423ed8531aad5cd3"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49aa27f1df5083a611e423ed8531aad5cd3">solar_core::EConstraintParams::MaxLengthWaitPreliminaryQuote</a></div></div>
+<div class="ttc" id="_solar_panel_8h_html"><div class="ttname"><a href="_solar_panel_8h.html">SolarPanel.h</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_a4b5949d07259da6f8a20d12a30403e90"><div class="ttname"><a href="namespacesolar__core.html#a4b5949d07259da6f8a20d12a30403e90">solar_core::TimeUnit</a></div><div class="ttdeci">int64_t TimeUnit</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00300">IParameters.h:300</a></div></div>
+<div class="ttc" id="_w_8h_html"><div class="ttname"><a href="_w_8h.html">W.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_agent_html"><div class="ttname"><a href="classsolar__core_1_1_i_agent.html">solar_core::IAgent</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_agent_8h_source.html#l00020">IAgent.h:20</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a7df346780d3d9683293af565d5831d05"><div class="ttname"><a href="classsolar__core_1_1_household.html#a7df346780d3d9683293af565d5831d05">solar_core::Household::receive_design</a></div><div class="ttdeci">virtual void receive_design(std::shared_ptr&lt; PVProject &gt; project_)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00195">H.cpp:195</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_ac73de13d0d4b4e01b2defbb85872c4b2"><div class="ttname"><a href="classsolar__core_1_1_household.html#ac73de13d0d4b4e01b2defbb85872c4b2">solar_core::Household::ac_update_tick</a></div><div class="ttdeci">virtual void ac_update_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00265">H.cpp:265</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a733a90456d57f698b3aa974c6c6e0108"><div class="ttname"><a href="classsolar__core_1_1_household.html#a733a90456d57f698b3aa974c6c6e0108">solar_core::Household::update_params</a></div><div class="ttdeci">virtual void update_params()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00341">H.cpp:341</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49ae497930a8f22e14387bac31ebe737a64"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49ae497930a8f22e14387bac31ebe737a64">solar_core::EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a8d4b9c4a5cf59c93f33489eccbfba7db"><div class="ttname"><a href="classsolar__core_1_1_household.html#a8d4b9c4a5cf59c93f33489eccbfba7db">solar_core::Household::schedule_visit</a></div><div class="ttdeci">virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr&lt; PVProject &gt; project)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00238">H.cpp:238</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a2d8c80f6db68610fb3e0f9b48e1e490b"><div class="ttname"><a href="classsolar__core_1_1_household.html#a2d8c80f6db68610fb3e0f9b48e1e490b">solar_core::Household::dec_evaluate_online_quotes</a></div><div class="ttdeci">virtual void dec_evaluate_online_quotes()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00100">H.cpp:100</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac9882efbffdf2ae9422abfc3e4d4a032">solar_core::EParamTypes::PreliminaryQuoteEstimatedSavings</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e">solar_core::EParamTypes::HHMarketingStateHighlyInterested</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_aedfc08b7837a3e2fa6ad9e62309694f3"><div class="ttname"><a href="classsolar__core_1_1_household.html#aedfc08b7837a3e2fa6ad9e62309694f3">solar_core::Household::n_preliminary_quotes</a></div><div class="ttdeci">long n_preliminary_quotes</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00246">H.h:246</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49a177186685b2d9651d26b48cb4ad61cc6"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a177186685b2d9651d26b48cb4ad61cc6">solar_core::EConstraintParams::MinNReceivedDesings</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ac2c46b3ff478ae34297f8672b3d91497">solar_core::EParamTypes::OnlineQuotePrice</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a91a0e5bcf4376200527bfe2b00d1ae6c">solar_core::EParamTypes::RequestedOnlineQuote</a></div></div>
+<div class="ttc" id="_world_settings_8h_html"><div class="ttname"><a href="_world_settings_8h.html">WorldSettings.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a15e598cfc419040a23f75fe08a8ef1d8"><div class="ttname"><a href="classsolar__core_1_1_household.html#a15e598cfc419040a23f75fe08a8ef1d8">solar_core::Household::schedule_visits_lock</a></div><div class="ttdeci">std::mutex schedule_visits_lock</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00243">H.h:243</a></div></div>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5d1561cc7b77d4e0eaca8cc37a4331e9">solar_core::EParamTypes::ProvidedOnlineQuote</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df">solar_core::EParamTypes::HHDecPreliminaryQuote</a></div></div>
 <div class="ttc" id="_i_message_8h_html"><div class="ttname"><a href="_i_message_8h.html">IMessage.h</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2bf6593af19bb602f7c596d7327c6dd6">solar_core::EParamTypes::RoofSize</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_world_settings_html_a728f0b1c11f8ec1816d269aedc1cd80e"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">solar_core::WorldSettings::params_to_copy_preliminary_quote</a></div><div class="ttdeci">std::unordered_set&lt; EParamTypes, EHash &gt; params_to_copy_preliminary_quote</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00054">WorldSettings.h:54</a></div></div>
+<<<<<<< HEAD
 <div class="ttc" id="classsolar__core_1_1_household_html_a1104d8264fe733937e1fd2e9ad0f8fc1"><div class="ttname"><a href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a></div><div class="ttdeci">House * house</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00178">H.h:178</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_enum_factory_html_a573986ee0b4951d5ecc6a8c100f892e8"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8">solar_core::EnumFactory::ToEParamTypes</a></div><div class="ttdeci">static EParamTypes ToEParamTypes(std::string param_type)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00424">IParameters.h:424</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">solar_core::EParamTypes::SEILarge</a></div></div>
@@ -539,6 +902,41 @@
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 28 2016 09:55:17 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+=======
+<div class="ttc" id="classsolar__core_1_1_household_html_a1104d8264fe733937e1fd2e9ad0f8fc1"><div class="ttname"><a href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a></div><div class="ttdeci">House * house</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00167">H.h:167</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">solar_core::EParamTypes::SEILarge</a></div></div>
+<div class="ttc" id="_h_8h_html"><div class="ttname"><a href="_h_8h.html">H.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a8c9635bac11c9bd93e65dbb5be5b9d85"><div class="ttname"><a href="classsolar__core_1_1_household.html#a8c9635bac11c9bd93e65dbb5be5b9d85">solar_core::Household::request_time_slot_visit</a></div><div class="ttdeci">virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr&lt; PVProject &gt; project)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00231">H.cpp:231</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a31a1c8d006fb9e95a2460aa392eaa830"><div class="ttname"><a href="classsolar__core_1_1_household.html#a31a1c8d006fb9e95a2460aa392eaa830">solar_core::Household::receive_preliminary_quote</a></div><div class="ttdeci">virtual void receive_preliminary_quote(std::shared_ptr&lt; PVProject &gt; project_)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00202">H.cpp:202</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a165b7c64c72e5ed4ea08307e32082517"><div class="ttname"><a href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">solar_core::Household::ac_inf_quoting_sei</a></div><div class="ttdeci">virtual void ac_inf_quoting_sei()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00040">H.cpp:40</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_ac9d26af7b52f0cdc357fc5dca4b86ad9"><div class="ttname"><a href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">solar_core::Household::get_inf</a></div><div class="ttdeci">virtual void get_inf(std::shared_ptr&lt; MesMarketingSEI &gt; mes_) override</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00019">H.cpp:19</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49a5d0891420ec7c6769c9ece305c98daac"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a5d0891420ec7c6769c9ece305c98daac">solar_core::EConstraintParams::MaxNOpenProjectsHH</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a077c668f06c009a43c535f1ad92cf92e"><div class="ttname"><a href="classsolar__core_1_1_household.html#a077c668f06c009a43c535f1ad92cf92e">solar_core::Household::i_schedule_visits</a></div><div class="ttdeci">std::size_t i_schedule_visits</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00242">H.h:242</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a79c0e955af98669487e0fb472811f842"><div class="ttname"><a href="classsolar__core_1_1_household.html#a79c0e955af98669487e0fb472811f842">solar_core::Household::pvprojects</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; PVProject &gt; &gt; pvprojects</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00200">H.h:200</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a1f08d08fd864b99cbeebd88b9a0784a7">solar_core::EParamTypes::Income</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html_ae96b30122adc9fae8fc2f209a4c89b0a"><div class="ttname"><a href="classsolar__core_1_1_w.html#ae96b30122adc9fae8fc2f209a4c89b0a">solar_core::W::time</a></div><div class="ttdeci">TimeUnit time</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00087">W.h:87</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">solar_core::EParamTypes::SEISmall</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_world_settings_html_ab9108a4169d6508f8e03f0298088ac69"><div class="ttname"><a href="classsolar__core_1_1_world_settings.html#ab9108a4169d6508f8e03f0298088ac69">solar_core::WorldSettings::constraints</a></div><div class="ttdeci">std::map&lt; EConstraintParams, double &gt; constraints</div><div class="ttdef"><b>Definition:</b> <a href="_world_settings_8h_source.html#l00056">WorldSettings.h:56</a></div></div>
+<div class="ttc" id="_s_e_i_8h_html"><div class="ttname"><a href="_s_e_i_8h.html">SEI.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a3ee8b2654cad46236d11f85a4ccd9574"><div class="ttname"><a href="classsolar__core_1_1_household.html#a3ee8b2654cad46236d11f85a4ccd9574">solar_core::Household::marketing_state</a></div><div class="ttdeci">EParamTypes marketing_state</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00226">H.h:226</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_ac827fdef4412a3c0d5e44d3f31908e49a2e66c9bd577b41e92fd40c619a886559"><div class="ttname"><a href="namespacesolar__core.html#ac827fdef4412a3c0d5e44d3f31908e49a2e66c9bd577b41e92fd40c619a886559">solar_core::EConstraintParams::MinNReceivedPreliminaryQuotes</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a306aed410a39e8062ab5f1b4a3216b8b"><div class="ttname"><a href="classsolar__core_1_1_household.html#a306aed410a39e8062ab5f1b4a3216b8b">solar_core::Household::receive_online_quote</a></div><div class="ttdeci">virtual void receive_online_quote(std::shared_ptr&lt; PVProject &gt; project_)</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00208">H.cpp:208</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362acc5c79b9e52a3187a8b3bfdf7796f6e5"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362acc5c79b9e52a3187a8b3bfdf7796f6e5">solar_core::EParamTypes::AcceptedDesign</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_house_html_a7f872cb768b83e70e263590078fa4c7d"><div class="ttname"><a href="classsolar__core_1_1_house.html#a7f872cb768b83e70e263590078fa4c7d">solar_core::House::roof_size</a></div><div class="ttdeci">double roof_size</div><div class="ttdef"><b>Definition:</b> <a href="_geography_8h_source.html#l00031">Geography.h:31</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a581329dc30b846b1b05267c8bbfb3dc2"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a581329dc30b846b1b05267c8bbfb3dc2">solar_core::EParamTypes::PreliminaryQuotePrice</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a6e27e36f623bd307eedcd97c550d5c5e"><div class="ttname"><a href="classsolar__core_1_1_household.html#a6e27e36f623bd307eedcd97c550d5c5e">solar_core::Household::dec_evaluate_preliminary_quotes</a></div><div class="ttdeci">virtual void dec_evaluate_preliminary_quotes()</div><div class="ttdef"><b>Definition:</b> <a href="_h_8cpp_source.html#l00131">H.cpp:131</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a3ae4cec5fca43ee5ca3287a01f5a05a2"><div class="ttname"><a href="classsolar__core_1_1_household.html#a3ae4cec5fca43ee5ca3287a01f5a05a2">solar_core::Household::get_inf_marketing_sei</a></div><div class="ttdeci">std::deque&lt; std::shared_ptr&lt; MesMarketingSEI &gt; &gt; get_inf_marketing_sei</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00222">H.h:222</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_ac82a6ebca38ecaf971845f6fa5791559"><div class="ttname"><a href="classsolar__core_1_1_household.html#ac82a6ebca38ecaf971845f6fa5791559">solar_core::Household::n_pending_designs</a></div><div class="ttdeci">long n_pending_designs</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00258">H.h:258</a></div></div>
+<div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00018">G.h:18</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362ae04bb6f7c490d1f5e1e19b790ac4bd48"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362ae04bb6f7c490d1f5e1e19b790ac4bd48">solar_core::EParamTypes::AcceptedPreliminaryQuote</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_aadd4e3e2fc66ed214bcfadf37f557b14"><div class="ttname"><a href="classsolar__core_1_1_household.html#aadd4e3e2fc66ed214bcfadf37f557b14">solar_core::Household::schedule_visits</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; std::weak_ptr&lt; PVProject &gt; &gt; &gt; schedule_visits</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00241">H.h:241</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a01ac4643c725f397ba7485209a906e4d"><div class="ttname"><a href="classsolar__core_1_1_household.html#a01ac4643c725f397ba7485209a906e4d">solar_core::Household::w</a></div><div class="ttdeci">W * w</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00290">H.h:290</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html_a41d61dc3bab971cb19170341b77d9df8"><div class="ttname"><a href="classsolar__core_1_1_household.html#a41d61dc3bab971cb19170341b77d9df8">solar_core::Household::params</a></div><div class="ttdeci">std::map&lt; EParamTypes, double &gt; params</div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00187">H.h:187</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -44,6 +44,7 @@
 <div class="textblock"><dl class="reflist">
 <dt><a class="anchor" id="_wp000001"></a>Class <a class="el" href="classsolar__core_1_1_household.html">solar_core::Household</a>  </dt>
 <dd>Once survey is completed will have data: what are your choices and decisions on solar panels. The same logic as in <a class="el" href="classsolar__core_1_1_s_e_i.html">SEI</a>. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data. </dd>
+<<<<<<< HEAD
 <dt><a class="anchor" id="_wp000004"></a>Class <a class="el" href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a>  </dt>
 <dd>For choice function could try neural nets - train them, include two sets of parameters, one will be parameters of an installer and the second will be parameters of a project. The resulting node will be probability of accepting project. Estimation will be done on a database with all installed solar panels. It is equivalent to density estimation using NN. Could also use PCA when the estimated component is assumed to be profit from the project. Could use Python with sci-kit or check TensorFlow. Once estimation is done - could use it as a simple linear function to produce estimation of profit - and thus estimation for the chance of accepting project. Basically dataset will produce profit estimation in some form, should still work even if have only accepted projects. For new project - will get profit estimation. </dd>
 <dt><a class="anchor" id="_wp000003"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df">solar_core::SEI::form_design</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
@@ -52,6 +53,14 @@
 <dd>for now it is price per watt  </dd>
 <dt><a class="anchor" id="_wp000005"></a>Class <a class="el" href="classsolar__core_1_1_s_e_m.html">solar_core::SEM</a>  </dt>
 <dd>Research for the structure of costs </dd>
+=======
+<dt><a class="anchor" id="_wp000002"></a>Member <a class="el" href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">solar_core::Household::dec_project_reroof</a>  (std::shared_ptr&lt; PVProject &gt; project)</dt>
+<dd>need to ask HH how they decide to reroof  </dd>
+<dt><a class="anchor" id="_wp000004"></a>Class <a class="el" href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a>  </dt>
+<dd>For choice function could try neural nets - train them, include two sets of parameters, one will be parameters of an installer and the second will be parameters of a project. The resulting node will be probability of accepting project. Estimation will be done on a database with all installed solar panels. It is equivalent to density estimation using NN. Could also use PCA when the estimated component is assumed to be profit from the project. Could use Python with sci-kit or check TensorFlow. Once estimation is done - could use it as a simple linear function to produce estimation of profit - and thus estimation for the chance of accepting project. Basically dataset will produce profit estimation in some form, should still work even if have only accepted projects. For new project - will get profit estimation.  </dd>
+<dt><a class="anchor" id="_wp000003"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df">solar_core::SEI::form_design</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
+<dd>accroding to the CSI data set there is 50/50 split on owning and leasing SP (see Host Customer Sector and System Owner Sector fields) </dd>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 <dt><a class="anchor" id="_wp000006"></a>Class <a class="el" href="classsolar__core_1_1_world_map.html">solar_core::WorldMap</a>  </dt>
 <dd>generally have 2-d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10^5 = 10^3 * 10^3. Might need grid with sizes, each lot has a size. 10^3 for rows and columns is OK size. </dd>
 <dt><a class="anchor" id="_wp000008"></a>Member <a class="el" href="classsolar__core_1_1_world_settings.html#a728f0b1c11f8ec1816d269aedc1cd80e">solar_core::WorldSettings::params_to_copy_preliminary_quote</a>  </dt>
@@ -60,7 +69,11 @@
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
+<<<<<<< HEAD
 Generated on Sat May 28 2016 09:55:18 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+=======
+Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

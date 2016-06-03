@@ -1,6 +1,12 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Tools/Serialize.cpp" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Tools/Serialize.cpp">
+<<<<<<< HEAD
 <area shape="rect" id="node2" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="823,349,991,376"/>
 <area shape="rect" id="node22" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="603,109,723,136"/>
 <area shape="rect" id="node23" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="171,267,313,293"/>
 <area shape="rect" id="node24" href="$_i_random_8h.html" title="Tools/IRandom.h" alt="" coords="503,184,627,211"/>
+=======
+<area shape="rect" id="node2" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="373,267,541,293"/>
+<area shape="rect" id="node13" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="469,109,589,136"/>
+<area shape="rect" id="node14" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="521,184,663,211"/>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

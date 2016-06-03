@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<<<<<<< HEAD
 <area shape="rect" id="node1" href="$classserialize_1_1_deserialize_map.html" title="serialize::DeserializeMap\l\&lt; K, V, Enable \&gt;" alt="" coords="5,5,176,46"/>
+=======
+<area shape="rect" id="node1" href="$classserialize_1_1_deserialize_value.html" title="serialize::DeserializeValue\l\&lt; T, Enable \&gt;" alt="" coords="5,5,184,46"/>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

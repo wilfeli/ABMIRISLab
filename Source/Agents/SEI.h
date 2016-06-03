@@ -22,6 +22,7 @@
 namespace solar_core
 {
     
+<<<<<<< HEAD
     
     
     /**
@@ -52,6 +53,38 @@ namespace solar_core
      
      @DevStage2 might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit
      
+=======
+    
+    
+    /**
+     
+     
+     
+     */
+    class MesMarketingSEI;
+    class MesMarketingSEIOnlineQuote;
+    class MesMarketingSEIPreliminaryQuote;
+    class MesDesign;
+    class MesPayment;
+    class W;
+    class Household;
+    
+    
+    /**
+     
+     For marketing - use marketing institute as an intermediary. SEI submits marketing information, marketing institute passes it to H based on the parameters, such as effectiveness
+     
+     
+     
+     
+     @wp For choice function could try neural nets - train them, include two sets of parameters, one will be parameters of an installer and the second will be parameters of a project. The resulting node will be probability of accepting project. Estimation will be done on a database with all installed solar panels. It is equivalent to density estimation using NN. Could also use PCA when the estimated component is assumed to be profit from the project. Could use Python with sci-kit or check TensorFlow. Once estimation is done - could use it as a simple linear function to produce estimation of profit - and thus estimation for the chance of accepting project. Basically dataset will produce profit estimation in some form, should still work even if have only accepted projects. For new project - will get profit estimation.
+     
+     
+     
+     
+     @DevStage2 might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit
+     
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
      */
     class SEI: public IAgent
     {
@@ -157,6 +190,7 @@ namespace solar_core
         //@}
         
         
+<<<<<<< HEAD
         //@{
         /**
          
@@ -170,6 +204,10 @@ namespace solar_core
         //@}
 
         
+=======
+        
+        
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
         
     protected:
         //@{

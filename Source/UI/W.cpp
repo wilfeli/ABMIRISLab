@@ -114,15 +114,22 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         //solar_module.json
         path_to_template = path_to_dir;
+<<<<<<< HEAD
         path_to_template /= "solar_equipment.json";
+=======
+        path_to_template /= "solar_module.json";
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
         path = path_to_template.string();
         read_json(path, pt);
         
         //create existing solar modules
         serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
         
+<<<<<<< HEAD
 
         
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
         
         //create grid
         path_to_template = path_to_dir;
@@ -264,7 +271,11 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             sems.push_back(new SEM(pt, this));
         };
         
+<<<<<<< HEAD
         max_ = sems.size() - 1;
+=======
+        max_ = WorldSettings::instance().solar_modules.size() - 1;
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
         auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
         auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
 
@@ -524,6 +535,7 @@ W::life_seis()
         };
     };
 }
+<<<<<<< HEAD
 
 
 void
@@ -576,6 +588,66 @@ W::life_gs()
         };
         
         while (!FLAG_G_TICK && !FLAG_IS_STOPPED)
+=======
+
+
+void
+W::life_sems()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_SEM_TICK = false;
+            
+            for (auto& agent:sems)
+            {
+                //get tick
+                agent->act_tick();
+            };
+            ++updated_counter;
+        };
+        
+        while (!FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+<<<<<<< HEAD
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_G_TICK || FLAG_IS_STOPPED); });
+=======
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEM_TICK || FLAG_IS_STOPPED); });
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+        };
+    };
+}
+
+<<<<<<< HEAD
+=======
+
+
+
+void
+W::life_gs()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_G_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_G_TICK = false;
+            
+            auto& agent = g;
+            
+            //get tick
+            agent->act_tick();
+            
+            ++updated_counter;
+        };
+        
+        while (!FLAG_G_TICK && !FLAG_IS_STOPPED)
         {
             //wait until new tick come
             std::unique_lock<std::mutex> l(lock_tick);
@@ -585,6 +657,7 @@ W::life_gs()
     };
 }
 
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 void
 W::life_markets()
 {

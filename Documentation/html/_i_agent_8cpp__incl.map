@@ -1,4 +1,9 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/IAgent.cpp" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/IAgent.cpp">
+<<<<<<< HEAD
 <area shape="rect" id="node2" href="$_i_agent_8h.html" title="IAgent.h" alt="" coords="832,109,904,136"/>
 <area shape="rect" id="node3" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="784,184,952,211"/>
+=======
+<area shape="rect" id="node2" href="$_i_agent_8h.html" title="IAgent.h" alt="" coords="421,109,493,136"/>
+<area shape="rect" id="node3" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="373,184,541,211"/>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

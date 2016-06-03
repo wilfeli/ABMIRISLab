@@ -1,5 +1,10 @@
 <map id="solar_core::SEI::ac_estimate_savings" name="solar_core::SEI::ac_estimate_savings">
+<<<<<<< HEAD
 <area shape="rect" id="node2" href="$classsolar__core_1_1_s_e_i.html#af598032ee3e4506cf5123aceee67cbfd" title="solar_core::SEI::form\l_preliminary_quote" alt="" coords="189,5,336,46"/>
 <area shape="rect" id="node4" href="$classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df" title="solar_core::SEI::form\l_design" alt="" coords="189,70,336,111"/>
 <area shape="rect" id="node3" href="$classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e" title="solar_core::SEI::act_tick" alt="" coords="384,45,549,72"/>
+=======
+<area shape="rect" id="node2" href="$classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df" title="solar_core::SEI::form\l_design" alt="" coords="189,5,336,46"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e" title="solar_core::SEI::act_tick" alt="" coords="384,12,549,39"/>
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

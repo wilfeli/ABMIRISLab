@@ -18,16 +18,20 @@ Collaboration diagram for solar\+\_\+core\+:\+:G\+:
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
+<<<<<<< HEAD
 \hyperlink{classsolar__core_1_1_g_a624adac31ade604e0335717bad4fc9cd}{G} (const \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt\+\_\+, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
 \item 
 void \hyperlink{classsolar__core_1_1_g_a0734da633e88ea0f6ff782d4b6521c09}{init} (\hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
 \item 
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 virtual void \hyperlink{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}{act\+\_\+tick} ()
 \end{DoxyCompactItemize}
 
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
+<<<<<<< HEAD
 virtual void \hyperlink{classsolar__core_1_1_g_a615600f35d73a38ea48e99909fff5085}{request\+\_\+permit\+\_\+for\+\_\+installation} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ project\+\_\+)
 \item 
 void \hyperlink{classsolar__core_1_1_g_ae5836aff26a74e47cd26081fb94641bb}{request\+\_\+inspection} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ project\+\_\+)
@@ -107,10 +111,37 @@ Here is the call graph for this function\+:
 \end{center}
 \end{figure}
 
+=======
+virtual void \hyperlink{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}{request\+\_\+permit} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ project\+\_\+)
+\end{DoxyCompactItemize}
+
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacesolar__core_a4b5949d07259da6f8a20d12a30403e90}{Time\+Unit} \hyperlink{classsolar__core_1_1_g_a4d5b2845fc790c0f14b13fe922821f4b}{a\+\_\+time}
+\end{DoxyCompactItemize}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ $>$ \hyperlink{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}{pending\+\_\+projects}
+\item 
+std\+::vector$<$ std\+::vector$<$ std\+::weak\+\_\+ptr$<$ \hyperlink{classsolar__core_1_1_p_v_project}{P\+V\+Project} $>$ $>$ $>$ \hyperlink{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}{schedule\+\_\+visits}
+\item 
+std\+::size\+\_\+t \hyperlink{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}{i\+\_\+schedule\+\_\+visits}
+\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file G.\+h.
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 
 
 \subsection{Member Function Documentation}
+<<<<<<< HEAD
 \hypertarget{classsolar__core_1_1_g_ae01d6ea43c397cc79356884c98caf277}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!ac\+\_\+update\+\_\+tick@{ac\+\_\+update\+\_\+tick}}
 \index{ac\+\_\+update\+\_\+tick@{ac\+\_\+update\+\_\+tick}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
 \subsubsection[{ac\+\_\+update\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void G\+::ac\+\_\+update\+\_\+tick (
@@ -146,6 +177,8 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \hypertarget{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!act\+\_\+tick@{act\+\_\+tick}}
 \index{act\+\_\+tick@{act\+\_\+tick}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
 \subsubsection[{act\+\_\+tick}]{\setlength{\rightskip}{0pt plus 5cm}void G\+::act\+\_\+tick (
@@ -153,6 +186,7 @@ Here is the caller graph for this function\+:
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_g_ad3c9fb1da4db51b296c29a6b94b0f139}
+<<<<<<< HEAD
 
 
 Definition at line 146 of file G.\+cpp.
@@ -283,6 +317,22 @@ Here is the caller graph for this function\+:
 Section relevant for permitting processrequest permit for the project 
 
 Definition at line 66 of file G.\+cpp.
+=======
+Section with actions in the world 
+
+Definition at line 63 of file G.\+cpp.
+
+\hypertarget{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!request\+\_\+permit@{request\+\_\+permit}}
+\index{request\+\_\+permit@{request\+\_\+permit}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{request\+\_\+permit}]{\setlength{\rightskip}{0pt plus 5cm}void G\+::request\+\_\+permit (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf P\+V\+Project} $>$}]{project\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c}
+Section relevant for permitting processrequest permit for the project 
+
+Definition at line 17 of file G.\+cpp.
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 
 
@@ -291,7 +341,11 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
+<<<<<<< HEAD
 \includegraphics[width=350pt]{classsolar__core_1_1_g_a615600f35d73a38ea48e99909fff5085_icgraph}
+=======
+\includegraphics[width=350pt]{classsolar__core_1_1_g_a10289bd4ea370e0e994f69603e11fc6c_icgraph}
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \end{center}
 \end{figure}
 
@@ -304,13 +358,18 @@ Here is the caller graph for this function\+:
 \subsubsection[{a\+\_\+time}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Unit} solar\+\_\+core\+::\+G\+::a\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a4d5b2845fc790c0f14b13fe922821f4b}
 
 
+<<<<<<< HEAD
 Definition at line 116 of file G.\+h.
+=======
+Definition at line 79 of file G.\+h.
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 \hypertarget{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!i\+\_\+schedule\+\_\+visits@{i\+\_\+schedule\+\_\+visits}}
 \index{i\+\_\+schedule\+\_\+visits@{i\+\_\+schedule\+\_\+visits}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
 \subsubsection[{i\+\_\+schedule\+\_\+visits}]{\setlength{\rightskip}{0pt plus 5cm}std\+::size\+\_\+t solar\+\_\+core\+::\+G\+::i\+\_\+schedule\+\_\+visits\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a5c79440fcadc7d3e9212c5e7c05f84f7}
 
 
+<<<<<<< HEAD
 Definition at line 88 of file G.\+h.
 
 \hypertarget{classsolar__core_1_1_g_a045f1db40b15301ed5ec8aefb5327b0e}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!params@{params}}
@@ -347,10 +406,21 @@ Definition at line 83 of file G.\+h.
 
 
 Definition at line 95 of file G.\+h.
+=======
+Definition at line 70 of file G.\+h.
+
+\hypertarget{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!pending\+\_\+projects@{pending\+\_\+projects}}
+\index{pending\+\_\+projects@{pending\+\_\+projects}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
+\subsubsection[{pending\+\_\+projects}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$std\+::shared\+\_\+ptr$<${\bf P\+V\+Project}$>$ $>$ solar\+\_\+core\+::\+G\+::pending\+\_\+projects\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a471a7f64e44432bd6d2f2974f507d669}
+Section relevant for permitting process 
+
+Definition at line 66 of file G.\+h.
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 \hypertarget{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}{}\index{solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}!schedule\+\_\+visits@{schedule\+\_\+visits}}
 \index{schedule\+\_\+visits@{schedule\+\_\+visits}!solar\+\_\+core\+::\+G@{solar\+\_\+core\+::\+G}}
 \subsubsection[{schedule\+\_\+visits}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$std\+::weak\+\_\+ptr$<${\bf P\+V\+Project}$>$ $>$ $>$ solar\+\_\+core\+::\+G\+::schedule\+\_\+visits\hspace{0.3cm}{\ttfamily [protected]}}\label{classsolar__core_1_1_g_a33472d3b331a303ec8a9b61e2da163d3}
+<<<<<<< HEAD
 schedule for visits for the permitting accessment, length is equal to the Max\+Length\+Wait\+Permit\+Visit.\begin{DoxyRefDesc}{Dev\+Stage2}
 \item[\hyperlink{_dev_stage2__DevStage2000002}{Dev\+Stage2}]think about it, not every jurisdiction will need it \end{DoxyRefDesc}
 
@@ -363,6 +433,11 @@ Definition at line 86 of file G.\+h.
 
 
 Definition at line 114 of file G.\+h.
+=======
+schedule for visits for the permitting accessment, length is equal to the Max\+Length\+Wait\+Permit\+Visit 
+
+Definition at line 68 of file G.\+h.
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 
 

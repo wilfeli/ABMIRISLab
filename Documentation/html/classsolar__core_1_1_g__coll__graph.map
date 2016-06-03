@@ -1,4 +1,5 @@
 <map id="solar_core::G" name="solar_core::G">
+<<<<<<< HEAD
 <area shape="rect" id="node11" href="$classsolar__core_1_1_w.html" title="solar_core::W" alt="" coords="1175,1072,1279,1099"/>
 <area shape="rect" id="node20" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="1534,1728,1690,1755"/>
 <area shape="rect" id="node29" href="$classsolar__core_1_1_utility.html" title="solar_core::Utility" alt="" coords="1550,823,1674,849"/>
@@ -13,4 +14,6 @@
 <area shape="rect" id="node35" href="$classsolar__core_1_1_i_institute.html" title="solar_core::IInstitute" alt="" coords="1155,1316,1298,1343"/>
 <area shape="rect" id="node41" href="$classsolar__core_1_1_u_i_d.html" title="solar_core::UID" alt="" coords="1169,359,1284,385"/>
 <area shape="rect" id="node46" href="$classsolar__core_1_1_i_random.html" title="solar_core::IRandom" alt="" coords="738,1001,883,1028"/>
+=======
+>>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>
