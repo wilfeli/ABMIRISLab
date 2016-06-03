@@ -19,6 +19,10 @@ using namespace solar_core;
 
 
 
+std::set<EParamTypes> Household::project_states_to_delete{EParamTypes::ClosedProject};
+
+
+
 Household::Household(PropertyTree& pt_, W* w_)
 {
     w = w_;
@@ -58,6 +62,7 @@ Household::Household(PropertyTree& pt_, W* w_)
     n_pending_designs = 0;
     
     
+    project_states_to_delete.insert(EParamTypes::ClosedProject);
     
 }
 
@@ -72,15 +77,19 @@ Household::init(W* w_)
 void
 Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
-    //saves information about advertising agent
+    //saves information about advertising agent only if not already commited to installing project
     ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
-    get_inf_marketing_sei.push_back(mes_);
     
-    if (marketing_state != EParamTypes::HHMarketingStateInterested)
+    if (marketing_state != EParamTypes::HHMarketingCommitedToInstallation)
     {
-        marketing_state = EParamTypes::HHMarketingStateInterested;
-        //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
-        w->get_state_inf(this, marketing_state);
+        get_inf_marketing_sei.push_back(mes_);
+        
+        if (marketing_state != EParamTypes::HHMarketingStateInterested)
+        {
+            marketing_state = EParamTypes::HHMarketingStateInterested;
+            //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
+            w->get_state_inf(this, marketing_state);
+        };
     };
     
     ///@DevStage2 might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
@@ -187,6 +196,14 @@ Household::dec_evaluate_online_quotes()
     };
     
     
+    //close other projects
+    auto i = n_request_quotes;
+    while (i < pvprojects.size())
+    {
+        pvprojects[i]->state_project = EParamTypes::ClosedProject;
+    };
+    
+    
 }
 
 
@@ -226,6 +243,21 @@ Household::dec_evaluate_preliminary_quotes()
         decision->sei->accepted_preliminary_quote(decision);
     };
     
+    
+    //close other projects
+    for(auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
+        {
+            if (project != decision)
+            {
+                project->state_project = EParamTypes::ClosedProject;
+            };
+        };
+        
+    };
+    
+    
 }
 
 /**
@@ -243,15 +275,26 @@ Household::dec_evaluate_designs()
                   return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
               });
     
-    auto decision = pvprojects[0];
+    auto decision = (pvprojects[0]->design) ? pvprojects[0] : nullptr;
     
-    decision->state_project = EParamTypes::AcceptedDesign;
-    decision->ac_hh_time = a_time;
-    decision->ac_accepted_time = a_time;
-    decision->sei->accepted_design(decision);
-    
-    accepted_design.push_back(decision);
-    
+    if (decision)
+    {
+        decision->state_project = EParamTypes::AcceptedDesign;
+        decision->ac_hh_time = a_time;
+        decision->ac_accepted_time = a_time;
+        decision->sei->accepted_design(decision);
+        
+        accepted_design.push_back(decision);
+        
+        //stop accepting marketing from SEI
+        marketing_state = EParamTypes::HHMarketingCommitedToInstallation;
+        //close all projects except already accepted
+        auto i = 1;
+        while (i < pvprojects.size())
+        {
+            pvprojects[i]->state_project = EParamTypes::ClosedProject;
+        };
+    };
 }
 
 
@@ -332,6 +375,12 @@ Household::ac_update_tick()
     a_time = w->time;
     
     
+    //delete closed projects
+    pvprojects.erase(std::remove_if(pvprojects.begin(), pvprojects.end(),
+                                    [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pvprojects.end());
+    
+    
+    
     //clear last day schedule
     schedule_visits[i_schedule_visits].clear();
     
@@ -394,7 +443,7 @@ Household::act_tick()
         };
     };
     
-    //if there is an accepted project - check if needs to make payments
+    //@DevStage2 if there is an accepted project - check if needs to make payments
     
     ///@DevStage2 generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both - agent is broadcasting changed state and behaves differently depending on the state.
 }

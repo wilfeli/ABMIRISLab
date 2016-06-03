@@ -181,6 +181,21 @@ public:
     
     
     //@}
+    
+    
+    //@{
+    /**
+     
+     Section with technical members
+     
+     */
+    
+    static std::set<EParamTypes> project_states_to_delete;
+    
+    
+    //@}
+    
+    
 
     
 protected:

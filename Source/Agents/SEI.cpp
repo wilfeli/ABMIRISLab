@@ -21,7 +21,7 @@
 
 using namespace solar_core;
 
-
+std::set<EParamTypes> SEI::project_states_to_delete{EParamTypes::ClosedProject};
 
 SEI::SEI(const PropertyTree& pt_, W* w_)
 {
@@ -480,6 +480,13 @@ SEI::ac_update_tick()
     //pove pending projects into active projects
     pvprojects.insert(pvprojects.end(), pvprojects_to_add.begin(), pvprojects_to_add.end());
     pvprojects_to_add.clear();
+    
+    
+    //delete closed projects
+    pvprojects.erase(std::remove_if(pvprojects.begin(), pvprojects.end(),
+                                    [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pvprojects.end());
+    
+    
     pvprojects_lock.unlock();
     
     
