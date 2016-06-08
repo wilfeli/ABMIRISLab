@@ -29,8 +29,12 @@
                       "Width": "969.0",
                       "Color": "Black",
                       "Pattern": "Window-paint",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
                       "Price (from reseller)": "300",
-                      "Peak Efficiency": "0.1639"
+                      "Peak Efficiency": "0.1639",
+                      "Degradation after 10 years": 0.089,
+                      "Warranty length": "25.0"
                       }
                       },
                       {
@@ -40,8 +44,12 @@
                       "Length": "1637.0",
                       "Width": "969.0",
                       "Peak Efficiency": "0.1670",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
                       "Price (from reseller)": "265",
                       "Color": "Black",
+                      "Degradation after 10 years": 0.089,
                       "Pattern": "Window-paint"
                       }
                       },
@@ -52,10 +60,14 @@
                       "Length": "1559",
                       "Width": "708",
                       "Peak Efficiency": "0.2084",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
                       "Type": "Monocrystalline Silicon",
                       "http": "http://www.solardesigntool.com/components/module-panel-solar/Sunpower/2639/SPR-230NE-BLK-D/specification-data-sheet.html",
                       "90% Power Output Warranty Period": "10",
                       "80% Power Output Warranty Period": "25",
+                      "Degradation after 10 years": 0.1,
                       "Price (from reseller)": "450"
                       }
                       },
@@ -67,8 +79,12 @@
                       "Width": "1001",
                       "Color": "Black",
                       "Peak Efficiency": "0.167",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
                       "Pattern": "Lines",
                       "http": "http://www.solardesigntool.com/components/module-panel-solar/Solar-World/2641/SW-280-Mono-Black/specification-data-sheet.html",
+                      "Degradation after 10 years": 0.068,
                       "Price (from reseller)": "350"
                       }
                       },
@@ -80,7 +96,11 @@
                       "Width": "798",
                       "Color": "Black",
                       "Peak Efficiency": "0.201",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
                       "Pattern": "Solid",
+                      "Degradation after 10 years": 0.069,
                       "Price (from reseller)": "500"
                       }
                       },
@@ -92,7 +112,11 @@
                       "Width": "1000",
                       "Color": "Black",
                       "Peak Efficiency": "0.1557",
+                      "Manufacturer Id": "FORMULA::RANDOM",
                       "Pattern": "Window-paint",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.08,
                       "Price (from reseller)": "240"
                       }
                       },
@@ -104,7 +128,11 @@
                       "Width": "1046",
                       "Color": "Black",
                       "Peak Efficiency": "0.2116",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
                       "Pattern": "Window-paint",
+                      "Degradation after 10 years": 0.069,
                       "Price (from reseller)": "690"
                       }
                       },
@@ -116,7 +144,11 @@
                       "Width": "991",
                       "Color": "Black",
                       "Peak Efficiency": "0.1667",
+                      "Manufacturer Id": "FORMULA::RANDOM",
                       "Pattern": "Window-paint",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.1,
                       "Price (from reseller)": "250"
                       }
                       },
@@ -128,19 +160,27 @@
                       "Width": "1001",
                       "Color": "Black",
                       "Peak Efficiency": "0.1640",
+                      "Manufacturer Id": "FORMULA::RANDOM",
                       "Pattern": "Lines",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.068,
                       "Price (from reseller)": "330"
                       }
                       },
                       {
-                      "SW250 Poly":{
-                      "Name":"SW250 Poly",
+                      "SW250 Poly": {
+                      "Name": "SW250 Poly",
                       "STC Power Rating": "250",
                       "Length": "1675",
                       "Width": "1001",
                       "Color": "Black",
                       "Peak Efficiency": "0.1491",
                       "Pattern": "Window-paint",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.068,
                       "Price (from reseller)": "250"
                       }
                       }
@@ -207,15 +247,15 @@
                   }
                   },
                   {
-                  "PVI-5000-OUTD-US-Z-A (240V)":{
-                  "Name":"PVI-5000-OUTD-US-Z-A (240V)",
+                  "PVI-5000-OUTD-US-Z-A (240V)": {
+                  "Name": "PVI-5000-OUTD-US-Z-A (240V)",
                   "Type": "Single-phase string inverter"
                   }
                   },
                   {
-                  "SB3800TL-US-22 (240V)":{
-                  "Name":"SB3800TL-US-22 (240V)",
-                  "Type":"String inverter"
+                  "SB3800TL-US-22 (240V)": {
+                  "Name": "SB3800TL-US-22 (240V)",
+                  "Type": "String inverter"
                   }
                   }
                   ]

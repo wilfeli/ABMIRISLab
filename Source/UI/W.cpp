@@ -311,6 +311,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         //set flags
         FLAG_H_TICK = true;
         FLAG_G_TICK = true;
+        FLAG_UTILITY_TICK = true;
         FLAG_SEI_TICK = true;
         FLAG_SEM_TICK = true;
         FLAG_MARKET_TICK = true;

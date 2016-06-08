@@ -71,6 +71,8 @@ MarketingInst::act_tick()
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_agents);
     
     std::size_t j = 0;
+//    std::cout << WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit] << std::endl;
+//    std::cout << w->hhs.size();
     for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit]; ++i)
     {
         j = rng_agents();

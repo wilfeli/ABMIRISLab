@@ -116,6 +116,7 @@ namespace solar_core {
         std::atomic<bool> FLAG_SEI_TICK;
         std::atomic<bool> FLAG_H_TICK;
         std::atomic<bool> FLAG_G_TICK;
+        std::atomic<bool> FLAG_UTILITY_TICK;
         std::atomic<bool> FLAG_MARKET_TICK;
         std::atomic<bool> FLAG_SEM_TICK;
         
