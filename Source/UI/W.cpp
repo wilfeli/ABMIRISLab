@@ -137,6 +137,15 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         
+        //
+        
+        
+        
+        
+        
+        
+        
+        
         //create random number generators for locations
         //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
         //check that it is uniform distribution

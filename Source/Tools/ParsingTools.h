@@ -18,6 +18,7 @@ namespace solar_core
     namespace tools
     {
         void parse_model_file(std::string path_to_file, std::map<std::string, std::string>& parsed_model);
+        void parse_csv_file(std::string path_to_file, std::vector<std::vector<std::string>>& parsed_file);
         
     } //tools
     

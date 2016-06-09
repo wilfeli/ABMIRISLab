@@ -131,6 +131,7 @@ namespace solar_core {
                 pt.put("location_y", rng_location_y());
                 
                 
+                //only difference is here - to differenciate SEI and SEIMock
                 seis.push_back(new solar_tests::SEIMock(pt, w));
                 
                 
