@@ -6,10 +6,8 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
-#include <iostream>
-#include <fstream>
 
-#include "Tools/ExternalIncludes.h"
+
 #include "Tools/ParsingTools.h"
 
 
@@ -51,19 +49,3 @@ tools::parse_model_file(std::string path_to_file, std::map<std::string, std::str
 
 
 
-void
-tools::parse_csv_file(std::string path_to_file, std::vector<std::vector<std::string>>& parsed_file)
-{
-    //read path to the saved w file
-    std::ifstream in_file(path_to_file);
-    std::string s;
-    const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
-    
-    //extract information from .model file
-    while (std::getline(in_file, s))
-    {
-        parsed_file.push_back(std::vector<std::string>{std::sregex_token_iterator(s.begin(), s.end(), re, 1), std::sregex_token_iterator()});
-        
-    };
-    
-}

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
+		ED438B631D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
+		ED438B641D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
 		ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
 		EDC006B41CED792C0024347C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
 		EDC006B71CEFF00A0024347C /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
@@ -99,6 +101,8 @@
 		ED0E14151C98BD2B00A41B24 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
 		ED3EA2161C9F440000C2B70E /* G.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = G.cpp; sourceTree = "<group>"; };
 		ED3EA2171C9F440000C2B70E /* G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G.h; sourceTree = "<group>"; };
+		ED438B611D09F78E00CE1EA7 /* Simulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulation.cpp; sourceTree = "<group>"; };
+		ED438B621D09F78E00CE1EA7 /* Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulation.h; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -8277,6 +8281,8 @@
 				EDE03AE01CB8184C00C79A22 /* Serialize.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
+				ED438B611D09F78E00CE1EA7 /* Simulation.cpp */,
+				ED438B621D09F78E00CE1EA7 /* Simulation.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -13165,6 +13171,7 @@
 				EDDE57A31CE2D51E005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE57A41CE2D51E005D1C49 /* operations.cpp in Sources */,
 				EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */,
+				ED438B631D09F78E00CE1EA7 /* Simulation.cpp in Sources */,
 				EDDE57A51CE2D51E005D1C49 /* path.cpp in Sources */,
 				EDDE57A61CE2D51E005D1C49 /* path_traits.cpp in Sources */,
 				EDDE57A71CE2D51E005D1C49 /* portability.cpp in Sources */,
@@ -13211,6 +13218,7 @@
 				EDDE57A01CE2CB9B005D1C49 /* windows_file_codecvt.cpp in Sources */,
 				EDDE57991CE2CB68005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE4C281CDE682E005D1C49 /* IRandom.cpp in Sources */,
+				ED438B641D09F78E00CE1EA7 /* Simulation.cpp in Sources */,
 				EDDE4C291CDE682E005D1C49 /* G.cpp in Sources */,
 				EDDE57921CE0F03F005D1C49 /* SEIMock.cpp in Sources */,
 				EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */,

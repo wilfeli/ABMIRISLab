@@ -214,6 +214,16 @@ namespace serialize
             ss >> out_;
         }
         
+        
+        static T deserialize_value(const std::string& in_)
+        {
+            T out_;
+            std::stringstream ss(in_);
+            ss >> out_;
+            return out_;
+        }
+        
+        
         static void deserialize_value(std::stringstream& ss, T& out_)
         {
             ss >> out_;

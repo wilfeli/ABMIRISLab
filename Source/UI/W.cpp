@@ -25,10 +25,9 @@
 #include "Agents/H.h"
 #include "UI/HelperW.h"
 
-using boost::property_tree::ptree;
-using boost::property_tree::ptree_error;
+
 using boost::property_tree::read_json;
-using boost::property_tree::write_json;
+
 
 using namespace solar_core;
 
@@ -138,7 +137,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         //
-        
+        //read json with distribution parameters
         
         
         
