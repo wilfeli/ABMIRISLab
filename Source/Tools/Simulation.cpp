@@ -48,27 +48,21 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         if (node.second.get<std::string>("type") == "continious")
         {
             //bin edges
-            //decision parameters
             serialize::deserialize(node.second.get_child("BIN_ENDS"), bin_ends);
-            
-            //create automatic bins
-            for (auto i = 0 ; i < N_BINS.back(); ++i)
-            {
-                BIN_VALUES.back().push_back(i);
-            };
-            
-        }
-        else
-        {
-            //read BIN_VALUES from the file
-            serialize::deserialize(node.second.get_child("BIN_ENDS"), BIN_VALUES.back());
         };
+
+        //read BIN_VALUES from the file
+        serialize::deserialize(node.second.get_child("values"), BIN_VALUES.back());
     };
     
     for (auto i = 0; i < N_BINS.size(); ++i)
     {
         N_BINS_CUM[i + 1] = N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i];
     };
+    
+    
+    
+    //joint distribution table
     std::vector<std::vector<long>> bins(N_BINS_CUM.back(), std::vector<long>(N_BINS.size(), 0.0));
     
     
@@ -86,6 +80,35 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     
     
     //create vector of frequencies
+    std::vector<long> freq_n(N_BINS_CUM.back(), 0);
+    
+    
+    //calculate frequencies
+    for (auto i = 0; i < bins.size(); ++i)
+    {
+        auto x_i = std::find_if(parsed_file.begin(), parsed_file.end(), [&](std::vector<double> &x_i_){
+            //check that x_i_ is equal to x
+            bool FLAG_EQ = true;
+            for(auto j = 0; j < x_i_.size(); ++j)
+            {
+                if (x_i_[j] != bins[i][j])
+                {
+                    FLAG_EQ = false;
+                    break;
+                };
+            };
+            
+            return FLAG_EQ;});
+        
+        //count number
+        for (; x_i != parsed_file.end(); ++x_i)
+        {
+            freq_n[i] += 1;
+        };
+        
+        
+    };
+    
     
     
     

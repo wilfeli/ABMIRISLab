@@ -283,7 +283,14 @@ namespace solar_tests
     
     
     
-    
+    TEST_F(WTest, CreatJointDistribution)
+    {
+        //testing if joint distribution is calculated correctly
+        
+        
+        
+        
+    }
     
     
     

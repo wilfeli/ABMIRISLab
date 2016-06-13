@@ -404,9 +404,27 @@ namespace solar_core
         
         
         
-        
+        /** Empty enum for completeness */
         None,
     };
+    
+    
+    
+    
+    enum class ERandomParams: int64_t
+    {
+        /** continious distribution discretized into bins */
+        ContiniousDiscretized,
+        
+        /** discrete distribution to begin with */
+        Discrete,
+        
+        
+        
+        /** Empty enum for completeness */
+        None
+    };
+    
     
     
     typedef int64_t TimeUnit;
