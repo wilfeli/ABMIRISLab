@@ -8,7 +8,7 @@
                         "EParamTypes::ElectricityPriceUCDemand": 0.2
                         },
                         {
-                        "EParamTypes::InflationRate": 0.03
+                        "EParamTypes::InflationRate": 0.02
                         },
                         {
                         "EParamTypes::MarketingMaxNToDrawPerTimeUnit":100

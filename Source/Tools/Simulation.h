@@ -17,10 +17,15 @@
 
 namespace solar_core
 {
+    
+    class IRandom;
+    
+    
+    
     namespace tools
     {
         
-        void create_joint_distribution();
+        
         
         
         /**
@@ -30,13 +35,19 @@ namespace solar_core
          
         
          */
-        class EmpriricalUVD
+        class EmpiricalUVD
         {
         public:
+            EmpiricalUVD() = default;
             std::string name;
             ERandomParams type;
             std::vector<double> bin_ends;
             std::vector<long> bin_values;
+            
+            std::vector<std::vector<long>> cond_values;
+            std::vector<long> cond_freq;
+            
+            std::vector<std::vector<double>> theta_bins; /*! linear proxy to get internal values from inverse, if continious */ 
             
             
         };
@@ -52,13 +63,31 @@ namespace solar_core
         {
         public:
             std::vector<EmpiricalUVD> mvd;
-            std::vector<long> values;
+            std::vector<std::vector<long>> values;
             std::vector<long> freq;
             
             
         };
         
         
+        EmpiricalMVD create_joint_distribution(std::string path_to_scheme, std::string path_to_data);
+        
+        void calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD& e_dist);
+        
+        std::vector<long> collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist);
+        
+        double calculate_scale_factor(std::vector<long>& cond_dist, EmpiricalUVD& dist);
+        
+        std::vector<double> create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUVD& dist);
+        
+        
+        long get_inverse_index(std::vector<double>& cmf, double u_i);
+        
+        double get_inverse_value(std::vector<double>& theta_bin, double u_i);
+        
+        double get_inverse_value_exp(std::vector<double>& theta_bin, double u_i);
+        
+        std::vector<double> draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand);
         
         
     } //tools

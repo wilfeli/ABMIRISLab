@@ -15,6 +15,7 @@
 #include "UI/W.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/ParsingTools.h"
+#include "Tools/Simulation.h"
 #include "Geography/Geography.h"
 #include "Institutions/MarketingSystem.h"
 #include "Agents/IAgent.h"
@@ -138,13 +139,15 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         //
         //read json with distribution parameters
+        auto path_to_data = path_to_dir;
+        path_to_data /= "joint_distribution.csv";
+        auto path_to_scheme = path_to_dir;
+        path_to_scheme /= "distribution.json";
+
         
+        auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
         
-        
-        
-        
-        
-        
+    
         //create random number generators for locations
         //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
         //check that it is uniform distribution
@@ -158,6 +161,13 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         max_ = world_map->g_map.size() - 1;
         auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
+        
+        
+        
+        //will draw electricity bill for each, roof size as a constant percent of a house size, income
+        
+        
+        
         
         
         auto formula_roof_age = pt.get<std::string>("House.roof_age");

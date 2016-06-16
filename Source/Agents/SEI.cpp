@@ -321,6 +321,8 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
             
             ac_estimate_savings(design, project_);
             
+            //MARK: cont. add discard for negative profits
+            
             designs.push_back(design);
         };
     };

@@ -90,6 +90,7 @@ Utility::act_tick()
                     auto free_capacity_after_permit = free_capacity - project->design->design->AC_size;
                     auto p = THETA_dec[0] * std::exp(THETA_dec[0]/free_capacity_after_permit);
                     
+                    //check that it is valid pdf
                     auto pdf_p = boost::uniform_01<>();
                     auto rng_p = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand->rng, pdf_p);
                     
@@ -98,6 +99,8 @@ Utility::act_tick()
                     {
                         //grant permit
                         project->state_project = EParamTypes::GrantedPermitForInterconnection;
+                        
+                        //MARK: cont. update current capacity, decrease by interconnected amount 
                     };
                     
                 };

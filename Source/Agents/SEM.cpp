@@ -149,6 +149,7 @@ SEM::act_tick()
     //innovate, change parameters for templates
     if ((a_time - sem_research_time) >= params[EParamTypes::SEMFrequencyResearchTemplates])
     {
+        //MARK: see if this parameter needs to be changed? ot iterated over in the cycle
         //pick random template and innovate on it
         if (params[EParamTypes::SEMNSolarPanelsResearch] > 0.0)
         {

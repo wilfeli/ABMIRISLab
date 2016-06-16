@@ -216,10 +216,6 @@ namespace solar_core
         EstimatedPricePerWatt,
         
         
-        /** Industry standard PV price, used in online estimation */
-        AveragePVPrice,
-        
-        
         /** Industry standard solar module size, used in online estimation */
         AveragePVCapacity,
         
