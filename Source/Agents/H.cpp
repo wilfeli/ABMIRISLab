@@ -28,15 +28,6 @@ Household::Household(PropertyTree& pt_, W* w_)
 {
     w = w_;
     
-    //read parameters
-    std::map<std::string, std::string> params_str;
-    serialize::deserialize(pt_.get_child("params"), params_str);
-    
-    ///@DevStage2 move to W to speed up, but test before that
-    for (auto& iter:params_str)
-    {
-        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
-    };
     
     marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
     

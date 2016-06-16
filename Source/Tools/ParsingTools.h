@@ -34,7 +34,7 @@ namespace solar_core
                 const std::sregex_token_iterator end;
                 for (std::sregex_token_iterator iter(s.begin(), s.end(), re, 1); iter != end; ++iter)
                 {
-                    parsed_file.back().push_back(serialize::DeserializeValue<T>::deserialize_value(iter));
+                    parsed_file.back().push_back(serialize::DeserializeValue<T>::deserialize_value(*iter));
                 };
                 
             };

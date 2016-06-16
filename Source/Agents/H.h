@@ -46,6 +46,7 @@ class PVProject;
  */
 class Household: public IAgent
 {
+    friend class W;
 public:
     
     //@{

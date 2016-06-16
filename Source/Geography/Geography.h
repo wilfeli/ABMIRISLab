@@ -23,6 +23,30 @@ namespace solar_core
      
      
      
+     Cuurently switched to estimated roof_size from the house_size 
+     -# RP  = roof pitch
+     -# HS = square foot of home
+     -# F = number of floors
+     -# x = roof pitched length
+     -# y = roof length
+     -# RA = roof area
+     -# R = ratio of roof area to house area
+     
+     Formula for calculating roof size
+     \f[
+     y = \sqrt{frac{HS}{F}}
+     \f]
+     \f[
+     x = (\frac{y}{2}) \times (\cos (\arctan (RP))
+     \f]
+     \f[
+     RA = 2 \times x \times y
+     \f]
+     \f[
+     R = RA \div HS
+     \f]
+     
+     
      */
     class House
     {

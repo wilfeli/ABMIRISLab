@@ -484,7 +484,7 @@ namespace serialize
                     double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
                     double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                     
-                    ///@DevStage2 change to better Truncated generation
+                    ///@DevStage2 change to better Truncated generation, now is simple rejection algorithm
                     formula = std::to_string(std::max(rand_.rnd() * std::pow(sigma2, 0.5) + mean, 0.0));
                     
                 }
@@ -509,6 +509,21 @@ namespace serialize
         
         return dest_;
     }
+    
+    class ParsedDist
+    {
+    public:
+        ParsedDist() = default;
+        ERandomParams type = ERandomParams::None;
+        bool valid_dist = false;
+        std::vector<double> params;
+    };
+    
+    
+    
+    ParsedDist create_dist_from_formula(const std::string& formula_, solar_core::IRandom* rand_);
+    
+    
     
     
 } //end of namespace serialize

@@ -415,6 +415,21 @@ namespace solar_core
         /** discrete distribution to begin with */
         Discrete,
         
+        /** truncated normal */
+        N_trunc,
+         
+        /** normal */
+        N,
+         
+        /** uniform distribution  */
+        u,
+        
+        /**  uniform int distribution */
+        u_int,
+        
+        
+        /** draw from the big joint distribution from external sources */
+        custom,
         
         
         /** Empty enum for completeness */

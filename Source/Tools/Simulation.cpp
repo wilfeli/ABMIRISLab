@@ -13,7 +13,7 @@
 
 using namespace solar_core;
 
-EmpiricalMVD
+tools::EmpiricalMVD
 tools::create_joint_distribution(std::string path_to_scheme, std::string path_to_data)
 {
     //read file
@@ -196,7 +196,7 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
     
     
     //go through the list of univariate distributions
-    for(auto dist:pmf.mvd)
+    for (auto dist:pmf.mvd)
     {
         //in indexes last value will be bin index
         //collapse conditional for already drawn values
@@ -233,21 +233,10 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
             {
                 x.push_back(get_inverse_value(dist.theta_bins[i], u_i));
             };
-            
-            
-            
         };
         
-        
-        
-        
-        
-        
     };
-    
-    
-    
-    
+    return x;
 }
 
 

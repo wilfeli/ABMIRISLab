@@ -247,3 +247,89 @@ serialize::solve_formula(std::string str_)
     
     return result;
 }
+
+
+
+
+/**
+ 
+ Parses distribution
+ 
+ */
+
+
+serialize::ParsedDist
+serialize::create_dist_from_formula(const std::string& formula_, solar_core::IRandom* rand_)
+{
+    serialize::ParsedDist dist;
+    std::string formula = formula_;
+    
+    if (formula.find("FORMULA::") != std::string::npos)
+    {
+        std::regex e("");
+        e.assign("FORMULA\\u003A\\u003A");
+        formula = std::regex_replace(formula, e, "");
+        
+        //check if it is requesting random number generation
+        if (formula.find("p.d.f.") != std::string::npos)
+        {
+            e.assign("p.d.f.\\u003A\\u003A");
+            formula = std::regex_replace(formula, e, "");
+            
+            //parse formula
+            //case of a truncated normal
+            if (formula.find("N_trunc") != std::string::npos)
+            {
+                double mean = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                double sigma2 = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
+                
+                
+                dist.params.push_back(mean);
+                dist.params.push_back(sigma2);
+                dist.type = solar_core::ERandomParams::N_trunc;
+                dist.valid_dist = true;
+                
+                
+            }
+            ///careful here - will find both u and u_int
+            else if (formula.find("u") != std::string::npos)
+            {
+                double min = std::stod(formula.substr(formula.find("(") + 1, formula.find(",") - formula.find("(") - 1));
+                double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
+                
+                dist.params.push_back(min);
+                dist.params.push_back(max);
+                
+                if (formula.find("u_int") != std::string::npos)
+                {
+                    dist.type = solar_core::ERandomParams::u_int;
+                }
+                else
+                {
+                    dist.type = solar_core::ERandomParams::u;
+                };
+                dist.valid_dist = true;
+                
+            }
+            else if (formula.find("CUSTOM") != std::string::npos)
+            {
+                dist.type = solar_core::ERandomParams::custom;
+                dist.valid_dist = true;
+            };
+            
+        };
+        
+    }
+    else
+    {
+    };
+    
+    
+    return dist;
+}
+
+
+
+
+
+

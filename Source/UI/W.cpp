@@ -148,6 +148,9 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
         
     
+        
+
+        //left as an old version as need to check that formulas are consistent here with the geography definition
         //create random number generators for locations
         //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
         //check that it is uniform distribution
@@ -172,28 +175,38 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         auto formula_roof_age = pt.get<std::string>("House.roof_age");
         auto formula_roof_size = pt.get<std::string>("House.roof_size");
-        //create rundom number generators for House
-        if (formula_roof_age.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
+        auto roof_size_coef = 0.0;
+        auto roof_age_coef = 0.0;
+        std::regex e("");
+        
+        if (formula_roof_size.find("FORMULA::house_size::") == std::string::npos)
         {
             throw std::runtime_error("unsupported hh specification rule");
+        }
+        else
+        {
+            e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
+            formula_roof_size = std::regex_replace(formula_roof_size, e, "");
+            roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *rand);
         };
-        if (formula_roof_size.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
+        
+        auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
+        
+        if (formula_roof_age.find("FORMULA::house_age::") == std::string::npos)
         {
             throw std::runtime_error("unsupported hh specification rule");
+        }
+        else
+        {
+            e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
+            formula_roof_age = std::regex_replace(formula_roof_age, e, "");
+            roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *rand);
         };
         
-        double mean_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find("(") + 1, formula_roof_age.find(",") - formula_roof_age.find("(") - 1));
-        double sigma2_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find(",") + 1, formula_roof_age.find(",") - formula_roof_age.find(")") - 1));
-        
-        auto pdf_roof_age = boost::normal_distribution<>(mean_roof_age, std::pow(sigma2_roof_age, 0.5));
-        auto rng_roof_age = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_age);
+        auto roof_age = [&coef = roof_age_coef](double house_size)->double {return coef*house_size;};
+
         
         
-        double mean_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find("(") + 1, formula_roof_size.find(",") - formula_roof_size.find("(") - 1));
-        double sigma2_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find(",") + 1, formula_roof_size.find(",") - formula_roof_size.find(")") - 1));
-        
-        auto pdf_roof_size = boost::normal_distribution<>(mean_roof_size, std::pow(sigma2_roof_size, 0.5));
-        auto rng_roof_size = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_size);
         
         
         
@@ -219,6 +232,76 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         };
         
         
+        //in the order of drawing for now
+        //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
+        std::vector<std::vector<double>> xs;
+        //draw from the joint distribution
+        for(auto i = 0 ; i < N_HH; ++i)
+        {
+            xs.push_back(tools::draw_joint_distribution(e_dist, rand));
+        };
+        
+        
+        
+        //read other parameters
+        serialize::deserialize(pt.get_child("params"), params_str);
+        std::map<EParamTypes, std::vector<double>> param_values;
+
+        for (auto& iter:params_str)
+        {
+            EParamTypes name = EnumFactory::ToEParamTypes(iter.first);
+            //explicitly solve for values
+            auto params = serialize::create_dist_from_formula(iter.second, rand);
+            
+            if (params.valid_dist == true)
+            {
+                param_values[name] = std::vector<double>(N_HH, 0.0);
+                //generate map of random number generators with the name for this parameter?
+                switch (params.type)
+                {
+                    case ERandomParams::N_trunc:
+                        throw std::runtime_error("unfinished thread, should not be here");
+                        break;
+                    case ERandomParams::custom:
+                        //see what parameter it is - save values
+                        if (name == EParamTypes::ElectricityBill)
+                        {
+                            for (auto i = 0; i < N_HH; ++i)
+                            {
+                                param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
+                            };
+                        }
+                        else if (name == EParamTypes::Income)
+                        {
+                            for (auto i = 0; i < N_HH; ++i)
+                            {
+                                param_values[name].push_back(xs[i][4]);
+                            };
+                        }
+                        else
+                        {
+                            throw std::runtime_error("unsupported hh specification rule");
+
+                        };
+                        
+                        
+                        
+                        break;
+                    default:
+                        break;
+                };
+            }
+            else
+            {
+                //get value and store it as a value for all agents?
+                auto param = serialize::solve_str_formula<double>(iter.second, *rand);
+                param_values[name] = std::vector<double>(N_HH, param);
+                
+            };
+        };
+        
+        
+        
         //create HH
         auto j = 0;
         for (auto i = 0; i < N_HH; ++i)
@@ -236,12 +319,13 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             pt.put("location_x", rng_location_x());
             pt.put("location_y", rng_location_y());
             
-            
+
             //generate House
             //roof_age
             //roof_size
-            pt.put("House.roof_age", std::max(0.0, rng_roof_age()));
-            pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
+            pt.put("House.roof_size", std::max(0.0, roof_size(xs[i][0])));
+            pt.put("House.roof_age", std::max(0.0, roof_age(xs[i][1])));
+            
             
             //create decision parameters
             THETA_design[EParamTypes::HHDecPreliminaryQuote] = std::vector<double>{rng_THETA()};
@@ -253,6 +337,12 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             //replace parameters if necessary
             hhs.push_back(new Household(pt, this));
             
+            
+            //copy other parameters
+            for (auto iter:param_values)
+            {
+                hhs.back()->params[iter.first] = param_values[iter.first][i];
+            };
             
             
             
