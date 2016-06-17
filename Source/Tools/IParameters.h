@@ -409,8 +409,8 @@ namespace solar_core
     
     enum class ERandomParams: int64_t
     {
-        /** continious distribution discretized into bins */
-        ContiniousDiscretized,
+        /** continuous distribution discretized into bins */
+        ContinuousDiscretized,
         
         /** discrete distribution to begin with */
         Discrete,

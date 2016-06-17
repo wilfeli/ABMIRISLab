@@ -47,7 +47,7 @@ namespace solar_core
             std::vector<std::vector<long>> cond_values;
             std::vector<long> cond_freq;
             
-            std::vector<std::vector<double>> theta_bins; /*! linear proxy to get internal values from inverse, if continious */ 
+            std::vector<std::vector<double>> theta_bins; /*! linear proxy to get internal values from inverse, if continuous */ 
             
             
         };

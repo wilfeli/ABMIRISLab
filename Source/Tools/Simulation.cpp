@@ -46,9 +46,9 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         N_BINS.push_back(node.second.get<long>("N_BINS"));
         
         //get bin values if discrete, otherwise assume it will be just numbers
-        if (node.second.get<std::string>("type") == "continious")
+        if (node.second.get<std::string>("type") == "continuous")
         {
-            e_dist.mvd.back().type = ERandomParams::ContiniousDiscretized;
+            e_dist.mvd.back().type = ERandomParams::ContinuousDiscretized;
             //bin edges
             serialize::deserialize(node.second.get_child("BIN_ENDS"), e_dist.mvd.back().bin_ends);
         }
@@ -190,7 +190,7 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
 {
     
     std::vector<double> x;
-    std::vector<long> i_x; //indices for bin values for each drawn discrete distribution, and into bins for continious - the same because used for collapsing cond distribution
+    std::vector<long> i_x; //indices for bin values for each drawn discrete distribution, and into bins for continuous - the same because used for collapsing cond distribution
     //initialize uniform distribution
     double u_i = 0.0;
     
@@ -219,9 +219,9 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
         {
             x.push_back(dist.bin_values[i_x.back()]);
         }
-        else if (dist.type == ERandomParams::ContiniousDiscretized)
+        else if (dist.type == ERandomParams::ContinuousDiscretized)
         {
-            //if it is continious - get inverse index and inverse value from the corresponding description
+            //if it is continuous - get inverse index and inverse value from the corresponding description
             //will point to the bin to use - simple linear inverse
             //check if it is last bin and if it will include inf right end
             

@@ -5,7 +5,7 @@
                },
                {
                "EParamTypes::Income": "FORMULA::p.d.f.::CUSTOM"
-               }
+               },
                {"EParamTypes::HHMaxNVisitsPerTimeUnit":5},
                {"EParamTypes::CreditScore":680}
                ],
