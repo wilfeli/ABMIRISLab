@@ -3,7 +3,6 @@
 \item[\label{wp__wp000001}%
 \hypertarget{wp__wp000001}{}%
 Class \hyperlink{classsolar__core_1_1_household}{solar\+\_\+core\+:\+:Household} ]Once survey is completed will have data\+: what are your choices and decisions on solar panels. The same logic as in \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I}. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data. 
-<<<<<<< HEAD
 \item[\label{wp__wp000004}%
 \hypertarget{wp__wp000004}{}%
 Class \hyperlink{classsolar__core_1_1_s_e_i}{solar\+\_\+core\+:\+:S\+E\+I} ]For choice function could try neural nets -\/ train them, include two sets of parameters, one will be parameters of an installer and the second will be parameters of a project. The resulting node will be probability of accepting project. Estimation will be done on a database with all installed solar panels. It is equivalent to density estimation using N\+N. Could also use P\+C\+A when the estimated component is assumed to be profit from the project. Could use Python with sci-\/kit or check Tensor\+Flow. Once estimation is done -\/ could use it as a simple linear function to produce estimation of profit -\/ and thus estimation for the chance of accepting project. Basically dataset will produce profit estimation in some form, should still work even if have only accepted projects. For new project -\/ will get profit estimation. 
@@ -16,17 +15,6 @@ Member \hyperlink{classsolar__core_1_1_s_e_i_ad532ca9d30d5988e051b75e33ce6c241}{
 \item[\label{wp__wp000005}%
 \hypertarget{wp__wp000005}{}%
 Class \hyperlink{classsolar__core_1_1_s_e_m}{solar\+\_\+core\+:\+:S\+E\+M} ]Research for the structure of costs 
-=======
-\item[\label{wp__wp000002}%
-\hypertarget{wp__wp000002}{}%
-Member \hyperlink{classsolar__core_1_1_household_aa63241ca3fcc1f2374d10b5c7f44124a}{solar\+\_\+core\+:\+:Household\+:\+:dec\+\_\+project\+\_\+reroof} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project)]need to ask H\+H how they decide to reroof  
-\item[\label{wp__wp000004}%
-\hypertarget{wp__wp000004}{}%
-Class \hyperlink{classsolar__core_1_1_s_e_i}{solar\+\_\+core\+:\+:S\+E\+I} ]For choice function could try neural nets -\/ train them, include two sets of parameters, one will be parameters of an installer and the second will be parameters of a project. The resulting node will be probability of accepting project. Estimation will be done on a database with all installed solar panels. It is equivalent to density estimation using N\+N. Could also use P\+C\+A when the estimated component is assumed to be profit from the project. Could use Python with sci-\/kit or check Tensor\+Flow. Once estimation is done -\/ could use it as a simple linear function to produce estimation of profit -\/ and thus estimation for the chance of accepting project. Basically dataset will produce profit estimation in some form, should still work even if have only accepted projects. For new project -\/ will get profit estimation.  
-\item[\label{wp__wp000003}%
-\hypertarget{wp__wp000003}{}%
-Member \hyperlink{classsolar__core_1_1_s_e_i_a807561ad055ddc0df91b80ba406ee6df}{solar\+\_\+core\+:\+:S\+E\+I\+:\+:form\+\_\+design} (std\+::shared\+\_\+ptr$<$ P\+V\+Project $>$ project\+\_\+)]accroding to the C\+S\+I data set there is 50/50 split on owning and leasing S\+P (see Host Customer Sector and System Owner Sector fields) 
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \item[\label{wp__wp000006}%
 \hypertarget{wp__wp000006}{}%
 Class \hyperlink{classsolar__core_1_1_world_map}{solar\+\_\+core\+:\+:World\+Map} ]generally have 2-\/d grid for spacial information, but it might be too much for the number of agents. Might need to compress or block representation. 10$^\wedge$5 = 10$^\wedge$3 $\ast$ 10$^\wedge$3. Might need grid with sizes, each lot has a size. 10$^\wedge$3 for rows and columns is O\+K size. 

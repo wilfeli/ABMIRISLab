@@ -25,19 +25,57 @@ namespace solar_core
             //read path to the saved w file
             std::ifstream in_file(path_to_file);
             std::string s;
-            const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
+//            const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
+//            const std::regex re{"(\d+)(,\s*\d+)*"};
+            const std::regex re("[\\s,]+");
+            auto n = 0;
+            
+            //skip first line
+            std::getline(in_file, s);
             
             //extract information from .model file
             while (std::getline(in_file, s))
             {
                 parsed_file.push_back(std::vector<T>{});
                 const std::sregex_token_iterator end;
-                for (std::sregex_token_iterator iter(s.begin(), s.end(), re, 1); iter != end; ++iter)
+                
+                //skip first column
+                
+                
+                for (std::sregex_token_iterator iter(s.begin(), s.end(), re, -1); iter != end; ++iter)
                 {
+                    
+#ifdef DEBUG
+                    if (n < 20)
+                    {
+                        std::cout << iter->str() << std::endl;
+                        ++n;
+                    };
+                    
+#endif
+                    
                     parsed_file.back().push_back(serialize::DeserializeValue<T>::deserialize_value(*iter));
                 };
                 
             };
+            
+            
+            
+#ifdef DEBUG
+            
+            for (auto i = 0; i < 10; ++i)
+            {
+                for (auto j = 0; j < parsed_file[i].size(); ++j)
+                {
+                    std::cout << parsed_file[i][j] << " ";
+                };
+                
+                std::cout << std::endl;
+            };
+            
+#endif
+            
+            
             
         }
         

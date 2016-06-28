@@ -42,104 +42,72 @@
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<<<<<<< HEAD
-<dt><a class="anchor" id="_DevStage2000027"></a>Member <a class="el" href="namespaceserialize.html#aa5ee0bad0c960a3f06430066217d8c12">serialize::solve_str_formula</a>  (const std::string &amp;formula_, IRandom &amp;rand_)</dt>
-<dd>change to better Truncated generation  </dd>
-<dt><a class="anchor" id="_DevStage2000026"></a>Member <a class="el" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">solar_core::EParamTypes</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000026"></a>Member <a class="el" href="namespaceserialize.html#aa5ee0bad0c960a3f06430066217d8c12">serialize::solve_str_formula</a>  (const std::string &amp;formula_, IRandom &amp;rand_)</dt>
+<dd>change to better Truncated generation, now is simple rejection algorithm  </dd>
+<dt><a class="anchor" id="_DevStage2000025"></a>Member <a class="el" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">solar_core::EParamTypes</a>  </dt>
 <dd>think about splitting enum into multiple enums </dd>
 <dt><a class="anchor" id="_DevStage2000001"></a>Member <a class="el" href="classsolar__core_1_1_g.html#a624adac31ade604e0335717bad4fc9cd">solar_core::G::G</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
 <dd>move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that  </dd>
 <dt><a class="anchor" id="_DevStage2000002"></a>Member <a class="el" href="classsolar__core_1_1_g.html#a33472d3b331a303ec8a9b61e2da163d3">solar_core::G::schedule_visits</a>  </dt>
 <dd>think about it, not every jurisdiction will need it  </dd>
-<dt><a class="anchor" id="_DevStage2000008"></a>Class <a class="el" href="classsolar__core_1_1_household.html">solar_core::Household</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000007"></a>Class <a class="el" href="classsolar__core_1_1_household.html">solar_core::Household</a>  </dt>
 <dd>might change from actually assigning house to assigning house type (memory considerations) </dd>
-<dt><a class="anchor" id="_DevStage2000005"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">solar_core::Household::ac_inf_quoting_sei</a>  ()</dt>
+<dt><a class="anchor" id="_DevStage2000004"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">solar_core::Household::ac_inf_quoting_sei</a>  ()</dt>
 <dd>think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote  </dd>
-<dt><a class="anchor" id="_DevStage2000007"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6">solar_core::Household::act_tick</a>  ()</dt>
+<dt><a class="anchor" id="_DevStage2000006"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1e7d20a60dc42b8d09a8d23a4cdb26a6">solar_core::Household::act_tick</a>  ()</dt>
 <dd>generally actions in a tick depend on the state of an agent, either it is choosing installer or waiting for the project to finish. Might have a call back to w that will indicate that this agent has changed state. In this case w will have multiple lists of agents in different states and would call appropriate function. Or might do it internally where new state will dictate behavior in the tick. Generally have both - agent is broadcasting changed state and behaves differently depending on the state.  </dd>
-<dt><a class="anchor" id="_DevStage2000006"></a>Member <a class="el" href="classsolar__core_1_1_household.html#aaa1f1e52009d8aef32d3c5a9367b93b7">solar_core::Household::dec_evaluate_designs</a>  ()</dt>
+<dt><a class="anchor" id="_DevStage2000005"></a>Member <a class="el" href="classsolar__core_1_1_household.html#aaa1f1e52009d8aef32d3c5a9367b93b7">solar_core::Household::dec_evaluate_designs</a>  ()</dt>
 <dd>may go back and forth over the design </dd>
-<dt><a class="anchor" id="_DevStage2000010"></a>Member <a class="el" href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">solar_core::Household::dec_project_reroof</a>  (std::shared_ptr&lt; PVProject &gt; project)</dt>
+<dt><a class="anchor" id="_DevStage2000009"></a>Member <a class="el" href="classsolar__core_1_1_household.html#aa63241ca3fcc1f2374d10b5c7f44124a">solar_core::Household::dec_project_reroof</a>  (std::shared_ptr&lt; PVProject &gt; project)</dt>
 <dd>need to ask HH how they decide to reroof  </dd>
-<dt><a class="anchor" id="_DevStage2000004"></a>Member <a class="el" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">solar_core::Household::get_inf</a>  (std::shared_ptr&lt; MesMarketingSEI &gt; mes_) override</dt>
+<dt><a class="anchor" id="_DevStage2000003"></a>Member <a class="el" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">solar_core::Household::get_inf</a>  (std::shared_ptr&lt; MesMarketingSEI &gt; mes_) override</dt>
 <dd>might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)  </dd>
-<dt><a class="anchor" id="_DevStage2000012"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000011"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a>  </dt>
 <dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000009"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a5f84bf614d0ec70abf9597ec97e07b1a">solar_core::Household::Household</a>  (PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
-=======
-<dt><a class="anchor" id="_DevStage2000012"></a>Member <a class="el" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362">solar_core::EParamTypes</a>  </dt>
-<dd>think about splitting enum into multiple enums </dd>
-<dt><a class="anchor" id="_DevStage2000004"></a>Class <a class="el" href="classsolar__core_1_1_household.html">solar_core::Household</a>  </dt>
-<dd>might change from actually assigning house to assigning house type (memory considerations) </dd>
-<dt><a class="anchor" id="_DevStage2000005"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a165b7c64c72e5ed4ea08307e32082517">solar_core::Household::ac_inf_quoting_sei</a>  ()</dt>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
-<dd><p class="startdd">need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator</p>
-<p>move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that </p>
-<p class="enddd">move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that  </p>
-</dd>
-<<<<<<< HEAD
-<dt><a class="anchor" id="_DevStage2000011"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb">solar_core::Household::location_y</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000008"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a5f84bf614d0ec70abf9597ec97e07b1a">solar_core::Household::Household</a>  (PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
+<dd>need destructor, copy constructor, copy assignment operator, move constructor, move assignment operator </dd>
+<dt><a class="anchor" id="_DevStage2000010"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb">solar_core::Household::location_y</a>  </dt>
 <dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000013"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a297842358a2d79db160566106972bc0d">solar_core::Household::preliminary_quotes</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000012"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a297842358a2d79db160566106972bc0d">solar_core::Household::preliminary_quotes</a>  </dt>
 <dd><p class="startdd">think about replacing raw pointer with. </p>
 <p class="enddd">choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages.  </p>
 </dd>
-<dt><a class="anchor" id="_DevStage2000025"></a>Class <a class="el" href="classsolar__core_1_1_mes_marketing_s_e_i_online_quote.html">solar_core::MesMarketingSEIOnlineQuote</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000024"></a>Class <a class="el" href="classsolar__core_1_1_mes_marketing_s_e_i_online_quote.html">solar_core::MesMarketingSEIOnlineQuote</a>  </dt>
 <dd>think, for now this message is used in the first stage of quoting. If decide to use in the next stage might have to add field to indicate from what stage of quoting this message is. Alternative is to have separate classes for different quotes from different stages. Actually like it more. Need to have base message class to avoid multiple containers for them. But at the same time it might be actually more efficient to have multiple containers for different stages of quoting. It will make search and compare much quicker... </dd>
-<dt><a class="anchor" id="_DevStage2000017"></a>Class <a class="el" href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000016"></a>Class <a class="el" href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a>  </dt>
 <dd>might add timer to model that giving estimate might take time. Also might have queue and maximum capacity, thus receiving quote in place might actually take some time before requesting online visit and actually performing this visit </dd>
-<dt><a class="anchor" id="_DevStage2000016"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d">solar_core::SEI::ac_estimate_savings</a>  (<a class="el" href="classsolar__core_1_1_p_v_design.html">PVDesign</a> &amp;design, std::shared_ptr&lt; PVProject &gt; project_)</dt>
+<dt><a class="anchor" id="_DevStage2000015"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab84401c625f5c459accf430535e4a06d">solar_core::SEI::ac_estimate_savings</a>  (<a class="el" href="classsolar__core_1_1_p_v_design.html">PVDesign</a> &amp;design, std::shared_ptr&lt; PVProject &gt; project_)</dt>
 <dd>: calculate PPA : calculate lease  </dd>
-<dt><a class="anchor" id="_DevStage2000018"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">solar_core::SEI::act_tick</a>  ()</dt>
+<dt><a class="anchor" id="_DevStage2000017"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">solar_core::SEI::act_tick</a>  ()</dt>
 <dd>might think about checking for the type of the tick in <a class="el" href="classsolar__core_1_1_w.html">W</a> and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap.  </dd>
-<dt><a class="anchor" id="_DevStage2000015"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df">solar_core::SEI::form_design</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
+<dt><a class="anchor" id="_DevStage2000014"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df">solar_core::SEI::form_design</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
 <dd>bootstrap here for different savings dynamics depending on parameters  </dd>
-<dt><a class="anchor" id="_DevStage2000021"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241">solar_core::SEI::form_online_quote</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
+<dt><a class="anchor" id="_DevStage2000020"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241">solar_core::SEI::form_online_quote</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
 <dd>think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change.  </dd>
-<dt><a class="anchor" id="_DevStage2000019"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a5fc331197d08788392c3af1903f25763">solar_core::SEI::location_y</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000018"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a5fc331197d08788392c3af1903f25763">solar_core::SEI::location_y</a>  </dt>
 <dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000020"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ad5326c45ccd4a5512a6c0a296656264d">solar_core::SEI::mes_marketing</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000019"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a41711b0f344d6f29ea48dbcdb08b9c4e">solar_core::SEI::project_states_to_delete</a>  </dt>
 <dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000014"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#af885d50c89decf5b6ff208c24cedd82b">solar_core::SEI::SEI</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
+<dt><a class="anchor" id="_DevStage2000013"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#af885d50c89decf5b6ff208c24cedd82b">solar_core::SEI::SEI</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
 <dd>move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that  </dd>
-<dt><a class="anchor" id="_DevStage2000023"></a>Class <a class="el" href="classsolar__core_1_1_s_e_m.html">solar_core::SEM</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000022"></a>Class <a class="el" href="classsolar__core_1_1_s_e_m.html">solar_core::SEM</a>  </dt>
 <dd>add market for solar panels and price feedback  </dd>
-<dt><a class="anchor" id="_DevStage2000022"></a>Member <a class="el" href="classsolar__core_1_1_s_e_m.html#a60d13fcadec26853d8461d32eefb97da">solar_core::SEM::SEM</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
+<dt><a class="anchor" id="_DevStage2000021"></a>Member <a class="el" href="classsolar__core_1_1_s_e_m.html#a60d13fcadec26853d8461d32eefb97da">solar_core::SEM::SEM</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
 <dd>move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that  </dd>
-<dt><a class="anchor" id="_DevStage2000024"></a>Member <a class="el" href="classsolar__core_1_1_utility.html#aa52a4877b6281d4ffa8f003b831e802c">solar_core::Utility::Utility</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
+<dt><a class="anchor" id="_DevStage2000023"></a>Member <a class="el" href="classsolar__core_1_1_utility.html#aa52a4877b6281d4ffa8f003b831e802c">solar_core::Utility::Utility</a>  (const PropertyTree &amp;pt_, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</dt>
 <dd>move to <a class="el" href="classsolar__core_1_1_w.html">W</a> to speed up, but test before that  </dd>
-<dt><a class="anchor" id="_DevStage2000030"></a>Member <a class="el" href="classsolar__core_1_1_w.html#a1d35d6501eef6d673bd2b28e2c1724c4">solar_core::W::interconnected_projects</a>  </dt>
+<dt><a class="anchor" id="_DevStage2000029"></a>Member <a class="el" href="classsolar__core_1_1_w.html#a1d35d6501eef6d673bd2b28e2c1724c4">solar_core::W::interconnected_projects</a>  </dt>
 <dd>think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive  </dd>
-<dt><a class="anchor" id="_DevStage2000029"></a>Member <a class="el" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45">solar_core::W::W</a>  (std::string path_, <a class="el" href="classsolar__core_1_1_helper_w.html">HelperW</a> *w_, std::string mode_="NEW")</dt>
+<dt><a class="anchor" id="_DevStage2000028"></a>Member <a class="el" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45">solar_core::W::W</a>  (std::string path_, <a class="el" href="classsolar__core_1_1_helper_w.html">HelperW</a> *w_, std::string mode_="NEW")</dt>
 <dd><p class="startdd">: serialization: choose custom/binary/to database. For now think that cereal will be emough, with saving to .json. All agents of the same type will be saved in the same file. Loading also from .json with simple structure.</p>
 <p>each sem will pick initial templates by name? - could make it base creation mode </p>
 <p class="enddd">each sem will pick initial templates by name? - could make it base creation mode </p>
 </dd>
-=======
-<dt><a class="anchor" id="_DevStage2000001"></a>Member <a class="el" href="classsolar__core_1_1_household.html#ac9d26af7b52f0cdc357fc5dca4b86ad9">solar_core::Household::get_inf</a>  (std::shared_ptr&lt; MesMarketingSEI &gt; mes_) override</dt>
-<dd>might be addd saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)  </dd>
-<dt><a class="anchor" id="_DevStage2000007"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1104d8264fe733937e1fd2e9ad0f8fc1">solar_core::Household::house</a>  </dt>
-<dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000006"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a1ba6b7af82982096e05d99a70a2647eb">solar_core::Household::location_y</a>  </dt>
-<dd>think about decreasing size for this field, use uint64_t or smaller for it  </dd>
-<dt><a class="anchor" id="_DevStage2000008"></a>Member <a class="el" href="classsolar__core_1_1_household.html#a297842358a2d79db160566106972bc0d">solar_core::Household::preliminary_quotes</a>  </dt>
-<dd>think about replacing raw pointer with.  choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages.  </dd>
-<dt><a class="anchor" id="_DevStage2000010"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ab0bd6ae650afc15fe71ce545373ab16e">solar_core::SEI::act_tick</a>  ()</dt>
-<dd>might think about checking for the type of the tick in <a class="el" href="classsolar__core_1_1_w.html">W</a> and call proper sub tick method from there, will save on multiple boll checks, even of they are cheap.  </dd>
-<dt><a class="anchor" id="_DevStage2000009"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#a807561ad055ddc0df91b80ba406ee6df">solar_core::SEI::form_design</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
-<dd>bootstrap here for different savings dynamics depending on parameters  </dd>
-<dt><a class="anchor" id="_DevStage2000011"></a>Member <a class="el" href="classsolar__core_1_1_s_e_i.html#ad532ca9d30d5988e051b75e33ce6c241">solar_core::SEI::form_online_quote</a>  (std::shared_ptr&lt; PVProject &gt; project_)</dt>
-<dd>think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. </dd>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-<<<<<<< HEAD
-Generated on Sat May 28 2016 09:55:18 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
-=======
-Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+Generated on Fri Jun 17 2016 11:50:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

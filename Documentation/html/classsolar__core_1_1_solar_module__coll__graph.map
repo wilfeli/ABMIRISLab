@@ -1,21 +1,16 @@
 <map id="solar_core::SolarModule" name="solar_core::SolarModule">
-<<<<<<< HEAD
-<area shape="rect" id="node3" href="$classsolar__core_1_1_s_e_m.html" title="solar_core::SEM" alt="" coords="1068,1804,1188,1831"/>
-<area shape="rect" id="node29" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="2219,367,2375,393"/>
-<area shape="rect" id="node46" href="$classsolar__core_1_1_s_e_i.html" title="solar_core::SEI" alt="" coords="2241,1688,2354,1715"/>
-<area shape="rect" id="node33" href="$classsolar__core_1_1_utility.html" title="solar_core::Utility" alt="" coords="2235,1085,2359,1112"/>
-<area shape="rect" id="node43" href="$classsolar__core_1_1_g.html" title="solar_core::G" alt="" coords="2246,724,2349,751"/>
-<area shape="rect" id="node19" href="$classsolar__core_1_1_w.html" title="solar_core::W" alt="" coords="1864,1315,1968,1341"/>
-<area shape="rect" id="node7" href="$classsolar__core_1_1_u_i_d.html" title="solar_core::UID" alt="" coords="652,2204,767,2231"/>
-<area shape="rect" id="node37" href="$classsolar__core_1_1_marketing_inst.html" title="solar_core::MarketingInst" alt="" coords="2211,2239,2383,2265"/>
-<area shape="rect" id="node17" title="STL class. " alt="" coords="253,2335,333,2361"/>
-<area shape="rect" id="node18" title="STL class. " alt="" coords="6,2327,133,2369"/>
-<area shape="rect" id="node21" href="$classsolar__core_1_1_i_agent.html" title="solar_core::IAgent" alt="" coords="1063,1607,1193,1633"/>
-<area shape="rect" id="node23" href="$classsolar__core_1_1_world_map.html" title="solar_core::WorldMap" alt="" coords="1436,1079,1588,1105"/>
-<area shape="rect" id="node38" href="$classsolar__core_1_1_i_institute.html" title="solar_core::IInstitute" alt="" coords="1845,2324,1987,2351"/>
-<area shape="rect" id="node47" href="$classsolar__core_1_1_i_random.html" title="solar_core::IRandom" alt="" coords="1439,1129,1585,1156"/>
-=======
-<area shape="rect" id="node3" title="STL class. " alt="" coords="139,99,219,125"/>
-<area shape="rect" id="node4" title="STL class. " alt="" coords="115,6,241,47"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+<area shape="rect" id="node3" href="$classsolar__core_1_1_s_e_m.html" title="solar_core::SEM" alt="" coords="1041,1507,1161,1533"/>
+<area shape="rect" id="node29" href="$classsolar__core_1_1_household.html" title="solar_core::Household" alt="" coords="2153,321,2309,348"/>
+<area shape="rect" id="node46" href="$classsolar__core_1_1_s_e_i.html" title="solar_core::SEI" alt="" coords="2174,1633,2287,1660"/>
+<area shape="rect" id="node34" href="$classsolar__core_1_1_utility.html" title="solar_core::Utility" alt="" coords="2169,1137,2293,1164"/>
+<area shape="rect" id="node44" href="$classsolar__core_1_1_g.html" title="solar_core::G" alt="" coords="2179,699,2282,725"/>
+<area shape="rect" id="node19" href="$classsolar__core_1_1_w.html" title="solar_core::W" alt="" coords="1789,1315,1893,1341"/>
+<area shape="rect" id="node7" href="$classsolar__core_1_1_u_i_d.html" title="solar_core::UID" alt="" coords="652,1637,767,1664"/>
+<area shape="rect" id="node38" href="$classsolar__core_1_1_marketing_inst.html" title="solar_core::MarketingInst" alt="" coords="2145,2264,2317,2291"/>
+<area shape="rect" id="node17" title="STL class. " alt="" coords="253,2265,333,2292"/>
+<area shape="rect" id="node18" title="STL class. " alt="" coords="6,2258,133,2299"/>
+<area shape="rect" id="node21" href="$classsolar__core_1_1_i_agent.html" title="solar_core::IAgent" alt="" coords="1036,1687,1167,1713"/>
+<area shape="rect" id="node23" href="$classsolar__core_1_1_world_map.html" title="solar_core::WorldMap" alt="" coords="1361,1125,1513,1152"/>
+<area shape="rect" id="node39" href="$classsolar__core_1_1_i_institute.html" title="solar_core::IInstitute" alt="" coords="1770,2353,1913,2380"/>
+<area shape="rect" id="node47" href="$classsolar__core_1_1_i_random.html" title="solar_core::IRandom" alt="" coords="1365,1176,1510,1203"/>
 </map>

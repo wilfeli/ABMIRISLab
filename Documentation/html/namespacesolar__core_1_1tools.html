@@ -48,18 +48,455 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">solar_core::tools Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad27b346e42787b5220c80cd386eae266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#ad27b346e42787b5220c80cd386eae266">parse_model_file</a> (std::string path_to_file, std::map&lt; std::string, std::string &gt; &amp;parsed_model)</td></tr>
 <tr class="separator:ad27b346e42787b5220c80cd386eae266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8bc4dd0c291632fc369b647480c30eb"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae8bc4dd0c291632fc369b647480c30eb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#ae8bc4dd0c291632fc369b647480c30eb">parse_csv_file</a> (std::string path_to_file, std::vector&lt; std::vector&lt; T &gt;&gt; &amp;parsed_file)</td></tr>
+<tr class="separator:ae8bc4dd0c291632fc369b647480c30eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460021055d6057f219037f378c0c3248"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a460021055d6057f219037f378c0c3248">create_joint_distribution</a> (std::string path_to_scheme, std::string path_to_data)</td></tr>
+<tr class="separator:a460021055d6057f219037f378c0c3248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0afae1319ed9c683eba7bf2916d0850d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a0afae1319ed9c683eba7bf2916d0850d">calculate_pmf</a> (std::vector&lt; std::vector&lt; long &gt;&gt; &amp;bins, std::vector&lt; std::vector&lt; double &gt;&gt; &amp;parsed_file, std::vector&lt; long &gt; &amp;freq_n, <a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a> &amp;e_dist)</td></tr>
+<tr class="separator:a0afae1319ed9c683eba7bf2916d0850d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace8f7b4ee917995274fe32b95e27f6ef"><td class="memItemLeft" align="right" valign="top">std::vector&lt; long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#ace8f7b4ee917995274fe32b95e27f6ef">collapse_pmf</a> (std::vector&lt; long &gt; &amp;i_x, <a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;dist)</td></tr>
+<tr class="separator:ace8f7b4ee917995274fe32b95e27f6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3994daf7d839df36bc1f424c426cb6a5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a3994daf7d839df36bc1f424c426cb6a5">calculate_scale_factor</a> (std::vector&lt; long &gt; &amp;cond_dist, <a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;dist)</td></tr>
+<tr class="separator:a3994daf7d839df36bc1f424c426cb6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09224182e02de7fdadabfba4e08e0ac2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a09224182e02de7fdadabfba4e08e0ac2">create_cmf</a> (std::vector&lt; long &gt; &amp;cond_dist, double scale_factor, <a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;dist)</td></tr>
+<tr class="separator:a09224182e02de7fdadabfba4e08e0ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5826bf3d73d587e67bba31912e73862a"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a5826bf3d73d587e67bba31912e73862a">get_inverse_index</a> (std::vector&lt; double &gt; &amp;cmf, double u_i)</td></tr>
+<tr class="separator:a5826bf3d73d587e67bba31912e73862a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97e71ce44bf9e2eedbcce4332e8fcdd8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a97e71ce44bf9e2eedbcce4332e8fcdd8">get_inverse_value</a> (std::vector&lt; double &gt; &amp;theta_bin, double u_i)</td></tr>
+<tr class="separator:a97e71ce44bf9e2eedbcce4332e8fcdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3631c4cd4d3cc65b4b8d59171809060"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#ab3631c4cd4d3cc65b4b8d59171809060">get_inverse_value_exp</a> (std::vector&lt; double &gt; &amp;theta_bin, double u_i)</td></tr>
+<tr class="separator:ab3631c4cd4d3cc65b4b8d59171809060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6003e555b2d4261cc9f26ae2688427"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427">draw_joint_distribution</a> (<a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a> &amp;pmf, <a class="el" href="classsolar__core_1_1_i_random.html">IRandom</a> *rand)</td></tr>
+<tr class="separator:a1f6003e555b2d4261cc9f26ae2688427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a0afae1319ed9c683eba7bf2916d0850d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void solar_core::tools::calculate_pmf </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; long &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>bins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>parsed_file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; long &gt; &amp;&#160;</td>
+          <td class="paramname"><em>freq_n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a> &amp;&#160;</td>
+          <td class="paramname"><em>e_dist</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00154">154</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d_icgraph" id="namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a460021055d6057f219037f378c0c3248" title="solar_core::tools::\lcreate_joint_distribution" alt="" coords="181,5,344,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="393,12,517,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a3994daf7d839df36bc1f424c426cb6a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double solar_core::tools::calculate_scale_factor </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; long &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cond_dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00277">277</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5_icgraph" id="namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="208,5,363,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="411,12,535,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ace8f7b4ee917995274fe32b95e27f6ef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; long &gt; solar_core::tools::collapse_pmf </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; long &gt; &amp;&#160;</td>
+          <td class="paramname"><em>i_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00246">246</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef_icgraph" id="namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="181,5,336,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="385,12,509,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a09224182e02de7fdadabfba4e08e0ac2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; solar_core::tools::create_cmf </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; long &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cond_dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale_factor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_u_v_d.html">EmpiricalUVD</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00293">293</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2_icgraph" id="namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="181,5,336,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="385,12,509,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a460021055d6057f219037f378c0c3248"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">tools::EmpiricalMVD</a> solar_core::tools::create_joint_distribution </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path_to_scheme</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path_to_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00017">17</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_cgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_cgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_cgraph" id="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_cgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#ae8bc4dd0c291632fc369b647480c30eb" title="solar_core::tools::\lparse_csv_file" alt="" coords="225,5,351,46"/><area shape="rect" id="node3" href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83" title="serialize::deserialize" alt="" coords="217,71,359,97"/><area shape="rect" id="node5" href="namespacesolar__core_1_1tools.html#a0afae1319ed9c683eba7bf2916d0850d" title="solar_core::tools::\lcalculate_pmf" alt="" coords="225,122,351,163"/><area shape="rect" id="node4" href="classserialize_1_1_deserialize_container.html#a81bdeaff0ef56f203cc65b1d0691c471" title="serialize::DeserializeContainer\l::deserialize" alt="" coords="408,63,611,105"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_icgraph" id="namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_icgraph">
+<area shape="rect" id="node2" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="217,12,341,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a1f6003e555b2d4261cc9f26ae2688427"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; solar_core::tools::draw_joint_distribution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1tools_1_1_empirical_m_v_d.html">EmpiricalMVD</a> &amp;&#160;</td>
+          <td class="paramname"><em>pmf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1_i_random.html">IRandom</a> *&#160;</td>
+          <td class="paramname"><em>rand</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00189">189</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_cgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_cgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_cgraph" id="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_cgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#ace8f7b4ee917995274fe32b95e27f6ef" title="solar_core::tools::\lcollapse_pmf" alt="" coords="225,5,351,46"/><area shape="rect" id="node3" href="namespacesolar__core_1_1tools.html#a3994daf7d839df36bc1f424c426cb6a5" title="solar_core::tools::\lcalculate_scale_factor" alt="" coords="211,70,365,111"/><area shape="rect" id="node4" href="namespacesolar__core_1_1tools.html#a09224182e02de7fdadabfba4e08e0ac2" title="solar_core::tools::\lcreate_cmf" alt="" coords="225,135,351,177"/><area shape="rect" id="node5" href="namespacesolar__core_1_1tools.html#a5826bf3d73d587e67bba31912e73862a" title="solar_core::tools::\lget_inverse_index" alt="" coords="223,201,353,242"/><area shape="rect" id="node6" href="namespacesolar__core_1_1tools.html#ab3631c4cd4d3cc65b4b8d59171809060" title="solar_core::tools::\lget_inverse_value_exp" alt="" coords="209,266,367,307"/><area shape="rect" id="node7" href="namespacesolar__core_1_1tools.html#a97e71ce44bf9e2eedbcce4332e8fcdd8" title="solar_core::tools::\lget_inverse_value" alt="" coords="223,331,353,373"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_icgraph" id="namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_icgraph">
+<area shape="rect" id="node2" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="209,12,333,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a5826bf3d73d587e67bba31912e73862a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long solar_core::tools::get_inverse_index </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cmf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>u_i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00327">327</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a_icgraph" id="namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="184,5,339,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="387,12,511,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a97e71ce44bf9e2eedbcce4332e8fcdd8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double solar_core::tools::get_inverse_value </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>theta_bin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>u_i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00345">345</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8_icgraph" id="namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="184,5,339,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="387,12,511,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ab3631c4cd4d3cc65b4b8d59171809060"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double solar_core::tools::get_inverse_value_exp </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>theta_bin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>u_i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_simulation_8cpp_source.html#l00353">353</a> of file <a class="el" href="_simulation_8cpp_source.html">Simulation.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060_icgraph" id="namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a1f6003e555b2d4261cc9f26ae2688427" title="solar_core::tools::\ldraw_joint_distribution" alt="" coords="213,5,368,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="417,12,541,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae8bc4dd0c291632fc369b647480c30eb"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void solar_core::tools::parse_csv_file </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path_to_file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; T &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>parsed_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_parsing_tools_8h_source.html#l00023">23</a> of file <a class="el" href="_parsing_tools_8h_source.html">ParsingTools.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb_icgraph.png" border="0" usemap="#namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb_icgraph" alt=""/></div>
+<map name="namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb_icgraph" id="namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb_icgraph">
+<area shape="rect" id="node2" href="namespacesolar__core_1_1tools.html#a460021055d6057f219037f378c0c3248" title="solar_core::tools::\lcreate_joint_distribution" alt="" coords="181,5,344,46"/><area shape="rect" id="node3" href="classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="393,12,517,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="ad27b346e42787b5220c80cd386eae266"></a>
 <div class="memitem">
 <div class="memproto">
@@ -84,7 +521,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_parsing_tools_8cpp_source.html#l00020">20</a> of file <a class="el" href="_parsing_tools_8cpp_source.html">ParsingTools.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_parsing_tools_8cpp_source.html#l00018">18</a> of file <a class="el" href="_parsing_tools_8cpp_source.html">ParsingTools.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -100,7 +537,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 28 2016 09:55:18 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 17 2016 11:50:11 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

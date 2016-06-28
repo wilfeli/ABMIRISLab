@@ -1,15 +1,8 @@
 <map id="serialize::DeserializeValue::deserialize_value" name="serialize::DeserializeValue::deserialize_value">
-<<<<<<< HEAD
 <area shape="rect" id="node2" href="$classserialize_1_1_deserialize_map.html#af4827270beb08c018e840b9cec766cde" title="serialize::DeserializeMap\l::deserialize" alt="" coords="244,70,415,111"/>
 <area shape="rect" id="node4" href="$classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html#ad440b5c02ce0eb7839f46df2e95f93ee" title="serialize::DeserializeMap\l\&lt; K, V, typename std::enable\l_if\&lt; std::is_pointer\&lt; V \&gt;::\lvalue \&gt;::type \&gt;::deserialize" alt="" coords="667,5,861,75"/>
 <area shape="rect" id="node5" href="$classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__ptr_3_01_v_01_4_01_4.html#ad2807cf1ee4670cbda806ad46c57f360" title="serialize::DeserializeMap\l\&lt; K, std::shared_ptr\&lt; V\l \&gt; \&gt;::deserialize" alt="" coords="679,107,849,163"/>
 <area shape="rect" id="node6" href="$classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vected2d1ee1f8886a5a92a6dbc69e18bdcd.html#a4ac8a4888f9383e338904ed4ea0ab4a7" title="serialize::DeserializeMap\l\&lt; K, V, typename std::enable\l_if\&lt; is_vector\&lt; V \&gt;::value\l \&gt;::type \&gt;::deserialize" alt="" coords="233,187,426,258"/>
 <area shape="rect" id="node7" href="$namespaceserialize.html#aa5ee0bad0c960a3f06430066217d8c12" title="serialize::solve_str\l_formula" alt="" coords="263,282,395,323"/>
 <area shape="rect" id="node3" href="$namespaceserialize.html#af7e18cf15b955d078b7fc036042cb083" title="serialize::deserialize" alt="" coords="475,77,618,104"/>
-=======
-<area shape="rect" id="node2" href="$classserialize_1_1_deserialize_map.html#af4827270beb08c018e840b9cec766cde" title="serialize::DeserializeMap\l::deserialize" alt="" coords="232,13,403,54"/>
-<area shape="rect" id="node4" href="$classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html#ad440b5c02ce0eb7839f46df2e95f93ee" title="serialize::DeserializeMap\l\&lt; K, V, typename std::enable\l_if\&lt; std::is_pointer\&lt; V \&gt;::\lvalue \&gt;::type \&gt;::deserialize" alt="" coords="643,57,837,127"/>
-<area shape="rect" id="node3" href="$namespaceserialize.html#af7e18cf15b955d078b7fc036042cb083" title="serialize::deserialize" alt="" coords="451,20,594,47"/>
-<area shape="rect" id="node5" href="$classsolar__core_1_1_w.html#aa252edac9babf33b41e22a816648a9a5" title="solar_core::W::W" alt="" coords="678,5,802,32"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

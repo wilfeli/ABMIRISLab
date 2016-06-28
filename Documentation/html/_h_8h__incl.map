@@ -1,13 +1,6 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/H.h" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/H.h">
-<<<<<<< HEAD
 <area shape="rect" id="node2" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="823,259,991,285"/>
 <area shape="rect" id="node23" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="582,184,724,211"/>
 <area shape="rect" id="node24" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="726,109,895,136"/>
 <area shape="rect" id="node25" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="848,184,965,211"/>
-=======
-<area shape="rect" id="node2" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="373,267,541,293"/>
-<area shape="rect" id="node14" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="195,184,337,211"/>
-<area shape="rect" id="node16" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="291,109,460,136"/>
-<area shape="rect" id="node17" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="413,184,531,211"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

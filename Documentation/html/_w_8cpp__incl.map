@@ -1,32 +1,22 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/W.cpp" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/W.cpp">
-<<<<<<< HEAD
-<area shape="rect" id="node2" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="434,184,554,211"/>
-<area shape="rect" id="node28" href="$_w_8h.html" title="UI/W.h" alt="" coords="204,184,266,211"/>
-<area shape="rect" id="node31" href="$_world_settings_8h.html" title="Tools/WorldSettings.h" alt="" coords="1280,259,1432,285"/>
-<area shape="rect" id="node32" href="$_parsing_tools_8h.html" title="Tools/ParsingTools.h" alt="" coords="1945,424,2092,451"/>
-<area shape="rect" id="node33" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="675,259,844,285"/>
-<area shape="rect" id="node34" href="$_marketing_system_8h.html" title="Institutions/MarketingSystem.h" alt="" coords="1462,184,1665,211"/>
-<area shape="rect" id="node35" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="1138,259,1256,285"/>
-<area shape="rect" id="node37" href="$_s_e_i_8h.html" title="Agents/SEI.h" alt="" coords="995,184,1094,211"/>
-<area shape="rect" id="node39" href="$_s_e_m_8h.html" title="Agents/SEM.h" alt="" coords="1506,259,1613,285"/>
-<area shape="rect" id="node43" href="$_utility_8h.html" title="Agents/Utility.h" alt="" coords="32,184,142,211"/>
-<area shape="rect" id="node44" href="$_g_8h.html" title="Agents/G.h" alt="" coords="1863,259,1952,285"/>
-<area shape="rect" id="node45" href="$_h_8h.html" title="Agents/H.h" alt="" coords="589,184,677,211"/>
-<area shape="rect" id="node46" href="$_helper_w_8h.html" title="UI/HelperW.h" alt="" coords="904,109,1006,136"/>
-<area shape="rect" id="node3" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="958,424,1126,451"/>
-<area shape="rect" id="node23" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="702,341,844,368"/>
-<area shape="rect" id="node24" href="$_i_random_8h.html" title="Tools/IRandom.h" alt="" coords="323,259,446,285"/>
-<area shape="rect" id="node36" href="$_i_institute_8h.html" title="Institutions/IInstitute.h" alt="" coords="1688,259,1838,285"/>
-<area shape="rect" id="node38" href="$_solar_panel_8h.html" title="Agents/SolarPanel.h" alt="" coords="970,259,1114,285"/>
-<area shape="rect" id="node40" href="$_i_d_8h.html" title="Tools/ID.h" alt="" coords="1673,341,1756,368"/>
-=======
-<area shape="rect" id="node6" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="745,200,865,227"/>
-<area shape="rect" id="node19" href="$_w_8h.html" title="UI/W.h" alt="" coords="54,200,116,227"/>
-<area shape="rect" id="node21" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="141,200,309,227"/>
-<area shape="rect" id="node22" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="604,200,721,227"/>
-<area shape="rect" id="node23" href="$_s_e_i_8h.html" title="Agents/SEI.h" alt="" coords="407,117,507,144"/>
-<area shape="rect" id="node7" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="373,357,541,384"/>
-<area shape="rect" id="node18" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="277,275,419,301"/>
-<area shape="rect" id="node24" href="$_solar_panel_8h.html" title="Agents/SolarPanel.h" alt="" coords="385,200,529,227"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+<area shape="rect" id="node2" href="$_serialize_8h.html" title="Tools/Serialize.h" alt="" coords="432,184,552,211"/>
+<area shape="rect" id="node28" href="$_w_8h.html" title="UI/W.h" alt="" coords="1902,184,1964,211"/>
+<area shape="rect" id="node31" href="$_world_settings_8h.html" title="Tools/WorldSettings.h" alt="" coords="1103,259,1255,285"/>
+<area shape="rect" id="node32" href="$_parsing_tools_8h.html" title="Tools/ParsingTools.h" alt="" coords="211,109,357,136"/>
+<area shape="rect" id="node33" href="$_simulation_8h.html" title="Tools/Simulation.h" alt="" coords="677,259,808,285"/>
+<area shape="rect" id="node34" href="$_geography_8h.html" title="Geography/Geography.h" alt="" coords="1431,259,1600,285"/>
+<area shape="rect" id="node35" href="$_marketing_system_8h.html" title="Institutions/MarketingSystem.h" alt="" coords="5,184,208,211"/>
+<area shape="rect" id="node36" href="$_i_agent_8h.html" title="Agents/IAgent.h" alt="" coords="335,259,452,285"/>
+<area shape="rect" id="node38" href="$_s_e_i_8h.html" title="Agents/SEI.h" alt="" coords="954,184,1053,211"/>
+<area shape="rect" id="node40" href="$_s_e_m_8h.html" title="Agents/SEM.h" alt="" coords="1809,259,1916,285"/>
+<area shape="rect" id="node44" href="$_utility_8h.html" title="Agents/Utility.h" alt="" coords="1619,184,1729,211"/>
+<area shape="rect" id="node45" href="$_g_8h.html" title="Agents/G.h" alt="" coords="2127,259,2216,285"/>
+<area shape="rect" id="node46" href="$_h_8h.html" title="Agents/H.h" alt="" coords="1248,184,1336,211"/>
+<area shape="rect" id="node47" href="$_helper_w_8h.html" title="UI/HelperW.h" alt="" coords="729,109,831,136"/>
+<area shape="rect" id="node3" href="$_external_includes_8h.html" title="Tools/ExternalIncludes.h" alt="" coords="1029,424,1197,451"/>
+<area shape="rect" id="node23" href="$_i_parameters_8h.html" title="Tools/IParameters.h" alt="" coords="1330,341,1472,368"/>
+<area shape="rect" id="node24" href="$_i_random_8h.html" title="Tools/IRandom.h" alt="" coords="477,259,600,285"/>
+<area shape="rect" id="node37" href="$_i_institute_8h.html" title="Institutions/IInstitute.h" alt="" coords="7,259,157,285"/>
+<area shape="rect" id="node39" href="$_solar_panel_8h.html" title="Agents/SolarPanel.h" alt="" coords="935,259,1079,285"/>
+<area shape="rect" id="node41" href="$_i_d_8h.html" title="Tools/ID.h" alt="" coords="1973,341,2056,368"/>
 </map>

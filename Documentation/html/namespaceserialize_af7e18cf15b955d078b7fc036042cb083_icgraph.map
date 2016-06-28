@@ -1,8 +1,4 @@
 <map id="serialize::deserialize" name="serialize::deserialize">
 <area shape="rect" id="node2" href="$classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5.html#ad440b5c02ce0eb7839f46df2e95f93ee" title="serialize::DeserializeMap\l\&lt; K, V, typename std::enable\l_if\&lt; std::is_pointer\&lt; V \&gt;::\lvalue \&gt;::type \&gt;::deserialize" alt="" coords="198,5,391,75"/>
-<<<<<<< HEAD
 <area shape="rect" id="node3" href="$classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__ptr_3_01_v_01_4_01_4.html#ad2807cf1ee4670cbda806ad46c57f360" title="serialize::DeserializeMap\l\&lt; K, std::shared_ptr\&lt; V\l \&gt; \&gt;::deserialize" alt="" coords="209,100,380,156"/>
-=======
-<area shape="rect" id="node3" href="$classsolar__core_1_1_w.html#aa252edac9babf33b41e22a816648a9a5" title="solar_core::W::W" alt="" coords="233,100,357,127"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

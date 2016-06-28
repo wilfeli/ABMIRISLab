@@ -1,6 +1,7 @@
 <map id="solar_core::EnumFactory::FromEParamTypes" name="solar_core::EnumFactory::FromEParamTypes">
 <area shape="rect" id="node2" href="$classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac" title="solar_core::HelperWSpecialization\l\&lt; T, BaselineModel \&gt;::create_seis" alt="" coords="225,5,450,46"/>
-<area shape="rect" id="node3" href="$classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce" title="solar_core::HelperWSpecialization\l\&lt; T, UnitTestModel \&gt;::create_seis" alt="" coords="225,70,450,111"/>
-<area shape="rect" id="node4" href="$classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="275,136,399,163"/>
-<area shape="rect" id="node5" href="$classsolar__core_1_1_w.html#a0b92657c681579dacc29821f41650541" title="solar_core::W::create_seis" alt="" coords="247,187,427,213"/>
+<area shape="rect" id="node3" href="$classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#aaf9f30218e0bc792ed2817caf89b576d" title="solar_core::HelperWSpecialization\l\&lt; T, BaselineModel \&gt;::create_hhs" alt="" coords="225,70,450,111"/>
+<area shape="rect" id="node4" href="$classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce" title="solar_core::HelperWSpecialization\l\&lt; T, UnitTestModel \&gt;::create_seis" alt="" coords="225,135,450,177"/>
+<area shape="rect" id="node5" href="$classsolar__core_1_1_w.html#a969ad4de57020878a91873868c9bdb45" title="solar_core::W::W" alt="" coords="275,201,399,228"/>
+<area shape="rect" id="node6" href="$classsolar__core_1_1_w.html#a0b92657c681579dacc29821f41650541" title="solar_core::W::create_seis" alt="" coords="247,252,427,279"/>
 </map>

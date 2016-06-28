@@ -28,9 +28,22 @@ double \hyperlink{classsolar__core_1_1_house_a7f872cb768b83e70e263590078fa4c7d}{
 
 
 \subsection{Detailed Description}
-Belongs to a \hyperlink{classsolar__core_1_1_household}{Household}. 
+Belongs to a \hyperlink{classsolar__core_1_1_household}{Household}.
 
-Definition at line 27 of file Geography.\+h.
+Cuurently switched to estimated roof\+\_\+size from the house\+\_\+size
+\begin{DoxyEnumerate}
+\item R\+P = roof pitch
+\item H\+S = square foot of home
+\item F = number of floors
+\item x = roof pitched length
+\item y = roof length
+\item R\+A = roof area
+\item R = ratio of roof area to house area
+\end{DoxyEnumerate}
+
+Formula for calculating roof size \[ y = \sqrt{frac{HS}{F}} \] \[ x = (\frac{y}{2}) \times (\cos (\arctan (RP)) \] \[ RA = 2 \times x \times y \] \[ R = RA \div HS \] 
+
+Definition at line 51 of file Geography.\+h.
 
 
 
@@ -54,14 +67,14 @@ Definition at line 16 of file Geography.\+cpp.
 \subsubsection[{roof\+\_\+age}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+House\+::roof\+\_\+age}\label{classsolar__core_1_1_house_aa6491ce4f3fc6d99a59ea80cfb8194fc}
 age of a house\textquotesingle{}s roof in years (not required to be whole years) 
 
-Definition at line 31 of file Geography.\+h.
+Definition at line 55 of file Geography.\+h.
 
 \hypertarget{classsolar__core_1_1_house_a7f872cb768b83e70e263590078fa4c7d}{}\index{solar\+\_\+core\+::\+House@{solar\+\_\+core\+::\+House}!roof\+\_\+size@{roof\+\_\+size}}
 \index{roof\+\_\+size@{roof\+\_\+size}!solar\+\_\+core\+::\+House@{solar\+\_\+core\+::\+House}}
 \subsubsection[{roof\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::\+House\+::roof\+\_\+size}\label{classsolar__core_1_1_house_a7f872cb768b83e70e263590078fa4c7d}
 size of a roof, in m$^\wedge$2 
 
-Definition at line 32 of file Geography.\+h.
+Definition at line 56 of file Geography.\+h.
 
 
 

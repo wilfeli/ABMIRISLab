@@ -1,7 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<<<<<<< HEAD
-<area shape="rect" id="node1" href="$classsolar__core_1_1_inverter.html" title="solar_core::Inverter" alt="" coords="6,5,143,32"/>
-=======
-<area shape="rect" id="node1" href="$classsolar__core_1_1_tile.html" title="solar_core::Tile" alt="" coords="6,5,119,32"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+<area shape="rect" id="node1" href="$classsolar__core_1_1_i_institute.html" title="solar_core::IInstitute" alt="" coords="6,5,149,32"/>
+<area shape="rect" id="node2" href="$classsolar__core_1_1_marketing_inst.html" title="solar_core::MarketingInst" alt="" coords="198,5,370,32"/>
 </map>

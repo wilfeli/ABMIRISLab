@@ -62,165 +62,288 @@
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define __ABMSolar__HelperW__</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_external_includes_8h.html">Tools/ExternalIncludes.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_random_8h.html">Tools/IRandom.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_s_e_i_8h.html">Agents/SEI.h</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;Tests/Agents/SEIMock.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_serialize_8h.html">Tools/Serialize.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_random_8h.html">Tools/IRandom.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_s_e_i_8h.html">Agents/SEI.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_h_8h.html">Agents/H.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;../Tests/Agents/SEIMock.h&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">class </span>W;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesolar__core.html">solar_core</a> {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_baseline_model.html">   22</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_baseline_model.html">BaselineModel</a> {};</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_unit_test_model.html">   23</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_unit_test_model.html">UnitTestModel</a> {};</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w.html">   24</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt_, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_) = 0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Param&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization.html">   32</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">   36</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt_, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html">   45</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>&lt;T, <a class="code" href="classsolar__core_1_1_baseline_model.html">BaselineModel</a>&gt;: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">   49</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            std::vector&lt;SEI*&gt; seis;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            T* w = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(w_);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="comment">//create random number generators for locations</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="comment">//is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="comment">//check that it is uniform distribution</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;location&quot;</span>).find(<span class="stringliteral">&quot;FORMULA::p.d.f.::u_int(0, size)&quot;</span>) == std::string::npos)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            };</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="comment">//create SEI - use template for parameters, use model file for additional parameters</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="comment">//create sei_type</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">auto</span> j = 0;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; N_SEI; ++i)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="comment">//put sei_type</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">EParamTypes::SEISmall</a>));</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordflow">if</span> (j &lt; N_SEILarge)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">EParamTypes::SEILarge</a>));</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                ++j;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="comment">//generate location</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                pt.put(<span class="stringliteral">&quot;location_x&quot;</span>, rng_location_x());</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                pt.put(<span class="stringliteral">&quot;location_y&quot;</span>, rng_location_y());</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                seis.push_back(<span class="keyword">new</span> <a class="code" href="classsolar__core_1_1_s_e_i.html">SEI</a>(pt, w));</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">class </span>W;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_baseline_model.html">   25</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_baseline_model.html">BaselineModel</a> {};</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_unit_test_model.html">   26</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_unit_test_model.html">UnitTestModel</a> {};</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt_, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_) = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Param&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization.html">   35</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">   39</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt_, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>&lt;T, <a class="code" href="classsolar__core_1_1_baseline_model.html">BaselineModel</a>&gt;: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">   52</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::vector&lt;SEI*&gt; seis;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            T* w = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(w_);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="comment">//create random number generators for locations</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="comment">//is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="comment">//check that it is uniform distribution</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">if</span> (pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;location&quot;</span>).find(<span class="stringliteral">&quot;FORMULA::p.d.f.::u_int(0, size)&quot;</span>) == std::string::npos)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            };</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="comment">//create SEI - use template for parameters, use model file for additional parameters</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="comment">//create sei_type</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">auto</span> j = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; N_SEI; ++i)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="comment">//put sei_type</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">EParamTypes::SEISmall</a>));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">if</span> (j &lt; N_SEILarge)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">EParamTypes::SEILarge</a>));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                ++j;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="comment">//generate location</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                pt.put(<span class="stringliteral">&quot;location_x&quot;</span>, rng_location_x());</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                pt.put(<span class="stringliteral">&quot;location_y&quot;</span>, rng_location_y());</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            };</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">return</span> seis;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html">   95</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>&lt;T, <a class="code" href="classsolar__core_1_1_unit_test_model.html">UnitTestModel</a>&gt;: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">   99</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            std::vector&lt;SEI*&gt; seis;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            T* w = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(w_);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                seis.push_back(<span class="keyword">new</span> <a class="code" href="classsolar__core_1_1_s_e_i.html">SEI</a>(pt, w));</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            };</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">return</span> seis;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        </div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#aaf9f30218e0bc792ed2817caf89b576d">   97</a></span>&#160;        std::vector&lt;Household*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#aaf9f30218e0bc792ed2817caf89b576d">create_hhs</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt, std::string mode_, <span class="keywordtype">long</span> N_HH, <span class="keywordtype">long</span> N_HHMarketingStateHighlyInterested, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_i_random.html">IRandom</a>* rand)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            std::vector&lt;Household*&gt; hhs;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment">//create THETA_design</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            std::map&lt;std::string, std::vector&lt;std::string&gt;&gt; THETA_design_str;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <a class="code" href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83">serialize::deserialize</a>(pt.get_child(<span class="stringliteral">&quot;THETA_design&quot;</span>), THETA_design_str);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="comment">//create random number generators for locations</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="comment">//is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="comment">//check that it is uniform distribution</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">if</span> (pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;location&quot;</span>).find(<span class="stringliteral">&quot;FORMULA::p.d.f.::u_int(0, size)&quot;</span>) == std::string::npos)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            };</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="comment">//create SEI - use template for parameters, use model file for additional parameters</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="comment">//create sei_type</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keyword">auto</span> j = 0;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; N_SEI; ++i)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keyword">auto</span> formula_THETA = THETA_design_str[<a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df">EParamTypes::HHDecPreliminaryQuote</a>)];</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> (formula_THETA[0].find(<span class="stringliteral">&quot;FORMULA::p.d.f.::u(0, 1)&quot;</span>) == std::string::npos)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            };</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keyword">auto</span> pdf_THETA = boost::uniform_01&lt;&gt;();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keyword">auto</span> rng_THETA = boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_01&lt;&gt;&gt;(rand-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_THETA);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            std::map&lt;EParamTypes, std::vector&lt;double&gt;&gt; THETA_design;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; iter:THETA_design_str)</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="comment">//put sei_type</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">EParamTypes::SEISmall</a>));</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                <span class="keywordflow">if</span> (j &lt; N_SEILarge)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">EParamTypes::SEILarge</a>));</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                };</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                ++j;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="comment">//generate location</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                pt.put(<span class="stringliteral">&quot;location_x&quot;</span>, rng_location_x());</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                pt.put(<span class="stringliteral">&quot;location_y&quot;</span>, rng_location_y());</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                seis.push_back(<span class="keyword">new</span> solar_tests::SEIMock(pt, w));</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            };</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">return</span> seis;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    };</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                THETA_design[<a class="code" href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8">EnumFactory::ToEParamTypes</a>(iter.first)] = std::vector&lt;double&gt;{};</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            };</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keyword">auto</span> formula_roof_age = pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;House.roof_age&quot;</span>);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keyword">auto</span> formula_roof_size = pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;House.roof_size&quot;</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="comment">//create rundom number generators for House</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span> (formula_roof_age.find(<span class="stringliteral">&quot;FORMULA::p.d.f.::N_trunc&quot;</span>) == std::string::npos)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            };</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordflow">if</span> (formula_roof_size.find(<span class="stringliteral">&quot;FORMULA::p.d.f.::N_trunc&quot;</span>) == std::string::npos)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            };</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordtype">double</span> mean_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find(<span class="stringliteral">&quot;(&quot;</span>) + 1, formula_roof_age.find(<span class="stringliteral">&quot;,&quot;</span>) - formula_roof_age.find(<span class="stringliteral">&quot;(&quot;</span>) - 1));</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordtype">double</span> sigma2_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find(<span class="stringliteral">&quot;,&quot;</span>) + 1, formula_roof_age.find(<span class="stringliteral">&quot;,&quot;</span>) - formula_roof_age.find(<span class="stringliteral">&quot;)&quot;</span>) - 1));</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keyword">auto</span> pdf_roof_age = boost::normal_distribution&lt;&gt;(mean_roof_age, std::pow(sigma2_roof_age, 0.5));</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keyword">auto</span> rng_roof_age = boost::variate_generator&lt;boost::mt19937&amp;, boost::normal_distribution&lt;&gt;&gt;(rand-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_roof_age);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    </div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;} <span class="comment">// solar_core namespace</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordtype">double</span> mean_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find(<span class="stringliteral">&quot;(&quot;</span>) + 1, formula_roof_size.find(<span class="stringliteral">&quot;,&quot;</span>) - formula_roof_size.find(<span class="stringliteral">&quot;(&quot;</span>) - 1));</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordtype">double</span> sigma2_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find(<span class="stringliteral">&quot;,&quot;</span>) + 1, formula_roof_size.find(<span class="stringliteral">&quot;,&quot;</span>) - formula_roof_size.find(<span class="stringliteral">&quot;)&quot;</span>) - 1));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keyword">auto</span> pdf_roof_size = boost::normal_distribution&lt;&gt;(mean_roof_size, std::pow(sigma2_roof_size, 0.5));</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keyword">auto</span> rng_roof_size = boost::variate_generator&lt;boost::mt19937&amp;, boost::normal_distribution&lt;&gt;&gt;(rand-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_roof_size);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(__ABMSolar__HelperW__) */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classsolar__core_1_1_unit_test_model_html"><div class="ttname"><a href="classsolar__core_1_1_unit_test_model.html">solar_core::UnitTestModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00023">HelperW.h:23</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_s_e_i_html"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a></div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00056">SEI.h:56</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_html_a738f047f9e421dcac3739f9898242c09"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">solar_core::HelperWSpecialization::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_) override</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00036">HelperW.h:36</a></div></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment">//create HH</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keyword">auto</span> j = 0;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; N_HH; ++i)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="keywordflow">if</span> (j &lt; N_HHMarketingStateHighlyInterested)</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    <span class="comment">//create few highly interested agents</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                    <span class="comment">//put specific parameters into template</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    pt.put(<span class="stringliteral">&quot;marketing_state&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e">EParamTypes::HHMarketingStateHighlyInterested</a>));</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                };</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                ++j;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                <span class="comment">//generate location</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                pt.put(<span class="stringliteral">&quot;location_x&quot;</span>, rng_location_x());</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                pt.put(<span class="stringliteral">&quot;location_y&quot;</span>, rng_location_y());</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <span class="comment">//generate House</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <span class="comment">//roof_age</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="comment">//roof_size</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                pt.put(<span class="stringliteral">&quot;House.roof_age&quot;</span>, std::max(0.0, rng_roof_age()));</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                pt.put(<span class="stringliteral">&quot;House.roof_size&quot;</span>, std::max(0.0, rng_roof_size()));</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <span class="comment">//create decision parameters</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                THETA_design[<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df">EParamTypes::HHDecPreliminaryQuote</a>] = std::vector&lt;double&gt;{rng_THETA()};</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                pt.put_child(<span class="stringliteral">&quot;THETA_design&quot;</span>, <a class="code" href="namespaceserialize.html#a48d3582d3d99189f6f067e77d962574f">serialize::serialize</a>(THETA_design, <span class="stringliteral">&quot;THETA_design&quot;</span>).get_child(<span class="stringliteral">&quot;THETA_design&quot;</span>));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                <span class="comment">//read configuration file</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="comment">//replace parameters if necessary</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                hhs.push_back(<span class="keyword">new</span> <a class="code" href="classsolar__core_1_1_household.html">Household</a>(pt, <span class="keyword">this</span>));</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            };</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    };</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html">  207</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classsolar__core_1_1_helper_w_specialization.html">HelperWSpecialization</a>&lt;T, <a class="code" href="classsolar__core_1_1_unit_test_model.html">UnitTestModel</a>&gt;: <span class="keyword">public</span> <a class="code" href="classsolar__core_1_1_helper_w.html">HelperW</a></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    {</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        </div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">  211</a></span>&#160;        std::vector&lt;SEI*&gt; <a class="code" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">create_seis</a>(<a class="code" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a>&amp; pt, std::string mode_, <span class="keywordtype">long</span> N_SEI, <span class="keywordtype">long</span> N_SEILarge, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, <a class="code" href="classsolar__core_1_1_w.html">W</a>* w_)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            std::vector&lt;SEI*&gt; seis;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            T* w = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(w_);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            <span class="comment">//create random number generators for locations</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="comment">//is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="comment">//check that it is uniform distribution</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <span class="keywordflow">if</span> (pt.get&lt;std::string&gt;(<span class="stringliteral">&quot;location&quot;</span>).find(<span class="stringliteral">&quot;FORMULA::p.d.f.::u_int(0, size)&quot;</span>) == std::string::npos)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;unsupported hh specification rule&quot;</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            };</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="comment">//create SEI - use template for parameters, use model file for additional parameters</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="comment">//create sei_type</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            <span class="keyword">auto</span> j = 0;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; N_SEI; ++i)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <span class="comment">//put sei_type</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">EParamTypes::SEISmall</a>));</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                <span class="keywordflow">if</span> (j &lt; N_SEILarge)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    pt.put(<span class="stringliteral">&quot;sei_type&quot;</span>, <a class="code" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">EnumFactory::FromEParamTypes</a>(<a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">EParamTypes::SEILarge</a>));</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                };</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                ++j;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                <span class="comment">//generate location</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                pt.put(<span class="stringliteral">&quot;location_x&quot;</span>, rng_location_x());</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                pt.put(<span class="stringliteral">&quot;location_y&quot;</span>, rng_location_y());</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                <span class="comment">//only difference is here - to differenciate SEI and SEIMock</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                seis.push_back(<span class="keyword">new</span> solar_tests::SEIMock(pt, w));</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            };</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">return</span> seis;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    };</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;} <span class="comment">// solar_core namespace</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(__ABMSolar__HelperW__) */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classsolar__core_1_1_unit_test_model_html"><div class="ttname"><a href="classsolar__core_1_1_unit_test_model.html">solar_core::UnitTestModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00026">HelperW.h:26</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_s_e_i_html"><div class="ttname"><a href="classsolar__core_1_1_s_e_i.html">solar_core::SEI</a></div><div class="ttdef"><b>Definition:</b> <a href="_s_e_i_8h_source.html#l00055">SEI.h:55</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_html_a738f047f9e421dcac3739f9898242c09"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization.html#a738f047f9e421dcac3739f9898242c09">solar_core::HelperWSpecialization::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_) override</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00039">HelperW.h:39</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_random_html"><div class="ttname"><a href="classsolar__core_1_1_i_random.html">solar_core::IRandom</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_random_8h_source.html#l00026">IRandom.h:26</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_w_html"><div class="ttname"><a href="classsolar__core_1_1_w.html">solar_core::W</a></div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00042">W.h:42</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_html"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization.html">solar_core::HelperWSpecialization</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00032">HelperW.h:32</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_baseline_model_html"><div class="ttname"><a href="classsolar__core_1_1_baseline_model.html">solar_core::BaselineModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00022">HelperW.h:22</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_html"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization.html">solar_core::HelperWSpecialization</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00035">HelperW.h:35</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_baseline_model_html"><div class="ttname"><a href="classsolar__core_1_1_baseline_model.html">solar_core::BaselineModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00025">HelperW.h:25</a></div></div>
+<div class="ttc" id="namespaceserialize_html_a48d3582d3d99189f6f067e77d962574f"><div class="ttname"><a href="namespaceserialize.html#a48d3582d3d99189f6f067e77d962574f">serialize::serialize</a></div><div class="ttdeci">PropertyTree serialize(std::vector&lt; T &gt; &amp;container_, PropertyTree::key_type const &amp;key)</div><div class="ttdef"><b>Definition:</b> <a href="_serialize_8h_source.html#l00198">Serialize.h:198</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_helper_w_html_a2d53e9a0f5945ced5ddc0388278d2336"><div class="ttname"><a href="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336">solar_core::HelperW::create_seis</a></div><div class="ttdeci">virtual std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_)=0</div></div>
-<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_html_a9f9f25055cdc6e402ae717b540a1feac"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">solar_core::HelperWSpecialization&lt; T, BaselineModel &gt;::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00049">HelperW.h:49</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362afc91168d2e624505b0168a1ee8c0c60e">solar_core::EParamTypes::HHMarketingStateHighlyInterested</a></div></div>
+<div class="ttc" id="_serialize_8h_html"><div class="ttname"><a href="_serialize_8h.html">Serialize.h</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_html_aaf9f30218e0bc792ed2817caf89b576d"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#aaf9f30218e0bc792ed2817caf89b576d">solar_core::HelperWSpecialization&lt; T, BaselineModel &gt;::create_hhs</a></div><div class="ttdeci">std::vector&lt; Household * &gt; create_hhs(PropertyTree &amp;pt, std::string mode_, long N_HH, long N_HHMarketingStateHighlyInterested, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, IRandom *rand)</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00097">HelperW.h:97</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_household_html"><div class="ttname"><a href="classsolar__core_1_1_household.html">solar_core::Household</a></div><div class="ttdef"><b>Definition:</b> <a href="_h_8h_source.html#l00047">H.h:47</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_html_a9f9f25055cdc6e402ae717b540a1feac"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">solar_core::HelperWSpecialization&lt; T, BaselineModel &gt;::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00052">HelperW.h:52</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a619c634adba7a1386122c22d8d2021df">solar_core::EParamTypes::HHDecPreliminaryQuote</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_enum_factory_html_a573986ee0b4951d5ecc6a8c100f892e8"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8">solar_core::EnumFactory::ToEParamTypes</a></div><div class="ttdeci">static EParamTypes ToEParamTypes(std::string param_type)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00456">IParameters.h:456</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a827914969a84c51a2e5722d05a311c97">solar_core::EParamTypes::SEILarge</a></div></div>
-<div class="ttc" id="namespacesolar__core_html_adeda2737d6938c190eb774a5b2495045"><div class="ttname"><a href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">solar_core::PropertyTree</a></div><div class="ttdeci">boost::property_tree::ptree PropertyTree</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00410">IParameters.h:410</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_helper_w_html"><div class="ttname"><a href="classsolar__core_1_1_helper_w.html">solar_core::HelperW</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00024">HelperW.h:24</a></div></div>
+<div class="ttc" id="_h_8h_html"><div class="ttname"><a href="_h_8h.html">H.h</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_adeda2737d6938c190eb774a5b2495045"><div class="ttname"><a href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">solar_core::PropertyTree</a></div><div class="ttdeci">boost::property_tree::ptree PropertyTree</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00442">IParameters.h:442</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_html"><div class="ttname"><a href="classsolar__core_1_1_helper_w.html">solar_core::HelperW</a></div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00027">HelperW.h:27</a></div></div>
 <div class="ttc" id="_external_includes_8h_html"><div class="ttname"><a href="_external_includes_8h.html">ExternalIncludes.h</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_enum_factory_html_a7f31a62dd221ed41128618d9eb74b4ee"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">solar_core::EnumFactory::FromEParamTypes</a></div><div class="ttdeci">static std::string FromEParamTypes(EParamTypes param_)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00605">IParameters.h:605</a></div></div>
+<div class="ttc" id="namespaceserialize_html_a4c500beb6e6b8eb1c9e62376d3f5ce83"><div class="ttname"><a href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83">serialize::deserialize</a></div><div class="ttdeci">void deserialize(const PropertyTree &amp;pt, std::vector&lt; T &gt; &amp;r)</div><div class="ttdef"><b>Definition:</b> <a href="_serialize_8h_source.html#l00393">Serialize.h:393</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_enum_factory_html_a7f31a62dd221ed41128618d9eb74b4ee"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee">solar_core::EnumFactory::FromEParamTypes</a></div><div class="ttdeci">static std::string FromEParamTypes(EParamTypes param_)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00637">IParameters.h:637</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a2b772976cb89ca861f4a970d8eed2959">solar_core::EParamTypes::SEISmall</a></div></div>
 <div class="ttc" id="_s_e_i_8h_html"><div class="ttname"><a href="_s_e_i_8h.html">SEI.h</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4_html_adf23c2c9808e7d9ef18a4d778bacccce"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">solar_core::HelperWSpecialization&lt; T, UnitTestModel &gt;::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00099">HelperW.h:99</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_i_random_html_a5d02ddbfd7b3c7a2932166b9ddba5f02"><div class="ttname"><a href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">solar_core::IRandom::rng</a></div><div class="ttdeci">boost::mt19937 rng</div><div class="ttdef"><b>Definition:</b> <a href="_i_random_8h_source.html#l00032">IRandom.h:32</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4_html_adf23c2c9808e7d9ef18a4d778bacccce"><div class="ttname"><a href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_unit_test_model_01_4.html#adf23c2c9808e7d9ef18a4d778bacccce">solar_core::HelperWSpecialization&lt; T, UnitTestModel &gt;::create_seis</a></div><div class="ttdeci">std::vector&lt; SEI * &gt; create_seis(PropertyTree &amp;pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_helper_w_8h_source.html#l00211">HelperW.h:211</a></div></div>
 <div class="ttc" id="_i_random_8h_html"><div class="ttname"><a href="_i_random_8h.html">IRandom.h</a></div></div>
 <div class="ttc" id="namespacesolar__core_html"><div class="ttname"><a href="namespacesolar__core.html">solar_core</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_8h_source.html#l00018">G.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 28 2016 09:55:17 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 17 2016 11:50:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

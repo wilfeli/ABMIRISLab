@@ -3,7 +3,6 @@
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-<<<<<<< HEAD
 class \hyperlink{classserialize_1_1_deserialize_container}{Deserialize\+Container}
 \item 
 class \hyperlink{classserialize_1_1_deserialize_map}{Deserialize\+Map}
@@ -12,36 +11,29 @@ class \hyperlink{classserialize_1_1_deserialize_map_3_01_k_00_01std_1_1shared__p
 \item 
 class \hyperlink{classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vected2d1ee1f8886a5a92a6dbc69e18bdcd}{Deserialize\+Map$<$ K, V, typename std\+::enable\+\_\+if$<$ is\+\_\+vector$<$ V $>$\+::value $>$\+::type $>$}
 \item 
-=======
-class \hyperlink{classserialize_1_1_deserialize_map}{Deserialize\+Map}
-\item 
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 class \hyperlink{classserialize_1_1_deserialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01std_1_1ibe6cfa8a2d341f3a0942baedd95196d5}{Deserialize\+Map$<$ K, V, typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ V $>$\+::value $>$\+::type $>$}
 \item 
 class \hyperlink{classserialize_1_1_deserialize_value}{Deserialize\+Value}
 \item 
 class \hyperlink{classserialize_1_1_deserialize_value_3_01_t_00_01typename_01std_1_1enable__if_3_01std_1_1is__sambc4bb2b40dcc8b30285e8bdc35bf8b03}{Deserialize\+Value$<$ T, typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ T, std\+::string $>$\+::value $>$\+::type $>$}
 \item 
-<<<<<<< HEAD
 class \hyperlink{classserialize_1_1is__vector}{is\+\_\+vector}
 \item 
 class \hyperlink{classserialize_1_1is__vector_3_01std_1_1vector_3_01_t_01_4_01_4}{is\+\_\+vector$<$ std\+::vector$<$ T $>$ $>$}
+\item 
+class \hyperlink{classserialize_1_1_parsed_dist}{Parsed\+Dist}
 \item 
 class \hyperlink{classserialize_1_1_serialize_container}{Serialize\+Container}
 \item 
 class \hyperlink{classserialize_1_1_serialize_map}{Serialize\+Map}
 \item 
 class \hyperlink{classserialize_1_1_serialize_map_3_01_k_00_01_v_00_01typename_01std_1_1enable__if_3_01is__vector3a4a5c31f236854fe1872e17684001d1}{Serialize\+Map$<$ K, V, typename std\+::enable\+\_\+if$<$ is\+\_\+vector$<$ V $>$\+::value $>$\+::type $>$}
-=======
-class \hyperlink{classserialize_1_1_serialize_impl2}{Serialize\+Impl2}
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \item 
 class \hyperlink{classserialize_1_1_s_y_alg}{S\+Y\+Alg}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-<<<<<<< HEAD
 {\footnotesize template$<$typename In $>$ }\\void \hyperlink{namespaceserialize_afcd8d07d106f4bf71ce8813e6c2ccbd8}{serialize\+\_\+value} (In \&in\+\_\+, std\+::string \&out\+\_\+)
 \item 
 {\footnotesize template$<$class T $>$ }\\\hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \hyperlink{namespaceserialize_a48d3582d3d99189f6f067e77d962574f}{serialize} (std\+::vector$<$ T $>$ \&container\+\_\+, Property\+Tree\+::key\+\_\+type const \&key)
@@ -57,11 +49,8 @@ class \hyperlink{classserialize_1_1_s_y_alg}{S\+Y\+Alg}
 {\footnotesize template$<$typename K , typename V $>$ }\\void \hyperlink{namespaceserialize_af7e18cf15b955d078b7fc036042cb083}{deserialize} (const \hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt, std\+::map$<$ K, V $>$ \&r)
 \item 
 {\footnotesize template$<$class T $>$ }\\T \hyperlink{namespaceserialize_aa5ee0bad0c960a3f06430066217d8c12}{solve\+\_\+str\+\_\+formula} (const std\+::string \&formula\+\_\+, \hyperlink{classsolar__core_1_1_i_random}{I\+Random} \&rand\+\_\+)
-=======
-{\footnotesize template$<$typename K , typename V $>$ }\\void \hyperlink{namespaceserialize_af7e18cf15b955d078b7fc036042cb083}{deserialize} (const Property\+Tree \&pt, std\+::map$<$ K, V $>$ \&r)
 \item 
-{\footnotesize template$<$class $>$ }\\void \hyperlink{namespaceserialize_a2c1ea7730402ca3407bced2235efe3fd}{solve\+\_\+str\+\_\+formula} (std\+::string \&formula\+\_\+,)
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+\hyperlink{classserialize_1_1_parsed_dist}{Parsed\+Dist} \hyperlink{namespaceserialize_a1cef1f38ab16dc50b42af0694fc4160f}{create\+\_\+dist\+\_\+from\+\_\+formula} (const std\+::string \&formula\+\_\+, \hyperlink{classsolar__core_1_1_i_random}{solar\+\_\+core\+::\+I\+Random} $\ast$rand\+\_\+)
 \end{DoxyCompactItemize}
 {\bf }\par
 \begin{DoxyCompactItemize}
@@ -82,7 +71,30 @@ bool \hyperlink{namespaceserialize_a897be0f6c9fe37021e11bfeb732d3500}{is\+\_\+op
 
 
 \subsection{Function Documentation}
-<<<<<<< HEAD
+\hypertarget{namespaceserialize_a1cef1f38ab16dc50b42af0694fc4160f}{}\index{serialize@{serialize}!create\+\_\+dist\+\_\+from\+\_\+formula@{create\+\_\+dist\+\_\+from\+\_\+formula}}
+\index{create\+\_\+dist\+\_\+from\+\_\+formula@{create\+\_\+dist\+\_\+from\+\_\+formula}!serialize@{serialize}}
+\subsubsection[{create\+\_\+dist\+\_\+from\+\_\+formula}]{\setlength{\rightskip}{0pt plus 5cm}{\bf serialize\+::\+Parsed\+Dist} serialize\+::create\+\_\+dist\+\_\+from\+\_\+formula (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{formula\+\_\+, }
+\item[{{\bf solar\+\_\+core\+::\+I\+Random} $\ast$}]{rand\+\_\+}
+\end{DoxyParamCaption}
+)}\label{namespaceserialize_a1cef1f38ab16dc50b42af0694fc4160f}
+Parses distribution careful here -\/ will find both u and u\+\_\+int 
+
+Definition at line 262 of file Serialize.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{namespaceserialize_a1cef1f38ab16dc50b42af0694fc4160f_icgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{namespaceserialize_a4c500beb6e6b8eb1c9e62376d3f5ce83}{}\index{serialize@{serialize}!deserialize@{deserialize}}
 \index{deserialize@{deserialize}!serialize@{serialize}}
 \subsubsection[{deserialize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void serialize\+::deserialize (
@@ -93,12 +105,11 @@ bool \hyperlink{namespaceserialize_a897be0f6c9fe37021e11bfeb732d3500}{is\+\_\+op
 )}\label{namespaceserialize_a4c500beb6e6b8eb1c9e62376d3f5ce83}
 
 
-Definition at line 383 of file Serialize.\+h.
+Definition at line 393 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -114,7 +125,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=342pt]{namespaceserialize_a4c500beb6e6b8eb1c9e62376d3f5ce83_icgraph}
+\includegraphics[width=350pt]{namespaceserialize_a4c500beb6e6b8eb1c9e62376d3f5ce83_icgraph}
 \end{center}
 \end{figure}
 
@@ -129,12 +140,11 @@ Here is the caller graph for this function\+:
 )}\label{namespaceserialize_a067bdd480e2966e4a61457e64dfbca9e}
 
 
-Definition at line 387 of file Serialize.\+h.
+Definition at line 397 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -143,36 +153,21 @@ Here is the call graph for this function\+:
 \end{figure}
 
 
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \hypertarget{namespaceserialize_af7e18cf15b955d078b7fc036042cb083}{}\index{serialize@{serialize}!deserialize@{deserialize}}
 \index{deserialize@{deserialize}!serialize@{serialize}}
 \subsubsection[{deserialize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename K , typename V $>$ void serialize\+::deserialize (
 \begin{DoxyParamCaption}
-<<<<<<< HEAD
 \item[{const {\bf Property\+Tree} \&}]{pt, }
-=======
-\item[{const Property\+Tree \&}]{pt, }
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \item[{std\+::map$<$ K, V $>$ \&}]{r}
 \end{DoxyParamCaption}
 )}\label{namespaceserialize_af7e18cf15b955d078b7fc036042cb083}
 Deserialize into map 
 
-<<<<<<< HEAD
-Definition at line 396 of file Serialize.\+h.
+Definition at line 406 of file Serialize.\+h.
 
 
 
 Here is the call graph for this function\+:\nopagebreak
-=======
-Definition at line 169 of file Serialize.\+h.
-
-
-
-Here is the call graph for this function\+:
-\nopagebreak
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -202,20 +197,11 @@ Here is the caller graph for this function\+:
 )}\label{namespaceserialize_ade99c17935e107385ad259ba3111457e}
 Evaluate R\+P\+N 
 
-<<<<<<< HEAD
 Definition at line 185 of file Serialize.\+cpp.
 
 
 
 Here is the call graph for this function\+:\nopagebreak
-=======
-Definition at line 175 of file Serialize.\+cpp.
-
-
-
-Here is the call graph for this function\+:
-\nopagebreak
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -245,20 +231,11 @@ Here is the caller graph for this function\+:
 )}\label{namespaceserialize_a2876e5d84edeaa969e25a176eb582bb3}
 
 
-<<<<<<< HEAD
 Definition at line 89 of file Serialize.\+cpp.
 
 
 
 Here is the call graph for this function\+:\nopagebreak
-=======
-Definition at line 81 of file Serialize.\+cpp.
-
-
-
-Here is the call graph for this function\+:
-\nopagebreak
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -274,11 +251,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-<<<<<<< HEAD
 \includegraphics[width=350pt]{namespaceserialize_a2876e5d84edeaa969e25a176eb582bb3_icgraph}
-=======
-\includegraphics[width=348pt]{namespaceserialize_a2876e5d84edeaa969e25a176eb582bb3_icgraph}
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \end{center}
 \end{figure}
 
@@ -329,7 +302,6 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
-<<<<<<< HEAD
 \hypertarget{namespaceserialize_a48d3582d3d99189f6f067e77d962574f}{}\index{serialize@{serialize}!serialize@{serialize}}
 \index{serialize@{serialize}!serialize@{serialize}}
 \subsubsection[{serialize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Property\+Tree} serialize\+::serialize (
@@ -344,8 +316,7 @@ Definition at line 198 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -361,7 +332,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=306pt]{namespaceserialize_a48d3582d3d99189f6f067e77d962574f_icgraph}
+\includegraphics[width=350pt]{namespaceserialize_a48d3582d3d99189f6f067e77d962574f_icgraph}
 \end{center}
 \end{figure}
 
@@ -380,8 +351,7 @@ Definition at line 201 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -404,8 +374,7 @@ Definition at line 204 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -428,8 +397,7 @@ Definition at line 48 of file Serialize.\+h.
 
 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -438,8 +406,6 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
-=======
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \hypertarget{namespaceserialize_a8efbe7c32352f8ff750211235e3d5361}{}\index{serialize@{serialize}!solve\+\_\+formula@{solve\+\_\+formula}}
 \index{solve\+\_\+formula@{solve\+\_\+formula}!serialize@{serialize}}
 \subsubsection[{solve\+\_\+formula}]{\setlength{\rightskip}{0pt plus 5cm}double serialize\+::solve\+\_\+formula (
@@ -449,7 +415,6 @@ Here is the caller graph for this function\+:
 )}\label{namespaceserialize_a8efbe7c32352f8ff750211235e3d5361}
 Simple algorithm to solve mathematical formulas 
 
-<<<<<<< HEAD
 Definition at line 242 of file Serialize.\+cpp.
 
 
@@ -465,28 +430,15 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Here is the caller graph for this function\+:
-=======
-Definition at line 233 of file Serialize.\+cpp.
-
-
-
-Here is the call graph for this function\+:
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-<<<<<<< HEAD
 \includegraphics[width=338pt]{namespaceserialize_a8efbe7c32352f8ff750211235e3d5361_icgraph}
-=======
-\includegraphics[width=350pt]{namespaceserialize_a8efbe7c32352f8ff750211235e3d5361_cgraph}
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \end{center}
 \end{figure}
 
 
-<<<<<<< HEAD
 \hypertarget{namespaceserialize_aa5ee0bad0c960a3f06430066217d8c12}{}\index{serialize@{serialize}!solve\+\_\+str\+\_\+formula@{solve\+\_\+str\+\_\+formula}}
 \index{solve\+\_\+str\+\_\+formula@{solve\+\_\+str\+\_\+formula}!serialize@{serialize}}
 \subsubsection[{solve\+\_\+str\+\_\+formula}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T serialize\+::solve\+\_\+str\+\_\+formula (
@@ -496,17 +448,16 @@ Here is the call graph for this function\+:
 \end{DoxyParamCaption}
 )}\label{namespaceserialize_aa5ee0bad0c960a3f06430066217d8c12}
 M\+A\+R\+K\+: cont. \begin{DoxyRefDesc}{Dev\+Stage2}
-\item[\hyperlink{_dev_stage2__DevStage2000027}{Dev\+Stage2}]change to better Truncated generation \end{DoxyRefDesc}
+\item[\hyperlink{_dev_stage2__DevStage2000026}{Dev\+Stage2}]change to better Truncated generation, now is simple rejection algorithm \end{DoxyRefDesc}
 
 
 careful here -\/ will find both u and u\+\_\+int 
 
-Definition at line 453 of file Serialize.\+h.
+Definition at line 463 of file Serialize.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -514,18 +465,6 @@ Here is the call graph for this function\+:
 \end{center}
 \end{figure}
 
-=======
-\hypertarget{namespaceserialize_a2c1ea7730402ca3407bced2235efe3fd}{}\index{serialize@{serialize}!solve\+\_\+str\+\_\+formula@{solve\+\_\+str\+\_\+formula}}
-\index{solve\+\_\+str\+\_\+formula@{solve\+\_\+str\+\_\+formula}!serialize@{serialize}}
-\subsubsection[{solve\+\_\+str\+\_\+formula}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ void serialize\+::solve\+\_\+str\+\_\+formula (
-\begin{DoxyParamCaption}
-\item[{std\+::string \&}]{formula\+\_\+}
-\end{DoxyParamCaption}
-)}\label{namespaceserialize_a2c1ea7730402ca3407bced2235efe3fd}
-M\+A\+R\+K\+: cont. 
-
-Definition at line 226 of file Serialize.\+h.
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 
 \hypertarget{namespaceserialize_a06d144912d025816fe84c532295d274a}{}\index{serialize@{serialize}!split\+\_\+expression\+\_\+\+S\+Y\+Alg@{split\+\_\+expression\+\_\+\+S\+Y\+Alg}}
 \index{split\+\_\+expression\+\_\+\+S\+Y\+Alg@{split\+\_\+expression\+\_\+\+S\+Y\+Alg}!serialize@{serialize}}
@@ -540,12 +479,7 @@ Definition at line 31 of file Serialize.\+cpp.
 
 
 
-<<<<<<< HEAD
 Here is the call graph for this function\+:\nopagebreak
-=======
-Here is the call graph for this function\+:
-\nopagebreak
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 \begin{figure}[H]
 \begin{center}
 \leavevmode

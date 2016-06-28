@@ -77,14 +77,94 @@ Collaboration diagram for solar_core::HelperWSpecialization&lt; T, BaselineModel
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f9f25055cdc6e402ae717b540a1feac"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classsolar__core_1_1_s_e_i.html">SEI</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#a9f9f25055cdc6e402ae717b540a1feac">create_seis</a> (<a class="el" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a> &amp;pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, <a class="el" href="classsolar__core_1_1_w.html">W</a> *w_)</td></tr>
 <tr class="separator:a9f9f25055cdc6e402ae717b540a1feac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9f30218e0bc792ed2817caf89b576d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classsolar__core_1_1_household.html">Household</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4.html#aaf9f30218e0bc792ed2817caf89b576d">create_hhs</a> (<a class="el" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a> &amp;pt, std::string mode_, long N_HH, long N_HHMarketingStateHighlyInterested, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_x, boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;rng_location_y, <a class="el" href="classsolar__core_1_1_i_random.html">IRandom</a> *rand)</td></tr>
+<tr class="separator:aaf9f30218e0bc792ed2817caf89b576d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 class solar_core::HelperWSpecialization&lt; T, BaselineModel &gt;</h3>
 
 
-<p>Definition at line <a class="el" href="_helper_w_8h_source.html#l00045">45</a> of file <a class="el" href="_helper_w_8h_source.html">HelperW.h</a>.</p>
+<p>Definition at line <a class="el" href="_helper_w_8h_source.html#l00048">48</a> of file <a class="el" href="_helper_w_8h_source.html">HelperW.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aaf9f30218e0bc792ed2817caf89b576d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classsolar__core_1_1_household.html">Household</a>*&gt; <a class="el" href="classsolar__core_1_1_helper_w_specialization.html">solar_core::HelperWSpecialization</a>&lt; T, <a class="el" href="classsolar__core_1_1_baseline_model.html">BaselineModel</a> &gt;::create_hhs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">PropertyTree</a> &amp;&#160;</td>
+          <td class="paramname"><em>pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>mode_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>N_HH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>N_HHMarketingStateHighlyInterested</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>rng_location_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::variate_generator&lt; boost::mt19937 &amp;, boost::uniform_int&lt; uint64_t &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>rng_location_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsolar__core_1_1_i_random.html">IRandom</a> *&#160;</td>
+          <td class="paramname"><em>rand</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Old version of generating H - with independent parameters </p>
+
+<p>Definition at line <a class="el" href="_helper_w_8h_source.html#l00097">97</a> of file <a class="el" href="_helper_w_8h_source.html">HelperW.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d_cgraph.png" border="0" usemap="#classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d_cgraph" alt=""/></div>
+<map name="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d_cgraph" id="classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d_cgraph">
+<area shape="rect" id="node2" href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83" title="serialize::deserialize" alt="" coords="294,12,437,39"/><area shape="rect" id="node4" href="classsolar__core_1_1_enum_factory.html#a7f31a62dd221ed41128618d9eb74b4ee" title="solar_core::EnumFactory\l::FromEParamTypes" alt="" coords="280,63,451,105"/><area shape="rect" id="node5" href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8" title="solar_core::EnumFactory\l::ToEParamTypes" alt="" coords="280,129,451,170"/><area shape="rect" id="node6" href="namespaceserialize.html#a48d3582d3d99189f6f067e77d962574f" title="serialize::serialize" alt="" coords="302,195,429,221"/><area shape="rect" id="node3" href="classserialize_1_1_deserialize_container.html#a81bdeaff0ef56f203cc65b1d0691c471" title="serialize::DeserializeContainer\l::deserialize" alt="" coords="499,5,701,46"/><area shape="rect" id="node7" href="classserialize_1_1_serialize_container.html#a38290b802d8c5a6e1e73d4c98e9f6432" title="serialize::SerializeContainer\l::serialize" alt="" coords="507,187,693,229"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a9f9f25055cdc6e402ae717b540a1feac"></a>
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +231,7 @@ template&lt;class T &gt; </div>
 
 <p>Implements <a class="el" href="classsolar__core_1_1_helper_w.html#a2d53e9a0f5945ced5ddc0388278d2336">solar_core::HelperW</a>.</p>
 
-<p>Definition at line <a class="el" href="_helper_w_8h_source.html#l00049">49</a> of file <a class="el" href="_helper_w_8h_source.html">HelperW.h</a>.</p>
+<p>Definition at line <a class="el" href="_helper_w_8h_source.html#l00052">52</a> of file <a class="el" href="_helper_w_8h_source.html">HelperW.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -170,7 +250,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 28 2016 09:55:18 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 17 2016 11:50:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

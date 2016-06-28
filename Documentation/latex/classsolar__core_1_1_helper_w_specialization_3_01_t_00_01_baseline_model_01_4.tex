@@ -6,8 +6,7 @@
 
 
 
-Inheritance diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, Baseline\+Model $>$\+:
-\nopagebreak
+Inheritance diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, Baseline\+Model $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,8 +15,7 @@ Inheritance diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, Bas
 \end{figure}
 
 
-Collaboration diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, Baseline\+Model $>$\+:
-\nopagebreak
+Collaboration diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, Baseline\+Model $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -28,6 +26,8 @@ Collaboration diagram for solar\+\_\+core\+:\+:Helper\+W\+Specialization$<$ T, B
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} $\ast$ $>$ \hyperlink{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_a9f9f25055cdc6e402ae717b540a1feac}{create\+\_\+seis} (\hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt, std\+::string mode\+\_\+, long N\+\_\+\+S\+E\+I, long N\+\_\+\+S\+E\+I\+Large, boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&rng\+\_\+location\+\_\+x, boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&rng\+\_\+location\+\_\+y, \hyperlink{classsolar__core_1_1_w}{W} $\ast$w\+\_\+)
+\item 
+std\+::vector$<$ \hyperlink{classsolar__core_1_1_household}{Household} $\ast$ $>$ \hyperlink{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d}{create\+\_\+hhs} (\hyperlink{namespacesolar__core_adeda2737d6938c190eb774a5b2495045}{Property\+Tree} \&pt, std\+::string mode\+\_\+, long N\+\_\+\+H\+H, long N\+\_\+\+H\+H\+Marketing\+State\+Highly\+Interested, boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&rng\+\_\+location\+\_\+x, boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&rng\+\_\+location\+\_\+y, \hyperlink{classsolar__core_1_1_i_random}{I\+Random} $\ast$rand)
 \end{DoxyCompactItemize}
 
 
@@ -36,11 +36,40 @@ std\+::vector$<$ \hyperlink{classsolar__core_1_1_s_e_i}{S\+E\+I} $\ast$ $>$ \hyp
 
 
 
-Definition at line 45 of file Helper\+W.\+h.
+Definition at line 48 of file Helper\+W.\+h.
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d}{}\index{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$@{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$}!create\+\_\+hhs@{create\+\_\+hhs}}
+\index{create\+\_\+hhs@{create\+\_\+hhs}!solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$@{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$}}
+\subsubsection[{create\+\_\+hhs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std\+::vector$<${\bf Household}$\ast$$>$ {\bf solar\+\_\+core\+::\+Helper\+W\+Specialization}$<$ T, {\bf Baseline\+Model} $>$\+::create\+\_\+hhs (
+\begin{DoxyParamCaption}
+\item[{{\bf Property\+Tree} \&}]{pt, }
+\item[{std\+::string}]{mode\+\_\+, }
+\item[{long}]{N\+\_\+\+H\+H, }
+\item[{long}]{N\+\_\+\+H\+H\+Marketing\+State\+Highly\+Interested, }
+\item[{boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&}]{rng\+\_\+location\+\_\+x, }
+\item[{boost\+::variate\+\_\+generator$<$ boost\+::mt19937 \&, boost\+::uniform\+\_\+int$<$ uint64\+\_\+t $>$$>$ \&}]{rng\+\_\+location\+\_\+y, }
+\item[{{\bf I\+Random} $\ast$}]{rand}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d}
+Old version of generating H -\/ with independent parameters 
+
+Definition at line 97 of file Helper\+W.\+h.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_aaf9f30218e0bc792ed2817caf89b576d_cgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{classsolar__core_1_1_helper_w_specialization_3_01_t_00_01_baseline_model_01_4_a9f9f25055cdc6e402ae717b540a1feac}{}\index{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$@{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$}!create\+\_\+seis@{create\+\_\+seis}}
 \index{create\+\_\+seis@{create\+\_\+seis}!solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$@{solar\+\_\+core\+::\+Helper\+W\+Specialization$<$ T, Baseline\+Model $>$}}
 \subsubsection[{create\+\_\+seis}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std\+::vector$<${\bf S\+E\+I}$\ast$$>$ {\bf solar\+\_\+core\+::\+Helper\+W\+Specialization}$<$ T, {\bf Baseline\+Model} $>$\+::create\+\_\+seis (
@@ -60,12 +89,11 @@ Implements \hyperlink{classsolar__core_1_1_helper_w_a2d53e9a0f5945ced5ddc0388278
 
 
 
-Definition at line 49 of file Helper\+W.\+h.
+Definition at line 52 of file Helper\+W.\+h.
 
 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

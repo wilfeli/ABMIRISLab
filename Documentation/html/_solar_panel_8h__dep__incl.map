@@ -1,6 +1,5 @@
 <map id="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/SolarPanel.h" name="/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Agents/SolarPanel.h">
 <area shape="rect" id="node2" href="$_g_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/G.cpp" alt="" coords="5,109,216,165"/>
-<<<<<<< HEAD
 <area shape="rect" id="node3" href="$_h_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/H.cpp" alt="" coords="35,213,245,269"/>
 <area shape="rect" id="node4" href="$_s_e_i_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.cpp" alt="" coords="269,213,480,269"/>
 <area shape="rect" id="node5" href="$_s_e_i_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.h" alt="" coords="341,109,552,165"/>
@@ -11,11 +10,4 @@
 <area shape="rect" id="node6" href="$_helper_w_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/HelperW.h" alt="" coords="504,213,715,269"/>
 <area shape="rect" id="node8" href="$_w_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/W.cpp" alt="" coords="647,317,857,373"/>
 <area shape="rect" id="node7" href="$_helper_w_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/HelperW.cpp" alt="" coords="412,317,623,373"/>
-=======
-<area shape="rect" id="node3" href="$_h_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/H.cpp" alt="" coords="56,213,267,269"/>
-<area shape="rect" id="node4" href="$_s_e_i_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.cpp" alt="" coords="525,213,736,269"/>
-<area shape="rect" id="node5" href="$_s_e_i_8h.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SEI.h" alt="" coords="291,109,501,165"/>
-<area shape="rect" id="node7" href="$_solar_panel_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/Agents/SolarPanel.cpp" alt="" coords="576,109,787,165"/>
-<area shape="rect" id="node6" href="$_w_8cpp.html" title="/Users/wilfeli/Dropbox\l/ABM/SolarPanels/ABMIRISLab\l/Source/UI/W.cpp" alt="" coords="291,213,501,269"/>
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
 </map>

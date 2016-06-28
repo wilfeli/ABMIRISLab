@@ -141,48 +141,51 @@
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keyword">auto</span> free_capacity_after_permit = free_capacity - project-&gt;design-&gt;design-&gt;AC_size;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keyword">auto</span> p = <a class="code" href="classsolar__core_1_1_utility.html#a32f7a95da732c6e48c15804277886a45">THETA_dec</a>[0] * std::exp(<a class="code" href="classsolar__core_1_1_utility.html#a32f7a95da732c6e48c15804277886a45">THETA_dec</a>[0]/free_capacity_after_permit);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="keyword">auto</span> pdf_p = boost::uniform_01&lt;&gt;();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <span class="keyword">auto</span> rng_p = boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_01&lt;&gt;&gt;(<a class="code" href="classsolar__core_1_1_utility.html#af46cb137dd05f7b0cabe2aed249498fb">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">rand</a>-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_p);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="comment">//grant permit with some probability</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="keywordflow">if</span> (rng_p() &lt; p)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        <span class="comment">//grant permit</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362af915b5ae43a4c3adc79b2ce7d6e3a679">EParamTypes::GrantedPermitForInterconnection</a>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    };</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                };</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                project-&gt;ac_utility_time = <a class="code" href="classsolar__core_1_1_utility.html#acc68b5e07894b8c3918a7512391c6f7e">a_time</a>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            };</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        };</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    };</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="comment">//check that it is valid pdf</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <span class="keyword">auto</span> pdf_p = boost::uniform_01&lt;&gt;();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="keyword">auto</span> rng_p = boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_01&lt;&gt;&gt;(<a class="code" href="classsolar__core_1_1_utility.html#af46cb137dd05f7b0cabe2aed249498fb">w</a>-&gt;<a class="code" href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">rand</a>-&gt;<a class="code" href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">rng</a>, pdf_p);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="comment">//grant permit with some probability</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="keywordflow">if</span> (rng_p() &lt; p)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        <span class="comment">//grant permit</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        project-&gt;state_project = <a class="code" href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362af915b5ae43a4c3adc79b2ce7d6e3a679">EParamTypes::GrantedPermitForInterconnection</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        <span class="comment">//MARK: cont. update current capacity, decrease by interconnected amount </span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    };</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                };</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                project-&gt;ac_utility_time = <a class="code" href="classsolar__core_1_1_utility.html#acc68b5e07894b8c3918a7512391c6f7e">a_time</a>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            };</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        };</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    };</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_a64c5f71eb62d4ee87fcacb77624b8c09"><div class="ttname"><a href="classsolar__core_1_1_utility.html#a64c5f71eb62d4ee87fcacb77624b8c09">solar_core::Utility::ac_update_tick</a></div><div class="ttdeci">void ac_update_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8cpp_source.html#l00062">Utility.cpp:62</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_w_html"><div class="ttname"><a href="classsolar__core_1_1_w.html">solar_core::W</a></div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00042">W.h:42</a></div></div>
 <div class="ttc" id="_utility_8h_html"><div class="ttname"><a href="_utility_8h.html">Utility.h</a></div></div>
 <div class="ttc" id="_solar_panel_8h_html"><div class="ttname"><a href="_solar_panel_8h.html">SolarPanel.h</a></div></div>
 <div class="ttc" id="_w_8h_html"><div class="ttname"><a href="_w_8h.html">W.h</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_ac38a138fae309c8f1a0c67f19b621fdb"><div class="ttname"><a href="classsolar__core_1_1_utility.html#ac38a138fae309c8f1a0c67f19b621fdb">solar_core::Utility::request_permit_for_interconnection</a></div><div class="ttdeci">void request_permit_for_interconnection(std::shared_ptr&lt; PVProject &gt; project_)</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8cpp_source.html#l00052">Utility.cpp:52</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_w_html_aa60afb55012cd72e304ac2c133e5a245"><div class="ttname"><a href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">solar_core::W::rand</a></div><div class="ttdeci">IRandom * rand</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00123">W.h:123</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_w_html_aa60afb55012cd72e304ac2c133e5a245"><div class="ttname"><a href="classsolar__core_1_1_w.html#aa60afb55012cd72e304ac2c133e5a245">solar_core::W::rand</a></div><div class="ttdeci">IRandom * rand</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00124">W.h:124</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_af46cb137dd05f7b0cabe2aed249498fb"><div class="ttname"><a href="classsolar__core_1_1_utility.html#af46cb137dd05f7b0cabe2aed249498fb">solar_core::Utility::w</a></div><div class="ttdeci">W * w</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8h_source.html#l00035">Utility.h:35</a></div></div>
 <div class="ttc" id="_serialize_8h_html"><div class="ttname"><a href="_serialize_8h.html">Serialize.h</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_a9df3a727c125d50170b7c0e190de460a"><div class="ttname"><a href="classsolar__core_1_1_utility.html#a9df3a727c125d50170b7c0e190de460a">solar_core::Utility::params</a></div><div class="ttdeci">std::map&lt; EParamTypes, double &gt; params</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8h_source.html#l00037">Utility.h:37</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_a71da8601e6cbd65575b8d1b3180484dd"><div class="ttname"><a href="classsolar__core_1_1_utility.html#a71da8601e6cbd65575b8d1b3180484dd">solar_core::Utility::act_tick</a></div><div class="ttdeci">void act_tick()</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8cpp_source.html#l00071">Utility.cpp:71</a></div></div>
 <div class="ttc" id="_i_message_8h_html"><div class="ttname"><a href="_i_message_8h.html">IMessage.h</a></div></div>
-<div class="ttc" id="classsolar__core_1_1_enum_factory_html_a573986ee0b4951d5ecc6a8c100f892e8"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8">solar_core::EnumFactory::ToEParamTypes</a></div><div class="ttdeci">static EParamTypes ToEParamTypes(std::string param_type)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00424">IParameters.h:424</a></div></div>
-<div class="ttc" id="namespacesolar__core_html_adeda2737d6938c190eb774a5b2495045"><div class="ttname"><a href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">solar_core::PropertyTree</a></div><div class="ttdeci">boost::property_tree::ptree PropertyTree</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00410">IParameters.h:410</a></div></div>
+<div class="ttc" id="classsolar__core_1_1_enum_factory_html_a573986ee0b4951d5ecc6a8c100f892e8"><div class="ttname"><a href="classsolar__core_1_1_enum_factory.html#a573986ee0b4951d5ecc6a8c100f892e8">solar_core::EnumFactory::ToEParamTypes</a></div><div class="ttdeci">static EParamTypes ToEParamTypes(std::string param_type)</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00456">IParameters.h:456</a></div></div>
+<div class="ttc" id="namespacesolar__core_html_adeda2737d6938c190eb774a5b2495045"><div class="ttname"><a href="namespacesolar__core.html#adeda2737d6938c190eb774a5b2495045">solar_core::PropertyTree</a></div><div class="ttdeci">boost::property_tree::ptree PropertyTree</div><div class="ttdef"><b>Definition:</b> <a href="_i_parameters_8h_source.html#l00442">IParameters.h:442</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_aa52a4877b6281d4ffa8f003b831e802c"><div class="ttname"><a href="classsolar__core_1_1_utility.html#aa52a4877b6281d4ffa8f003b831e802c">solar_core::Utility::Utility</a></div><div class="ttdeci">Utility(const PropertyTree &amp;pt_, W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8cpp_source.html#l00019">Utility.cpp:19</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_a32f7a95da732c6e48c15804277886a45"><div class="ttname"><a href="classsolar__core_1_1_utility.html#a32f7a95da732c6e48c15804277886a45">solar_core::Utility::THETA_dec</a></div><div class="ttdeci">std::vector&lt; double &gt; THETA_dec</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8h_source.html#l00044">Utility.h:44</a></div></div>
 <div class="ttc" id="namespacesolar__core_html_aa1147341e5ef7a40d68d1bd68e149362a5437744a7fb1f45fdf5d109c4444e7d6"><div class="ttname"><a href="namespacesolar__core.html#aa1147341e5ef7a40d68d1bd68e149362a5437744a7fb1f45fdf5d109c4444e7d6">solar_core::EParamTypes::RequestedPermitForInterconnection</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_aec8717094f41f296a2b50310f0faa169"><div class="ttname"><a href="classsolar__core_1_1_utility.html#aec8717094f41f296a2b50310f0faa169">solar_core::Utility::init</a></div><div class="ttdeci">void init(W *w_)</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8cpp_source.html#l00044">Utility.cpp:44</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_a80f37d5cc4772161923aaacb73e45e81"><div class="ttname"><a href="classsolar__core_1_1_utility.html#a80f37d5cc4772161923aaacb73e45e81">solar_core::Utility::pending_pvprojects</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; PVProject &gt; &gt; pending_pvprojects</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8h_source.html#l00040">Utility.h:40</a></div></div>
-<div class="ttc" id="namespaceserialize_html_a4c500beb6e6b8eb1c9e62376d3f5ce83"><div class="ttname"><a href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83">serialize::deserialize</a></div><div class="ttdeci">void deserialize(const PropertyTree &amp;pt, std::vector&lt; T &gt; &amp;r)</div><div class="ttdef"><b>Definition:</b> <a href="_serialize_8h_source.html#l00383">Serialize.h:383</a></div></div>
+<div class="ttc" id="namespaceserialize_html_a4c500beb6e6b8eb1c9e62376d3f5ce83"><div class="ttname"><a href="namespaceserialize.html#a4c500beb6e6b8eb1c9e62376d3f5ce83">serialize::deserialize</a></div><div class="ttdeci">void deserialize(const PropertyTree &amp;pt, std::vector&lt; T &gt; &amp;r)</div><div class="ttdef"><b>Definition:</b> <a href="_serialize_8h_source.html#l00393">Serialize.h:393</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_utility_html_ae3b66140590b19d4c448aa8f8f559906"><div class="ttname"><a href="classsolar__core_1_1_utility.html#ae3b66140590b19d4c448aa8f8f559906">solar_core::Utility::pending_pvprojects_to_add</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; PVProject &gt; &gt; pending_pvprojects_to_add</div><div class="ttdef"><b>Definition:</b> <a href="_utility_8h_source.html#l00041">Utility.h:41</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_w_html_ae96b30122adc9fae8fc2f209a4c89b0a"><div class="ttname"><a href="classsolar__core_1_1_w.html#ae96b30122adc9fae8fc2f209a4c89b0a">solar_core::W::time</a></div><div class="ttdeci">TimeUnit time</div><div class="ttdef"><b>Definition:</b> <a href="_w_8h_source.html#l00108">W.h:108</a></div></div>
 <div class="ttc" id="classsolar__core_1_1_i_random_html_a5d02ddbfd7b3c7a2932166b9ddba5f02"><div class="ttname"><a href="classsolar__core_1_1_i_random.html#a5d02ddbfd7b3c7a2932166b9ddba5f02">solar_core::IRandom::rng</a></div><div class="ttdeci">boost::mt19937 rng</div><div class="ttdef"><b>Definition:</b> <a href="_i_random_8h_source.html#l00032">IRandom.h:32</a></div></div>
@@ -196,7 +199,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 28 2016 09:55:17 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 17 2016 11:50:09 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

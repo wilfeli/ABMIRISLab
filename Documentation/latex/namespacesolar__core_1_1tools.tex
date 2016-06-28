@@ -1,13 +1,307 @@
 \hypertarget{namespacesolar__core_1_1tools}{}\section{solar\+\_\+core\+:\+:tools Namespace Reference}
 \label{namespacesolar__core_1_1tools}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classsolar__core_1_1tools_1_1_empirical_m_v_d}{Empirical\+M\+V\+D}
+\item 
+class \hyperlink{classsolar__core_1_1tools_1_1_empirical_u_v_d}{Empirical\+U\+V\+D}
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{namespacesolar__core_1_1tools_ad27b346e42787b5220c80cd386eae266}{parse\+\_\+model\+\_\+file} (std\+::string path\+\_\+to\+\_\+file, std\+::map$<$ std\+::string, std\+::string $>$ \&parsed\+\_\+model)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb}{parse\+\_\+csv\+\_\+file} (std\+::string path\+\_\+to\+\_\+file, std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&parsed\+\_\+file)
+\item 
+\hyperlink{classsolar__core_1_1tools_1_1_empirical_m_v_d}{Empirical\+M\+V\+D} \hyperlink{namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248}{create\+\_\+joint\+\_\+distribution} (std\+::string path\+\_\+to\+\_\+scheme, std\+::string path\+\_\+to\+\_\+data)
+\item 
+void \hyperlink{namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d}{calculate\+\_\+pmf} (std\+::vector$<$ std\+::vector$<$ long $>$$>$ \&bins, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&parsed\+\_\+file, std\+::vector$<$ long $>$ \&freq\+\_\+n, \hyperlink{classsolar__core_1_1tools_1_1_empirical_m_v_d}{Empirical\+M\+V\+D} \&e\+\_\+dist)
+\item 
+std\+::vector$<$ long $>$ \hyperlink{namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef}{collapse\+\_\+pmf} (std\+::vector$<$ long $>$ \&i\+\_\+x, \hyperlink{classsolar__core_1_1tools_1_1_empirical_u_v_d}{Empirical\+U\+V\+D} \&dist)
+\item 
+double \hyperlink{namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5}{calculate\+\_\+scale\+\_\+factor} (std\+::vector$<$ long $>$ \&cond\+\_\+dist, \hyperlink{classsolar__core_1_1tools_1_1_empirical_u_v_d}{Empirical\+U\+V\+D} \&dist)
+\item 
+std\+::vector$<$ double $>$ \hyperlink{namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2}{create\+\_\+cmf} (std\+::vector$<$ long $>$ \&cond\+\_\+dist, double scale\+\_\+factor, \hyperlink{classsolar__core_1_1tools_1_1_empirical_u_v_d}{Empirical\+U\+V\+D} \&dist)
+\item 
+long \hyperlink{namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a}{get\+\_\+inverse\+\_\+index} (std\+::vector$<$ double $>$ \&cmf, double u\+\_\+i)
+\item 
+double \hyperlink{namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8}{get\+\_\+inverse\+\_\+value} (std\+::vector$<$ double $>$ \&theta\+\_\+bin, double u\+\_\+i)
+\item 
+double \hyperlink{namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060}{get\+\_\+inverse\+\_\+value\+\_\+exp} (std\+::vector$<$ double $>$ \&theta\+\_\+bin, double u\+\_\+i)
+\item 
+std\+::vector$<$ double $>$ \hyperlink{namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427}{draw\+\_\+joint\+\_\+distribution} (\hyperlink{classsolar__core_1_1tools_1_1_empirical_m_v_d}{Empirical\+M\+V\+D} \&pmf, \hyperlink{classsolar__core_1_1_i_random}{I\+Random} $\ast$rand)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\hypertarget{namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!calculate\+\_\+pmf@{calculate\+\_\+pmf}}
+\index{calculate\+\_\+pmf@{calculate\+\_\+pmf}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{calculate\+\_\+pmf}]{\setlength{\rightskip}{0pt plus 5cm}void solar\+\_\+core\+::tools\+::calculate\+\_\+pmf (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::vector$<$ long $>$$>$ \&}]{bins, }
+\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{parsed\+\_\+file, }
+\item[{std\+::vector$<$ long $>$ \&}]{freq\+\_\+n, }
+\item[{{\bf Empirical\+M\+V\+D} \&}]{e\+\_\+dist}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d}
+
+
+Definition at line 154 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a0afae1319ed9c683eba7bf2916d0850d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!calculate\+\_\+scale\+\_\+factor@{calculate\+\_\+scale\+\_\+factor}}
+\index{calculate\+\_\+scale\+\_\+factor@{calculate\+\_\+scale\+\_\+factor}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{calculate\+\_\+scale\+\_\+factor}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::tools\+::calculate\+\_\+scale\+\_\+factor (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ long $>$ \&}]{cond\+\_\+dist, }
+\item[{{\bf Empirical\+U\+V\+D} \&}]{dist}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5}
+
+
+Definition at line 277 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a3994daf7d839df36bc1f424c426cb6a5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!collapse\+\_\+pmf@{collapse\+\_\+pmf}}
+\index{collapse\+\_\+pmf@{collapse\+\_\+pmf}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{collapse\+\_\+pmf}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ long $>$ solar\+\_\+core\+::tools\+::collapse\+\_\+pmf (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ long $>$ \&}]{i\+\_\+x, }
+\item[{{\bf Empirical\+U\+V\+D} \&}]{dist}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef}
+
+
+Definition at line 246 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_ace8f7b4ee917995274fe32b95e27f6ef_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!create\+\_\+cmf@{create\+\_\+cmf}}
+\index{create\+\_\+cmf@{create\+\_\+cmf}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{create\+\_\+cmf}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ solar\+\_\+core\+::tools\+::create\+\_\+cmf (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ long $>$ \&}]{cond\+\_\+dist, }
+\item[{double}]{scale\+\_\+factor, }
+\item[{{\bf Empirical\+U\+V\+D} \&}]{dist}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2}
+
+
+Definition at line 293 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a09224182e02de7fdadabfba4e08e0ac2_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!create\+\_\+joint\+\_\+distribution@{create\+\_\+joint\+\_\+distribution}}
+\index{create\+\_\+joint\+\_\+distribution@{create\+\_\+joint\+\_\+distribution}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{create\+\_\+joint\+\_\+distribution}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tools\+::\+Empirical\+M\+V\+D} solar\+\_\+core\+::tools\+::create\+\_\+joint\+\_\+distribution (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path\+\_\+to\+\_\+scheme, }
+\item[{std\+::string}]{path\+\_\+to\+\_\+data}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248}
+
+
+Definition at line 17 of file Simulation.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{namespacesolar__core_1_1tools_a460021055d6057f219037f378c0c3248_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!draw\+\_\+joint\+\_\+distribution@{draw\+\_\+joint\+\_\+distribution}}
+\index{draw\+\_\+joint\+\_\+distribution@{draw\+\_\+joint\+\_\+distribution}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{draw\+\_\+joint\+\_\+distribution}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ solar\+\_\+core\+::tools\+::draw\+\_\+joint\+\_\+distribution (
+\begin{DoxyParamCaption}
+\item[{{\bf Empirical\+M\+V\+D} \&}]{pmf, }
+\item[{{\bf I\+Random} $\ast$}]{rand}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427}
+
+
+Definition at line 189 of file Simulation.\+cpp.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{namespacesolar__core_1_1tools_a1f6003e555b2d4261cc9f26ae2688427_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!get\+\_\+inverse\+\_\+index@{get\+\_\+inverse\+\_\+index}}
+\index{get\+\_\+inverse\+\_\+index@{get\+\_\+inverse\+\_\+index}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{get\+\_\+inverse\+\_\+index}]{\setlength{\rightskip}{0pt plus 5cm}long solar\+\_\+core\+::tools\+::get\+\_\+inverse\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{cmf, }
+\item[{double}]{u\+\_\+i}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a}
+
+
+Definition at line 327 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a5826bf3d73d587e67bba31912e73862a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!get\+\_\+inverse\+\_\+value@{get\+\_\+inverse\+\_\+value}}
+\index{get\+\_\+inverse\+\_\+value@{get\+\_\+inverse\+\_\+value}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{get\+\_\+inverse\+\_\+value}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::tools\+::get\+\_\+inverse\+\_\+value (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{theta\+\_\+bin, }
+\item[{double}]{u\+\_\+i}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8}
+
+
+Definition at line 345 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_a97e71ce44bf9e2eedbcce4332e8fcdd8_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!get\+\_\+inverse\+\_\+value\+\_\+exp@{get\+\_\+inverse\+\_\+value\+\_\+exp}}
+\index{get\+\_\+inverse\+\_\+value\+\_\+exp@{get\+\_\+inverse\+\_\+value\+\_\+exp}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{get\+\_\+inverse\+\_\+value\+\_\+exp}]{\setlength{\rightskip}{0pt plus 5cm}double solar\+\_\+core\+::tools\+::get\+\_\+inverse\+\_\+value\+\_\+exp (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{theta\+\_\+bin, }
+\item[{double}]{u\+\_\+i}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060}
+
+
+Definition at line 353 of file Simulation.\+cpp.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_ab3631c4cd4d3cc65b4b8d59171809060_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!parse\+\_\+csv\+\_\+file@{parse\+\_\+csv\+\_\+file}}
+\index{parse\+\_\+csv\+\_\+file@{parse\+\_\+csv\+\_\+file}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
+\subsubsection[{parse\+\_\+csv\+\_\+file}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void solar\+\_\+core\+::tools\+::parse\+\_\+csv\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path\+\_\+to\+\_\+file, }
+\item[{std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&}]{parsed\+\_\+file}
+\end{DoxyParamCaption}
+)}\label{namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb}
+
+
+Definition at line 23 of file Parsing\+Tools.\+h.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolar__core_1_1tools_ae8bc4dd0c291632fc369b647480c30eb_icgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{namespacesolar__core_1_1tools_ad27b346e42787b5220c80cd386eae266}{}\index{solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}!parse\+\_\+model\+\_\+file@{parse\+\_\+model\+\_\+file}}
 \index{parse\+\_\+model\+\_\+file@{parse\+\_\+model\+\_\+file}!solar\+\_\+core\+::tools@{solar\+\_\+core\+::tools}}
 \subsubsection[{parse\+\_\+model\+\_\+file}]{\setlength{\rightskip}{0pt plus 5cm}void solar\+\_\+core\+::tools\+::parse\+\_\+model\+\_\+file (
@@ -18,12 +312,11 @@ void \hyperlink{namespacesolar__core_1_1tools_ad27b346e42787b5220c80cd386eae266}
 )}\label{namespacesolar__core_1_1tools_ad27b346e42787b5220c80cd386eae266}
 
 
-Definition at line 20 of file Parsing\+Tools.\+cpp.
+Definition at line 18 of file Parsing\+Tools.\+cpp.
 
 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

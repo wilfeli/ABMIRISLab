@@ -78,9 +78,30 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7f872cb768b83e70e263590078fa4c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Belongs to a <a class="el" href="classsolar__core_1_1_household.html">Household</a>. </p>
-
-<p>Definition at line <a class="el" href="_geography_8h_source.html#l00027">27</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
+<div class="textblock"><p>Belongs to a <a class="el" href="classsolar__core_1_1_household.html">Household</a>.</p>
+<p>Cuurently switched to estimated roof_size from the house_size</p><ol type="1">
+<li>RP = roof pitch</li>
+<li>HS = square foot of home</li>
+<li>F = number of floors</li>
+<li>x = roof pitched length</li>
+<li>y = roof length</li>
+<li>RA = roof area</li>
+<li>R = ratio of roof area to house area</li>
+</ol>
+<p>Formula for calculating roof size </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = \sqrt{frac{HS}{F}} \]" src="form_0.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = (\frac{y}{2}) \times (\cos (\arctan (RP)) \]" src="form_1.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ RA = 2 \times x \times y \]" src="form_2.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R = RA \div HS \]" src="form_3.png"/>
+</p>
+ 
+<p>Definition at line <a class="el" href="_geography_8h_source.html#l00051">51</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1babbd79506a4acf93c16ceec093b924"></a>
 <div class="memitem">
@@ -112,7 +133,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>age of a house's roof in years (not required to be whole years) </p>
 
-<p>Definition at line <a class="el" href="_geography_8h_source.html#l00031">31</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
+<p>Definition at line <a class="el" href="_geography_8h_source.html#l00055">55</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
 
 </div>
 </div>
@@ -127,7 +148,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>size of a roof, in m^2 </p>
 
-<p>Definition at line <a class="el" href="_geography_8h_source.html#l00032">32</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
+<p>Definition at line <a class="el" href="_geography_8h_source.html#l00056">56</a> of file <a class="el" href="_geography_8h_source.html">Geography.h</a>.</p>
 
 </div>
 </div>
@@ -138,11 +159,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-<<<<<<< HEAD
-Generated on Sat May 28 2016 09:55:18 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
-=======
-Generated on Tue Apr 12 2016 21:57:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
->>>>>>> 9fadf023062505cb443534457ab9d4d3cc1b7bfc
+Generated on Fri Jun 17 2016 11:50:10 for ABMSolar by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
