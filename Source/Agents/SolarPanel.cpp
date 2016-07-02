@@ -32,4 +32,17 @@ SolarModule::SolarModule(const PropertyTree& pt_)
     warranty_length = pt_.get<double>("Warranty length");
     manufacturer_id = pt_.get<std::string>("Manufacturer Id");
     degradation = pt_.get<double>("Degradation after 10 years");
+    
+    
+    //added double check on parameters consistency
+    
+    
+    double STC_power_rating_from_ef = efficiency * length * width / 1000;
+    
+    if (STC_power_rating_from_ef != STC_power_rating)
+    {
+        throw std::runtime_error("inconsistent solar panel parameters");
+    };
+    
+    
 }
