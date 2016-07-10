@@ -215,6 +215,7 @@ namespace solar_core
         virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
         
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
+        std::map<EParamTypes, std::shared_ptr<Inverter>> dec_inverters; /*!< choices for different inverters to create design with */
         typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
         
         void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
@@ -262,7 +263,7 @@ namespace solar_core
         
         
         
-        std::map<EParamTypes, double> params; /** Parameters of a SEI */
+        std::map<EParamTypes, double> params; /** Parameters of a SEI, here will include price per watt also */
         EParamTypes sei_type;
         double money = 0.0; 
         

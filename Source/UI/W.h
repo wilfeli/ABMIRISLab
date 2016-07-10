@@ -36,7 +36,14 @@ namespace solar_core {
     class SEM;
     class Household;
     class PVProject;
+    class PVDesign;
     class HelperW;
+    
+    
+    
+    
+    
+    
     
     
     class W
@@ -78,7 +85,7 @@ namespace solar_core {
         
         void life(); /*!< general loop */
         
-        void life_hhs(); /*!< life of households */
+        virtual void life_hhs(); /*!< life of households */
         void life_seis(); /*!< life of seis */
         void life_sems(); /*!< life of sems */
         void life_gs(); /*!< life of g */
@@ -190,8 +197,22 @@ namespace solar_core {
         
         
         
+        
+        
     };
     
+    
+    
+    
+    class WEE: public W
+    {
+    public:
+        virtual void life_hhs() overwrite; /*!< life of households */
+    protected:
+        std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
+        std::size_t i_pool_projects;
+
+    };
     
 }
 

@@ -100,6 +100,21 @@ protected:
     
     
     
+    class PVProjectFlat
+    {
+    public:
+        std::shared_ptr<SolarModule> PV_module;
+        double N_PANELS = 0.0;
+        double DC_size = 0.0;
+        double AC_size = 0.0;
+        TimeUnit begin_time;
+        H* agent;/*!< for whom this project is created */
+        
+        
+    };
+    
+    
+    
 /**
  
  PV Project by SEI
