@@ -9,6 +9,52 @@
 #ifndef __ABMSolar__H__
 #define __ABMSolar__H__
 
+#include "Agents/Homeowner.h"
+
+
+namespace solar_core
+{
+    /**
+     
+     Simple H that could only decide on ROI
+     
+     */
+    class H
+    {
+    public:
+        //@{
+        /**
+         
+         Section with geographical parameters
+         
+         */
+        
+        
+        
+        //@}
+        
+        /**
+         
+         
+         Section with parameters for solar projects, mainly House for now
+         
+         
+         
+         
+         */
+        House* house; /** Simplification: assume only 1 house per h*/
+        
+        
+        //@}
+        
+    };
+    
+
+    
+    
+} //end namespace solar_core
+
+
 
 
 #endif /* defined(__ABMSolar__H__) */

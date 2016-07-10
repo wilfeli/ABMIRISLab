@@ -18,6 +18,10 @@
 		EDD376621D320283008705B8 /* WEE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3765F1D320283008705B8 /* WEE.cpp */; };
 		EDD376651D320347008705B8 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376631D320346008705B8 /* H.cpp */; };
 		EDD376661D320347008705B8 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376631D320346008705B8 /* H.cpp */; };
+		EDD376691D320954008705B8 /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
+		EDD3766A1D320954008705B8 /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
+		EDD3766D1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
+		EDD3766E1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -2007,6 +2011,10 @@
 		EDD376601D320283008705B8 /* WEE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEE.h; sourceTree = "<group>"; };
 		EDD376631D320346008705B8 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H.cpp; sourceTree = "<group>"; };
 		EDD376641D320346008705B8 /* H.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = H.h; sourceTree = "<group>"; };
+		EDD376671D320954008705B8 /* SEIBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEIBL.cpp; sourceTree = "<group>"; };
+		EDD376681D320954008705B8 /* SEIBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEIBL.h; sourceTree = "<group>"; };
+		EDD3766B1D321BDC008705B8 /* SEMBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEMBL.cpp; sourceTree = "<group>"; };
+		EDD3766C1D321BDC008705B8 /* SEMBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMBL.h; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -8248,6 +8256,10 @@
 				EDDE57AC1CE2E99D005D1C49 /* Utility.h */,
 				EDD376631D320346008705B8 /* H.cpp */,
 				EDD376641D320346008705B8 /* H.h */,
+				EDD376671D320954008705B8 /* SEIBL.cpp */,
+				EDD376681D320954008705B8 /* SEIBL.h */,
+				EDD3766B1D321BDC008705B8 /* SEMBL.cpp */,
+				EDD3766C1D321BDC008705B8 /* SEMBL.h */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -13184,6 +13196,7 @@
 				EDDE57B11CE3A234005D1C49 /* ID.cpp in Sources */,
 				EDDE57A31CE2D51E005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE57A41CE2D51E005D1C49 /* operations.cpp in Sources */,
+				EDD376691D320954008705B8 /* SEIBL.cpp in Sources */,
 				EDDE57AD1CE2E99D005D1C49 /* Utility.cpp in Sources */,
 				ED438B631D09F78E00CE1EA7 /* Simulation.cpp in Sources */,
 				EDDE57A51CE2D51E005D1C49 /* path.cpp in Sources */,
@@ -13213,6 +13226,7 @@
 				EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */,
 				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
+				EDD3766D1D321BDC008705B8 /* SEMBL.cpp in Sources */,
 				EDDE578A1CDEF359005D1C49 /* Log.cpp in Sources */,
 				EDE03AE71CBBF68900C79A22 /* Serialize.cpp in Sources */,
 			);
@@ -13239,6 +13253,7 @@
 				EDDE57921CE0F03F005D1C49 /* SEIMock.cpp in Sources */,
 				EDD376621D320283008705B8 /* WEE.cpp in Sources */,
 				EDDE4C2A1CDE682E005D1C49 /* SolarPanel.cpp in Sources */,
+				EDD3766A1D320954008705B8 /* SEIBL.cpp in Sources */,
 				EDDE578F1CE0E7AF005D1C49 /* WMock.cpp in Sources */,
 				EDDE57971CE17D3D005D1C49 /* ParsingTools.cpp in Sources */,
 				EDDE4C2E1CDE682E005D1C49 /* SEI.cpp in Sources */,
@@ -13252,6 +13267,7 @@
 				EDDE4C3A1CDE682E005D1C49 /* WorldSettings.cpp in Sources */,
 				EDDE4C3B1CDE682E005D1C49 /* MarketingSystem.cpp in Sources */,
 				EDDE4C3D1CDE682E005D1C49 /* W.cpp in Sources */,
+				EDD3766E1D321BDC008705B8 /* SEMBL.cpp in Sources */,
 				EDD376661D320347008705B8 /* H.cpp in Sources */,
 				EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */,
 				EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */,

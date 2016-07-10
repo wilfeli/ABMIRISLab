@@ -30,41 +30,6 @@ class SEI;
 class PVProject;
     
     
-    /**
-     
-     Simple H that could only decide on ROI
-     
-     */
-    class H
-    {
-    public:
-        //@{
-        /**
-         
-         Section with geographical parameters
-         
-         */
-        
-        
-        
-        //@}
-        
-        /**
-         
-         
-         Section with parameters for solar projects, mainly House for now
-         
-         
-         
-         
-         */
-        House* house; /** Simplification: assume only 1 house per h*/
-        
-        
-        //@}
-
-    };
-    
     
     
     

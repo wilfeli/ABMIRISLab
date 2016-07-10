@@ -204,15 +204,7 @@ namespace solar_core {
     
     
     
-    class WEE: public W
-    {
-    public:
-        virtual void life_hhs() overwrite; /*!< life of households */
-    protected:
-        std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
-        std::size_t i_pool_projects;
-
-    };
+    
     
 }
 
