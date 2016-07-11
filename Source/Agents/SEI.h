@@ -34,7 +34,7 @@ namespace solar_core
     class MesDesign;
     class MesPayment;
     class W;
-    class Household;
+    class Homeowner;
     
     
     /**

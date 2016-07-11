@@ -12,19 +12,19 @@
 #include "Tools/Serialize.h"
 #include "UI/W.h"
 #include "Agents/SolarPanel.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 #include "Agents/SEI.h"
 
 using namespace solar_core;
 
 
 
-std::set<EParamTypes> Household::project_states_to_delete{EParamTypes::ClosedProject};
+std::set<EParamTypes> Homeowner::project_states_to_delete{EParamTypes::ClosedProject};
 
 
 
 
-Household::Household(PropertyTree& pt_, W* w_)
+Homeowner::Homeowner(PropertyTree& pt_, W* w_)
 {
     w = w_;
     
@@ -61,26 +61,26 @@ Household::Household(PropertyTree& pt_, W* w_)
 
 
 void
-Household::init(W* w_)
+Homeowner::init(W* w_)
 {
     a_time = w_->time;
 }
 
 
 void
-Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
+Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
 
     //saves information about advertising agent only if not already commited to installing project
     ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
     
-    if (marketing_state != EParamTypes::HHMarketingCommitedToInstallation)
+    if (marketing_state != EParamTypes::HOMarketingCommitedToInstallation)
     {
         get_inf_marketing_sei.push_back(mes_);
         
-        if (marketing_state != EParamTypes::HHMarketingStateInterested)
+        if (marketing_state != EParamTypes::HOMarketingStateInterested)
         {
-            marketing_state = EParamTypes::HHMarketingStateInterested;
+            marketing_state = EParamTypes::HOMarketingStateInterested;
             //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
             w->get_state_inf(this, marketing_state);
         };
@@ -93,14 +93,14 @@ Household::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 }
 
 void
-Household::ac_inf_marketing_sei()
+Homeowner::ac_inf_marketing_sei()
 {
     w->marketing->request_inf_marketing_sei(this);
 }
 
 
 void
-Household::ac_inf_quoting_sei()
+Homeowner::ac_inf_quoting_sei()
 {
     
     //move timer here
@@ -111,7 +111,7 @@ Household::ac_inf_quoting_sei()
     
     //requests quotes from SEI
     //restricts number of projects
-    while ((!get_inf_marketing_sei.empty()) && (pvprojects.size() <= WorldSettings::instance().constraints[EConstraintParams::MaxNOpenProjectsHH]))
+    while ((!get_inf_marketing_sei.empty()) && (pvprojects.size() <= WorldSettings::instance().constraints[EConstraintParams::MaxNOpenProjectsHO]))
     {
         auto marketing_inf = get_inf_marketing_sei.front();
         
@@ -130,11 +130,11 @@ Household::ac_inf_quoting_sei()
         ///@DevStage2 think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote
         switch (marketing_state)
         {
-            case EParamTypes::HHMarketingStateHighlyInterested:
+            case EParamTypes::HOMarketingStateHighlyInterested:
                 //requests preliminary quote with site visit
                 new_project->state_project = EParamTypes::RequestedPreliminaryQuote;
                 marketing_inf->agent->request_preliminary_quote(new_project);
-            case EParamTypes::HHMarketingStateInterested:
+            case EParamTypes::HOMarketingStateInterested:
                 switch (marketing_inf->sei_type)
             {
                 case EParamTypes::SEISmall:
@@ -164,7 +164,7 @@ Household::ac_inf_quoting_sei()
 }
 
 void
-Household::dec_evaluate_online_quotes()
+Homeowner::dec_evaluate_online_quotes()
 {
     //sort projects by price, lower price goes first
     std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
@@ -203,7 +203,7 @@ Household::dec_evaluate_online_quotes()
 
 
 void
-Household::dec_evaluate_preliminary_quotes()
+Homeowner::dec_evaluate_preliminary_quotes()
 {
     //sort projects by price, lower price goes first
     std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
@@ -223,7 +223,7 @@ Household::dec_evaluate_preliminary_quotes()
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
-            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * THETA_design[EParamTypes::HHDecPreliminaryQuote][0])
+            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * THETA_design[EParamTypes::HODecPreliminaryQuote][0])
             {
                 decision = project;
                 break;
@@ -261,7 +261,7 @@ Household::dec_evaluate_preliminary_quotes()
  
  */
 void
-Household::dec_evaluate_designs()
+Homeowner::dec_evaluate_designs()
 {
     //assume that best design in terms of savings is accepted?
     std::sort(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &lhs, std::shared_ptr<PVProject> &rhs)
@@ -281,7 +281,7 @@ Household::dec_evaluate_designs()
         accepted_design.push_back(decision);
         
         //stop accepting marketing from SEI
-        marketing_state = EParamTypes::HHMarketingCommitedToInstallation;
+        marketing_state = EParamTypes::HOMarketingCommitedToInstallation;
         //close all projects except already accepted
         auto i = 1;
         while (i < pvprojects.size())
@@ -293,29 +293,29 @@ Household::dec_evaluate_designs()
 
 
 void
-Household::receive_design(std::shared_ptr<PVProject> project_)
+Homeowner::receive_design(std::shared_ptr<PVProject> project_)
 {
     ++n_pending_designs;
 }
 
 
 void
-Household::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
+Homeowner::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
     ++n_preliminary_quotes;
 }
 
 void
-Household::receive_online_quote(std::shared_ptr<PVProject> project_)
+Homeowner::receive_online_quote(std::shared_ptr<PVProject> project_)
 {
     
 }
 
 
-std::shared_ptr<MesStateBaseHH>
-Household::get_inf_online_quote(IAgent* agent_to)
+std::shared_ptr<MesStateBaseHO>
+Homeowner::get_inf_online_quote(IAgent* agent_to)
 {
-    auto mes = std::make_shared<MesStateBaseHH>();
+    auto mes = std::make_shared<MesStateBaseHO>();
     
     ///Some parameters need to be taken from House directly, they are pushed to the general container when changed
     for (auto& param:WorldSettings::instance().params_to_copy_preliminary_quote)
@@ -329,20 +329,20 @@ Household::get_inf_online_quote(IAgent* agent_to)
 
 
 bool
-Household::request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
+Homeowner::request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
 {
     std::size_t i = (i_schedule_visits + (visit_time - a_time)) % schedule_visits.size();
-    return schedule_visits[i].size() < params[EParamTypes::HHMaxNVisitsPerTimeUnit];
+    return schedule_visits[i].size() < params[EParamTypes::HOMaxNVisitsPerTimeUnit];
 }
 
 bool
-Household::schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
+Homeowner::schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
 {
     schedule_visits_lock.lock();
     std::size_t i = (i_schedule_visits + (visit_time - a_time)) % schedule_visits.size();
     bool FLAG_SCHEDULED_VISIT = false;
     
-    if (schedule_visits[i].size() < params[EParamTypes::HHMaxNVisitsPerTimeUnit])
+    if (schedule_visits[i].size() < params[EParamTypes::HOMaxNVisitsPerTimeUnit])
     {
         schedule_visits[i].push_back(project);
         FLAG_SCHEDULED_VISIT = true;
@@ -354,7 +354,7 @@ Household::schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project)
 
 
 bool
-Household::dec_project_reroof(std::shared_ptr<PVProject> project)
+Homeowner::dec_project_reroof(std::shared_ptr<PVProject> project)
 {
     //MARK: cont.
     return false;
@@ -363,7 +363,7 @@ Household::dec_project_reroof(std::shared_ptr<PVProject> project)
 
 
 void
-Household::ac_update_tick()
+Homeowner::ac_update_tick()
 {
     //update internal timer
     a_time = w->time;
@@ -395,7 +395,7 @@ Household::ac_update_tick()
 
 
 void
-Household::act_tick()
+Homeowner::act_tick()
 {
     //update internals for the tick
     ac_update_tick();
@@ -447,7 +447,7 @@ Household::act_tick()
 
 
 void
-Household::update_params()
+Homeowner::update_params()
 {
     //saves parameters
     params[EParamTypes::RoofSize] = house->roof_size;

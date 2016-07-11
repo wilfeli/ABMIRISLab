@@ -34,7 +34,7 @@ namespace solar_core {
     class Utility;
     class SEI;
     class SEM;
-    class Household;
+    class Homeowner;
     class PVProject;
     class PVDesign;
     class HelperW;
@@ -64,7 +64,7 @@ namespace solar_core {
         
         
         W(std::string path_, HelperW* w_, std::string mode_ = "NEW"); /*!< */
-        void init();
+        virtual void init();
         std::string base_path;
         
         
@@ -85,7 +85,7 @@ namespace solar_core {
         
         void life(); /*!< general loop */
         
-        virtual void life_hhs(); /*!< life of households */
+        virtual void life_hos(); /*!< life of Homeowners */
         void life_seis(); /*!< life of seis */
         void life_sems(); /*!< life of sems */
         void life_gs(); /*!< life of g */
@@ -157,7 +157,7 @@ namespace solar_core {
          */
         
         
-        void get_state_inf(Household* agent_, EParamTypes state_); /*!< gets information about state change from agent */
+        void get_state_inf(Homeowner* agent_, EParamTypes state_); /*!< gets information about state change from agent */
         void get_state_inf_installed_project(std::shared_ptr<PVProject> project_); /*!< is called when project is finished to record it */
         void get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_); /*!< is called when project is interconnected to record it */
         
@@ -185,7 +185,7 @@ namespace solar_core {
         
         
         
-        std::vector<Household*> hhs;/*!< all H agents */
+        std::vector<Homeowner*> hos;/*!< all H agents */
         std::vector<SEI*> seis;/*!< all SEI agents */
         std::vector<SEM*> sems; /*!< all SEM */
         /*!< H agents that are active, @DevStage3 think about splitting more fine grained */

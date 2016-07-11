@@ -23,7 +23,7 @@
 #include "Agents/SEM.h"
 #include "Agents/Utility.h"
 #include "Agents/G.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 #include "UI/HelperW.h"
 
 
@@ -89,8 +89,8 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         auto N_SEI = pt.get<long>("N_SEI");
         auto N_SEILarge = pt.get<long>("N_SEILarge");
         auto N_SEM = pt.get<long>("N_SEM");
-        auto N_HH = pt.get<long>("N_HH");
-        auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
+        auto N_HO = pt.get<long>("N_HO");
+        auto N_HOMarketingStateHighlyInterested = pt.get<long>("N_HOMarketingStateHighlyInterested");
         
         //create RNG
         rand = new IRandom(pt.get<double>("SEED"));
@@ -222,7 +222,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         std::map<std::string, std::vector<std::string>> THETA_design_str;
         serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
         
-        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HHDecPreliminaryQuote)];
+        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HODecPreliminaryQuote)];
         
         if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
         {
@@ -244,7 +244,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
         std::vector<std::vector<double>> xs;
         //draw from the joint distribution
-        for(auto i = 0 ; i < N_HH; ++i)
+        for(auto i = 0 ; i < N_HO; ++i)
         {
             xs.push_back(tools::draw_joint_distribution(e_dist, rand));
         };
@@ -263,7 +263,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             
             if (params.valid_dist == true)
             {
-                param_values[name] = std::vector<double>(N_HH, 0.0);
+                param_values[name] = std::vector<double>(N_HO, 0.0);
                 //generate map of random number generators with the name for this parameter?
                 switch (params.type)
                 {
@@ -274,14 +274,14 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
                         //see what parameter it is - save values
                         if (name == EParamTypes::ElectricityBill)
                         {
-                            for (auto i = 0; i < N_HH; ++i)
+                            for (auto i = 0; i < N_HO; ++i)
                             {
                                 param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
                             };
                         }
                         else if (name == EParamTypes::Income)
                         {
-                            for (auto i = 0; i < N_HH; ++i)
+                            for (auto i = 0; i < N_HO; ++i)
                             {
                                 param_values[name].push_back(xs[i][4]);
                             };
@@ -303,22 +303,22 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             {
                 //get value and store it as a value for all agents?
                 auto param = serialize::solve_str_formula<double>(iter.second, *rand);
-                param_values[name] = std::vector<double>(N_HH, param);
+                param_values[name] = std::vector<double>(N_HO, param);
                 
             };
         };
         
         
         
-        //create HH
+        //create HO
         auto j = 0;
-        for (auto i = 0; i < N_HH; ++i)
+        for (auto i = 0; i < N_HO; ++i)
         {
-            if (j < N_HHMarketingStateHighlyInterested)
+            if (j < N_HOMarketingStateHighlyInterested)
             {
                 //create few highly interested agents
                 //put specific parameters into template
-                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HHMarketingStateHighlyInterested));
+                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HOMarketingStateHighlyInterested));
             };
             
             ++j;
@@ -336,20 +336,20 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             
             
             //create decision parameters
-            THETA_design[EParamTypes::HHDecPreliminaryQuote] = std::vector<double>{rng_THETA()};
+            THETA_design[EParamTypes::HODecPreliminaryQuote] = std::vector<double>{rng_THETA()};
             pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
             
             
             
             //read configuration file
             //replace parameters if necessary
-            hhs.push_back(new Household(pt, this));
+            hos.push_back(new Homeowner(pt, this));
             
             
             //copy other parameters
             for (auto iter:param_values)
             {
-                hhs.back()->params[iter.first] = param_values[iter.first][i];
+                hos.back()->params[iter.first] = param_values[iter.first][i];
             };
             
             
@@ -490,7 +490,7 @@ W::init()
     
     
     
-    for (auto& agent:hhs)
+    for (auto& agent:hos)
     {
         agent->init(this);
     };
@@ -505,13 +505,6 @@ W::init()
         agent->init(this);
     };
     
-    
-    //preallocate pool of designs
-    for (auto i = 0; i < )
-    {};
-    std::vector<>
-    
-
     
 }
 
@@ -570,11 +563,11 @@ W::life()
 
 
 void
-W::life_hhs()
+W::life_hos()
 {
     
     
-    //go through households that indicated desire to request information and inform them that action to request information could be taken
+    //go through Homeowners that indicated desire to request information and inform them that action to request information could be taken
     for (auto& agent:get_inf_marketing_sei_agents)
     {
         ///@DevStage3 might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place.
@@ -592,7 +585,7 @@ W::life_hhs()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto& agent:hhs)
+            for (auto& agent:hos)
             {
                 //get tick
                 agent->act_tick();
@@ -753,7 +746,7 @@ W::get_permit_difficulty(double location_x, double location_y) const
 
 
 void
-W::get_state_inf(Household* agent_, EParamTypes state_)
+W::get_state_inf(Homeowner* agent_, EParamTypes state_)
 {
 }
 

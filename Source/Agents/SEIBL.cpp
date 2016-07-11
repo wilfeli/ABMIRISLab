@@ -6,9 +6,10 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
-#include "SEIBL.h"
+#include "Agents/SEIBL.h"
+#include "Agents/H.h"
 
-
+using namespace solar_core;
 
 /**
  
@@ -16,7 +17,7 @@
  
  */
 std::shared_ptr<PVDesign>
-SEI::form_design_for_params(H* agent_)
+SEIBL::form_design_for_params(H* agent_)
 {
     
     //size is equal to the utility bill, assume simple electricity pricing for now
@@ -65,6 +66,7 @@ SEI::form_design_for_params(H* agent_)
 
 
 
+
 void
 SEI::dec_base()
 {
@@ -77,5 +79,23 @@ SEI::dec_base()
     
     
 }
+
+
+
+void
+SEI::act_tick()
+{
+    
+    
+    //make price decision, based on the switching or not
+    dec_base();
+    
+    
+    //MARK: cont. 
+
+    
+    
+}
+
 
 

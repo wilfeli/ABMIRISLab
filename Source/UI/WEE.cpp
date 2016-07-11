@@ -6,7 +6,25 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
-#include "WEE.h"
+
+
+
+
+#include "Tools/Serialize.h"
+
+#include "UI/WEE.h"
+#include "Tools/WorldSettings.h"
+#include "Tools/ParsingTools.h"
+#include "Tools/Simulation.h"
+#include "Geography/Geography.h"
+#include "Institutions/MarketingSystem.h"
+#include "Agents/IAgent.h"
+#include "Agents/SEI.h"
+#include "Agents/SEM.h"
+#include "Agents/Utility.h"
+#include "Agents/G.h"
+#include "Agents/Homeowner.h"
+#include "UI/HelperW.h"
 
 
 using namespace solar_core;
@@ -14,16 +32,55 @@ using namespace solar_core;
 
 
 void
-WEE::life_hhs()
+WEE::init()
+{
+    
+    marketing->init(this);
+    g->init(this);
+    
+    
+    
+    for (auto& agent:hos)
+    {
+        agent->init(this);
+    };
+    
+    for (auto& agent:seis)
+    {
+        agent->init(this);
+    };
+    
+    for (auto& agent:sems)
+    {
+        agent->init(this);
+    };
+    
+    
+    //preallocate pool of designs
+    for (auto i = 0; i < constants::POOL_SIZE; ++i)
+    {
+        pool_projects.push_back(std::make_shared<PVProjectFlat>());
+    };
+    
+    
+    
+    
+}
+
+
+
+
+void
+WEE::life_hos()
 {
     
     
     //randomly select agents and push marketing information
-    auto pdf_agents = boost::uniform_int<uint64_t>(0, hhs.size()-1);
+    auto pdf_agents = boost::uniform_int<uint64_t>(0, hos.size()-1);
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_agents);
     
     
-    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, hhs.size()-1);
+    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, hos.size()-1);
     auto rng_sei_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_sei_agents);
     
     std::size_t j_h = 0;
@@ -49,25 +106,25 @@ WEE::life_hhs()
                 
                 
                 //form design for an agent
-                seis[j_sei]->form_design_for_params(hhs[i], pool_designs[i_pool_designs]);
+                seis[j_sei]->form_design_for_params(hos[i], pool_projects[i_pool_projects]);
                 
                 
                 //get answer for the design
-                FLAG_DEC = hhs[i]->ac_dec_design(seis[j_sei]->form_design_for_params(hhs[i]));
+                FLAG_DEC = hos[i]->ac_dec_design(seis[j_sei]->form_design_for_params(hos[i]));
                 
                 
                 
                 //if accepted - save as an active project to maintain it
                 if (FLAG_DEC)
                 {
-                    ++i_pool_designs;
+                    ++i_pool_projects;
                 };
                 
             };
             
             
             
-            for (auto& agent:hhs)
+            for (auto& agent:hos)
             {
                 //get tick
                 agent->act_tick();

@@ -11,7 +11,7 @@
 #include "Tools/Serialize.h"
 #include "Agents/G.h"
 #include "Agents/SolarPanel.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 
 using namespace solar_core;
 

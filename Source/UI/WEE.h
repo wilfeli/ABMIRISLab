@@ -12,13 +12,20 @@
 
 #include "UI/W.h"
 
+
+
 namespace solar_core {
 
+    
+    class PVProjectFlat;
+    
+    
 
 class WEE: public W
 {
 public:
-    virtual void life_hhs() overwrite; /*!< life of households */
+    virtual void init() override;
+    virtual void life_hos() override; /*!< life of Homeowners */
 protected:
     std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
     std::size_t i_pool_projects;

@@ -24,10 +24,10 @@ WMock::create(std::string path_, std::string mode_)
 
 
 
-std::vector<solar_core::Household*>&
-WMock::get_hhs()
+std::vector<solar_core::Homeowner*>&
+WMock::get_hos()
 {
-    return hhs;
+    return hos;
 }
 
 

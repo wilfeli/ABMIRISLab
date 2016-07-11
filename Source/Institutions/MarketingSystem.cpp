@@ -10,7 +10,7 @@
 #include "Institutions/MarketingSystem.h"
 #include "Institutions/IMessage.h"
 #include "Tools/WorldSettings.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 
 
 using namespace solar_core;
@@ -67,7 +67,7 @@ MarketingInst::act_tick()
     
     
     //randomly select agents and push marketing information
-    auto pdf_agents = boost::uniform_int<uint64_t>(0, w->hhs.size()-1);
+    auto pdf_agents = boost::uniform_int<uint64_t>(0, w->hos.size()-1);
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_agents);
     
     std::size_t j = 0;
@@ -79,7 +79,7 @@ MarketingInst::act_tick()
         //push all marketing messages
         for (auto& mes:marketing_mess)
         {
-            w->hhs[j]->get_inf(mes);
+            w->hos[j]->get_inf(mes);
         };
 
     };

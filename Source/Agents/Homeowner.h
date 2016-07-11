@@ -24,7 +24,7 @@ namespace solar_core
 
     
 class MesMarketingSEIPreliminaryQuote;
-class MesStateBaseHH;
+class MesStateBaseHO;
 class W;
 class SEI;
 class PVProject;
@@ -36,7 +36,7 @@ class PVProject;
 
 /**
  
- Has multiple humans, but they are not modelled as decision agents only the HH is the decision making agent.
+ Has multiple humans, but they are not modelled as decision agents only the HO is the decision making agent.
  
  
  @wp Once survey is completed will have data: what are your choices and decisions on solar panels. The same logic as in SEI. Hidden parameter/factor is utility of accepting project. Might be more complex to estimate as will have a lot of categorical data.
@@ -48,7 +48,7 @@ class PVProject;
  
  
  */
-class Household: public IAgent
+class Homeowner: public IAgent
 {
     friend class W;
 public:
@@ -72,7 +72,7 @@ public:
      */
     
     
-    Household(PropertyTree& pt_, W* w_);
+    Homeowner(PropertyTree& pt_, W* w_);
     void init(W* w_);
     
     //@}
@@ -124,8 +124,8 @@ public:
      
      */
     
-    virtual std::shared_ptr<MesStateBaseHH> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
-    //will this command initialize relationship between HH and SEI?
+    virtual std::shared_ptr<MesStateBaseHO> get_inf_online_quote(IAgent* agent_to); /*!< first request for information from SEI, provides basic information such as credit score and etc. */
+    //will this command initialize relationship between HO and SEI?
 
 	//switched order to be more chronological
     virtual void receive_online_quote(std::shared_ptr<PVProject> project_); /*!< empty for now as information is added directly to the project itself */
@@ -133,7 +133,7 @@ public:
     virtual bool request_time_slot_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< check that could have a visit at this time */
     virtual bool schedule_visit(TimeUnit visit_time, std::weak_ptr<PVProject> project); /*!< schedules visit at this time, returns false if no slots are open */
 	//virtual bool receive_revised_quote(std::shared_ptr<PVProject> project_); //added this virtual bool because they do get a revised quote? wasn't sure if there was a parameter specifically for this or if you make a variable for this revised quote?
-	virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @DevStage2 need to ask HH how they decide to reroof */
+	virtual bool dec_project_reroof(std::shared_ptr<PVProject> project); /*!< @DevStage2 need to ask HO how they decide to reroof */
     //@DevStage2 can receive_preliminary_quote recursively update?
     
     
@@ -208,7 +208,7 @@ protected:
     
     
     
-    std::map<EParamTypes, double> params; /** Parameters of a household, such as income, number of humans, etc. */
+    std::map<EParamTypes, double> params; /** Parameters of a Homeowner, such as income, number of humans, etc. */
     
     
     //@}

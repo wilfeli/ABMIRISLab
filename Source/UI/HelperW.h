@@ -13,7 +13,7 @@
 #include "Tools/Serialize.h"
 #include "Tools/IRandom.h"
 #include "Agents/SEI.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 #include "../Tests/Agents/SEIMock.h"
 
 
@@ -94,15 +94,15 @@ namespace solar_core {
         
         
         /** Old version of generating H - with independent parameters  */
-        std::vector<Household*> create_hhs(PropertyTree& pt, std::string mode_, long N_HH, long N_HHMarketingStateHighlyInterested, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, IRandom* rand)
+        std::vector<Homeowner*> create_hhs(PropertyTree& pt, std::string mode_, long N_HO, long N_HOMarketingStateHighlyInterested, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, IRandom* rand)
         {
-            std::vector<Household*> hhs;
+            std::vector<Homeowner*> hhs;
             
             //create THETA_design
             std::map<std::string, std::vector<std::string>> THETA_design_str;
             serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
             
-            auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HHDecPreliminaryQuote)];
+            auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HODecPreliminaryQuote)];
             
             if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
             {
@@ -148,15 +148,15 @@ namespace solar_core {
 
             
             
-            //create HH
+            //create HO
             auto j = 0;
-            for (auto i = 0; i < N_HH; ++i)
+            for (auto i = 0; i < N_HO; ++i)
             {
-                if (j < N_HHMarketingStateHighlyInterested)
+                if (j < N_HOMarketingStateHighlyInterested)
                 {
                     //create few highly interested agents
                     //put specific parameters into template
-                    pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HHMarketingStateHighlyInterested));
+                    pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HOMarketingStateHighlyInterested));
                 };
                 
                 ++j;
@@ -174,7 +174,7 @@ namespace solar_core {
                 pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
                 
                 //create decision parameters
-                THETA_design[EParamTypes::HHDecPreliminaryQuote] = std::vector<double>{rng_THETA()};
+                THETA_design[EParamTypes::HODecPreliminaryQuote] = std::vector<double>{rng_THETA()};
                 pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
                 
                 
@@ -184,7 +184,7 @@ namespace solar_core {
                 
                 //read configuration file
                 //replace parameters if necessary
-                hhs.push_back(new Household(pt, this));
+                hhs.push_back(new Homeowner(pt, this));
                 
                 
                 

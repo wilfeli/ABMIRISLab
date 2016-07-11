@@ -107,7 +107,7 @@ int main(int argc, const char * argv[])
     func = &W::life;
     threads.push_back(std::thread(func, w));
     
-    func = &W::life_hhs;
+    func = &W::life_hos;
     threads.push_back(std::thread(func, w));
     
     func = &W::life_seis;

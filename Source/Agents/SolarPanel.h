@@ -16,8 +16,8 @@
 namespace solar_core
 {
 
-class Household;
-class MesStateBaseHH;
+class Homeowner;
+class MesStateBaseHO;
 class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
 class MesDesign;
@@ -123,8 +123,8 @@ protected:
 class PVProject
 {
 public:
-    Household* agent;/*!< for whom this project is created */
-    std::shared_ptr<MesStateBaseHH> state_base_agent;/*!< additional information about the agent for whom this project is made */
+    Homeowner* agent;/*!< for whom this project is created */
+    std::shared_ptr<MesStateBaseHO> state_base_agent;/*!< additional information about the agent for whom this project is made */
     TimeUnit begin_time;
     EParamTypes state_project;
     EParamTypes state_materials;

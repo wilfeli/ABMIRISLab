@@ -39,7 +39,7 @@
 #include "Tests/UI/WMock.h"
 #include "Tests/Agents/SEIMock.h"
 #include "UI/UI.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 
 
 
@@ -92,7 +92,7 @@ namespace solar_tests
 //            std::vector<std::thread> threads;
 //            void (*func)();
 //            
-//            func = &PSTest::WActTickHH;
+//            func = &PSTest::WActTickHO;
 //            threads.push_back(std::thread(func));
 //            
 //            // work for the workers to finish
@@ -106,7 +106,7 @@ namespace solar_tests
         }
         
         
-        static void WActTickHH()
+        static void WActTickHO()
         {
             for (auto& agent:w->get_hhs())
             {
@@ -147,7 +147,7 @@ namespace solar_tests
         }
         
         
-        virtual solar_core::Household* get_hh(std::size_t i)
+        virtual solar_core::Homeowner* get_hh(std::size_t i)
         {
             return w->get_hhs()[i];
         };
@@ -201,7 +201,7 @@ namespace solar_tests
      Test that hh is created according to template
      
     */
-    TEST_F(WTest, CreateHH)
+    TEST_F(WTest, CreateHO)
     {
         //number of hh
         

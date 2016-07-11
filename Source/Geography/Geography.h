@@ -19,7 +19,7 @@ namespace solar_core
     
     /**
      
-     Belongs to a Household.
+     Belongs to a Homeowner.
      
      
      

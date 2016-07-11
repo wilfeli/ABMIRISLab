@@ -31,6 +31,7 @@ namespace solar_core
         const int WAIT_CYCLES_VIEW_REQUEST = 10;
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
         const double NUMBER_DAYS_IN_YEAR = 365.25;
+        const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
@@ -61,7 +62,7 @@ namespace solar_core
         Income,
         
 
-        /**  Number of humans in a household */
+        /**  Number of humans in a Homeowner */
         N_H,
         
         
@@ -80,42 +81,42 @@ namespace solar_core
         RoofAge,
         
         
-		/*Why couldn't we use an enum class to show different levels of interest for HHMarketingState?*/
+		/*Why couldn't we use an enum class to show different levels of interest for HOMarketingState?*/
 		
-		/** If Household is very interested in SP */
-        HHMarketingStateHighlyInterested,
+		/** If Homeowner is very interested in SP */
+        HOMarketingStateHighlyInterested,
         
         
-        /** If Household is just interested in SP and ready to ask for quotes */
-        HHMarketingStateInterested,
+        /** If Homeowner is just interested in SP and ready to ask for quotes */
+        HOMarketingStateInterested,
         
         
-        /** If Household is not interested in installing SP */
-        HHMarketingNotInterested,
+        /** If Homeowner is not interested in installing SP */
+        HOMarketingNotInterested,
 
         
-        /** If Household is already installed */
-        HHMarketingCommitedToInstallation,
+        /** If Homeowner is already installed */
+        HOMarketingCommitedToInstallation,
 
         
-        /** State of a quoting stage for HH: actively requesting information */
+        /** State of a quoting stage for HO: actively requesting information */
         ActiveQuoting,
         
         
-        /** State of a quoting stage for HH: not requesting quotes, might be analysing them or committed to the project */
+        /** State of a quoting stage for HO: not requesting quotes, might be analysing them or committed to the project */
         InactiveQuoting,
         
         
-        /** State of a quoting stage for HH: decision on reroofing old roof */
-        HHDecisionReroof,
+        /** State of a quoting stage for HO: decision on reroofing old roof */
+        HODecisionReroof,
         
         
-        /** Maximum number of visits per unit of time for HH */
-        HHMaxNVisitsPerTimeUnit,
+        /** Maximum number of visits per unit of time for HO */
+        HOMaxNVisitsPerTimeUnit,
         
         
         /** Thetas for decisions: decision on preliminary quotes */
-        HHDecPreliminaryQuote,
+        HODecPreliminaryQuote,
         
         
         /** State of a Project: preliminary quotes has been requested via online */
@@ -137,10 +138,10 @@ namespace solar_core
         CollectedInfFirstSiteVisit,
         
         /** State of a Project: Roof needs to be changed */
-        RequiredHHReroof,
+        RequiredHOReroof,
         
         /** State of a Project: Homeowner agreed to reroof thus waiting for reroofing */
-        WaitingHHReroof,
+        WaitingHOReroof,
         
         /** State of a Project: project is accepted for further development*/
         AcceptedPreliminaryQuote,
@@ -255,7 +256,7 @@ namespace solar_core
         /** Parameters of a SEI, such as processing time before action is taken to schedule first site visit */
         SEIProcessingTimeRequiredForSchedulingFirstSiteVisit,
         
-        /** Parameters of a SEI, processing time before design is created after project is accepted by HH */
+        /** Parameters of a SEI, processing time before design is created after project is accepted by HO */
         SEIProcessingTimeRequiredForDesign,
         
         /** Maximum number of visits per unit of time for SEI */
@@ -341,7 +342,7 @@ namespace solar_core
         
         
         
-        /** Marketing part: number of HH to draw per unit of time to push marketing information */
+        /** Marketing part: number of HO to draw per unit of time to push marketing information */
         MarketingMaxNToDrawPerTimeUnit,
         
         
@@ -366,7 +367,7 @@ namespace solar_core
         
         
         /** Maximum number of open projects to consider */
-        MaxNOpenProjectsHH,
+        MaxNOpenProjectsHO,
         
         
         /** Maximum number of preliminary quotes to request from received online quotes */
@@ -466,9 +467,9 @@ namespace solar_core
             {
                 return EParamTypes::N_H;
             }
-            else if (param_type == "eparamtypes::hhdecpreliminaryquote")
+            else if (param_type == "eparamtypes::hodecpreliminaryquote")
             {
-                return EParamTypes::HHDecPreliminaryQuote;
+                return EParamTypes::HODecPreliminaryQuote;
             }
             else if (param_type == "eparamtypes::creditscore")
             {
@@ -478,13 +479,13 @@ namespace solar_core
             {
                 return EParamTypes::ElectricityBill;
             }
-            else if (param_type == "eparamtypes::hhmaxnvisitspertimeunit")
+            else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
             {
-                return EParamTypes::HHMaxNVisitsPerTimeUnit;
+                return EParamTypes::HOMaxNVisitsPerTimeUnit;
             }
-            else if (param_type == "eparamtypes::hhmarketingstatehighlyinterested")
+            else if (param_type == "eparamtypes::homarketingstatehighlyinterested")
             {
-                return EParamTypes::HHMarketingStateHighlyInterested;
+                return EParamTypes::HOMarketingStateHighlyInterested;
             }
             else if (param_type == "eparamtypes::inactivequoting")
             {
@@ -636,21 +637,21 @@ namespace solar_core
         
         static std::string FromEParamTypes(EParamTypes param_)
         {
-            if (param_ == EParamTypes::HHMarketingStateHighlyInterested)
+            if (param_ == EParamTypes::HOMarketingStateHighlyInterested)
             {
-                return "EParamTypes::HHMarketingStateHighlyInterested";
+                return "EParamTypes::HOMarketingStateHighlyInterested";
             }
-            else if (param_ == EParamTypes::HHMarketingStateInterested)
+            else if (param_ == EParamTypes::HOMarketingStateInterested)
             {
-                return "EParamTypes::HHMarketingStateInterested";
+                return "EParamTypes::HOMarketingStateInterested";
             }
-            else if (param_ == EParamTypes::HHMarketingNotInterested)
+            else if (param_ == EParamTypes::HOMarketingNotInterested)
             {
-                return "EParamTypes::HHMarketingNotInterested";
+                return "EParamTypes::HOMarketingNotInterested";
             }
-            else if (param_ == EParamTypes::HHDecPreliminaryQuote)
+            else if (param_ == EParamTypes::HODecPreliminaryQuote)
             {
-                return "EParamTypes::HHDecPreliminaryQuote";
+                return "EParamTypes::HODecPreliminaryQuote";
             }
             else if (param_ == EParamTypes::SEISmall)
             {
@@ -704,7 +705,7 @@ namespace solar_core
             }
             else if (param_type == "econstraintparams::maxnopenprojectshh")
             {
-                return EConstraintParams::MaxNOpenProjectsHH;
+                return EConstraintParams::MaxNOpenProjectsHO;
             }
             else if (param_type == "econstraintparams::semmaxlengthrecordhistory")
             {
