@@ -20,10 +20,13 @@
 #include "Institutions/MarketingSystem.h"
 #include "Agents/IAgent.h"
 #include "Agents/SEI.h"
+#include "Agents/SEIBL.h"
+#include "Agents/SEMBL.h"
 #include "Agents/SEM.h"
 #include "Agents/Utility.h"
 #include "Agents/G.h"
 #include "Agents/Homeowner.h"
+#include "Agents/H.h"
 #include "UI/HelperW.h"
 
 
@@ -117,6 +120,8 @@ WEE::life_hos()
                 //if accepted - save as an active project to maintain it
                 if (FLAG_DEC)
                 {
+                    //save as accepted project
+                    seis[j_sei]->install_project(pool_projects[i_pool_projects], time);
                     ++i_pool_projects;
                 };
                 
@@ -124,11 +129,6 @@ WEE::life_hos()
             
             
             
-            for (auto& agent:hos)
-            {
-                //get tick
-                agent->act_tick();
-            };
             ++updated_counter;
         };
         
@@ -146,3 +146,51 @@ WEE::life_hos()
     
     
 }
+
+
+
+double
+WEE::get_inf(EDecParams type_, SEIBL* agent_)
+{
+    double ret = 0.0;
+    switch (type_)
+    {
+        case EDecParams::Reputation_i:
+        {
+            double Rep_i = 0.0;
+            for (std::size_t i = 0; i < seis.size(); ++i)
+            {
+                if (seis[i] != agent_)
+                {
+                    Rep_i += seis[i]->reputation;
+                };
+            };
+            ret = Rep_i / (seis.size() - 1);
+        }
+            break;
+        case EDecParams::Price_i:
+        {
+            double Price_i = 0.0;
+            for (std::size_t i = 0; i < seis.size(); ++i)
+            {
+                if (seis[i] != agent_)
+                {
+                    Price_i += seis[i]->dec_design->irr;
+                };
+            };
+            ret = Price_i / (seis.size() - 1);
+        }
+            break;
+        default:
+            break;
+    };
+    
+    return ret;
+    
+}
+
+
+
+
+
+

@@ -74,7 +74,7 @@ namespace solar_core
          
          */
         
-        void act_tick();
+        virtual void act_tick();
         
         bool sell_SolarModule(MesSellOrder& mes_);
         

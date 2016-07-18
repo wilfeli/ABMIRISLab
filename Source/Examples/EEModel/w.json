@@ -1,0 +1,76 @@
+{
+    "WorldSettings": {
+        "params_exog": [
+                        {
+                        "EParamTypes::AverageElectricityDemand":30
+                        },
+                        {
+                        "EParamTypes::DCtoACLoss": 0.2
+                        },
+                        {
+                        "EParamTypes::ElectricityPriceUCDemand": 0.2
+                        },
+                        {
+                        "EParamTypes::InflationRate": 0.02
+                        },
+                        {
+                        "EParamTypes::MarketingMaxNToDrawPerTimeUnit":100
+                        },
+                        {
+                        "EParamTypes::DegradationDefinitionLength":10
+                        },
+                        {
+                        "EParamTypes::WHMaxNToDrawPerTimeUnit":100
+                        }
+                        ],
+        "constraints":[
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
+                       {
+                       "EConstraintParams::MaxLengthPlanInstallations":10
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPermitVisit":10
+                       },
+                       {
+                       "EConstraintParams::SEMMaxLengthRecordHistory":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxLengthWaitPreliminaryQuote":10
+                       },
+                       {
+                       "EConstraintParams::MinNReceivedDesings":2
+                       },
+                       {
+                       "EConstraintParams::MaxNTicksToCollectQuotes":10
+                       },
+                       {
+                       "EConstraintParams:MinNReceivedPreliminaryQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
+                       },
+                       {
+                       "EConstraintParams::MaxNOpenProjectsHO":10
+                       }
+                       ]
+    },
+    "N_HO":500,
+    "N_SEI":3,
+    "N_SEILarge": 1,
+    "N_SEM":7,
+    "N_HOMarketingStateHighlyInterested":10,
+    "SEED":2016,
+    "params":[
+              {
+              "N_ITERATIONS":520
+              }
+              ]
+    
+    
+}
+

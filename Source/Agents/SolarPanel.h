@@ -17,6 +17,7 @@ namespace solar_core
 {
 
 class Homeowner;
+class H;
 class MesStateBaseHO;
 class MesMarketingSEIOnlineQuote;
 class MesMarketingSEIPreliminaryQuote;
@@ -58,7 +59,23 @@ public:
     std::string manufacturer_id = "";
     SEM* manufacturer = nullptr;
     double degradation = 0.0;
+    
+    
+    
+    
+    
 };
+    
+    
+    class SolarModuleBL: public SolarModule
+    {
+    public:
+        /** parameters of a true reliability distribution (exponential) */
+        std::vector<double> THETA_reliability;
+        /** parameters of a true reliability distribution (normal) */
+        std::vector<double> THETA_complexity;
+    protected:
+    };
     
 
     
@@ -103,13 +120,14 @@ protected:
     class PVProjectFlat
     {
     public:
-        std::shared_ptr<SolarModule> PV_module;
+        std::shared_ptr<SolarModuleBL> PV_module;
         double N_PANELS = 0.0;
         double DC_size = 0.0;
         double AC_size = 0.0;
         TimeUnit begin_time;
         H* agent;/*!< for whom this project is created */
-        
+        double production_time = 0.0; /*!< realized production for t period */
+        double production_time_1 = 0.0; /*!< realized production for t-1 period */
         
     };
     

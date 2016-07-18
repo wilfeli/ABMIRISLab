@@ -2015,6 +2015,19 @@
 		EDD376681D320954008705B8 /* SEIBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEIBL.h; sourceTree = "<group>"; };
 		EDD3766B1D321BDC008705B8 /* SEMBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEMBL.cpp; sourceTree = "<group>"; };
 		EDD3766C1D321BDC008705B8 /* SEMBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMBL.h; sourceTree = "<group>"; };
+		EDD376701D3429B0008705B8 /* basemodel.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basemodel.model; sourceTree = "<group>"; };
+		EDD376711D3429B0008705B8 /* distribution.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = distribution.json; sourceTree = "<group>"; };
+		EDD376721D3429B0008705B8 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
+		EDD376731D3429B0008705B8 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
+		EDD376741D3429B0008705B8 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
+		EDD376751D3429B0008705B8 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
+		EDD376761D3429B0008705B8 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
+		EDD376771D3429B0008705B8 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
+		EDD376781D3429B0008705B8 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
+		EDD376791D3429B0008705B8 /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
+		EDD3767A1D3429B0008705B8 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
+		EDD3767B1D3429B0008705B8 /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
+		EDD3767C1D3429B0008705B8 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -4530,6 +4543,7 @@
 		ED0E14131C98BD2B00A41B24 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				EDD3766F1D3429B0008705B8 /* EEModel */,
 				EDC006A91CECB4EB0024347C /* UnitTestModel */,
 				ED0E14141C98BD2B00A41B24 /* BaseModel */,
 			);
@@ -8204,6 +8218,26 @@
 			path = UnitTestModel;
 			sourceTree = "<group>";
 		};
+		EDD3766F1D3429B0008705B8 /* EEModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDD376701D3429B0008705B8 /* basemodel.model */,
+				EDD376711D3429B0008705B8 /* distribution.json */,
+				EDD376721D3429B0008705B8 /* g.json */,
+				EDD376731D3429B0008705B8 /* geography.json */,
+				EDD376741D3429B0008705B8 /* hh.json */,
+				EDD376751D3429B0008705B8 /* inverters.json */,
+				EDD376761D3429B0008705B8 /* joint_distribution.csv */,
+				EDD376771D3429B0008705B8 /* sei.json */,
+				EDD376781D3429B0008705B8 /* sem.json */,
+				EDD376791D3429B0008705B8 /* solar_equipment.json */,
+				EDD3767A1D3429B0008705B8 /* solar_module.json */,
+				EDD3767B1D3429B0008705B8 /* utility.json */,
+				EDD3767C1D3429B0008705B8 /* w.json */,
+			);
+			path = EEModel;
+			sourceTree = "<group>";
+		};
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
@@ -8392,15 +8426,15 @@
 				EDDE4DD81CDEBDA9005D1C49 /* filesystem */,
 				EDDE4DE31CDEBDA9005D1C49 /* filesystem.hpp */,
 				EDDE4DE41CDEBDA9005D1C49 /* function */,
-				EDDE4DF81CDEBDA9005D1C49 /* function.hpp */,
 				EDDE4DF91CDEBDA9005D1C49 /* function_equal.hpp */,
+				EDDE4DF81CDEBDA9005D1C49 /* function.hpp */,
 				EDDE4DFA1CDEBDA9005D1C49 /* functional */,
 				EDDE4E051CDEBDA9005D1C49 /* get_pointer.hpp */,
 				EDDE4E061CDEBDA9005D1C49 /* indirect_reference.hpp */,
 				EDDE4E071CDEBDA9005D1C49 /* integer */,
-				EDDE4E0A1CDEBDA9005D1C49 /* integer.hpp */,
 				EDDE4E0B1CDEBDA9005D1C49 /* integer_fwd.hpp */,
 				EDDE4E0C1CDEBDA9005D1C49 /* integer_traits.hpp */,
+				EDDE4E0A1CDEBDA9005D1C49 /* integer.hpp */,
 				EDDE4E0D1CDEBDA9005D1C49 /* intrusive */,
 				EDDE4E1D1CDEBDA9005D1C49 /* intrusive_ptr.hpp */,
 				EDDE4E1E1CDEBDA9005D1C49 /* io */,
@@ -8420,8 +8454,8 @@
 				EDDE51BE1CDEBDAE005D1C49 /* next_prior.hpp */,
 				EDDE51BF1CDEBDAE005D1C49 /* non_type.hpp */,
 				EDDE51C01CDEBDAE005D1C49 /* noncopyable.hpp */,
-				EDDE51C11CDEBDAE005D1C49 /* none.hpp */,
 				EDDE51C21CDEBDAE005D1C49 /* none_t.hpp */,
+				EDDE51C11CDEBDAE005D1C49 /* none.hpp */,
 				EDDE51C31CDEBDAE005D1C49 /* numeric */,
 				EDDE51DC1CDEBDAE005D1C49 /* operators.hpp */,
 				EDDE51DD1CDEBDAE005D1C49 /* optional */,
@@ -8437,8 +8471,8 @@
 				EDDE53B61CDEBDB0005D1C49 /* rational.hpp */,
 				EDDE53B71CDEBDB0005D1C49 /* ref.hpp */,
 				EDDE53B81CDEBDB0005D1C49 /* regex */,
-				EDDE53F11CDEBDB0005D1C49 /* regex.hpp */,
 				EDDE53F21CDEBDB1005D1C49 /* regex_fwd.hpp */,
+				EDDE53F11CDEBDB0005D1C49 /* regex.hpp */,
 				EDDE53F31CDEBDB1005D1C49 /* scoped_array.hpp */,
 				EDDE53F41CDEBDB1005D1C49 /* scoped_ptr.hpp */,
 				EDDE53F51CDEBDB1005D1C49 /* shared_array.hpp */,
@@ -8458,8 +8492,8 @@
 				EDDE55201CDEBDB2005D1C49 /* token_iterator.hpp */,
 				EDDE55211CDEBDB2005D1C49 /* tokenizer.hpp */,
 				EDDE55221CDEBDB2005D1C49 /* tuple */,
-				EDDE55261CDEBDB2005D1C49 /* type.hpp */,
 				EDDE55271CDEBDB2005D1C49 /* type_traits */,
+				EDDE55261CDEBDB2005D1C49 /* type.hpp */,
 				EDDE558A1CDEBDB3005D1C49 /* utility */,
 				EDDE55971CDEBDB3005D1C49 /* utility.hpp */,
 				EDDE55981CDEBDB3005D1C49 /* version.hpp */,

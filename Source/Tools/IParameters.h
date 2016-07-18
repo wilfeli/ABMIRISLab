@@ -70,6 +70,10 @@ namespace solar_core
         CreditScore,
         
         
+        /** Average demand for electricity */
+        AverageElectricityDemand,
+        
+        
         /** Electricity Bill */
         ElectricityBill,
         
@@ -354,6 +358,12 @@ namespace solar_core
         TechnologyInverterMicro,
         
         
+        /** Number of H to draw per tick for EE model */
+        WHMaxNToDrawPerTimeUnit,
+        
+        
+        
+        
         /** Empty enum for completeness */
         None
         
@@ -439,6 +449,32 @@ namespace solar_core
     
     
     
+    
+    enum class EDecParams: int64_t
+    {
+        Reputation_i,
+        
+        Reputation,
+        
+        Price_i,
+        
+        Price,
+        
+        irr,
+        
+        irr_i,
+        
+        NewTechnology,
+        
+        CurrentTechnology,
+        
+        None
+        
+    };
+    
+    
+    
+    
     typedef int64_t TimeUnit;
     typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
     
@@ -478,6 +514,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::electricitybill")
             {
                 return EParamTypes::ElectricityBill;
+            }
+            else if (param_type == "eparamtypes::averageelectricitydemand")
+            {
+                return EParamTypes::AverageElectricityDemand;
             }
             else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
             {
@@ -622,6 +662,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::utilityprocessingtimerequiredforpermit")
             {
                 return EParamTypes::UtilityProcessingTimeRequiredForPermit;
+            }
+            else if (param_type == "eparamtypes::whmaxntodrawpertimeunit")
+            {
+                return EParamTypes::WHMaxNToDrawPerTimeUnit;
             }
             else
             {
