@@ -131,6 +131,8 @@ class SEM;
         double production_time_1 = 0.0; /*!< realized production for t-1 period */
         double irr_e = 0.0; /*!< expected irr of a project */
         TimeUnit maintenance_time;
+        TimeUnit maintenance_time_1;
+        double maintenance_complexity;
         
     };
     

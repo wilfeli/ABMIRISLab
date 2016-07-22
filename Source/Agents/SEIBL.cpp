@@ -380,15 +380,14 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
         return w->rand->r_pareto_2(dec_design_hat.THETA_reliability[1], dec_design_hat.THETA_reliability[0]);
     };
     
-    
-    
-    
-    
-    
-    
 
-//    auto pdf_THETA_complexity = boost::random::gamma_distribution<>(dec_design_hat.THETA_reliability[0], 1/dec_design_hat.THETA_reliability[1]);
-//    auto rng_THETA_complexity = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_reliability);
+    auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat.THETA_complexity[2]);
+    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_complexity_base)
+    auto rng_THETA_complexity() = [&]()
+    {
+        return dec_design_hat.THETA_reliability[0] + rng_THETA_complexity_base() * (dec_design_hat.THETA_reliability[3] * (dec_design_hat.THETA_reliability[1] + 1))/(dec_design_hat.THETA_reliability[1] * dec_design_hat.THETA_reliability[2]);
+    };
+    
     
     
     
@@ -450,23 +449,19 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
 void
 SEIBL::wm_update()
 {
+    
     //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    X(0,1) = THETA_reputation[0];
+    X(0,1) = 1/(THETA_reputation[0] - 1);
     X(0,2) = dec_design->irr;
     X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
     X(0,4) = w->get_inf(EDecParams::irr_i, this);
+    //observed share over the past year - y
     Y(0,0) = w->get_inf(EDecParams::Share, this);
     
     
-    //updates parameters for distribution if new information about performance is here
-    //goes through actual production in the previous year, calculate percentage of the promised production,
-    //update Gamma with new estimate in THETA_reputation, given the new data point
     
-    
-    
-    //observed share over the past year - y
     
 
     //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression)
@@ -485,12 +480,36 @@ SEIBL::wm_update()
     
     
     
-    //data generating will be MVS - take mean from there
+    //data generating will be MVS - take mean from there - see predictions using BLR
     for (auto i = 0; i < THETA_demand.size() ; ++i)
     {
         THETA_demand[i] = Mu_0[i];
     };
     
+    //update reputation
+    
+    //updates parameters for distribution if new information about performance is here
+    //goes through actual production in the previous year, calculate percentage of the promised production,
+    //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
+    //
+    double mean = 0.0;
+    for(auto project: pvprojects)
+    {
+        mean += project->production_time;
+    };
+    
+    //average production
+    mean = mean / pvprojects.size();
+    
+    //number of data points, assume update every step
+    uint64_t n = a_time - 1;
+    
+    //updated parameter for reputation
+    THETA_reputation[0] = (1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1)));
+    
+    
+    
+
 }
 
 
@@ -505,17 +524,79 @@ void
 SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 {
     //fill in details for the project
+    project_->PV_module = dec_design->PV_module;
+    //MARK: cont.
     
+    //uses true distribution here
+    auto rng_THETA_reliability = [&]()
+    {
+        return w->rand->r_pareto_2(dec_design->PV_module->THETA_reliability[1], dec_design->PV_module->THETA_reliability[0]);
+    };
+
     
     
     //draw next time of maintenance
-    project_->maintenance_time 
+    project_->begin_time = time_;
+    //will break when, might be longer than project_->PV_module->warranty_length
+    project_->maintenance_time = rng_THETA_reliability() + time_;
+    //start counter for length before break-down from the start of the project
+    project_->maintenance_time_1 = time_;
+    
     
     
 }
 
 
-
+void SEIBL::projects_update()
+{
+    
+    //go though installed projects
+    std::map<UID, std::vector<double>> failures;
+    
+    for (auto project:pvprojects)
+    {
+        if (project->maintenance_time == a_time)
+        {
+            //record as failure
+            failures[project->PV_module->uid].push_back(project->maintenance_time);
+            //restart counter until next break-down
+            project->maintenance_time_1 = a_time;
+            //draw next maintenance time
+            
+        
+            //draw maintenance complexity
+            
+            
+            //record into costs for the period
+            
+            
+            //records down period into production time, hard coded that TimeUnit here is 1 year - so share of down time as a percentage of days in a year - 365.
+            project->production_time = project->maintenance_complexity / (WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation]) / (365);
+            
+        }
+        else
+        {
+            project->production_time = 1.0; // always up, no failures this year
+        };
+    };
+    
+    
+    
+    //go though each panel and update estimates for reliability and complexity
+    for (auto failure:failures)
+    {
+        
+        //transform into Eigen X matrix (n,1)
+        Eigen::Map<Eigen::MatrixXd> X(failure.second.data(),failure.second.size(),1);
+        MatrixXd centered = X.rowwise() - X.colwise().mean();
+        //cont. updating posterior normal-inverse-gamma for complexity - formulas is in https://en.wikipedia.org/wiki/Conjugate_prior - for normal with mu and sigma
+        beta_n = + 0.5 * (centered.adjoint() * centered);
+        
+        
+    };
+    
+    
+}
 
 
 
@@ -528,6 +609,10 @@ SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 void
 SEIBL::act_tick()
 {
+    
+    ac_update_tick();
+    
+    
     //updates information for decision making
     wm_update();
     
