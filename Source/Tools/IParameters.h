@@ -11,6 +11,7 @@
 
 #include "Tools/ExternalIncludes.h"
 #include <boost/property_tree/ptree.hpp>
+#include <Eigen/Dense>
 
 #ifdef DEBUG
 
@@ -34,6 +35,7 @@ namespace solar_core
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
+        const int N_BETA_SEI_WM = 5;
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
         static constexpr double SOLAR_NAN() {return std::numeric_limits<double>::quiet_NaN();};
         // ... other related constants
@@ -468,6 +470,8 @@ namespace solar_core
         
         CurrentTechnology,
         
+        Share,
+        
         None
         
     };
@@ -477,8 +481,9 @@ namespace solar_core
     
     typedef int64_t TimeUnit;
     typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
-    
-    
+    typedef Eigen::MatrixXd ThetaType; //one of containers for parameters
+    typedef Eigen::Matrix<double, 1, constants::N_BETA_SEI_WM> SEIWMDataType; //one of containers for parameters
+    typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM> SEIWMMatrixd;
     
     typedef std::underlying_type<EParamTypes>::type EParamTypes_type;
     

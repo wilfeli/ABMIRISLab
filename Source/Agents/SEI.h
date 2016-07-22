@@ -12,7 +12,7 @@
 
 
 #include "Tools/ExternalIncludes.h"
-
+#include "Tools/ID.h"
 #include "Tools/IParameters.h"
 #include "Agents/IAgent.h"
 #include "Agents/SolarPanel.h"
@@ -165,7 +165,7 @@ namespace solar_core
          */
         
         static std::set<EParamTypes> project_states_to_delete;
-        
+        UID uid; /*!< is default initializedto be next id */
         
         //@}
 
@@ -313,7 +313,7 @@ namespace solar_core
          
          */
         
-        void ac_update_tick(); /*!< update internals for the tick */
+        virtual void ac_update_tick(); /*!< update internals for the tick */
         
         //@}
         

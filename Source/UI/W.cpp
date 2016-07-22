@@ -535,6 +535,8 @@ W::life()
         
         if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE)
         {
+            ac_update_tick();
+            
             ++time;
             updated_counter = 0;
             FLAG_SEI_TICK = true;

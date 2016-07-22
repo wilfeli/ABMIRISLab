@@ -11,6 +11,7 @@
 
 #include "Agents/SEI.h"
 #include "Tools/ID.h"
+#include <Eigen/Dense>
 
 
 namespace solar_core {
@@ -43,10 +44,24 @@ namespace solar_core
     {
         friend class WEE;
     public:
+        SEIBL(const PropertyTree& pt_, W* w_);
         std::shared_ptr<PVProjectFlat> form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project);
-        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Gamma distribution, is updated based on the realized production of installations */
+        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Gamma distribution, is updated based on the realized production of installations.  */
         
     protected:
+        
+        
+        //@{
+        /**
+         
+         Section with internals of an agent
+         
+         */
+        
+        virtual void ac_update_tick() override; /*!< update internals for the tick */
+        
+        //@}
+        
         
         std::map<UID, std::shared_ptr<TDesign>>  designs;  /** have current estimates on system design parameters for different learning distributions. UID of a solar_module here */
         
@@ -59,7 +74,9 @@ namespace solar_core
         
         std::vector<double> THETA_complexity_prior;
         
-        std::vector<double> THETA_reliability_prior;
+        std::vector<double> THETA_reliability_prior{1, };
+        
+        double complexity_install_prior =  16.0;
 
         std::vector<double> WM_time; /*!< current state of information about reputation of others, promised returns of others, average for both parameters */
         
@@ -68,6 +85,22 @@ namespace solar_core
         std::mutex lock;
         
         WEE* w;
+        
+        SEIWMDataType X;
+        Eigen::Matrix<double, 1, 1> Y;
+        
+        
+        SEIWMMatrixd V_0;
+        SEIWMMatrixd V_n;
+        SEIWMDataType Mu_0;
+        SEIWMDataType Mu_n;
+        double a_0;
+        double a_n;
+        double b_0;
+        double b_n;
+        
+        
+        
     };
     
     

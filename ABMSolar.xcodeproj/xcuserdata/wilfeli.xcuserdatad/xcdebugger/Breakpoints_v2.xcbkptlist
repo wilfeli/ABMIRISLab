@@ -30,9 +30,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "434"
-            endingLineNumber = "434"
-            landmarkName = "SEI::install_project(std::shared_ptr&lt;PVProject&gt; project)"
-            landmarkType = "5">
+            endingLineNumber = "434">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -47,7 +45,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "467"
             endingLineNumber = "467"
-            landmarkName = "SEI::get_payment(std::shared_ptr&lt;MesPayment&gt; mes_)"
+            landmarkName = "SEI::install_project(std::shared_ptr&lt;PVProject&gt; project)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

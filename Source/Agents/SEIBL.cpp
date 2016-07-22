@@ -14,6 +14,27 @@
 
 using namespace solar_core;
 
+
+
+SEIBL::SEIBL(const PropertyTree& pt_, W* w_):SEI(pt_, w_)
+{
+    //prior on Lambda_0 - assume ridge regression
+    double c = 0.5;
+    Lambda_0 = MatrixWMd::Identity();
+    Lambda_0 = c * Lambda_0;
+    a_0 = 1;
+    b_0 = 1;
+    Mu_0 = MatrixWMd::Ones();
+    X(0,0) = 1.0;
+    
+    
+    
+}
+
+
+
+
+
 /**
  
  Create design for H and its parameters
@@ -94,24 +115,19 @@ SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat>, double irr)
 
 
 
-void
-SEIBL::dec_base()
+std::shared_ptr<TDesign> SEIBL::dec_base()
 {
+    double p_n = 0.0;
+    double p_n1 = 0.0;
+    
+    
+    
     //makes decision about ...
     
     //estimates expected profit for the current module
     
-    TDesign dec_design_hat = *dec_design; /// current design first
-    
-    //assume price
-    double p = params[EParamTypes::EstimatedPricePerWatt];
-    
-    
-    
-    
-    
-    double p = max_profit(dec_design_hat);
-    
+    auto dec_design_hat = dec_design; /// current design first
+    p_n = max_profit(dec_design_hat);
     
     
     
@@ -120,54 +136,111 @@ SEIBL::dec_base()
     //draw random SEM
     auto i = 0;
     
-    if (dec_design->module->manufacturer != w->sems[i])
+    //
+    auto max_ = w->sems.size();
+    auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+    
+    i = rng_i();
+    
+    auto test_design = std::make_shared<TDesign>(*dec_design);
+    test_design->module = nullptr;
+    
+    //check if it is new techonology
+    if (w->sems[i]->solar_panel_templates[EDecParams::NewTechnology])
     {
+        test_design->module = w->sems[i]->solar_panel_templates[EDecParams::NewTechnology];
+    }
+    else
+    {
+        if (dec_design->module != w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology])
+        {
+            test_design->module = w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology];
+        };
+    };
+    
+    if (test_design->module)
+    {
+        
+        //reset to presets
+        //might be using SEM specific prior for new models? later
+        test_design->THETA_reliability = THETA_reliability_prior;
+        test_design->THETA_complexity = THETA_complexity_prior;
+        test_design->complexity_install = complexity_install_prior;
+        //assume price is the same for everyone
+        test_design->p_module = test_design->module->p_sem;
+        
+        
+        p_n1 = max_profit(dec_design_hat)
+        
         //evaluate new design
+        auto profit_time = est_profit(dec_design_hat, double pn);
+        auto profit_new = est_profit(test_design, double p_n1);
         
-        
-        auto profit_time = ;
-        auto profit_new = ;
-        
-        
+        //calculate expected profit for other random design (from random SEM)
+        //compare - if higher, than have chance to switch and start offering it
+        //prob of switching depends on the distance between expected profits and attitide towards switching
         auto p_switch = exploration_p(profit_time, profit_new);
         
         //draw and see if switches
+        if (w->rand->ru() <= p_switch)
+        {
+            //inform SEM about switch
+            dec_design->module->manufacturer->remove_connection(dec_design->module);
+            test_design->module->manufacturer->add_connection(test_design->module);
+            
+            //if switches
+            dec = test_design;
+            test_design->p_design = p_n1;
+        }
+        else
+        {
+            dec = dec_design;
+            //save estimated price
+            dec_design->p_design = p_n;
+        };
         
-        
-        
-        //if switches
-        dec =
-        
+
     };
     
-    
-    
-    
-    //calculate expected profit for other random design (from random SEM)
-    //compare - if higher, than have chance to switch and start offering it
-    
-    
-    
-    
-    
-    
-    
-    //might be using SEM specific prior for new models?
-    
-    //prob of switching depends on the distance between expected profits and attitide towards switching
-    
-    //pick random SEM
-    //use active design
-    //evaluate - solve for p explicit (could solve for the actual solution here )
-    
-    
-    
-    
+
 }
 
 
 double
-SEIBL::max_profit(){}
+SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat)
+{
+    
+    /// method for searching for opt solution
+    /// use gradient descent
+    /// https://en.wikipedia.org/wiki/Gradient_descent
+    
+    double epsilon = 0.01; //step in derivative
+    double x_old = params[EParamTypes::EstimatedPricePerWatt]; // The value does not matter as long as abs(x_new - x_old) > precision
+    double x_new = x_old + epsilon; // The algorithm starts here
+    double gamma = 0.01 //step size
+    double precision = 0.00001; //tolerance for convergence
+    int N_steps = 100; //max number of steps
+    
+    
+    auto f_derivative = [epsilon, &dec_design_hat, this](double x)->double {return (this->estimate_profit(dec_design_hat, x + epsilon) - this->estimate_profit(dec_design_hat, x + epsilon))/epsilon;};
+   
+    auto i = 0;
+    while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
+    {
+        x_old = x_new;
+        x_new = x_old - gamma * f_derivative(x_old);
+        ++i;
+    };
+    
+    
+    //if negative return 0.0
+    
+    return std::max(x_new, 0.0);
+    
+}
+
+
 
 
 
@@ -205,10 +278,13 @@ SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
     double N_hat = std::ceil(THETA_demand[0] +
                              THETA_demand[1] * irr_hat +
                              THETA_demand[2] * THETA_reputation[0] * THETA_reputation[1] +
-                             THETA_demand[3] * WM_time[0] +
-                             THETA_demand[4] * WM_time[1]);
+                             THETA_demand[3] * X(0, 2) +
+                             THETA_demand[4] * X(0, 3));
     
+    //adjust for the general market size
+    N_hat = N_hat * WorldSettings::instance().exog_params[EParamTypes::TotalPVMarketSize];
     
+    //??? some other type of estimation
     
     //estimate number of panels for an average utility bill
     auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
@@ -299,9 +375,18 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
     
     
     
+    auto rng_THETA_reliability = [&]()
+    {
+        return w->rand->r_pareto_2(dec_design_hat.THETA_reliability[1], dec_design_hat.THETA_reliability[0]);
+    };
     
-//    auto pdf_THETA_reliability = boost::random::gamma_distribution<>(dec_design_hat.THETA_reliability[0], 1/dec_design_hat.THETA_reliability[1]);
-//    auto rng_THETA_reliability = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_reliability);
+    
+    
+    
+    
+    
+    
+
 //    auto pdf_THETA_complexity = boost::random::gamma_distribution<>(dec_design_hat.THETA_reliability[0], 1/dec_design_hat.THETA_reliability[1]);
 //    auto rng_THETA_complexity = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_reliability);
     
@@ -365,21 +450,46 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
 void
 SEIBL::wm_update()
 {
-    //collect average reputations for top installer in term of shares
+    //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    WM_time[0] = w->get_inf(EDecParams::Reputation_i, this);
-    WM_time[1] = w->get_inf(EDecParams::irr_i, this);
+    X(0,1) = THETA_reputation[0];
+    X(0,2) = dec_design->irr;
+    X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
+    X(0,4) = w->get_inf(EDecParams::irr_i, this);
+    Y(0,0) = w->get_inf(EDecParams::Share, this);
     
     
     //updates parameters for distribution if new information about performance is here
-    
-    
     //goes through actual production in the previous year, calculate percentage of the promised production,
     //update Gamma with new estimate in THETA_reputation, given the new data point
     
     
     
+    //observed share over the past year - y
+    
+
+    //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression)
+    //details http://www.biostat.umn.edu/~ph7440/pubh7440/BayesianLinearModelGoryDetails.pdf
+    //assume incremental updates
+    Mu_n = (X.transpose() * X + V_0.inverse()).inverse() + (V_0.inverse() * Mu_0 + X.transpose() * Y)
+    V_n = (X.transpose() * X + V_0.inverse()).inverse();
+    a_n = a_0 + 0.5;
+    b_n = b_0 + 0.5 * (Y.transpose() * Y + Mu_0.transpose() * V_0.inverse() * Mu_0 + Mu_n.transpose() * V_n.inverse() * Mu_n)
+    
+    //update to new values
+    Mu_0 = Mu_n;
+    V_0 = V_n;
+    a_0 = a_n;
+    b_0 = b_n;
+    
+    
+    
+    //data generating will be MVS - take mean from there
+    for (auto i = 0; i < THETA_demand.size() ; ++i)
+    {
+        THETA_demand[i] = Mu_0[i];
+    };
     
 }
 
@@ -392,12 +502,22 @@ SEIBL::wm_update()
  
  */
 void
-SEIBL::installed_project()
+SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 {
+    //fill in details for the project
+    
+    
     
     //draw next time of maintenance
+    project_->maintenance_time 
+    
     
 }
+
+
+
+
+
 
 /**
  
@@ -410,6 +530,9 @@ SEIBL::act_tick()
 {
     //updates information for decision making
     wm_update();
+    
+    //projects update
+    projects_update();
     
     //make price decision, based on the switching or not
     auto dec = dec_base();

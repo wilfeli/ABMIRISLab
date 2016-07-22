@@ -9,7 +9,7 @@
 #ifndef __ABMSolar__WEE__
 #define __ABMSolar__WEE__
 
-
+#include "Tools/ID.h"
 #include "UI/W.h"
 
 
@@ -43,6 +43,10 @@ protected:
     std::vector<SEIBL*> seis;/*!< all SEI agents */
     std::vector<SEMBL*> sems; /*!< all SEM */
 
+    std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>> installed_projects_time;
+    std::vector<std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>>> installed_projects_history;
+    std::map<UID, double> market_share_seis;
+    std::vector<UID> sorted_by_market_share_seis;
     
     
 };

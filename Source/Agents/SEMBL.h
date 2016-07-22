@@ -12,9 +12,10 @@
 
 #include "Agents/SEM.h"
 
-namespace solar_core {
+namespace solar_core
+{
     
-
+class SolarModuleBL;
 
 
 class SEMBL: public SEM
@@ -32,10 +33,18 @@ public:
     //@}
     
     std::map<EDecParams, std::shared_ptr<SolarModuleBL>>solar_panel_templates;/*!< list of solar panels to produce */
+    
+    int N_connections_current = 0;
+    int N_connections_new = 0;
+    
+    void add_connection(std::shared_ptr<SolarModuleBL> link);
+    void remove_connection(std::shared_ptr<SolarModuleBL> link);
+    
 protected:
-    std::vector<double> THETA_dist_efficiency; /*!< parameters for lognormal random walk */
-    std::vector<double> THETA_dist_reliability; /*!< parameters for lognormal random walk */
-    std::vector<double> THETA_dist_complexity; /*!< parameters for lognormal random walk */
+    std::vector<double> THETA_dist_efficiency; /*!< parameters for lognormal random walk, mean, variance, current value. Mean is average increase in efficiency over the past years. Variance - small on the scale of efficiency. Starting value - 0.16 current average production efficiency. */
+    std::vector<double> THETA_dist_reliability; /*!< parameters for lognormal random walk. Data generating distribution is exponential. Assume that currently it is once every 5 years, so \f$ \lambda_{0} = \frac{1}{5} \f$. */
+    std::vector<double> THETA_dist_complexity; /*!< parameters for lognormal random walk. Data generating distribution is Normal. Need 4 parameters for 2 random walks and 2 current parameters. 
+        Average repair time is 2 days + waiting for materials - 2 weeks, assume total 20 * 8 = 160 labor hours, and deviation of 20 labor hours.  */
     
     
     

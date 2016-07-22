@@ -70,7 +70,11 @@ WEE::init()
     
 }
 
-
+void WEE::ac_update_tick()
+{
+    installed_projects_history.push_back(installed_projects_time);
+    installed_projects_time.clear();
+}
 
 
 void
@@ -181,11 +185,61 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
             ret = Price_i / (seis.size() - 1);
         }
             break;
+        case EDecParams::Share:
+        {
+            ret = market_share_seis[agent_->uid];
+        }
+            break;
         default:
             break;
     };
     
     return ret;
+    
+}
+
+
+void W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
+{
+    //save to the corresponding installer
+    installed_projects_time[project_->sei->uid].push_back(project_);
+    
+    //save total number of installed projects
+    ++N_installed_projects_time;
+}
+
+
+
+
+
+/**
+ 
+ Calculate installed projects as a share
+ 
+ */
+void
+WEE::ac_update_wm()
+{
+    
+    //save into history
+    installed_projects_history.push_back(installed_projects_time);
+    installed_projects_time.clear();
+    
+    //calculate shares
+    for (auto iter:installed_projects_time)
+    {
+        market_share_seis[iter.first] = iter.second.size()/N_installed_projects_time;
+    };
+    
+    N_installed_projects_time = 0;
+    
+    //sort by the share in descending order
+    auto cmp = [&](UID const & a, UID const & b)
+    {
+        return market_share_seis[a] > market_share_seis[b];
+    };
+    
+    std::sort(sorted_by_market_share_seis.begin(), sorted_by_market_share_seis.end(), cmp);
     
 }
 
