@@ -277,6 +277,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
                             for (auto i = 0; i < N_HO; ++i)
                             {
                                 param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
+                                param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
                             };
                         }
                         else if (name == EParamTypes::Income)

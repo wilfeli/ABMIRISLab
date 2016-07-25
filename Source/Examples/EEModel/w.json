@@ -21,6 +21,12 @@
                         },
                         {
                         "EParamTypes::WHMaxNToDrawPerTimeUnit":100
+                        },
+                        {
+                        "EParamTypes::AverageSolarIrradiation": 5
+                        },
+                        {
+                        "EParamTypes::AveragePermitDifficulty": 50
                         }
                         ],
         "constraints":[

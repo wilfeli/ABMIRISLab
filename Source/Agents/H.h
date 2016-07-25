@@ -47,6 +47,23 @@ namespace solar_core
         
         //@}
         
+        
+        //@{
+        /**
+         
+         Section with general parameters that describe hh
+         
+         */
+        
+        
+        
+        std::map<EParamTypes, double> params; /** Parameters of a Homeowner, such as income, number of humans, etc. */
+        
+        
+        //@}
+        
+        
+        
     };
     
 

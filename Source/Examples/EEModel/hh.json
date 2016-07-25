@@ -4,6 +4,9 @@
                "EParamTypes::ElectricityBill": "FORMULA::p.d.f.::CUSTOM"
                },
                {
+               "EParamTypes::ElectricityConsumption": "FORMULA::p.d.f.::CUSTOM"
+               },
+               {
                "EParamTypes::Income": "FORMULA::p.d.f.::CUSTOM"
                },
                {"EParamTypes::HOMaxNVisitsPerTimeUnit":5},

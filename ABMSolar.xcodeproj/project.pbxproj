@@ -13395,6 +13395,7 @@
 					"$(OTHER_CFLAGS)",
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -13409,6 +13410,7 @@
 					"$(OTHER_CFLAGS)",
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

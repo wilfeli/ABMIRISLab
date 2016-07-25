@@ -18,13 +18,15 @@ using namespace solar_core;
 
 SEIBL::SEIBL(const PropertyTree& pt_, W* w_):SEI(pt_, w_)
 {
-    //prior on Lambda_0 - assume ridge regression
+    //prior on V_0 - assume ridge regression
     double c = 0.5;
-    Lambda_0 = MatrixWMd::Identity();
-    Lambda_0 = c * Lambda_0;
+    V_0 = SEIWMMatrixd::Identity();
+    V_0 = c * V_0;
+    
+    //prior on other parameters from BLR for the share
     a_0 = 1;
     b_0 = 1;
-    Mu_0 = MatrixWMd::Ones();
+    Mu_0 = SEIWMDataType::Ones();
     X(0,0) = 1.0;
     
     
@@ -45,10 +47,41 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
 {
     
     //size is equal to the utility bill, assume simple electricity pricing for now
-    auto estimated_demand  = agent_->params[EParamTypes::ElectricityBill] / WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    auto demand  = agent_->params[EParamTypes::ElectricityConsumption] /constants::NUMBER_DAYS_IN_MONTH;
+
+    
+    //solar irradiation - average number
+    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
+    //permit length in labor*hours
+    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+    
+    
+    int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design->PV_module->efficiency * (dec_design->PV_module->length * dec_design->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    double DC_size = N_PANELS * dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width / 1000;
+
+    //size of one panel
+    double module_area = dec_design->PV_module->length * dec_design->PV_module->width / 1000000;
+    
+    //system area size
+    double system_area = N_PANELS * module_area;
+    //convert sq.feet into sq. meters
+    double roof_area = 0.09290304 * agent_->house->roof_size;
+    double available_area = std::min(roof_area, system_area);
+    
+    
+    //update to the actual available area
+    N_PANELS = std::ceil(available_area/module_area);
+    DC_size = N_PANELS * dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width / 1000;
+    
     
     //price per watt is predetermined by the optimality choice
-    auto p = params[EParamTypes::EstimatedPricePerWatt] *  estimated_demand;
+    auto p = params[EParamTypes::EstimatedPricePerWatt] * DC_size;
+    
+    //calculate irr given the parameters for this
+    project->DC_size= DC_size;
+    project->agent = agent_;
+    project->AC_size = 
+    
     
     
     //there is only 1 solar panel + inverter combinaion to use in offering solar panels
@@ -368,13 +401,6 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
     
     //calculate expected maintenance
     //draw time before next maintenance
-    //create gamma for current prior - convert into boost representation
-    
-    //here need to write Lomax distribution for reliability - prior Gamma, data - exponential, posterior - Gamma, posterior for data - Lomax
-    //for complexity prior - Normal-Inverse gamma, data - normal, posterior - Normal-Inverse gamma, posterior for data - student. Generate from usual student and shift by mean and scale
-    
-    
-    
     auto rng_THETA_reliability = [&]()
     {
         return w->rand->r_pareto_2(dec_design_hat.THETA_reliability[1], dec_design_hat.THETA_reliability[0]);
@@ -388,16 +414,13 @@ SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_ha
         return dec_design_hat.THETA_reliability[0] + rng_THETA_complexity_base() * (dec_design_hat.THETA_reliability[3] * (dec_design_hat.THETA_reliability[1] + 1))/(dec_design_hat.THETA_reliability[1] * dec_design_hat.THETA_reliability[2]);
     };
     
-    
-    
-    
+
     double x = 0.0; //time before next breakdown
     double t = 0.0; //time of a last breakdown
     double irr_ = 0.05; //rate of financing for this installer - discounting rate for its profit calculations
     double maintenance_n_hat = 0.0; //maintenance for one simulation run
     double maintenance_hat = 0.0; //average maintenance over all simulation runs
     double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
-    
     
     
     //estimation for the period t, labor price is constant - change to dynamic labor price estimation in the future
@@ -460,9 +483,6 @@ SEIBL::wm_update()
     //observed share over the past year - y
     Y(0,0) = w->get_inf(EDecParams::Share, this);
     
-    
-    
-    
 
     //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression)
     //details http://www.biostat.umn.edu/~ph7440/pubh7440/BayesianLinearModelGoryDetails.pdf
@@ -479,7 +499,6 @@ SEIBL::wm_update()
     b_0 = b_n;
     
     
-    
     //data generating will be MVS - take mean from there - see predictions using BLR
     for (auto i = 0; i < THETA_demand.size() ; ++i)
     {
@@ -487,11 +506,10 @@ SEIBL::wm_update()
     };
     
     //update reputation
-    
     //updates parameters for distribution if new information about performance is here
     //goes through actual production in the previous year, calculate percentage of the promised production,
     //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
-    //
+    //assume method of moments with only parameter being  \f$/alpha \$f
     double mean = 0.0;
     for(auto project: pvprojects)
     {
@@ -506,10 +524,6 @@ SEIBL::wm_update()
     
     //updated parameter for reputation
     THETA_reputation[0] = (1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1)));
-    
-    
-    
-
 }
 
 
@@ -550,8 +564,33 @@ SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 void SEIBL::projects_update()
 {
     
-    //go though installed projects
+    //go though installed projects, record failures
     std::map<UID, std::vector<double>> failures;
+    //go though installed projects record failure complexity
+    std::map<UID, std::vector<double>> failures_complexity;
+
+    
+    //uses true distribution here
+    auto rng_THETA_reliability = [&](std::shared_ptr<SolarModuleBL> pv_module_)
+    {
+        return w->rand->r_pareto_2(pv_module_->THETA_reliability[1], pv_module_->THETA_reliability[0]);
+    };
+    
+    
+    //complexity generators
+    auto rng_THETA_complexity() = [](boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
+    {
+        return pv_module_->THETA_reliability[0] + rng_THETA_complexity_base_() * (pv_module_->THETA_reliability[3] * (pv_module_->THETA_reliability[1] + 1))/(pv_module_->THETA_reliability[1] * pv_module_->THETA_reliability[2]);
+    };
+
+    std::map<UID, boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>> rngs_THETA_complexity_base;
+    for (auto iter:designs)
+    {
+        rngs_THETA_complexity_base[iter.first] = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]));
+    };
+    
+    
+    
     
     for (auto project:pvprojects)
     {
@@ -559,19 +598,26 @@ void SEIBL::projects_update()
         {
             //record as failure
             failures[project->PV_module->uid].push_back(project->maintenance_time);
+            
             //restart counter until next break-down
             project->maintenance_time_1 = a_time;
-            //draw next maintenance time
             
-        
+            //draw next maintenance time
+            project->maintenance_time = rng_THETA_reliability(project->PV_module) + a_time;
+            
             //draw maintenance complexity
+            project->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base[project->PV_module->uid], project->PV_module);
+            
+            //save actual complexity level
+            failures_complexity[project->PV_module->uid].push_back(project->maintenance_complexity);
             
             
             //record into costs for the period
-            
+            costs_time += project->maintenance_complexity * WorldSettings::instance().params_exog[EParamTypes::LaborPrice] ;
             
             //records down period into production time, hard coded that TimeUnit here is 1 year - so share of down time as a percentage of days in a year - 365.
-            project->production_time = project->maintenance_complexity / (WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation]) / (365);
+            //because maintenance complexity is in labor*hours and solar radiation defines number of hours per day solar panels are active, the result will be number of days solar system is down, convert into percentage of a year
+            project->production_time = project->maintenance_complexity / (WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation]) / (constants::NUMBER_DAYS_IN_TICK);
             
         }
         else
@@ -582,18 +628,41 @@ void SEIBL::projects_update()
     
     
     
-    //go though each panel and update estimates for reliability and complexity
+    //updates Gamma - prior to Gamma posterior, with Exponential data
     for (auto failure:failures)
     {
-        
+        //\f$ a' = a + n \f$
+        designs[failure.first]->THETA_reliability[0] += failure.second.size();
+        //\f$ b' = b + \sum_{i}x_{i} \f$
+        designs[failure.first]->THETA_reliability[1] += std::accumulate(failure.second.begin(), failure.second.end(), 0.0);
+    };
+    
+    
+    double mu_complexity_n = 0.0;
+    double v_complexity_n = 0.0;
+    double alpha_complexity_n = 0.0;
+    double beta_complexity_n = 0.0;
+    //go though each panel and update estimates for reliability and complexity
+    for (auto failure:failures_complexity)
+    {
         //transform into Eigen X matrix (n,1)
-        Eigen::Map<Eigen::MatrixXd> X(failure.second.data(),failure.second.size(),1);
+        Eigen::Map<Eigen::MatrixXd> X(failure.second.data(), failure.second.size(), 1);
         MatrixXd centered = X.rowwise() - X.colwise().mean();
+        
+        auto X_bar = X.mean();
+        auto n = failure.size();
+        auto design = design[failure.first];
+        
         //cont. updating posterior normal-inverse-gamma for complexity - formulas is in https://en.wikipedia.org/wiki/Conjugate_prior - for normal with mu and sigma
-        beta_n = + 0.5 * (centered.adjoint() * centered);
+        mu_complexity_n = (design->THETA_complexity[1] * design->THETA_complexity[0] + n * x_bar) / (design->THETA_complexity[1] + n);
+        v_complexity_n = design->THETA_complexity[1] + n;
+        alpha_complexity_n = design->THETA_complexity[2] + 0.5 * n;
+        beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.adjoint() * centered) +
+                            0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(x_bar - design->THETA_complexity[0], 0.5);
         
         
     };
+
     
     
 }
@@ -625,6 +694,7 @@ SEIBL::act_tick()
     //switch to new offering, lock as simulateneously is offering projects to H
     lock.lock();
     dec_design = dec;
+    design[dec->PV_module->uid] = dec;
     lock.unlock();
     
     

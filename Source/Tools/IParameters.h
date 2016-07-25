@@ -32,6 +32,7 @@ namespace solar_core
         const int WAIT_CYCLES_VIEW_REQUEST = 10;
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
         const double NUMBER_DAYS_IN_YEAR = 365.25;
+        const double NUMBER_DAYS_IN_TICK = 365.25;
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
@@ -74,6 +75,26 @@ namespace solar_core
         
         /** Average demand for electricity */
         AverageElectricityDemand,
+        
+        
+        /** For @wp2 average level of solar radiation */
+        AverageSolarIrradiation,
+        
+        
+        /** For @wp2 average labor intencity of permitting in labor*hours */
+        AveragePermitDifficulty,
+        
+        
+        /** Consumption of electricity - monthly KWh */
+        ElectricityConsumption,
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         /** Electricity Bill */
