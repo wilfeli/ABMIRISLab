@@ -117,7 +117,7 @@ WEE::life_hos()
                 
                 
                 //get answer for the design
-                FLAG_DEC = hos[i]->ac_dec_design(seis[j_sei]->form_design_for_params(hos[i]));
+                FLAG_DEC = hos[i]->ac_dec_design(pool_projects[i_pool_projects]);
                 
                 
                 

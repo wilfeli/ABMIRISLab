@@ -9,8 +9,10 @@
 #include "Tools/IRandom.h"
 #include "Tools/WorldSettings.h"
 #include "Agents/SEIBL.h"
+#include "Agents/SEMBL.h"
 #include "Agents/H.h"
 #include "UI/W.h"
+#include "UI/WEE.h"
 
 using namespace solar_core;
 
@@ -52,9 +54,6 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     
     //solar irradiation - average number
     auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
-    //permit length in labor*hours
-    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    
     
     int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design->PV_module->efficiency * (dec_design->PV_module->length * dec_design->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     double DC_size = N_PANELS * dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width / 1000;
@@ -65,7 +64,7 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     //system area size
     double system_area = N_PANELS * module_area;
     //convert sq.feet into sq. meters
-    double roof_area = 0.09290304 * agent_->house->roof_size;
+    double roof_area = constants::NUMBER_SQM_IN_SQF * agent_->house->roof_size;
     double available_area = std::min(roof_area, system_area);
     
     
@@ -77,71 +76,99 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     //price per watt is predetermined by the optimality choice
     auto p = params[EParamTypes::EstimatedPricePerWatt] * DC_size;
     
-    //calculate irr given the parameters for this
+    //calculate irr given the parameters for this project
     project->DC_size= DC_size;
     project->agent = agent_;
-    project->AC_size = 
-    
-    
-    
-    //there is only 1 solar panel + inverter combinaion to use in offering solar panels
-    //calculate ROI
-    
-    auto roof_age = [&coef = roof_age_coef](double house_age)->double {return roof_age_coef * house_age;};
-    
-    
-    
-    auto NPV_purchase = [&project](double r)->double {
-        
-        //panel output
-        
-        
-        //production each time unit
-        
-        
-        
-        
-    };
-    
+    project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    project->p = p;
     
     
     //find irr
     //secant method
+    project->irr_a = irr_secant(project);
     
+    project->sei = this;
     
-    
-    
-    project.irr = irr;
-    
-    
-    
+    return project;
     
 }
 
 
 
 
-double
-SEIBL::irr_secant()
+double SEIBL::irr_secant(std::shared_ptr<PVProjectFlat> project)
 {
+    //algorithm parameters
+    double precision = 0.00001; //tolerance for convergence
+    auto N_iterations = 10; //max number of iterations
     
     //guess starting points
-    r_n = 0.05
-    r_n_1
-    r_n_2
+    auto r_n = 0.05;
+    auto r_n_1 = 0.06;
+    auto r_n1 = r_n + precision + 0.01;
+
+    auto i = 0;
+
     
+    while ((i < N_iterations) && std::abs(r_n1 - r_n) > precision)
+    {
+        r_n1 = r_n - NPV_purchase(project, r_n) * (r_n - r_n_1)/(NPV_purchase(project, r_n) - NPV_purchase(project, r_n_1));
+        ++i;
+    };
     
-    
+    return r_n1;
 }
+/**
 
-
-
-double
-SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat>, double irr)
+ Replicates financial calculator from Python
+ 
+*/
+double SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat> project, double irr)
 {
-    //panel output
+    //solar irradiation - average number
+    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
+    auto total_savings = 0.0;
+    auto AC_size_t = project->AC_size;
+    auto degradation_t = std::exp(std::log((1 - project->PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
+    auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
+    auto production_t = 0.0;
+    auto ElectricityPriceUCDemand_t = WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+    auto ElectricityPriceUCSupply_t = WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
+    //purchase financials
+    //MARK: cont. include tax incentives here
+    auto NPV_purchase = - project->p;
+    auto NPV_loan = 0.0;
     
+    //loan payments
+    auto loan_amount = project->p;
+    //monthly payments, warranty length is in years, assume that interest rate is in yearly terms
+    auto N_loan = project->PV_module->warranty_length * 12;
+    //monthly payments for the loan
+    auto loan_annuity = (WorldSettings::instance().params_exog[EParamTypes::AverageInterestRateLoan]/12)/(1 - std::pow((1 + WorldSettings::instance().params_exog[EParamTypes::AverageInterestRateLoan]/12), -N_loan)) * loan_amount;
     
+    for (auto i = 0; i < project->PV_module->warranty_length; ++i)
+    {
+        //panel output
+        production_t = AC_size_t * solar_irradiation * constants::NUMBER_DAYS_IN_YEAR;
+        total_savings = total_savings + production_t * ElectricityPriceUCSupply_t;
+        
+        NPV_purchase += production_t * ElectricityPriceUCSupply_t / std::pow(1 + irr, i);
+        //NPV loan income part
+        NPV_loan += production_t * ElectricityPriceUCSupply_t / std::pow(1 + irr, i);
+        //NPV loan costs part
+        NPV_loan -= (loan_annuity * 12) / std::pow(1 + irr, i);
+        
+        //degradation of a panel
+        AC_size_t = AC_size_t * degradation_t;
+        
+        //escalation of electricity price
+        ElectricityPriceUCSupply_t = ElectricityPriceUCSupply_t * (1 + inflation);
+        //escalation of electricity price
+        ElectricityPriceUCDemand_t = ElectricityPriceUCDemand_t * (1 + inflation);
+        
+    };
+    
+    return NPV_purchase;
     
 };
 
@@ -150,49 +177,50 @@ SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat>, double irr)
 
 std::shared_ptr<TDesign> SEIBL::dec_base()
 {
+    std::shared_ptr<TDesign> dec;
+    
+    
+    //makes decision about switching to new design or not
+    //price \f$ p_{n} \f$
     double p_n = 0.0;
+    //price \f$ p_{n+1} \f$, and p_n_1 will be \f$ p_{n-1} \f$
     double p_n1 = 0.0;
     
     
-    
-    //makes decision about ...
-    
-    //estimates expected profit for the current module
-    
-    auto dec_design_hat = dec_design; /// current design first
-    p_n = max_profit(dec_design_hat);
-    
-    
+    //allocate PVProjectFlat
+    auto average_project = std::make_shared<PVProjectFlat>();
     
 
+    //estimates expected profit for the current module
+    auto dec_design_hat = dec_design; /// current design first
+    p_n = max_profit(dec_design_hat, average_project);
     
     //draw random SEM
-    auto i = 0;
-    
-    //
+
     auto max_ = w->sems.size();
     auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
     auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
     
-    i = rng_i();
+    auto i = rng_i();
     
+    //MARK: cont. think if it needs new or this is OK
     auto test_design = std::make_shared<TDesign>(*dec_design);
-    test_design->module = nullptr;
+    test_design->PV_module = nullptr;
     
     //check if it is new techonology
     if (w->sems[i]->solar_panel_templates[EDecParams::NewTechnology])
     {
-        test_design->module = w->sems[i]->solar_panel_templates[EDecParams::NewTechnology];
+        test_design->PV_module = w->sems[i]->solar_panel_templates[EDecParams::NewTechnology];
     }
     else
     {
-        if (dec_design->module != w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology])
+        if (dec_design->PV_module != w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology])
         {
-            test_design->module = w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology];
+            test_design->PV_module = w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology];
         };
     };
     
-    if (test_design->module)
+    if (test_design->PV_module)
     {
         
         //reset to presets
@@ -201,14 +229,14 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         test_design->THETA_complexity = THETA_complexity_prior;
         test_design->complexity_install = complexity_install_prior;
         //assume price is the same for everyone
-        test_design->p_module = test_design->module->p_sem;
+        test_design->p_module = test_design->PV_module->p_sem;
         
         
-        p_n1 = max_profit(dec_design_hat)
+        p_n1 = max_profit(dec_design_hat, average_project);
         
         //evaluate new design
-        auto profit_time = est_profit(dec_design_hat, double pn);
-        auto profit_new = est_profit(test_design, double p_n1);
+        auto profit_time = est_profit(dec_design_hat, average_project, p_n);
+        auto profit_new = est_profit(test_design, average_project, p_n1);
         
         //calculate expected profit for other random design (from random SEM)
         //compare - if higher, than have chance to switch and start offering it
@@ -219,8 +247,8 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         if (w->rand->ru() <= p_switch)
         {
             //inform SEM about switch
-            dec_design->module->manufacturer->remove_connection(dec_design->module);
-            test_design->module->manufacturer->add_connection(test_design->module);
+            dynamic_cast<SEMBL*>(dec_design->PV_module->manufacturer)->remove_connection(dec_design->PV_module);
+            dynamic_cast<SEMBL*>(test_design->PV_module->manufacturer)->add_connection(test_design->PV_module);
             
             //if switches
             dec = test_design;
@@ -236,12 +264,11 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
 
     };
     
-
+    return dec;
 }
 
 
-double
-SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat)
+double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project)
 {
     
     /// method for searching for opt solution
@@ -251,12 +278,12 @@ SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat)
     double epsilon = 0.01; //step in derivative
     double x_old = params[EParamTypes::EstimatedPricePerWatt]; // The value does not matter as long as abs(x_new - x_old) > precision
     double x_new = x_old + epsilon; // The algorithm starts here
-    double gamma = 0.01 //step size
+    double gamma = 0.01; //step size
     double precision = 0.00001; //tolerance for convergence
     int N_steps = 100; //max number of steps
     
     
-    auto f_derivative = [epsilon, &dec_design_hat, this](double x)->double {return (this->estimate_profit(dec_design_hat, x + epsilon) - this->estimate_profit(dec_design_hat, x + epsilon))/epsilon;};
+    auto f_derivative = [epsilon, &dec_design_hat, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x + epsilon))/epsilon;};
    
     auto i = 0;
     while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
@@ -268,40 +295,48 @@ SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat)
     
     
     //if negative return 0.0
-    
     return std::max(x_new, 0.0);
-    
 }
 
 
 
 
 
-double
-SEIBL::estimate_irr_from_params(std::shared_ptr<TDesign> dec_design_hat, double p)
+double SEIBL::est_irr_from_params(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p)
 {
-    
-    double irr = 0.0
-    
-    //MARK: cont.
-    
-    return irr;
-    
-    
+    return irr_secant(project);
 }
 
 
 
-double
-SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
+double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p)
 {
     
     double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     
     ///estimates profit given the proposed price
+    //estimate number of panels for an average utility bill
+    auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    //solar irradiation - average number
+    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
+    //permit length in labor*hours
+    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+    
+    
+    int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
+    double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
+
+    //create average project for this design
+    project->PV_module = dec_design_hat->PV_module;
+    project->DC_size = DC_size;
+    project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    project->p = DC_size * p;
+
+    
     
     ///calculate promised irr for the TDesign given average utility bill and other parameters for the design, assume that spends p requested, and savings are equal to the savings on electricity bill over the warranty length, assume increase in electricity prices, and degradation standard. Do not include down time due to maintenance - assume that it will be ideal conditions (as a sales pitch). For estimates of the profit will use actual estimated maintenance costs
-    double irr_hat = est_irr_from_params(dec_design_hat, p);
+    double irr_hat = est_irr_from_params(dec_design_hat, project, p);
     
     
     //given price parameter - get number of projects
@@ -318,19 +353,6 @@ SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
     N_hat = N_hat * WorldSettings::instance().exog_params[EParamTypes::TotalPVMarketSize];
     
     //??? some other type of estimation
-    
-    //estimate number of panels for an average utility bill
-    auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
-    //solar irradiation - average number
-    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
-    //permit length in labor*hours
-    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    
-    
-    int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->module->efficiency * (dec_design_hat->module->length * dec_design_hat->module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
-    
-    double DC_size = N_PANELS * dec_design_hat->module->efficiency * dec_design_hat->module->length * dec_design_hat->module->width / 1000;
-    
     double w = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
     
     
@@ -344,7 +366,7 @@ SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
     double profit = 0.0;
     double irr_ = 0.05;
     
-    for (auto t = 0; i < T_planning; ++i)
+    for (auto t = 0; t < T_planning; ++t)
     {
         //adjust for inflation
         w_t = w * std::pow(1 + inflation, t);
@@ -359,7 +381,7 @@ SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
         costs_t += est_maintenance(dec_design_hat, N_hat_t, w_t);
         
         //calculate materials costs, only panels, no inverters here
-        costs_t += N_panels * N_hat_t * p_module;
+        costs_t += N_PANELS * N_hat_t * p_module;
 
         //labor costs to design each project
         costs_t += N_hat_t * params[EParamTypes::SEITimeLUForDesign] * w_t;
@@ -393,8 +415,7 @@ SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, double p)
 
 
 
-double
-SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w)
+double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w)
 {
     ///number of simulation runs
     std::size_t N_trial = 10;
@@ -538,9 +559,6 @@ void
 SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 {
     //fill in details for the project
-    project_->PV_module = dec_design->PV_module;
-    //MARK: cont.
-    
     //uses true distribution here
     auto rng_THETA_reliability = [&]()
     {
@@ -555,8 +573,6 @@ SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
     project_->maintenance_time = rng_THETA_reliability() + time_;
     //start counter for length before break-down from the start of the project
     project_->maintenance_time_1 = time_;
-    
-    
     
 }
 
@@ -678,14 +694,15 @@ void SEIBL::projects_update()
 void
 SEIBL::act_tick()
 {
-    
+    //update basic parameters
     ac_update_tick();
-    
     
     //updates information for decision making
     wm_update();
     
     //projects update
+    //go over installed projects and see if need maintenance, if need - record as costs and update time till next maintenance
+    //record actual production in the year based on the maintenance length
     projects_update();
     
     //make price decision, based on the switching or not
@@ -696,16 +713,6 @@ SEIBL::act_tick()
     dec_design = dec;
     design[dec->PV_module->uid] = dec;
     lock.unlock();
-    
-    
-    //MARK: cont.
-
-    
-    //go over installed projects and see if need maintenance, if need - record as costs and update time till next maintenance
-    //record actual production in the year based on the maintenance length
-    
-    
-    
     
     
 }

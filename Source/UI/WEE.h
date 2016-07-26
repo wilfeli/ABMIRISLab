@@ -33,6 +33,8 @@ public:
     
     double get_inf(EDecParams type_, SEIBL* agent_);
     
+    std::vector<SEMBL*> sems; /*!< all SEM */
+    
 protected:
     std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
     std::size_t i_pool_projects;
@@ -41,7 +43,7 @@ protected:
     
     std::vector<H*> hos;/*!< all H agents */
     std::vector<SEIBL*> seis;/*!< all SEI agents */
-    std::vector<SEMBL*> sems; /*!< all SEM */
+
 
     std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>> installed_projects_time;
     std::vector<std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>>> installed_projects_history;

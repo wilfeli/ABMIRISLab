@@ -36,9 +36,9 @@ namespace solar_core
         double p_design = 0.0; /*!< price per watt for the design based on this module */
         double complexity_install = 16.0; /*!< in labor*hours for the current state of the project */
         double BETA_complexity_time = 1.0; /*!< discounting for learning on how to install */
-        int N_panels = 0;
-        double DC_size = 0.0;
-        double AC_size = 0.0; 
+        int N_panels = 0; /*!< for an average house */
+        double DC_size = 0.0; /*!< for an average house */
+        double AC_size = 0.0; /*!< for an average house */
     };
     
     
@@ -72,7 +72,7 @@ namespace solar_core
         
         std::vector<double> THETA_demand; /*!< BLR estimate for demand for projects given own irr and other parameters */
         
-        std::vector<double> THETA_complexity_prior;
+        std::vector<double> THETA_complexity_prior{50, 1, 1, 50}; /*!< mean was estimated from {\displaystyle \nu } \nu  observations with sample mean {\displaystyle \mu _{0}} \mu _{0}; variance was estimated from {\displaystyle 2\alpha } 2\alpha  observations with sample mean {\displaystyle \mu _{0}} \mu _{0} and sum of squared deviations {\displaystyle 2\beta } 2\beta  */ 
         
         std::vector<double> THETA_reliability_prior{1, 1/25}; /*!< 25 - is average warranty length */
         
@@ -85,6 +85,40 @@ namespace solar_core
         std::mutex lock;
         
         WEE* w;
+        
+        
+        //@{
+        /**
+         
+         Decisions section
+         
+         */
+        
+        std::shared_ptr<TDesign> dec_base(); /*!< decision to switch or not */
+        
+        //@}
+        
+        
+        
+        
+        
+        //@{
+        /**
+         
+         Calculations of a profit
+         
+         */
+        double est_irr_from_params(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p); /*!< estimate irr for the project */
+        double NPV_purchase(std::shared_ptr<PVProjectFlat> project, double irr); /*!< NPV if purchased */
+        double irr_secant(std::shared_ptr<PVProjectFlat> project); /*!< finds irr given project parameters */
+        double max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project); /*!< finds price that would maximize profit for this design */
+        double est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p); /*!< estimates profit for a price */
+        double est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w); /*!< estimates maintenance given expected parameters */
+        
+        //@}
+        
+        
+        
         
         
         //@{

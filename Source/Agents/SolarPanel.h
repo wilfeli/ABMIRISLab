@@ -130,9 +130,11 @@ class SEM;
         double production_time = 0.0; /*!< realized production for t period */
         double production_time_1 = 0.0; /*!< realized production for t-1 period */
         double irr_e = 0.0; /*!< expected irr of a project */
+        double irr_a = 0.0; /*!< advertized by installer irr */
         TimeUnit maintenance_time;
         TimeUnit maintenance_time_1;
         double maintenance_complexity;
+        double p; /*!< total price for this project */
         
     };
     

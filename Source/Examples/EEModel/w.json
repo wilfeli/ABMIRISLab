@@ -11,6 +11,9 @@
                         "EParamTypes::ElectricityPriceUCDemand": 0.2
                         },
                         {
+                        "EParamTypes::ElectricityPriceUCSupply": 0.2
+                        },
+                        {
                         "EParamTypes::InflationRate": 0.02
                         },
                         {
@@ -27,6 +30,12 @@
                         },
                         {
                         "EParamTypes::AveragePermitDifficulty": 50
+                        },
+                        {
+                        "EParamTypes::AverageLoanLength":25
+                        },
+                        {
+                        "EParamTypes::AverageInterestRateLoan":0.06
                         }
                         ],
         "constraints":[
@@ -58,7 +67,7 @@
                        "EConstraintParams:MinNReceivedPreliminaryQuotes":2
                        },
                        {
-                       "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
+                    "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
                        },
                        {
                        "EConstraintParams::MaxNOpenProjectsHO":10
