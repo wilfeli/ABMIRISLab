@@ -24,7 +24,7 @@ std::set<EParamTypes> Homeowner::project_states_to_delete{EParamTypes::ClosedPro
 
 
 
-Homeowner::Homeowner(PropertyTree& pt_, W* w_)
+Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
 {
     w = w_;
     

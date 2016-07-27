@@ -14,6 +14,12 @@
 
 namespace solar_core
 {
+    
+    class WEE;
+    class PVProjectFlat;
+    
+    
+    
     /**
      
      Simple H that could only decide on ROI
@@ -22,6 +28,22 @@ namespace solar_core
     class H
     {
     public:
+        //@{
+        
+        /**
+         
+        Initialization section
+        
+        */
+        
+        H(const PropertyTree& pt_, WEE* w_);
+        void init(WEE* w_);
+        
+         
+        //@}
+        
+        
+        
         //@{
         /**
          
@@ -46,6 +68,21 @@ namespace solar_core
         
         
         //@}
+        
+        
+        //@{
+        /**
+         
+         Decision section
+         */
+        
+        std::vector<double> THETA_decision;/*!< irr threshold for decision to switch - \f$\mu\f$ in Logistic distribution */
+        bool ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_); /*!< decides to accept project or not */
+        std::vector<double> THETA_params; /*!< parameters for defining decision parameters */
+        
+        
+        //@}
+        
         
         
         //@{

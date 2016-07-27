@@ -125,7 +125,7 @@ class SEM;
         double DC_size = 0.0;
         double AC_size = 0.0;
         TimeUnit begin_time;
-        SEI* sei; /*!< installer of a project */
+        SEIBL* sei; /*!< installer of a project */
         H* agent;/*!< for whom this project is created */
         double production_time = 0.0; /*!< realized production for t period */
         double production_time_1 = 0.0; /*!< realized production for t-1 period */

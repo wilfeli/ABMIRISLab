@@ -95,6 +95,8 @@ namespace solar_core
          */
         
         std::shared_ptr<TDesign> dec_base(); /*!< decision to switch or not */
+        double exploration_p(double profit_new, double profit_old); /*!< return probability to switch */
+        
         
         //@}
         

@@ -241,7 +241,7 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         //calculate expected profit for other random design (from random SEM)
         //compare - if higher, than have chance to switch and start offering it
         //prob of switching depends on the distance between expected profits and attitide towards switching
-        auto p_switch = exploration_p(profit_time, profit_new);
+        auto p_switch = exploration_p(profit_new, profit_time);
         
         //draw and see if switches
         if (w->rand->ru() <= p_switch)
@@ -268,6 +268,22 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
 }
 
 
+
+/**
+ 
+ Returns probability to switch
+ 
+ */
+double SEIBL::exploration_p(double profit_new, double profit_old)
+{
+    //Logistic function (from cdf of the distribution)
+    return (1/(1+std::exp(-(profit_new/profit_old - THETA_exploration[0])/THETA_exploration[1])));
+    
+}
+
+
+
+
 double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project)
 {
     
@@ -283,7 +299,7 @@ double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     int N_steps = 100; //max number of steps
     
     
-    auto f_derivative = [epsilon, &dec_design_hat, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x + epsilon))/epsilon;};
+    auto f_derivative = [epsilon, &dec_design_hat, &project, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x + epsilon))/epsilon;};
    
     auto i = 0;
     while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
@@ -350,7 +366,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
                              THETA_demand[4] * X(0, 3));
     
     //adjust for the general market size
-    N_hat = N_hat * WorldSettings::instance().exog_params[EParamTypes::TotalPVMarketSize];
+    N_hat = N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize];
     
     //??? some other type of estimation
     double w = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
@@ -400,7 +416,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
         
         
         //update parameters
-        complexity_install_t = dec_design_hat->compexity_install * (dec_design_hat->BETA_complexity_time);
+        complexity_install_t = dec_design_hat->complexity_install * (dec_design_hat->BETA_complexity_time);
         profit_t = 0.0;
         costs_t = 0.0;
         
@@ -418,17 +434,17 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
 double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w)
 {
     ///number of simulation runs
-    std::size_t N_trial = 10;
+    std::size_t N_trials = 10;
     
     //calculate expected maintenance
     //draw time before next maintenance
     auto rng_THETA_reliability = [&]()
     {
-        return w->rand->r_pareto_2(dec_design_hat.THETA_reliability[1], dec_design_hat.THETA_reliability[0]);
+        return w->rand->r_pareto_2(dec_design_hat->THETA_reliability[1], dec_design_hat->THETA_reliability[0]);
     };
     
 
-    auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat.THETA_complexity[2]);
+    auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat->THETA_complexity[2]);
     auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_complexity_base)
     auto rng_THETA_complexity() = [&]()
     {

@@ -24,6 +24,22 @@ public:
     //@{
     /**
      
+     
+     */
+    
+    SEMBL(const PropertyTree& pt_, W* w_);
+    
+    
+    //@}
+    
+    
+    
+    
+    
+    
+    //@{
+    /**
+     
      Section with actions in the world
      
      */
@@ -46,7 +62,14 @@ protected:
     std::vector<double> THETA_dist_complexity; /*!< parameters for lognormal random walk. Data generating distribution is Normal. Need 4 parameters for 2 random walks and 2 current parameters. 
         Average repair time is 2 days + waiting for materials - 2 weeks, assume total 20 * 8 = 160 labor hours, and deviation of 20 labor hours.  */
     
+    Eigen::MatrixXd mean_rw_complexity_dist;
+    Eigen::MatrixXd sigma_rw_complexity_dist;
+    Eigen::MatrixXd normTransform_rw_complexity_dist;
+    Eigen::MatrixXd sample_ind_rw_complexity_dist;
+    Eigen::MatrixXd sample_rw_complexity_dist ;
     
+    
+    static int N_complexity_params; // Dimensionality (rows)
     
 };
 

@@ -7,14 +7,14 @@
 //
 
 #include "Tools/ExternalIncludes.h"
-#include "IRandom.h"
+#include "Tools/IRandom.h"
 
 
 
-using solar_core;
+using namespace solar_core;
 
 
 double IRandom::r_pareto_2(double lambda, double alpha)
 {
-    return (lambda * std::pow((ru() + lambda / alpha), -(1/(alpha + 1))) - 1);
+    return (lambda * std::pow((1 - ru()), -(1/alpha)) - 1);
 }

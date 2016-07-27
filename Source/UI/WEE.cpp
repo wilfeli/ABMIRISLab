@@ -117,7 +117,7 @@ WEE::life_hos()
                 
                 
                 //get answer for the design
-                FLAG_DEC = hos[i]->ac_dec_design(pool_projects[i_pool_projects]);
+                FLAG_DEC = hos[i]->ac_dec_design(pool_projects[i_pool_projects], this);
                 
                 
                 

@@ -59,6 +59,7 @@
     "THETA_profit": [
                      "FORMULA::p.d.f.::N_trunc(0.3, 0.05)"
                      ],
+    "THETA_exploration":["FORMULA::explorer - [1.0, 0.25], exploiter - [1.5, 0.5]"]
     "money": "FORMULA::p.d.f.::u(0, 10000)",
     "location": "FORMULA::p.d.f.::u_int(0, size)"
 }
