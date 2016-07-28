@@ -9,8 +9,12 @@
                {
                "EParamTypes::Income": "FORMULA::p.d.f.::CUSTOM"
                },
-               {"EParamTypes::HOMaxNVisitsPerTimeUnit":5},
-               {"EParamTypes::CreditScore":680}
+               {
+               "EParamTypes::HOMaxNVisitsPerTimeUnit": 5
+               },
+               {
+               "EParamTypes::CreditScore": 680
+               }
                ],
     "location": "FORMULA::p.d.f.::u_int(0, size)",
     "House": {
@@ -25,10 +29,9 @@
                                                             ]
                      }
                      ],
-    "THETA_params":[
-    1.0,
-    3.0,
-                    0.02
-    
-    ]
+    "THETA_params": [
+                     1,
+                     3,
+                     0.02
+                     ]
 }

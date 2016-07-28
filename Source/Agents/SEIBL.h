@@ -51,6 +51,23 @@ namespace solar_core
         std::shared_ptr<PVProjectFlat> form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project);
         std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Inv-Gamma distribution, is updated based on the realized production of installations.  */
         
+        
+        //@{
+        /**
+         
+         Interactions with the world
+         
+         */
+        
+        void install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_);
+        
+        
+        virtual void act_tick() override;
+        
+        
+        //@}
+        
+        
     protected:
         
         
@@ -61,9 +78,7 @@ namespace solar_core
          
          */
         
-        virtual void ac_update_tick() override; /*!< update internals for the tick */
-        
-        //@}
+
         
         
         std::map<UID, std::shared_ptr<TDesign>>  designs;  /** have current estimates on system design parameters for different learning distributions. UID of a solar_module here */
@@ -85,6 +100,10 @@ namespace solar_core
         std::mutex lock;
         
         WEE* w;
+        
+        
+        std::vector<std::shared_ptr<PVProjectFlat>> pvprojects; /*!< list of active and potential PV projects */
+        
         
         
         //@{
@@ -115,7 +134,7 @@ namespace solar_core
         double irr_secant(std::shared_ptr<PVProjectFlat> project); /*!< finds irr given project parameters */
         double max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project); /*!< finds price that would maximize profit for this design */
         double est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p); /*!< estimates profit for a price */
-        double est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w); /*!< estimates maintenance given expected parameters */
+        double est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double wage); /*!< estimates maintenance given expected parameters */
         
         //@}
         
@@ -155,6 +174,21 @@ namespace solar_core
         
         
         //@}
+        
+        //@{
+        /**
+         
+         Section with internal actions of an agent
+         
+         */
+        
+        virtual void ac_update_tick() override; /*!< update internals for the tick */
+        void wm_update(); /*!< updates estimates for projects and reputation estimate */
+        void projects_update(); /*!< updates projects to maintenance */
+        //@}
+
+        
+        
         
         
     };

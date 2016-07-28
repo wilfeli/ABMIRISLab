@@ -36,6 +36,12 @@
                         },
                         {
                         "EParamTypes::AverageInterestRateLoan":0.06
+                        },
+                        {
+                        "EParamTypes::TotalPVMarketSize":10000
+                        }
+                        {
+                        "EParamTypes::LaborPrice":20
                         }
                         ],
         "constraints":[

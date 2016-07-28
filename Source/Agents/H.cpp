@@ -19,14 +19,23 @@ using namespace solar_core;
 
 H::H(const PropertyTree& pt_, WEE* w_)
 {
-    serialize::deserialize(pt_.get_child("THETA_params"),THETA_params);
 
+
+}
+
+
+
+
+void H::init(WEE* w_)
+{
+    
     //calculate probabilty of switching given the parameters of this h
     THETA_decision[0] = 1/THETA_params[1] * std::pow((1 + THETA_params[0]/THETA_params[1] * params[EParamTypes::Income] / 1000),-1/(THETA_params[0] + 1));
     //variance equivalent is fixed for everyone
     THETA_decision[1] = THETA_params[2];
-}
+    
 
+}
 
 
 bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)

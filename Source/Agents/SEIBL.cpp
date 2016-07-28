@@ -20,6 +20,12 @@ using namespace solar_core;
 
 SEIBL::SEIBL(const PropertyTree& pt_, W* w_):SEI(pt_, w_)
 {
+    
+    //generate other parameters
+    
+    
+    
+    
     //prior on V_0 - assume ridge regression
     double c = 0.5;
     V_0 = SEIWMMatrixd::Identity();
@@ -232,7 +238,7 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         test_design->p_module = test_design->PV_module->p_sem;
         
         
-        p_n1 = max_profit(dec_design_hat, average_project);
+        p_n1 = max_profit(test_design, average_project);
         
         //evaluate new design
         auto profit_time = est_profit(dec_design_hat, average_project, p_n);
@@ -369,7 +375,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     N_hat = N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize];
     
     //??? some other type of estimation
-    double w = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+    double wage = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
     
     
     //repeat over estimated planned horizon of 5 years for keeping the same type of equipment
@@ -385,7 +391,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     for (auto t = 0; t < T_planning; ++t)
     {
         //adjust for inflation
-        w_t = w * std::pow(1 + inflation, t);
+        w_t = wage * std::pow(1 + inflation, t);
         
         //calculate expected sales, assume the same formula
         N_hat_t = N_hat;
@@ -397,7 +403,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
         costs_t += est_maintenance(dec_design_hat, N_hat_t, w_t);
         
         //calculate materials costs, only panels, no inverters here
-        costs_t += N_PANELS * N_hat_t * p_module;
+        costs_t += N_PANELS * N_hat_t * dec_design_hat->p_module;
 
         //labor costs to design each project
         costs_t += N_hat_t * params[EParamTypes::SEITimeLUForDesign] * w_t;
@@ -431,7 +437,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
 
 
 
-double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double w)
+double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double wage)
 {
     ///number of simulation runs
     std::size_t N_trials = 10;
@@ -445,20 +451,21 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
     
 
     auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat->THETA_complexity[2]);
-    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, pdf_THETA_complexity_base)
-    auto rng_THETA_complexity() = [&]()
+    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(w->rand->rng, pdf_THETA_complexity_base);
+    auto rng_THETA_complexity = [&]()
     {
-        return dec_design_hat.THETA_reliability[0] + rng_THETA_complexity_base() * (dec_design_hat.THETA_reliability[3] * (dec_design_hat.THETA_reliability[1] + 1))/(dec_design_hat.THETA_reliability[1] * dec_design_hat.THETA_reliability[2]);
+        return dec_design_hat->THETA_reliability[0] + rng_THETA_complexity_base() * (dec_design_hat->THETA_reliability[3] * (dec_design_hat->THETA_reliability[1] + 1))/(dec_design_hat->THETA_reliability[1] * dec_design_hat->THETA_reliability[2]);
     };
     
 
     double x = 0.0; //time before next breakdown
+    double y = 0.0; //complexity of a repair
     double t = 0.0; //time of a last breakdown
     double irr_ = 0.05; //rate of financing for this installer - discounting rate for its profit calculations
     double maintenance_n_hat = 0.0; //maintenance for one simulation run
     double maintenance_hat = 0.0; //average maintenance over all simulation runs
     double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
-    
+    std::vector<double> cash_flow_maintenance_n{dec_design_hat->PV_module->warranty_length, 0.0};
     
     //estimation for the period t, labor price is constant - change to dynamic labor price estimation in the future
     for (auto n = 0; n < N_trials; ++n)
@@ -473,15 +480,15 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
                 t += x;
                 
                 //if it is still in warranty - spend labor*hours to repair
-                if (t <= dec_design_hat.module->warranty_length)
+                if (t <= dec_design_hat->PV_module->warranty_length)
                 {
                     //draw complexity of the breakdown, in labor*hours
                     y = rng_THETA_complexity();
                     //and labor costs to repair it adjusted for inflation
-                    maintenance_n_hat += (y * w * std::pow(1 + inflation, t))/std::pow(1 + irr_, t);
+                    maintenance_n_hat += (y * wage * std::pow(1 + inflation, t))/std::pow(1 + irr_, t);
                     
                     //? need condition of non-negativity for cashflows
-                    cash_flow_maintenance_n[t] = (y * w * std::pow(1 + inflation, t));
+                    cash_flow_maintenance_n[t] = (y * wage * std::pow(1 + inflation, t));
                 }
                 else
                 {
@@ -524,10 +531,10 @@ SEIBL::wm_update()
     //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression)
     //details http://www.biostat.umn.edu/~ph7440/pubh7440/BayesianLinearModelGoryDetails.pdf
     //assume incremental updates
-    Mu_n = (X.transpose() * X + V_0.inverse()).inverse() + (V_0.inverse() * Mu_0 + X.transpose() * Y)
+    Mu_n = (X.transpose() * X + V_0.inverse()).inverse() + (V_0.inverse() * Mu_0 + X.transpose() * Y);
     V_n = (X.transpose() * X + V_0.inverse()).inverse();
     a_n = a_0 + 0.5;
-    b_n = b_0 + 0.5 * (Y.transpose() * Y + Mu_0.transpose() * V_0.inverse() * Mu_0 + Mu_n.transpose() * V_n.inverse() * Mu_n)
+    b_n = b_0 + (0.5 * (Y.transpose() * Y + Mu_0.transpose() * V_0.inverse() * Mu_0 + Mu_n.transpose() * V_n.inverse() * Mu_n))(0,0);
     
     //update to new values
     Mu_0 = Mu_n;
@@ -571,8 +578,7 @@ SEIBL::wm_update()
  
  
  */
-void
-SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
+void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 {
     //fill in details for the project
     //uses true distribution here
@@ -589,6 +595,11 @@ SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
     project_->maintenance_time = rng_THETA_reliability() + time_;
     //start counter for length before break-down from the start of the project
     project_->maintenance_time_1 = time_;
+    
+    
+    w->get_state_inf_installed_project(std::dynamic_pointer_cast<PVProject>(project_));
+    
+    
     
 }
 
@@ -610,15 +621,15 @@ void SEIBL::projects_update()
     
     
     //complexity generators
-    auto rng_THETA_complexity() = [](boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
+    auto rng_THETA_complexity = [](boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
     {
         return pv_module_->THETA_reliability[0] + rng_THETA_complexity_base_() * (pv_module_->THETA_reliability[3] * (pv_module_->THETA_reliability[1] + 1))/(pv_module_->THETA_reliability[1] * pv_module_->THETA_reliability[2]);
     };
 
-    std::map<UID, boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>> rngs_THETA_complexity_base;
+    std::map<UID, boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>> rngs_THETA_complexity_base;
     for (auto iter:designs)
     {
-        rngs_THETA_complexity_base[iter.first] = boost::variate_generator<boost::mt19937&, boost::random::gamma_distribution<>>(w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]));
+        rngs_THETA_complexity_base[iter.first] = boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>(&w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]));
     };
     
     
@@ -679,18 +690,18 @@ void SEIBL::projects_update()
     {
         //transform into Eigen X matrix (n,1)
         Eigen::Map<Eigen::MatrixXd> X(failure.second.data(), failure.second.size(), 1);
-        MatrixXd centered = X.rowwise() - X.colwise().mean();
+        Eigen::MatrixXd centered = X.rowwise() - X.colwise().mean();
         
         auto X_bar = X.mean();
-        auto n = failure.size();
-        auto design = design[failure.first];
+        auto n = failure.second.size();
+        auto design = designs[failure.first];
         
         //cont. updating posterior normal-inverse-gamma for complexity - formulas is in https://en.wikipedia.org/wiki/Conjugate_prior - for normal with mu and sigma
-        mu_complexity_n = (design->THETA_complexity[1] * design->THETA_complexity[0] + n * x_bar) / (design->THETA_complexity[1] + n);
+        mu_complexity_n = (design->THETA_complexity[1] * design->THETA_complexity[0] + n * X_bar) / (design->THETA_complexity[1] + n);
         v_complexity_n = design->THETA_complexity[1] + n;
         alpha_complexity_n = design->THETA_complexity[2] + 0.5 * n;
-        beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.adjoint() * centered) +
-                            0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(x_bar - design->THETA_complexity[0], 0.5);
+        beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.transpose() * centered)(0,0) +
+                            0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(X_bar - design->THETA_complexity[0], 0.5);
         
         
     };
@@ -707,8 +718,7 @@ void SEIBL::projects_update()
  tick is moved to be a year
  
 */
-void
-SEIBL::act_tick()
+void SEIBL::act_tick()
 {
     //update basic parameters
     ac_update_tick();
@@ -727,7 +737,7 @@ SEIBL::act_tick()
     //switch to new offering, lock as simulateneously is offering projects to H
     lock.lock();
     dec_design = dec;
-    design[dec->PV_module->uid] = dec;
+    designs[dec->PV_module->uid] = dec;
     lock.unlock();
     
     

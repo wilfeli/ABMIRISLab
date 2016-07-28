@@ -32,6 +32,155 @@
 
 using namespace solar_core;
 
+/**
+ 
+ Assume that world is created from scratch
+ 
+ */
+WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
+{
+
+    
+    //set ui flags
+    FLAG_IS_STOPPED = true;
+    
+    
+    //saves path to basic template
+    base_path = path_;
+    boost::filesystem::path path_to_model_file(path_);
+    boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
+    boost::filesystem::path path_to_template;
+    std::string path;
+    //    Log::instance(path_);
+    
+    //preallocate stuff
+    PropertyTree pt;
+    std::map<std::string, std::string> params_str;
+    
+    
+    if (mode_ == "NEW")
+    {
+        
+        create_world(path_to_model_file, path_to_dir, path_to_template, pt, params_str);
+        
+        
+        
+        //left as an old version as need to check that formulas are consistent here with the geography definition
+        //create random number generators for locations
+        //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
+        //check that it is uniform distribution
+        if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
+        {
+            throw std::runtime_error("unsupported ho specification rule");
+        };
+        auto max_ = world_map->g_map[0].size() - 1;
+        auto pdf_location_x = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_location_x = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_x);
+        max_ = world_map->g_map.size() - 1;
+        auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
+
+        
+        
+        //ho.json
+        path_to_template = path_to_dir;
+        path_to_template /= "ho.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+
+        
+        hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
+        
+        
+        
+        //sei.json
+        path_to_template = path_to_dir;
+        path_to_template /= "sei.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        
+        seis = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], rng_location_x, rng_location_y, this);
+        
+        
+        
+        //sem.json
+        ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
+        path_to_template = path_to_dir;
+        path_to_template /= "sem.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        
+        for (auto i = 0; i < params_d[EParamTypes::N_SEM]; ++i)
+        {
+            sems.push_back(new SEMBL(pt, this));
+        };
+        
+        
+        max_ = sems.size() - 1;
+        auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+        auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
+        
+        
+        //set producers
+        for (auto iter: WorldSettings::instance().solar_modules)
+        {
+            if (iter.second->manufacturer_id == "FORMULA::RANDOM")
+            {
+                iter.second->manufacturer = sems[rng_i()];
+                iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
+                
+            }
+            else
+            {
+                throw std::runtime_error("unsupported formula");
+            };
+        };
+        
+        
+        
+        //create G
+        //g.json
+        path_to_template = path_to_dir;
+        path_to_template /= "g.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        g = new G(pt, this);
+        
+        
+        //create Utility
+        //utility.json
+        path_to_template = path_to_dir;
+        path_to_template /= "utility.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        utility = new Utility(pt, this);
+        
+        
+        //create marketing
+        marketing = new MarketingInst(this);
+        
+        
+        
+        //set flags
+        FLAG_H_TICK = true;
+        FLAG_G_TICK = true;
+        FLAG_UTILITY_TICK = true;
+        FLAG_SEI_TICK = true;
+        FLAG_SEM_TICK = true;
+        FLAG_MARKET_TICK = true;
+        updated_counter = 0;
+        notified_counter = 0;
+
+        
+        
+        
+        
+
+    };
+
+    
+
+}
 
 
 void
@@ -70,11 +219,7 @@ WEE::init()
     
 }
 
-void WEE::ac_update_tick()
-{
-    installed_projects_history.push_back(installed_projects_time);
-    installed_projects_time.clear();
-}
+
 
 
 void
@@ -103,10 +248,17 @@ WEE::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::WHMaxNToDrawPerTimeUnit]; ++i)
+            for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::WHMaxNToDrawPerTimeUnit];++i)
             {
-                //pick h randomly
-                j_h = rng_agents();
+                while (true)
+                {
+                    //pick h randomly
+                    j_h = rng_agents();
+                    if (hos[i]->FLAG_INSTALLED_SYSTEM)
+                    {
+                        break;
+                    };
+                };
                 
                 //pick sei randomly
                 j_sei = rng_sei_agents();
@@ -127,6 +279,7 @@ WEE::life_hos()
                     //save as accepted project
                     seis[j_sei]->install_project(pool_projects[i_pool_projects], time);
                     ++i_pool_projects;
+                    hos[i]->FLAG_INSTALLED_SYSTEM = true;
                 };
                 
             };
@@ -166,7 +319,7 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
             {
                 if (seis[i] != agent_)
                 {
-                    Rep_i += seis[i]->reputation;
+                    Rep_i += 1/(seis[i]->THETA_reputation[0] - 1);
                 };
             };
             ret = Rep_i / (seis.size() - 1);
@@ -199,10 +352,10 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
 }
 
 
-void W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
+void WEE::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 {
     //save to the corresponding installer
-    installed_projects_time[project_->sei->uid].push_back(project_);
+    installed_projects_time[project_->sei->uid].push_back(std::dynamic_pointer_cast<PVProjectFlat>(project_));
     
     //save total number of installed projects
     ++N_installed_projects_time;
@@ -212,13 +365,18 @@ void W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 
 
 
+void WEE::ac_update_tick()
+{
+    ac_update_wm();
+}
+
+
 /**
  
  Calculate installed projects as a share
  
  */
-void
-WEE::ac_update_wm()
+void WEE::ac_update_wm()
 {
     
     //save into history

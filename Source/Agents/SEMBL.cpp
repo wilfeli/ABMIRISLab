@@ -168,7 +168,7 @@ void SEMBL::act_tick()
 
     
     //update uid
-    new_pv->
+    new_pv->p_sem = p_baseline;
     
 
     solar_panel_templates[EDecParams::NewTechnology] = new_pv;

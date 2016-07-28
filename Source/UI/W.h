@@ -62,13 +62,11 @@ namespace solar_core {
          
          */
         
-        
+        W() = default;
         W(std::string path_, HelperW* w_, std::string mode_ = "NEW"); /*!< */
         virtual void init();
         std::string base_path;
         
-        
-        virtual void create_seis(PropertyTree& pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y);
         
         
         //@}
@@ -91,7 +89,7 @@ namespace solar_core {
         void life_gs(); /*!< life of g */
         void life_markets(); /*!< life of marketing */
         
-        
+        virtual void ac_update_tick();
         
         
         
@@ -158,7 +156,7 @@ namespace solar_core {
         
         
         void get_state_inf(Homeowner* agent_, EParamTypes state_); /*!< gets information about state change from agent */
-        void get_state_inf_installed_project(std::shared_ptr<PVProject> project_); /*!< is called when project is finished to record it */
+        virtual void get_state_inf_installed_project(std::shared_ptr<PVProject> project_); /*!< is called when project is finished to record it */
         void get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_); /*!< is called when project is interconnected to record it */
         
         
@@ -181,6 +179,24 @@ namespace solar_core {
         
         
     protected:
+        
+        //@{
+        /**
+         
+         Initialization part
+         
+         */
+        
+        
+        virtual void create_world(boost::filesystem::path& path_to_model_file, boost::filesystem::path& path_to_dir, boost::filesystem::path& path_to_template, PropertyTree& pt, std::map<std::string, std::string>& params_str);
+        
+        
+        
+        //@}
+        
+        
+        
+        
         std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
         
         
@@ -190,8 +206,8 @@ namespace solar_core {
         std::vector<SEM*> sems; /*!< all SEM */
         /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
         
-        std::map<std::string, std::string> params;
-        
+        std::map<std::string, std::string> params; /*!< have string values to parameters */
+        std::map<EParamTypes, double> params_d; /*!< have numerical values to parameters */
         
         std::vector<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
         

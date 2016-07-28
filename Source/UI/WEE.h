@@ -27,13 +27,57 @@ namespace solar_core {
 class WEE: public W
 {
 public:
+    WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;
     virtual void life_hos() override; /*!< life of Homeowners */
     
     
+    
+    //@{
+    /**
+     
+     Interactions with other agents
+     
+     */
+    
+    
+    
+    virtual void get_state_inf_installed_project(std::shared_ptr<PVProject> project_) override;
     double get_inf(EDecParams type_, SEIBL* agent_);
+    //@}
+    
+    //@{
+    /**
+     
+    Agents 
+     
+     */
+    
     
     std::vector<SEMBL*> sems; /*!< all SEM */
+    std::vector<H*> hos;/*!< all H agents */
+    std::vector<SEIBL*> seis;/*!< all SEI agents */
+    //@}
+    
+    
+    //@{
+    /**
+     
+     Main loop
+     
+     */
+    
+    
+    virtual void ac_update_tick() override;
+    void ac_update_wm();
+    
+    
+    //@}
+    
+    
+    
+    
+    
     
 protected:
     std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
@@ -41,14 +85,15 @@ protected:
     
     
     
-    std::vector<H*> hos;/*!< all H agents */
-    std::vector<SEIBL*> seis;/*!< all SEI agents */
+
 
 
     std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>> installed_projects_time;
     std::vector<std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>>> installed_projects_history;
     std::map<UID, double> market_share_seis;
     std::vector<UID> sorted_by_market_share_seis;
+    
+    int64_t N_installed_projects_time = 0;
     
     
 };

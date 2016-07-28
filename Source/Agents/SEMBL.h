@@ -45,6 +45,7 @@ public:
      */
     
     virtual void act_tick() override;
+    
 
     //@}
     
@@ -57,6 +58,20 @@ public:
     void remove_connection(std::shared_ptr<SolarModuleBL> link);
     
 protected:
+    
+    //@{
+    /**
+     
+     Section with internal actions of an agent
+     
+     
+     */
+    void ac_update_tick();
+    
+    
+    //@}
+    
+    
     std::vector<double> THETA_dist_efficiency; /*!< parameters for lognormal random walk, mean, variance, current value. Mean is average increase in efficiency over the past years. Variance - small on the scale of efficiency. Starting value - 0.16 current average production efficiency. */
     std::vector<double> THETA_dist_reliability; /*!< parameters for lognormal random walk. Data generating distribution is exponential. Assume that currently it is once every 5 years, so \f$ \lambda_{0} = \frac{1}{5} \f$. */
     std::vector<double> THETA_dist_complexity; /*!< parameters for lognormal random walk. Data generating distribution is Normal. Need 4 parameters for 2 random walks and 2 current parameters. 
@@ -69,6 +84,7 @@ protected:
     Eigen::MatrixXd sample_rw_complexity_dist ;
     
     
+    double p_baseline = 150.0; /*!< base price for the panel, constant for now for simplicity */
     static int N_complexity_params; // Dimensionality (rows)
     
 };

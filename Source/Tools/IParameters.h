@@ -6,6 +6,12 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+
+
+
+
 #ifndef ABMSolar_IParameters_h
 #define ABMSolar_IParameters_h
 
@@ -96,6 +102,29 @@ namespace solar_core
         
         /** Interest rate on a loan */
         AverageInterestRateLoan,
+        
+        
+        /** Number of Homeowners to generate */
+        N_HO,
+        
+        /** Number of installers to generate */
+        N_SEI,
+        
+        /** Number of large installers to generate */
+        N_SEILarge,
+        
+        /** Number of manufactures to generate */
+        N_SEM,
+        
+        /** Number of homeowners that are interested in installing */
+        N_HOMarketingStateHighlyInterested,
+        
+        /** Number of potential buyers */
+        TotalPVMarketSize,
+        
+        /** Labor price for the installers - qualified labor */
+        LaborPrice,
+        
         
         
         
@@ -314,6 +343,20 @@ namespace solar_core
         SEILowEfficiencyDesign,
         
     
+        
+        SEITimeLUForDesign,
+        
+        SEITimeLUForMarketing,
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         /** SEM parameters: Length of a production cycle  */
         SEMFrequencyProduction,
@@ -615,6 +658,54 @@ namespace solar_core
             {
                 return EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit;
             }
+            else if (param_type == "eparamtypes::n_ho")
+            {
+                return EParamTypes::N_HO;
+            }
+            else if (param_type == "eparamtypes::n_sei")
+            {
+                return EParamTypes::N_SEI;
+            }
+            else if (param_type == "eparamtypes::n_seilarge")
+            {
+                return EParamTypes::N_SEILarge;
+            }
+            else if (param_type == "eparamtypes::n_sem")
+            {
+                return EParamTypes::N_SEM;
+            }
+            else if (param_type == "eparamtypes::n_homarketingstatehighlyinterested")
+            {
+                return EParamTypes::N_HOMarketingStateHighlyInterested;
+            }
+            else if (param_type == "eparamtypes::totalpvmarketsize")
+            {
+                return EParamTypes::TotalPVMarketSize;
+            }
+            else if (param_type == "eparamtypes::laborprice")
+            {
+                return EParamTypes::LaborPrice;
+            }
+            else if (param_type == "eparamtypes::averagesolarirradiation")
+            {
+                return EParamTypes::AverageSolarIrradiation;
+            }
+            else if (param_type == "eparamtypes::averagepermitdifficulty")
+            {
+                return EParamTypes::AveragePermitDifficulty;
+            }
+            else if (param_type == "eparamtypes::electricityconsumption")
+            {
+                return EParamTypes::ElectricityConsumption;
+            }
+            else if (param_type == "eparamtypes::averageloanlength")
+            {
+                return EParamTypes::AverageLoanLength;
+            }
+            else if (param_type == "eparamtypes::averageinterestrateloan")
+            {
+                return EParamTypes::AverageInterestRateLoan;
+            }
             else if (param_type == "eparamtypes::gprocessingtimerequiredforprocessingpermit")
             {
                 return EParamTypes::GProcessingTimeRequiredForProcessingPermit;
@@ -808,4 +899,7 @@ namespace solar_core
     
 
 } //end of namespace solar_core
+
+#pragma clang diagnostic pop
+
 #endif

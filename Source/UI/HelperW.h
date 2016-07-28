@@ -13,6 +13,7 @@
 #include "Tools/Serialize.h"
 #include "Tools/IRandom.h"
 #include "Agents/SEI.h"
+#include "Agents/SEIBL.h"
 #include "Agents/Homeowner.h"
 #include "../Tests/Agents/SEIMock.h"
 
@@ -24,6 +25,9 @@ namespace solar_core {
 
     class BaselineModel {};
     class UnitTestModel {};
+    class ExploreExploit {};
+    
+    
     class HelperW
     {
     public:
@@ -93,8 +97,8 @@ namespace solar_core {
         
         
         
-        /** Old version of generating H - with independent parameters  */
-        std::vector<Homeowner*> create_hhs(PropertyTree& pt, std::string mode_, long N_HO, long N_HOMarketingStateHighlyInterested, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, IRandom* rand)
+        /** Old version of generating H - with independent parameters. Is not used in BaselineModel  */
+        std::vector<Homeowner*> create_hhs_independent_params(PropertyTree& pt, std::string mode_, long N_HO, long N_HOMarketingStateHighlyInterested, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, IRandom* rand)
         {
             std::vector<Homeowner*> hhs;
             
@@ -250,6 +254,195 @@ namespace solar_core {
             return seis;
             
         }
+    };
+    
+    
+    template <class T>
+    class HelperWSpecialization<T, ExploreExploit>: public HelperW
+    {
+    public:
+        /** Here it will be used by dynamically casting to the proper class to get access to this specific initialization   */
+        std::vector<SEIBL*> create_seis(PropertyTree& pt, std::string mode_, long N_SEI, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        {
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        std::vector<H*> create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        {
+            
+            
+            std::vector<H*> hos;
+            
+            std::map<std::string, std::string> params_str;
+            T* w = static_cast<T*>(w_);
+            
+            //
+            //read json with distribution parameters
+            auto path_to_data = path_to_dir;
+            path_to_data /= "joint_distribution.csv";
+            auto path_to_scheme = path_to_dir;
+            path_to_scheme /= "distribution.json";
+            
+            
+            auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
+            
+            //will draw electricity bill for each, roof size as a constant percent of a house size, income
+            auto formula_roof_age = pt.get<std::string>("House.roof_age");
+            auto formula_roof_size = pt.get<std::string>("House.roof_size");
+            auto roof_size_coef = 0.0;
+            auto roof_age_coef = 0.0;
+            std::regex e("");
+            
+            if (formula_roof_size.find("FORMULA::house_size::") == std::string::npos)
+            {
+                throw std::runtime_error("unsupported hh specification rule");
+            }
+            else
+            {
+                e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
+                formula_roof_size = std::regex_replace(formula_roof_size, e, "");
+                roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *(w->rand));
+            };
+            
+            auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
+            
+            if (formula_roof_age.find("FORMULA::house_age::") == std::string::npos)
+            {
+                throw std::runtime_error("unsupported hh specification rule");
+            }
+            else
+            {
+                e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
+                formula_roof_age = std::regex_replace(formula_roof_age, e, "");
+                roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *(w->rand));
+            };
+            
+            auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
+            
+            
+            //in the order of drawing for now
+            //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
+            std::vector<std::vector<double>> xs;
+            //draw from the joint distribution
+            for(auto i = 0 ; i < w->params_d[EParamTypes::N_HO]; ++i)
+            {
+                xs.push_back(tools::draw_joint_distribution(e_dist, w->rand));
+            };
+            
+            
+            
+            //read other parameters
+            serialize::deserialize(pt.get_child("params"), params_str);
+            std::map<EParamTypes, std::vector<double>> param_values;
+            
+            for (auto& iter:params_str)
+            {
+                EParamTypes name = EnumFactory::ToEParamTypes(iter.first);
+                //explicitly solve for values
+                auto params = serialize::create_dist_from_formula(iter.second, w->rand);
+                
+                if (params.valid_dist == true)
+                {
+                    param_values[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], 0.0);
+                    //generate map of random number generators with the name for this parameter?
+                    switch (params.type)
+                    {
+                        case ERandomParams::N_trunc:
+                            throw std::runtime_error("unfinished thread, should not be here");
+                            break;
+                        case ERandomParams::custom:
+                            //see what parameter it is - save values
+                            if (name == EParamTypes::ElectricityBill)
+                            {
+                                for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
+                                    param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
+                                };
+                            }
+                            else if (name == EParamTypes::Income)
+                            {
+                                for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    param_values[name].push_back(xs[i][4]);
+                                };
+                            }
+                            else
+                            {
+                                throw std::runtime_error("unsupported ho specification rule");
+                            
+                            };
+                            
+                            break;
+                        default:
+                            break;
+                    };
+                }
+                else
+                {
+                    //get value and store it as a value for all agents?
+                    auto param = serialize::solve_str_formula<double>(iter.second, *rand);
+                    param_values[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], param);
+                    
+                };
+            };
+            
+            
+            std::vector<double> THETA_params;
+            serialize::deserialize(pt_.get_child("THETA_params"),THETA_params);
+            
+            
+            //create HO
+            auto j = 0;
+            for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+            {
+                //generate location
+                pt.put("location_x", rng_location_x());
+                pt.put("location_y", rng_location_y());
+                
+                
+                //generate House
+                //roof_age
+                //roof_size
+                pt.put("House.roof_size", std::max(0.0, roof_size(xs[i][0])));
+                pt.put("House.roof_age", std::max(0.0, roof_age(xs[i][1])));
+                
+                
+                //read configuration file
+                //replace parameters if necessary
+                hos.push_back(new H(pt, this));
+                
+                
+                //copy other parameters
+                for (auto iter:param_values)
+                {
+                    hos.back()->params[iter.first] = param_values[iter.first][i];
+                };
+                
+                hos.back()->THETA_params = THETA_params;
+                
+            };
+
+        
+            return hos;
+        }
+        
+        
+        
+        
+        
     };
 
     

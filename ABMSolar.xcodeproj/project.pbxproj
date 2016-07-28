@@ -2019,7 +2019,7 @@
 		EDD376711D3429B0008705B8 /* distribution.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = distribution.json; sourceTree = "<group>"; };
 		EDD376721D3429B0008705B8 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDD376731D3429B0008705B8 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
-		EDD376741D3429B0008705B8 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hh.json; sourceTree = "<group>"; };
+		EDD376741D3429B0008705B8 /* ho.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ho.json; sourceTree = "<group>"; };
 		EDD376751D3429B0008705B8 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
 		EDD376761D3429B0008705B8 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
 		EDD376771D3429B0008705B8 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
@@ -8225,7 +8225,7 @@
 				EDD376711D3429B0008705B8 /* distribution.json */,
 				EDD376721D3429B0008705B8 /* g.json */,
 				EDD376731D3429B0008705B8 /* geography.json */,
-				EDD376741D3429B0008705B8 /* hh.json */,
+				EDD376741D3429B0008705B8 /* ho.json */,
 				EDD376751D3429B0008705B8 /* inverters.json */,
 				EDD376761D3429B0008705B8 /* joint_distribution.csv */,
 				EDD376771D3429B0008705B8 /* sei.json */,
