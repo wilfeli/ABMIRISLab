@@ -45,6 +45,7 @@ namespace solar_core
     
     class SEIBL: public SEI
     {
+        template <class T1, class T2> friend class HelperWSpecialization;
         friend class WEE;
     public:
         //@{
@@ -66,7 +67,7 @@ namespace solar_core
          
          */
         std::shared_ptr<PVProjectFlat> form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project);
-        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Inv-Gamma distribution, is updated based on the realized production of installations. MARK: check what parameters for reputation distribution are needed (1 or 2) and which one is the mean */
+        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Inv-Gamma distribution, is updated based on the realized production of installations. Here use Inv-Gamma\f$\left(\alpha, \beta \right)\f$. Assumption is that \f$\beta=1\f$ and estimate \f$\alpha\f$ via method of moments */
         //@}
         
         //@{
@@ -165,7 +166,7 @@ namespace solar_core
          Parameters for BLR for estimation of demand
          
          */
-        SEIWMDataType X;
+        Eigen::Matrix<double, 1, constants::N_BETA_SEI_WM> X;
         Eigen::Matrix<double, 1, 1> Y;
         
         SEIWMMatrixd V_0;

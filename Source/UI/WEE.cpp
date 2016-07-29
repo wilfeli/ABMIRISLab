@@ -348,7 +348,7 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
 }
 
 
-void WEE::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
+void WEE::get_state_inf_installed_project(std::shared_ptr<PVProjectFlat> project_)
 {
     //save to the corresponding installer
     installed_projects_time[project_->sei->uid].push_back(std::dynamic_pointer_cast<PVProjectFlat>(project_));

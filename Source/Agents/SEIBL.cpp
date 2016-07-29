@@ -390,7 +390,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     //use ceil to get int number
     double N_hat = std::ceil(THETA_demand[0] +
                              THETA_demand[1] * irr_hat +
-                             THETA_demand[2] * THETA_reputation[0] * THETA_reputation[1] +
+                             THETA_demand[2] * THETA_reputation[1]/(THETA_reputation[0] - 1) +
                              THETA_demand[3] * X(0, 2) +
                              THETA_demand[4] * X(0, 3));
     
@@ -543,7 +543,7 @@ SEIBL::wm_update()
     //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    X(0,1) = 1/(THETA_reputation[0] - 1);
+    X(0,1) = THETA_reputation[1]/(THETA_reputation[0] - 1);
     X(0,2) = dec_design->irr;
     X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
     X(0,4) = w->get_inf(EDecParams::irr_i, this);
@@ -551,10 +551,10 @@ SEIBL::wm_update()
     Y(0,0) = w->get_inf(EDecParams::Share, this);
     
 
-    //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression)
+    //implement BLR (https://en.wikipedia.org/wiki/Bayesian_linear_regression )
     //details http://www.biostat.umn.edu/~ph7440/pubh7440/BayesianLinearModelGoryDetails.pdf
     //assume incremental updates
-    Mu_n = (X.transpose() * X + V_0.inverse()).inverse() + (V_0.inverse() * Mu_0 + X.transpose() * Y);
+    Mu_n = (X.transpose() * X + V_0.inverse()).inverse() * (V_0.inverse() * Mu_0 + X.transpose() * Y);
     V_n = (X.transpose() * X + V_0.inverse()).inverse();
     a_n = a_0 + 0.5;
     b_n = b_0 + (0.5 * (Y.transpose() * Y + Mu_0.transpose() * V_0.inverse() * Mu_0 + Mu_n.transpose() * V_n.inverse() * Mu_n))(0,0);
@@ -620,7 +620,7 @@ void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit ti
     project_->maintenance_time_1 = time_;
     
     
-    w->get_state_inf_installed_project(std::dynamic_pointer_cast<PVProject>(project_));
+    w->get_state_inf_installed_project(project_);
     
     
     
@@ -652,7 +652,7 @@ void SEIBL::projects_update()
     std::map<UID, boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>> rngs_THETA_complexity_base;
     for (auto iter:designs)
     {
-        rngs_THETA_complexity_base[iter.first] = boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>(&w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]));
+        rngs_THETA_complexity_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>(&w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]))));
     };
     
     
@@ -672,7 +672,7 @@ void SEIBL::projects_update()
             project->maintenance_time = rng_THETA_reliability(project->PV_module) + a_time;
             
             //draw maintenance complexity
-            project->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base[project->PV_module->uid], project->PV_module);
+            project->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base.at(project->PV_module->uid), project->PV_module);
             
             //save actual complexity level
             failures_complexity[project->PV_module->uid].push_back(project->maintenance_complexity);

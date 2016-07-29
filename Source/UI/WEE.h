@@ -21,11 +21,12 @@ namespace solar_core {
     class SEIBL;
     class SEMBL;
     class H;
-    
+    class ExploreExploit;
     
 
 class WEE: public W
 {
+    template <class T1, class T2> friend class HelperWSpecialization;
 public:
     WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;
@@ -42,7 +43,7 @@ public:
     
     
     
-    virtual void get_state_inf_installed_project(std::shared_ptr<PVProject> project_) override;
+    virtual void get_state_inf_installed_project(std::shared_ptr<PVProjectFlat> project_);
     double get_inf(EDecParams type_, SEIBL* agent_);
     //@}
     

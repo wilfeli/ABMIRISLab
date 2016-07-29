@@ -10,7 +10,7 @@
 #define __ABMSolar__SolarPanel__
 
 #include "Tools/ExternalIncludes.h"
-
+#include "Tools/ID.h"
 #include "Tools/IParameters.h"
 
 namespace solar_core

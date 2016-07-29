@@ -154,7 +154,7 @@ void SEMBL::act_tick()
     //find how to vectorize this call - for fun
     for (auto i = 0; i < N_complexity_params; ++i)
     {
-        sample_ind_rw_complexity_dist[i] = w->rand->rnd();
+        sample_ind_rw_complexity_dist(i,0) = w->rand->rnd();
     };
     
     sample_rw_complexity_dist = (normTransform_rw_complexity_dist * sample_ind_rw_complexity_dist).colwise() + mean_rw_complexity_dist;

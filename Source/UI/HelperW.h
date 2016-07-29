@@ -470,7 +470,7 @@ namespace solar_core {
                 
                 //read configuration file
                 //replace parameters if necessary
-                hos.push_back(new H(pt, this));
+                hos.push_back(new H(pt, w));
                 
                 
                 //copy other parameters

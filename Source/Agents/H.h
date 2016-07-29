@@ -17,7 +17,7 @@ namespace solar_core
     
     class WEE;
     class PVProjectFlat;
-    
+
     
     
     /**
@@ -27,6 +27,7 @@ namespace solar_core
      */
     class H
     {
+        template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
         

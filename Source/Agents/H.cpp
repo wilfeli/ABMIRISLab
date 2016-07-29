@@ -11,6 +11,7 @@
 #include "Agents/SolarPanel.h"
 
 #include "Agents/H.h"
+#include "Agents/SEIBL.h"
 #include "UI/WEE.h"
 
 
@@ -41,7 +42,7 @@ void H::init(WEE* w_)
 bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)
 {
     //get irr and reputation of an installer (mean from distribution)
-    auto irr = (project_->irr_a * project_->sei->THETA_reputation[0]);
+    auto irr = (project_->irr_a * 1/(project_->sei->THETA_reputation[0]) - 1) * project_->sei->THETA_reputation[1];
     
     //Logistic function (from cdf of the distribution)
     auto p_switch = (1/(1+std::exp(-(irr - THETA_decision[0])/THETA_decision[1])));

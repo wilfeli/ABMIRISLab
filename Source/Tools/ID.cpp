@@ -11,7 +11,7 @@
 using namespace solar_core;
 
 
-long UID::id_counter = 1; //zero is reserved as default uid
+int64_t UID::id_counter = 1; //zero is reserved as default uid
 bool UID::FLAG_END_INITIALIZATION = false;
 std::unordered_set<int64_t> UID::used_ids;
 bool UID::FLAG_NEW_MODE = true;
@@ -24,8 +24,8 @@ UID::UID()
     //create next id
     ++UID::id_counter;
     
-    id.id = id_counter;
-    id.id_string = std::to_string(id.id);
+    id = id_counter;
+    id_string = std::to_string(id);
 }
 
 

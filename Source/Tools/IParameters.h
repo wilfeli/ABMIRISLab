@@ -549,7 +549,7 @@ namespace solar_core
     typedef int64_t TimeUnit;
     typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
     typedef Eigen::MatrixXd ThetaType; //one of containers for parameters
-    typedef Eigen::Matrix<double, 1, constants::N_BETA_SEI_WM> SEIWMDataType; //one of containers for parameters
+    typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, 1> SEIWMDataType; //one of containers for parameters
     typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM> SEIWMMatrixd;
     
     typedef std::underlying_type<EParamTypes>::type EParamTypes_type;
