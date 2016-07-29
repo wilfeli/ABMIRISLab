@@ -205,7 +205,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "704"
-            endingLineNumber = "704">
+            endingLineNumber = "704"
+            landmarkName = "W::life_markets()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

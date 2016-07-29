@@ -7,6 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED2BC13E1D4BACA300B96FB1 /* ID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AF1CE3A234005D1C49 /* ID.cpp */; };
+		ED2BC13F1D4BACA300B96FB1 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE560D1CDEBDB3005D1C49 /* codecvt_error_category.cpp */; };
+		ED2BC1401D4BACA300B96FB1 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE560E1CDEBDB3005D1C49 /* operations.cpp */; };
+		ED2BC1411D4BACA300B96FB1 /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
+		ED2BC1421D4BACA300B96FB1 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
+		ED2BC1431D4BACA300B96FB1 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
+		ED2BC1441D4BACA300B96FB1 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE560F1CDEBDB3005D1C49 /* path.cpp */; };
+		ED2BC1451D4BACA300B96FB1 /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56101CDEBDB3005D1C49 /* path_traits.cpp */; };
+		ED2BC1461D4BACA300B96FB1 /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56111CDEBDB3005D1C49 /* portability.cpp */; };
+		ED2BC1471D4BACA300B96FB1 /* unique_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56121CDEBDB3005D1C49 /* unique_path.cpp */; };
+		ED2BC1481D4BACA300B96FB1 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56131CDEBDB3005D1C49 /* utf8_codecvt_facet.cpp */; };
+		ED2BC1491D4BACA300B96FB1 /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56141CDEBDB3005D1C49 /* windows_file_codecvt.cpp */; };
+		ED2BC14A1D4BACA300B96FB1 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE56C81CDEBDB4005D1C49 /* error_code.cpp */; };
+		ED2BC14B1D4BACA300B96FB1 /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376631D320346008705B8 /* H.cpp */; };
+		ED2BC14C1D4BACA300B96FB1 /* IRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE0FD911CC0058100115115 /* IRandom.cpp */; };
+		ED2BC14D1D4BACA300B96FB1 /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
+		ED2BC14E1D4BACA300B96FB1 /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
+		ED2BC14F1D4BACA300B96FB1 /* WEE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3765F1D320283008705B8 /* WEE.cpp */; };
+		ED2BC1511D4BACA300B96FB1 /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
+		ED2BC1521D4BACA300B96FB1 /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
+		ED2BC1531D4BACA300B96FB1 /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
+		ED2BC1541D4BACA300B96FB1 /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
+		ED2BC1551D4BACA300B96FB1 /* Homeowner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* Homeowner.cpp */; };
+		ED2BC1561D4BACA300B96FB1 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57841CDEF2D2005D1C49 /* UI.cpp */; };
+		ED2BC1571D4BACA300B96FB1 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
+		ED2BC1581D4BACA300B96FB1 /* ParsingTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */; };
+		ED2BC1591D4BACA300B96FB1 /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
+		ED2BC15A1D4BACA300B96FB1 /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
+		ED2BC15B1D4BACA300B96FB1 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
+		ED2BC15C1D4BACA300B96FB1 /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
+		ED2BC15D1D4BACA300B96FB1 /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116D1C8515D800763818 /* IMessage.cpp */; };
+		ED2BC15E1D4BACA300B96FB1 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
+		ED2BC15F1D4BACA300B96FB1 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
+		ED2BC1601D4BACA300B96FB1 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57881CDEF359005D1C49 /* Log.cpp */; };
+		ED2BC1611D4BACA300B96FB1 /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
+		ED2BC16A1D4BAF8200B96FB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED2BC1691D4BAF8200B96FB1 /* main.cpp */; };
+		ED2BC16D1D4BB74F00B96FB1 /* UIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED2BC16B1D4BB74F00B96FB1 /* UIBL.cpp */; };
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
 		ED438B631D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
 		ED438B641D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
@@ -85,6 +122,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		ED2BC1631D4BACA300B96FB1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		EDDB3FB01C7C402D00A6EA1F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,6 +153,10 @@
 
 /* Begin PBXFileReference section */
 		ED0E14151C98BD2B00A41B24 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = w.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ABMSolar copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED2BC1691D4BAF8200B96FB1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EE/UI/main.cpp; sourceTree = "<group>"; };
+		ED2BC16B1D4BB74F00B96FB1 /* UIBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIBL.cpp; sourceTree = "<group>"; };
+		ED2BC16C1D4BB74F00B96FB1 /* UIBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBL.h; sourceTree = "<group>"; };
 		ED3EA2161C9F440000C2B70E /* G.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = G.cpp; sourceTree = "<group>"; };
 		ED3EA2171C9F440000C2B70E /* G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G.h; sourceTree = "<group>"; };
 		ED438B611D09F78E00CE1EA7 /* Simulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulation.cpp; sourceTree = "<group>"; };
@@ -4522,6 +4572,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		ED2BC1621D4BACA300B96FB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDDB3FAF1C7C402D00A6EA1F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4566,6 +4623,22 @@
 				EDE03ADF1CB8070500C79A22 /* sem.json */,
 			);
 			path = BaseModel;
+			sourceTree = "<group>";
+		};
+		ED2BC13B1D4BA8DA00B96FB1 /* EE */ = {
+			isa = PBXGroup;
+			children = (
+				ED2BC1681D4BACCA00B96FB1 /* UI */,
+			);
+			name = EE;
+			sourceTree = "<group>";
+		};
+		ED2BC1681D4BACCA00B96FB1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ED2BC1691D4BAF8200B96FB1 /* main.cpp */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		ED7492F91CDD830700FB61FB /* boost_1_57_0 */ = {
@@ -8241,6 +8314,7 @@
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
+				ED2BC13B1D4BA8DA00B96FB1 /* EE */,
 				EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */,
 				EDDB3FB31C7C402D00A6EA1F /* Products */,
 				EDDB3FD91C7DA16200A6EA1F /* Source */,
@@ -8253,6 +8327,7 @@
 			children = (
 				EDDB3FB21C7C402D00A6EA1F /* ABMSolar */,
 				EDDE4C481CDE682E005D1C49 /* ABMSolar copy */,
+				ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8348,15 +8423,17 @@
 		EDDB3FE51C7DA16200A6EA1F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				EDD376601D320283008705B8 /* WEE.h */,
-				EDD3765F1D320283008705B8 /* WEE.cpp */,
+				EDC006B51CEFF00A0024347C /* HelperW.cpp */,
+				EDC006B61CEFF00A0024347C /* HelperW.h */,
 				EDDB3FE61C7DA16200A6EA1F /* main.cpp */,
 				EDDE57841CDEF2D2005D1C49 /* UI.cpp */,
 				EDDE57851CDEF2D2005D1C49 /* UI.h */,
+				ED2BC16B1D4BB74F00B96FB1 /* UIBL.cpp */,
+				ED2BC16C1D4BB74F00B96FB1 /* UIBL.h */,
 				EDEDFCF81C87BA5100A26BA5 /* W.cpp */,
 				EDDB3FE71C7DA16200A6EA1F /* W.h */,
-				EDC006B51CEFF00A0024347C /* HelperW.cpp */,
-				EDC006B61CEFF00A0024347C /* HelperW.h */,
+				EDD3765F1D320283008705B8 /* WEE.cpp */,
+				EDD376601D320283008705B8 /* WEE.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -13156,6 +13233,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		ED2BC13C1D4BACA300B96FB1 /* SolarEE  */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED2BC1641D4BACA300B96FB1 /* Build configuration list for PBXNativeTarget "SolarEE " */;
+			buildPhases = (
+				ED2BC13D1D4BACA300B96FB1 /* Sources */,
+				ED2BC1621D4BACA300B96FB1 /* Frameworks */,
+				ED2BC1631D4BACA300B96FB1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SolarEE ";
+			productName = ABMSolar;
+			productReference = ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */;
+			productType = "com.apple.product-type.tool";
+		};
 		EDDB3FB11C7C402D00A6EA1F /* ABMSolar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDDB3FB91C7C402D00A6EA1F /* Build configuration list for PBXNativeTarget "ABMSolar" */;
@@ -13218,11 +13312,56 @@
 			targets = (
 				EDDB3FB11C7C402D00A6EA1F /* ABMSolar */,
 				EDDE4C261CDE682E005D1C49 /* Tests */,
+				ED2BC13C1D4BACA300B96FB1 /* SolarEE  */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		ED2BC13D1D4BACA300B96FB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED2BC13E1D4BACA300B96FB1 /* ID.cpp in Sources */,
+				ED2BC13F1D4BACA300B96FB1 /* codecvt_error_category.cpp in Sources */,
+				ED2BC1401D4BACA300B96FB1 /* operations.cpp in Sources */,
+				ED2BC1411D4BACA300B96FB1 /* SEIBL.cpp in Sources */,
+				ED2BC1421D4BACA300B96FB1 /* Utility.cpp in Sources */,
+				ED2BC1431D4BACA300B96FB1 /* Simulation.cpp in Sources */,
+				ED2BC1441D4BACA300B96FB1 /* path.cpp in Sources */,
+				ED2BC16D1D4BB74F00B96FB1 /* UIBL.cpp in Sources */,
+				ED2BC1451D4BACA300B96FB1 /* path_traits.cpp in Sources */,
+				ED2BC1461D4BACA300B96FB1 /* portability.cpp in Sources */,
+				ED2BC1471D4BACA300B96FB1 /* unique_path.cpp in Sources */,
+				ED2BC1481D4BACA300B96FB1 /* utf8_codecvt_facet.cpp in Sources */,
+				ED2BC1491D4BACA300B96FB1 /* windows_file_codecvt.cpp in Sources */,
+				ED2BC14A1D4BACA300B96FB1 /* error_code.cpp in Sources */,
+				ED2BC14B1D4BACA300B96FB1 /* H.cpp in Sources */,
+				ED2BC14C1D4BACA300B96FB1 /* IRandom.cpp in Sources */,
+				ED2BC14D1D4BACA300B96FB1 /* G.cpp in Sources */,
+				ED2BC14E1D4BACA300B96FB1 /* SolarPanel.cpp in Sources */,
+				ED2BC14F1D4BACA300B96FB1 /* WEE.cpp in Sources */,
+				ED2BC1511D4BACA300B96FB1 /* SEI.cpp in Sources */,
+				ED2BC1521D4BACA300B96FB1 /* Geography.cpp in Sources */,
+				ED2BC1531D4BACA300B96FB1 /* SEM.cpp in Sources */,
+				ED2BC1541D4BACA300B96FB1 /* HelperW.cpp in Sources */,
+				ED2BC1551D4BACA300B96FB1 /* Homeowner.cpp in Sources */,
+				ED2BC1561D4BACA300B96FB1 /* UI.cpp in Sources */,
+				ED2BC1571D4BACA300B96FB1 /* IInstitute.cpp in Sources */,
+				ED2BC1581D4BACA300B96FB1 /* ParsingTools.cpp in Sources */,
+				ED2BC1591D4BACA300B96FB1 /* IParameters.cpp in Sources */,
+				ED2BC15A1D4BACA300B96FB1 /* WorldSettings.cpp in Sources */,
+				ED2BC15B1D4BACA300B96FB1 /* MarketingSystem.cpp in Sources */,
+				ED2BC15C1D4BACA300B96FB1 /* W.cpp in Sources */,
+				ED2BC15D1D4BACA300B96FB1 /* IMessage.cpp in Sources */,
+				ED2BC15E1D4BACA300B96FB1 /* IAgent.cpp in Sources */,
+				ED2BC15F1D4BACA300B96FB1 /* SEMBL.cpp in Sources */,
+				ED2BC1601D4BACA300B96FB1 /* Log.cpp in Sources */,
+				ED2BC1611D4BACA300B96FB1 /* Serialize.cpp in Sources */,
+				ED2BC16A1D4BAF8200B96FB1 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDDB3FAE1C7C402D00A6EA1F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -13314,6 +13453,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		ED2BC1651D4BACA300B96FB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
+				);
+				PRODUCT_NAME = "ABMSolar copy";
+				USER_HEADER_SEARCH_PATHS = ./Source;
+			};
+			name = Debug;
+		};
+		ED2BC1661D4BACA300B96FB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
+				);
+				PRODUCT_NAME = "ABMSolar copy";
+				USER_HEADER_SEARCH_PATHS = ./Source;
+			};
+			name = Release;
+		};
 		EDDB3FB71C7C402D00A6EA1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -13463,6 +13632,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ED2BC1641D4BACA300B96FB1 /* Build configuration list for PBXNativeTarget "SolarEE " */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED2BC1651D4BACA300B96FB1 /* Debug */,
+				ED2BC1661D4BACA300B96FB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDDB3FAD1C7C402D00A6EA1F /* Build configuration list for PBXProject "ABMSolar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

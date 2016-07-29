@@ -16,16 +16,16 @@
 namespace solar_core
 {
 
-class Homeowner;
-class H;
-class MesStateBaseHO;
-class MesMarketingSEIOnlineQuote;
-class MesMarketingSEIPreliminaryQuote;
-class MesDesign;
-class MesFinance;
-class SEI;
-class SEM;
-    
+    class Homeowner;
+    class H;
+    class MesStateBaseHO;
+    class MesMarketingSEIOnlineQuote;
+    class MesMarketingSEIPreliminaryQuote;
+    class MesDesign;
+    class MesFinance;
+    class SEI;
+    class SEM;
+    class SEIBL;
     
     
     

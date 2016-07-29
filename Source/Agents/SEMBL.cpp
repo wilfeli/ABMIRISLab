@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "Tools/Serialize.h"
 #include "UI/WEE.h"
 #include "Agents/SEMBL.h"
 #include "Agents/SolarPanel.h"

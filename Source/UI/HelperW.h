@@ -12,6 +12,9 @@
 #include "Tools/ExternalIncludes.h"
 #include "Tools/Serialize.h"
 #include "Tools/IRandom.h"
+#include "Tools/Simulation.h"
+#include "Tools/WorldSettings.h"
+#include "Agents/H.h"
 #include "Agents/SEI.h"
 #include "Agents/SEIBL.h"
 #include "Agents/Homeowner.h"
@@ -267,25 +270,23 @@ namespace solar_core {
             T* w = static_cast<T*>(w_);
             std::vector<SEIBL*> seis;
             
-            //check how many exploreres to create
+            //SEM connections
             auto max_ = w->sems.size() - 1;
             auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
             auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
             int64_t j_sem = 0;
             
+            //check how many exploreres to create
             int64_t N_Explorer = pt.get<double>("THETA_exploration.Share::explorer") * N_SEI;
+            std::vector<double> THETA_explorer;
+            std::vector<double> THETA_exploiter;
+            serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::explorer"), THETA_explorer);
+            serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::exploiter"), THETA_exploiter);
+
             
             
             for (auto i = 0; i < N_SEI; ++i)
             {
-
-                std::vector<double> THETA_explorer;
-                std::vector<double> THETA_exploiter;
-                serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::explorer"), THETA_explorer);
-                serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::exploiter"), THETA_exploiter);
-                
-                
-                
                 seis.push_back(new SEIBL(pt, w));
                 
                 if (i < N_Explorer)
@@ -315,19 +316,9 @@ namespace solar_core {
                 {
                     throw std::runtime_error("unsupported specification");
                 };
-
-                
-                
-                
-                
-                
-                
-                
             };
             
-            
-            
-            
+            return seis;
         }
         
         
@@ -346,7 +337,6 @@ namespace solar_core {
             std::map<std::string, std::string> params_str;
             T* w = static_cast<T*>(w_);
             
-            //
             //read json with distribution parameters
             auto path_to_data = path_to_dir;
             path_to_data /= "joint_distribution.csv";
@@ -424,7 +414,7 @@ namespace solar_core {
                             //see what parameter it is - save values
                             if (name == EParamTypes::ElectricityBill)
                             {
-                                for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
                                     param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
                                     param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
@@ -432,7 +422,7 @@ namespace solar_core {
                             }
                             else if (name == EParamTypes::Income)
                             {
-                                for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
                                     param_values[name].push_back(xs[i][4]);
                                 };
@@ -451,7 +441,7 @@ namespace solar_core {
                 else
                 {
                     //get value and store it as a value for all agents?
-                    auto param = serialize::solve_str_formula<double>(iter.second, *rand);
+                    auto param = serialize::solve_str_formula<double>(iter.second, *(w->rand));
                     param_values[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], param);
                     
                 };
@@ -459,7 +449,7 @@ namespace solar_core {
             
             
             std::vector<double> THETA_params;
-            serialize::deserialize(pt_.get_child("THETA_params"),THETA_params);
+            serialize::deserialize(pt.get_child("THETA_params"),THETA_params);
             
             
             //create HO

@@ -115,54 +115,8 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         seis = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], rng_location_x, rng_location_y, this);
         
         
-        
-
-        
-        
-        max_ = sems.size() - 1;
-        auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-        auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
-        
-        
-        //set producers
-        for (auto iter: WorldSettings::instance().solar_modules)
-        {
-            if (iter.second->manufacturer_id == "FORMULA::RANDOM")
-            {
-                iter.second->manufacturer = sems[rng_i()];
-                iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
-                
-            }
-            else
-            {
-                throw std::runtime_error("unsupported formula");
-            };
-        };
-        
-        
-        
-        //create G
-        //g.json
-        path_to_template = path_to_dir;
-        path_to_template /= "g.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        g = new G(pt, this);
-        
-        
-        //create Utility
-        //utility.json
-        path_to_template = path_to_dir;
-        path_to_template /= "utility.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        utility = new Utility(pt, this);
-        
-        
-        //create marketing
-        marketing = new MarketingInst(this);
-        
-        
+        //no other institutions in this simple model
+        //flags are left here just in case if decide later to add this agents back 
         
         //set flags
         FLAG_H_TICK = true;
@@ -174,14 +128,8 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         updated_counter = 0;
         notified_counter = 0;
 
-        
-        
-        
-        
 
     };
-
-    
 
 }
 
@@ -190,11 +138,7 @@ void
 WEE::init()
 {
     
-    marketing->init(this);
-    g->init(this);
-    
-    
-    
+
     for (auto& agent:hos)
     {
         agent->init(this);
@@ -222,7 +166,56 @@ WEE::init()
     
 }
 
-
+void
+W::life()
+{
+    bool FLAG_MAX_N_ITERATIONS = params.count("N_ITERATIONS");
+    long MAX_N_ITERATIONS = 0;
+    if (FLAG_MAX_N_ITERATIONS)
+    {
+        MAX_N_ITERATIONS = std::stol(params["N_ITERATIONS"]);
+    };
+    
+    while (!FLAG_IS_STOPPED)
+    {
+        //stop if max number iterations is exceeded
+        if (FLAG_MAX_N_ITERATIONS)
+        {
+            if ((time - begin_time) > MAX_N_ITERATIONS)
+            {
+                FLAG_IS_STOPPED = true;
+                FLAG_IS_STARTED = false;
+                break;
+            };
+        };
+        
+        if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE_EE)
+        {
+            ac_update_tick();
+            
+            ++time;
+            updated_counter = 0;
+            FLAG_SEI_TICK = true;
+            FLAG_H_TICK = true;
+            FLAG_G_TICK = true;
+            FLAG_SEM_TICK = true;
+            FLAG_MARKET_TICK = true;
+            
+            
+            all_update.notify_all();
+            while((notified_counter < constants::NUMBER_AGENT_TYPES_LIFE_EE) && !FLAG_IS_STOPPED)
+            {
+                //need additional notifies, otherwise thread could wake while FLAG_TICK is false and get back to sleep. During the time it takes for it to go to sleep, notify_all could have been called and missed this thread, that was in between state
+                all_update.notify_all();
+            };
+            
+            notified_counter = 0;
+        }
+        else
+        {
+        };
+    };
+}
 
 
 void

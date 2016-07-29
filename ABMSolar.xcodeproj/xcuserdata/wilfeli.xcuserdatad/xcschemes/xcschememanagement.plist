@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ABMSolar copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>ABMSolar.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>ED2BC13C1D4BACA300B96FB1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EDDB3FB11C7C402D00A6EA1F</key>
 		<dict>
 			<key>primary</key>
