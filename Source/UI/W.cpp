@@ -7,7 +7,7 @@
 //
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++1y-compat"
+#pragma clang diagnostic ignored "-Wc++11-compat"
 
 
 

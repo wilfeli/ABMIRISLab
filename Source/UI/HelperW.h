@@ -264,8 +264,66 @@ namespace solar_core {
         /** Here it will be used by dynamically casting to the proper class to get access to this specific initialization   */
         std::vector<SEIBL*> create_seis(PropertyTree& pt, std::string mode_, long N_SEI, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
+            T* w = static_cast<T*>(w_);
+            std::vector<SEIBL*> seis;
+            
+            //check how many exploreres to create
+            auto max_ = w->sems.size() - 1;
+            auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+            int64_t j_sem = 0;
+            
+            int64_t N_Explorer = pt.get<double>("THETA_exploration.Share::explorer") * N_SEI;
             
             
+            for (auto i = 0; i < N_SEI; ++i)
+            {
+
+                std::vector<double> THETA_explorer;
+                std::vector<double> THETA_exploiter;
+                serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::explorer"), THETA_explorer);
+                serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::exploiter"), THETA_exploiter);
+                
+                
+                
+                seis.push_back(new SEIBL(pt, w));
+                
+                if (i < N_Explorer)
+                {
+                    //create explorer
+                    seis.back()->THETA_exploration = THETA_explorer;
+                }
+                else
+                {
+                    seis.back()->THETA_exploration = THETA_exploiter;
+                };
+                
+                
+
+                
+                //set manufacturer connection
+                if (pt.get<std::string>("dec_design") == "FORMULA::RANDOM")
+                {
+                    j_sem = rng_i();
+                    //connect to random sem manufacturer
+                    seis.back()->dec_design->PV_module = w->sems[j_sem]->solar_panel_templates[EDecParams::CurrentTechnology];
+                    //record as connection
+                    w->sems[j_sem]->add_connection(seis.back()->dec_design->PV_module);
+                    
+                }
+                else
+                {
+                    throw std::runtime_error("unsupported specification");
+                };
+
+                
+                
+                
+                
+                
+                
+                
+            };
             
             
             

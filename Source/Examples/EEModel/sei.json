@@ -59,16 +59,70 @@
     "THETA_profit": [
                      "FORMULA::p.d.f.::N_trunc(0.3, 0.05)"
                      ],
+    "THETA_reputation": [
+                         1,
+                         1
+                         ],
     "THETA_exploration": {
         "FORMULA::explorer": [
                               1,
                               0.25
                               ],
+        "Share::explorer": 0.5,
         "FORMULA::exploiter": [
                                1.5,
                                0.5
                                ]
     },
+    "THETA_Demand": [],
+    "Mu_0": [
+             1,
+             1,
+             1,
+             1,
+             1
+             ],
+    "V_0": [
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5
+            ],
+    "a_0": 1,
+    "b_0": 1,
     "money": "FORMULA::p.d.f.::u(0, 10000)",
-    "location": "FORMULA::p.d.f.::u_int(0, size)"
+    "location": "FORMULA::p.d.f.::u_int(0, size)",
+    "THETA_complexity_prior": [
+                               50,
+                               1,
+                               1,
+                               50
+                               ],
+    "THETA_reliability_prior": [
+                                1,
+                                0.04
+                                ],
+    "complexity_install_prior": 16,
+    "dec_design": "FORMULA::RANDOM"
 }

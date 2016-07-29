@@ -7,6 +7,7 @@
 //
 
 #include "Tools/IRandom.h"
+#include "Tools/Serialize.h"
 #include "Tools/WorldSettings.h"
 #include "Agents/SEIBL.h"
 #include "Agents/SEMBL.h"
@@ -18,18 +19,33 @@ using namespace solar_core;
 
 
 
-SEIBL::SEIBL(const PropertyTree& pt_, W* w_):SEI(pt_, w_)
+SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
 {
     
     //generate other parameters
+    serialize::deserialize(pt_.get_child("THETA_reputation"), THETA_reputation);
     
+    //create empty design to offer
+    dec_design = std::make_shared<TDesign>();
     
+    //reset to presets
+    //might be using SEM specific prior for new models? later
+    dec_design->THETA_reliability = THETA_reliability_prior;
+    dec_design->THETA_complexity = THETA_complexity_prior;
+    dec_design->complexity_install = complexity_install_prior;
+
     
     
     //prior on V_0 - assume ridge regression
     double c = 0.5;
     V_0 = SEIWMMatrixd::Identity();
     V_0 = c * V_0;
+    
+    //as alternative could read from file
+//    std::vector<double> V_0_std;
+//    serialize::deserialize(pt_.get_child("V_0"), V_0_std);
+//    Eigen::Map<Eigen::MatrixXd> V_0(V_0_std.data(), constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM);
+    
     
     //prior on other parameters from BLR for the share
     a_0 = 1;
@@ -42,7 +58,14 @@ SEIBL::SEIBL(const PropertyTree& pt_, W* w_):SEI(pt_, w_)
 }
 
 
-
+void SEIBL::init(WEE* w_)
+{
+    
+    //finish setting starting design
+    dec_design->p_module = dec_design->PV_module->p_sem;
+    designs[dec_design->PV_module->uid] = dec_design;
+    
+}
 
 
 /**

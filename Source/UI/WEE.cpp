@@ -91,17 +91,7 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
-        
-        
-        //sei.json
-        path_to_template = path_to_dir;
-        path_to_template /= "sei.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        
-        seis = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], rng_location_x, rng_location_y, this);
-        
-        
+
         
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
@@ -114,6 +104,19 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         {
             sems.push_back(new SEMBL(pt, this));
         };
+        
+        
+        //sei.json
+        path_to_template = path_to_dir;
+        path_to_template /= "sei.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        
+        seis = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], rng_location_x, rng_location_y, this);
+        
+        
+        
+
         
         
         max_ = sems.size() - 1;

@@ -25,6 +25,13 @@ int SEMBL::N_complexity_params = 2;
 SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_dist(N_complexity_params, 1), sigma_rw_complexity_dist(N_complexity_params, N_complexity_params), normTransform_rw_complexity_dist(N_complexity_params, N_complexity_params), sample_ind_rw_complexity_dist(N_complexity_params, 1), sample_rw_complexity_dist(N_complexity_params, 1)
 {
     
+    //generate other parameters
+    serialize::deserialize(pt_.get_child("THETA_dist_efficiency"), THETA_dist_efficiency);
+    serialize::deserialize(pt_.get_child("THETA_dist_reliability"), THETA_dist_reliability);
+    serialize::deserialize(pt_.get_child("THETA_dist_complexity"), THETA_dist_complexity);
+    
+    p_baseline = pt_.get<double>("p_baseline");
+    
     //generate from THETA_dist_complexity
     for (auto i = 0; i < N_complexity_params * N_complexity_params; ++i)
     {

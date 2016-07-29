@@ -47,10 +47,27 @@ namespace solar_core
     {
         friend class WEE;
     public:
-        SEIBL(const PropertyTree& pt_, W* w_);
-        std::shared_ptr<PVProjectFlat> form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project);
-        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Inv-Gamma distribution, is updated based on the realized production of installations.  */
+        //@{
         
+        /**
+         
+         Initialization section
+         
+         */
+        SEIBL(const PropertyTree& pt_, WEE* w_);
+        void init(WEE* w_); /*!< not virtual because in WEE has SEIBL as pointers */
+        
+        //@}
+        
+        //@{
+        /**
+         
+         Agent's parameters
+         
+         */
+        std::shared_ptr<PVProjectFlat> form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project);
+        std::vector<double> THETA_reputation; /*!< have current estimate of a reputation by onlookers. Inv-Gamma distribution, is updated based on the realized production of installations. MARK: check what parameters for reputation distribution are needed (1 or 2) and which one is the mean */
+        //@}
         
         //@{
         /**
