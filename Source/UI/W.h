@@ -81,7 +81,7 @@ namespace solar_core {
          
          */
         
-        void life(); /*!< general loop */
+        virtual void life(); /*!< general loop */
         
         virtual void life_hos(); /*!< life of Homeowners */
         void life_seis(); /*!< life of seis */

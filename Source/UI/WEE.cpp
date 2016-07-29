@@ -166,8 +166,7 @@ WEE::init()
     
 }
 
-void
-W::life()
+void WEE::life()
 {
     bool FLAG_MAX_N_ITERATIONS = params.count("N_ITERATIONS");
     long MAX_N_ITERATIONS = 0;

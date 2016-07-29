@@ -157,7 +157,7 @@ void SEMBL::act_tick()
         sample_ind_rw_complexity_dist(i,0) = w->rand->rnd();
     };
     
-    sample_rw_complexity_dist = (normTransform_rw_complexity_dist * sample_ind_rw_complexity_dist).colwise() + mean_rw_complexity_dist;
+    sample_rw_complexity_dist = (normTransform_rw_complexity_dist * sample_ind_rw_complexity_dist) + mean_rw_complexity_dist;
     
     //update parameters for the solar_panel
     THETA_dist_complexity[N_complexity_params * 3] = sample_rw_complexity_dist(0,0);
@@ -176,6 +176,8 @@ void SEMBL::act_tick()
 
     
     //update uid
+    new_pv->uid = UID();
+    //update price
     new_pv->p_sem = p_baseline;
     
 

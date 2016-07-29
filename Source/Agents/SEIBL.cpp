@@ -60,7 +60,7 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
 
 void SEIBL::init(WEE* w_)
 {
-    
+    w = w_;
     //finish setting starting design
     dec_design->p_module = dec_design->PV_module->p_sem;
     designs[dec_design->PV_module->uid] = dec_design;
@@ -733,6 +733,13 @@ void SEIBL::projects_update()
     
 }
 
+
+
+void SEIBL::ac_update_tick()
+{
+    //update internal timer
+    a_time = w->time;
+}
 
 
 /**

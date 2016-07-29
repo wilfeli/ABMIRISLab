@@ -68,7 +68,7 @@ public:
      
      */
     
-    
+    virtual void life() override;
     virtual void ac_update_tick() override;
     void ac_update_wm();
     
