@@ -17,6 +17,7 @@
 #include "Agents/H.h"
 #include "Agents/SEI.h"
 #include "Agents/SEIBL.h"
+#include "Agents/SEMBL.h"
 #include "Agents/Homeowner.h"
 #include "../Tests/Agents/SEIMock.h"
 
@@ -323,8 +324,48 @@ namespace solar_core {
         
         
         
-        
-        
+        std::vector<SEMBL*> create_sems(const PropertyTree& pt, std::string mode_, long N_SEM, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        {
+            T* w = static_cast<T*>(w_);
+            std::vector<SEMBL*> sems;
+            
+            for (auto i = 0; i < N_SEM; ++i)
+            {
+                sems.push_back(new SEMBL(pt, w_));
+            };
+            
+            
+            
+            //create connections
+            auto max_ = sems.size() - 1;
+            auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+            
+            
+            //set producers
+            for (auto iter: WorldSettings::instance().solar_modules)
+            {
+                if (iter.second->manufacturer_id == "FORMULA::RANDOM")
+                {
+                    iter.second->manufacturer = sems[rng_i()];
+                    iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
+                
+                
+                    //intrusive setting
+                    dynamic_cast<SEMBL*>(iter.second->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology] = std::static_pointer_cast<SolarModuleBL>(iter.second);
+                    //set parameters for the module
+                    dynamic_cast<SEMBL*>(iter.second->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology]->init();
+                }
+                else
+                {
+                    throw std::runtime_error("unsupported formula");
+                };
+            };
+            
+            
+            
+            return sems;
+        }
         
         
         

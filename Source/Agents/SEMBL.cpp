@@ -169,6 +169,11 @@ void SEMBL::act_tick()
     //set params for new module
     new_pv->efficiency = THETA_dist_efficiency[2];
     
+    new_pv->THETA_reliability[0] = THETA_dist_reliability[2];
+    
+    new_pv->THETA_complexity[0] = THETA_dist_complexity[N_complexity_params * 3];
+    new_pv->THETA_complexity[1] = THETA_dist_complexity[N_complexity_params * 3 + 1];
+    
     
     
     //think if there is problem that reliability is updated as random log-normal walk, but prior is assumed to be Gamma. Might need to make it gamma too?

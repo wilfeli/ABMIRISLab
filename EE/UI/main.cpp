@@ -32,8 +32,9 @@
 #include <thread>
 #include <iostream>
 #include <boost/filesystem.hpp>
-#include "UI/W.h"
+#include "UI/WEE.h"
 #include "UI/UI.h"
+#include "UI/UIBL.h"
 #include "UI/HelperW.h"
 
 
@@ -81,7 +82,7 @@ int main(int argc, const char * argv[])
         auto helper = new solar_core::HelperWSpecialization<solar_core::W, solar_core::BaselineModel>();
         
         //create world
-        w = new W(path_to_model_file.string(), helper, "NEW");
+        w = new WEE(path_to_model_file.string(), helper, "NEW");
         
         //initialize world
         w->init();
@@ -96,7 +97,7 @@ int main(int argc, const char * argv[])
     w->FLAG_IS_STOPPED = false;
     w->FLAG_IS_PAUSED = false;
     
-    solar_ui::UI* ui = new solar_ui::UI();
+    solar_ui::UIBL* ui = new solar_ui::UIBL();
     
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;

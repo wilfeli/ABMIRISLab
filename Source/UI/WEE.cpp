@@ -63,6 +63,14 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         
         create_world(path_to_model_file, path_to_dir, path_to_template, pt, params_str);
         
+
+        //ho.json
+        path_to_template = path_to_dir;
+        path_to_template /= "ho.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        
+        
         
         
         //left as an old version as need to check that formulas are consistent here with the geography definition
@@ -81,12 +89,6 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
 
         
-        
-        //ho.json
-        path_to_template = path_to_dir;
-        path_to_template /= "ho.json";
-        path = path_to_template.string();
-        read_json(path, pt);
 
         
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
@@ -99,11 +101,10 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         path_to_template /= "sem.json";
         path = path_to_template.string();
         read_json(path, pt);
+
         
-        for (auto i = 0; i < params_d[EParamTypes::N_SEM]; ++i)
-        {
-            sems.push_back(new SEMBL(pt, this));
-        };
+        sems = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_sems(pt, mode_, params_d[EParamTypes::N_SEM], rng_location_x, rng_location_y, this);
+        
         
         
         //sei.json

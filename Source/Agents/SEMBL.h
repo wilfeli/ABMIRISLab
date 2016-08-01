@@ -21,6 +21,7 @@ class SolarModuleBL;
 class SEMBL: public SEM
 {
     template <class T1, class T2> friend class HelperWSpecialization;
+    friend class SolarModuleBL; 
 public:
     //@{
     /**

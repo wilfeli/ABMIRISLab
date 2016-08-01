@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+
 #include "UI/UIBL.h"
 #include "UI/WEE.h"
 #include <boost/filesystem.hpp>
@@ -13,7 +14,7 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
-
+#include "Agents/SEIBL.h"
 #include "Agents/SolarPanel.h"
 #include "Institutions/IMessage.h"
 
@@ -21,7 +22,7 @@ using namespace solar_ui;
 
 
 void
-UI::init(solar_core::WEE *w_)
+UIBL::init(solar_core::WEE *w_)
 {
     w = w_;
 };
@@ -29,7 +30,7 @@ UI::init(solar_core::WEE *w_)
 
 
 void
-UI::save(std::string path_to_save_file_)
+UIBL::save(std::string path_to_save_file_)
 {
     if (path_to_save_file_ == "")
     {
@@ -40,7 +41,7 @@ UI::save(std::string path_to_save_file_)
     auto simulation_length = w->time + 1;
     
     
-    auto save_data_raw = std::vector<std::deque<std::shared_ptr<solar_core::PVProjectFLat>>>(simulation_length, {});
+    auto save_data_raw = std::vector<std::deque<std::shared_ptr<solar_core::PVProjectFlat>>>(simulation_length, {});
     
     
     
@@ -49,9 +50,9 @@ UI::save(std::string path_to_save_file_)
     //go through all installed projects and sort them by the date they were installed
     for (auto sei:w->seis)
     {
-        for (auto& project:sei->pv_projects)
+        for (auto& project:sei->pvprojects)
         {
-            save_data_raw[project_->begin_time].push_back(project);
+            save_data_raw[project->begin_time].push_back(project);
         };
     }
     
@@ -80,7 +81,7 @@ UI::save(std::string path_to_save_file_)
         
         for (auto& project:save_data_raw[i])
         {
-            price_per_watt += project-p>/project->DC_size;
+            price_per_watt += project->p/project->DC_size;
             accum_price_per_watt += project->p;
             total_watt += project->DC_size;
             

@@ -23,10 +23,10 @@ namespace solar_core
 namespace solar_ui
 {
     
-    class UI
+    class UIBL
     {
     public:
-        UI(){};
+        UIBL(){};
         void init(solar_core::WEE* w_);
         
         

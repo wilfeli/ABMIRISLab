@@ -591,6 +591,10 @@ namespace solar_core
             {
                 return EParamTypes::AverageElectricityDemand;
             }
+            else if (param_type == "eparamtypes::electricitypriceucsupply")
+            {
+                return EParamTypes::ElectricityPriceUCSupply;
+            }
             else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
             {
                 return EParamTypes::HOMaxNVisitsPerTimeUnit;
@@ -867,7 +871,7 @@ namespace solar_core
             {
                 return EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes;
             }
-            else if (param_type == "econstraintparams::maxnopenprojectshh")
+            else if (param_type == "econstraintparams::maxnopenprojectsho")
             {
                 return EConstraintParams::MaxNOpenProjectsHO;
             }

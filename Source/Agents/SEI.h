@@ -17,7 +17,10 @@
 #include "Agents/IAgent.h"
 #include "Agents/SolarPanel.h"
 
-
+namespace solar_ui
+{
+    class UIBL;
+}
 
 namespace solar_core
 {

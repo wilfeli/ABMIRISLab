@@ -45,6 +45,7 @@ namespace solar_core
     {
     public:
 
+        static double initialization_tolerance;
         static std::shared_ptr<SolarModule> deserialize(const PropertyTree& pt_);
         SolarModule(const PropertyTree& pt_);
         
@@ -70,6 +71,9 @@ namespace solar_core
     class SolarModuleBL: public SolarModule
     {
     public:
+        SolarModuleBL(const PropertyTree& pt_);
+        /*!< uses manufacturer priors to specialize itself */
+        void init();
         /** parameters of a true reliability distribution (exponential) */
         std::vector<double> THETA_reliability;
         /** parameters of a true reliability distribution (normal) */

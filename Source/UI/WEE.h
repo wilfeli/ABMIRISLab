@@ -12,8 +12,10 @@
 #include "Tools/ID.h"
 #include "UI/W.h"
 
-
-
+namespace solar_ui
+{
+    class UIBL;
+}
 namespace solar_core {
 
     
@@ -27,6 +29,7 @@ namespace solar_core {
 class WEE: public W
 {
     template <class T1, class T2> friend class HelperWSpecialization;
+    friend class solar_ui::UIBL;
 public:
     WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;

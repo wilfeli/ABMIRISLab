@@ -477,7 +477,7 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
     auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(w->rand->rng, pdf_THETA_complexity_base);
     auto rng_THETA_complexity = [&]()
     {
-        return dec_design_hat->THETA_reliability[0] + rng_THETA_complexity_base() * (dec_design_hat->THETA_reliability[3] * (dec_design_hat->THETA_reliability[1] + 1))/(dec_design_hat->THETA_reliability[1] * dec_design_hat->THETA_reliability[2]);
+        return dec_design_hat->THETA_complexity[0] + rng_THETA_complexity_base() * (dec_design_hat->THETA_complexity[3] * (dec_design_hat->THETA_complexity[1] + 1))/(dec_design_hat->THETA_complexity[1] * dec_design_hat->THETA_complexity[2]);
     };
     
 
@@ -639,20 +639,23 @@ void SEIBL::projects_update()
     //uses true distribution here
     auto rng_THETA_reliability = [&](std::shared_ptr<SolarModuleBL> pv_module_)
     {
+        
+        
+        //MARK: cont.
         return w->rand->r_pareto_2(pv_module_->THETA_reliability[1], pv_module_->THETA_reliability[0]);
     };
     
     
     //complexity generators
-    auto rng_THETA_complexity = [](boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
+    auto rng_THETA_complexity = [](boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
     {
-        return pv_module_->THETA_reliability[0] + rng_THETA_complexity_base_() * (pv_module_->THETA_reliability[3] * (pv_module_->THETA_reliability[1] + 1))/(pv_module_->THETA_reliability[1] * pv_module_->THETA_reliability[2]);
+        return pv_module_->THETA_complexity[0] + rng_THETA_complexity_base_() * std::pow(pv_module_->THETA_complexity[1], 0.5);
     };
 
-    std::map<UID, boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>> rngs_THETA_complexity_base;
+    std::map<UID, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>> rngs_THETA_complexity_base;
     for (auto iter:designs)
     {
-        rngs_THETA_complexity_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::random::student_t_distribution<>>(&w->rand->rng, boost::random::student_t_distribution<>(2 * iter.second->PV_module->THETA_complexity[2]))));
+        rngs_THETA_complexity_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>(&w->rand->rng, boost::normal_distribution<>(0.0, 1.0))));
     };
     
     
