@@ -60,13 +60,20 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         //read BIN_VALUES from the file
         serialize::deserialize(node.second.get_child("values"), e_dist.mvd.back().bin_values);
         
+        for (auto i = 0; i < e_dist.mvd.back().bin_values.size(); ++i)
+        {
+            e_dist.mvd.back().bin_values_map[e_dist.mvd.back().bin_values[i]] = i;
+        };
+        
+        
         //read name from the file
         e_dist.mvd.back().name = node.second.get<std::string>("name");
     };
     
     for (auto i = 0; i < N_BINS.size(); ++i)
     {
-        N_BINS_CUM[i + 1] = N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i];
+        //MARK: change to push back
+        N_BINS_CUM.push_back(N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i]);
     };
     
     
@@ -91,37 +98,53 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     //create vector of frequencies
     e_dist.freq = std::vector<long>(N_BINS_CUM.back(), 0);
     
-    
-    //calculate frequencies
-    for (auto i = 0; i < e_dist.values.size(); ++i)
+    int64_t N_TAILS = 0;
+    int64_t bin = 0;
+    int64_t i = 0;
+    //reverse order
+    for (auto x_i:parsed_file)
     {
-        auto x_i = std::find_if(parsed_file.begin(), parsed_file.end(), [&](std::vector<double> &x_i_){
-            //check that x_i_ is equal to x
-            bool FLAG_EQ = true;
-            for(auto j = 0; j < x_i_.size(); ++j)
-            {
-                //check what value it should be
-                if (x_i_[j] != e_dist.mvd[j].bin_values[e_dist.values[i][j]])
-                {
-                    FLAG_EQ = false;
-                    break;
-                };
-            };
-            
-            return FLAG_EQ;});
-        
-        //count number
-        for (; x_i != parsed_file.end(); ++x_i)
+        for (auto j = 0; j < x_i.size() - 1; ++j)
         {
-            e_dist.freq[i] += 1;
+            N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+            bin = e_dist.mvd[j].bin_values_map[x_i[j+1]];
+            i += bin * N_TAILS;
+            
+#ifdef DEBUG
+            
+#endif
+        };
+        e_dist.freq[i] += 1;
+        i = 0;
+    };
+    
+    
+#ifdef DEBUG
+    auto sum = 0;
+    for (auto i = 0; i < e_dist.freq.size(); ++i)
+    {
+        sum += e_dist.freq[i];
+        
+        if (e_dist.freq[i] != 0)
+        {
+            std::cout << i << "::" << e_dist.freq[i] << std::endl;
         };
     };
+    
+    std::cout << sum << std::endl;
+    
+#endif
+    
     
     //store index into actual bin values
     for (auto value_add = 0; value_add < e_dist.mvd[0].bin_values.size(); ++value_add)
     {
         e_dist.mvd[0].cond_values.push_back(std::vector<long>{});
         e_dist.mvd[0].cond_values.back().push_back(value_add);
+        
+        //calculate conditional pmf
+        calculate_pmf(e_dist.mvd[0].cond_values, parsed_file, e_dist.mvd[0].cond_freq, e_dist, N_BINS_CUM);
+        
     };
     
     
@@ -139,7 +162,7 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         };
         
         //calculate conditional pmf
-        calculate_pmf(e_dist.mvd[i].cond_values, parsed_file, e_dist.mvd[i].cond_freq, e_dist);
+        calculate_pmf(e_dist.mvd[i].cond_values, parsed_file, e_dist.mvd[i].cond_freq, e_dist, N_BINS_CUM);
         
     };
 
@@ -151,33 +174,31 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
 
 
 void
-tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD& e_dist)
+tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD& e_dist, std::vector<int64_t>& N_BINS_CUM)
 {
-    //calculate frequencies
+    freq_n = std::vector<long>(bins.size(), 0);
+    auto i_pos = 0;
+    int64_t N_TAILS = 0;
     for (auto i = 0; i < bins.size(); ++i)
     {
-        auto x_i = std::find_if(parsed_file.begin(), parsed_file.end(), [&](std::vector<double> &x_i_){
-            //check that x_i_ is equal to x
-            bool FLAG_EQ = true;
-            for(auto j = 0; j < bins[i].size(); ++j)
-            {
-                if (x_i_[j] != e_dist.mvd[j].bin_values[bins[i][j]])
-                {
-                    FLAG_EQ = false;
-                    break;
-                };
-            };
-            
-            return FLAG_EQ;});
-        
-        //count number
-        for (; x_i != parsed_file.end(); ++x_i)
+        //calculate starting position for thisbin
+        for(auto j = 0; j < bins[i]. size(); ++j)
         {
-            freq_n[i] += 1;
+            N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+            i_pos += bins[i][j] * N_TAILS;
+            
         };
+        
+        
+        //sum over the number of tails
+        for (auto k = 0; k < N_TAILS; ++k){
+            freq_n[i] += e_dist.freq[i_pos + k];
+        }
+        
+        i_pos = 0;
     };
-
-
+    
+    
 
 }
 
@@ -298,22 +319,24 @@ tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUV
         cmf.push_back(cmf[i] + dist.cond_freq[cond_dist[i]] / scale_factor);
     };
     
-    
-    dist.theta_bins.clear();
-    //update theta_bins
-    for (auto i = 1; i < cmf.size(); ++i)
+    if (dist.type == ERandomParams::ContinuousDiscretized)
     {
-        dist.theta_bins.push_back(std::vector<double>{});
-        if (( i != cmf.size() - 1) || ((i == cmf.size() - 1) && (dist.bin_ends.back() != constants::SOLAR_INFINITY())))
+        dist.theta_bins.clear();
+        //update theta_bins
+        for (auto i = 1; i < cmf.size(); ++i)
         {
-            dist.theta_bins.back().push_back(cmf[i-1]);
-            dist.theta_bins.back().push_back(dist.bin_ends[i] - dist.bin_ends[i-1]);
-            dist.theta_bins.back().push_back(cmf[i] - cmf[i-1]);
-            dist.theta_bins.back().push_back(dist.bin_ends[i-1]);
-        }
-        else
-        {
-            dist.theta_bins.back().push_back(std::exp(dist.bin_ends[i-1]) * (1 - cmf[i-1]));
+            dist.theta_bins.push_back(std::vector<double>{});
+            if (( i != cmf.size() - 1) || ((i == cmf.size() - 1) && (dist.bin_ends.back() != constants::SOLAR_INFINITY())))
+            {
+                dist.theta_bins.back().push_back(cmf[i-1]);
+                dist.theta_bins.back().push_back(dist.bin_ends[i] - dist.bin_ends[i-1]);
+                dist.theta_bins.back().push_back(cmf[i] - cmf[i-1]);
+                dist.theta_bins.back().push_back(dist.bin_ends[i-1]);
+            }
+            else
+            {
+                dist.theta_bins.back().push_back(std::exp(dist.bin_ends[i-1]) * (1 - cmf[i-1]));
+            };
         };
     };
     
@@ -326,14 +349,17 @@ tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUV
 long
 tools::get_inverse_index(std::vector<double>& cmf, double u_i)
 {
-    long i = 0;
+    long i = 1;
     for (; i < cmf.size(); ++i)
     {
-        if (u_i > cmf[i])
+        if ((u_i < cmf[i]) && (u_i >= cmf[i-1]))
         {
             break;
         };
     };
+    
+    
+    
     
     //breaks when crossed over, so returns step back
     return i - 1;
