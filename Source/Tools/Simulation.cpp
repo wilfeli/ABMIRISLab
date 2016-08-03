@@ -109,31 +109,27 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
             N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
             bin = e_dist.mvd[j].bin_values_map[x_i[j+1]];
             i += bin * N_TAILS;
-            
-#ifdef DEBUG
-            
-#endif
         };
         e_dist.freq[i] += 1;
         i = 0;
     };
     
     
-#ifdef DEBUG
-    auto sum = 0;
-    for (auto i = 0; i < e_dist.freq.size(); ++i)
-    {
-        sum += e_dist.freq[i];
-        
-        if (e_dist.freq[i] != 0)
-        {
-            std::cout << i << "::" << e_dist.freq[i] << std::endl;
-        };
-    };
-    
-    std::cout << sum << std::endl;
-    
-#endif
+//#ifdef DEBUG
+//    auto sum = 0;
+//    for (auto i = 0; i < e_dist.freq.size(); ++i)
+//    {
+//        sum += e_dist.freq[i];
+//        
+//        if (e_dist.freq[i] != 0)
+//        {
+//            std::cout << i << "::" << e_dist.freq[i] << std::endl;
+//        };
+//    };
+//    
+//    std::cout << sum << std::endl;
+//    
+//#endif
     
     
     //store index into actual bin values
@@ -166,6 +162,10 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         
     };
 
+    //save information about tail length
+    e_dist.n_bins_cum = N_BINS_CUM;
+    
+    
     return e_dist;
     
     
@@ -181,8 +181,8 @@ tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vect
     int64_t N_TAILS = 0;
     for (auto i = 0; i < bins.size(); ++i)
     {
-        //calculate starting position for thisbin
-        for(auto j = 0; j < bins[i]. size(); ++j)
+        //calculate starting position for this bin
+        for(auto j = 0; j < bins[i].size(); ++j)
         {
             N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
             i_pos += bins[i][j] * N_TAILS;
@@ -217,12 +217,12 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
     
     
     //go through the list of univariate distributions
-    for (auto dist:pmf.mvd)
+    for (auto& dist:pmf.mvd)
     {
         //in indexes last value will be bin index
         //collapse conditional for already drawn values
         //returns list of indices into main list for conditional distribution
-        auto cond_dist = collapse_pmf(i_x, dist);
+        auto cond_dist = collapse_pmf(i_x, dist, pmf);
         
         //calculate scale factor
         auto scale_factor = calculate_scale_factor(cond_dist, dist);
@@ -264,7 +264,7 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
 
 
 std::vector<long>
-tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist)
+tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist, EmpiricalMVD& pmf)
 {
     std::vector<long> cond_dist;
     bool FLAG_EQ = true;
@@ -283,7 +283,12 @@ tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist)
         };
         if (FLAG_EQ)
         {
-            cond_dist.push_back(i);
+            //will always push continious chunk because of the layout length will be N_TAIL
+            for (auto k = 0; k < dist.bin_values.size(); ++k)
+            {
+                cond_dist.push_back(i + k);
+            };
+            break;
         };
     };
     
@@ -357,9 +362,7 @@ tools::get_inverse_index(std::vector<double>& cmf, double u_i)
             break;
         };
     };
-    
-    
-    
+
     
     //breaks when crossed over, so returns step back
     return i - 1;

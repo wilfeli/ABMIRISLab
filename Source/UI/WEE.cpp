@@ -90,10 +90,10 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
 
         
 
-        
+#ifndef DEBUG
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
-
+#endif
         
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode

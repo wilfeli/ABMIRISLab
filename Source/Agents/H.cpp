@@ -18,7 +18,7 @@
 using namespace solar_core;
 
 
-H::H(const PropertyTree& pt_, WEE* w_)
+H::H(const PropertyTree& pt_, WEE* w_):THETA_decision(2, 0.0)
 {
 
 

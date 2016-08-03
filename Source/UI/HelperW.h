@@ -288,6 +288,14 @@ namespace solar_core {
             
             for (auto i = 0; i < N_SEI; ++i)
             {
+                //put sei_type
+                pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
+                
+                //generate location
+                pt.put("location_x", rng_location_x());
+                pt.put("location_y", rng_location_y());
+                
+                
                 seis.push_back(new SEIBL(pt, w));
                 
                 if (i < N_Explorer)
@@ -337,32 +345,36 @@ namespace solar_core {
             
             
             //create connections
-            auto max_ = sems.size() - 1;
+            auto max_ = WorldSettings::instance().solar_modules.size() - 1;
             auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
             auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
             
             
-            //set producers
-            for (auto iter: WorldSettings::instance().solar_modules)
+            
+            //Every SEM has one solar_module
+            for (auto iter:sems)
             {
-                if (iter.second->manufacturer_id == "FORMULA::RANDOM")
+                while (true)
                 {
-                    iter.second->manufacturer = sems[rng_i()];
-                    iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
-                
-                
-                    //intrusive setting
-                    dynamic_cast<SEMBL*>(iter.second->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology] = std::static_pointer_cast<SolarModuleBL>(iter.second);
-                    //set parameters for the module
-                    dynamic_cast<SEMBL*>(iter.second->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology]->init();
-                }
-                else
-                {
-                    throw std::runtime_error("unsupported formula");
+                    
+                    auto it = WorldSettings::instance().solar_modules.begin();
+                    std::advance(it, rng_i());
+                    auto module = it->second;
+                    if (module->manufacturer_id != "FORMULA::RANDOM")
+                    {
+                        //could use this module
+                        module->manufacturer = iter;
+                        module->manufacturer_id = module->manufacturer->uid.get_string();
+                        
+                        //intrusive setting, UGLY
+                        dynamic_cast<SEMBL*>(module->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology] = std::static_pointer_cast<SolarModuleBL>(module);
+                        //set parameters for the module
+                        dynamic_cast<SEMBL*>(module->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology]->init();
+
+                        break;
+                    };
                 };
             };
-            
-            
             
             return sems;
         }
@@ -458,7 +470,6 @@ namespace solar_core {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
                                     param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
-                                    param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
                                 };
                             }
                             else if (name == EParamTypes::Income)
@@ -466,6 +477,13 @@ namespace solar_core {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
                                     param_values[name].push_back(xs[i][4]);
+                                };
+                            }
+                            else if (name == EParamTypes::ElectricityConsumption)
+                            {
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
                                 };
                             }
                             else
