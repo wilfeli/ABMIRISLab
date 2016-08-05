@@ -73,7 +73,7 @@ int main(int argc, const char * argv[])
         throw std::runtime_error("No model file");
     };
     
-    W* w = nullptr;
+    WEE* w = nullptr;
     
     
     
@@ -99,21 +99,24 @@ int main(int argc, const char * argv[])
     
     solar_ui::UIBL* ui = new solar_ui::UIBL();
     
+    //initialize world
+    ui->init(w);
+    
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;
     
-    void (W::*func)();
+    void (WEE::*func)();
     
-    func = &W::life;
+    func = &WEE::life;
     threads.push_back(std::thread(func, w));
     
-    func = &W::life_hos;
+    func = &WEE::life_hos;
     threads.push_back(std::thread(func, w));
     
-    func = &W::life_seis;
+    func = &WEE::life_seis;
     threads.push_back(std::thread(func, w));
     
-    func = &W::life_sems;
+    func = &WEE::life_sems;
     threads.push_back(std::thread(func, w));
     
     

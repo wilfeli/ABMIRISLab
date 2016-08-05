@@ -591,6 +591,8 @@ W::life_hos()
 void
 W::life_seis()
 {
+//    std::cout<< "test" << std::endl;
+    
     while (!FLAG_IS_STOPPED)
     {
         if (FLAG_SEI_TICK && !FLAG_IS_STOPPED)

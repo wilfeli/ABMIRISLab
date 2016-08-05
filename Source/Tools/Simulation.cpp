@@ -30,9 +30,7 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     PropertyTree pt;
     read_json(path_to_scheme, pt);
     
-    
     EmpiricalMVD e_dist;
-    
     
     std::vector<long> N_BINS;
     std::vector<int64_t> N_BINS_CUM;
@@ -114,24 +112,6 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         i = 0;
     };
     
-    
-//#ifdef DEBUG
-//    auto sum = 0;
-//    for (auto i = 0; i < e_dist.freq.size(); ++i)
-//    {
-//        sum += e_dist.freq[i];
-//        
-//        if (e_dist.freq[i] != 0)
-//        {
-//            std::cout << i << "::" << e_dist.freq[i] << std::endl;
-//        };
-//    };
-//    
-//    std::cout << sum << std::endl;
-//    
-//#endif
-    
-    
     //store index into actual bin values
     for (auto value_add = 0; value_add < e_dist.mvd[0].bin_values.size(); ++value_add)
     {
@@ -142,7 +122,6 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
         calculate_pmf(e_dist.mvd[0].cond_values, parsed_file, e_dist.mvd[0].cond_freq, e_dist, N_BINS_CUM);
         
     };
-    
     
     //take table from the previous one and multiply by own values
     for (auto i = 1; i < e_dist.mvd.size(); ++i)
@@ -165,10 +144,7 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     //save information about tail length
     e_dist.n_bins_cum = N_BINS_CUM;
     
-    
     return e_dist;
-    
-    
 }
 
 
@@ -189,7 +165,6 @@ tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vect
             
         };
         
-        
         //sum over the number of tails
         for (auto k = 0; k < N_TAILS; ++k){
             freq_n[i] += e_dist.freq[i_pos + k];
@@ -197,9 +172,6 @@ tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vect
         
         i_pos = 0;
     };
-    
-    
-
 }
 
 
@@ -283,9 +255,10 @@ tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist, EmpiricalMVD& pm
         };
         if (FLAG_EQ)
         {
-            //will always push continious chunk because of the layout length will be N_TAIL
+            //will always push continious chunk because of the layout length will be N_BINS
             for (auto k = 0; k < dist.bin_values.size(); ++k)
             {
+                //save position into the distiribution table
                 cond_dist.push_back(i + k);
             };
             break;

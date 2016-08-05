@@ -20,7 +20,14 @@ using namespace solar_core;
 
 H::H(const PropertyTree& pt_, WEE* w_):THETA_decision(2, 0.0)
 {
+    //location
+    location_x = pt_.get<long>("location_x");
+    location_y = pt_.get<long>("location_y");
+    
+    //House
+    house = new House(pt_.get_child("House"));
 
+    
 
 }
 
@@ -41,11 +48,19 @@ void H::init(WEE* w_)
 
 bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)
 {
-    //get irr and reputation of an installer (mean from distribution)
-    auto irr = (project_->irr_a * 1/(project_->sei->THETA_reputation[0]) - 1) * project_->sei->THETA_reputation[1];
+    
+    //get irr and reputation of an installer (mean from distribution
+    auto irr = project_->irr_a * ((project_->sei->THETA_reputation[0] > 1)? 1/(project_->sei->THETA_reputation[0] - 1) * project_->sei->THETA_reputation[1] : 1);
+    
+    
+    
     
     //Logistic function (from cdf of the distribution)
     auto p_switch = (1/(1+std::exp(-(irr - THETA_decision[0])/THETA_decision[1])));
+    
+    
+    std::cout << std::fixed << std::setprecision(2) << w_->time << ": irr: " << irr << ", p_switch: " << p_switch << std::endl;
+    
     
     return (w_->rand->ru() <= p_switch);
 }

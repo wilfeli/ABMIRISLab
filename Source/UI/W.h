@@ -84,10 +84,10 @@ namespace solar_core {
         virtual void life(); /*!< general loop */
         
         virtual void life_hos(); /*!< life of Homeowners */
-        void life_seis(); /*!< life of seis */
-        void life_sems(); /*!< life of sems */
-        void life_gs(); /*!< life of g */
-        void life_markets(); /*!< life of marketing */
+        virtual void life_seis(); /*!< life of seis */
+        virtual void life_sems(); /*!< life of sems */
+        virtual void life_gs(); /*!< life of g */
+        virtual void life_markets(); /*!< life of marketing */
         
         virtual void ac_update_tick();
         

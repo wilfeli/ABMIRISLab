@@ -356,11 +356,10 @@ namespace solar_core {
             {
                 while (true)
                 {
-                    
                     auto it = WorldSettings::instance().solar_modules.begin();
                     std::advance(it, rng_i());
                     auto module = it->second;
-                    if (module->manufacturer_id != "FORMULA::RANDOM")
+                    if (module->manufacturer_id == "FORMULA::RANDOM")
                     {
                         //could use this module
                         module->manufacturer = iter;
@@ -469,21 +468,21 @@ namespace solar_core {
                             {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
-                                    param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
+                                    param_values[name][i] = xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
                                 };
                             }
                             else if (name == EParamTypes::Income)
                             {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
-                                    param_values[name].push_back(xs[i][4]);
+                                    param_values[name][i] = xs[i][4];
                                 };
                             }
                             else if (name == EParamTypes::ElectricityConsumption)
                             {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
-                                    param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
+                                    param_values[EParamTypes::ElectricityConsumption][i] = xs[i][5]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
                                 };
                             }
                             else
@@ -525,6 +524,7 @@ namespace solar_core {
                 //roof_size
                 pt.put("House.roof_size", std::max(0.0, roof_size(xs[i][0])));
                 pt.put("House.roof_age", std::max(0.0, roof_age(xs[i][1])));
+                pt.put("House.house_size", xs[i][0]);
                 
                 
                 //read configuration file

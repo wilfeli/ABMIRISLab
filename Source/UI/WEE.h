@@ -34,7 +34,8 @@ public:
     WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;
     virtual void life_hos() override; /*!< life of Homeowners */
-    
+    virtual void life_seis() override;
+    virtual void life_sems() override;
     
     
     //@{

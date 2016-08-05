@@ -16,5 +16,5 @@ using namespace solar_core;
 
 double IRandom::r_pareto_2(double lambda, double alpha)
 {
-    return (lambda * std::pow((1 - ru()), -(1/alpha)) - 1);
+    return std::max(0.0, (lambda * std::pow((1 - ru()), -(1/alpha)) - 1));
 }

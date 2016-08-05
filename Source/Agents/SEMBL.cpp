@@ -106,7 +106,7 @@ void SEMBL::ac_update_tick()
     
     
     //switch techonologies
-    if (N_connections_current == 0)
+    if ((N_connections_current == 0) && (solar_panel_templates[EDecParams::NewTechnology]))
     {
         solar_panel_templates[EDecParams::CurrentTechnology] = solar_panel_templates[EDecParams::NewTechnology];
         solar_panel_templates[EDecParams::NewTechnology] = nullptr;
@@ -161,7 +161,7 @@ void SEMBL::act_tick()
     
     //update parameters for the solar_panel
     THETA_dist_complexity[N_complexity_params * 3] = sample_rw_complexity_dist(0,0);
-    THETA_dist_complexity[N_complexity_params * 3 + 1] = sample_rw_complexity_dist(0,1);
+    THETA_dist_complexity[N_complexity_params * 3 + 1] = sample_rw_complexity_dist(1,0);
     
    
     std::shared_ptr<SolarModuleBL> new_pv(new SolarModuleBL(*solar_panel_templates[EDecParams::CurrentTechnology]));

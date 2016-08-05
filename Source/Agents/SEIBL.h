@@ -108,7 +108,7 @@ namespace solar_core
         
         std::vector<double> THETA_complexity_prior{50, 1, 1, 50}; /*!< mean was estimated from {\displaystyle \nu } \nu  observations with sample mean {\displaystyle \mu _{0}} \mu _{0}; variance was estimated from {\displaystyle 2\alpha } 2\alpha  observations with sample mean {\displaystyle \mu _{0}} \mu _{0} and sum of squared deviations {\displaystyle 2\beta } 2\beta  */ 
         
-        std::vector<double> THETA_reliability_prior{1, 1/25}; /*!< 25 - is average warranty length */
+        std::vector<double> THETA_reliability_prior{1, 0.04}; /*!< 1, 1/25 where 25 - is average warranty length */
         
         double complexity_install_prior =  16.0;
 
@@ -188,7 +188,7 @@ namespace solar_core
          
          */
         
-        double costs_time; /*!< period costs */
+        double costs_time = 0.0; /*!< period costs */
         
         
         

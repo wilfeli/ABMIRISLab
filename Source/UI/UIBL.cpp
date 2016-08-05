@@ -114,6 +114,10 @@ UIBL::save(std::string path_to_save_file_)
             };
             out_file << std::endl;
         };
+    }
+    else
+    {
+        throw std::runtime_error("wrong path to save");
     };
     
     

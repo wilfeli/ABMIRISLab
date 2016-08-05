@@ -90,10 +90,10 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
 
         
 
-#ifndef DEBUG
+//#ifndef DEBUG
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
-#endif
+//#endif
         
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
@@ -228,7 +228,7 @@ WEE::life_hos()
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_agents);
     
     
-    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, hos.size()-1);
+    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, seis.size()-1);
     auto rng_sei_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_sei_agents);
     
     std::size_t j_h = 0;
@@ -250,7 +250,7 @@ WEE::life_hos()
                 {
                     //pick h randomly
                     j_h = rng_agents();
-                    if (hos[i]->FLAG_INSTALLED_SYSTEM)
+                    if (!hos[j_h]->FLAG_INSTALLED_SYSTEM)
                     {
                         break;
                     };
@@ -261,11 +261,11 @@ WEE::life_hos()
                 
                 
                 //form design for an agent
-                seis[j_sei]->form_design_for_params(hos[i], pool_projects[i_pool_projects]);
+                seis[j_sei]->form_design_for_params(hos[j_h], pool_projects[i_pool_projects]);
                 
                 
                 //get answer for the design
-                FLAG_DEC = hos[i]->ac_dec_design(pool_projects[i_pool_projects], this);
+                FLAG_DEC = hos[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
                 
                 
                 
@@ -275,7 +275,7 @@ WEE::life_hos()
                     //save as accepted project
                     seis[j_sei]->install_project(pool_projects[i_pool_projects], time);
                     ++i_pool_projects;
-                    hos[i]->FLAG_INSTALLED_SYSTEM = true;
+                    hos[j_h]->FLAG_INSTALLED_SYSTEM = true;
                 };
                 
             };
@@ -299,6 +299,69 @@ WEE::life_hos()
     
     
 }
+
+
+
+void
+WEE::life_seis()
+{
+    //    std::cout<< "test" << std::endl;
+    
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_SEI_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_SEI_TICK = false;
+            
+            for (auto& agent:seis)
+            {
+                //get tick
+                agent->act_tick();
+            };
+            ++updated_counter;
+        };
+        
+        while (!FLAG_SEI_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEI_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+
+
+void
+WEE::life_sems()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_SEM_TICK = false;
+            
+            for (auto& agent:sems)
+            {
+                //get tick
+                agent->act_tick();
+            };
+            ++updated_counter;
+        };
+        
+        while (!FLAG_SEM_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_SEM_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
 
 
 

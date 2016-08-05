@@ -25,6 +25,13 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     //generate other parameters
     serialize::deserialize(pt_.get_child("THETA_reputation"), THETA_reputation);
     
+    serialize::deserialize(pt_.get_child("THETA_complexity_prior"), THETA_complexity_prior);
+    
+    serialize::deserialize(pt_.get_child("THETA_reliability_prior"), THETA_reliability_prior);
+    
+    complexity_install_prior = pt_.get<double>("complexity_install_prior");
+
+    
     //create empty design to offer
     dec_design = std::make_shared<TDesign>();
     
@@ -45,13 +52,30 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
 //    std::vector<double> V_0_std;
 //    serialize::deserialize(pt_.get_child("V_0"), V_0_std);
 //    Eigen::Map<Eigen::MatrixXd> V_0(V_0_std.data(), constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM);
+//    a_0 = pt_.get<double>("a_0");
+//    b_0 = pt_.get<double>("b_0");
+//    std::vector<double> Mu_0_std;
+//    serialize::deserialize(pt_.get_child("Mu_0"), Mu_0_std);
+//    Eigen::Map<Eigen::MatrixXd> Mu_0(Mu_0_std.data(), constants::N_BETA_SEI_WM, 1);
+
+    
     
     
     //prior on other parameters from BLR for the share
     a_0 = 1;
     b_0 = 1;
+    
     Mu_0 = SEIWMDataType::Ones();
     X(0,0) = 1.0;
+    
+    
+    //initialize THETA_demand from Mu_0
+    THETA_demand = std::vector<double>(constants::N_BETA_SEI_WM, 0.0);
+    //data generating will be MVS - take mean from there - see predictions using BLR
+    for (auto i = 0; i < Mu_0.size() ; ++i)
+    {
+        THETA_demand[i] = Mu_0[i];
+    };
     
     
     
@@ -78,7 +102,7 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
 {
     
     //size is equal to the utility bill, assume simple electricity pricing for now
-    auto demand  = agent_->params[EParamTypes::ElectricityConsumption] /constants::NUMBER_DAYS_IN_MONTH;
+    auto demand  = agent_->params[EParamTypes::ElectricityConsumption]/constants::NUMBER_DAYS_IN_MONTH;
 
     
     //solar irradiation - average number
@@ -106,17 +130,19 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     auto p = params[EParamTypes::EstimatedPricePerWatt] * DC_size;
     
     //calculate irr given the parameters for this project
+    project->N_PANELS = N_PANELS;
     project->DC_size= DC_size;
     project->agent = agent_;
     project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     project->p = p;
-    
+    project->PV_module = dec_design->PV_module;
+    project->sei = this;
     
     //find irr
     //secant method
     project->irr_a = irr_secant(project);
     
-    project->sei = this;
+    
     
     return project;
     
@@ -226,7 +252,7 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
     
     //draw random SEM
 
-    auto max_ = w->sems.size();
+    auto max_ = w->sems.size() - 1;
     auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
     auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
     
@@ -583,14 +609,20 @@ SEIBL::wm_update()
         mean += project->production_time;
     };
     
-    //average production
-    mean = mean / pvprojects.size();
-    
-    //number of data points, assume update every step
-    uint64_t n = a_time - 1;
-    
-    //updated parameter for reputation
-    THETA_reputation[0] = (1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1)));
+    if (pvprojects.size() > 0)
+    {
+        //average production
+        mean = mean / pvprojects.size();
+        
+        //number of data points, assume update every step
+        uint64_t n = a_time;
+        
+        if (n > 0)
+        {
+            //updated parameter for reputation
+            THETA_reputation[0] = (1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1)));
+        };
+    };
 }
 
 
@@ -604,10 +636,11 @@ SEIBL::wm_update()
 void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit time_)
 {
     //fill in details for the project
-    //uses true distribution here
-    auto rng_THETA_reliability = [&]()
+    //uses true distribution here - exponential
+    auto rng_THETA_reliability = [&](double lambda)
     {
-        return w->rand->r_pareto_2(dec_design->PV_module->THETA_reliability[1], dec_design->PV_module->THETA_reliability[0]);
+        
+        return boost::variate_generator<boost::mt19937&, boost::exponential_distribution<>>(w->rand->rng, boost::exponential_distribution<>(lambda))();
     };
 
     
@@ -615,14 +648,14 @@ void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit ti
     //draw next time of maintenance
     project_->begin_time = time_;
     //will break when, might be longer than project_->PV_module->warranty_length
-    project_->maintenance_time = rng_THETA_reliability() + time_;
+    project_->maintenance_time = rng_THETA_reliability(dec_design->PV_module->THETA_reliability[0]) + time_;
     //start counter for length before break-down from the start of the project
     project_->maintenance_time_1 = time_;
     
     
     w->get_state_inf_installed_project(project_);
     
-    
+    pvprojects.push_back(project_);
     
 }
 
@@ -637,13 +670,20 @@ void SEIBL::projects_update()
 
     
     //uses true distribution here
-    auto rng_THETA_reliability = [&](std::shared_ptr<SolarModuleBL> pv_module_)
+    std::map<UID, boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>> rngs_THETA_reliability_base;
+    
+    for (auto iter:designs)
     {
-        
-        
-        //MARK: cont.
-        return w->rand->r_pareto_2(pv_module_->THETA_reliability[1], pv_module_->THETA_reliability[0]);
+        rngs_THETA_reliability_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>(&w->rand->rng, boost::exponential_distribution<>(iter.second->PV_module->THETA_reliability[0]))));
     };
+
+    
+    //reliability generator
+    auto rng_THETA_reliability = [](boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>& rng_THETA_reliability_base_)
+    {
+        return rng_THETA_reliability_base_();
+    };
+    
     
     
     //complexity generators
@@ -661,9 +701,10 @@ void SEIBL::projects_update()
     
     
     
-    for (auto project:pvprojects)
+    for (int64_t i = pvprojects.size() - 1; i >= 0; --i)
     {
-        if (project->maintenance_time == a_time)
+        auto project = pvprojects[i];
+        if (project->maintenance_time <= a_time)
         {
             //record as failure
             failures[project->PV_module->uid].push_back(project->maintenance_time);
@@ -672,7 +713,7 @@ void SEIBL::projects_update()
             project->maintenance_time_1 = a_time;
             
             //draw next maintenance time
-            project->maintenance_time = rng_THETA_reliability(project->PV_module) + a_time;
+            project->maintenance_time = rng_THETA_reliability(rngs_THETA_reliability_base.at(project->PV_module->uid)) + a_time;
             
             //draw maintenance complexity
             project->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base.at(project->PV_module->uid), project->PV_module);
@@ -726,8 +767,7 @@ void SEIBL::projects_update()
         mu_complexity_n = (design->THETA_complexity[1] * design->THETA_complexity[0] + n * X_bar) / (design->THETA_complexity[1] + n);
         v_complexity_n = design->THETA_complexity[1] + n;
         alpha_complexity_n = design->THETA_complexity[2] + 0.5 * n;
-        beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.transpose() * centered)(0,0) +
-                            0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(X_bar - design->THETA_complexity[0], 0.5);
+        beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.transpose() * centered)(0,0) + 0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(X_bar - design->THETA_complexity[0], 0.5);
         
         
     };
@@ -742,6 +782,9 @@ void SEIBL::ac_update_tick()
 {
     //update internal timer
     a_time = w->time;
+    
+    
+    //add projects to add to avoid iterating over changing collection
 }
 
 
