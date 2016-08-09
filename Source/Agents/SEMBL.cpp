@@ -63,6 +63,8 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
         normTransform_rw_complexity_dist = eigenSolver.eigenvectors() * eigenSolver.eigenvalues().cwiseSqrt().asDiagonal();
     }
     
+    solar_panel_templates[EDecParams::CurrentTechnology] = nullptr;
+    solar_panel_templates[EDecParams::NewTechnology] = nullptr;
     
     
 }
@@ -72,7 +74,7 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
 
 void SEMBL::add_connection(std::shared_ptr<SolarModuleBL> link)
 {
-    if (solar_panel_templates[EDecParams::NewTechnology] == link)
+    if (solar_panel_templates.at(EDecParams::NewTechnology) == link)
     {
         ++N_connections_new;
     }
@@ -85,7 +87,7 @@ void SEMBL::add_connection(std::shared_ptr<SolarModuleBL> link)
 
 void SEMBL::remove_connection(std::shared_ptr<SolarModuleBL> link)
 {
-    if (solar_panel_templates[EDecParams::NewTechnology] == link)
+    if (solar_panel_templates.at(EDecParams::NewTechnology) == link)
     {
         --N_connections_new;
     }
@@ -106,7 +108,7 @@ void SEMBL::ac_update_tick()
     
     
     //switch techonologies
-    if ((N_connections_current == 0) && (solar_panel_templates[EDecParams::NewTechnology]))
+    if ((N_connections_current == 0) && (solar_panel_templates.count(EDecParams::NewTechnology) > 0.0) && (solar_panel_templates.at(EDecParams::NewTechnology) != nullptr))
     {
         solar_panel_templates[EDecParams::CurrentTechnology] = solar_panel_templates[EDecParams::NewTechnology];
         solar_panel_templates[EDecParams::NewTechnology] = nullptr;
@@ -144,27 +146,29 @@ void SEMBL::act_tick()
     //assume for now they are separate distributions
     
     //new efficiency from random walk
-    THETA_dist_efficiency[2] = THETA_dist_efficiency[2] * std::exp(w->rand->rnd() * std::pow(THETA_dist_efficiency[1], 0.5) + THETA_dist_efficiency[0]);
+    THETA_dist_efficiency[2] = THETA_dist_efficiency[2] * std::exp(w->rand_sem->rnd() * std::pow(THETA_dist_efficiency[1], 0.5) + THETA_dist_efficiency[0]);
     
     //new reliability from random walk
-    THETA_dist_reliability[2] = THETA_dist_reliability[2] * std::exp(w->rand->rnd() * std::pow(THETA_dist_reliability[1], 0.5) + THETA_dist_reliability[0]);
+    THETA_dist_reliability[2] = THETA_dist_reliability[2] * std::exp(w->rand_sem->rnd() * std::pow(THETA_dist_reliability[1], 0.5) + THETA_dist_reliability[0]);
     
     //new complexity from random walk
     //generate N_complexity_params of independent N(0, 1)
     //find how to vectorize this call - for fun
     for (auto i = 0; i < N_complexity_params; ++i)
     {
-        sample_ind_rw_complexity_dist(i,0) = w->rand->rnd();
+        sample_ind_rw_complexity_dist(i,0) = w->rand_sem->rnd();
     };
     
     sample_rw_complexity_dist = (normTransform_rw_complexity_dist * sample_ind_rw_complexity_dist) + mean_rw_complexity_dist;
     
     //update parameters for the solar_panel
-    THETA_dist_complexity[N_complexity_params * 3] = sample_rw_complexity_dist(0,0);
-    THETA_dist_complexity[N_complexity_params * 3 + 1] = sample_rw_complexity_dist(1,0);
+    THETA_dist_complexity[N_complexity_params * 3] = THETA_dist_complexity[N_complexity_params * 3] * std::exp(sample_rw_complexity_dist(0,0));
+    THETA_dist_complexity[N_complexity_params * 3 + 1] = THETA_dist_complexity[N_complexity_params * 3 + 1] * std::exp(sample_rw_complexity_dist(1,0));
     
-   
-    std::shared_ptr<SolarModuleBL> new_pv(new SolarModuleBL(*solar_panel_templates[EDecParams::CurrentTechnology]));
+    
+    
+    auto new_pv = std::make_shared<SolarModuleBL>(*solar_panel_templates[EDecParams::CurrentTechnology]);
+//    std::shared_ptr<SolarModuleBL> new_pv(new SolarModuleBL(*solar_panel_templates[EDecParams::CurrentTechnology]));
     
     //set params for new module
     new_pv->efficiency = THETA_dist_efficiency[2];
@@ -185,9 +189,9 @@ void SEMBL::act_tick()
     //update price
     new_pv->p_sem = p_baseline;
     
-
+    lock.lock();
     solar_panel_templates[EDecParams::NewTechnology] = new_pv;
-
+    lock.unlock();
     
     
     

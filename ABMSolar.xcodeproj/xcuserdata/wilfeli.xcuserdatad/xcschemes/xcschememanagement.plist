@@ -19,10 +19,25 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>eemodel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>ED2BC13C1D4BACA300B96FB1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED5624171D5673F200FF25BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED5624211D56754800FF25BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -88,6 +88,7 @@ namespace solar_core {
         virtual void life_sems(); /*!< life of sems */
         virtual void life_gs(); /*!< life of g */
         virtual void life_markets(); /*!< life of marketing */
+        virtual void life_utility(); /*!< life of utility */
         
         virtual void ac_update_tick();
         
@@ -127,6 +128,12 @@ namespace solar_core {
         
         
         IRandom* rand = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_sei = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_sem = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_ho = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_g = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_market = nullptr; /*!< random number generator, same for everyone for now */
+        IRandom* rand_utility = nullptr; /*!< random number generator, same for everyone for now */
         
         //@}
         

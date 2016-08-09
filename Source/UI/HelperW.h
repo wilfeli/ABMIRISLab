@@ -266,13 +266,13 @@ namespace solar_core {
     {
     public:
         /** Here it will be used by dynamically casting to the proper class to get access to this specific initialization   */
-        std::vector<SEIBL*> create_seis(PropertyTree& pt, std::string mode_, long N_SEI, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        std::vector<SEIBL*>* create_seis(PropertyTree& pt, std::string mode_, long N_SEI, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
             T* w = static_cast<T*>(w_);
-            std::vector<SEIBL*> seis;
+            auto seis = new std::vector<SEIBL*>();
             
             //SEM connections
-            auto max_ = w->sems.size() - 1;
+            auto max_ = w->sems->size() - 1;
             auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
             auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
             int64_t j_sem = 0;
@@ -296,16 +296,16 @@ namespace solar_core {
                 pt.put("location_y", rng_location_y());
                 
                 
-                seis.push_back(new SEIBL(pt, w));
+                seis->push_back(new SEIBL(pt, w));
                 
                 if (i < N_Explorer)
                 {
                     //create explorer
-                    seis.back()->THETA_exploration = THETA_explorer;
+                    seis->back()->THETA_exploration = THETA_explorer;
                 }
                 else
                 {
-                    seis.back()->THETA_exploration = THETA_exploiter;
+                    seis->back()->THETA_exploration = THETA_exploiter;
                 };
                 
                 
@@ -316,9 +316,9 @@ namespace solar_core {
                 {
                     j_sem = rng_i();
                     //connect to random sem manufacturer
-                    seis.back()->dec_design->PV_module = w->sems[j_sem]->solar_panel_templates[EDecParams::CurrentTechnology];
+                    seis->back()->dec_design->PV_module = (*w->sems)[j_sem]->solar_panel_templates[EDecParams::CurrentTechnology];
                     //record as connection
-                    w->sems[j_sem]->add_connection(seis.back()->dec_design->PV_module);
+                    (*w->sems)[j_sem]->add_connection(seis->back()->dec_design->PV_module);
                     
                 }
                 else
@@ -327,19 +327,28 @@ namespace solar_core {
                 };
             };
             
+            
+            //set market shares for them
+            for (auto& sei: *seis)
+            {
+                w->market_share_seis[sei->uid] = 1/N_SEI;
+            };
+            
+            
+            
             return seis;
         }
         
         
         
-        std::vector<SEMBL*> create_sems(const PropertyTree& pt, std::string mode_, long N_SEM, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        std::vector<SEMBL*>* create_sems(const PropertyTree& pt, std::string mode_, long N_SEM, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
             T* w = static_cast<T*>(w_);
-            std::vector<SEMBL*> sems;
+            auto sems = new std::vector<SEMBL*>();
             
             for (auto i = 0; i < N_SEM; ++i)
             {
-                sems.push_back(new SEMBL(pt, w_));
+                sems->push_back(new SEMBL(pt, w_));
             };
             
             
@@ -352,7 +361,7 @@ namespace solar_core {
             
             
             //Every SEM has one solar_module
-            for (auto iter:sems)
+            for (auto iter:*sems)
             {
                 while (true)
                 {
@@ -380,11 +389,11 @@ namespace solar_core {
         
         
         
-        std::vector<H*> create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        std::vector<H*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
             
             
-            std::vector<H*> hos;
+            auto hos = new std::vector<H*>();
             
             std::map<std::string, std::string> params_str;
             T* w = static_cast<T*>(w_);
@@ -511,7 +520,6 @@ namespace solar_core {
             
             
             //create HO
-            auto j = 0;
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
                 //generate location
@@ -529,20 +537,21 @@ namespace solar_core {
                 
                 //read configuration file
                 //replace parameters if necessary
-                hos.push_back(new H(pt, w));
+                hos->push_back(new H(pt, w));
                 
                 
                 //copy other parameters
                 for (auto iter:param_values)
                 {
-                    hos.back()->params[iter.first] = param_values[iter.first][i];
+                    hos->back()->params[iter.first] = param_values[iter.first][i];
                 };
                 
-                hos.back()->THETA_params = THETA_params;
+                hos->back()->THETA_params = THETA_params;
                 
             };
 
         
+            delete e_dist;
             return hos;
         }
         

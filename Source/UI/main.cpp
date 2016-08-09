@@ -122,6 +122,9 @@ int main(int argc, const char * argv[])
     func = &W::life_markets;
     threads.push_back(std::thread(func, w));
     
+    func = &W::life_utility;
+    threads.push_back(std::thread(func, w));
+    
     time_t rawtime;
     tm* timeinfo;
     

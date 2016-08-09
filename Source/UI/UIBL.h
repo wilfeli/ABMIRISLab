@@ -33,9 +33,9 @@ namespace solar_ui
         void collect_inf();
         void save(std::string path_to_save_file_ = "");
         
-    protected:
+    
         solar_core::WEE* w;
-        
+    protected:    
     };
     
     

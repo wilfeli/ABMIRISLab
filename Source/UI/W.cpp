@@ -405,8 +405,13 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     params_d[EParamTypes::N_HOMarketingStateHighlyInterested] = pt.get<long>("N_HOMarketingStateHighlyInterested");
     
     //create RNG
+    rand_sei = new IRandom(pt.get<double>("SEED"));
     rand = new IRandom(pt.get<double>("SEED"));
-    
+    rand_sem = new IRandom(pt.get<double>("SEED"));
+    rand_ho = new IRandom(pt.get<double>("SEED"));
+    rand_g = new IRandom(pt.get<double>("SEED"));
+    rand_market = new IRandom(pt.get<double>("SEED"));
+    rand_utility = new IRandom(pt.get<double>("SEED"));
     
     //create parameters
     serialize::deserialize(pt.get_child("WorldSettings.params_exog"),params_str);
@@ -521,6 +526,7 @@ W::life()
             FLAG_G_TICK = true;
             FLAG_SEM_TICK = true;
             FLAG_MARKET_TICK = true;
+            FLAG_UTILITY_TICK = true;
             
             
             all_update.notify_all();
@@ -705,6 +711,35 @@ W::life_markets()
             std::unique_lock<std::mutex> l(lock_tick);
             //takes a predicate that is used to loop until it returns false
             all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_MARKET_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+
+void
+W::life_utility()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_UTILITY_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_UTILITY_TICK = false;
+            
+            auto& agent = utility;
+            
+            //get tick
+            agent->act_tick();
+            
+            ++updated_counter;
+        };
+        
+        while (!FLAG_UTILITY_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_UTILITY_TICK || FLAG_IS_STOPPED); });
         };
     };
 }

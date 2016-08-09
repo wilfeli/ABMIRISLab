@@ -40,6 +40,12 @@
                },
                {
                "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
+               },
+               {
+               "EParamTypes::SEITimeLUForMarketing" : 100
+               },
+               {
+               "EParamTypes::SEITimeLUForDesign": 100
                }
                ],
     "mes_marketing": "",
@@ -121,7 +127,7 @@
                                ],
     "THETA_reliability_prior": [
                                 1,
-                                0.04
+                                25
                                 ],
     "complexity_install_prior": 16,
     "dec_design": "FORMULA::RANDOM"

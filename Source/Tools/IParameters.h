@@ -42,7 +42,7 @@ namespace solar_core
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const double NUMBER_SQM_IN_SQF = 0.09290304;
-        const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
+        const int NUMBER_AGENT_TYPES_LIFE = 6; /*!< number of agents that update in W::life(), hh, sei, sem, g, market, utility */
         const int NUMBER_AGENT_TYPES_LIFE_EE = 3; /*!< number of agents that update in WEE::life(), hh, sei, sem  */
         const int N_BETA_SEI_WM = 5;
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
@@ -662,6 +662,14 @@ namespace solar_core
             else if (param_type == "eparamtypes::seiprocessingtimerequiredforschedulingfirstsitevisit")
             {
                 return EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit;
+            }
+            else if (param_type == "eparamtypes::seitimeluformarketing")
+            {
+                return EParamTypes::SEITimeLUForMarketing;
+            }
+            else if (param_type == "eparamtypes::seitimelufordesign")
+            {
+                return EParamTypes::SEITimeLUForDesign;
             }
             else if (param_type == "eparamtypes::n_ho")
             {

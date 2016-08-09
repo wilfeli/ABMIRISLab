@@ -47,6 +47,49 @@
 		ED3EA2181C9F440000C2B70E /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
 		ED438B631D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
 		ED438B641D09F78E00CE1EA7 /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
+		ED5624111D56644900FF25BA /* UI_Python.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED56240F1D56644900FF25BA /* UI_Python.cpp */; };
+		ED5624121D56644900FF25BA /* UI_Python.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED56240F1D56644900FF25BA /* UI_Python.cpp */; };
+		ED5624131D56644900FF25BA /* UI_Python.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED56240F1D56644900FF25BA /* UI_Python.cpp */; };
+		ED5624261D56756200FF25BA /* UI_Python.h in Headers */ = {isa = PBXBuildFile; fileRef = ED5624101D56644900FF25BA /* UI_Python.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED5624271D5675C200FF25BA /* UI_Python.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED56240F1D56644900FF25BA /* UI_Python.cpp */; };
+		ED56242B1D58261000FF25BA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED2BC1691D4BAF8200B96FB1 /* main.cpp */; };
+		ED56242C1D58261000FF25BA /* G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA2161C9F440000C2B70E /* G.cpp */; };
+		ED56242D1D58261000FF25BA /* H.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376631D320346008705B8 /* H.cpp */; };
+		ED56242E1D58261000FF25BA /* Homeowner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCFA1C87BF5800A26BA5 /* Homeowner.cpp */; };
+		ED56242F1D58261000FF25BA /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
+		ED5624301D58261000FF25BA /* SEI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C01C8E9D6D005670BD /* SEI.cpp */; };
+		ED5624311D58261000FF25BA /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
+		ED5624321D58261000FF25BA /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
+		ED5624331D58261000FF25BA /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
+		ED5624341D58261000FF25BA /* SolarPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */; };
+		ED5624351D58261000FF25BA /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */; };
+		ED5624361D58261000FF25BA /* Geography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE41CBB3A5400C79A22 /* Geography.cpp */; };
+		ED5624371D58261000FF25BA /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
+		ED5624381D58261000FF25BA /* IMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116D1C8515D800763818 /* IMessage.cpp */; };
+		ED5624391D58261000FF25BA /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
+		ED56243A1D58261000FF25BA /* ID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57AF1CE3A234005D1C49 /* ID.cpp */; };
+		ED56243B1D58261000FF25BA /* IParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE11CB88F2200C79A22 /* IParameters.cpp */; };
+		ED56243C1D58261000FF25BA /* IRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE0FD911CC0058100115115 /* IRandom.cpp */; };
+		ED56243D1D58261000FF25BA /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57881CDEF359005D1C49 /* Log.cpp */; };
+		ED56243E1D58261000FF25BA /* ParsingTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */; };
+		ED56243F1D58261000FF25BA /* Serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE03AE61CBBF68900C79A22 /* Serialize.cpp */; };
+		ED5624401D58261000FF25BA /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED438B611D09F78E00CE1EA7 /* Simulation.cpp */; };
+		ED5624411D58261000FF25BA /* WorldSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */; };
+		ED5624421D58261000FF25BA /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
+		ED5624431D58261000FF25BA /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE57841CDEF2D2005D1C49 /* UI.cpp */; };
+		ED5624441D58261000FF25BA /* UIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED2BC16B1D4BB74F00B96FB1 /* UIBL.cpp */; };
+		ED5624451D58261000FF25BA /* W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDEDFCF81C87BA5100A26BA5 /* W.cpp */; };
+		ED5624461D58261000FF25BA /* WEE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3765F1D320283008705B8 /* WEE.cpp */; };
+		ED5624471D582E7F00FF25BA /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A951CDD830E00FB61FB /* codecvt_error_category.cpp */; };
+		ED5624481D582E7F00FF25BA /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A961CDD830E00FB61FB /* operations.cpp */; };
+		ED5624491D582E7F00FF25BA /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A971CDD830E00FB61FB /* path.cpp */; };
+		ED56244A1D582E7F00FF25BA /* path_traits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A981CDD830E00FB61FB /* path_traits.cpp */; };
+		ED56244B1D582E7F00FF25BA /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A991CDD830E00FB61FB /* portability.cpp */; };
+		ED56244C1D582E7F00FF25BA /* unique_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A9A1CDD830E00FB61FB /* unique_path.cpp */; };
+		ED56244D1D582E7F00FF25BA /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A9B1CDD830E00FB61FB /* utf8_codecvt_facet.cpp */; };
+		ED56244E1D582E7F00FF25BA /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A9C1CDD830E00FB61FB /* windows_file_codecvt.cpp */; };
+		ED5624501D582EA000FF25BA /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B0D1CDD830E00FB61FB /* error_code.cpp */; };
+		ED5624511D583C5800FF25BA /* model.h in Headers */ = {isa = PBXBuildFile; fileRef = ED5624281D56944800FF25BA /* model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
 		EDC006B41CED792C0024347C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
 		EDC006B71CEFF00A0024347C /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
@@ -153,7 +196,7 @@
 
 /* Begin PBXFileReference section */
 		ED0E14151C98BD2B00A41B24 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = w.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
-		ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ABMSolar copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED2BC1671D4BACA300B96FB1 /* SolarEE */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SolarEE; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2BC1691D4BAF8200B96FB1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EE/UI/main.cpp; sourceTree = "<group>"; };
 		ED2BC16B1D4BB74F00B96FB1 /* UIBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIBL.cpp; sourceTree = "<group>"; };
 		ED2BC16C1D4BB74F00B96FB1 /* UIBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBL.h; sourceTree = "<group>"; };
@@ -161,6 +204,10 @@
 		ED3EA2171C9F440000C2B70E /* G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G.h; sourceTree = "<group>"; };
 		ED438B611D09F78E00CE1EA7 /* Simulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulation.cpp; sourceTree = "<group>"; };
 		ED438B621D09F78E00CE1EA7 /* Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulation.h; sourceTree = "<group>"; };
+		ED56240F1D56644900FF25BA /* UI_Python.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UI_Python.cpp; sourceTree = "<group>"; };
+		ED5624101D56644900FF25BA /* UI_Python.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UI_Python.h; sourceTree = "<group>"; };
+		ED5624221D56754800FF25BA /* libeemodel.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libeemodel.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED5624281D56944800FF25BA /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = EE/UI/model.h; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -2100,7 +2147,7 @@
 		EDDC11C51C8F9FF7005670BD /* SolarPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarPanel.cpp; sourceTree = "<group>"; };
 		EDDC11C61C8F9FF7005670BD /* SolarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SolarPanel.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDDC11C81C8FEB08005670BD /* ExternalIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalIncludes.h; sourceTree = "<group>"; };
-		EDDE4C481CDE682E005D1C49 /* ABMSolar copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ABMSolar copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDDE4C481CDE682E005D1C49 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = Source/ExternalTools/gtest/gtest.framework; sourceTree = "<group>"; };
 		EDDE4C4F1CDE7067005D1C49 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = main.cpp; path = Tests/UI/main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EDDE4C551CDEBDA8005D1C49 /* all_of.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = all_of.hpp; sourceTree = "<group>"; };
@@ -4578,6 +4625,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED56241F1D56754800FF25BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDDB3FAF1C7C402D00A6EA1F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4636,6 +4690,7 @@
 			isa = PBXGroup;
 			children = (
 				ED2BC1691D4BAF8200B96FB1 /* main.cpp */,
+				ED5624281D56944800FF25BA /* model.h */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -8324,8 +8379,9 @@
 			isa = PBXGroup;
 			children = (
 				EDDB3FB21C7C402D00A6EA1F /* ABMSolar */,
-				EDDE4C481CDE682E005D1C49 /* ABMSolar copy */,
-				ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */,
+				EDDE4C481CDE682E005D1C49 /* Test */,
+				ED2BC1671D4BACA300B96FB1 /* SolarEE */,
+				ED5624221D56754800FF25BA /* libeemodel.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8432,6 +8488,8 @@
 				EDDB3FE71C7DA16200A6EA1F /* W.h */,
 				EDD3765F1D320283008705B8 /* WEE.cpp */,
 				EDD376601D320283008705B8 /* WEE.h */,
+				ED56240F1D56644900FF25BA /* UI_Python.cpp */,
+				ED5624101D56644900FF25BA /* UI_Python.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -13230,6 +13288,18 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ED5624201D56754800FF25BA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5624261D56756200FF25BA /* UI_Python.h in Headers */,
+				ED5624511D583C5800FF25BA /* model.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		ED2BC13C1D4BACA300B96FB1 /* SolarEE  */ = {
 			isa = PBXNativeTarget;
@@ -13245,8 +13315,25 @@
 			);
 			name = "SolarEE ";
 			productName = ABMSolar;
-			productReference = ED2BC1671D4BACA300B96FB1 /* ABMSolar copy */;
+			productReference = ED2BC1671D4BACA300B96FB1 /* SolarEE */;
 			productType = "com.apple.product-type.tool";
+		};
+		ED5624211D56754800FF25BA /* eemodel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED5624231D56754800FF25BA /* Build configuration list for PBXNativeTarget "eemodel" */;
+			buildPhases = (
+				ED56241E1D56754800FF25BA /* Sources */,
+				ED56241F1D56754800FF25BA /* Frameworks */,
+				ED5624201D56754800FF25BA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eemodel;
+			productName = eemodel;
+			productReference = ED5624221D56754800FF25BA /* libeemodel.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 		EDDB3FB11C7C402D00A6EA1F /* ABMSolar */ = {
 			isa = PBXNativeTarget;
@@ -13279,7 +13366,7 @@
 			);
 			name = Tests;
 			productName = ABMSolar;
-			productReference = EDDE4C481CDE682E005D1C49 /* ABMSolar copy */;
+			productReference = EDDE4C481CDE682E005D1C49 /* Test */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -13291,6 +13378,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "IRIS Lab";
 				TargetAttributes = {
+					ED5624211D56754800FF25BA = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					EDDB3FB11C7C402D00A6EA1F = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -13311,6 +13401,7 @@
 				EDDB3FB11C7C402D00A6EA1F /* ABMSolar */,
 				EDDE4C261CDE682E005D1C49 /* Tests */,
 				ED2BC13C1D4BACA300B96FB1 /* SolarEE  */,
+				ED5624211D56754800FF25BA /* eemodel */,
 			);
 		};
 /* End PBXProject section */
@@ -13341,6 +13432,7 @@
 				ED2BC14F1D4BACA300B96FB1 /* WEE.cpp in Sources */,
 				ED2BC1511D4BACA300B96FB1 /* SEI.cpp in Sources */,
 				ED2BC1521D4BACA300B96FB1 /* Geography.cpp in Sources */,
+				ED5624131D56644900FF25BA /* UI_Python.cpp in Sources */,
 				ED2BC1531D4BACA300B96FB1 /* SEM.cpp in Sources */,
 				ED2BC1541D4BACA300B96FB1 /* HelperW.cpp in Sources */,
 				ED2BC1551D4BACA300B96FB1 /* Homeowner.cpp in Sources */,
@@ -13357,6 +13449,51 @@
 				ED2BC1601D4BACA300B96FB1 /* Log.cpp in Sources */,
 				ED2BC1611D4BACA300B96FB1 /* Serialize.cpp in Sources */,
 				ED2BC16A1D4BAF8200B96FB1 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED56241E1D56754800FF25BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5624501D582EA000FF25BA /* error_code.cpp in Sources */,
+				ED5624471D582E7F00FF25BA /* codecvt_error_category.cpp in Sources */,
+				ED5624481D582E7F00FF25BA /* operations.cpp in Sources */,
+				ED5624491D582E7F00FF25BA /* path.cpp in Sources */,
+				ED56244A1D582E7F00FF25BA /* path_traits.cpp in Sources */,
+				ED56244B1D582E7F00FF25BA /* portability.cpp in Sources */,
+				ED56244C1D582E7F00FF25BA /* unique_path.cpp in Sources */,
+				ED56244D1D582E7F00FF25BA /* utf8_codecvt_facet.cpp in Sources */,
+				ED56244E1D582E7F00FF25BA /* windows_file_codecvt.cpp in Sources */,
+				ED56242B1D58261000FF25BA /* main.cpp in Sources */,
+				ED56242C1D58261000FF25BA /* G.cpp in Sources */,
+				ED56242D1D58261000FF25BA /* H.cpp in Sources */,
+				ED56242E1D58261000FF25BA /* Homeowner.cpp in Sources */,
+				ED56242F1D58261000FF25BA /* IAgent.cpp in Sources */,
+				ED5624301D58261000FF25BA /* SEI.cpp in Sources */,
+				ED5624311D58261000FF25BA /* SEIBL.cpp in Sources */,
+				ED5624321D58261000FF25BA /* SEM.cpp in Sources */,
+				ED5624331D58261000FF25BA /* SEMBL.cpp in Sources */,
+				ED5624341D58261000FF25BA /* SolarPanel.cpp in Sources */,
+				ED5624351D58261000FF25BA /* Utility.cpp in Sources */,
+				ED5624361D58261000FF25BA /* Geography.cpp in Sources */,
+				ED5624371D58261000FF25BA /* IInstitute.cpp in Sources */,
+				ED5624381D58261000FF25BA /* IMessage.cpp in Sources */,
+				ED5624391D58261000FF25BA /* MarketingSystem.cpp in Sources */,
+				ED56243A1D58261000FF25BA /* ID.cpp in Sources */,
+				ED56243B1D58261000FF25BA /* IParameters.cpp in Sources */,
+				ED56243C1D58261000FF25BA /* IRandom.cpp in Sources */,
+				ED56243D1D58261000FF25BA /* Log.cpp in Sources */,
+				ED56243E1D58261000FF25BA /* ParsingTools.cpp in Sources */,
+				ED56243F1D58261000FF25BA /* Serialize.cpp in Sources */,
+				ED5624401D58261000FF25BA /* Simulation.cpp in Sources */,
+				ED5624411D58261000FF25BA /* WorldSettings.cpp in Sources */,
+				ED5624421D58261000FF25BA /* HelperW.cpp in Sources */,
+				ED5624431D58261000FF25BA /* UI.cpp in Sources */,
+				ED5624441D58261000FF25BA /* UIBL.cpp in Sources */,
+				ED5624451D58261000FF25BA /* W.cpp in Sources */,
+				ED5624461D58261000FF25BA /* WEE.cpp in Sources */,
+				ED5624271D5675C200FF25BA /* UI_Python.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13394,6 +13531,7 @@
 				EDE03AE21CB88F2200C79A22 /* IParameters.cpp in Sources */,
 				EDDC11C41C8EAF5F005670BD /* WorldSettings.cpp in Sources */,
 				EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */,
+				ED5624111D56644900FF25BA /* UI_Python.cpp in Sources */,
 				EDEDFCF91C87BA5100A26BA5 /* W.cpp in Sources */,
 				EDDA116F1C8515D800763818 /* IMessage.cpp in Sources */,
 				EDDA11691C85131100763818 /* IAgent.cpp in Sources */,
@@ -13407,6 +13545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5624121D56644900FF25BA /* UI_Python.cpp in Sources */,
 				EDC006B41CED792C0024347C /* main.cpp in Sources */,
 				EDDE57A11CE2D4B0005D1C49 /* error_code.cpp in Sources */,
 				EDDE579A1CE2CB9B005D1C49 /* operations.cpp in Sources */,
@@ -13461,8 +13600,8 @@
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
 				);
-				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				PRODUCT_NAME = SolarEE;
+				USER_HEADER_SEARCH_PATHS = "./Source ./EE";
 			};
 			name = Debug;
 		};
@@ -13476,8 +13615,50 @@
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
 				);
-				PRODUCT_NAME = "ABMSolar copy";
-				USER_HEADER_SEARCH_PATHS = ./Source;
+				PRODUCT_NAME = SolarEE;
+				USER_HEADER_SEARCH_PATHS = "./Source ./EE";
+			};
+			name = Release;
+		};
+		ED5624241D56754800FF25BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./Source ./EE";
+			};
+			name = Debug;
+		};
+		ED5624251D56754800FF25BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
+					"-isystem",
+					"$(PROJECT_DIR)/Source/ExternalTools/Eigen",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./Source ./EE";
 			};
 			name = Release;
 		};
@@ -13601,7 +13782,7 @@
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
-				PRODUCT_NAME = "ABMSolar copy";
+				PRODUCT_NAME = Test;
 				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include $(PROJECT_DIR)";
 			};
 			name = Debug;
@@ -13622,7 +13803,7 @@
 					"-isystem",
 					"$(PROJECT_DIR)/Source/ExternalTools/boost_1_60_0",
 				);
-				PRODUCT_NAME = "ABMSolar copy";
+				PRODUCT_NAME = Test;
 				USER_HEADER_SEARCH_PATHS = "./Source $(PROJECT_DIR)/Source/ExternalTools/gtest $(PROJECT_DIR)/../Tests/googletest-master/googletest/include $(PROJECT_DIR)";
 			};
 			name = Release;
@@ -13638,6 +13819,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		ED5624231D56754800FF25BA /* Build configuration list for PBXNativeTarget "eemodel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED5624241D56754800FF25BA /* Debug */,
+				ED5624251D56754800FF25BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		EDDB3FAD1C7C402D00A6EA1F /* Build configuration list for PBXProject "ABMSolar" */ = {
 			isa = XCConfigurationList;

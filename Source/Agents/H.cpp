@@ -59,8 +59,8 @@ bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)
     auto p_switch = (1/(1+std::exp(-(irr - THETA_decision[0])/THETA_decision[1])));
     
     
-    std::cout << std::fixed << std::setprecision(2) << w_->time << ": irr: " << irr << ", p_switch: " << p_switch << std::endl;
+//    std::cout << std::fixed << std::setprecision(2) << w_->time << ": irr: " << irr << ", p_switch: " << p_switch << std::endl;
     
     
-    return (w_->rand->ru() <= p_switch);
+    return (w_->rand_ho->ru() <= p_switch);
 }

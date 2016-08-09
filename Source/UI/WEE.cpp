@@ -140,17 +140,17 @@ WEE::init()
 {
     
 
-    for (auto& agent:hos)
+    for (auto& agent:*hos)
     {
         agent->init(this);
     };
     
-    for (auto& agent:seis)
+    for (auto& agent:*seis)
     {
         agent->init(this);
     };
     
-    for (auto& agent:sems)
+    for (auto& agent:*sems)
     {
         agent->init(this);
     };
@@ -224,11 +224,11 @@ WEE::life_hos()
     
     
     //randomly select agents and push marketing information
-    auto pdf_agents = boost::uniform_int<uint64_t>(0, hos.size()-1);
+    auto pdf_agents = boost::uniform_int<uint64_t>(0, hos->size()-1);
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_agents);
     
     
-    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, seis.size()-1);
+    auto pdf_sei_agents = boost::uniform_int<uint64_t>(0, seis->size()-1);
     auto rng_sei_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_sei_agents);
     
     std::size_t j_h = 0;
@@ -250,7 +250,7 @@ WEE::life_hos()
                 {
                     //pick h randomly
                     j_h = rng_agents();
-                    if (!hos[j_h]->FLAG_INSTALLED_SYSTEM)
+                    if (!(*hos)[j_h]->FLAG_INSTALLED_SYSTEM)
                     {
                         break;
                     };
@@ -261,11 +261,11 @@ WEE::life_hos()
                 
                 
                 //form design for an agent
-                seis[j_sei]->form_design_for_params(hos[j_h], pool_projects[i_pool_projects]);
+                (*seis)[j_sei]->form_design_for_params((*hos)[j_h], pool_projects[i_pool_projects]);
                 
                 
                 //get answer for the design
-                FLAG_DEC = hos[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
+                FLAG_DEC = (*hos)[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
                 
                 
                 
@@ -273,9 +273,9 @@ WEE::life_hos()
                 if (FLAG_DEC)
                 {
                     //save as accepted project
-                    seis[j_sei]->install_project(pool_projects[i_pool_projects], time);
+                    (*seis)[j_sei]->install_project(pool_projects[i_pool_projects], time);
                     ++i_pool_projects;
-                    hos[j_h]->FLAG_INSTALLED_SYSTEM = true;
+                    (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
                 };
                 
             };
@@ -314,7 +314,7 @@ WEE::life_seis()
             ++notified_counter;
             FLAG_SEI_TICK = false;
             
-            for (auto& agent:seis)
+            for (auto& agent:*seis)
             {
                 //get tick
                 agent->act_tick();
@@ -344,7 +344,7 @@ WEE::life_sems()
             ++notified_counter;
             FLAG_SEM_TICK = false;
             
-            for (auto& agent:sems)
+            for (auto& agent:*sems)
             {
                 //get tick
                 agent->act_tick();
@@ -374,27 +374,27 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
         case EDecParams::Reputation_i:
         {
             double Rep_i = 0.0;
-            for (std::size_t i = 0; i < seis.size(); ++i)
+            for (std::size_t i = 0; i < seis->size(); ++i)
             {
-                if (seis[i] != agent_)
+                if ((*seis)[i] != agent_)
                 {
-                    Rep_i += 1/(seis[i]->THETA_reputation[0] - 1);
+                    Rep_i += ((*seis)[i]->THETA_reputation[0] > 1.0 ? 1/((*seis)[i]->THETA_reputation[0] - 1) : 1.0);
                 };
             };
-            ret = Rep_i / (seis.size() - 1);
+            ret = Rep_i / (seis->size());
         }
             break;
         case EDecParams::Price_i:
         {
             double Price_i = 0.0;
-            for (std::size_t i = 0; i < seis.size(); ++i)
+            for (std::size_t i = 0; i < seis->size(); ++i)
             {
-                if (seis[i] != agent_)
+                if ((*seis)[i] != agent_)
                 {
-                    Price_i += seis[i]->dec_design->irr;
+                    Price_i += (*seis)[i]->dec_design->irr;
                 };
             };
-            ret = Price_i / (seis.size() - 1);
+            ret = Price_i / (seis->size());
         }
             break;
         case EDecParams::Share:

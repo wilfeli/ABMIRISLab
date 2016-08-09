@@ -41,18 +41,18 @@ UIBL::save(std::string path_to_save_file_)
     auto simulation_length = w->time + 1;
     
     
-    auto save_data_raw = std::vector<std::deque<std::shared_ptr<solar_core::PVProjectFlat>>>(simulation_length, {});
+    auto save_data_raw = std::vector<std::deque<solar_core::PVProjectFlat*>>(simulation_length, {});
     
     
     
     
     
     //go through all installed projects and sort them by the date they were installed
-    for (auto sei:w->seis)
+    for (auto sei:*w->seis)
     {
         for (auto& project:sei->pvprojects)
         {
-            save_data_raw[project->begin_time].push_back(project);
+            save_data_raw[project->begin_time].push_back(project.get());
         };
     }
     

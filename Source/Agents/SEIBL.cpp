@@ -33,14 +33,17 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
 
     
     //create empty design to offer
-    dec_design = std::make_shared<TDesign>();
+    dec_design = new TDesign();
     
     //reset to presets
     //might be using SEM specific prior for new models? later
     dec_design->THETA_reliability = THETA_reliability_prior;
     dec_design->THETA_complexity = THETA_complexity_prior;
     dec_design->complexity_install = complexity_install_prior;
-
+    
+    //synchronize price
+    dec_design->p_design = params[EParamTypes::EstimatedPricePerWatt];
+    
     
     
     //prior on V_0 - assume ridge regression
@@ -140,7 +143,7 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     
     //find irr
     //secant method
-    project->irr_a = irr_secant(project);
+    project->irr_a = irr_secant(project.get());
     
     
     
@@ -151,7 +154,7 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
 
 
 
-double SEIBL::irr_secant(std::shared_ptr<PVProjectFlat> project)
+double SEIBL::irr_secant(PVProjectFlat* project)
 {
     //algorithm parameters
     double precision = 0.00001; //tolerance for convergence
@@ -178,7 +181,7 @@ double SEIBL::irr_secant(std::shared_ptr<PVProjectFlat> project)
  Replicates financial calculator from Python
  
 */
-double SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat> project, double irr)
+double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
 {
     //solar irradiation - average number
     auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
@@ -230,9 +233,9 @@ double SEIBL::NPV_purchase(std::shared_ptr<PVProjectFlat> project, double irr)
 
 
 
-std::shared_ptr<TDesign> SEIBL::dec_base()
+TDesign* SEIBL::dec_base()
 {
-    std::shared_ptr<TDesign> dec;
+    TDesign* dec = nullptr;
     
     
     //makes decision about switching to new design or not
@@ -243,7 +246,7 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
     
     
     //allocate PVProjectFlat
-    auto average_project = std::make_shared<PVProjectFlat>();
+    auto average_project = new PVProjectFlat();
     
 
     //estimates expected profit for the current module
@@ -252,30 +255,32 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
     
     //draw random SEM
 
-    auto max_ = w->sems.size() - 1;
+    auto max_ = w->sems->size() - 1;
     auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
     
     auto i = rng_i();
     
     //MARK: cont. think if it needs new or this is OK
-    auto test_design = std::make_shared<TDesign>(*dec_design);
+    auto test_design = new TDesign(*dec_design);
     test_design->PV_module = nullptr;
     
+    (*w->sems)[i]->lock.lock();
     //check if it is new techonology
-    if (w->sems[i]->solar_panel_templates[EDecParams::NewTechnology])
+    if ((*w->sems)[i]->solar_panel_templates.at(EDecParams::NewTechnology) != nullptr)
     {
-        test_design->PV_module = w->sems[i]->solar_panel_templates[EDecParams::NewTechnology];
+        test_design->PV_module = (*w->sems)[i]->solar_panel_templates[EDecParams::NewTechnology];
     }
     else
     {
-        if (dec_design->PV_module != w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology])
+        if (dec_design->PV_module != (*w->sems)[i]->solar_panel_templates[EDecParams::CurrentTechnology])
         {
-            test_design->PV_module = w->sems[i]->solar_panel_templates[EDecParams::CurrentTechnology];
+            test_design->PV_module = (*w->sems)[i]->solar_panel_templates[EDecParams::CurrentTechnology];
         };
     };
+    (*w->sems)[i]->lock.unlock();
     
-    if (test_design->PV_module)
+    if (test_design->PV_module != nullptr)
     {
         
         //reset to presets
@@ -299,7 +304,7 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         auto p_switch = exploration_p(profit_new, profit_time);
         
         //draw and see if switches
-        if (w->rand->ru() <= p_switch)
+        if (w->rand_sei->ru() <= p_switch)
         {
             //inform SEM about switch
             dynamic_cast<SEMBL*>(dec_design->PV_module->manufacturer)->remove_connection(dec_design->PV_module);
@@ -312,12 +317,22 @@ std::shared_ptr<TDesign> SEIBL::dec_base()
         else
         {
             dec = dec_design;
+            delete test_design;
             //save estimated price
             dec_design->p_design = p_n;
         };
         
 
+    }
+    else
+    {
+        dec = dec_design;
+        //save estimated price
+        dec_design->p_design = p_n;
     };
+
+    
+    delete average_project;
     
     return dec;
 }
@@ -338,8 +353,13 @@ double SEIBL::exploration_p(double profit_new, double profit_old)
 
 
 
+double SEIBL::f_derivative(double epsilon, TDesign* dec_design_hat, PVProjectFlat* project, double x)
+{
+    return (est_profit(dec_design_hat, project, x + epsilon) - est_profit(dec_design_hat, project, x))/epsilon;
+}
 
-double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project)
+
+double SEIBL::max_profit(TDesign* dec_design_hat, PVProjectFlat* project)
 {
     
     /// method for searching for opt solution
@@ -354,13 +374,13 @@ double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     int N_steps = 100; //max number of steps
     
     
-    auto f_derivative = [epsilon, &dec_design_hat, &project, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x + epsilon))/epsilon;};
+//    auto f_derivative = [epsilon, &dec_design_hat, &project, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x))/epsilon;};
    
     auto i = 0;
     while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
     {
         x_old = x_new;
-        x_new = x_old - gamma * f_derivative(x_old);
+        x_new = x_old - gamma * f_derivative(epsilon, dec_design_hat, project, x_old);
         ++i;
     };
     
@@ -373,14 +393,14 @@ double SEIBL::max_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
 
 
 
-double SEIBL::est_irr_from_params(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p)
+double SEIBL::est_irr_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p)
 {
     return irr_secant(project);
 }
 
 
 
-double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_ptr<PVProjectFlat> project, double p)
+double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p)
 {
     
     double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
@@ -416,7 +436,7 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
     //use ceil to get int number
     double N_hat = std::ceil(THETA_demand[0] +
                              THETA_demand[1] * irr_hat +
-                             THETA_demand[2] * THETA_reputation[1]/(THETA_reputation[0] - 1) +
+                             THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
                              THETA_demand[3] * X(0, 2) +
                              THETA_demand[4] * X(0, 3));
     
@@ -486,7 +506,9 @@ double SEIBL::est_profit(std::shared_ptr<TDesign> dec_design_hat, std::shared_pt
 
 
 
-double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size_t N_hat, double wage)
+
+
+double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double wage)
 {
     ///number of simulation runs
     std::size_t N_trials = 10;
@@ -495,12 +517,12 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
     //draw time before next maintenance
     auto rng_THETA_reliability = [&]()
     {
-        return w->rand->r_pareto_2(dec_design_hat->THETA_reliability[1], dec_design_hat->THETA_reliability[0]);
+        return w->rand_sei->r_pareto_2(dec_design_hat->THETA_reliability[1], dec_design_hat->THETA_reliability[0]);
     };
     
 
     auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat->THETA_complexity[2]);
-    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(w->rand->rng, pdf_THETA_complexity_base);
+    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(w->rand_sei->rng, pdf_THETA_complexity_base);
     auto rng_THETA_complexity = [&]()
     {
         return dec_design_hat->THETA_complexity[0] + rng_THETA_complexity_base() * (dec_design_hat->THETA_complexity[3] * (dec_design_hat->THETA_complexity[1] + 1))/(dec_design_hat->THETA_complexity[1] * dec_design_hat->THETA_complexity[2]);
@@ -514,13 +536,15 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
     double maintenance_n_hat = 0.0; //maintenance for one simulation run
     double maintenance_hat = 0.0; //average maintenance over all simulation runs
     double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
-    std::vector<double> cash_flow_maintenance_n{dec_design_hat->PV_module->warranty_length, 0.0};
+//    std::vector<double> cash_flow_maintenance_n{dec_design_hat->PV_module->warranty_length, 0.0};
+    int64_t N_hat_i = std::min(N_hat, N_trials * 1);
+    
     
     //estimation for the period t, labor price is constant - change to dynamic labor price estimation in the future
     for (auto n = 0; n < N_trials; ++n)
     {
         //for each project
-        for (auto i = 0; i < N_hat; ++i)
+        for (auto i = 0; i < N_hat_i; ++i)
         {
             while (true)
             {
@@ -537,7 +561,7 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
                     maintenance_n_hat += (y * wage * std::pow(1 + inflation, t))/std::pow(1 + irr_, t);
                     
                     //? need condition of non-negativity for cashflows
-                    cash_flow_maintenance_n[t] = (y * wage * std::pow(1 + inflation, t));
+//                    cash_flow_maintenance_n[t] = (y * wage * std::pow(1 + inflation, t));
                 }
                 else
                 {
@@ -554,7 +578,7 @@ double SEIBL::est_maintenance(std::shared_ptr<TDesign> dec_design_hat, std::size
     
     
     //final estmate for the discounted maintenance costs
-    maintenance_hat = maintenance_hat/(N_trials);
+    maintenance_hat = (maintenance_hat * N_hat / N_hat_i)/(N_trials);
 
     return maintenance_hat;
     
@@ -569,7 +593,7 @@ SEIBL::wm_update()
     //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    X(0,1) = THETA_reputation[1]/(THETA_reputation[0] - 1);
+    X(0,1) = (THETA_reputation[0] > 1.0 ? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0);
     X(0,2) = dec_design->irr;
     X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
     X(0,4) = w->get_inf(EDecParams::irr_i, this);
@@ -604,15 +628,16 @@ SEIBL::wm_update()
     //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
     //assume method of moments with only parameter being  \f$/alpha \$f
     double mean = 0.0;
-    for(auto project: pvprojects)
+    auto i_max = pvprojects.size() - 1;
+    for(auto i = 0; i < i_max ; ++i)
     {
-        mean += project->production_time;
+        mean += pvprojects[i]->production_time;
     };
     
-    if (pvprojects.size() > 0)
+    if (i_max > 0)
     {
         //average production
-        mean = mean / pvprojects.size();
+        mean = mean / i_max;
         
         //number of data points, assume update every step
         uint64_t n = a_time;
@@ -640,7 +665,7 @@ void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit ti
     auto rng_THETA_reliability = [&](double lambda)
     {
         
-        return boost::variate_generator<boost::mt19937&, boost::exponential_distribution<>>(w->rand->rng, boost::exponential_distribution<>(lambda))();
+        return boost::variate_generator<boost::mt19937&, boost::exponential_distribution<>>(w->rand_sei->rng, boost::exponential_distribution<>(lambda))();
     };
 
     
@@ -670,69 +695,68 @@ void SEIBL::projects_update()
 
     
     //uses true distribution here
-    std::map<UID, boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>> rngs_THETA_reliability_base;
+    auto rngs_THETA_reliability_base = new std::map<UID, boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>*>();
     
-    for (auto iter:designs)
+    for (const auto& iter:designs)
     {
-        rngs_THETA_reliability_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>(&w->rand->rng, boost::exponential_distribution<>(iter.second->PV_module->THETA_reliability[0]))));
+        rngs_THETA_reliability_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>(&w->rand_sei->rng, boost::exponential_distribution<>(iter.second->PV_module->THETA_reliability[0]))));
     };
 
     
     //reliability generator
-    auto rng_THETA_reliability = [](boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>& rng_THETA_reliability_base_)
+    auto rng_THETA_reliability = [](boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>* rng_THETA_reliability_base_)
     {
-        return rng_THETA_reliability_base_();
+        return (*rng_THETA_reliability_base_)();
     };
     
     
     
     //complexity generators
-    auto rng_THETA_complexity = [](boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>& rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
+    auto rng_THETA_complexity = [](boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>* rng_THETA_complexity_base_, std::shared_ptr<SolarModuleBL> pv_module_)
     {
-        return pv_module_->THETA_complexity[0] + rng_THETA_complexity_base_() * std::pow(pv_module_->THETA_complexity[1], 0.5);
+        return pv_module_->THETA_complexity[0] + (*rng_THETA_complexity_base_)() * std::pow(pv_module_->THETA_complexity[1], 0.5);
     };
 
-    std::map<UID, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>> rngs_THETA_complexity_base;
+    auto rngs_THETA_complexity_base = new std::map<UID, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>*>();
     for (auto iter:designs)
     {
-        rngs_THETA_complexity_base.emplace(std::make_pair(iter.first, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>(&w->rand->rng, boost::normal_distribution<>(0.0, 1.0))));
+        rngs_THETA_complexity_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>(&w->rand_sei->rng, boost::normal_distribution<>(0.0, 1.0))));
     };
     
     
     
-    
-    for (int64_t i = pvprojects.size() - 1; i >= 0; --i)
+    auto i_max = pvprojects.size() - 1;
+    for (int64_t i = i_max; i >= 0; --i)
     {
-        auto project = pvprojects[i];
-        if (project->maintenance_time <= a_time)
+        if (pvprojects[i]->maintenance_time <= a_time)
         {
             //record as failure
-            failures[project->PV_module->uid].push_back(project->maintenance_time);
+            failures[pvprojects[i]->PV_module->uid].push_back(pvprojects[i]->maintenance_time);
             
             //restart counter until next break-down
-            project->maintenance_time_1 = a_time;
+            pvprojects[i]->maintenance_time_1 = a_time;
             
             //draw next maintenance time
-            project->maintenance_time = rng_THETA_reliability(rngs_THETA_reliability_base.at(project->PV_module->uid)) + a_time;
+            pvprojects[i]->maintenance_time = rng_THETA_reliability(rngs_THETA_reliability_base->at(pvprojects[i]->PV_module->uid)) + a_time;
             
             //draw maintenance complexity
-            project->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base.at(project->PV_module->uid), project->PV_module);
+            pvprojects[i]->maintenance_complexity = rng_THETA_complexity(rngs_THETA_complexity_base->at(pvprojects[i]->PV_module->uid), pvprojects[i]->PV_module);
             
             //save actual complexity level
-            failures_complexity[project->PV_module->uid].push_back(project->maintenance_complexity);
+            failures_complexity[pvprojects[i]->PV_module->uid].push_back(pvprojects[i]->maintenance_complexity);
             
             
             //record into costs for the period
-            costs_time += project->maintenance_complexity * WorldSettings::instance().params_exog[EParamTypes::LaborPrice] ;
+            costs_time += pvprojects[i]->maintenance_complexity * WorldSettings::instance().params_exog[EParamTypes::LaborPrice] ;
             
             //records down period into production time, hard coded that TimeUnit here is 1 year - so share of down time as a percentage of days in a year - 365.
             //because maintenance complexity is in labor*hours and solar radiation defines number of hours per day solar panels are active, the result will be number of days solar system is down, convert into percentage of a year
-            project->production_time = project->maintenance_complexity / (WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation]) / (constants::NUMBER_DAYS_IN_TICK);
+            pvprojects[i]->production_time = pvprojects[i]->maintenance_complexity / (WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation]) / (constants::NUMBER_DAYS_IN_TICK);
             
         }
         else
         {
-            project->production_time = 1.0; // always up, no failures this year
+            pvprojects[i]->production_time = 1.0; // always up, no failures this year
         };
     };
     
@@ -770,9 +794,29 @@ void SEIBL::projects_update()
         beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.transpose() * centered)(0,0) + 0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(X_bar - design->THETA_complexity[0], 0.5);
         
         
+        design->THETA_complexity[0] = mu_complexity_n;
+        design->THETA_complexity[1] = v_complexity_n;
+        design->THETA_complexity[2] = alpha_complexity_n;
+        design->THETA_complexity[3] = beta_complexity_n;
+        
+        
     };
 
     
+    //MARK: cont. clean after itself
+    //delete new allocations
+    for (auto& iter:*rngs_THETA_reliability_base)
+    {
+        delete iter.second;
+    };
+    
+    for (auto& iter:*rngs_THETA_complexity_base)
+    {
+        delete iter.second;
+    };
+    
+    delete rngs_THETA_reliability_base;
+    delete rngs_THETA_complexity_base;
     
 }
 
@@ -799,9 +843,13 @@ void SEIBL::act_tick()
     //update basic parameters
     ac_update_tick();
     
-    //updates information for decision making
-    wm_update();
     
+    //skip first update
+    if (a_time > 0)
+    {
+        //updates information for decision making
+        wm_update();
+    };
     //projects update
     //go over installed projects and see if need maintenance, if need - record as costs and update time till next maintenance
     //record actual production in the year based on the maintenance length
@@ -809,11 +857,16 @@ void SEIBL::act_tick()
     
     //make price decision, based on the switching or not
     auto dec = dec_base();
+//    TDesign* dec = dec_design;
     
     //switch to new offering, lock as simulateneously is offering projects to H
     lock.lock();
-    dec_design = dec;
-    designs[dec->PV_module->uid] = dec;
+    if (dec_design != dec)
+    {
+        dec_design = dec;
+        designs[dec->PV_module->uid] = dec;
+        params[EParamTypes::EstimatedPricePerWatt] = dec_design->p_design;
+    };
     lock.unlock();
     
     

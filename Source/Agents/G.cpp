@@ -33,7 +33,7 @@ G::G(const PropertyTree& pt_, W* w_)
     ///@DevStage2 move to W to speed up, but test before that
     for (auto& iter:params_str)
     {
-        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand_g);
     };
     
     

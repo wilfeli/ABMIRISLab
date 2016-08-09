@@ -103,7 +103,7 @@ namespace solar_core
          */
         
         UID uid;
-        
+        std::mutex lock;
         
         //@}
         
@@ -119,7 +119,7 @@ namespace solar_core
         
         W* w;
         TimeUnit a_time; /*!< agent time */
-        std::mutex lock;
+
         
         void ac_update_tick(); /*!< updates before tick */
         

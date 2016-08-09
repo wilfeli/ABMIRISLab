@@ -33,9 +33,6 @@ class WEE: public W
 public:
     WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;
-    virtual void life_hos() override; /*!< life of Homeowners */
-    virtual void life_seis() override;
-    virtual void life_sems() override;
     
     
     //@{
@@ -59,9 +56,9 @@ public:
      */
     
     
-    std::vector<SEMBL*> sems; /*!< all SEM */
-    std::vector<H*> hos;/*!< all H agents */
-    std::vector<SEIBL*> seis;/*!< all SEI agents */
+    std::vector<SEMBL*>* sems; /*!< all SEM */
+    std::vector<H*>* hos;/*!< all H agents */
+    std::vector<SEIBL*>* seis;/*!< all SEI agents */
     //@}
     
     
@@ -72,6 +69,11 @@ public:
      
      */
     
+    virtual void life_hos() override; /*!< life of Homeowners */
+    virtual void life_seis() override;
+    virtual void life_sems() override;
+
+
     virtual void life() override;
     virtual void ac_update_tick() override;
     void ac_update_wm();
@@ -83,13 +85,17 @@ public:
     
     
     
-    
-protected:
+    //@{
+    /**
+     
+     Results of simulations
+     
+     */
     std::vector<std::shared_ptr<PVProjectFlat>> pool_projects;
     std::size_t i_pool_projects;
+    //@}
     
-    
-    
+protected:
 
 
 

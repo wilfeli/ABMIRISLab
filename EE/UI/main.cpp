@@ -38,6 +38,11 @@
 #include "UI/HelperW.h"
 
 
+
+#include "UI/model.h"
+
+
+
 #ifdef _WIN64
 #include  <io.h>
 #endif
@@ -47,7 +52,28 @@ using namespace solar_core;
 
 int main(int argc, const char * argv[])
 {
+    solar_ui::UIBL* ui = reinterpret_cast<solar_ui::UIBL*>(init_model(argc, argv));
     
+    //introduce some delay
+    for (auto i = 0; i <  10000; ++i)
+    {};
+    
+    
+    run_model(ui);
+    
+    return 0;
+    
+}
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    
+
+void* init_model(int argc, const char** argv)
+{
     //store starting directory
     boost::filesystem::path full_path(boost::filesystem::current_path());
     
@@ -102,6 +128,16 @@ int main(int argc, const char * argv[])
     //initialize world
     ui->init(w);
     
+    return ui;
+}
+    
+    
+int run_model(void* ui_)
+{
+    
+    auto ui = reinterpret_cast<solar_ui::UIBL*>(ui_);
+    auto w = ui->w;
+    
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;
     
@@ -144,24 +180,15 @@ int main(int argc, const char * argv[])
     
     //save model here
     ui->save();
-    
-    
+
     return 0;
-    
-    
-    
-    
     
 }
 
 
-
-
-
-
-
-
-
+#ifdef __cplusplus
+} //C API
+#endif
 
 
 
