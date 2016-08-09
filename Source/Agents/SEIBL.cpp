@@ -434,11 +434,11 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
     //estimated number of projects is Bayesian Linear Regression
     //parameters are own offered irr, offered irr of others, reputation, reputation of others
     //use ceil to get int number
-    double N_hat = std::ceil(THETA_demand[0] +
+    double N_hat = std::min(std::ceil(THETA_demand[0] +
                              THETA_demand[1] * irr_hat +
                              THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
                              THETA_demand[3] * X(0, 2) +
-                             THETA_demand[4] * X(0, 3));
+                             THETA_demand[4] * X(0, 3)), 1.0);
     
     //adjust for the general market size
     N_hat = N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize];
@@ -489,14 +489,16 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
         //total profit
         profit_t -= costs_t;
         
+        //accumulate profit
+        profit += profit_t / std::pow(1 + irr_, t);
+        
         
         //update parameters
         complexity_install_t = dec_design_hat->complexity_install * (dec_design_hat->BETA_complexity_time);
         profit_t = 0.0;
         costs_t = 0.0;
         
-        //accumulate profit
-        profit += profit_t / std::pow(1 + irr_, t);
+
         
     };
 

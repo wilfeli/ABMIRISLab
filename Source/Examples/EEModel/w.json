@@ -2,7 +2,7 @@
     "WorldSettings": {
         "params_exog": [
                         {
-                        "EParamTypes::AverageElectricityDemand": 30
+                        "EParamTypes::AverageElectricityDemand": 900
                         },
                         {
                         "EParamTypes::DCtoACLoss": 0.2
