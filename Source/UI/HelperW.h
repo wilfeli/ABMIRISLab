@@ -374,8 +374,12 @@ namespace solar_core {
                         module->manufacturer = iter;
                         module->manufacturer_id = module->manufacturer->uid.get_string();
                         
+
                         //intrusive setting, UGLY
                         dynamic_cast<SEMBL*>(module->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology] = std::static_pointer_cast<SolarModuleBL>(module);
+                        
+                        iter->init_world_connections();
+                        
                         //set parameters for the module
                         dynamic_cast<SEMBL*>(module->manufacturer)->solar_panel_templates[EDecParams::CurrentTechnology]->init();
 

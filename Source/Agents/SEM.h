@@ -63,6 +63,7 @@ namespace solar_core
         
         SEM(const PropertyTree& pt_, W* w_);
         void init(W* w_);
+        virtual void init_world_connections();
         
         //@}
         

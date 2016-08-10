@@ -71,6 +71,11 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     Mu_0 = SEIWMDataType::Ones();
     X(0,0) = 1.0;
     
+    //scale factor is generated following assumption in notebook ABM_solar_eemodel
+    double scale_factor = 0.0833333333333;
+    
+    
+    Mu_0 = Mu_0 * scale_factor;
     
     //initialize THETA_demand from Mu_0
     THETA_demand = std::vector<double>(constants::N_BETA_SEI_WM, 0.0);
@@ -369,18 +374,16 @@ double SEIBL::max_profit(TDesign* dec_design_hat, PVProjectFlat* project)
     double epsilon = 0.01; //step in derivative
     double x_old = params[EParamTypes::EstimatedPricePerWatt]; // The value does not matter as long as abs(x_new - x_old) > precision
     double x_new = x_old + epsilon; // The algorithm starts here
-    double gamma = 0.01; //step size
+    double gamma = 0.0001; //step size
     double precision = 0.00001; //tolerance for convergence
     int N_steps = 100; //max number of steps
     
-    
-//    auto f_derivative = [epsilon, &dec_design_hat, &project, this](double x)->double {return (this->est_profit(dec_design_hat, project, x + epsilon) - this->est_profit(dec_design_hat, project, x))/epsilon;};
-   
     auto i = 0;
     while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
     {
         x_old = x_new;
-        x_new = x_old - gamma * f_derivative(epsilon, dec_design_hat, project, x_old);
+        //plus here because needs to maximize profit
+        x_new = x_old + gamma * f_derivative(epsilon, dec_design_hat, project, x_old);
         ++i;
     };
     
@@ -439,9 +442,17 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
                              THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
                              THETA_demand[3] * X(0, 2) +
                              THETA_demand[4] * X(0, 3)), 1.0);
+
     
     //adjust for the general market size
     N_hat = N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize];
+    
+    
+#ifdef DEBUG
+    //for testing purposes
+    N_hat = 1.0;
+#endif
+    
     
     //??? some other type of estimation
     double wage = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];

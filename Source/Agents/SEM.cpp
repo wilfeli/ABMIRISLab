@@ -92,6 +92,11 @@ SEM::init(W* w_)
 }
 
 
+void SEM::init_world_connections()
+{
+}
+
+
 
 bool
 SEM::sell_SolarModule(solar_core::MesSellOrder &mes_)

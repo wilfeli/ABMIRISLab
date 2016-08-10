@@ -29,8 +29,8 @@ namespace solar_core
     {
     public:
         std::shared_ptr<SolarModuleBL> PV_module; /*!< is used to pull ID, efficiency, degradation */
-        std::vector<double> THETA_reliability; /*!< prior is G(1, 1/(expected time without failures = warranty)), data is exponential, posterior is \f$ G(a + n, b + \sum_{i}\left(y_{i})\right) \f$   */
-        std::vector<double> THETA_complexity; /*!< prior is Normal-Inverse Gamma(), posterior will be the same, and data distirbution is Normal with unknown mean and variance:  */
+        std::vector<double> THETA_reliability; /*!< prior is G(1, (expected time without failures = warranty)), data is exponential, posterior is \f$ G(a + n, b + \sum_{i}\left(y_{i})\right) \f$   */
+        std::vector<double> THETA_complexity; /*!< prior is Normal-Inverse Gamma(), posterior will be the same, and data distribution is Normal with unknown mean and variance:  */
         double irr = 0.0; /*!< advertized rate of return for an average project */
         double p_module = 0.0; /*!< price of a module for this installer */
         double p_design = 0.0; /*!< price per watt for the design based on this module */

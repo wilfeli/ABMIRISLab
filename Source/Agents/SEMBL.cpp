@@ -71,6 +71,13 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
 
 
 
+void SEMBL::init_world_connections()
+{
+    
+    solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = p_baseline;
+    
+}
+
 
 void SEMBL::add_connection(std::shared_ptr<SolarModuleBL> link)
 {

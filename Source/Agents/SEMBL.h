@@ -26,10 +26,13 @@ public:
     //@{
     /**
      
+     Initialization section
      
      */
     
     SEMBL(const PropertyTree& pt_, W* w_);
+    
+    virtual void init_world_connections() override; /*!< updated parameters once connections are in place */
     
     
     //@}
