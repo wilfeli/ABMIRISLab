@@ -13827,6 +13827,7 @@
 				ED5624251D56754800FF25BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EDDB3FAD1C7C402D00A6EA1F /* Build configuration list for PBXProject "ABMSolar" */ = {
 			isa = XCConfigurationList;
