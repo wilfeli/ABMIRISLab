@@ -42,6 +42,9 @@
                         },
                         {
                         "EParamTypes::LaborPrice": 20
+                        },
+                        {
+                        "EParamTypes::GFederalTaxIncentive" : 0.3
                         }
                         ],
         "constraints": [
@@ -82,7 +85,7 @@
     },
     "N_HO": 500,
     "N_SEI": 3,
-    "N_SEILarge": 1,
+    "N_SEILarge": 0,
     "N_SEM": 7,
     "N_HOMarketingStateHighlyInterested": 10,
     "SEED": 2016,

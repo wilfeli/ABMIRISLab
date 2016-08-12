@@ -349,7 +349,9 @@ namespace solar_core
         
         SEITimeLUForMarketing,
         
+        SEITimeLUForPermit,
         
+        SEITimeLUForAdministration,
         
         
         
@@ -399,6 +401,10 @@ namespace solar_core
         
         /** G parameters: processing time for granting installation permit */
         GProcessingTimeRequiredForGrantingPermitForInstallation,
+        
+        
+        GFederalTaxIncentive,
+        
         
         /** Utility parameters: time to investigate request for interconnection */
         UtilityProcessingTimeRequiredForPermit,
@@ -671,6 +677,14 @@ namespace solar_core
             {
                 return EParamTypes::SEITimeLUForDesign;
             }
+            else if (param_type == "eparamtypes::seitimeluforpermit")
+            {
+                return EParamTypes::SEITimeLUForPermit;
+            }
+            else if (param_type == "eparamtypes::seitimeluforadministration")
+            {
+                return EParamTypes::SEITimeLUForAdministration;
+            }
             else if (param_type == "eparamtypes::n_ho")
             {
                 return EParamTypes::N_HO;
@@ -730,6 +744,10 @@ namespace solar_core
             else if (param_type == "eparamtypes:gmaxnvisitspertimeunit")
             {
                 return EParamTypes::GMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::gfederaltaxincentive")
+            {
+                return EParamTypes::GFederalTaxIncentive;
             }
             else if (param_type == "eparamtypes::dctoacloss")
             {

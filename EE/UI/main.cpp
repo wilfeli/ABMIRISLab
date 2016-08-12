@@ -146,8 +146,8 @@ int run_model(void* ui_)
     func = &WEE::life;
     threads.push_back(std::thread(func, w));
     
-    func = &WEE::life_hos;
-    threads.push_back(std::thread(func, w));
+//    func = &WEE::life_hos;
+//    threads.push_back(std::thread(func, w));
     
     func = &WEE::life_seis;
     threads.push_back(std::thread(func, w));

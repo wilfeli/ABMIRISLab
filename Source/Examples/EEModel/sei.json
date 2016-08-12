@@ -46,6 +46,12 @@
                },
                {
                "EParamTypes::SEITimeLUForDesign": 100
+               },
+               {
+               "EparamTypes::SEITimeLUForAdministration": 10435
+               },
+               {
+               "EParamTypes::SEITimeLUForPermit": 160
                }
                ],
     "mes_marketing": "",
@@ -81,13 +87,20 @@
                                ]
     },
     "THETA_Demand": [],
+    "X":[1.0,
+         0.5,
+         1.0,
+         0.5,
+         1.0
+    ],
     "Mu_0": [
-             1,
-             1,
-             1,
-             1,
-             1
+             -1.75,
+             1.5,
+             1.0,
+             -1.0,
+             1.0
              ],
+    "Mu_0_scale_factor": 0.666666666667,
     "V_0": [
             0.5,
             0,

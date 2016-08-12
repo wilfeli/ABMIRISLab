@@ -11,6 +11,7 @@
 
 #include "Agents/SEI.h"
 #include "Tools/ID.h"
+#include "UI/UI_Python.h"
 #include <Eigen/Dense>
 
 
@@ -18,6 +19,8 @@ namespace solar_core {
     class H;
     class WEE;
 }
+
+
 
 
 
@@ -48,6 +51,9 @@ namespace solar_core
         template <class T1, class T2> friend class HelperWSpecialization;
         friend class WEE;
         friend class solar_ui::UIBL;
+        friend double ::C_API_estimate_profit(HUIBL* ui_, int sei_i, double p);
+        friend double ::C_API_estimate_irr(HUIBL* ui_, int sei_i, double p);
+        friend double ::C_API_estimate_demand(HUIBL* ui_, int sei_i, double p, int size_THETA, const double* THETA);
     public:
         //@{
         
@@ -87,6 +93,19 @@ namespace solar_core
         //@}
         
         
+        //@{
+        /**
+         
+         Offered design
+         
+         */
+        
+        TDesign* dec_design; /*!< current design to offer */
+        
+        //@}
+        
+        
+        
     protected:
         
         
@@ -102,7 +121,7 @@ namespace solar_core
         
         std::map<UID, TDesign*>  designs;  /** have current estimates on system design parameters for different learning distributions. UID of a solar_module here */
         
-        TDesign* dec_design; /*!< current design to offer */
+
         
         std::vector<double> THETA_demand; /*!< BLR estimate for demand for projects given own irr and other parameters */
         
@@ -154,7 +173,10 @@ namespace solar_core
         double max_profit(TDesign* dec_design_hat, PVProjectFlat* project); /*!< finds price that would maximize profit for this design */
         double est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< estimates profit for a price */
         double est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double wage); /*!< estimates maintenance given expected parameters */
+        double est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< estimates demand for the project and price */
         double f_derivative(double epsilon, TDesign* dec_design_hat, PVProjectFlat* project, double x);
+        PVProjectFlat* init_average_pvproject(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< setup average project for profit maximization */
+        
         
         //@}
         

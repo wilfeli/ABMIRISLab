@@ -55,26 +55,28 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
 //    std::vector<double> V_0_std;
 //    serialize::deserialize(pt_.get_child("V_0"), V_0_std);
 //    Eigen::Map<Eigen::MatrixXd> V_0(V_0_std.data(), constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM);
-//    a_0 = pt_.get<double>("a_0");
-//    b_0 = pt_.get<double>("b_0");
-//    std::vector<double> Mu_0_std;
-//    serialize::deserialize(pt_.get_child("Mu_0"), Mu_0_std);
-//    Eigen::Map<Eigen::MatrixXd> Mu_0(Mu_0_std.data(), constants::N_BETA_SEI_WM, 1);
+    a_0 = pt_.get<double>("a_0");
+    b_0 = pt_.get<double>("b_0");
+    std::vector<double> Mu_0_prior;
+    serialize::deserialize(pt_.get_child("Mu_0"), Mu_0_prior);
+    Eigen::Map<Eigen::MatrixXd> Mu_0(Mu_0_prior.data(), constants::N_BETA_SEI_WM, 1);
+
 
     
+    std::vector<double> X_prior;
+    //generate other parameters
+    serialize::deserialize(pt_.get_child("X"), X_prior);
+    for (auto i = 0; i < X_prior.size(); ++i)
+    {
+        X(0,i) = X_prior[i];
+    };
     
     
-    //prior on other parameters from BLR for the share
-    a_0 = 1;
-    b_0 = 1;
+    //set other priors
     
-    Mu_0 = SEIWMDataType::Ones();
-    X(0,0) = 1.0;
     
     //scale factor is generated following assumption in notebook ABM_solar_eemodel
-    double scale_factor = 0.0833333333333;
-    
-    
+    double scale_factor = pt_.get<double>("Mu_0_scale_factor");
     Mu_0 = Mu_0 * scale_factor;
     
     //initialize THETA_demand from Mu_0
@@ -82,7 +84,7 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     //data generating will be MVS - take mean from there - see predictions using BLR
     for (auto i = 0; i < Mu_0.size() ; ++i)
     {
-        THETA_demand[i] = Mu_0[i];
+        THETA_demand[i] = Mu_0(i, 0);
     };
     
     
@@ -168,16 +170,49 @@ double SEIBL::irr_secant(PVProjectFlat* project)
     //guess starting points
     auto r_n = 0.05;
     auto r_n_1 = 0.06;
-    auto r_n1 = r_n + precision + 0.01;
+    auto r_n1 = 0.0; //r_n + precision + 0.01;
 
     auto i = 0;
 
     
-    while ((i < N_iterations) && std::abs(r_n1 - r_n) > precision)
+    //precheck that there are zeros in [0,+inf] range
+    if (NPV_purchase(project, 0.0) < 0.0)
     {
-        r_n1 = r_n - NPV_purchase(project, r_n) * (r_n - r_n_1)/(NPV_purchase(project, r_n) - NPV_purchase(project, r_n_1));
-        ++i;
+        //assume that it this case no solution could be found, return -100 as a proxy to -inf
+        r_n1 = -100.0;
+#ifdef DEBUG
+        std::cout << "negative NPV at zero" << std::endl;
+#endif
+        
+    }
+    else
+    {
+        //try to find a solution
+        while ((i < N_iterations) && std::abs(r_n1 - r_n_1) > precision)
+        {
+            //MARK: cont. need to handle +inf if no solution to NPV_purchase = 0.0
+            r_n1 = r_n - NPV_purchase(project, r_n) * (r_n - r_n_1)/(NPV_purchase(project, r_n) - NPV_purchase(project, r_n_1));
+#ifdef DEBUG
+            std::cout << i << ": " << r_n1 << ", " << r_n << ", " << r_n_1 << std::endl;
+#endif
+            r_n_1 = r_n;
+            r_n = r_n1;
+            ++i;
+            
+            
+        };
     };
+    
+    
+
+    
+    //assume that in r_n1 becomes +inf, there is no solution and return -100.0 where it is very negative rate of return
+    if (r_n1 > 10.0)
+    {
+        r_n1 = -100.0;
+    };
+    
+    
     
     return r_n1;
 }
@@ -191,19 +226,19 @@ double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
     //solar irradiation - average number
     auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
     auto total_savings = 0.0;
-    auto AC_size_t = project->AC_size;
+    auto AC_size_t = project->AC_size / constants::NUMBER_WATTS_IN_KILOWATT;
     auto degradation_t = std::exp(std::log((1 - project->PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto production_t = 0.0;
     auto ElectricityPriceUCDemand_t = WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
     auto ElectricityPriceUCSupply_t = WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
     //purchase financials
-    //MARK: cont. include tax incentives here
-    auto NPV_purchase = - project->p;
+    //include tax incentives here
+    auto NPV_purchase = - (project->p * WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]);
     auto NPV_loan = 0.0;
     
     //loan payments
-    auto loan_amount = project->p;
+    auto loan_amount = (project->p * WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]);
     //monthly payments, warranty length is in years, assume that interest rate is in yearly terms
     auto N_loan = project->PV_module->warranty_length * 12;
     //monthly payments for the loan
@@ -230,6 +265,11 @@ double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
         ElectricityPriceUCDemand_t = ElectricityPriceUCDemand_t * (1 + inflation);
         
     };
+    
+    
+#ifdef DEBUG
+    std::cout << NPV_purchase << " for " << irr << std::endl;
+#endif
     
     return NPV_purchase;
     
@@ -336,6 +376,9 @@ TDesign* SEIBL::dec_base()
         dec_design->p_design = p_n;
     };
 
+    //update general irr
+    dec->irr = est_irr_from_params(dec, init_average_pvproject(dec, average_project, dec->p_design), dec->p_design);
+    
     
     delete average_project;
     
@@ -371,19 +414,21 @@ double SEIBL::max_profit(TDesign* dec_design_hat, PVProjectFlat* project)
     /// use gradient descent
     /// https://en.wikipedia.org/wiki/Gradient_descent
     
-    double epsilon = 0.01; //step in derivative
+    double epsilon = 0.5; //step in derivative
     double x_old = params[EParamTypes::EstimatedPricePerWatt]; // The value does not matter as long as abs(x_new - x_old) > precision
     double x_new = x_old + epsilon; // The algorithm starts here
     double gamma = 0.0001; //step size
-    double precision = 0.00001; //tolerance for convergence
+    double precision = 0.0000001; //tolerance for convergence
     int N_steps = 100; //max number of steps
     
     auto i = 0;
     while ((std::abs(x_new - x_old) > precision) && (i < N_steps))
     {
         x_old = x_new;
-        //plus here because needs to maximize profit
-        x_new = x_old + gamma * f_derivative(epsilon, dec_design_hat, project, x_old);
+        //plus gamma here because needs to maximize profit
+        //2.0 is lower bound
+        //10.0 is upper bound, take them from actual data and adjust for inflation for 25 years
+        x_new = std::max(2.0, std::min(x_old + gamma * f_derivative(epsilon, dec_design_hat, project, x_old), 10.0));
         ++i;
     };
     
@@ -403,32 +448,33 @@ double SEIBL::est_irr_from_params(TDesign* dec_design_hat, PVProjectFlat* projec
 
 
 
-double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p)
+PVProjectFlat* SEIBL::init_average_pvproject(TDesign* dec_design_hat, PVProjectFlat* project, double p)
 {
-    
-    double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
-    
     ///estimates profit given the proposed price
     //estimate number of panels for an average utility bill
     auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
     //solar irradiation - average number
     auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
-    //permit length in labor*hours
-    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    
+
     
     int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     
     double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
-
+    
     //create average project for this design
     project->PV_module = dec_design_hat->PV_module;
+    project->N_PANELS = N_PANELS;
     project->DC_size = DC_size;
     project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     project->p = DC_size * p;
+    
+    return project;
 
-    
-    
+}
+
+
+double SEIBL::est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p)
+{
     ///calculate promised irr for the TDesign given average utility bill and other parameters for the design, assume that spends p requested, and savings are equal to the savings on electricity bill over the warranty length, assume increase in electricity prices, and degradation standard. Do not include down time due to maintenance - assume that it will be ideal conditions (as a sales pitch). For estimates of the profit will use actual estimated maintenance costs
     double irr_hat = est_irr_from_params(dec_design_hat, project, p);
     
@@ -437,21 +483,45 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
     //estimated number of projects is Bayesian Linear Regression
     //parameters are own offered irr, offered irr of others, reputation, reputation of others
     //use ceil to get int number
-    double N_hat = std::min(std::ceil(THETA_demand[0] +
-                             THETA_demand[1] * irr_hat +
-                             THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
-                             THETA_demand[3] * X(0, 2) +
-                             THETA_demand[4] * X(0, 3)), 1.0);
-
+    double N_hat = std::min(std::max(THETA_demand[0] +
+                                     THETA_demand[1] * irr_hat +
+                                     THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
+                                     THETA_demand[3] * X(0, 3) +
+                                     THETA_demand[4] * X(0, 4), 0.0), 1.0);
+    
     
     //adjust for the general market size
-    N_hat = N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize];
+    N_hat = std::ceil(N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize]);
+    
+    return N_hat;
+    
+}
+
+
+double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p)
+{
+    
+    double inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
+    
+    ///estimates profit given the proposed price
+    //permit length in labor*hours
+    auto permit_difficulty = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+    
+    //update average project parameters
+    init_average_pvproject(dec_design_hat, project, p);
     
     
-#ifdef DEBUG
-    //for testing purposes
-    N_hat = 1.0;
-#endif
+    auto DC_size = project->DC_size;
+    auto N_PANELS = project->N_PANELS;
+    
+    
+    auto N_hat = est_demand_from_params(dec_design_hat, project, p);
+    
+    
+//#ifdef DEBUG
+//    //for testing purposes
+//    N_hat = 1.0;
+//#endif
     
     
     //??? some other type of estimation
@@ -488,11 +558,17 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
         //labor costs to design each project
         costs_t += N_hat_t * params[EParamTypes::SEITimeLUForDesign] * w_t;
         
-        //labor costs to get permit
-        costs_t += permit_difficulty * w_t;
+        //labor costs to get permit, general maintenance
+        costs_t += params[EParamTypes::SEITimeLUForPermit] * w_t;
+        
+        //specific for a project permitting difficulty
+        costs_t += permit_difficulty * w_t * N_hat_t;
         
         //marketing costs - fixed number of hours in labor units
         costs_t += params[EParamTypes::SEITimeLUForMarketing] * w_t;
+        
+        //general administrative costs
+        costs_t += params[EParamTypes::SEITimeLUForAdministration] * w_t;
         
         //calculate sales
         profit_t += N_hat_t * p * DC_size;
@@ -569,7 +645,7 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
                 if (t <= dec_design_hat->PV_module->warranty_length)
                 {
                     //draw complexity of the breakdown, in labor*hours
-                    y = rng_THETA_complexity();
+                    y = std::max(0.0, rng_THETA_complexity());
                     //and labor costs to repair it adjusted for inflation
                     maintenance_n_hat += (y * wage * std::pow(1 + inflation, t))/std::pow(1 + irr_, t);
                     
@@ -591,8 +667,12 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
     
     
     //final estmate for the discounted maintenance costs
-    maintenance_hat = (maintenance_hat * N_hat / N_hat_i)/(N_trials);
+    maintenance_hat = (N_hat_i > 0)?(maintenance_hat * N_hat / N_hat_i)/(N_trials): 0.0;
 
+#ifdef DEBUG
+    std::cout << maintenance_hat << " for " << N_hat << std::endl;
+#endif
+    
     return maintenance_hat;
     
 }
