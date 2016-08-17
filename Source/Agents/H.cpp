@@ -50,7 +50,7 @@ bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)
 {
     
     //get irr and reputation of an installer (mean from distribution
-    auto irr = project_->irr_a * ((project_->sei->THETA_reputation[0] > 1)? 1/(project_->sei->THETA_reputation[0] - 1) * project_->sei->THETA_reputation[1] : 1);
+    auto irr = project_->irr_a * ((project_->sei->THETA_reputation[0] != 1)? 1/(project_->sei->THETA_reputation[0] - 1) * project_->sei->THETA_reputation[1] : 1);
     
     
     

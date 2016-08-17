@@ -148,6 +148,11 @@ WEE::init()
     for (auto& agent:*seis)
     {
         agent->init(this);
+        
+        
+        //add to the pool
+        sorted_by_market_share_seis.push_back(agent->uid);
+        
     };
     
     for (auto& agent:*sems)
@@ -314,6 +319,24 @@ WEE::life_seis()
             ++notified_counter;
             FLAG_SEI_TICK = false;
             
+            //update wm if need
+            for (auto& agent:*seis)
+            {
+                //get tick
+                agent->act_tick_pre();
+            };
+
+            
+            
+            //update wm if need
+            for (auto& agent:*seis)
+            {
+                //get tick
+                agent->act_tick_wm();
+            };
+            
+            
+            
             for (auto& agent:*seis)
             {
                 //get tick
@@ -378,23 +401,23 @@ WEE::get_inf(EDecParams type_, SEIBL* agent_)
             {
                 if ((*seis)[i] != agent_)
                 {
-                    Rep_i += ((*seis)[i]->THETA_reputation[0] > 1.0 ? 1/((*seis)[i]->THETA_reputation[0] - 1) : 1.0);
+                    Rep_i += ((*seis)[i]->THETA_reputation[0] != 1.0 ? 1/((*seis)[i]->THETA_reputation[0] - 1) : 1.0);
                 };
             };
-            ret = Rep_i / (seis->size());
+            ret = Rep_i / (seis->size() - 1);
         }
             break;
-        case EDecParams::Price_i:
+        case EDecParams::irr_i:
         {
-            double Price_i = 0.0;
+            double irr_i = 0.0;
             for (std::size_t i = 0; i < seis->size(); ++i)
             {
                 if ((*seis)[i] != agent_)
                 {
-                    Price_i += (*seis)[i]->dec_design->irr;
+                    irr_i += (*seis)[i]->dec_design->irr;
                 };
             };
-            ret = Price_i / (seis->size());
+            ret = irr_i / (seis->size() - 1);
         }
             break;
         case EDecParams::Share:
@@ -437,16 +460,36 @@ void WEE::ac_update_tick()
  */
 void WEE::ac_update_wm()
 {
+    double N = N_installed_projects_time;
+    //calculate shares
+    for (auto iter:installed_projects_time)
+    {
+        auto N_i = iter.second.size();
+//        double share = N_i / N;
+//        N = 10;
+//#ifdef DEBUG
+//        std::cout << N_i << std::endl;
+//#endif
+//#ifdef DEBUG
+//        std::cout << N << std::endl;
+//#endif
+//#ifdef DEBUG
+//        std::cout << std::fixed << std::setprecision(2) << N_i/N << std::endl;
+//#endif
+//
+//
+
+        
+        market_share_seis[iter.first] = N_i/N;
+//        
+//#ifdef DEBUG
+//        std::cout << market_share_seis[iter.first] << std::endl;
+//#endif
+    };
     
     //save into history
     installed_projects_history.push_back(installed_projects_time);
     installed_projects_time.clear();
-    
-    //calculate shares
-    for (auto iter:installed_projects_time)
-    {
-        market_share_seis[iter.first] = iter.second.size()/N_installed_projects_time;
-    };
     
     N_installed_projects_time = 0;
     

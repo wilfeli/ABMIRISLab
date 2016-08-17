@@ -59,7 +59,7 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     b_0 = pt_.get<double>("b_0");
     std::vector<double> Mu_0_prior;
     serialize::deserialize(pt_.get_child("Mu_0"), Mu_0_prior);
-    Eigen::Map<Eigen::MatrixXd> Mu_0(Mu_0_prior.data(), constants::N_BETA_SEI_WM, 1);
+    Mu_0 = Eigen::Map<Eigen::MatrixXd>(Mu_0_prior.data(), constants::N_BETA_SEI_WM, 1);
 
 
     
@@ -192,9 +192,9 @@ double SEIBL::irr_secant(PVProjectFlat* project)
         {
             //MARK: cont. need to handle +inf if no solution to NPV_purchase = 0.0
             r_n1 = r_n - NPV_purchase(project, r_n) * (r_n - r_n_1)/(NPV_purchase(project, r_n) - NPV_purchase(project, r_n_1));
-#ifdef DEBUG
-            std::cout << i << ": " << r_n1 << ", " << r_n << ", " << r_n_1 << std::endl;
-#endif
+//#ifdef DEBUG
+//            std::cout << i << ": " << r_n1 << ", " << r_n << ", " << r_n_1 << std::endl;
+//#endif
             r_n_1 = r_n;
             r_n = r_n1;
             ++i;
@@ -267,9 +267,9 @@ double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
     };
     
     
-#ifdef DEBUG
-    std::cout << NPV_purchase << " for " << irr << std::endl;
-#endif
+//#ifdef DEBUG
+//    std::cout << NPV_purchase << " for " << irr << std::endl;
+//#endif
     
     return NPV_purchase;
     
@@ -347,6 +347,15 @@ TDesign* SEIBL::dec_base()
         //compare - if higher, than have chance to switch and start offering it
         //prob of switching depends on the distance between expected profits and attitide towards switching
         auto p_switch = exploration_p(profit_new, profit_time);
+        
+        
+#ifdef DEBUG
+        
+        std::cout << profit_time << "  " << profit_new << std::endl;
+        
+#endif
+        
+        
         
         //draw and see if switches
         if (w->rand_sei->ru() <= p_switch)
@@ -485,7 +494,7 @@ double SEIBL::est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* pro
     //use ceil to get int number
     double N_hat = std::min(std::max(THETA_demand[0] +
                                      THETA_demand[1] * irr_hat +
-                                     THETA_demand[2] * (THETA_reputation[0] > 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
+                                     THETA_demand[2] * (THETA_reputation[0] != 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
                                      THETA_demand[3] * X(0, 3) +
                                      THETA_demand[4] * X(0, 4), 0.0), 1.0);
     
@@ -669,9 +678,9 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
     //final estmate for the discounted maintenance costs
     maintenance_hat = (N_hat_i > 0)?(maintenance_hat * N_hat / N_hat_i)/(N_trials): 0.0;
 
-#ifdef DEBUG
-    std::cout << maintenance_hat << " for " << N_hat << std::endl;
-#endif
+//#ifdef DEBUG
+//    std::cout << maintenance_hat << " for " << N_hat << std::endl;
+//#endif
     
     return maintenance_hat;
     
@@ -680,13 +689,13 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
 
 
 void
-SEIBL::wm_update()
+SEIBL::wm_update_external()
 {
     
     //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    X(0,1) = (THETA_reputation[0] > 1.0 ? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0);
+    X(0,1) = (THETA_reputation[0] != 1.0 ? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0);
     X(0,2) = dec_design->irr;
     X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
     X(0,4) = w->get_inf(EDecParams::irr_i, this);
@@ -715,32 +724,6 @@ SEIBL::wm_update()
         THETA_demand[i] = Mu_0[i];
     };
     
-    //update reputation
-    //updates parameters for distribution if new information about performance is here
-    //goes through actual production in the previous year, calculate percentage of the promised production,
-    //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
-    //assume method of moments with only parameter being  \f$/alpha \$f
-    double mean = 0.0;
-    auto i_max = pvprojects.size() - 1;
-    for(auto i = 0; i < i_max ; ++i)
-    {
-        mean += pvprojects[i]->production_time;
-    };
-    
-    if (i_max > 0)
-    {
-        //average production
-        mean = mean / i_max;
-        
-        //number of data points, assume update every step
-        uint64_t n = a_time;
-        
-        if (n > 0)
-        {
-            //updated parameter for reputation
-            THETA_reputation[0] = (1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1)));
-        };
-    };
 }
 
 
@@ -925,6 +908,61 @@ void SEIBL::ac_update_tick()
 }
 
 
+void SEIBL::act_tick_pre()
+{
+    //update basic parameters
+    ac_update_tick();
+}
+
+
+
+void SEIBL::act_tick_wm()
+{
+    //skip first update
+    if (a_time > 0)
+    {
+        //updates information for decision making
+        wm_update_external();
+    };
+
+    
+}
+
+
+
+void SEIBL::wm_update_internal()
+{
+    //update reputation
+    //updates parameters for distribution if new information about performance is here
+    //goes through actual production in the previous year, calculate percentage of the promised production,
+    //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
+    //assume method of moments with only parameter being  \f$/alpha \$f
+    double mean = 0.0;
+    auto i_max = pvprojects.size() - 1;
+    for(auto i = 0; i < i_max ; ++i)
+    {
+        mean += pvprojects[i]->production_time;
+    };
+    
+    if (i_max > 0)
+    {
+        //average production
+        mean = mean / i_max;
+        
+        //number of data points, assume update every step
+        uint64_t n = a_time;
+        
+        if (n > 0)
+        {
+            //updated parameter for reputation
+            THETA_reputation[0] = (THETA_reputation[0] != 1)?(1 + 1/ (1/(THETA_reputation[0] - 1)*(n/(n+1)) + mean / (n+1))):(1 + 1/( n/(n+1) + mean/(n+1)));
+        };
+    };
+
+}
+
+
+
 /**
  
  
@@ -933,20 +971,18 @@ void SEIBL::ac_update_tick()
 */
 void SEIBL::act_tick()
 {
-    //update basic parameters
-    ac_update_tick();
+
     
-    
-    //skip first update
     if (a_time > 0)
     {
-        //updates information for decision making
-        wm_update();
+        //projects update
+        //go over installed projects and see if need maintenance, if need - record as costs and update time till next maintenance
+        //record actual production in the year based on the maintenance length
+        projects_update();
+        
+        //update reputation
+        wm_update_internal();
     };
-    //projects update
-    //go over installed projects and see if need maintenance, if need - record as costs and update time till next maintenance
-    //record actual production in the year based on the maintenance length
-    projects_update();
     
     //make price decision, based on the switching or not
     auto dec = dec_base();

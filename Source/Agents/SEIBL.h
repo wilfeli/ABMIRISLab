@@ -88,7 +88,8 @@ namespace solar_core
         
         
         virtual void act_tick() override;
-        
+        void act_tick_wm(); /*!< updates wm when called from W, because need synchronized update for all sei, otherwise reputation will be divergent */
+        void act_tick_pre(); /*!< updates to the next cycle of sei's inners */
         
         //@}
         
@@ -129,7 +130,7 @@ namespace solar_core
         
         std::vector<double> THETA_reliability_prior{1, 25}; /*!< 1, 25 where 25 - is average warranty length */
         
-        double complexity_install_prior =  16.0;
+        double complexity_install_prior =  80.0;
 
         std::vector<double> WM_time; /*!< current state of information about reputation of others, promised returns of others, average for both parameters */
         
@@ -225,8 +226,9 @@ namespace solar_core
          */
         
         virtual void ac_update_tick() override; /*!< update internals for the tick */
-        void wm_update(); /*!< updates estimates for projects and reputation estimate */
-        void projects_update(); /*!< updates projects to maintenance */
+        void wm_update_external(); /*!< updates estimates for demand */
+        void wm_update_internal(); /*!< updates estimates for reputation estimate */
+        void projects_update(); /*!< updates projects to maintenance and their parameters */
         //@}
 
         

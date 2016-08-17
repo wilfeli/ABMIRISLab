@@ -42,16 +42,16 @@
                "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
                },
                {
-               "EParamTypes::SEITimeLUForMarketing" : 100
+               "EParamTypes::SEITimeLUForMarketing" : 2500000
                },
                {
-               "EParamTypes::SEITimeLUForDesign": 100
+               "EParamTypes::SEITimeLUForDesign": 200
                },
                {
-               "EparamTypes::SEITimeLUForAdministration": 10435
+               "EparamTypes::SEITimeLUForAdministration": 2000000
                },
                {
-               "EParamTypes::SEITimeLUForPermit": 160
+               "EParamTypes::SEITimeLUForPermit": 200
                }
                ],
     "mes_marketing": "",
@@ -142,6 +142,6 @@
                                 1,
                                 25
                                 ],
-    "complexity_install_prior": 16,
+    "complexity_install_prior": 100,
     "dec_design": "FORMULA::RANDOM"
 }
