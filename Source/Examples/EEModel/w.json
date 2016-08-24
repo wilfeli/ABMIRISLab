@@ -91,7 +91,7 @@
     "SEED": 2016,
     "params": [
                {
-               "N_ITERATIONS": 25
+               "N_ITERATIONS": 2
                }
                ]
 }

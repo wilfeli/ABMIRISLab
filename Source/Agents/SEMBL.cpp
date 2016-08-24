@@ -31,6 +31,9 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
     serialize::deserialize(pt_.get_child("THETA_dist_reliability"), THETA_dist_reliability);
     serialize::deserialize(pt_.get_child("THETA_dist_complexity"), THETA_dist_complexity);
     
+    
+    
+    //assume that it is price per efficiency unit
     p_baseline = pt_.get<double>("p_baseline");
     
     //generate from THETA_dist_complexity
@@ -73,8 +76,16 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
 
 void SEMBL::init_world_connections()
 {
+    auto PV_module = solar_panel_templates.at(EDecParams::CurrentTechnology);
+    //calculate price for this starting efficiency
+    double p_per_watt = -1.3126 + (PV_module->efficiency/0.15) * 1.8135;
+    //total number of watts
+    double panel_watts = PV_module->efficiency * (PV_module->length * PV_module->width/1000000)*1000;
     
-    solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = p_baseline;
+    
+    solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = panel_watts * p_per_watt;
+    
+//    std::cout << solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem << std::endl;
     
 }
 
@@ -184,6 +195,11 @@ void SEMBL::act_tick()
     
     new_pv->THETA_complexity[0] = THETA_dist_complexity[N_complexity_params * 3];
     new_pv->THETA_complexity[1] = THETA_dist_complexity[N_complexity_params * 3 + 1];
+    
+    
+//#ifdef DEBUG
+//    std::cout << new_pv->THETA_reliability[0] << " " << new_pv->THETA_complexity[0] << " " << new_pv->THETA_complexity[1] << std::endl;
+//#endif
     
     
     

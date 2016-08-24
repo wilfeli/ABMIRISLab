@@ -55,11 +55,13 @@ extern "C" {
     
     C_API_Vector_PVProjectFlat C_API_get_pvprojects(HUIBL * ui);
     
-    
+    int C_API_run_model_steps(void* ui_, int N);
     double C_API_estimate_profit(HUIBL *ui_, int sei_i, double p);
     double C_API_estimate_irr(HUIBL *ui_, int sei_i, double p);
-    double C_API_estimate_demand(HUIBL* ui_, int sei_i, double p, int size_THETA, const double* THETA);
-    
+    double C_API_estimate_irr_params(HUIBL* ui_, int sei_i, double efficiency_);
+    double C_API_estimate_demand_sei_params(HUIBL* ui_, int sei_i, double p, int size_THETA, const double* THETA);
+    double C_API_estimate_demand_w_params(HUIBL* ui_, double irr_);
+    double C_API_estimate_demand(HUIBL* ui_, int sei_i, double p);
     
 
 #ifdef __cplusplus

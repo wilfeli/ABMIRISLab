@@ -36,7 +36,7 @@
 #include "UI/UI.h"
 #include "UI/UIBL.h"
 #include "UI/HelperW.h"
-
+#include "UI/UI_Python.h"
 
 
 #include "UI/model.h"
@@ -54,12 +54,15 @@ int main(int argc, const char * argv[])
 {
     solar_ui::UIBL* ui = reinterpret_cast<solar_ui::UIBL*>(init_model(argc, argv));
     
-    //introduce some delay
-    for (auto i = 0; i <  10000; ++i)
-    {};
+//    //introduce some delay
+//    for (auto i = 0; i <  10000; ++i)
+//    {};
     
     
-    run_model(ui);
+    C_API_run_model_steps(ui, 10);
+    
+    //save model here
+    ui->save();
     
     return 0;
     
@@ -130,6 +133,65 @@ void* init_model(int argc, const char** argv)
     
     return ui;
 }
+
+    
+    
+    
+int C_API_run_model_steps(void* ui_, int N)
+{
+    //run for fixed number of steps
+    
+    auto ui = reinterpret_cast<solar_ui::UIBL*>(ui_);
+    auto w = ui->w;
+    
+    w->params["N_ITERATIONS"] = std::to_string(w->time + N);
+    w->FLAG_IS_STARTED = true;
+    w->FLAG_IS_STOPPED = false;
+    w->FLAG_IS_PAUSED = false;
+    
+    //start threads with fs, bs, main cycle, markets
+    std::vector<std::thread> threads;
+    
+    void (WEE::*func)();
+    
+    func = &WEE::life;
+    threads.push_back(std::thread(func, w));
+    
+    func = &WEE::life_hos;
+    threads.push_back(std::thread(func, w));
+    
+    func = &WEE::life_seis;
+    threads.push_back(std::thread(func, w));
+    
+    func = &WEE::life_sems;
+    threads.push_back(std::thread(func, w));
+    
+    
+    time_t rawtime;
+    tm* timeinfo;
+    
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+    
+    char mbstr[100];
+    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+    std::cout << "time: " <<  mbstr << " "<< "INFO: " << "started running" << std::endl;
+    
+    // work for the workers to finish
+    for(auto& t : threads)
+    {
+        t.join();
+    };
+    
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+    std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
+    
+    return 0;
+ 
+}
+    
     
     
 int run_model(void* ui_)

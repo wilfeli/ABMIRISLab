@@ -9,6 +9,7 @@
 #ifndef __ABMSolar__WEE__
 #define __ABMSolar__WEE__
 
+#include "UI/UI_Python.h"
 #include "Tools/ID.h"
 #include "UI/W.h"
 
@@ -30,6 +31,7 @@ class WEE: public W
 {
     template <class T1, class T2> friend class HelperWSpecialization;
     friend class solar_ui::UIBL;
+    friend int ::C_API_run_model_steps(void* ui_, int N);
 public:
     WEE(std::string path_, HelperW* w_, std::string mode_ = "NEW");
     virtual void init() override;

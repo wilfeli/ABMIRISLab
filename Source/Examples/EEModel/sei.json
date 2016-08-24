@@ -45,7 +45,7 @@
                "EParamTypes::SEITimeLUForMarketing" : 2500000
                },
                {
-               "EParamTypes::SEITimeLUForDesign": 200
+               "EParamTypes::SEITimeLUForDesign": 350
                },
                {
                "EparamTypes::SEITimeLUForAdministration": 2000000
@@ -100,7 +100,7 @@
              -1.0,
              1.0
              ],
-    "Mu_0_scale_factor": 0.666666666667,
+    "Mu_0_scale_factor": 0.75,
     "V_0": [
             0.5,
             0,

@@ -168,6 +168,13 @@ WEE::init()
     };
     
     
+//#ifdef DEBUG
+//    for (auto& h:*hos)
+//    {
+//        std::cout << h->params[EParamTypes::Income] << std::endl;
+//    };
+//#endif
+    
     
     
 }
@@ -184,37 +191,40 @@ void WEE::life()
     while (!FLAG_IS_STOPPED)
     {
         //stop if max number iterations is exceeded
-        if (FLAG_MAX_N_ITERATIONS)
-        {
-            if ((time - begin_time) > MAX_N_ITERATIONS)
-            {
-                FLAG_IS_STOPPED = true;
-                FLAG_IS_STARTED = false;
-                break;
-            };
-        };
-        
         if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE_EE)
         {
-            ac_update_tick();
-            
-            ++time;
-            updated_counter = 0;
-            FLAG_SEI_TICK = true;
-            FLAG_H_TICK = true;
-            FLAG_G_TICK = true;
-            FLAG_SEM_TICK = true;
-            FLAG_MARKET_TICK = true;
-            
-            
-            all_update.notify_all();
-            while((notified_counter < constants::NUMBER_AGENT_TYPES_LIFE_EE) && !FLAG_IS_STOPPED)
+            if (FLAG_MAX_N_ITERATIONS)
             {
-                //need additional notifies, otherwise thread could wake while FLAG_TICK is false and get back to sleep. During the time it takes for it to go to sleep, notify_all could have been called and missed this thread, that was in between state
-                all_update.notify_all();
+                if ((time - begin_time) >= (MAX_N_ITERATIONS - 1))
+                {
+                    FLAG_IS_STOPPED = true;
+                    FLAG_IS_STARTED = false;
+                    break;
+                };
             };
-            
-            notified_counter = 0;
+
+            if (!FLAG_IS_STOPPED)
+            {
+                ac_update_tick();
+                
+                ++time;
+                updated_counter = 0;
+                FLAG_SEI_TICK = true;
+                FLAG_H_TICK = true;
+                FLAG_G_TICK = true;
+                FLAG_SEM_TICK = true;
+                FLAG_MARKET_TICK = true;
+                
+                
+                all_update.notify_all();
+                while((notified_counter < constants::NUMBER_AGENT_TYPES_LIFE_EE) && !FLAG_IS_STOPPED)
+                {
+                    //need additional notifies, otherwise thread could wake while FLAG_TICK is false and get back to sleep. During the time it takes for it to go to sleep, notify_all could have been called and missed this thread, that was in between state
+                    all_update.notify_all();
+                };
+                
+                notified_counter = 0;
+            };
         }
         else
         {
@@ -249,42 +259,44 @@ WEE::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::WHMaxNToDrawPerTimeUnit];++i)
+            if (++i_pool_projects < hos->size() - 1)
             {
-                while (true)
+                for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::WHMaxNToDrawPerTimeUnit];++i)
                 {
-                    //pick h randomly
-                    j_h = rng_agents();
-                    if (!(*hos)[j_h]->FLAG_INSTALLED_SYSTEM)
+                    while (true)
                     {
-                        break;
+                        //pick h randomly
+                        j_h = rng_agents();
+                        if (!(*hos)[j_h]->FLAG_INSTALLED_SYSTEM)
+                        {
+                            break;
+                        };
                     };
+                    
+                    //pick sei randomly
+                    j_sei = rng_sei_agents();
+                    
+                    
+                    //form design for an agent
+                    (*seis)[j_sei]->form_design_for_params((*hos)[j_h], pool_projects[i_pool_projects]);
+                    
+                    
+                    //get answer for the design
+                    FLAG_DEC = (*hos)[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
+                    
+                    
+                    
+                    //if accepted - save as an active project to maintain it
+                    if (FLAG_DEC)
+                    {
+                        //save as accepted project
+                        (*seis)[j_sei]->install_project(pool_projects[i_pool_projects], time);
+                        ++i_pool_projects;
+                        (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
+                    };
+                    
                 };
-                
-                //pick sei randomly
-                j_sei = rng_sei_agents();
-                
-                
-                //form design for an agent
-                (*seis)[j_sei]->form_design_for_params((*hos)[j_h], pool_projects[i_pool_projects]);
-                
-                
-                //get answer for the design
-                FLAG_DEC = (*hos)[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
-                
-                
-                
-                //if accepted - save as an active project to maintain it
-                if (FLAG_DEC)
-                {
-                    //save as accepted project
-                    (*seis)[j_sei]->install_project(pool_projects[i_pool_projects], time);
-                    ++i_pool_projects;
-                    (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
-                };
-                
-            };
-            
+            }
             
             
             ++updated_counter;
@@ -449,6 +461,8 @@ void WEE::get_state_inf_installed_project(std::shared_ptr<PVProjectFlat> project
 
 void WEE::ac_update_tick()
 {
+    //MARK: cont. update world parameters for inflation
+    
     ac_update_wm();
 }
 
@@ -491,6 +505,13 @@ void WEE::ac_update_wm()
     installed_projects_history.push_back(installed_projects_time);
     installed_projects_time.clear();
     
+    
+#ifdef DEBUG
+    std::cout << time << " " << N_installed_projects_time << std::endl;
+    std::cout << time << " " << i_pool_projects + 1 << std::endl;
+#endif
+    
+    
     N_installed_projects_time = 0;
     
     //sort by the share in descending order
@@ -500,6 +521,36 @@ void WEE::ac_update_wm()
     };
     
     std::sort(sorted_by_market_share_seis.begin(), sorted_by_market_share_seis.end(), cmp);
+    
+    
+//#ifdef DEBUG
+//    
+//    std::cout << time << "  ";
+//    for (auto& uid:sorted_by_market_share_seis)
+//    {
+//        std::cout << uid.get_string() << "  ";
+//        std::cout << market_share_seis[uid] << ",";
+//        
+//    };
+//    std::cout << std::endl;
+//    
+//
+//    
+//#endif
+//    
+//    
+//    
+//#ifdef DEBUG
+//    std::cout<< time << std::endl;
+//    for (auto& sei:*seis)
+//    {
+//        std::cout<< sei->dec_design->p_design << std::endl;
+//    };
+//#endif
+    
+    
+
+    
     
 }
 

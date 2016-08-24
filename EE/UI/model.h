@@ -16,6 +16,9 @@ extern "C" {
 void* init_model(int argc, const char** argv);
     
 int run_model(void* ui_);
+    
+int run_model_steps(void* ui_, int N); /*!< run for fixed number of steps */
+
 
 #ifdef __cplusplus
 } //C API

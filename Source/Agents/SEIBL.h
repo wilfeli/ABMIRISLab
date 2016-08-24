@@ -53,7 +53,9 @@ namespace solar_core
         friend class solar_ui::UIBL;
         friend double ::C_API_estimate_profit(HUIBL* ui_, int sei_i, double p);
         friend double ::C_API_estimate_irr(HUIBL* ui_, int sei_i, double p);
-        friend double ::C_API_estimate_demand(HUIBL* ui_, int sei_i, double p, int size_THETA, const double* THETA);
+        friend double ::C_API_estimate_irr_params(HUIBL* ui_, int sei_i, double efficiency_);
+        friend double ::C_API_estimate_demand(HUIBL* ui_, int sei_i, double p);
+        friend double ::C_API_estimate_demand_sei_params(HUIBL* ui_, int sei_i, double p, int size_THETA, const double* THETA);
     public:
         //@{
         
@@ -126,7 +128,7 @@ namespace solar_core
         
         std::vector<double> THETA_demand; /*!< BLR estimate for demand for projects given own irr and other parameters */
         
-        std::vector<double> THETA_complexity_prior{50, 1, 1, 50}; /*!< mean was estimated from {\displaystyle \nu } \nu  observations with sample mean {\displaystyle \mu _{0}} \mu _{0}; variance was estimated from {\displaystyle 2\alpha } 2\alpha  observations with sample mean {\displaystyle \mu _{0}} \mu _{0} and sum of squared deviations {\displaystyle 2\beta } 2\beta  */ 
+        std::vector<double> THETA_complexity_prior; /*!< mean was estimated from {\displaystyle \nu } \nu  observations with sample mean {\displaystyle \mu _{0}} \mu _{0}; variance was estimated from {\displaystyle 2\alpha } 2\alpha  observations with sample mean {\displaystyle \mu _{0}} \mu _{0} and sum of squared deviations {\displaystyle 2\beta } 2\beta  */
         
         std::vector<double> THETA_reliability_prior{1, 25}; /*!< 1, 25 where 25 - is average warranty length */
         
@@ -171,12 +173,24 @@ namespace solar_core
         double est_irr_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< estimate irr for the project */
         double NPV_purchase(PVProjectFlat* project, double irr); /*!< NPV if purchased */
         double irr_secant(PVProjectFlat* project); /*!< finds irr given project parameters */
-        double max_profit(TDesign* dec_design_hat, PVProjectFlat* project); /*!< finds price that would maximize profit for this design */
-        double est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< estimates profit for a price */
+        double max_profit_GD(TDesign* dec_design_hat, PVProjectFlat* project); /*!< finds price that would maximize profit for this design, uses gradient descent */
+        double max_profit_GS(TDesign* dec_design_hat, PVProjectFlat* project); /*!< finds price that would maximize profit for this design, uses grid search */
+        
+        
+        using OptMethod = double (SEIBL::*) (TDesign* dec_design_hat, PVProjectFlat* project);
+        
+        OptMethod max_profit;
+        
+        
+        double est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p, bool debug_flag = false); /*!< estimates profit for a price */
         double est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double wage); /*!< estimates maintenance given expected parameters */
         double est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< estimates demand for the project and price */
         double f_derivative(double epsilon, TDesign* dec_design_hat, PVProjectFlat* project, double x);
         PVProjectFlat* init_average_pvproject(TDesign* dec_design_hat, PVProjectFlat* project, double p); /*!< setup average project for profit maximization */
+        
+        
+        Eigen::MatrixXd profit_grid;
+        
         
         
         //@}
