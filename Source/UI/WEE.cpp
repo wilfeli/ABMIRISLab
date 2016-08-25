@@ -259,7 +259,7 @@ WEE::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            if (++i_pool_projects < hos->size() - 1)
+            if (i_pool_projects < hos->size() - 1)
             {
                 for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::WHMaxNToDrawPerTimeUnit];++i)
                 {

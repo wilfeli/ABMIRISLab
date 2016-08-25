@@ -38,13 +38,13 @@
                         "EParamTypes::AverageInterestRateLoan": 0.06
                         },
                         {
-                        "EParamTypes::TotalPVMarketSize": 30000
+                        "EParamTypes::TotalPVMarketSize": 50000
                         },
                         {
                         "EParamTypes::LaborPrice": 20
                         },
                         {
-                        "EParamTypes::GFederalTaxIncentive" : 0.3
+                        "EParamTypes::GFederalTaxIncentive" : 0.30
                         }
                         ],
         "constraints": [

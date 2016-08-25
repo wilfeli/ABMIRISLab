@@ -289,11 +289,11 @@ double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
     auto ElectricityPriceUCSupply_t = WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
     //purchase financials
     //include tax incentives here
-    auto NPV_purchase = - (project->p * WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]);
+    auto NPV_purchase = - (project->p * (1 - WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]));
     auto NPV_loan = 0.0;
     
     //loan payments
-    auto loan_amount = (project->p * WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]);
+    auto loan_amount = (project->p * (1 - WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]));
     //monthly payments, warranty length is in years, assume that interest rate is in yearly terms
     auto N_loan = project->PV_module->warranty_length * 12;
     //monthly payments for the loan
@@ -817,10 +817,11 @@ SEIBL::wm_update_external()
     //collect average reputations for top installers in term of shares
     //collect posted irr for them, average
     
-    X(0,1) = (THETA_reputation[0] != 1.0 ? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0);
-    X(0,2) = dec_design->irr;
-    X(0,3) = w->get_inf(EDecParams::Reputation_i, this);
-    X(0,4) = w->get_inf(EDecParams::irr_i, this);
+    X(0,1) = dec_design->irr;
+    X(0,2) = (THETA_reputation[0] != 1.0 ? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0);
+    X(0,3) = w->get_inf(EDecParams::irr_i, this);
+    X(0,4) = w->get_inf(EDecParams::Reputation_i, this);
+
     //observed share over the past year - y
     Y(0,0) = w->get_inf(EDecParams::Share, this);
     
@@ -1082,7 +1083,7 @@ void SEIBL::wm_update_internal()
     //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
     //assume method of moments with only parameter being  \f$/alpha \$f
     double mean = 0.0;
-    auto i_max = pvprojects.size() - 1;
+    int64_t i_max = pvprojects.size() - 1;
     for(auto i = 0; i < i_max ; ++i)
     {
         mean += pvprojects[i]->production_time;

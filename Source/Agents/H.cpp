@@ -59,7 +59,7 @@ bool H::ac_dec_design(std::shared_ptr<PVProjectFlat> project_, WEE* w_)
     
     
     //Logistic function (from cdf of the distribution)
-    auto p_switch = (1/(1+std::exp(-(irr * THETA_decision[2] - THETA_decision[0])/THETA_decision[1])));
+    auto p_switch = (1/(1+std::exp(-((irr) * THETA_decision[2] - THETA_decision[0])/THETA_decision[1])));
     
 //#ifdef DEBUG
 //    std::cout << std::fixed << std::setprecision(2) << w_->time << ": irr: " << irr << ", p_switch: " << p_switch << std::endl;
