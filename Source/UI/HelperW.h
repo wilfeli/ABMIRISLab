@@ -281,6 +281,7 @@ namespace solar_core {
             int64_t N_Explorer = pt.get<double>("THETA_exploration.Share::explorer") * N_SEI;
             std::vector<double> THETA_explorer;
             std::vector<double> THETA_exploiter;
+            //in the last position have adjustment parameter for maximum ratio in case of different sign of profit estimation
             serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::explorer"), THETA_explorer);
             serialize::deserialize(pt.get_child("THETA_exploration.FORMULA::exploiter"), THETA_exploiter);
 

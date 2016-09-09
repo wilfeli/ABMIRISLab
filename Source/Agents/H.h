@@ -39,7 +39,7 @@ namespace solar_core
         
         H(const PropertyTree& pt_, WEE* w_);
         void init(WEE* w_);
-        
+        void ac_update_tick(TimeUnit time_);
          
         //@}
         
@@ -69,7 +69,7 @@ namespace solar_core
          */
         House* house; /** Simplification: assume only 1 house per h*/
         bool FLAG_INSTALLED_SYSTEM = false;
-        
+        TimeUnit time_updated_params;
         //@}
         
         

@@ -82,10 +82,14 @@ void SEMBL::init_world_connections()
     //total number of watts
     double panel_watts = PV_module->efficiency * (PV_module->length * PV_module->width/1000000)*1000;
     
+    p_baseline = panel_watts * p_per_watt;
+    
     
     solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = panel_watts * p_per_watt;
     
 //    std::cout << solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem << std::endl;
+    
+    //MARK: cont. update THETA_dist_efficiency to the current panel efficiency as a starting point
     
 }
 
@@ -135,6 +139,11 @@ void SEMBL::ac_update_tick()
     };
     
     lock.unlock();
+    
+    
+    //update p_baseline for learning rate
+    p_baseline = p_baseline * (1 - params[EParamTypes::SEMLearningPrice]);
+    
 }
 
 /**
@@ -209,6 +218,8 @@ void SEMBL::act_tick()
     
     //update uid
     new_pv->uid = UID();
+    
+    
     //update price
     new_pv->p_sem = p_baseline;
     

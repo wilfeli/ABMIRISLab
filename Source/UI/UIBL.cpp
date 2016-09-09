@@ -45,6 +45,11 @@ UIBL::save(std::string path_to_save_file_)
     
     
     
+    //save data from last step
+    w->save_end_data();
+    
+    
+    
     
     
     //go through all installed projects and sort them by the date they were installed
@@ -58,8 +63,8 @@ UIBL::save(std::string path_to_save_file_)
     
     
     //go through each bucket and count number of projects [0], count total number of projects [1], average price for the project per time unit
-    auto N_SERIES = 4;
-    auto save_data = std::vector<std::vector<double>>(simulation_length, std::vector<double>(N_SERIES, 0.0));
+    auto N_SERIES = 5;
+    auto save_data = new std::vector<std::vector<double>>(simulation_length, std::vector<double>(N_SERIES, 0.0));
     
     
     std::size_t N_INSTALLED_PROJECTS = 0;
@@ -70,9 +75,10 @@ UIBL::save(std::string path_to_save_file_)
     double price_per_watt = 0.0;
     for (auto i = 0; i < save_data_raw.size(); ++i)
     {
+        (*save_data)[i][0] = i;
         N_INSTALLED_PROJECTS = save_data_raw[i].size();
-        save_data[i][0] = N_INSTALLED_PROJECTS;
-        save_data[i][1] = N_INSTALLED_PROJECTS_T_1 + N_INSTALLED_PROJECTS;
+        (*save_data)[i][1] = N_INSTALLED_PROJECTS;
+        (*save_data)[i][2] = N_INSTALLED_PROJECTS_T_1 + N_INSTALLED_PROJECTS;
         N_INSTALLED_PROJECTS_T_1 += N_INSTALLED_PROJECTS;
         
         accum_price_per_watt = 0.0;
@@ -89,8 +95,13 @@ UIBL::save(std::string path_to_save_file_)
         
         average_price_per_watt = accum_price_per_watt/total_watt;
         
-        save_data[i][2] = average_price_per_watt;
-        save_data[i][3] = price_per_watt/save_data_raw[i].size();
+        (*save_data)[i][3] = average_price_per_watt;
+        (*save_data)[i][4] = price_per_watt/save_data_raw[i].size();
+        
+        
+        //save efficiencies of the panels
+        (*save_data)[i].insert((*save_data)[i].end(), w->history_data[i].begin(), w->history_data[i].end());
+        
         
     };
     
@@ -106,11 +117,15 @@ UIBL::save(std::string path_to_save_file_)
     
     if (out_file)
     {
-        for (auto i = 0; i < save_data.size(); ++i)
+        for (auto i = 0; i < (*save_data).size(); ++i)
         {
-            for (auto j = 0; j < save_data[i].size(); ++j)
+            for (auto j = 0; j < (*save_data)[i].size(); ++j)
             {
-                out_file << save_data[i][j] << ",";
+                out_file << (*save_data)[i][j];
+                if (j != (*save_data)[i].size() - 1)
+                {
+                    out_file << ",";
+                };
             };
             out_file << std::endl;
         };

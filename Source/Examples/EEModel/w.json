@@ -5,6 +5,12 @@
                         "EParamTypes::AverageElectricityDemand": 900
                         },
                         {
+                        "EParamTypes::AverageElectricityDemandGrowthRate" : 0.003
+                        },
+                        {
+                        "EParamTypes::AverageElectricityDemandHistoricalGrowth" : 0.0257
+                        },
+                        {
                         "EParamTypes::DCtoACLoss": 0.2
                         },
                         {
@@ -91,7 +97,7 @@
     "SEED": 2016,
     "params": [
                {
-               "N_ITERATIONS": 2
+               "N_ITERATIONS": 10
                }
                ]
 }

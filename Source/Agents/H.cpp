@@ -13,7 +13,7 @@
 #include "Agents/H.h"
 #include "Agents/SEIBL.h"
 #include "UI/WEE.h"
-
+#include "Tools/WorldSettings.h"
 
 using namespace solar_core;
 
@@ -33,16 +33,40 @@ H::H(const PropertyTree& pt_, WEE* w_):THETA_decision(3, 0.0)
 
 
 
+void H::ac_update_tick(TimeUnit time_)
+{
+    //check for how much to update
+    auto delta_time = time_ - time_updated_params;
+    
+    //update Income for inflation
+    params[EParamTypes::Income] *= std::pow((1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]), delta_time);
+    //update Energy Consumption for growth rates - historical
+    params[EParamTypes::ElectricityConsumption] *= std::pow((1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]), delta_time);
+    
+    
+}
+
+
 
 void H::init(WEE* w_)
 {
+    
+    time_updated_params = w_->time;
     
     //calculate probabilty of switching given the parameters of this h
     THETA_decision[0] = 1/THETA_params[1] * std::pow((1 + THETA_params[0]/THETA_params[1] * params[EParamTypes::Income] / 1000),-1/(THETA_params[0] + 1));
     //variance equivalent is fixed for everyone
     THETA_decision[1] = THETA_params[2];
     THETA_decision[2] = 0.5;
-
+    
+    
+    //adjust income for inflation, assume that it is 2016, and data is from 2009
+    //it is 6 years, so
+    params[EParamTypes::Income] *= std::pow((1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]), 6);
+    //adjust electricity consumption for growth rates
+    params[EParamTypes::ElectricityConsumption] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandHistoricalGrowth]);
+    
+    //MARK: cont. adjust ElectricityBill for other model
 }
 
 

@@ -66,7 +66,7 @@ namespace solar_core {
         W(std::string path_, HelperW* w_, std::string mode_ = "NEW"); /*!< */
         virtual void init();
         std::string base_path;
-        
+        std::map<std::string, std::string> params; /*!< have string values to parameters */
         
         
         //@}
@@ -213,7 +213,7 @@ namespace solar_core {
         std::vector<SEM*> sems; /*!< all SEM */
         /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
         
-        std::map<std::string, std::string> params; /*!< have string values to parameters */
+
         std::map<EParamTypes, double> params_d; /*!< have numerical values to parameters */
         
         std::vector<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */

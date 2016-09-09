@@ -97,6 +97,14 @@ namespace solar_core
         ElectricityConsumption,
         
         
+        /** Projected growth rates */
+        AverageElectricityDemandGrowthRate,
+        
+        
+        /** Adjustment for RECS dataset from 2009 to 2015 */
+        AverageElectricityDemandHistoricalGrowth,
+        
+        
         /** Average loan length */
         AverageLoanLength,
         
@@ -384,11 +392,11 @@ namespace solar_core
         /** SEM parameter: Base level of efficiency with 1.0 as price adjustment */
         SEMPriceBaseEfficiency,
         
-        /** SEM parameter: Marrkup to the price for the increased efficiency */
+        /** SEM parameter: Markup to the price for the increased efficiency */
         SEMPriceMarkupEfficiency,
         
-        
-        
+        /** SEM parameter: Learning rate for production of new panels, basically price decrease rate */
+        SEMLearningPrice,
         
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
@@ -573,7 +581,7 @@ namespace solar_core
             //case insensitive
             std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
             
-            if (param_type == "eparamtypes::income") //why do we only make income and N_H case insensitive?
+            if (param_type == "eparamtypes::income")
             {
                 return EParamTypes::Income;
             }
@@ -600,6 +608,14 @@ namespace solar_core
             else if (param_type == "eparamtypes::electricitypriceucsupply")
             {
                 return EParamTypes::ElectricityPriceUCSupply;
+            }
+            else if (param_type == "eparamtypes::averageelectricitydemandgrowthrate")
+            {
+                return EParamTypes::AverageElectricityDemandGrowthRate;
+            }
+            else if (param_type == "eparamtypes::averageelectricitydemandhistoricalgrowth")
+            {
+                return EParamTypes::AverageElectricityDemandHistoricalGrowth;
             }
             else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
             {
@@ -800,6 +816,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::semproductionquantity")
             {
                 return EParamTypes::SEMProductionQuantity;
+            }
+            else if (param_type == "eparamtypes:semlearningprice")
+            {
+                return EParamTypes::SEMLearningPrice;
             }
             else if (param_type == "eparamtypes::utilitycurrentcapacity")
             {

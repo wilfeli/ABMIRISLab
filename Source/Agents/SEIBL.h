@@ -37,7 +37,7 @@ namespace solar_core
         double irr = 0.0; /*!< advertized rate of return for an average project */
         double p_module = 0.0; /*!< price of a module for this installer */
         double p_design = 0.0; /*!< price per watt for the design based on this module */
-        double complexity_install = 16.0; /*!< in labor*hours for the current state of the project */
+        double complexity_install; /*!< in labor*hours for the current state of the project */
         double BETA_complexity_time = 1.0; /*!< discounting for learning on how to install */
         int N_panels = 0; /*!< for an average house */
         double DC_size = 0.0; /*!< for an average house */

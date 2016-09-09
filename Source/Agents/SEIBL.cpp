@@ -466,11 +466,23 @@ TDesign* SEIBL::dec_base()
 double SEIBL::exploration_p(double profit_new, double profit_old)
 {
     //Logistic function (from cdf of the distribution)
-    //MARK: cont. add cases of different signs of profits
-    if (profit_new)
-    {};
+    double profit_ratio = profit_new/profit_old;
     
-    return (1/(1+std::exp(-(profit_new/profit_old - THETA_exploration[0])/THETA_exploration[1])));
+    if ((profit_new > 0.0) && (profit_old < 0.0))
+    {
+        profit_ratio = THETA_exploration[2]; //always agree
+    }
+    else if ((profit_new < 0.0) && (profit_old > 0.0))
+    {
+        profit_ratio = -THETA_exploration[2]; //always refuse
+    }
+    else if ((profit_new < 0.0) && (profit_old < 0.0))
+    {
+        profit_ratio = 1/profit_ratio; //reverse relationship
+    };
+
+    
+    return (1/(1+std::exp(-(profit_ratio - THETA_exploration[0])/THETA_exploration[1])));
     
 }
 
@@ -726,8 +738,14 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
 
 
 
-
-
+/**
+ 
+ 
+ MARK: cont. change to see if need to draw for the number of panels
+ 
+ 
+ 
+ */
 double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double wage)
 {
     ///number of simulation runs
@@ -1067,7 +1085,7 @@ void SEIBL::act_tick_wm()
     if (a_time > 0)
     {
         //updates information for decision making
-//        wm_update_external();
+        wm_update_external();
     };
 
     
@@ -1099,22 +1117,22 @@ void SEIBL::wm_update_internal()
         double n = a_time;
         double N = n0 + n - 1;
         
-//#ifdef DEBUG
-//        if (n > 0)
-//        {
-//            //updated parameter for reputation
-//            if (THETA_reputation[0] != 1)
-//            {
-//                double k = 1/(THETA_reputation[0]-1)*(N/(N+1))+mean/(N+1);
-//                THETA_reputation[0] = 1+1/k;
-//            }
-//            else
-//            {
-//                double k = N/(N+1) + (mean/(N+1));
-//                THETA_reputation[0] = 1+1/k;
-//            };
-//        };
-//#endif
+#ifdef DEBUG
+        if (n > 0)
+        {
+            //updated parameter for reputation
+            if (THETA_reputation[0] != 1)
+            {
+                double k = 1/(THETA_reputation[0]-1)*(N/(N+1))+mean/(N+1);
+                THETA_reputation[0] = 1+1/k;
+            }
+            else
+            {
+                double k = N/(N+1) + (mean/(N+1));
+                THETA_reputation[0] = 1+1/k;
+            };
+        };
+#endif
    };
 
 

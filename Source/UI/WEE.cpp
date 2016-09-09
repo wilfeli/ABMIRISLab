@@ -273,6 +273,11 @@ WEE::life_hos()
                         };
                     };
                     
+                    
+                    //update for tick
+                    (*hos)[j_h]->ac_update_tick(time);
+                    
+                    
                     //pick sei randomly
                     j_sei = rng_sei_agents();
                     
@@ -461,7 +466,9 @@ void WEE::get_state_inf_installed_project(std::shared_ptr<PVProjectFlat> project
 
 void WEE::ac_update_tick()
 {
-    //MARK: cont. update world parameters for inflation
+    //update world parameters for inflation
+    WorldSettings::instance().params_exog[EParamTypes::LaborPrice] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+    WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]);
     
     ac_update_wm();
 }
@@ -549,13 +556,32 @@ void WEE::ac_update_wm()
 //#endif
     
     
+    
+    //save efficiency numbers
+    history_data.push_back({});
+    for (auto& sei:*seis)
+    {
+        history_data.back().push_back(sei->dec_design->PV_module->efficiency);
+    };
+    
+    
 
     
     
 }
 
 
+void
+WEE::save_end_data()
+{
+    //save efficiency numbers
+    history_data.push_back({});
+    for (auto& sei:*seis)
+    {
+        history_data.back().push_back(sei->dec_design->PV_module->efficiency);
+    };
 
+}
 
 
 

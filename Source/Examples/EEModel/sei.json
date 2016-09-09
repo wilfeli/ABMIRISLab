@@ -78,12 +78,14 @@
     "THETA_exploration": {
         "FORMULA::explorer": [
                               1,
-                              0.25
+                              0.25,
+                              5
                               ],
         "Share::explorer": 0.5,
         "FORMULA::exploiter": [
                                1.5,
-                               0.5
+                               0.5,
+                               5
                                ]
     },
     "THETA_Demand": [],

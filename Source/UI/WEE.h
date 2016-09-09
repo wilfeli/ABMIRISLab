@@ -109,6 +109,10 @@ protected:
     int64_t N_installed_projects_time = 0;
     
     
+    std::vector<std::vector<double>> history_data;
+    void save_end_data(); /*!< saves data from the last tick */
+    
+    
 };
 
 } //end namespace solar_core

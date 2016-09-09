@@ -59,7 +59,7 @@ int main(int argc, const char * argv[])
 //    {};
     
     
-    C_API_run_model_steps(ui, 10);
+    C_API_run_model_steps(ui, std::stoi(ui->w->params["N_ITERATIONS"]));
     
     //save model here
     ui->save();
