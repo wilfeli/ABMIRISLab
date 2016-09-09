@@ -817,7 +817,7 @@ namespace solar_core
             {
                 return EParamTypes::SEMProductionQuantity;
             }
-            else if (param_type == "eparamtypes:semlearningprice")
+            else if (param_type == "eparamtypes::semlearningprice")
             {
                 return EParamTypes::SEMLearningPrice;
             }
