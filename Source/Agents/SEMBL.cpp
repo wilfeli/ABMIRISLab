@@ -173,7 +173,14 @@ void SEMBL::act_tick()
     //assume for now they are separate distributions
     
     //new efficiency from random walk
-    THETA_dist_efficiency[2] = THETA_dist_efficiency[2] * std::exp(w->rand_sem->rnd() * std::pow(THETA_dist_efficiency[1], 0.5) + THETA_dist_efficiency[0]);
+    auto new_efficiency = 0.0;
+    
+    while (new_efficiency < THETA_dist_efficiency[2])
+    {
+        new_efficiency = THETA_dist_efficiency[2] * std::exp(w->rand_sem->rnd() * std::pow(THETA_dist_efficiency[1], 0.5) + THETA_dist_efficiency[0]);
+    };
+    
+    THETA_dist_efficiency[2] = new_efficiency;
     
     //new reliability from random walk
     THETA_dist_reliability[2] = THETA_dist_reliability[2] * std::exp(w->rand_sem->rnd() * std::pow(THETA_dist_reliability[1], 0.5) + THETA_dist_reliability[0]);

@@ -25,7 +25,7 @@
                "EParamTypes::SEMFrequencyPriceDecisions":4
                },
                {
-               "EParamTypes::SEMLearningPrice":0.27
+               "EParamTypes::SEMLearningPrice":0.20
                }
                
             ],
@@ -38,7 +38,7 @@
     "money": "FORMULA::p.d.f.::u(10000, 50000)",
     "THETA_dist_efficiency":[
                              0.005,
-                             0.005,
+                             0.0025,
                            0.16
     ],
     "THETA_dist_reliability":[
