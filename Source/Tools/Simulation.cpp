@@ -230,6 +230,9 @@ tools::draw_joint_distribution(EmpiricalMVD* pmf, IRandom* rand)
             if (( i == dist->theta_bins.size() - 1) && (dist->bin_ends.back() == constants::SOLAR_INFINITY()))
             {
                 x.push_back(get_inverse_value_exp(dist->theta_bins[i], u_i));
+                
+                
+                
             }
             else
             {
@@ -364,10 +367,16 @@ double
 tools::get_inverse_value_exp(std::vector<double>& theta_bin, double u_i)
 {
     //uses exponent as a proxy
+    double ret = (-std::log((1 - u_i)/theta_bin[0]));
     
-    return (-std::log((1 - u_i)/theta_bin[0]));
+    if (ret > 1000000)
+    {
+        throw std::runtime_error("too big simulation value");
+    };
     
+//    return (-std::log((1 - u_i)/theta_bin[0]));
     
+    return ret;
 }
 
 

@@ -131,6 +131,12 @@ namespace solar_core
         /** Number of potential buyers */
         TotalPVMarketSize,
         
+        
+        
+        /** Historical penetration level */
+        PenetrationLevel,
+        
+        
         /** Labor price for the installers - qualified labor */
         LaborPrice,
         
@@ -616,6 +622,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::averageelectricitydemandhistoricalgrowth")
             {
                 return EParamTypes::AverageElectricityDemandHistoricalGrowth;
+            }
+            else if (param_type == "eparamtypes::penetrationlevel")
+            {
+                return EParamTypes::PenetrationLevel;
             }
             else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
             {

@@ -12,7 +12,7 @@
                           ],
     "params": [
                {
-               "EParamTypes::EstimatedPricePerWatt": 5.5
+               "EParamTypes::EstimatedPricePerWatt": 3.5
                },
                {
                "EParamTypes::SEIMaxNVisitsPerTimeUnit": 5

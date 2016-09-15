@@ -407,11 +407,11 @@ TDesign* SEIBL::dec_base()
         
         
         
-#ifdef DEBUG
-        
-        std::cout << "profit " << profit_time << "  " << profit_new << "price " << p_n << std::endl;
-        
-#endif
+//#ifdef DEBUG
+//        
+//        std::cout << "profit " << profit_time << "  " << profit_new << "price " << p_n << std::endl;
+//        
+//#endif
         
         
         
@@ -860,20 +860,19 @@ SEIBL::wm_update_external()
     
 
 #ifdef DEBUG
-    std::cout << "wm update "<< std::endl;
+//    std::cout << "wm update "<< std::endl;
 #endif
     //data generating will be MVS - take mean from there - see predictions using BLR
     for (auto i = 0; i < THETA_demand.size() ; ++i)
     {
-#ifdef DEBUG
         THETA_demand[i] = Mu_0[i];
-
-        std::cout << THETA_demand[i] << " ";
+#ifdef DEBUG
+//        std::cout << THETA_demand[i] << " ";
 #endif
     };
     
 #ifdef DEBUG
-    std::cout << std::endl;
+//    std::cout << std::endl;
 #endif
     
 }
@@ -1173,7 +1172,7 @@ void SEIBL::act_tick()
         designs[dec->PV_module->uid] = dec;
         params[EParamTypes::EstimatedPricePerWatt] = dec_design->p_design;
         
-        std::cout << "switched " << uid.get_string() << std::endl;
+//        std::cout << "switched " << uid.get_string() << std::endl;
         
     };
     lock.unlock();

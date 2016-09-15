@@ -9,12 +9,14 @@
 
 #include "UI/UIBL.h"
 #include "UI/WEE.h"
+
 #include <boost/filesystem.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
 #include "Agents/SEIBL.h"
+#include "Agents/H.h"
 #include "Agents/SolarPanel.h"
 #include "Institutions/IMessage.h"
 
@@ -109,7 +111,7 @@ UIBL::save(std::string path_to_save_file_)
     boost::filesystem::path path(path_to_save_file_);
     boost::filesystem::path path_to_dir = path.parent_path();
     boost::uuids::uuid file_name_short = boost::uuids::random_generator()();
-    std::string file_name = boost::uuids::to_string(file_name_short) + ".csv";
+    std::string file_name = boost::uuids::to_string(file_name_short) + "_w.csv";
     boost::filesystem::path path_tmp = path_to_dir;
     path_tmp /= file_name;
     
@@ -117,6 +119,10 @@ UIBL::save(std::string path_to_save_file_)
     
     if (out_file)
     {
+        
+        //MARK: cont. write column names
+        
+        
         for (auto i = 0; i < (*save_data).size(); ++i)
         {
             for (auto j = 0; j < (*save_data)[i].size(); ++j)
@@ -135,8 +141,29 @@ UIBL::save(std::string path_to_save_file_)
         throw std::runtime_error("wrong path to save");
     };
     
+    out_file.close();
     
     
+    //save incomes, house sizes and electricity bills to double check
+    file_name_short = boost::uuids::random_generator()();
+    file_name = boost::uuids::to_string(file_name_short) + "_hos.csv";
+    path_tmp = path_to_dir;
+    path_tmp /= file_name;
+    out_file.open(path_tmp.string());
+    
+
+    if (out_file)
+    {
+        for (auto h:*(w->hos))
+        {
+            
+            out_file << ((h->params[solar_core::EParamTypes::Income] > 10000000)? 10000000 : h->params[solar_core::EParamTypes::Income]) << ",";
+            out_file << h->params[solar_core::EParamTypes::ElectricityBill] << ",";
+            out_file << h->house->house_size << ",";
+            out_file << ((h->FLAG_INSTALLED_SYSTEM)? 1: 0);
+            out_file << std::endl;
+        };
+    };
     
     
 }

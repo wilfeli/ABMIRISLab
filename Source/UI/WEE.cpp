@@ -168,13 +168,95 @@ WEE::init()
     };
     
     
-//#ifdef DEBUG
-//    for (auto& h:*hos)
-//    {
-//        std::cout << h->params[EParamTypes::Income] << std::endl;
-//    };
-//#endif
+
+    //create pool of preassigned projects - mark some H as FLAG_INSTALLED_SYSTEM
     
+    //pick agent by number
+    auto sei = (*seis)[0];
+    
+    //adjust parameters for past
+    std::map<std::string, double> params_t_1;
+    //design
+    auto dec_design_hat = sei->dec_design;
+    
+    params_t_1["efficiency"] = dec_design_hat->PV_module->efficiency;
+    params_t_1["p_module"] = dec_design_hat->p_module;
+    params_t_1["p_design"] = dec_design_hat->p_design;
+    
+    dec_design_hat->PV_module->efficiency = 0.15;
+    double p_per_watt = 1.0;
+    double panel_watts = dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000)*1000;
+    
+    dec_design_hat->p_module = panel_watts * p_per_watt;
+    dec_design_hat->p_design = 4.5;
+    
+    
+    //randomly select agents and push marketing information
+    auto pdf_agents = boost::uniform_int<uint64_t>(0, hos->size()-1);
+    auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_agents);
+
+    
+    auto N_installed = 0;
+    int64_t N_pre_installed = hos->size() * WorldSettings::instance().params_exog[EParamTypes::PenetrationLevel];
+    std::size_t j_h = 0;
+    auto max_N_trials = 50000;
+    int64_t N_trials = 0;
+    bool FLAG_DEC;
+    
+    while (N_installed < N_pre_installed)
+    {
+        //check that it doesn't have installation already
+        while (true)
+        {
+            //pick h randomly
+            j_h = rng_agents();
+            if (!(*hos)[j_h]->FLAG_INSTALLED_SYSTEM)
+            {
+                break;
+            };
+        };
+        
+        ++N_trials;
+        if (N_trials > max_N_trials)
+        {
+            break;
+        };
+        
+        //form design for an agent
+        (*seis)[0]->form_design_for_params((*hos)[j_h], pool_projects[i_pool_projects]);
+        //get answer for the design
+        FLAG_DEC = (*hos)[j_h]->ac_dec_design(pool_projects[i_pool_projects], this);
+        //if accepted - mark as installed
+        if (FLAG_DEC)
+        {
+            ++N_installed;
+            (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
+        };
+    };
+    
+    //restore previous values
+    dec_design_hat->PV_module->efficiency = params_t_1["efficiency"];
+    dec_design_hat->p_module = params_t_1["p_module"];
+    dec_design_hat->p_design = params_t_1["p_design"];
+
+
+
+#ifdef DEBUG
+    N_installed = 0;
+    
+    //calculate number of preinstalled projects
+    for (auto h: (*hos))
+    {
+        if (h->FLAG_INSTALLED_SYSTEM)
+        {
+            ++N_installed;
+        };
+    };
+    
+    
+//    std::cout << N_installed << std::endl;
+    
+#endif
     
     
 }
@@ -298,6 +380,7 @@ WEE::life_hos()
                         (*seis)[j_sei]->install_project(pool_projects[i_pool_projects], time);
                         ++i_pool_projects;
                         (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
+                        (*hos)[j_h]->time_installed = time; 
                     };
                     
                 };
@@ -513,10 +596,10 @@ void WEE::ac_update_wm()
     installed_projects_time.clear();
     
     
-#ifdef DEBUG
-    std::cout << time << " " << N_installed_projects_time << std::endl;
-    std::cout << time << " " << i_pool_projects + 1 << std::endl;
-#endif
+//#ifdef DEBUG
+//    std::cout << time << " " << N_installed_projects_time << std::endl;
+//    std::cout << time << " " << i_pool_projects + 1 << std::endl;
+//#endif
     
     
     N_installed_projects_time = 0;
