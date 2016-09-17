@@ -69,6 +69,7 @@ namespace solar_core
          */
         House* house; /** Simplification: assume only 1 house per h*/
         bool FLAG_INSTALLED_SYSTEM = false;
+        TimeUnit time_installed; 
         TimeUnit time_updated_params;
         //@}
         

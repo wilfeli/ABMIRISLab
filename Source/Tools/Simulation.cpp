@@ -230,9 +230,6 @@ tools::draw_joint_distribution(EmpiricalMVD* pmf, IRandom* rand)
             if (( i == dist->theta_bins.size() - 1) && (dist->bin_ends.back() == constants::SOLAR_INFINITY()))
             {
                 x.push_back(get_inverse_value_exp(dist->theta_bins[i], u_i));
-                
-                
-                
             }
             else
             {
@@ -325,7 +322,11 @@ tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUV
             }
             else
             {
-                dist->theta_bins.back().push_back(std::exp(dist->bin_ends[i-1]) * (1 - cmf[i-1]));
+                //scale it down
+//                std::cout << std::endl;
+                dist->theta_bins.back().push_back(dist->bin_ends[(i - 1)]);
+                dist->theta_bins.back().push_back(std::exp(dist->bin_ends[(i - 1)]/dist->theta_bins.back()[0]) * (1 - cmf[i-1]));
+                
             };
         };
     };
@@ -367,14 +368,12 @@ double
 tools::get_inverse_value_exp(std::vector<double>& theta_bin, double u_i)
 {
     //uses exponent as a proxy
-    double ret = (-std::log((1 - u_i)/theta_bin[0]));
+    double ret = (-std::log((1 - u_i)/theta_bin[1]) * theta_bin[0]);
     
-    if (ret > 1000000)
-    {
-        throw std::runtime_error("too big simulation value");
-    };
-    
-//    return (-std::log((1 - u_i)/theta_bin[0]));
+//    if (ret > 1000000)
+//    {
+////        throw std::runtime_error("too big simulation value");
+//    };
     
     return ret;
 }
