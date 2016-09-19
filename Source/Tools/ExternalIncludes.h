@@ -10,8 +10,10 @@
 #define ABMSolar_ExternalIncludes_h
 
 #include <cstdint>
+#include <cstdlib>
 #include <istream>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <string>

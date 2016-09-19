@@ -17,6 +17,7 @@ House::House(const PropertyTree& pt_)
 {
     roof_age = pt_.get<double>("roof_age");
     roof_size = pt_.get<double>("roof_size");
+    house_size = pt_.get<double>("house_size");
     
 }
 

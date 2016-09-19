@@ -14,6 +14,7 @@
 
 #include <boost/random.hpp>
 #include <boost/random/normal_distribution.hpp>
+#include <boost/random/gamma_distribution.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include "Tools/IParameters.h"
 #include "Tools/ExternalIncludes.h"
@@ -34,6 +35,11 @@ namespace solar_core
     public:
         boost::variate_generator<boost::mt19937&, boost::normal_distribution<>> rnd;
         boost::variate_generator<boost::mt19937&, boost::uniform_01<>> ru;
+        
+        
+    public:
+        //generate lomax 
+        double r_pareto_2(double lambda, double alpha);
     };
 } //end solar_core namespace
 

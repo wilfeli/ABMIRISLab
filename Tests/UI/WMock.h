@@ -20,7 +20,7 @@ namespace solar_tests{
 
     public:
         WMock(std::string path_, solar_core::HelperW* helper_, std::string mode_): solar_core::W(path_, helper_, mode_){};
-        std::vector<solar_core::Household*>& get_hhs();
+        std::vector<solar_core::Homeowner*>& get_hos();
         std::vector<solar_core::SEI*>& get_seis();
         
         static WMock* create(std::string path_, std::string mode_);

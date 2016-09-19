@@ -13,8 +13,17 @@
 
 using namespace solar_core;
 
-tools::EmpiricalMVD
-tools::create_joint_distribution(std::string path_to_scheme, std::string path_to_data)
+
+tools::EmpiricalMVD::~EmpiricalMVD()
+{
+    for (auto& dist: mvd)
+    {
+        delete dist;
+    };
+}
+
+
+tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme, std::string path_to_data)
 {
     //read file
     std::vector<std::vector<double>> parsed_file;
@@ -30,9 +39,7 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     PropertyTree pt;
     read_json(path_to_scheme, pt);
     
-    
-    EmpiricalMVD e_dist;
-    
+    EmpiricalMVD* e_dist = new EmpiricalMVD();
     
     std::vector<long> N_BINS;
     std::vector<int64_t> N_BINS_CUM;
@@ -42,40 +49,47 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
     
     for (const auto& node: pt)
     {
-        e_dist.mvd.push_back(EmpiricalUVD());
+        e_dist->mvd.push_back(new EmpiricalUVD());
         N_BINS.push_back(node.second.get<long>("N_BINS"));
         
         //get bin values if discrete, otherwise assume it will be just numbers
         if (node.second.get<std::string>("type") == "continuous")
         {
-            e_dist.mvd.back().type = ERandomParams::ContinuousDiscretized;
+            e_dist->mvd.back()->type = ERandomParams::ContinuousDiscretized;
             //bin edges
-            serialize::deserialize(node.second.get_child("BIN_ENDS"), e_dist.mvd.back().bin_ends);
+            serialize::deserialize(node.second.get_child("BIN_ENDS"), e_dist->mvd.back()->bin_ends);
         }
         else
         {
-            e_dist.mvd.back().type = ERandomParams::Discrete;
+            e_dist->mvd.back()->type = ERandomParams::Discrete;
         };
 
         //read BIN_VALUES from the file
-        serialize::deserialize(node.second.get_child("values"), e_dist.mvd.back().bin_values);
+        serialize::deserialize(node.second.get_child("values"), e_dist->mvd.back()->bin_values);
+        
+        for (auto i = 0; i < e_dist->mvd.back()->bin_values.size(); ++i)
+        {
+            e_dist->mvd.back()->bin_values_map[e_dist->mvd.back()->bin_values[i]] = i;
+        };
+        
         
         //read name from the file
-        e_dist.mvd.back().name = node.second.get<std::string>("name");
+        e_dist->mvd.back()->name = node.second.get<std::string>("name");
     };
     
     for (auto i = 0; i < N_BINS.size(); ++i)
     {
-        N_BINS_CUM[i + 1] = N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i];
+        //MARK: change to push back
+        N_BINS_CUM.push_back(N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i]);
     };
     
     
     
     //joint distribution table
-    e_dist.values = std::vector<std::vector<long>>(N_BINS_CUM.back(), std::vector<long>(N_BINS.size(), 0.0));
+    e_dist->values = std::vector<std::vector<long>>(N_BINS_CUM.back(), std::vector<long>(N_BINS.size(), 0.0));
     
     
-    for (int64_t i = 0; i < e_dist.values.size(); ++i)
+    for (int64_t i = 0; i < e_dist->values.size(); ++i)
     {
         for(int64_t j = 0; j < N_BINS.size(); ++j)
         {
@@ -83,102 +97,90 @@ tools::create_joint_distribution(std::string path_to_scheme, std::string path_to
             auto N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
             auto i_sub = i % (N_TAILS * N_BINS[j]);
             long k = i_sub/N_TAILS;
-            e_dist.values[i][j] = k; //from what bin to take values    //BIN_VALUES[j][k];
+            e_dist->values[i][j] = k; //from what bin to take values    //BIN_VALUES[j][k];
         };
     };
     
     
     //create vector of frequencies
-    e_dist.freq = std::vector<long>(N_BINS_CUM.back(), 0);
+    e_dist->freq = std::vector<long>(N_BINS_CUM.back(), 0);
     
-    
-    //calculate frequencies
-    for (auto i = 0; i < e_dist.values.size(); ++i)
+    int64_t N_TAILS = 0;
+    int64_t bin = 0;
+    int64_t i = 0;
+    //reverse order
+    for (auto x_i:parsed_file)
     {
-        auto x_i = std::find_if(parsed_file.begin(), parsed_file.end(), [&](std::vector<double> &x_i_){
-            //check that x_i_ is equal to x
-            bool FLAG_EQ = true;
-            for(auto j = 0; j < x_i_.size(); ++j)
-            {
-                //check what value it should be
-                if (x_i_[j] != e_dist.mvd[j].bin_values[e_dist.values[i][j]])
-                {
-                    FLAG_EQ = false;
-                    break;
-                };
-            };
-            
-            return FLAG_EQ;});
-        
-        //count number
-        for (; x_i != parsed_file.end(); ++x_i)
+        for (auto j = 0; j < x_i.size() - 1; ++j)
         {
-            e_dist.freq[i] += 1;
+            N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+            bin = e_dist->mvd[j]->bin_values_map[x_i[j+1]];
+            i += bin * N_TAILS;
         };
+        e_dist->freq[i] += 1;
+        i = 0;
     };
     
     //store index into actual bin values
-    for (auto value_add = 0; value_add < e_dist.mvd[0].bin_values.size(); ++value_add)
+    for (auto value_add = 0; value_add < e_dist->mvd[0]->bin_values.size(); ++value_add)
     {
-        e_dist.mvd[0].cond_values.push_back(std::vector<long>{});
-        e_dist.mvd[0].cond_values.back().push_back(value_add);
+        e_dist->mvd[0]->cond_values.push_back(std::vector<long>{});
+        e_dist->mvd[0]->cond_values.back().push_back(value_add);
+        
+        //calculate conditional pmf
+       calculate_pmf(e_dist->mvd[0]->cond_values, parsed_file, e_dist->mvd[0]->cond_freq, e_dist, N_BINS_CUM);
+        
     };
     
-    
     //take table from the previous one and multiply by own values
-    for (auto i = 1; i < e_dist.mvd.size(); ++i)
+    for (auto i = 1; i < e_dist->mvd.size(); ++i)
     {
         //take previous distribution and multiply by own bin values
-        for (auto value: e_dist.mvd[i-1].cond_values)
+        for (auto value: e_dist->mvd[i-1]->cond_values)
         {
-            for (auto value_add = 0 ; value_add< e_dist.mvd[i].bin_values.size(); ++value_add)
+            for (auto value_add = 0 ; value_add< e_dist->mvd[i]->bin_values.size(); ++value_add)
             {
-                e_dist.mvd[i].cond_values.push_back(value);
-                e_dist.mvd[i].cond_values.back().push_back(value_add);
+                e_dist->mvd[i]->cond_values.push_back(value);
+                e_dist->mvd[i]->cond_values.back().push_back(value_add);
             };
         };
         
         //calculate conditional pmf
-        calculate_pmf(e_dist.mvd[i].cond_values, parsed_file, e_dist.mvd[i].cond_freq, e_dist);
+        calculate_pmf(e_dist->mvd[i]->cond_values, parsed_file, e_dist->mvd[i]->cond_freq, e_dist, N_BINS_CUM);
         
     };
 
+    //save information about tail length
+    e_dist->n_bins_cum = N_BINS_CUM;
+    
     return e_dist;
-    
-    
 }
 
 
 
 void
-tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD& e_dist)
+tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM)
 {
-    //calculate frequencies
+    freq_n = std::vector<long>(bins.size(), 0);
+    auto i_pos = 0;
+    int64_t N_TAILS = 0;
     for (auto i = 0; i < bins.size(); ++i)
     {
-        auto x_i = std::find_if(parsed_file.begin(), parsed_file.end(), [&](std::vector<double> &x_i_){
-            //check that x_i_ is equal to x
-            bool FLAG_EQ = true;
-            for(auto j = 0; j < bins[i].size(); ++j)
-            {
-                if (x_i_[j] != e_dist.mvd[j].bin_values[bins[i][j]])
-                {
-                    FLAG_EQ = false;
-                    break;
-                };
-            };
-            
-            return FLAG_EQ;});
-        
-        //count number
-        for (; x_i != parsed_file.end(); ++x_i)
+        //calculate starting position for this bin
+        for(auto j = 0; j < bins[i].size(); ++j)
         {
-            freq_n[i] += 1;
+            N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+            i_pos += bins[i][j] * N_TAILS;
+            
         };
+        
+        //sum over the number of tails
+        for (auto k = 0; k < N_TAILS; ++k){
+            freq_n[i] += e_dist->freq[i_pos + k];
+        }
+        
+        i_pos = 0;
     };
-
-
-
 }
 
 
@@ -186,7 +188,7 @@ tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vect
 
 
 std::vector<double>
-tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
+tools::draw_joint_distribution(EmpiricalMVD* pmf, IRandom* rand)
 {
     
     std::vector<double> x;
@@ -196,12 +198,12 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
     
     
     //go through the list of univariate distributions
-    for (auto dist:pmf.mvd)
+    for (auto& dist:pmf->mvd)
     {
         //in indexes last value will be bin index
         //collapse conditional for already drawn values
         //returns list of indices into main list for conditional distribution
-        auto cond_dist = collapse_pmf(i_x, dist);
+        auto cond_dist = collapse_pmf(i_x, dist, pmf);
         
         //calculate scale factor
         auto scale_factor = calculate_scale_factor(cond_dist, dist);
@@ -214,24 +216,24 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
         //draw next uniform
         u_i = rand->ru();
         auto i = get_inverse_index(cmf, u_i);
-        i_x.push_back(dist.cond_values[cond_dist[i]].back());
-        if (dist.type == ERandomParams::Discrete)
+        i_x.push_back(dist->cond_values[cond_dist[i]].back());
+        if (dist->type == ERandomParams::Discrete)
         {
-            x.push_back(dist.bin_values[i_x.back()]);
+            x.push_back(dist->bin_values[i_x.back()]);
         }
-        else if (dist.type == ERandomParams::ContinuousDiscretized)
+        else if (dist->type == ERandomParams::ContinuousDiscretized)
         {
             //if it is continuous - get inverse index and inverse value from the corresponding description
             //will point to the bin to use - simple linear inverse
             //check if it is last bin and if it will include inf right end
             
-            if (( i == dist.theta_bins.size() - 1) && (dist.bin_ends.back() == constants::SOLAR_INFINITY()))
+            if (( i == dist->theta_bins.size() - 1) && (dist->bin_ends.back() == constants::SOLAR_INFINITY()))
             {
-                x.push_back(get_inverse_value_exp(dist.theta_bins[i], u_i));
+                x.push_back(get_inverse_value_exp(dist->theta_bins[i], u_i));
             }
             else
             {
-                x.push_back(get_inverse_value(dist.theta_bins[i], u_i));
+                x.push_back(get_inverse_value(dist->theta_bins[i], u_i));
             };
         };
         
@@ -243,18 +245,18 @@ tools::draw_joint_distribution(EmpiricalMVD& pmf, IRandom* rand)
 
 
 std::vector<long>
-tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist)
+tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD* dist, EmpiricalMVD* pmf)
 {
     std::vector<long> cond_dist;
     bool FLAG_EQ = true;
     //pick only rows with values from there
-    for (auto i = 0; i < dist.cond_values.size(); ++i)
+    for (auto i = 0; i < dist->cond_values.size(); ++i)
     {
         //should still push all as will never go into the cycle in the first place
         FLAG_EQ = true;
         for (auto j = 0; j < i_x.size(); ++j)
         {
-            if (dist.cond_values[i][j] != i_x[j])
+            if (dist->cond_values[i][j] != i_x[j])
             {
                 FLAG_EQ = false;
                 break;
@@ -262,7 +264,13 @@ tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist)
         };
         if (FLAG_EQ)
         {
-            cond_dist.push_back(i);
+            //will always push continious chunk because of the layout length will be N_BINS
+            for (auto k = 0; k < dist->bin_values.size(); ++k)
+            {
+                //save position into the distiribution table
+                cond_dist.push_back(i + k);
+            };
+            break;
         };
     };
     
@@ -274,13 +282,13 @@ tools::collapse_pmf(std::vector<long>& i_x, EmpiricalUVD& dist)
 
 
 double
-tools::calculate_scale_factor(std::vector<long>& cond_dist, EmpiricalUVD& dist)
+tools::calculate_scale_factor(std::vector<long>& cond_dist, EmpiricalUVD* dist)
 {
     double scale_factor = 0;
     
     for (auto i:cond_dist)
     {
-        scale_factor += dist.cond_freq[i];
+        scale_factor += dist->cond_freq[i];
     };
     
     
@@ -290,30 +298,36 @@ tools::calculate_scale_factor(std::vector<long>& cond_dist, EmpiricalUVD& dist)
 
 
 std::vector<double>
-tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUVD& dist)
+tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUVD* dist)
 {
     std::vector<double> cmf{0};
     for (auto i = 0; i < cond_dist.size(); ++i)
     {
-        cmf.push_back(cmf[i] + dist.cond_freq[cond_dist[i]] / scale_factor);
+        cmf.push_back(cmf[i] + dist->cond_freq[cond_dist[i]] / scale_factor);
     };
     
-    
-    dist.theta_bins.clear();
-    //update theta_bins
-    for (auto i = 1; i < cmf.size(); ++i)
+    if (dist->type == ERandomParams::ContinuousDiscretized)
     {
-        dist.theta_bins.push_back(std::vector<double>{});
-        if (( i != cmf.size() - 1) || ((i == cmf.size() - 1) && (dist.bin_ends.back() != constants::SOLAR_INFINITY())))
+        dist->theta_bins.clear();
+        //update theta_bins
+        for (auto i = 1; i < cmf.size(); ++i)
         {
-            dist.theta_bins.back().push_back(cmf[i-1]);
-            dist.theta_bins.back().push_back(dist.bin_ends[i] - dist.bin_ends[i-1]);
-            dist.theta_bins.back().push_back(cmf[i] - cmf[i-1]);
-            dist.theta_bins.back().push_back(dist.bin_ends[i-1]);
-        }
-        else
-        {
-            dist.theta_bins.back().push_back(std::exp(dist.bin_ends[i-1]) * (1 - cmf[i-1]));
+            dist->theta_bins.push_back(std::vector<double>{});
+            if (( i != cmf.size() - 1) || ((i == cmf.size() - 1) && (dist->bin_ends.back() != constants::SOLAR_INFINITY())))
+            {
+                dist->theta_bins.back().push_back(cmf[i-1]);
+                dist->theta_bins.back().push_back(dist->bin_ends[i] - dist->bin_ends[i-1]);
+                dist->theta_bins.back().push_back(cmf[i] - cmf[i-1]);
+                dist->theta_bins.back().push_back(dist->bin_ends[i-1]);
+            }
+            else
+            {
+                //scale it down
+//                std::cout << std::endl;
+                dist->theta_bins.back().push_back(dist->bin_ends[(i - 1)]);
+                dist->theta_bins.back().push_back(std::exp(dist->bin_ends[(i - 1)]/dist->theta_bins.back()[0]) * (1 - cmf[i-1]));
+                
+            };
         };
     };
     
@@ -326,14 +340,15 @@ tools::create_cmf(std::vector<long>& cond_dist, double scale_factor, EmpiricalUV
 long
 tools::get_inverse_index(std::vector<double>& cmf, double u_i)
 {
-    long i = 0;
+    long i = 1;
     for (; i < cmf.size(); ++i)
     {
-        if (u_i > cmf[i])
+        if ((u_i < cmf[i]) && (u_i >= cmf[i-1]))
         {
             break;
         };
     };
+
     
     //breaks when crossed over, so returns step back
     return i - 1;
@@ -353,10 +368,14 @@ double
 tools::get_inverse_value_exp(std::vector<double>& theta_bin, double u_i)
 {
     //uses exponent as a proxy
+    double ret = (-std::log((1 - u_i)/theta_bin[1]) * theta_bin[0]);
     
-    return (-std::log((1 - u_i)/theta_bin[0]));
+//    if (ret > 1000000)
+//    {
+////        throw std::runtime_error("too big simulation value");
+//    };
     
-    
+    return ret;
 }
 
 

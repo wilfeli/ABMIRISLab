@@ -28,7 +28,7 @@ namespace solar_core
 //            const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
 //            const std::regex re{"(\d+)(,\s*\d+)*"};
             const std::regex re("[\\s,]+");
-            auto n = 0;
+//            auto n = 0;
             
             //skip first line
             std::getline(in_file, s);
@@ -45,14 +45,14 @@ namespace solar_core
                 for (std::sregex_token_iterator iter(s.begin(), s.end(), re, -1); iter != end; ++iter)
                 {
                     
-#ifdef DEBUG
-                    if (n < 20)
-                    {
-                        std::cout << iter->str() << std::endl;
-                        ++n;
-                    };
-                    
-#endif
+//#ifdef DEBUG
+//                    if (n < 20)
+//                    {
+//                        std::cout << iter->str() << std::endl;
+//                        ++n;
+//                    };
+//                    
+//#endif
                     
                     parsed_file.back().push_back(serialize::DeserializeValue<T>::deserialize_value(*iter));
                 };
@@ -61,19 +61,19 @@ namespace solar_core
             
             
             
-#ifdef DEBUG
-            
-            for (auto i = 0; i < 10; ++i)
-            {
-                for (auto j = 0; j < parsed_file[i].size(); ++j)
-                {
-                    std::cout << parsed_file[i][j] << " ";
-                };
-                
-                std::cout << std::endl;
-            };
-            
-#endif
+//#ifdef DEBUG
+//            
+//            for (auto i = 0; i < 10; ++i)
+//            {
+//                for (auto j = 0; j < parsed_file[i].size(); ++j)
+//                {
+//                    std::cout << parsed_file[i][j] << " ";
+//                };
+//                
+//                std::cout << std::endl;
+//            };
+//            
+//#endif
             
             
             

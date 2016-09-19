@@ -6,7 +6,7 @@
                {
                "EParamTypes::Income": "FORMULA::p.d.f.::CUSTOM"
                },
-               {"EParamTypes::HHMaxNVisitsPerTimeUnit":5},
+               {"EParamTypes::HOMaxNVisitsPerTimeUnit":5},
                {"EParamTypes::CreditScore":680}
                ],
     "location": "FORMULA::p.d.f.::u_int(0, size)",
@@ -17,7 +17,7 @@
     "quote_state": "EParamTypes::InactiveQuoting",
     "THETA_design": [
                      {
-                     "EParamTypes::HHDecPreliminaryQuote": [
+                     "EParamTypes::HODecPreliminaryQuote": [
                                                             "FORMULA::p.d.f.::u(0, 1)"
                                                             ]
                      }

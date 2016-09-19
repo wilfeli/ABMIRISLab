@@ -92,7 +92,7 @@ Utility::act_tick()
                     
                     //check that it is valid pdf
                     auto pdf_p = boost::uniform_01<>();
-                    auto rng_p = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand->rng, pdf_p);
+                    auto rng_p = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand_utility->rng, pdf_p);
                     
                     //grant permit with some probability
                     if (rng_p() < p)

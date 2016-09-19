@@ -6,11 +6,18 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+
+
+
+
 #ifndef ABMSolar_IParameters_h
 #define ABMSolar_IParameters_h
 
 #include "Tools/ExternalIncludes.h"
 #include <boost/property_tree/ptree.hpp>
+#include <Eigen/Dense>
 
 #ifdef DEBUG
 
@@ -31,8 +38,13 @@ namespace solar_core
         const int WAIT_CYCLES_VIEW_REQUEST = 10;
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
         const double NUMBER_DAYS_IN_YEAR = 365.25;
+        const double NUMBER_DAYS_IN_TICK = 365.25;
+        const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
-        const int NUMBER_AGENT_TYPES_LIFE = 5; /*!< number of agents that update in W::life(), hh, sei, sem, g, market */
+        const double NUMBER_SQM_IN_SQF = 0.09290304;
+        const int NUMBER_AGENT_TYPES_LIFE = 6; /*!< number of agents that update in W::life(), hh, sei, sem, g, market, utility */
+        const int NUMBER_AGENT_TYPES_LIFE_EE = 3; /*!< number of agents that update in WEE::life(), hh, sei, sem  */
+        const int N_BETA_SEI_WM = 5;
         static constexpr double SOLAR_INFINITY() {return std::numeric_limits<double>::infinity();}; /*!< could use INFINITY macro constant from <cmath>, but it will be float infinity. see http://en.cppreference.com/w/cpp/header/cmath */
         static constexpr double SOLAR_NAN() {return std::numeric_limits<double>::quiet_NaN();};
         // ... other related constants
@@ -61,12 +73,74 @@ namespace solar_core
         Income,
         
 
-        /**  Number of humans in a household */
+        /**  Number of humans in a Homeowner */
         N_H,
         
         
         /** Credit score */
         CreditScore,
+        
+        
+        /** Average demand for electricity */
+        AverageElectricityDemand,
+        
+        
+        /** For @wp2 average level of solar radiation */
+        AverageSolarIrradiation,
+        
+        
+        /** For @wp2 average labor intencity of permitting in labor*hours */
+        AveragePermitDifficulty,
+        
+        
+        /** Consumption of electricity - monthly KWh */
+        ElectricityConsumption,
+        
+        
+        /** Projected growth rates */
+        AverageElectricityDemandGrowthRate,
+        
+        
+        /** Adjustment for RECS dataset from 2009 to 2015 */
+        AverageElectricityDemandHistoricalGrowth,
+        
+        
+        /** Average loan length */
+        AverageLoanLength,
+        
+        
+        /** Interest rate on a loan */
+        AverageInterestRateLoan,
+        
+        
+        /** Number of Homeowners to generate */
+        N_HO,
+        
+        /** Number of installers to generate */
+        N_SEI,
+        
+        /** Number of large installers to generate */
+        N_SEILarge,
+        
+        /** Number of manufactures to generate */
+        N_SEM,
+        
+        /** Number of homeowners that are interested in installing */
+        N_HOMarketingStateHighlyInterested,
+        
+        /** Number of potential buyers */
+        TotalPVMarketSize,
+        
+        
+        
+        /** Historical penetration level */
+        PenetrationLevel,
+        
+        
+        /** Labor price for the installers - qualified labor */
+        LaborPrice,
+        
+        
         
         
         /** Electricity Bill */
@@ -80,42 +154,42 @@ namespace solar_core
         RoofAge,
         
         
-		/*Why couldn't we use an enum class to show different levels of interest for HHMarketingState?*/
+		/*Why couldn't we use an enum class to show different levels of interest for HOMarketingState?*/
 		
-		/** If Household is very interested in SP */
-        HHMarketingStateHighlyInterested,
+		/** If Homeowner is very interested in SP */
+        HOMarketingStateHighlyInterested,
         
         
-        /** If Household is just interested in SP and ready to ask for quotes */
-        HHMarketingStateInterested,
+        /** If Homeowner is just interested in SP and ready to ask for quotes */
+        HOMarketingStateInterested,
         
         
-        /** If Household is not interested in installing SP */
-        HHMarketingNotInterested,
+        /** If Homeowner is not interested in installing SP */
+        HOMarketingNotInterested,
 
         
-        /** If Household is already installed */
-        HHMarketingCommitedToInstallation,
+        /** If Homeowner is already installed */
+        HOMarketingCommitedToInstallation,
 
         
-        /** State of a quoting stage for HH: actively requesting information */
+        /** State of a quoting stage for HO: actively requesting information */
         ActiveQuoting,
         
         
-        /** State of a quoting stage for HH: not requesting quotes, might be analysing them or committed to the project */
+        /** State of a quoting stage for HO: not requesting quotes, might be analysing them or committed to the project */
         InactiveQuoting,
         
         
-        /** State of a quoting stage for HH: decision on reroofing old roof */
-        HHDecisionReroof,
+        /** State of a quoting stage for HO: decision on reroofing old roof */
+        HODecisionReroof,
         
         
-        /** Maximum number of visits per unit of time for HH */
-        HHMaxNVisitsPerTimeUnit,
+        /** Maximum number of visits per unit of time for HO */
+        HOMaxNVisitsPerTimeUnit,
         
         
         /** Thetas for decisions: decision on preliminary quotes */
-        HHDecPreliminaryQuote,
+        HODecPreliminaryQuote,
         
         
         /** State of a Project: preliminary quotes has been requested via online */
@@ -137,10 +211,10 @@ namespace solar_core
         CollectedInfFirstSiteVisit,
         
         /** State of a Project: Roof needs to be changed */
-        RequiredHHReroof,
+        RequiredHOReroof,
         
         /** State of a Project: Homeowner agreed to reroof thus waiting for reroofing */
-        WaitingHHReroof,
+        WaitingHOReroof,
         
         /** State of a Project: project is accepted for further development*/
         AcceptedPreliminaryQuote,
@@ -255,7 +329,7 @@ namespace solar_core
         /** Parameters of a SEI, such as processing time before action is taken to schedule first site visit */
         SEIProcessingTimeRequiredForSchedulingFirstSiteVisit,
         
-        /** Parameters of a SEI, processing time before design is created after project is accepted by HH */
+        /** Parameters of a SEI, processing time before design is created after project is accepted by HO */
         SEIProcessingTimeRequiredForDesign,
         
         /** Maximum number of visits per unit of time for SEI */
@@ -285,6 +359,22 @@ namespace solar_core
         
     
         
+        SEITimeLUForDesign,
+        
+        SEITimeLUForMarketing,
+        
+        SEITimeLUForPermit,
+        
+        SEITimeLUForAdministration,
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /** SEM parameters: Length of a production cycle  */
         SEMFrequencyProduction,
         
@@ -308,11 +398,11 @@ namespace solar_core
         /** SEM parameter: Base level of efficiency with 1.0 as price adjustment */
         SEMPriceBaseEfficiency,
         
-        /** SEM parameter: Marrkup to the price for the increased efficiency */
+        /** SEM parameter: Markup to the price for the increased efficiency */
         SEMPriceMarkupEfficiency,
         
-        
-        
+        /** SEM parameter: Learning rate for production of new panels, basically price decrease rate */
+        SEMLearningPrice,
         
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
@@ -325,6 +415,10 @@ namespace solar_core
         
         /** G parameters: processing time for granting installation permit */
         GProcessingTimeRequiredForGrantingPermitForInstallation,
+        
+        
+        GFederalTaxIncentive,
+        
         
         /** Utility parameters: time to investigate request for interconnection */
         UtilityProcessingTimeRequiredForPermit,
@@ -341,7 +435,7 @@ namespace solar_core
         
         
         
-        /** Marketing part: number of HH to draw per unit of time to push marketing information */
+        /** Marketing part: number of HO to draw per unit of time to push marketing information */
         MarketingMaxNToDrawPerTimeUnit,
         
         
@@ -351,6 +445,12 @@ namespace solar_core
         
         /** Technology block: inverters technology type micro */
         TechnologyInverterMicro,
+        
+        
+        /** Number of H to draw per tick for EE model */
+        WHMaxNToDrawPerTimeUnit,
+        
+        
         
         
         /** Empty enum for completeness */
@@ -366,7 +466,7 @@ namespace solar_core
         
         
         /** Maximum number of open projects to consider */
-        MaxNOpenProjectsHH,
+        MaxNOpenProjectsHO,
         
         
         /** Maximum number of preliminary quotes to request from received online quotes */
@@ -438,10 +538,39 @@ namespace solar_core
     
     
     
+    
+    enum class EDecParams: int64_t
+    {
+        Reputation_i,
+        
+        Reputation,
+        
+        Price_i,
+        
+        Price,
+        
+        irr,
+        
+        irr_i,
+        
+        NewTechnology,
+        
+        CurrentTechnology,
+        
+        Share,
+        
+        None
+        
+    };
+    
+    
+    
+    
     typedef int64_t TimeUnit;
     typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
-    
-    
+    typedef Eigen::MatrixXd ThetaType; //one of containers for parameters
+    typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, 1> SEIWMDataType; //one of containers for parameters
+    typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM> SEIWMMatrixd;
     
     typedef std::underlying_type<EParamTypes>::type EParamTypes_type;
     
@@ -458,7 +587,7 @@ namespace solar_core
             //case insensitive
             std::transform(param_type.begin(), param_type.end(), param_type.begin(), ::tolower);
             
-            if (param_type == "eparamtypes::income") //why do we only make income and N_H case insensitive?
+            if (param_type == "eparamtypes::income")
             {
                 return EParamTypes::Income;
             }
@@ -466,9 +595,9 @@ namespace solar_core
             {
                 return EParamTypes::N_H;
             }
-            else if (param_type == "eparamtypes::hhdecpreliminaryquote")
+            else if (param_type == "eparamtypes::hodecpreliminaryquote")
             {
-                return EParamTypes::HHDecPreliminaryQuote;
+                return EParamTypes::HODecPreliminaryQuote;
             }
             else if (param_type == "eparamtypes::creditscore")
             {
@@ -478,13 +607,33 @@ namespace solar_core
             {
                 return EParamTypes::ElectricityBill;
             }
-            else if (param_type == "eparamtypes::hhmaxnvisitspertimeunit")
+            else if (param_type == "eparamtypes::averageelectricitydemand")
             {
-                return EParamTypes::HHMaxNVisitsPerTimeUnit;
+                return EParamTypes::AverageElectricityDemand;
             }
-            else if (param_type == "eparamtypes::hhmarketingstatehighlyinterested")
+            else if (param_type == "eparamtypes::electricitypriceucsupply")
             {
-                return EParamTypes::HHMarketingStateHighlyInterested;
+                return EParamTypes::ElectricityPriceUCSupply;
+            }
+            else if (param_type == "eparamtypes::averageelectricitydemandgrowthrate")
+            {
+                return EParamTypes::AverageElectricityDemandGrowthRate;
+            }
+            else if (param_type == "eparamtypes::averageelectricitydemandhistoricalgrowth")
+            {
+                return EParamTypes::AverageElectricityDemandHistoricalGrowth;
+            }
+            else if (param_type == "eparamtypes::penetrationlevel")
+            {
+                return EParamTypes::PenetrationLevel;
+            }
+            else if (param_type == "eparamtypes::homaxnvisitspertimeunit")
+            {
+                return EParamTypes::HOMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::homarketingstatehighlyinterested")
+            {
+                return EParamTypes::HOMarketingStateHighlyInterested;
             }
             else if (param_type == "eparamtypes::inactivequoting")
             {
@@ -546,6 +695,70 @@ namespace solar_core
             {
                 return EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit;
             }
+            else if (param_type == "eparamtypes::seitimeluformarketing")
+            {
+                return EParamTypes::SEITimeLUForMarketing;
+            }
+            else if (param_type == "eparamtypes::seitimelufordesign")
+            {
+                return EParamTypes::SEITimeLUForDesign;
+            }
+            else if (param_type == "eparamtypes::seitimeluforpermit")
+            {
+                return EParamTypes::SEITimeLUForPermit;
+            }
+            else if (param_type == "eparamtypes::seitimeluforadministration")
+            {
+                return EParamTypes::SEITimeLUForAdministration;
+            }
+            else if (param_type == "eparamtypes::n_ho")
+            {
+                return EParamTypes::N_HO;
+            }
+            else if (param_type == "eparamtypes::n_sei")
+            {
+                return EParamTypes::N_SEI;
+            }
+            else if (param_type == "eparamtypes::n_seilarge")
+            {
+                return EParamTypes::N_SEILarge;
+            }
+            else if (param_type == "eparamtypes::n_sem")
+            {
+                return EParamTypes::N_SEM;
+            }
+            else if (param_type == "eparamtypes::n_homarketingstatehighlyinterested")
+            {
+                return EParamTypes::N_HOMarketingStateHighlyInterested;
+            }
+            else if (param_type == "eparamtypes::totalpvmarketsize")
+            {
+                return EParamTypes::TotalPVMarketSize;
+            }
+            else if (param_type == "eparamtypes::laborprice")
+            {
+                return EParamTypes::LaborPrice;
+            }
+            else if (param_type == "eparamtypes::averagesolarirradiation")
+            {
+                return EParamTypes::AverageSolarIrradiation;
+            }
+            else if (param_type == "eparamtypes::averagepermitdifficulty")
+            {
+                return EParamTypes::AveragePermitDifficulty;
+            }
+            else if (param_type == "eparamtypes::electricityconsumption")
+            {
+                return EParamTypes::ElectricityConsumption;
+            }
+            else if (param_type == "eparamtypes::averageloanlength")
+            {
+                return EParamTypes::AverageLoanLength;
+            }
+            else if (param_type == "eparamtypes::averageinterestrateloan")
+            {
+                return EParamTypes::AverageInterestRateLoan;
+            }
             else if (param_type == "eparamtypes::gprocessingtimerequiredforprocessingpermit")
             {
                 return EParamTypes::GProcessingTimeRequiredForProcessingPermit;
@@ -557,6 +770,10 @@ namespace solar_core
             else if (param_type == "eparamtypes:gmaxnvisitspertimeunit")
             {
                 return EParamTypes::GMaxNVisitsPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::gfederaltaxincentive")
+            {
+                return EParamTypes::GFederalTaxIncentive;
             }
             else if (param_type == "eparamtypes::dctoacloss")
             {
@@ -610,6 +827,10 @@ namespace solar_core
             {
                 return EParamTypes::SEMProductionQuantity;
             }
+            else if (param_type == "eparamtypes::semlearningprice")
+            {
+                return EParamTypes::SEMLearningPrice;
+            }
             else if (param_type == "eparamtypes::utilitycurrentcapacity")
             {
                 return EParamTypes::UtilityCurrentCapacity;
@@ -621,6 +842,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::utilityprocessingtimerequiredforpermit")
             {
                 return EParamTypes::UtilityProcessingTimeRequiredForPermit;
+            }
+            else if (param_type == "eparamtypes::whmaxntodrawpertimeunit")
+            {
+                return EParamTypes::WHMaxNToDrawPerTimeUnit;
             }
             else
             {
@@ -636,21 +861,21 @@ namespace solar_core
         
         static std::string FromEParamTypes(EParamTypes param_)
         {
-            if (param_ == EParamTypes::HHMarketingStateHighlyInterested)
+            if (param_ == EParamTypes::HOMarketingStateHighlyInterested)
             {
-                return "EParamTypes::HHMarketingStateHighlyInterested";
+                return "EParamTypes::HOMarketingStateHighlyInterested";
             }
-            else if (param_ == EParamTypes::HHMarketingStateInterested)
+            else if (param_ == EParamTypes::HOMarketingStateInterested)
             {
-                return "EParamTypes::HHMarketingStateInterested";
+                return "EParamTypes::HOMarketingStateInterested";
             }
-            else if (param_ == EParamTypes::HHMarketingNotInterested)
+            else if (param_ == EParamTypes::HOMarketingNotInterested)
             {
-                return "EParamTypes::HHMarketingNotInterested";
+                return "EParamTypes::HOMarketingNotInterested";
             }
-            else if (param_ == EParamTypes::HHDecPreliminaryQuote)
+            else if (param_ == EParamTypes::HODecPreliminaryQuote)
             {
-                return "EParamTypes::HHDecPreliminaryQuote";
+                return "EParamTypes::HODecPreliminaryQuote";
             }
             else if (param_ == EParamTypes::SEISmall)
             {
@@ -702,9 +927,9 @@ namespace solar_core
             {
                 return EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes;
             }
-            else if (param_type == "econstraintparams::maxnopenprojectshh")
+            else if (param_type == "econstraintparams::maxnopenprojectsho")
             {
-                return EConstraintParams::MaxNOpenProjectsHH;
+                return EConstraintParams::MaxNOpenProjectsHO;
             }
             else if (param_type == "econstraintparams::semmaxlengthrecordhistory")
             {
@@ -735,4 +960,7 @@ namespace solar_core
     
 
 } //end of namespace solar_core
+
+#pragma clang diagnostic pop
+
 #endif
