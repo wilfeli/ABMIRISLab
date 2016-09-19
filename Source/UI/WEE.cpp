@@ -569,38 +569,12 @@ void WEE::ac_update_wm()
     for (auto iter:installed_projects_time)
     {
         auto N_i = iter.second.size();
-//        double share = N_i / N;
-//        N = 10;
-//#ifdef DEBUG
-//        std::cout << N_i << std::endl;
-//#endif
-//#ifdef DEBUG
-//        std::cout << N << std::endl;
-//#endif
-//#ifdef DEBUG
-//        std::cout << std::fixed << std::setprecision(2) << N_i/N << std::endl;
-//#endif
-//
-//
-
-        
         market_share_seis[iter.first] = N_i/N;
-//        
-//#ifdef DEBUG
-//        std::cout << market_share_seis[iter.first] << std::endl;
-//#endif
     };
     
     //save into history
     installed_projects_history.push_back(installed_projects_time);
     installed_projects_time.clear();
-    
-    
-//#ifdef DEBUG
-//    std::cout << time << " " << N_installed_projects_time << std::endl;
-//    std::cout << time << " " << i_pool_projects + 1 << std::endl;
-//#endif
-    
     
     N_installed_projects_time = 0;
     
@@ -612,32 +586,33 @@ void WEE::ac_update_wm()
     
     std::sort(sorted_by_market_share_seis.begin(), sorted_by_market_share_seis.end(), cmp);
     
+
+    
     
 //#ifdef DEBUG
-//    
-//    std::cout << time << "  ";
-//    for (auto& uid:sorted_by_market_share_seis)
-//    {
-//        std::cout << uid.get_string() << "  ";
-//        std::cout << market_share_seis[uid] << ",";
-//        
-//    };
-//    std::cout << std::endl;
-//    
-//
-//    
-//#endif
-//    
-//    
-//    
-//#ifdef DEBUG
+//    //higher is better
+//    std::cout << "reputation" << std::endl;
 //    std::cout<< time << std::endl;
-//    for (auto& sei:*seis)
+//    for (std::size_t i = 0; i < seis->size(); ++i)
 //    {
-//        std::cout<< sei->dec_design->p_design << std::endl;
+//        std::cout << ((*seis)[i]->THETA_reputation[0] != 1.0 ? 1/((*seis)[i]->THETA_reputation[0] - 1) : 1.0) << std::endl;
 //    };
 //#endif
-    
+//    
+//    
+//#ifdef DEBUG
+//    //lower is better
+//    std::cout << "reliablity" << std::endl;
+//    for (std::size_t i = 0; i < sems->size(); ++i)
+//    {
+//        if ((*sems)[i]->solar_panel_templates[EDecParams::NewTechnology])
+//        {
+//            std::cout << (*sems)[i]->solar_panel_templates[EDecParams::NewTechnology]->THETA_reliability[0] << std::endl;
+//        };
+//    };
+//    
+//    
+//#endif
     
     
     //save efficiency numbers
