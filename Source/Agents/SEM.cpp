@@ -92,6 +92,11 @@ SEM::init(W* w_)
 }
 
 
+void SEM::init_world_connections()
+{
+}
+
+
 
 bool
 SEM::sell_SolarModule(solar_core::MesSellOrder &mes_)
@@ -154,7 +159,7 @@ SEM::act_tick()
         if (params[EParamTypes::SEMNSolarPanelsResearch] > 0.0)
         {
             auto pdf_i = boost::uniform_int<uint64_t>(0, solar_panel_templates.size() - 1);
-            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sem->rng, pdf_i);
             
             std::set<std::size_t> templates_to_replace;
             

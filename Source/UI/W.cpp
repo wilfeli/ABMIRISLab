@@ -6,6 +6,8 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++11-compat"
 
 
 
@@ -23,7 +25,7 @@
 #include "Agents/SEM.h"
 #include "Agents/Utility.h"
 #include "Agents/G.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 #include "UI/HelperW.h"
 
 
@@ -31,6 +33,14 @@ using boost::property_tree::read_json;
 
 
 using namespace solar_core;
+
+
+
+
+
+
+
+
 
 /**
  
@@ -49,89 +59,24 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
     boost::filesystem::path path_to_model_file(path_);
     boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
     boost::filesystem::path path_to_template;
+    std::string path;
     //    Log::instance(path_);
+    
+    //preallocate stuff
+    PropertyTree pt;
+    std::map<std::string, std::string> params_str;
+    
     
     if (mode_ == "NEW")
     {
         
-        std::map<std::string, std::string> parsed_model;
+        create_world(path_to_model_file, path_to_dir, path_to_template, pt, params_str);
         
-        tools::parse_model_file(path_to_model_file.string(), parsed_model);
         
-        std::string w_file_name = "";
-        if (parsed_model.count("path_to_save") > 0)
-        {
-            params["path_to_save"] = parsed_model["path_to_save"];
-        }
-        else
-        {
-            throw std::runtime_error("Wrong configuration file");
-        };
-
         
+        //ho.json
         path_to_template = path_to_dir;
-        path_to_template /= "w.json";
-        
-        std::string path = path_to_template.string();
-        
-        //baseline model
-        PropertyTree pt;
-        read_json(path, pt);
-        
-        auto N_SEI = pt.get<long>("N_SEI");
-        auto N_SEILarge = pt.get<long>("N_SEILarge");
-        auto N_SEM = pt.get<long>("N_SEM");
-        auto N_HH = pt.get<long>("N_HH");
-        auto N_HHMarketingStateHighlyInterested = pt.get<long>("N_HHMarketingStateHighlyInterested");
-        
-        //create RNG
-        rand = new IRandom(pt.get<double>("SEED"));
-        
-        
-        //create parameters
-        std::map<std::string, std::string> params_str;
-        serialize::deserialize(pt.get_child("WorldSettings.params_exog"),params_str);
-        
-        for (auto& iter:params_str)
-        {
-            WorldSettings::instance().params_exog[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
-        };
-        
-        
-        
-        params_str.clear();
-        serialize::deserialize(pt.get_child("WorldSettings.constraints"),params_str);
-        for (auto& iter:params_str)
-        {
-            WorldSettings::instance().constraints[EnumFactory::ToEConstraintParams(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
-        };
-        
-        serialize::deserialize(pt.get_child("params"),params);
-        
-        //set internals
-        time = 0;
-        
-        
-        //solar_module.json
-        path_to_template = path_to_dir;
-        path_to_template /= "solar_equipment.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        
-        //create existing solar modules
-        serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
-        
-        
-        //create grid
-        path_to_template = path_to_dir;
-        path_to_template /= "geography.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        world_map = new WorldMap(pt, this);
-        
-        //hh.json
-        path_to_template = path_to_dir;
-        path_to_template /= "hh.json";
+        path_to_template /= "ho.json";
         path = path_to_template.string();
         read_json(path, pt);
         
@@ -156,7 +101,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         //check that it is uniform distribution
         if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
         {
-            throw std::runtime_error("unsupported hh specification rule");
+            throw std::runtime_error("unsupported ho specification rule");
         };
         auto max_ = world_map->g_map[0].size() - 1;
         auto pdf_location_x = boost::uniform_int<uint64_t>(0, max_);
@@ -168,10 +113,6 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         //will draw electricity bill for each, roof size as a constant percent of a house size, income
-        
-        
-        
-        
         
         auto formula_roof_age = pt.get<std::string>("House.roof_age");
         auto formula_roof_size = pt.get<std::string>("House.roof_size");
@@ -203,7 +144,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *rand);
         };
         
-        auto roof_age = [&coef = roof_age_coef](double house_size)->double {return coef*house_size;};
+        auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
 
         
         
@@ -214,7 +155,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         std::map<std::string, std::vector<std::string>> THETA_design_str;
         serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
         
-        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HHDecPreliminaryQuote)];
+        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HODecPreliminaryQuote)];
         
         if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
         {
@@ -236,7 +177,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
         std::vector<std::vector<double>> xs;
         //draw from the joint distribution
-        for(auto i = 0 ; i < N_HH; ++i)
+        for(auto i = 0 ; i < params_d[EParamTypes::N_HO]; ++i)
         {
             xs.push_back(tools::draw_joint_distribution(e_dist, rand));
         };
@@ -255,7 +196,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             
             if (params.valid_dist == true)
             {
-                param_values[name] = std::vector<double>(N_HH, 0.0);
+                param_values[name] = std::vector<double>(params_d[EParamTypes::N_HO], 0.0);
                 //generate map of random number generators with the name for this parameter?
                 switch (params.type)
                 {
@@ -266,14 +207,15 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
                         //see what parameter it is - save values
                         if (name == EParamTypes::ElectricityBill)
                         {
-                            for (auto i = 0; i < N_HH; ++i)
+                            for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
                             {
                                 param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
+                                param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
                             };
                         }
                         else if (name == EParamTypes::Income)
                         {
-                            for (auto i = 0; i < N_HH; ++i)
+                            for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
                             {
                                 param_values[name].push_back(xs[i][4]);
                             };
@@ -295,22 +237,22 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             {
                 //get value and store it as a value for all agents?
                 auto param = serialize::solve_str_formula<double>(iter.second, *rand);
-                param_values[name] = std::vector<double>(N_HH, param);
+                param_values[name] = std::vector<double>(params_d[EParamTypes::N_HO], param);
                 
             };
         };
         
         
         
-        //create HH
+        //create HO
         auto j = 0;
-        for (auto i = 0; i < N_HH; ++i)
+        for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
         {
-            if (j < N_HHMarketingStateHighlyInterested)
+            if (j < params_d[EParamTypes::N_HOMarketingStateHighlyInterested])
             {
                 //create few highly interested agents
                 //put specific parameters into template
-                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HHMarketingStateHighlyInterested));
+                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HOMarketingStateHighlyInterested));
             };
             
             ++j;
@@ -328,20 +270,20 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
             
             
             //create decision parameters
-            THETA_design[EParamTypes::HHDecPreliminaryQuote] = std::vector<double>{rng_THETA()};
+            THETA_design[EParamTypes::HODecPreliminaryQuote] = std::vector<double>{rng_THETA()};
             pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
             
             
             
             //read configuration file
             //replace parameters if necessary
-            hhs.push_back(new Household(pt, this));
+            hos.push_back(new Homeowner(pt, this));
             
             
             //copy other parameters
             for (auto iter:param_values)
             {
-                hhs.back()->params[iter.first] = param_values[iter.first][i];
+                hos.back()->params[iter.first] = param_values[iter.first][i];
             };
             
             
@@ -354,7 +296,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        seis = helper_->create_seis(pt, mode_, N_SEI, N_SEILarge, rng_location_x, rng_location_y, this);
+        seis = helper_->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], params_d[EParamTypes::N_SEILarge], rng_location_x, rng_location_y, this);
         
         
         
@@ -365,7 +307,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        for (auto i = 0; i < N_SEM; ++i)
+        for (auto i = 0; i < params_d[EParamTypes::N_SEM]; ++i)
         {
             sems.push_back(new SEM(pt, this));
         };
@@ -424,7 +366,6 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         FLAG_SEM_TICK = true;
         FLAG_MARKET_TICK = true;
         updated_counter = 0;
-        //        updated_counter = constants::NUMBER_AGENT_TYPES_LIFE;
         notified_counter = 0;
         
     };
@@ -432,43 +373,92 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
 
 
 
-void
-W::create_seis(PropertyTree &pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y)
+void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesystem::path& path_to_dir, boost::filesystem::path& path_to_template, PropertyTree& pt, std::map<std::string, std::string>& params_str)
 {
-    //create random number generators for locations
-    //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
-    //check that it is uniform distribution
-    if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
+    std::map<std::string, std::string> parsed_model;
+    
+    tools::parse_model_file(path_to_model_file.string(), parsed_model);
+    
+    std::string w_file_name = "";
+    if (parsed_model.count("path_to_save") > 0)
     {
-        throw std::runtime_error("unsupported hh specification rule");
+        params["path_to_save"] = parsed_model["path_to_save"];
+    }
+    else
+    {
+        throw std::runtime_error("Wrong configuration file");
     };
     
     
-    //create SEI - use template for parameters, use model file for additional parameters
-    //create sei_type
-    auto j = 0;
-    for (auto i = 0; i < N_SEI; ++i)
+    path_to_template = path_to_dir;
+    path_to_template /= "w.json";
+    
+    std::string path = path_to_template.string();
+    
+    //baseline model
+    read_json(path, pt);
+    
+    params_d[EParamTypes::N_SEI] = pt.get<long>("N_SEI");
+    params_d[EParamTypes::N_SEILarge] = pt.get<long>("N_SEILarge");
+    params_d[EParamTypes::N_SEM] = pt.get<long>("N_SEM");
+    params_d[EParamTypes::N_HO] = pt.get<long>("N_HO");
+    params_d[EParamTypes::N_HOMarketingStateHighlyInterested] = pt.get<long>("N_HOMarketingStateHighlyInterested");
+    
+    //create RNG
+    rand_sei = new IRandom(pt.get<double>("SEED"));
+    rand = new IRandom(pt.get<double>("SEED"));
+    rand_sem = new IRandom(pt.get<double>("SEED"));
+    rand_ho = new IRandom(pt.get<double>("SEED"));
+    rand_g = new IRandom(pt.get<double>("SEED"));
+    rand_market = new IRandom(pt.get<double>("SEED"));
+    rand_utility = new IRandom(pt.get<double>("SEED"));
+    
+    //create parameters
+    serialize::deserialize(pt.get_child("WorldSettings.params_exog"),params_str);
+    
+    for (auto& iter:params_str)
     {
-        //put sei_type
-        pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
-        if (j < N_SEILarge)
-        {
-            pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
-        };
-        ++j;
-        
-        
-        //generate location
-        pt.put("location_x", rng_location_x());
-        pt.put("location_y", rng_location_y());
-        
-        
-        seis.push_back(new SEI(pt, this));
-        
-        
+        WorldSettings::instance().params_exog[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
     };
+    
+    
+    
+    params_str.clear();
+    serialize::deserialize(pt.get_child("WorldSettings.constraints"),params_str);
+    for (auto& iter:params_str)
+    {
+        WorldSettings::instance().constraints[EnumFactory::ToEConstraintParams(iter.first)] = serialize::solve_str_formula<double>(iter.second, *rand);
+    };
+    
+    serialize::deserialize(pt.get_child("params"),params);
+    
+    //set internals
+    time = 0;
+    
+    
+    //solar_module.json
+    path_to_template = path_to_dir;
+    path_to_template /= "solar_equipment.json";
+    path = path_to_template.string();
+    read_json(path, pt);
+    
+    //create existing solar modules
+    serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
+    
+    
+    //create grid
+    path_to_template = path_to_dir;
+    path_to_template /= "geography.json";
+    path = path_to_template.string();
+    read_json(path, pt);
+    world_map = new WorldMap(pt, this);
 
 }
+
+
+
+
+
 
 
 
@@ -482,7 +472,7 @@ W::init()
     
     
     
-    for (auto& agent:hhs)
+    for (auto& agent:hos)
     {
         agent->init(this);
     };
@@ -497,10 +487,6 @@ W::init()
         agent->init(this);
     };
     
-    
-    
-    
-
     
 }
 
@@ -531,6 +517,8 @@ W::life()
         
         if (updated_counter >= constants::NUMBER_AGENT_TYPES_LIFE)
         {
+            ac_update_tick();
+            
             ++time;
             updated_counter = 0;
             FLAG_SEI_TICK = true;
@@ -538,6 +526,7 @@ W::life()
             FLAG_G_TICK = true;
             FLAG_SEM_TICK = true;
             FLAG_MARKET_TICK = true;
+            FLAG_UTILITY_TICK = true;
             
             
             all_update.notify_all();
@@ -555,15 +544,15 @@ W::life()
     };
 }
 
-
+void W::ac_update_tick(){}
 
 
 void
-W::life_hhs()
+W::life_hos()
 {
     
     
-    //go through households that indicated desire to request information and inform them that action to request information could be taken
+    //go through Homeowners that indicated desire to request information and inform them that action to request information could be taken
     for (auto& agent:get_inf_marketing_sei_agents)
     {
         ///@DevStage3 might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place.
@@ -581,7 +570,7 @@ W::life_hhs()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto& agent:hhs)
+            for (auto& agent:hos)
             {
                 //get tick
                 agent->act_tick();
@@ -608,6 +597,8 @@ W::life_hhs()
 void
 W::life_seis()
 {
+//    std::cout<< "test" << std::endl;
+    
     while (!FLAG_IS_STOPPED)
     {
         if (FLAG_SEI_TICK && !FLAG_IS_STOPPED)
@@ -725,6 +716,35 @@ W::life_markets()
 }
 
 
+void
+W::life_utility()
+{
+    while (!FLAG_IS_STOPPED)
+    {
+        if (FLAG_UTILITY_TICK && !FLAG_IS_STOPPED)
+        {
+            ++notified_counter;
+            FLAG_UTILITY_TICK = false;
+            
+            auto& agent = utility;
+            
+            //get tick
+            agent->act_tick();
+            
+            ++updated_counter;
+        };
+        
+        while (!FLAG_UTILITY_TICK && !FLAG_IS_STOPPED)
+        {
+            //wait until new tick come
+            std::unique_lock<std::mutex> l(lock_tick);
+            //takes a predicate that is used to loop until it returns false
+            all_update.wait_for(l, std::chrono::milliseconds(constants::WAIT_MILLISECONDS_LIFE_TICK),[this](){return (FLAG_UTILITY_TICK || FLAG_IS_STOPPED); });
+        };
+    };
+}
+
+
 
 
 
@@ -742,7 +762,7 @@ W::get_permit_difficulty(double location_x, double location_y) const
 
 
 void
-W::get_state_inf(Household* agent_, EParamTypes state_)
+W::get_state_inf(Homeowner* agent_, EParamTypes state_)
 {
 }
 
@@ -760,4 +780,12 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
     interconnected_projects.push_back(project_);
 }
+
+
+
+
+#pragma clang diagnostic pop
+
+
+
 

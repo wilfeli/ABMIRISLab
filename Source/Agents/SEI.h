@@ -12,12 +12,15 @@
 
 
 #include "Tools/ExternalIncludes.h"
-
+#include "Tools/ID.h"
 #include "Tools/IParameters.h"
 #include "Agents/IAgent.h"
 #include "Agents/SolarPanel.h"
 
-
+namespace solar_ui
+{
+    class UIBL;
+}
 
 namespace solar_core
 {
@@ -34,7 +37,7 @@ namespace solar_core
     class MesDesign;
     class MesPayment;
     class W;
-    class Household;
+    class Homeowner;
     
     
     /**
@@ -165,7 +168,7 @@ namespace solar_core
          */
         
         static std::set<EParamTypes> project_states_to_delete;
-        
+        UID uid; /*!< is default initializedto be next id */
         
         //@}
 
@@ -215,6 +218,7 @@ namespace solar_core
         virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
         
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
+        std::map<EParamTypes, std::shared_ptr<Inverter>> dec_inverters; /*!< choices for different inverters to create design with */
         typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
         
         void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
@@ -262,7 +266,7 @@ namespace solar_core
         
         
         
-        std::map<EParamTypes, double> params; /** Parameters of a SEI */
+        std::map<EParamTypes, double> params; /** Parameters of a SEI, here will include price per watt also */
         EParamTypes sei_type;
         double money = 0.0; 
         
@@ -312,7 +316,7 @@ namespace solar_core
          
          */
         
-        void ac_update_tick(); /*!< update internals for the tick */
+        virtual void ac_update_tick(); /*!< update internals for the tick */
         
         //@}
         

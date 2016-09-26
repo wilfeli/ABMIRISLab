@@ -13,7 +13,7 @@
 #include "Agents/SEM.h"
 #include "Agents/SEI.h"
 #include "Agents/Utility.h"
-#include "Agents/H.h"
+#include "Agents/Homeowner.h"
 #include "Institutions/IMessage.h"
 #include "Institutions/MarketingSystem.h"
 #include "Agents/SolarPanel.h"
@@ -208,8 +208,8 @@ SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
         
         auto dec = project_->agent->dec_project_reroof(project_);
         
-        project_->state_base_agent->params[EParamTypes::HHDecisionReroof] = dec;
-        project_->state_project = EParamTypes::RequiredHHReroof;
+        project_->state_base_agent->params[EParamTypes::HODecisionReroof] = dec;
+        project_->state_project = EParamTypes::RequiredHOReroof;
         
     };
     
@@ -230,13 +230,13 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
     
     //if roof is old and refuses to reroof - close project
-    if (project_->state_project == EParamTypes::RequiredHHReroof)
+    if (project_->state_project == EParamTypes::RequiredHOReroof)
     {
         //if agrees to reroof - transfer into waiting state
         //otherwise mark as closed
-        if (project_->state_base_agent->params[EParamTypes::HHDecisionReroof])
+        if (project_->state_base_agent->params[EParamTypes::HODecisionReroof])
         {
-            project_->state_project = EParamTypes::WaitingHHReroof;
+            project_->state_project = EParamTypes::WaitingHOReroof;
         }
         else
         {
@@ -266,6 +266,15 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     return mes;
 }
 
+
+
+
+
+
+
+
+
+
 /**
  
  @wp accroding to the CSI data set there is 50/50 split on owning and leasing SP (see Host Customer Sector and System Owner Sector fields)
@@ -274,7 +283,8 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
  
  Example for California San Jose and REC260PE:
  Average daily use 30kWh per day. 
- For California assume 6 hours of solar. (Look at the map http://understandsolar.com/calculating-kilowatt-hours-solar-panels-produce/) It is kWh/m2/day. 
+ For California assume 6 hours of solar. (Look at the map http://understandsolar.com/calculating-kilowatt-hours-solar-panels-produce/ ) It is kWh/m2/day. 
+ (http://i1.wp.com/upload.wikimedia.org/wikipedia/commons/2/2c/Us_pv_annual_may2004.jpg?resize=1501%2C1164 )
  
  
  PTC refers to PVUSA Test Conditions, which were developed to test and compare PV systems as part of the PVUSA (Photovoltaics for Utility Scale Applications) project. PTC are 1,000 Watts per square meter solar irradiance, 20 degrees C air temperature, and wind speed of 1 meter per second at 10 meters above ground level.
@@ -387,7 +397,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     ///@DevStage2: calculate PPA
     ///@DevStage2: calculate lease
 
-    //simple calculation when HH owns the system
+    //simple calculation when HO owns the system
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
     auto energy_costs = 0.0;
@@ -527,8 +537,6 @@ SEI::act_tick()
 {
     //update internals for the tick
     ac_update_tick();
-    
-    
     
     
     
@@ -760,3 +768,10 @@ void
 SEI::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
 }
+
+
+
+
+
+
+
