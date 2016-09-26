@@ -49,15 +49,15 @@
                        "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes":2
                        },
                        {
-                       "EConstraintParams::MaxNOpenProjectsHH":10
+                       "EConstraintParams::MaxNOpenProjectsHO":10
                        }
                        ]
     },
-    "N_HH":500,
+    "N_HO":500,
     "N_SEI":3,
     "N_SEILarge": 1,
     "N_SEM":7,
-    "N_HHMarketingStateHighlyInterested":10,
+    "N_HOMarketingStateHighlyInterested":10,
     "SEED":2016,
     "params":[
               {

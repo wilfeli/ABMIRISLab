@@ -63,6 +63,7 @@ namespace solar_core
         
         SEM(const PropertyTree& pt_, W* w_);
         void init(W* w_);
+        virtual void init_world_connections();
         
         //@}
         
@@ -74,7 +75,7 @@ namespace solar_core
          
          */
         
-        void act_tick();
+        virtual void act_tick();
         
         bool sell_SolarModule(MesSellOrder& mes_);
         
@@ -103,7 +104,7 @@ namespace solar_core
          */
         
         UID uid;
-        
+        std::mutex lock;
         
         //@}
         
@@ -119,7 +120,7 @@ namespace solar_core
         
         W* w;
         TimeUnit a_time; /*!< agent time */
-        std::mutex lock;
+
         
         void ac_update_tick(); /*!< updates before tick */
         

@@ -119,17 +119,17 @@ public:
     
 /**
  
- Returns basic parameters of HH, is used in online quote process
+ Returns basic parameters of HO, is used in online quote process
  
  
  @DevStage3 if decide to have agent specific messages might later collapse them all into the same class
  
  
  */
-class MesStateBaseHH
+class MesStateBaseHO
 {
 public:
-    std::map<EParamTypes, double> params; /*!< basic parameters of HH */
+    std::map<EParamTypes, double> params; /*!< basic parameters of HO */
     
 };
     
