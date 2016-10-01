@@ -52,7 +52,7 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
     quote_stage_timer = 0;
     n_preliminary_quotes = 0;
     n_pending_designs = 0;
-    
+    n_preliminary_quotes_requested = 0;
     
     project_states_to_delete.insert(EParamTypes::ClosedProject);
 
@@ -74,7 +74,7 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
     //saves information about advertising agent only if not already commited to installing project
     ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
     
-    if (marketing_state != EParamTypes::HOMarketingCommitedToInstallation)
+    if (marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)
     {
         get_inf_marketing_sei.push_back(mes_);
         
@@ -99,19 +99,14 @@ Homeowner::ac_inf_marketing_sei()
 }
 
 
+
+
 void
 Homeowner::ac_inf_quoting_sei()
 {
-    
-    //move timer here
-    if ((!get_inf_marketing_sei.empty()) || quote_stage_timer > 0.0)
-    {
-        ++quote_stage_timer;
-    };
-    
     //requests quotes from SEI
-    //restricts number of projects
-    while ((!get_inf_marketing_sei.empty()) && (pvprojects.size() <= WorldSettings::instance().constraints[EConstraintParams::MaxNOpenProjectsHO]))
+    //will narrow down pool after gathering some information
+    while (!get_inf_marketing_sei.empty())
     {
         auto marketing_inf = get_inf_marketing_sei.front();
         
@@ -126,85 +121,122 @@ Homeowner::ac_inf_quoting_sei()
         pvprojects.push_back(new_project);
         marketing_inf->agent->get_project(new_project);
         
-        //Distinguishes between online and phone quote. Small installers might not have an online presence.
-        ///@DevStage2 think about moving difference to the virtual call. For now it is explicit, as it is assumed that agents themselves realize that it will be online vs offline quote
+        //uses online quote to gather general information to just narrow down the possible pool of projects
+        //will use non-compensatory rules here
         switch (marketing_state)
         {
             case EParamTypes::HOMarketingStateHighlyInterested:
-                //requests preliminary quote with site visit
-                new_project->state_project = EParamTypes::RequestedPreliminaryQuote;
-                marketing_inf->agent->request_preliminary_quote(new_project);
             case EParamTypes::HOMarketingStateInterested:
-                switch (marketing_inf->sei_type)
-            {
-                case EParamTypes::SEISmall:
-                    //returns quote in the form of a message
-                    // assume no online presence, so requests preliminary quote
-                    new_project->state_project = EParamTypes::RequestedPreliminaryQuote;
-                    marketing_inf->agent->request_preliminary_quote(new_project);
-                    break;
-                case EParamTypes::SEILarge:
-                    //requests online quote, it will be provided in a separate call
-                    new_project->state_project = EParamTypes::RequestedOnlineQuote;
-                    marketing_inf->agent->request_online_quote(new_project);
-                    break;
-                    
-                default:
-                    break;
-            }
-                
+                //request online quotes, assume that it is general information to narrow down pool of installers
+                //requests online quote, it will be provided in a separate call
+                new_project->state_project = EParamTypes::RequestedOnlineQuote;
+                //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
+                //
+                marketing_inf->agent->request_online_quote(new_project);
             default:
-                //otherwise do nothing as is not interested
                 break;
         };
         
         get_inf_marketing_sei.pop_front();
     };
-    
 }
+
+
+
 
 void
 Homeowner::dec_evaluate_online_quotes()
 {
-    //sort projects by price, lower price goes first
-    std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
-        //compare only if online quote was received,
-        bool compare_res = false;
-        if (lhs->state_project == EParamTypes::ProvidedOnlineQuote && rhs->state_project == EParamTypes::ProvidedOnlineQuote)
+    //here narrowing down of the pool by non-compensatory rules will be implemented
+    
+    //first by information - already activated if saw neighbor install PV system.
+    //second by customer rating
+    //there will be groups of non-compensatory rules, each Homeowner belongs to one of the groups
+    
+    
+    auto pool = std::vector<bool>(pvprojects.size(), false);
+    
+    for (auto i = 0; i < pvprojects.size(); ++i)
+    {
+        //check if is in the pool
+        //check on Customer rating
+        if (pvprojects[i]->sei->params[EParamTypes::SEIRating] >= THETA_NCDecisions[EParamTypes::SEIRating][0])
         {
-            compare_res = lhs->online_quote->params[EParamTypes::OnlineQuotePrice] < rhs->online_quote->params[EParamTypes::OnlineQuotePrice];
+            pool[i] = true;
         };
-        return compare_res;
-    });
-    
-    
-    //mark first N projects for requesting preliminary quotes and request them
-    auto n_request_quotes = 0;
-    auto max_n_request_quotes = WorldSettings::instance().constraints[EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes];
-    while (n_request_quotes < max_n_request_quotes)
-    {
-        auto project = pvprojects[n_request_quotes];
-        project->state_project = EParamTypes::RequestedPreliminaryQuote;
-        project->sei->request_preliminary_quote(project);
-        ++n_request_quotes;
     };
     
     
-    //close other projects
-    auto i = n_request_quotes;
-    while (i < pvprojects.size())
+    for (auto i = 0; i < pool.size(); ++i)
     {
-        pvprojects[i]->state_project = EParamTypes::ClosedProject;
+        //pool is now narrowed down to the subset of all open projects, request further information from them (without site visit for this step)
+        if (pool[i])
+        {
+            auto project = pvprojects[i];
+            project->state_project = EParamTypes::RequestedPreliminaryQuote;
+            project->sei->request_preliminary_quote(project);
+            
+            //update number of requested quotes
+            ++n_preliminary_quotes_requested;
+        }
+        else
+        {
+            pvprojects[i]->state_project = EParamTypes::ClosedProject;
+        };
+        
     };
-    
-    
 }
+
+
+
 
 
 
 void
 Homeowner::dec_evaluate_preliminary_quotes()
 {
+    
+    for (auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
+        {
+            //here installers are evaluated
+            //preliminary quote will have general savings estimation
+            //collect all parameters for decisions
+            project->sei->params[EParamTypes::SEIRating];
+            
+            
+            project->sei->params[EParamTypes::SEIInteractionType];
+            
+            
+            //number inside is type of equipment - directly corresponds to the position in the vector
+            project->sei->params[EParamTypes::SEIEquipmentType];
+            
+            
+            
+            //estimated project total time
+            //LeadIn time if fixed for each installer and is an estimation
+            //Permitting time depends on the location, but is an estimate
+            
+            project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
+            
+            
+            
+
+            
+        };
+    
+    
+    };
+    
+    
+    //calculate all values, draw random terms also
+    //assign utility to each project
+    
+    //Generate random noise. Generation is here because every choice will regenerate them
+    
+    
+    
     //sort projects by price, lower price goes first
     std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
         //compare only if online quote was received,
@@ -258,8 +290,9 @@ Homeowner::dec_evaluate_preliminary_quotes()
  
  
  @DevStage2 may go back and forth over the design
+
  
- */
+*/
 void
 Homeowner::dec_evaluate_designs()
 {
@@ -281,12 +314,18 @@ Homeowner::dec_evaluate_designs()
         accepted_design.push_back(decision);
         
         //stop accepting marketing from SEI
-        marketing_state = EParamTypes::HOMarketingCommitedToInstallation;
+        marketing_state = EParamTypes::HOMarketingStateCommitedToInstallation;
+        
+        //tell world that stopped accepting offers
+        w->get_state_inf(this, marketing_state);
+        
         //close all projects except already accepted
+        //assume that picked project number 0, so projects with number 1 an on are closed
         auto i = 1;
         while (i < pvprojects.size())
         {
             pvprojects[i]->state_project = EParamTypes::ClosedProject;
+            ++i;
         };
     };
 }
@@ -413,10 +452,13 @@ Homeowner::act_tick()
     
     
     //evaluates preliminary quotes and commits to the project
-    if (n_preliminary_quotes >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedPreliminaryQuotes])
+    //once all requested quotes are in - evaluate offerings
+    if (n_preliminary_quotes >= n_preliminary_quotes_requested)
     {
         dec_evaluate_preliminary_quotes();
     };
+    
+    
     
     //evaluates designs
     if (n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])

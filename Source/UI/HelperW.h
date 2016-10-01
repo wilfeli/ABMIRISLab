@@ -68,8 +68,22 @@ namespace solar_core {
             //check that it is uniform distribution
             if (pt.get<std::string>("location").find("FORMULA::p.d.f.::u_int(0, size)") == std::string::npos)
             {
-                throw std::runtime_error("unsupported hh specification rule");
+                throw std::runtime_error("unsupported sei specification rule");
             };
+            
+            
+            
+            //parameters
+            //read file from params for seis - create sei from it
+            
+            
+            
+            
+            
+            //
+            
+            
+            
             
             
             //create SEI - use template for parameters, use model file for additional parameters
@@ -98,6 +112,64 @@ namespace solar_core {
             return seis;
             
         }
+        
+        std::vector<SEM*> create_sems()
+        {
+            //MARK: cont.
+            
+            //create inverter producers as a separate type of sem
+            
+            //assign different inverters
+            
+            
+            
+        }
+        
+        
+        
+        std::vector<Homeowner*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        {
+            
+            
+            auto hos = new std::vector<Homeowner*>();
+            
+            std::map<std::string, std::string> params_str;
+            T* w = static_cast<T*>(w_);
+            
+            
+            //create H accroding to distribution of types
+            //read in information about types
+            //read json with distribution parameters
+            auto path_to_scheme = path_to_dir;
+            path_to_scheme /= "ho-ncdecisions.json";
+            
+            //read json with specification
+            PropertyTree pt_decisions;
+            read_json(path_to_scheme, pt_decisions);
+            
+
+            //each item is map
+            std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
+            std::map<std::string, double> HOD_distribution;
+            for (const auto& node: pt)
+            {
+                
+            };
+            
+            
+            
+            
+            
+            
+            return hos;
+
+            
+            
+            
+        }
+        
+        
+        
         
         
         

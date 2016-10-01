@@ -33,7 +33,10 @@ namespace solar_core
     {
     public:
         std::string name;
-        EParamTypes technology; 
+        EParamTypes technology;
+        SEM* manufacturer = nullptr;
+        UID uid;
+        double p_sem; /*!< price as quoted by manufacturer */
     protected:
         
         
@@ -102,6 +105,7 @@ namespace solar_core
         double solar_irradiation = 0.0;
         double permit_difficulty = 0.0;
         std::shared_ptr<SolarModule> PV_module;
+        std::shared_ptr<Inverter> inverter;
         double N_PANELS = 0.0;
         double DC_size = 0.0;
         double AC_size = 0.0;

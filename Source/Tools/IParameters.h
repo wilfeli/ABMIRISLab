@@ -132,16 +132,12 @@ namespace solar_core
         TotalPVMarketSize,
         
         
-        
         /** Historical penetration level */
         PenetrationLevel,
         
         
         /** Labor price for the installers - qualified labor */
         LaborPrice,
-        
-        
-        
         
         /** Electricity Bill */
         ElectricityBill,
@@ -150,12 +146,18 @@ namespace solar_core
         /** Roof size */
         RoofSize,
         
+        
         /** Roof age */
         RoofAge,
         
         
-		/*Why couldn't we use an enum class to show different levels of interest for HOMarketingState?*/
-		
+        
+        /** Homeowner non-compensatory decisions */
+        HONCDecisionSEIRating,
+        
+        
+        
+        
 		/** If Homeowner is very interested in SP */
         HOMarketingStateHighlyInterested,
         
@@ -165,11 +167,11 @@ namespace solar_core
         
         
         /** If Homeowner is not interested in installing SP */
-        HOMarketingNotInterested,
+        HOMarketingStateNotInterested,
 
         
         /** If Homeowner is already installed */
-        HOMarketingCommitedToInstallation,
+        HOMarketingStateCommitedToInstallation,
 
         
         /** State of a quoting stage for HO: actively requesting information */
@@ -286,6 +288,10 @@ namespace solar_core
         PreliminaryQuoteEstimatedSavings,
         
         
+        /** Estimated total project time for the location - general estimate */
+        PreliminaryQuoteEstimatedTotalProjectTime,
+        
+        
         /** Industry standard price per watt that is used in estimating installation cost */
         EstimatedPricePerWatt,
         
@@ -321,6 +327,10 @@ namespace solar_core
         
         /** Large SEI */
         SEILarge,
+        
+        
+        /** Section with other parameters for SEI */
+        SEIRating,
 
         
         /** Parameters of a SEI, such as processing time before preliminary quote is formed after site visit */
@@ -440,11 +450,15 @@ namespace solar_core
         
         
         /** Technology block: inverters technology type standard */
-        TechnologyInverterStandard,
+        TechnologyInverterCentral,
         
         
         /** Technology block: inverters technology type micro */
         TechnologyInverterMicro,
+        
+        
+        /** Technology block: inverters technology type micro */
+        TechnologyInverterPowerOptimizer,
         
         
         /** Number of H to draw per tick for EE model */
@@ -535,6 +549,27 @@ namespace solar_core
         /** Empty enum for completeness */
         None
     };
+    
+    
+    
+    /** All in terms of efficiency only  */
+    enum class ESEIEquipmentType: int64_t
+    {
+        
+        /**  Least advanced */
+        Traditional = 0,
+        
+        /**  Mid range */
+        Standard = 1,
+        
+        /**  Most advanced */
+        CuttingEdge = 2,
+        
+        /** Empty enum for completeness  */
+        None = -1
+    };
+    
+    
     
     
     

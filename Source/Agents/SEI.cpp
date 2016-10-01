@@ -229,6 +229,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     //is here because otherwise later assigning will override this
     project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
     
+    //@DevStage3 think about changing location of this request. For now it is assumed that SEI bails out if roof is too old by its standards
     //if roof is old and refuses to reroof - close project
     if (project_->state_project == EParamTypes::RequiredHOReroof)
     {
@@ -244,24 +245,38 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
         };
     };
     
-    //forms design by default
-    //mid percentage to be used for estimating size
-    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    //forms design by default, for an average demand
+    auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
     //amount of solar irradiation in Wh/m2/day
     auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
-    //distribution of permit length in different locations
+    //distribution of permit length difficulty coefficient in different locations
     auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
     
     
     auto design = PVDesign();
     
-    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[1], *(++dec_solar_modules.begin()), design);
+    //assume that project is offered at 100% of utility bill
+    //only 1 solar module per installer
+    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), design);
     
     ac_estimate_savings(design, project_);
 
 
     mes->params[EParamTypes::PreliminaryQuotePrice] = design.total_costs;
-    mes->params[EParamTypes::PreliminaryQuoteEstimatedSavings] = design.total_savings;
+    
+    
+    //assume that permit difficulty here in weeks
+    //so that total project time is lead time and permitting time summed
+    auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+    auto total_project_time = permit_difficulty_scale * permit_difficulty + params[EParamTypes::SEILeadInProjectTime];
+    
+    mes->params[EParamTypes::PreliminaryQuoteTotalProjectTime] = total_project_time;
+    
+    //MARK: cont. change to savings percent. Add calculation of savings
+    mes->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] = design.total_net_savings;
+    
+    
+    mes->params[EParamTypes::SEIWarranty] = params[EParamTypes::SEIWarranty];
     
     return mes;
 }
@@ -351,7 +366,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
 
 
 void
-SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design)
+SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
 {
     design.solar_irradiation = solar_irradiation;
     
@@ -361,20 +376,29 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
     
     design.PV_module = iter.second;
     
-    design.DC_size = design.N_PANELS * iter.second->STC_power_rating / constants::NUMBER_WATTS_IN_KILOWATT;
+    design.inverter = iter_inverter.second;
+    
+    design.DC_size = design.N_PANELS * iter.second->efficiency * iter.second->length * iter.second->width / 1000;
     
     design.AC_size = design.DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     
-    ///@DevStage1 add inverter technology here
     
+    //assume that it is price per watt or min of costs
+    //for now it is margin over costs
+    //costs are proportional to DC size and its square, and quoted price for inverters
+    design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1] + design.inverter->p_sem * THETA_hard_costs[2];
     
-    
-    design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1];
-    
+    //general installation costs and permitting costs
+    //marketing and administrative costs are included in profit margin
     design.soft_costs = design.N_PANELS * THETA_soft_costs[0] + permit_difficulty * THETA_soft_costs[1];
+    
     
     design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
 
+
+    
+    
+    
 }
 
 
@@ -415,6 +439,11 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     design.energy_savings_money = energy_costs;
     design.total_savings = energy_costs - design.total_costs;
+    
+    
+    //MARK: cont. add net savings calculation
+    design.total_net_savings;
+    
 }
 
 

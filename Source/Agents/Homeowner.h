@@ -202,7 +202,7 @@ protected:
     //@{
     /**
     
-     Section with general parameters that describe hh
+     Section with general parameters that describe ho
      
     */
     
@@ -217,7 +217,6 @@ protected:
     /**
      
      Section with information relevant to potential and active projects
-	 //should this type of section be in H or SEI?
      
      */
     
@@ -246,8 +245,6 @@ protected:
     
     std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing information from SEI agents that this agent is interested in geting quotes from */
     
-    std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage2 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
-    
     EParamTypes marketing_state; /*!< could be interested, very interested or not */
     
     //@}
@@ -269,6 +266,7 @@ protected:
     
     long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
     long n_preliminary_quotes; /*!< number of preliminary quotes */
+    long n_preliminary_quotes_requested; /*!< number of requested quotes from installers, equal to total pool size */
 
     
     //@}
@@ -276,33 +274,37 @@ protected:
     //@{
     /**
      
-     Section relevant to design stage
+     Section with agent's internal decisions
      
      */
     
+    virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further. Uses non-compensatory ruels here */
+    
+    virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be pursued further. Will correspond to SEI conjoint. Will pick best from here and request actual quotes with site visit. */
+    
     void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
     
-    std::deque<std::shared_ptr<PVProject>> accepted_design; //why is this coming from a deque?
-    long n_pending_designs;
+    
+    std::map<EParamTypes, std::vector<double>> THETA_installers; /*!< parameters for decision making, from installer conjoint  */
     
     std::map<EParamTypes, std::vector<double>> THETA_design; /*!< parameters for decision making  */
     
+    std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
     
+    std::deque<std::shared_ptr<PVProject>> accepted_design;
+    
+    long n_pending_designs;
+
     
     //@}
+    
     
     //@{
     /**
      
-     Section with agent's internals //internal preferences? what is the difference between this section and parameters of H
+     Section with general tick actions and agent's bookeeping 
      
      */
-    
-    
-    virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further */
-    virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be persued further */
-    
-    /*!< GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
     virtual void update_params(); /*!< is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. */
     

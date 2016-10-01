@@ -173,6 +173,21 @@ namespace solar_core
         //@}
 
         
+        //@{
+        /**
+         
+         Section with general parameters that describe SEI
+         
+         */
+        
+        std::map<EParamTypes, double> params; /** Parameters of a SEI, here will include price per watt also */
+
+        
+
+        //@}
+        
+        
+        
         
     protected:
         //@{
@@ -266,7 +281,6 @@ namespace solar_core
         
         
         
-        std::map<EParamTypes, double> params; /** Parameters of a SEI, here will include price per watt also */
         EParamTypes sei_type;
         double money = 0.0; 
         

@@ -551,7 +551,7 @@ void
 W::life_hos()
 {
     
-    
+    //@DevStage3 move to main cycle maybe? As of now it will be called only in the very beginning
     //go through Homeowners that indicated desire to request information and inform them that action to request information could be taken
     for (auto& agent:get_inf_marketing_sei_agents)
     {
@@ -570,13 +570,30 @@ W::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto& agent:hos)
+            for (auto& agent:active_hos)
             {
-                //get tick
-                agent->act_tick();
+                if (agent)
+                {
+                    if (agent->marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)
+                    {
+                        //get tick
+                        agent->act_tick();
+                    }
+                    else
+                    {
+                        //TODO check that is nullptr to the agent in the list and not to actual agent
+                        agent = nullptr;
+                    };
+                };
+                
+
             };
             ++updated_counter;
         };
+        
+        
+        //@DevStage3 add cleaning of active_hos from time to time based on timer
+        
         
         while (!FLAG_H_TICK && !FLAG_IS_STOPPED)
         {
@@ -754,6 +771,8 @@ W::get_solar_irradiation(double location_x, double location_y) const
     return world_map->g_map[location_x][location_y]->solar_irradiation;
 }
 
+
+
 double
 W::get_permit_difficulty(double location_x, double location_y) const
 {
@@ -764,6 +783,23 @@ W::get_permit_difficulty(double location_x, double location_y) const
 void
 W::get_state_inf(Homeowner* agent_, EParamTypes state_)
 {
+    
+    //depending on the state either set to null if no longer active or add to the list
+    switch (state_)
+    {
+        case EParamTypes::HOMarketingStateHighlyInterested:
+        case EParamTypes::HOMarketingStateInterested:
+            active_hos.push_back(agent_);
+            break;
+        case EParamTypes::HOMarketingStateCommitedToInstallation:
+            break;
+        default:
+            break;
+            
+    };
+    
+    
+    
 }
 
 
