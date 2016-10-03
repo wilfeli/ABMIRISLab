@@ -257,7 +257,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     
     //assume that project is offered at 100% of utility bill
     //only 1 solar module per installer
-    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), design);
+    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), *(dec_inverters.find(EParamTypes::TechnologyInverterCentral)), design);
     
     ac_estimate_savings(design, project_);
 
@@ -326,38 +326,38 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     //do in multiples of three
     //check design for full electricity bill, for 80% of it and for 30% of it
     std::vector<PVDesign> designs;
-    //daily electricity consumption from bill in kWh
-    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
-    //amount of solar irradiation in kWh/m2/day
-    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
-    //distribution of permit length in different locations
-    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
-    
-    //EParamTypes::ElectricityBill has daily electricity bill
-    for (auto project_percentage:dec_project_percentages)
-    {
-        //for each preferred panel - with high, mid and low efficiency, calculate number of panels to meet the demand
-        for (auto iter: dec_solar_modules)
-        {
-            //create design
-            auto design = PVDesign();
-            
-            form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
-            
-            ac_estimate_savings(design, project_);
-            
-            //MARK: cont. add discard for negative profits
-            
-            designs.push_back(design);
-        };
-    };
-    
-    //sort by savings and present best option
-    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
-    
-    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
-        return lhs.total_savings > rhs.total_savings;
-    });
+//    //daily electricity consumption from bill in kWh
+//    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
+//    //amount of solar irradiation in kWh/m2/day
+//    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
+//    //distribution of permit length in different locations
+//    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
+//    
+//    //EParamTypes::ElectricityBill has daily electricity bill
+//    for (auto project_percentage:dec_project_percentages)
+//    {
+//        //for each preferred panel - with high, mid and low efficiency, calculate number of panels to meet the demand
+//        for (auto iter: dec_solar_modules)
+//        {
+//            //create design
+//            auto design = PVDesign();
+//            
+//            form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
+//            
+//            ac_estimate_savings(design, project_);
+//            
+//            //MARK: cont. add discard for negative profits
+//            
+//            designs.push_back(design);
+//        };
+//    };
+//    
+//    //sort by savings and present best option
+//    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
+//    
+//    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
+//        return lhs.total_savings > rhs.total_savings;
+//    });
     auto design = std::make_shared<PVDesign>(designs[0]);
     auto mes = std::make_shared<MesDesign>(design);
         
@@ -642,6 +642,7 @@ SEI::act_tick()
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForDesign])
             {
                 auto mes = form_design(project);
+                project->state_project = EParamTypes::DraftedDesign;
                 project->design = mes;
                 form_financing(project);
                 project->agent->receive_design(project);

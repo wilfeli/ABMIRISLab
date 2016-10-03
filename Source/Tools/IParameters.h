@@ -152,8 +152,34 @@ namespace solar_core
         
         
         
-        /** Homeowner non-compensatory decisions */
+        /** Homeowner non-compensatory decisions: ratings screening rule */
         HONCDecisionSEIRating,
+        
+        
+        /** Homeowner installer decision: utility of other options */
+        HOSEIDecisionUtilityNone,
+        
+        /** Resulting estimate of the utility for an option */
+        HOSEIDecisionEstimatedUtility,
+        
+        
+        
+        
+        HODesignDecisionPanelEfficiency,
+        
+        
+        /** Is property of a specific panel */
+        HODesignDecisionPanelVisibility,
+        HODesignDecisionInverType,
+        
+        /** Is property of a design as a whole */
+        HODesignDecisionFailures,
+        
+        /** Is property of a design as a whole. Calculated from expected produced enegry */
+        HODesignDecisionCO2,
+        
+        
+        HODesignDecision,
         
         
         
@@ -288,8 +314,17 @@ namespace solar_core
         PreliminaryQuoteEstimatedSavings,
         
         
+        /** Preliminary estimation of savings based on utility bill after site visit, net expression */
+        PreliminaryQuoteEstimatedNetSavings,
+
+        
         /** Estimated total project time for the location - general estimate */
-        PreliminaryQuoteEstimatedTotalProjectTime,
+        PreliminaryQuoteTotalProjectTime,
+        
+        
+        
+        
+        
         
         
         /** Industry standard price per watt that is used in estimating installation cost */
@@ -329,8 +364,24 @@ namespace solar_core
         SEILarge,
         
         
-        /** Section with other parameters for SEI */
+        /** Parameters of a SEI: rating */
         SEIRating,
+        
+        
+        /** Parameters of a SEI: type of interaction */
+        SEIInteractionType,
+        
+        
+        /** Parameters of a SEI: equipment type*/
+        SEIEquipmentType,
+        
+        
+        /** Parameters of a SEI: lead in time before project could moved into permitting phase*/
+        SEILeadInProjectTime,
+        
+        
+        /** Parameters of a SEI: type of warranty*/
+        SEIWarranty,
 
         
         /** Parameters of a SEI, such as processing time before preliminary quote is formed after site visit */

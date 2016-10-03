@@ -54,6 +54,18 @@
                {
                "EParamTypes::SEIRating": "FORMULA::p.d.f.::CUSTOM"
                },
+               {
+               "EParamTypes::SEIInteractionType": "FORMULA::p.d.f.::CUSTOM"
+               },
+               {
+               "EParamTypes::SEIEquipmentType": "FORMULA::p.d.f.::CUSTOM"
+               },
+               {
+               "EParamTypes::SEILeadInProjectTime": "FORMULA::p.d.f.::CUSTOM"
+               },
+               {
+               "EParamTypes::SEIWarranty": "FORMULA::p.d.f.::CUSTOM"
+               },
                ],
     "mes_marketing": "",
     "dec_project_percentages": [

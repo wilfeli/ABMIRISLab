@@ -195,32 +195,48 @@ Homeowner::dec_evaluate_online_quotes()
 void
 Homeowner::dec_evaluate_preliminary_quotes()
 {
+    auto pdf_error = boost::uniform_01<>();
+    auto rng_error = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand_ho->rng, pdf_error);
+    double error = 0.0;
+    double utility = 0.0;
+    double utility_none = THETA_installers[EParamTypes::HOSEIDecisionUtilityNone][0];
     
     for (auto& project:pvprojects)
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
+            utility = 0.0;
+            
+            error = rng_error();
+            
             //here installers are evaluated
             //preliminary quote will have general savings estimation
             //collect all parameters for decisions
-            project->sei->params[EParamTypes::SEIRating];
+            utility += THETA_installers[EParamTypes::SEIRating][0] * project->sei->params[EParamTypes::SEIRating];
             
-            
-            project->sei->params[EParamTypes::SEIInteractionType];
+            //discrete variables have position in the vector of coefficients as their value. Fragile.
+            utility += THETA_installers[EParamTypes::SEIInteractionType][project->sei->params[EParamTypes::SEIInteractionType]];
             
             
             //number inside is type of equipment - directly corresponds to the position in the vector
-            project->sei->params[EParamTypes::SEIEquipmentType];
-            
-            
+            utility += THETA_installers[EParamTypes::SEIEquipmentType][project->sei->params[EParamTypes::SEIEquipmentType]];
             
             //estimated project total time
             //LeadIn time if fixed for each installer and is an estimation
             //Permitting time depends on the location, but is an estimate
+            utility += THETA_installers[EParamTypes::SEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
             
-            project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
+            //warranty
+            utility += THETA_installers[EParamTypes::SEIWarranty][ project->preliminary_quote->params[EParamTypes::SEIWarranty]];
             
             
+            //savings are estimated for an average homeowner
+            utility += THETA_installers[EParamTypes::SEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
+            
+            utility += error;
+            
+            
+            project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility];
             
 
             
@@ -237,25 +253,25 @@ Homeowner::dec_evaluate_preliminary_quotes()
     
     
     
-    //sort projects by price, lower price goes first
+    //sort projects by utility, higher utility goes first
     std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
         //compare only if online quote was received,
         bool compare_res = false;
         if (lhs->state_project == EParamTypes::ProvidedPreliminaryQuote && rhs->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
-            compare_res = lhs->online_quote->params[EParamTypes::PreliminaryQuoteEstimatedSavings] > rhs->online_quote->params[EParamTypes::PreliminaryQuoteEstimatedSavings];
+            compare_res = lhs->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility] < rhs->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility];
         };
         return compare_res;
     });
     
     
     std::shared_ptr<PVProject> decision = nullptr;
-    //pick top project and compare price to income
+    //pick top project and request further information
     for(auto& project:pvprojects)
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
-            if (project->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= params[EParamTypes::Income] * THETA_design[EParamTypes::HODecPreliminaryQuote][0])
+            if (project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility] >= utility_none)
             {
                 decision = project;
                 break;
@@ -263,6 +279,7 @@ Homeowner::dec_evaluate_preliminary_quotes()
         }
     };
     
+    //if choose someone
     if (decision)
     {
         decision->state_project = EParamTypes::AcceptedPreliminaryQuote;
@@ -289,13 +306,40 @@ Homeowner::dec_evaluate_preliminary_quotes()
 /**
  
  
- @DevStage2 may go back and forth over the design
+ @DevStage4 may go back and forth over the design
 
  
 */
 void
 Homeowner::dec_evaluate_designs()
 {
+    auto pdf_error = boost::uniform_01<>();
+    auto rng_error = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand_ho->rng, pdf_error);
+    double error = 0.0;
+    double utility = 0.0;
+    double utility_none = THETA_design[EParamTypes::HODesignDecisionUtilityNone][0];
+    
+    
+    for (auto& project:pvprojects)
+    {
+        //MARK: cont. sort out timing of updating projects
+        if (project->state_project == EParamTypes::DraftedDesign)
+        {
+            utility = 0.0;
+            error = rng_error();
+            
+            //efficiency
+            utility += THETA_design[EParamTypes::HODesignDecisionPanelEfficiency][0] * project->desing->design->PV_module->efficiency
+            
+            //MARK: cont.
+            
+            
+            
+        };
+    };
+    
+    
+    
     //assume that best design in terms of savings is accepted?
     std::sort(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &lhs, std::shared_ptr<PVProject> &rhs)
               {

@@ -235,8 +235,9 @@ namespace solar_core
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
         std::map<EParamTypes, std::shared_ptr<Inverter>> dec_inverters; /*!< choices for different inverters to create design with */
         typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
+        typedef std::pair<EParamTypes, std::shared_ptr<Inverter>> IterTypeDecInverter;
         
-        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, PVDesign& design); /*!< forms design for specific parameters */
+        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter,PVDesign& design); /*!< forms design for specific parameters */
         
         
         std::vector<double> dec_project_percentages; /*!< percentage of a utility bill to cover */
