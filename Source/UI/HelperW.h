@@ -21,12 +21,14 @@
 #include "Agents/Homeowner.h"
 #include "../Tests/Agents/SEIMock.h"
 
+using boost::property_tree::read_json;
 
 namespace solar_core {
 
     
     class W;
 
+    class CoreModel {};
     class BaselineModel {};
     class UnitTestModel {};
     class ExploreExploit {};
@@ -48,6 +50,185 @@ namespace solar_core {
         {
             
         }
+        
+        
+        template <class TA>
+        std::vector<TA*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        {
+            
+            auto hos = new std::vector<TA*>();
+            
+            std::map<std::string, std::string> params_str;
+            T* w = static_cast<T*>(w_);
+            
+            //read json with distribution parameters
+            auto path_to_data = path_to_dir;
+            path_to_data /= "joint_distribution.csv";
+            auto path_to_scheme = path_to_dir;
+            path_to_scheme /= "distribution.json";
+            
+            
+            auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
+            
+            //will draw electricity bill for each, roof size as a constant percent of a house size, income
+            auto formula_roof_age = pt.get<std::string>("House.roof_age");
+            auto formula_roof_size = pt.get<std::string>("House.roof_size");
+            auto roof_size_coef = 0.0;
+            auto roof_age_coef = 0.0;
+            std::regex e("");
+            
+            if (formula_roof_size.find("FORMULA::house_size::") == std::string::npos)
+            {
+                throw std::runtime_error("unsupported hh specification rule");
+            }
+            else
+            {
+                e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
+                formula_roof_size = std::regex_replace(formula_roof_size, e, "");
+                roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *(w->rand));
+            };
+            
+            auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
+            
+            if (formula_roof_age.find("FORMULA::house_age::") == std::string::npos)
+            {
+                throw std::runtime_error("unsupported hh specification rule");
+            }
+            else
+            {
+                e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
+                formula_roof_age = std::regex_replace(formula_roof_age, e, "");
+                roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *(w->rand));
+            };
+            
+            auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
+            
+            
+            //in the order of drawing for now
+            //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
+            std::vector<std::vector<double>>* xs = new std::vector<std::vector<double>>();
+            //draw from the joint distribution
+            for(auto i = 0 ; i < w->params_d[EParamTypes::N_HO]; ++i)
+            {
+                xs->push_back(tools::draw_joint_distribution(e_dist, w->rand));
+            };
+            
+            
+            
+            //read other parameters
+            serialize::deserialize(pt.get_child("params"), params_str);
+            std::map<EParamTypes, std::vector<double>>* param_values = new std::map<EParamTypes, std::vector<double>>();
+            
+            for (auto& iter:params_str)
+            {
+                EParamTypes name = EnumFactory::ToEParamTypes(iter.first);
+                //explicitly solve for values
+                auto params = serialize::create_dist_from_formula(iter.second, w->rand);
+                
+                if (params.valid_dist == true)
+                {
+                    (*param_values)[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], 0.0);
+                    //generate map of random number generators with the name for this parameter?
+                    switch (params.type)
+                    {
+                        case ERandomParams::N_trunc:
+                            throw std::runtime_error("unfinished thread, should not be here");
+                            break;
+                        case ERandomParams::custom:
+                            //see what parameter it is - save values
+                            if (name == EParamTypes::ElectricityBill)
+                            {
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    (*param_values)[name][i] = (*xs)[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
+                                };
+                            }
+                            else if (name == EParamTypes::Income)
+                            {
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    (*param_values)[name][i] = (*xs)[i][4];
+                                };
+                            }
+                            else if (name == EParamTypes::ElectricityConsumption)
+                            {
+                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+                                {
+                                    (*param_values)[EParamTypes::ElectricityConsumption][i] = (*xs)[i][5]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
+                                };
+                            }
+                            else
+                            {
+                                throw std::runtime_error("unsupported ho specification rule");
+                                
+                            };
+                            
+                            break;
+                        default:
+                            break;
+                    };
+                }
+                else
+                {
+                    //get value and store it as a value for all agents?
+                    auto param = serialize::solve_str_formula<double>(iter.second, *(w->rand));
+                    (*param_values)[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], param);
+                    
+                };
+            };
+            
+            
+            std::vector<double> THETA_params;
+            serialize::deserialize(pt.get_child("THETA_params"),THETA_params);
+            
+            
+            
+            //create HO
+            for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+            {
+                //generate location
+                pt.put("location_x", rng_location_x());
+                pt.put("location_y", rng_location_y());
+                
+                
+                //generate House
+                //roof_age
+                //roof_size
+                pt.put("House.roof_size", std::max(0.0, roof_size((*xs)[i][0])));
+                pt.put("House.roof_age", std::max(0.0, roof_age((*xs)[i][1])));
+                pt.put("House.house_size", (*xs)[i][0]);
+                
+                
+                //read configuration file
+                //replace parameters if necessary
+                hos->push_back(new TA(pt, w));
+                
+                
+                //copy other parameters
+                for (auto iter:(*param_values))
+                {
+                    hos->back()->params[iter.first] = (*param_values)[iter.first][i];
+                };
+                
+                hos->back()->THETA_params = THETA_params;
+                
+            };
+            
+            
+            delete e_dist;
+            delete xs;
+            delete param_values;
+            return hos;
+
+            
+            
+            
+            
+        }
+        
+        
+        
+        
     };
     
     
@@ -129,9 +310,11 @@ namespace solar_core {
         
         std::vector<Homeowner*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
+            //create raw Hs
+            auto helper = solar_core::HelperWSpecialization<T, solar_core::CoreModel>();
             
+            auto hos = helper.template create_hos<Homeowner>(pt, mode_, path_to_dir, rng_location_x, rng_location_y, w_);
             
-            auto hos = new std::vector<Homeowner*>();
             
             std::map<std::string, std::string> params_str;
             T* w = static_cast<T*>(w_);
@@ -145,135 +328,47 @@ namespace solar_core {
             
             //read json with specification
             PropertyTree pt_decisions;
-            read_json(path_to_scheme, pt_decisions);
+            read_json(path_to_scheme.string(), pt_decisions);
             
 
-            //each item is map
+            //each item is a map that describes preferences
+            //outer map describes classes of preferences
             std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
             std::map<std::string, double> HOD_distribution;
+            EParamTypes attribute;
             for (const auto& node: pt)
             {
+                //read distribution of classes
+                for (auto& node_dist:node.second.get_child("scheme"))
+                {
+                    attribute = EnumFactory::ToEParamTypes(node_dist.first);
+                    serialize::deserialize(node_dist.second, HOD_distribution_scheme[node.first][attribute]);
+                };
                 
+                
+                //read class preferences
+                HOD_distribution[node.first] = node.second.get<double>("frequency");
             };
             
             
+            //simple case everyone has the same utility
             
+            
+
+            
+            
+            
+            
+
+            //@DevStage3 if decide to have random utility  - when generating H assign utility from the description of a probability distribution
             
             
             
             return hos;
 
-            
-            
-            
         }
         
         
-        
-        
-        
-        
-        /** Old version of generating H - with independent parameters. Is not used in BaselineModel  */
-        std::vector<Homeowner*> create_hhs_independent_params(PropertyTree& pt, std::string mode_, long N_HO, long N_HOMarketingStateHighlyInterested, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, IRandom* rand)
-        {
-            std::vector<Homeowner*> hhs;
-            
-            //create THETA_design
-            std::map<std::string, std::vector<std::string>> THETA_design_str;
-            serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
-            
-            auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HODecPreliminaryQuote)];
-            
-            if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
-            {
-                throw std::runtime_error("unsupported hh specification rule");
-            };
-            
-            auto pdf_THETA = boost::uniform_01<>();
-            auto rng_THETA = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(rand->rng, pdf_THETA);
-            
-            
-            std::map<EParamTypes, std::vector<double>> THETA_design;
-            for (auto& iter:THETA_design_str)
-            {
-                THETA_design[EnumFactory::ToEParamTypes(iter.first)] = std::vector<double>{};
-            };
-            
-            
-            auto formula_roof_age = pt.get<std::string>("House.roof_age");
-            auto formula_roof_size = pt.get<std::string>("House.roof_size");
-            
-            //create rundom number generators for House
-            if (formula_roof_age.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
-            {
-                throw std::runtime_error("unsupported hh specification rule");
-            };
-            if (formula_roof_size.find("FORMULA::p.d.f.::N_trunc") == std::string::npos)
-            {
-                throw std::runtime_error("unsupported hh specification rule");
-            };
-    
-            double mean_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find("(") + 1, formula_roof_age.find(",") - formula_roof_age.find("(") - 1));
-            double sigma2_roof_age = std::stod(formula_roof_age.substr(formula_roof_age.find(",") + 1, formula_roof_age.find(",") - formula_roof_age.find(")") - 1));
-    
-            auto pdf_roof_age = boost::normal_distribution<>(mean_roof_age, std::pow(sigma2_roof_age, 0.5));
-            auto rng_roof_age = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_age);
-    
-    
-            double mean_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find("(") + 1, formula_roof_size.find(",") - formula_roof_size.find("(") - 1));
-            double sigma2_roof_size = std::stod(formula_roof_size.substr(formula_roof_size.find(",") + 1, formula_roof_size.find(",") - formula_roof_size.find(")") - 1));
-    
-            auto pdf_roof_size = boost::normal_distribution<>(mean_roof_size, std::pow(sigma2_roof_size, 0.5));
-            auto rng_roof_size = boost::variate_generator<boost::mt19937&, boost::normal_distribution<>>(rand->rng, pdf_roof_size);
-
-            
-            
-            //create HO
-            auto j = 0;
-            for (auto i = 0; i < N_HO; ++i)
-            {
-                if (j < N_HOMarketingStateHighlyInterested)
-                {
-                    //create few highly interested agents
-                    //put specific parameters into template
-                    pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HOMarketingStateHighlyInterested));
-                };
-                
-                ++j;
-                
-                //generate location
-                pt.put("location_x", rng_location_x());
-                pt.put("location_y", rng_location_y());
-                
-            
-                
-                //generate House
-                //roof_age
-                //roof_size
-                pt.put("House.roof_age", std::max(0.0, rng_roof_age()));
-                pt.put("House.roof_size", std::max(0.0, rng_roof_size()));
-                
-                //create decision parameters
-                THETA_design[EParamTypes::HODecPreliminaryQuote] = std::vector<double>{rng_THETA()};
-                pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
-                
-                
-                
-                
-                
-                
-                //read configuration file
-                //replace parameters if necessary
-                hhs.push_back(new Homeowner(pt, this));
-                
-                
-                
-                
-            };
-
-            
-            
-        }
         
         
         
@@ -469,166 +564,12 @@ namespace solar_core {
         std::vector<H*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
             
+            //create raw Hs
+            //uses core version directly, so careful when changing it
+            auto helper = solar_core::HelperWSpecialization<T, solar_core::CoreModel>();
             
-            auto hos = new std::vector<H*>();
-            
-            std::map<std::string, std::string> params_str;
-            T* w = static_cast<T*>(w_);
-            
-            //read json with distribution parameters
-            auto path_to_data = path_to_dir;
-            path_to_data /= "joint_distribution.csv";
-            auto path_to_scheme = path_to_dir;
-            path_to_scheme /= "distribution.json";
-            
-            
-            auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
-            
-            //will draw electricity bill for each, roof size as a constant percent of a house size, income
-            auto formula_roof_age = pt.get<std::string>("House.roof_age");
-            auto formula_roof_size = pt.get<std::string>("House.roof_size");
-            auto roof_size_coef = 0.0;
-            auto roof_age_coef = 0.0;
-            std::regex e("");
-            
-            if (formula_roof_size.find("FORMULA::house_size::") == std::string::npos)
-            {
-                throw std::runtime_error("unsupported hh specification rule");
-            }
-            else
-            {
-                e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
-                formula_roof_size = std::regex_replace(formula_roof_size, e, "");
-                roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *(w->rand));
-            };
-            
-            auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
-            
-            if (formula_roof_age.find("FORMULA::house_age::") == std::string::npos)
-            {
-                throw std::runtime_error("unsupported hh specification rule");
-            }
-            else
-            {
-                e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
-                formula_roof_age = std::regex_replace(formula_roof_age, e, "");
-                roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *(w->rand));
-            };
-            
-            auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
-            
-            
-            //in the order of drawing for now
-            //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
-            std::vector<std::vector<double>> xs;
-            //draw from the joint distribution
-            for(auto i = 0 ; i < w->params_d[EParamTypes::N_HO]; ++i)
-            {
-                xs.push_back(tools::draw_joint_distribution(e_dist, w->rand));
-            };
-            
-            
-            
-            //read other parameters
-            serialize::deserialize(pt.get_child("params"), params_str);
-            std::map<EParamTypes, std::vector<double>> param_values;
-            
-            for (auto& iter:params_str)
-            {
-                EParamTypes name = EnumFactory::ToEParamTypes(iter.first);
-                //explicitly solve for values
-                auto params = serialize::create_dist_from_formula(iter.second, w->rand);
-                
-                if (params.valid_dist == true)
-                {
-                    param_values[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], 0.0);
-                    //generate map of random number generators with the name for this parameter?
-                    switch (params.type)
-                    {
-                        case ERandomParams::N_trunc:
-                            throw std::runtime_error("unfinished thread, should not be here");
-                            break;
-                        case ERandomParams::custom:
-                            //see what parameter it is - save values
-                            if (name == EParamTypes::ElectricityBill)
-                            {
-                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
-                                {
-                                    param_values[name][i] = xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
-                                };
-                            }
-                            else if (name == EParamTypes::Income)
-                            {
-                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
-                                {
-                                    param_values[name][i] = xs[i][4];
-                                };
-                            }
-                            else if (name == EParamTypes::ElectricityConsumption)
-                            {
-                                for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
-                                {
-                                    param_values[EParamTypes::ElectricityConsumption][i] = xs[i][5]/constants::NUMBER_DAYS_IN_YEAR * constants::NUMBER_DAYS_IN_MONTH;
-                                };
-                            }
-                            else
-                            {
-                                throw std::runtime_error("unsupported ho specification rule");
-                            
-                            };
-                            
-                            break;
-                        default:
-                            break;
-                    };
-                }
-                else
-                {
-                    //get value and store it as a value for all agents?
-                    auto param = serialize::solve_str_formula<double>(iter.second, *(w->rand));
-                    param_values[name] = std::vector<double>(w->params_d[EParamTypes::N_HO], param);
-                    
-                };
-            };
-            
-            
-            std::vector<double> THETA_params;
-            serialize::deserialize(pt.get_child("THETA_params"),THETA_params);
-            
-            
-            //create HO
-            for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
-            {
-                //generate location
-                pt.put("location_x", rng_location_x());
-                pt.put("location_y", rng_location_y());
-                
-                
-                //generate House
-                //roof_age
-                //roof_size
-                pt.put("House.roof_size", std::max(0.0, roof_size(xs[i][0])));
-                pt.put("House.roof_age", std::max(0.0, roof_age(xs[i][1])));
-                pt.put("House.house_size", xs[i][0]);
-                
-                
-                //read configuration file
-                //replace parameters if necessary
-                hos->push_back(new H(pt, w));
-                
-                
-                //copy other parameters
-                for (auto iter:param_values)
-                {
-                    hos->back()->params[iter.first] = param_values[iter.first][i];
-                };
-                
-                hos->back()->THETA_params = THETA_params;
-                
-            };
-
+            auto hos = helper.template create_hos<H>(pt, mode_, path_to_dir, rng_location_x, rng_location_y, w_);
         
-            delete e_dist;
             return hos;
         }
         

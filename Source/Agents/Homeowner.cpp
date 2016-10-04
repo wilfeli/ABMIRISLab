@@ -39,9 +39,9 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
     house = new House(pt_.get_child("House"));
     
     
-    //decision parameters
-    serialize::deserialize(pt_.get_child("THETA_design"), THETA_design);
-    
+//    //decision parameters
+//    serialize::deserialize(pt_.get_child("THETA_design"), THETA_design);
+//    
     
     
     quote_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("quote_state"));
@@ -224,15 +224,16 @@ Homeowner::dec_evaluate_preliminary_quotes()
             //estimated project total time
             //LeadIn time if fixed for each installer and is an estimation
             //Permitting time depends on the location, but is an estimate
-            utility += THETA_installers[EParamTypes::SEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
+            utility += THETA_installers[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
             
             //warranty
-            utility += THETA_installers[EParamTypes::SEIWarranty][ project->preliminary_quote->params[EParamTypes::SEIWarranty]];
+            utility += THETA_installers[EParamTypes::SEIWarranty][project->preliminary_quote->params[EParamTypes::SEIWarranty]];
             
             
             //savings are estimated for an average homeowner
-            utility += THETA_installers[EParamTypes::SEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
+            utility += THETA_installers[EParamTypes::HOSEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
             
+            //Generate random noise. Generation is here because every choice will regenerate them
             utility += error;
             
             
@@ -244,12 +245,6 @@ Homeowner::dec_evaluate_preliminary_quotes()
     
     
     };
-    
-    
-    //calculate all values, draw random terms also
-    //assign utility to each project
-    
-    //Generate random noise. Generation is here because every choice will regenerate them
     
     
     
@@ -322,32 +317,67 @@ Homeowner::dec_evaluate_designs()
     
     for (auto& project:pvprojects)
     {
-        //MARK: cont. sort out timing of updating projects
+
         if (project->state_project == EParamTypes::DraftedDesign)
         {
             utility = 0.0;
             error = rng_error();
             
             //efficiency
-            utility += THETA_design[EParamTypes::HODesignDecisionPanelEfficiency][0] * project->desing->design->PV_module->efficiency
+            utility += THETA_design[EParamTypes::HODesignDecisionPanelEfficiency][0] * project->design->design->PV_module->efficiency;
             
-            //MARK: cont.
+            //visibility
+            utility += THETA_design[EParamTypes::HODesignDecisionPanelVisibility][project->design->design->PV_module->visibility];
             
+            //inverter type
+            utility += THETA_design[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
             
+            //number of failures
+            utility += THETA_design[EParamTypes::HODesignDecisionFailures][0] * project->design->design->failure_rate;
             
+            //emmision levels
+            utility += THETA_design[EParamTypes::HODesignDecisionCO2][0] * project->design->design->co2_equivalent;
+            
+            //savings are estimated for an average homeowner
+            utility += THETA_installers[EParamTypes::HODesignDecisionEstimatedNetSavings][0] * project->design->design->total_net_savings;
+            
+            utility += error;
+
+
+            project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = utility;
+           
         };
     };
     
     
     
-    //assume that best design in terms of savings is accepted?
-    std::sort(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &lhs, std::shared_ptr<PVProject> &rhs)
-              {
-                  return (lhs->design && rhs->design)? lhs->design->design->total_savings > rhs->design->design->total_savings: (lhs->design)? true: false;
-              });
+    //sort projects by utility, higher utility goes first
+    std::sort(pvprojects.begin(), pvprojects.end(), [](const std::shared_ptr<PVProject> lhs, const std::shared_ptr<PVProject> rhs){
+        //compare only if online quote was received,
+        bool compare_res = false;
+        if (lhs->state_project == EParamTypes::DraftedDesign && rhs->state_project == EParamTypes::DraftedDesign)
+        {
+            compare_res = lhs->design->params[EParamTypes::HODesignDecisionEstimatedUtility] < rhs->design->params[EParamTypes::HODesignDecisionEstimatedUtility];
+        };
+        return compare_res;
+    });
     
-    auto decision = (pvprojects[0]->design) ? pvprojects[0] : nullptr;
     
+    std::shared_ptr<PVProject> decision = nullptr;
+    //pick top project and request further information
+    for(auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::DraftedDesign)
+        {
+            if (project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] >= utility_none)
+            {
+                decision = project;
+                break;
+            };
+        }
+    };
+    
+    //if choose someone
     if (decision)
     {
         decision->state_project = EParamTypes::AcceptedDesign;
@@ -362,16 +392,25 @@ Homeowner::dec_evaluate_designs()
         
         //tell world that stopped accepting offers
         w->get_state_inf(this, marketing_state);
-        
-        //close all projects except already accepted
-        //assume that picked project number 0, so projects with number 1 an on are closed
-        auto i = 1;
-        while (i < pvprojects.size())
-        {
-            pvprojects[i]->state_project = EParamTypes::ClosedProject;
-            ++i;
-        };
+
     };
+    
+    
+    //close other projects
+    for(auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::DraftedDesign)
+        {
+            if (project != decision)
+            {
+                project->state_project = EParamTypes::ClosedProject;
+            };
+        };
+        
+    };
+    
+    
+    
 }
 
 

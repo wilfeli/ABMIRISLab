@@ -567,7 +567,7 @@ SEI::act_tick()
     //update internals for the tick
     ac_update_tick();
     
-    
+    //MARK: cont. sort out timing of updating projects - general timing of messages in the timeline
     
     
     //go through projects, if online quote was requested - provide it

@@ -88,12 +88,9 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
 
-        
 
-//#ifndef DEBUG
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
-//#endif
         
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode

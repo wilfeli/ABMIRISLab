@@ -697,22 +697,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "496777053.270063"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "Homeowner::dec_evaluate_designs()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Source/UI/W.cpp"
             timestampString = "496778392.748978"
             startingColumnNumber = "9223372036854775807"
@@ -736,6 +720,22 @@
             startingLineNumber = "262"
             endingLineNumber = "262"
             landmarkName = "SEI::form_preliminary_quote(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/Homeowner.cpp"
+            timestampString = "497209975.837056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "Homeowner::dec_evaluate_designs()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

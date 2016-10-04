@@ -154,7 +154,7 @@ namespace solar_core
         
         /** Homeowner non-compensatory decisions: ratings screening rule */
         HONCDecisionSEIRating,
-        
+    
         
         /** Homeowner installer decision: utility of other options */
         HOSEIDecisionUtilityNone,
@@ -162,15 +162,24 @@ namespace solar_core
         /** Resulting estimate of the utility for an option */
         HOSEIDecisionEstimatedUtility,
         
+        /** Decision on net savings */
+        HOSEIDecisionEstimatedNetSavings,
+        
+        /** Decisions on the length of the project */
+        HOSEIDecisionTotalProjectTime,
         
         
+        /**  Utiilty of alternative */
+        HODesignDecisionUtilityNone,
         
+        /** Decision on panels efficiency */
         HODesignDecisionPanelEfficiency,
-        
         
         /** Is property of a specific panel */
         HODesignDecisionPanelVisibility,
-        HODesignDecisionInverType,
+        
+        /** Decision on inverter type */
+        HODesignDecisionInverterType,
         
         /** Is property of a design as a whole */
         HODesignDecisionFailures,
@@ -178,9 +187,11 @@ namespace solar_core
         /** Is property of a design as a whole. Calculated from expected produced enegry */
         HODesignDecisionCO2,
         
+        /** Decisions on savings of the whole istallation */
+        HODesignDecisionEstimatedNetSavings,
         
-        HODesignDecision,
-        
+        /** Resulting estimate of the utility for an option */
+        HODesignDecisionEstimatedUtility,
         
         
         
@@ -622,6 +633,24 @@ namespace solar_core
     
     
     
+    enum class ESEIInverterType: int64_t
+    {
+        
+        Central = 0,
+        
+        
+        PoweOptimizer = 1,
+        
+        
+        Micro = 2,
+        
+        
+        
+        /** Empty enum for completeness  */
+        None = -1
+        
+    };
+    
     
     
     
@@ -955,7 +984,7 @@ namespace solar_core
             {
                 return "EParamTypes::HOMarketingStateInterested";
             }
-            else if (param_ == EParamTypes::HOMarketingNotInterested)
+            else if (param_ == EParamTypes::HOMarketingStateNotInterested)
             {
                 return "EParamTypes::HOMarketingNotInterested";
             }
@@ -1031,6 +1060,51 @@ namespace solar_core
             };
 
         }
+        
+        
+        
+        
+        
+        static ESEIInverterType ToESEIInverterType(std::string param_)
+        {
+            //case insensitive
+            std::transform(param_.begin(), param_.end(), param_.begin(), ::tolower);
+            
+            if (param_ == "eseiinvertertype::central")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "single-phase string inverter")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "string inverter")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "eseiinvertertype::poweoptimizer")
+            {
+                return ESEIInverterType::PoweOptimizer;
+            }
+            else if (param_ == "eseiinvertertype::micro")
+            {
+                return ESEIInverterType::Micro;
+            }
+            else if (param_ == "microinverter")
+            {
+                return ESEIInverterType::Micro;
+            }
+            else
+            {
+#ifdef DEBUG
+                std::cout << param_;
+                throw std::runtime_error("missing conversion");
+#endif
+                return ESEIInverterType::None;
+            };
+
+        }
+        
         
     };
     

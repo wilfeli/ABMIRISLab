@@ -15,6 +15,29 @@ double SolarModule::initialization_tolerance = 0.1;
 
 
 
+std::shared_ptr<Inverter>
+Inverter::deserialize(const PropertyTree& pt_)
+{
+    //placeholder to be replaced by other type if needed
+    if (pt_.get<std::string>("TYPE") == "solar_core::Inverter")
+    {
+        return std::make_shared<Inverter>(pt_);
+    }
+    else
+    {
+        return std::make_shared<Inverter>(pt_);
+    };
+}
+
+
+Inverter::Inverter(const PropertyTree& pt_)
+{
+    name = pt_.get<std::string>("Name");
+    technology = EnumFactory::ToESEIInverterType(pt_.get<std::string>("Type"));
+    
+}
+
+
 std::shared_ptr<SolarModule>
 SolarModule::deserialize(const PropertyTree& pt_)
 {
@@ -48,18 +71,26 @@ SolarModule::SolarModule(const PropertyTree& pt_)
     
     
     //added double check on parameters consistency
-    
-    
     double STC_power_rating_from_ef = efficiency * length * width / 1000;
-    
-    
-    
     
     
     if (std::abs(STC_power_rating_from_ef - STC_power_rating) > initialization_tolerance)
     {
         throw std::runtime_error("inconsistent solar panel parameters");
     };
+    
+    
+    //convert multiple parameters into indicator of visiibility
+    std::string color = pt_.get<std::string>("Color");
+    std::string pattern = pt_.get<std::string>("Pattern");
+    
+    //depending on the pattern will become low visibility
+    if ((pattern == "Solid") || (pattern == "Lines"))
+    {
+        visibility = 1.0;
+    };
+    
+    
     
     
 }
