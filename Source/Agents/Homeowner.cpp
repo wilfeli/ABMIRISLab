@@ -38,12 +38,6 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
     //House
     house = new House(pt_.get_child("House"));
     
-    
-//    //decision parameters
-//    serialize::deserialize(pt_.get_child("THETA_design"), THETA_design);
-//    
-    
-    
     quote_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("quote_state"));
     
     schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});

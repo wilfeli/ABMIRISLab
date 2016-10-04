@@ -335,6 +335,9 @@ namespace solar_core {
             //outer map describes classes of preferences
             std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
             std::map<std::string, double> HOD_distribution;
+            std::vector<std::string> labels;
+            std::vector<double> cmf{0};
+            
             EParamTypes attribute;
             for (const auto& node: pt)
             {
@@ -348,15 +351,38 @@ namespace solar_core {
                 
                 //read class preferences
                 HOD_distribution[node.first] = node.second.get<double>("frequency");
+                //create labels and cmf to generate class labels
+                labels.push_back(node.first);
+                cmf.push_back(cmf.back() + HOD_distribution[node.first]);
             };
             
             
-            //simple case everyone has the same utility
+            //read other parameters and save them to proper thetas
             
+            
+            //create HO
+            std::string label;
+            for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
+            {
+                //draw next uniform
+                u_i = w->rand_ho->ru();
+                //generate class label given frequencies
+                label = labels[tools::get_inverse_index(cmf, u_i)];
+                
+                //assume the same parameters for each class
+                (*hos)[i]->THETA_NCDecisions = HOD_distribution_scheme[label];
+                
+                
+                //get classes for other parameters
+                //MARK: cont.
+                
+                
+                
+            };
             
 
             
-            
+
             
             
 
