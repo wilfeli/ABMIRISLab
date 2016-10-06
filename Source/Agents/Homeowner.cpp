@@ -61,6 +61,19 @@ Homeowner::init(W* w_)
 }
 
 
+
+void
+Homeowner::get_project(std::shared_ptr<PVProject> project_)
+{
+    pvprojects_lock.lock();
+    //save project
+    pvprojects_to_add.push_back(project_);
+    pvprojects_lock.unlock();
+}
+
+
+
+
 void
 Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
@@ -133,6 +146,11 @@ Homeowner::ac_inf_quoting_sei()
         
         get_inf_marketing_sei.pop_front();
     };
+    
+    
+    //tick stage timer
+    ++quote_stage_timer;
+    
 }
 
 
@@ -221,6 +239,7 @@ Homeowner::dec_evaluate_preliminary_quotes()
             utility += THETA_installers[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
             
             //warranty
+            //MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
             utility += THETA_installers[EParamTypes::SEIWarranty][project->preliminary_quote->params[EParamTypes::SEIWarranty]];
             
             
@@ -288,6 +307,10 @@ Homeowner::dec_evaluate_preliminary_quotes()
         };
         
     };
+    
+    
+    //exit evaluation stage
+    n_preliminary_quotes = 0;
     
     
 }
@@ -408,6 +431,10 @@ Homeowner::dec_evaluate_designs()
 }
 
 
+
+
+
+
 void
 Homeowner::receive_design(std::shared_ptr<PVProject> project_)
 {
@@ -485,10 +512,18 @@ Homeowner::ac_update_tick()
     a_time = w->time;
     
     
+    pvprojects_lock.lock();
+    //move pending projects into active projects
+    pvprojects.insert(pvprojects.end(), pvprojects_to_add.begin(), pvprojects_to_add.end());
+    pvprojects_to_add.clear();
+
+    
+    
     //delete closed projects
     pvprojects.erase(std::remove_if(pvprojects.begin(), pvprojects.end(),
                                     [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pvprojects.end());
-    
+    pvprojects_lock.unlock();
+
     
     
     //clear last day schedule

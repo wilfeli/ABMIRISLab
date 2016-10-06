@@ -82,19 +82,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         
-        //
-        //read json with distribution parameters
-        auto path_to_data = path_to_dir;
-        path_to_data /= "joint_distribution.csv";
-        auto path_to_scheme = path_to_dir;
-        path_to_scheme /= "distribution.json";
-
         
-        auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
-        
-    
-        
-
         //left as an old version as need to check that formulas are consistent here with the geography definition
         //create random number generators for locations
         //is created here to speed up generation, otherwise rng is created for each agent, so location formula is not used directly.
@@ -111,184 +99,9 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
         
         
-        
-        //will draw electricity bill for each, roof size as a constant percent of a house size, income
-        
-        auto formula_roof_age = pt.get<std::string>("House.roof_age");
-        auto formula_roof_size = pt.get<std::string>("House.roof_size");
-        auto roof_size_coef = 0.0;
-        auto roof_age_coef = 0.0;
-        std::regex e("");
-        
-        if (formula_roof_size.find("FORMULA::house_size::") == std::string::npos)
-        {
-            throw std::runtime_error("unsupported hh specification rule");
-        }
-        else
-        {
-            e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
-            formula_roof_size = std::regex_replace(formula_roof_size, e, "");
-            roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *rand);
-        };
-        
-        auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
-        
-        if (formula_roof_age.find("FORMULA::house_age::") == std::string::npos)
-        {
-            throw std::runtime_error("unsupported hh specification rule");
-        }
-        else
-        {
-            e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
-            formula_roof_age = std::regex_replace(formula_roof_age, e, "");
-            roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *rand);
-        };
-        
-        auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
-
+        hos = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
         
-        
-        
-        
-        //create THETA_design
-        std::map<std::string, std::vector<std::string>> THETA_design_str;
-        serialize::deserialize(pt.get_child("THETA_design"), THETA_design_str);
-        
-        auto formula_THETA = THETA_design_str[EnumFactory::FromEParamTypes(EParamTypes::HODecPreliminaryQuote)];
-        
-        if (formula_THETA[0].find("FORMULA::p.d.f.::u(0, 1)") == std::string::npos)
-        {
-            throw std::runtime_error("unsupported hh specification rule");
-        };
-        
-        auto pdf_THETA = boost::uniform_01<>();
-        auto rng_THETA = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(rand->rng, pdf_THETA);
-        
-        
-        std::map<EParamTypes, std::vector<double>> THETA_design;
-        for (auto& iter:THETA_design_str)
-        {
-            THETA_design[EnumFactory::ToEParamTypes(iter.first)] = std::vector<double>{};
-        };
-        
-        
-        //in the order of drawing for now
-        //df_save = df[['TOTSQFT_C', 'YEARMADERANGE', 'ROOFTYPE', 'TREESHAD', 'MONEYPY', 'KWH_C']]
-        std::vector<std::vector<double>> xs;
-        //draw from the joint distribution
-        for(auto i = 0 ; i < params_d[EParamTypes::N_HO]; ++i)
-        {
-            xs.push_back(tools::draw_joint_distribution(e_dist, rand));
-        };
-        
-        
-        
-        //read other parameters
-        serialize::deserialize(pt.get_child("params"), params_str);
-        std::map<EParamTypes, std::vector<double>> param_values;
-
-        for (auto& iter:params_str)
-        {
-            EParamTypes name = EnumFactory::ToEParamTypes(iter.first);
-            //explicitly solve for values
-            auto params = serialize::create_dist_from_formula(iter.second, rand);
-            
-            if (params.valid_dist == true)
-            {
-                param_values[name] = std::vector<double>(params_d[EParamTypes::N_HO], 0.0);
-                //generate map of random number generators with the name for this parameter?
-                switch (params.type)
-                {
-                    case ERandomParams::N_trunc:
-                        throw std::runtime_error("unfinished thread, should not be here");
-                        break;
-                    case ERandomParams::custom:
-                        //see what parameter it is - save values
-                        if (name == EParamTypes::ElectricityBill)
-                        {
-                            for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
-                            {
-                                param_values[name].push_back(xs[i][5] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]);
-                                param_values[EParamTypes::ElectricityConsumption].push_back(xs[i][5]);
-                            };
-                        }
-                        else if (name == EParamTypes::Income)
-                        {
-                            for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
-                            {
-                                param_values[name].push_back(xs[i][4]);
-                            };
-                        }
-                        else
-                        {
-                            throw std::runtime_error("unsupported hh specification rule");
-
-                        };
-                        
-                        
-                        
-                        break;
-                    default:
-                        break;
-                };
-            }
-            else
-            {
-                //get value and store it as a value for all agents?
-                auto param = serialize::solve_str_formula<double>(iter.second, *rand);
-                param_values[name] = std::vector<double>(params_d[EParamTypes::N_HO], param);
-                
-            };
-        };
-        
-        
-        
-        //create HO
-        auto j = 0;
-        for (auto i = 0; i < params_d[EParamTypes::N_HO]; ++i)
-        {
-            if (j < params_d[EParamTypes::N_HOMarketingStateHighlyInterested])
-            {
-                //create few highly interested agents
-                //put specific parameters into template
-                pt.put("marketing_state", EnumFactory::FromEParamTypes(EParamTypes::HOMarketingStateHighlyInterested));
-            };
-            
-            ++j;
-            
-            //generate location
-            pt.put("location_x", rng_location_x());
-            pt.put("location_y", rng_location_y());
-            
-
-            //generate House
-            //roof_age
-            //roof_size
-            pt.put("House.roof_size", std::max(0.0, roof_size(xs[i][0])));
-            pt.put("House.roof_age", std::max(0.0, roof_age(xs[i][1])));
-            
-            
-            //create decision parameters
-            THETA_design[EParamTypes::HODecPreliminaryQuote] = std::vector<double>{rng_THETA()};
-            pt.put_child("THETA_design", serialize::serialize(THETA_design, "THETA_design").get_child("THETA_design"));
-            
-            
-            
-            //read configuration file
-            //replace parameters if necessary
-            hos.push_back(new Homeowner(pt, this));
-            
-            
-            //copy other parameters
-            for (auto iter:param_values)
-            {
-                hos.back()->params[iter.first] = param_values[iter.first][i];
-            };
-            
-            
-            
-        };
         
         //sei.json
         path_to_template = path_to_dir;
@@ -296,7 +109,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        seis = helper_->create_seis(pt, mode_, params_d[EParamTypes::N_SEI], params_d[EParamTypes::N_SEILarge], rng_location_x, rng_location_y, this);
+        seis = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_seis(pt, mode_, rng_location_x, rng_location_y, this);
         
         
         
@@ -309,11 +122,11 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         for (auto i = 0; i < params_d[EParamTypes::N_SEM]; ++i)
         {
-            sems.push_back(new SEM(pt, this));
+            sems->push_back(new SEM(pt, this));
         };
         
 
-        max_ = sems.size() - 1;
+        max_ = sems->size() - 1;
         auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
         auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
 
@@ -323,7 +136,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         {
             if (iter.second->manufacturer_id == "FORMULA::RANDOM")
             {
-                iter.second->manufacturer = sems[rng_i()];
+                iter.second->manufacturer = (*sems)[rng_i()];
                 iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
                 
             }
@@ -472,17 +285,17 @@ W::init()
     
     
     
-    for (auto& agent:hos)
+    for (auto& agent:*hos)
     {
         agent->init(this);
     };
     
-    for (auto& agent:seis)
+    for (auto& agent:*seis)
     {
         agent->init(this);
     };
     
-    for (auto& agent:sems)
+    for (auto& agent:*sems)
     {
         agent->init(this);
     };
@@ -623,7 +436,7 @@ W::life_seis()
             ++notified_counter;
             FLAG_SEI_TICK = false;
             
-            for (auto& agent:seis)
+            for (auto& agent:*seis)
             {
                 //get tick
                 agent->act_tick();
@@ -653,7 +466,7 @@ W::life_sems()
             ++notified_counter;
             FLAG_SEM_TICK = false;
             
-            for (auto& agent:sems)
+            for (auto& agent:*sems)
             {
                 //get tick
                 agent->act_tick();

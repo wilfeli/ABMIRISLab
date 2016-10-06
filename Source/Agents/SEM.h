@@ -103,6 +103,8 @@ namespace solar_core
          
          */
         
+        EParamTypes sem_type;
+        
         UID uid;
         std::mutex lock;
         
@@ -140,7 +142,7 @@ namespace solar_core
          Section relevant to production
          
          */
-        std::vector<std::shared_ptr<SolarModule>>solar_panel_templates;/*!< list of solar panels to produce */
+        std::vector<std::shared_ptr<SolarModule>>solar_panel_templates; /*!< list of solar panels to produce */
         std::vector<std::shared_ptr<Inverter>> inverter_templates;
         
         std::map<std::string, double> inventories;

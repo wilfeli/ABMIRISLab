@@ -57,6 +57,7 @@ namespace solar_core
      */
     class SEI: public IAgent
     {
+        template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
         /**
@@ -230,7 +231,7 @@ namespace solar_core
          */
         
         
-        virtual std::shared_ptr<MesDesign> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
+        virtual std::vector<std::shared_ptr<MesDesign>> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
         
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
         std::map<EParamTypes, std::shared_ptr<Inverter>> dec_inverters; /*!< choices for different inverters to create design with */

@@ -362,6 +362,10 @@ namespace solar_core
         DCtoACLoss,
         
         
+        /** Convertion from kWh into acres of forest for CO2 */
+        EnergyToCO2,
+        
+        
         /** Length of a definition for degradation rate */
         DegradationDefinitionLength,
         
@@ -475,6 +479,12 @@ namespace solar_core
         
         /** SEM parameter: Learning rate for production of new panels, basically price decrease rate */
         SEMLearningPrice,
+        
+        
+        /** Inverter or PV producer  */
+        SEMPVProducer,
+        SEMInverterProducer,
+        
         
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
@@ -709,6 +719,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::n_h")
             {
                 return EParamTypes::N_H;
+            }
+            else if (param_type == "eparamtypes::energytoco2")
+            {
+                return EParamTypes::EnergyToCO2;
             }
             else if (param_type == "eparamtypes::hodecpreliminaryquote")
             {

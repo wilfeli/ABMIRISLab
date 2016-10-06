@@ -1,7 +1,7 @@
 {
     "dec_solar_modules": [
                           {
-                          "EParamTypes::SEIMidEfficiencyDesign": "REC260PE"
+                          "EParamTypes::SEIMidEfficiencyDesign": "FORMULA::RANDOM"
                           }
                           ],
     "dec_inverters":[

@@ -37,7 +37,8 @@ namespace solar_core {
     class HelperW
     {
     public:
-        virtual std::vector<SEI*> create_seis(PropertyTree& pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_) = 0;
+        virtual void init(){};
+
     };
     
 
@@ -46,12 +47,8 @@ namespace solar_core {
     {
     public:
         
-        std::vector<SEI*> create_seis(PropertyTree& pt_, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_) override
-        {
-            
-        }
         
-        
+
         template <class TA>
         std::vector<TA*>* create_hos(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
@@ -238,9 +235,9 @@ namespace solar_core {
     {
     public:
 
-        std::vector<SEI*> create_seis(PropertyTree& pt, std::string mode_, long N_SEI, long N_SEILarge, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        std::vector<SEI*>* create_seis(PropertyTree& pt, std::string mode_, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
-            std::vector<SEI*> seis;
+            std::vector<SEI*>* seis;
             
             T* w = static_cast<T*>(w_);
             
@@ -257,40 +254,107 @@ namespace solar_core {
             //parameters
             //read file from params for seis - create sei from it
             
+            //list of precreated partial SEI, will add other parameters from json
+            //similar to h creation algorithm
+            
+
+            
+            //SEM connections PV module and SEM connections Inverter
+            auto max_ = w->sems->size() - 1;
+            auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+            int64_t j_sem = 0;
             
             
             
             
-            //
-            
-            
-            
-            
-            
-            //create SEI - use template for parameters, use model file for additional parameters
-            //create sei_type
-            auto j = 0;
-            for (auto i = 0; i < N_SEI; ++i)
+            for (auto i = 0; i < w->params_d[EParamTypes::N_SEI]; ++i)
             {
                 //put sei_type
-                pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEISmall));
-                if (j < N_SEILarge)
-                {
-                    pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
-                };
-                ++j;
-                
+                pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::None));
                 
                 //generate location
                 pt.put("location_x", rng_location_x());
                 pt.put("location_y", rng_location_y());
                 
                 
-                seis.push_back(new SEI(pt, w));
+                seis->push_back(new SEI(pt, w));
+
                 
-                
+                //set manufacturer connection
+                if (pt.get<std::string>("dec_design") == "FORMULA::RANDOM")
+                {
+                    j_sem = rng_i();
+                    
+                    if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMPVProducer)
+                    {
+                        //connect with first template
+                        //connect to random PV manufacturer
+                        seis->back()->dec_solar_modules[EParamTypes::SEIMidEfficiencyDesign] = (*w->sems)[j_sem]->solar_panel_templates[0];
+                        
+                    }
+                    else
+                    {
+                        //connect to random Inverter manufacturer
+                        //check inverter type
+                        //keep searching until required type is found
+                        
+                        auto inverter_type = (*w->sems)[j_sem]->inverter_templates[0]->technology;
+                        
+                        double technology_to_set = 2.0;
+                        
+                        while (technology_to_set > 0.0)
+                        {
+                            if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMInverterProducer)
+                            {
+                                if (inverter_type == ESEIInverterType::Central)
+                                {
+                                    if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] == nullptr)
+                                    {
+                                        seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] = (*w->sems)[j_sem]->inverter_templates[0];
+                                        
+                                        --technology_to_set;
+                                    };
+                                };
+                                
+                                if (inverter_type == ESEIInverterType::Micro)
+                                {
+                                    if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] == nullptr)
+                                    {
+                                        seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] = (*w->sems)[j_sem]->inverter_templates[0];
+                                        --technology_to_set;
+                                    };
+                                };
+
+                                j_sem = rng_i();
+                            }
+                            else
+                            {
+                                j_sem = rng_i();
+                            };
+
+                        };
+                        
+                    };
+                    
+                    
+                }
+                else
+                {
+                    throw std::runtime_error("unsupported specification");
+                };
             };
+            
+
+            
+            
+            
             return seis;
+
+            
+            
+            
+            
             
         }
         
@@ -302,7 +366,7 @@ namespace solar_core {
             
             //assign different inverters
             
-            
+            //create PV producers
             
         }
         
@@ -362,6 +426,7 @@ namespace solar_core {
             
             //create HO
             std::string label;
+            double u_i;
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
                 //draw next uniform
@@ -381,21 +446,11 @@ namespace solar_core {
             };
             
 
-            
-
-            
-            
-
             //@DevStage3 if decide to have random utility  - when generating H assign utility from the description of a probability distribution
-            
-            
             
             return hos;
 
         }
-        
-        
-        
         
         
     };

@@ -208,9 +208,9 @@ namespace solar_core {
         
         
         
-        std::vector<Homeowner*> hos;/*!< all H agents */
-        std::vector<SEI*> seis;/*!< all SEI agents */
-        std::vector<SEM*> sems; /*!< all SEM */
+        std::vector<Homeowner*>* hos;/*!< all H agents */
+        std::vector<SEI*>* seis;/*!< all SEI agents */
+        std::vector<SEM*>* sems; /*!< all SEM */
         /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
         
 

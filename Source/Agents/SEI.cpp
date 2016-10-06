@@ -136,13 +136,6 @@ SEI::request_online_quote(std::shared_ptr<PVProject> project_)
 void
 SEI::request_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
-    //if SEISmall - request information
-    if ((sei_type == EParamTypes::SEISmall) && (!project_->state_base_agent))
-    {
-        //request additional information
-        project_->state_base_agent = project_->agent->get_inf_online_quote(this);
-    };
-    
     
     //update time of a last action
     project_->ac_sei_time = a_time;
@@ -317,7 +310,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
  
  
 */
-std::shared_ptr<MesDesign>
+std::vector<std::shared_ptr<MesDesign>>
 SEI::form_design(std::shared_ptr<PVProject> project_)
 {
     
@@ -326,53 +319,81 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     //do in multiples of three
     //check design for full electricity bill, for 80% of it and for 30% of it
     std::vector<PVDesign> designs;
-//    //daily electricity consumption from bill in kWh
-//    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
-//    //amount of solar irradiation in kWh/m2/day
-//    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
-//    //distribution of permit length in different locations
-//    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
-//    
-//    //EParamTypes::ElectricityBill has daily electricity bill
-//    for (auto project_percentage:dec_project_percentages)
-//    {
-//        //for each preferred panel - with high, mid and low efficiency, calculate number of panels to meet the demand
-//        for (auto iter: dec_solar_modules)
-//        {
-//            //create design
-//            auto design = PVDesign();
-//            
-//            form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, design);
-//            
-//            ac_estimate_savings(design, project_);
-//            
-//            //MARK: cont. add discard for negative profits
-//            
-//            designs.push_back(design);
-//        };
-//    };
-//    
-//    //sort by savings and present best option
-//    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
-//    
-//    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
-//        return lhs.total_savings > rhs.total_savings;
-//    });
-    auto design = std::make_shared<PVDesign>(designs[0]);
-    auto mes = std::make_shared<MesDesign>(design);
+    //daily electricity consumption from bill in kWh
+    auto demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    //amount of solar irradiation in kWh/m2/day
+    auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
+    //distribution of permit length in different locations
+    auto permit_difficulty = w->get_permit_difficulty(project_->agent->location_x, project_->agent->location_y);
+    for (auto project_percentage:dec_project_percentages)
+    {
+        for (auto iter: dec_solar_modules)
+        {
+            for (auto iter_inv:dec_inverters)
+            {
+                //create design
+                auto design = PVDesign();
+                
+                form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, iter_inv, design);
+                
+                ac_estimate_savings(design, project_);
+                
+                designs.push_back(design);
+                
+            };
+        };
+    };
+    
+    //sort by savings and present best option
+    ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
+    
+    std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
+        return lhs.total_net_savings > rhs.total_net_savings;
+    });
+    
+    
+    std::vector<std::shared_ptr<MesDesign>> mess;
+    mess.push_back(std::make_shared<MesDesign>(designs[0]));
+    mess.push_back(std::make_shared<MesDesign>(designs[1]));
+    
         
-    return mes;
+    return mess;
 }
 
 
 void
 SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
 {
+    
+    double demand_adjusted = demand / (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    
     design.solar_irradiation = solar_irradiation;
     
     design.permit_difficulty = permit_difficulty;
     
-    design.N_PANELS = std::ceil(demand * project_percentage / ((solar_irradiation) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
+    double N_PANELS = std::ceil(demand_adjusted * project_percentage / ((solar_irradiation) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
+    //size of one panel
+    double module_area = iter.second->length * iter.second->width / 1000000;
+    
+    //system area size
+    double system_area = N_PANELS * module_area;
+    //convert sq.feet into sq. meters
+    double roof_area = constants::NUMBER_SQM_IN_SQF * project_->agent->house->roof_size;
+    double available_area = std::min(roof_area, system_area);
+    
+    
+    //update to the actual available area
+    N_PANELS = std::ceil(available_area/module_area);
+    
+    
+    
+    design.N_PANELS = N_PANELS;
+    
+    //adjust for roof size
+    
+    
     
     design.PV_module = iter.second;
     
@@ -380,9 +401,20 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
     
     design.DC_size = design.N_PANELS * iter.second->efficiency * iter.second->length * iter.second->width / 1000;
     
+    
+    //MARK: cont. check if need to target 100% of demand with DC or already with adjusted AC size?
     design.AC_size = design.DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     
     
+    design.co2_equivalent = 0.0;
+    
+    
+    
+    
+    
+    
+    
+    //MARK: cont.
     //assume that it is price per watt or min of costs
     //for now it is margin over costs
     //costs are proportional to DC size and its square, and quoted price for inverters
@@ -418,32 +450,52 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     
     
-    ///@DevStage2: calculate PPA
-    ///@DevStage2: calculate lease
+    ///@DevStage4: calculate PPA
+    ///@DevStage4: calculate lease
 
     //simple calculation when HO owns the system
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
     auto CPI = 1;
-    auto energy_costs = 0.0;
-    auto AC_size = design.AC_size;
+    auto AC_size_t = design.AC_size;
+    //difference in definitions
     auto degradation_t = std::exp(std::log((1 - design.PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
-    for (auto i = 0; i < design.PV_module->warranty_length; ++i)
+    auto production_t = 0.0;
+    
+    
+    //loan annuity - equivalent to
+    auto loan_amount = design.total_costs;
+    auto interest_rate_loan = WorldSettings::instance().params_exog[EParamTypes::AverageInterestRateLoan]; //yearly terms
+    double warranty_length = design.PV_module->warranty_length;
+    //assumed that it is equal to warranty ... BIG ASSUMPTION
+    auto loan_length = warranty_length / 52; //yearly dimension, divide by number of weeks in a year
+    
+    int NUMBER_MONTHS_IN_YEAR = 12;
+    auto N_loan = loan_length * NUMBER_MONTHS_IN_YEAR;
+    auto loan_annuity = (interest_rate_loan/NUMBER_MONTHS_IN_YEAR)/(1 - std::pow((1 + interest_rate_loan/NUMBER_MONTHS_IN_YEAR), -N_loan))*loan_amount;
+    auto total_production = 0.0;
+    double potential_energy_costs = 0.0;
+    double realized_energy_income = 0.0;
+    
+    //MARK: cont. think about using warranty length here or maybe some generalized value
+    for (auto i = 0; i < warranty_length; ++i)
     {
-        //estimate yearly energy production, if PPA might be used in estimation
-        //MARK: cont. check again
-        auto yearly_production = AC_size * design.solar_irradiation * constants::NUMBER_DAYS_IN_YEAR;
-        energy_costs += yearly_production * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
-        AC_size = AC_size * degradation_t;
+        //estimate yearly energy production
+        //MARK: cont. check again that numbers are in the correct ballpark
+        production_t = AC_size_t * design.solar_irradiation * constants::NUMBER_DAYS_IN_YEAR;
+        total_production += production_t;
+        
+        //how much have payed if decided to go without solar
+        potential_energy_costs += design.AC_size * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        //how much could make if sell energy and decide not to use it
+        realized_energy_income += production_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
+        AC_size_t = AC_size_t * degradation_t;
         CPI = CPI * inflation;
     };
     
-    design.energy_savings_money = energy_costs;
-    design.total_savings = energy_costs - design.total_costs;
     
-    
-    //MARK: cont. add net savings calculation
-    design.total_net_savings;
-    
+    //adjustment for opportunity costs for diverting money into this investment
+    design.total_net_savings = (realized_energy_income - loan_annuity * N_loan)/potential_energy_costs;
+    design.co2_equivalent = total_production/WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2];
 }
 
 
@@ -517,7 +569,7 @@ SEI::ac_update_tick()
     a_time = w->time;
     
     pvprojects_lock.lock();
-    //pove pending projects into active projects
+    //move pending projects into active projects
     pvprojects.insert(pvprojects.end(), pvprojects_to_add.begin(), pvprojects_to_add.end());
     pvprojects_to_add.clear();
 
@@ -584,10 +636,27 @@ SEI::act_tick()
         };
         
         
-        //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
+        //if visited site and processing time for preliminary quote has elapsed -  form preliminary quote
         if (project->state_project == EParamTypes::RequestedPreliminaryQuote)
         {
-            //if preliminary quote was requested - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
+            //just processing time
+            if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote])
+            {
+                auto mes = form_preliminary_quote(project);
+                project->preliminary_quote = mes;
+                project->state_project = EParamTypes::ProvidedPreliminaryQuote;
+                project->agent->receive_preliminary_quote(project);
+                project->ac_sei_time = a_time;
+            };
+        };
+        
+
+        
+        
+        //if preliminary quote is requested and have capacity for new project, and processing time for preliminary quotes has elapced - get back and schedule time
+        if (project->state_project == EParamTypes::AcceptedPreliminaryQuote)
+        {
+            //if preliminary quote was accepted - check that processing time after request has elapsed and contact agent to schedule visit, check capacity for visits for each future time
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
@@ -621,32 +690,41 @@ SEI::act_tick()
         };
         
         
-        //if visited site and processing time for preliminary quote has elapsed -  form preliminary quote
+        
+        
         if (project->state_project == EParamTypes::CollectedInfFirstSiteVisit)
-        {
-            //if information after first site visit is collected
-            if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote])
-            {
-                auto mes = form_preliminary_quote(project);
-                project->preliminary_quote = mes;
-                project->agent->receive_preliminary_quote(project);
-                project->ac_sei_time = a_time;
-            };
-        };
-        
-        
-        
-        if (project->state_project == EParamTypes::AcceptedPreliminaryQuote)
         {
             //if enough time has elapsed
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForDesign])
             {
-                auto mes = form_design(project);
+                auto mess = form_design(project);
                 project->state_project = EParamTypes::DraftedDesign;
-                project->design = mes;
+                project->design = mess[0];
                 form_financing(project);
                 project->agent->receive_design(project);
                 project->ac_sei_time = a_time;
+                
+                for (auto i = 1; i < mess.size(); ++i)
+                {
+                    //create new project
+                    auto project_dublicate = PVProject(*project);
+                    
+                    auto project_to_add = std::make_shared<PVProject>(project_dublicate);
+                    
+                    get_project(project_to_add);
+                    
+                    project_to_add->agent->get_project(project_to_add);
+                    
+                    //assign design
+                    project_to_add->design = mess[i];
+                    
+                    form_financing(project_to_add);
+                    project_to_add->agent->receive_design(project_to_add);
+                    project_to_add->ac_sei_time = a_time;
+                };
+                
+                
+
             };
             
         };
@@ -766,6 +844,16 @@ SEI::act_tick()
     
     
     
+    //make decision on price per watt for new installations and general pricing strategy
+    //estimate sales given price - estimate share of the market for installer parameters
+    //estimate prob to get client given current offerings
+    //assume that knows actual utility function 
+    
+    
+    
+    
+    
+    
     
 
     //MARK: cont. collect information from SEM and update design examples
@@ -780,7 +868,6 @@ SEI::act_tick()
     
     
     
-    //MARK: cont. preliminary quote - mom and pop shop will be separate class, derived from this, so this implementation is for the big SEI, which all have online quotes
     
     
     

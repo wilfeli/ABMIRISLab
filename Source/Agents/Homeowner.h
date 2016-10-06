@@ -150,6 +150,9 @@ public:
      
      */
     
+    
+    void get_project(std::shared_ptr<PVProject> project_);
+    
     virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
     //@DevStage2 is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
     //@}
@@ -219,11 +222,12 @@ protected:
      Section with information relevant to potential and active projects
      
      */
-    
+
     
     std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
     
-    
+    std::vector<std::shared_ptr<PVProject>> pvprojects_to_add;
+    std::mutex pvprojects_lock;
     
     //@}
     
