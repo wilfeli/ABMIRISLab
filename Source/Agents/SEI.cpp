@@ -477,6 +477,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     double realized_energy_income = 0.0;
     
     //MARK: cont. think about using warranty length here or maybe some generalized value
+    //It is fixed 25 years in conjoint 
     for (auto i = 0; i < warranty_length; ++i)
     {
         //estimate yearly energy production
@@ -847,7 +848,7 @@ SEI::act_tick()
     //make decision on price per watt for new installations and general pricing strategy
     //estimate sales given price - estimate share of the market for installer parameters
     //estimate prob to get client given current offerings
-    //assume that knows actual utility function 
+    //assume that knows actual utility function
     
     
     

@@ -350,6 +350,7 @@ Homeowner::dec_evaluate_designs()
             utility += THETA_design[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
             
             //number of failures
+            //MARK: cont. 
             utility += THETA_design[EParamTypes::HODesignDecisionFailures][0] * project->design->design->failure_rate;
             
             //emmision levels
