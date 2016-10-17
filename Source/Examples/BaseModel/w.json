@@ -100,6 +100,21 @@
                         },
                         {
                         "EParamTypes::EnergyToCO2" : 0.665
+                        },
+                        {
+                        "EParamTypes::SEMFailureRatePVModule" : 0.003
+                        },
+                        {
+                        "EParamTypes::SEMFailureRateInverterMicro" : 0.0035
+                        },
+                        {
+                        "EParamTypes::SEMFailureRateInverterCentral": 0.1
+                        },
+                        {
+                        "EParamTypes::SEMFailureRateInverterPowerOptimizer": 0.003
+                        },
+                        {
+                        "EParamTypes::PVModuleWarrantyLength": 25.0
                         }
                         ]
     },

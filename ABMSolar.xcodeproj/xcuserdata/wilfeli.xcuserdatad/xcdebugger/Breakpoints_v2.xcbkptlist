@@ -701,23 +701,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "584"
             endingLineNumber = "584"
-            landmarkName = "W::life_hos()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Agents/SEI.cpp"
-            timestampString = "496985145.66026"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "SEI::form_preliminary_quote(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkName = "W::get_solar_irradiation(double location_x, double location_y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -734,38 +718,6 @@
             startingLineNumber = "335"
             endingLineNumber = "335"
             landmarkName = "Homeowner::dec_evaluate_designs()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Agents/SEI.cpp"
-            timestampString = "497330501.812751"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
-            landmarkName = "SEI::form_design_for_params(std::shared_ptr&lt;PVProject&gt; project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM&amp; iter, const IterTypeDecInverter&amp; iter_inverter, PVDesign&amp; design)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Agents/SEI.cpp"
-            timestampString = "497387751.620244"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
-            landmarkName = "SEI::form_design_for_params(std::shared_ptr&lt;PVProject&gt; project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM&amp; iter, const IterTypeDecInverter&amp; iter_inverter, PVDesign&amp; design)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

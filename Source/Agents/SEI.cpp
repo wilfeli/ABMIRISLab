@@ -44,6 +44,10 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     
     serialize::deserialize(pt_.get_child("dec_project_percentages"),dec_project_percentages);
     
+    //complexity of installation in labor*hours
+    complexity_install_prior = pt_.get<double>("complexity_install_prior");
+    
+    
     std::vector<std::string> THETA_hard_costs_str;
     serialize::deserialize(pt_.get_child("THETA_hard_costs"), THETA_hard_costs_str);
     
@@ -252,6 +256,8 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     //only 1 solar module per installer
     form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), *(dec_inverters.find(EParamTypes::TechnologyInverterCentral)), design);
     
+
+    
     ac_estimate_savings(design, project_);
 
 
@@ -383,17 +389,9 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
     double roof_area = constants::NUMBER_SQM_IN_SQF * project_->agent->house->roof_size;
     double available_area = std::min(roof_area, system_area);
     
-    
     //update to the actual available area
     N_PANELS = std::ceil(available_area/module_area);
-    
-    
-    
     design.N_PANELS = N_PANELS;
-    
-    //adjust for roof size
-    
-    
     
     design.PV_module = iter.second;
     
@@ -412,26 +410,90 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
     
     
     
+    //failure rate for main part of the system
+    //if it is central inverter - add number of panels  and raw central inverter failure rate
     
+    design.failure_rate = 0.0;
+    design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRatePVModule] * design.N_PANELS;
+    switch (design.inverter->technology) {
+        case ESEIInverterType::Central:
+            design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterCentral];
+            break;
+        case ESEIInverterType::PoweOptimizer:
+            //add both micro and central failure rates
+            design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterCentral];
+            design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterPowerOptimizer] * design.N_PANELS;
+            break;
+        case ESEIInverterType::Micro:
+            design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterMicro] * design.N_PANELS;
+            break;
+        default:
+            break;
+    }
     
-    //MARK: cont.
-    //assume that it is price per watt or min of costs
-    //for now it is margin over costs
-    //costs are proportional to DC size and its square, and quoted price for inverters
-    design.hard_costs = design.N_PANELS * iter.second->efficiency * THETA_hard_costs[0] + std::pow(design.DC_size, 2) * THETA_hard_costs[1] + design.inverter->p_sem * THETA_hard_costs[2];
-    
-    //general installation costs and permitting costs
-    //marketing and administrative costs are included in profit margin
-    design.soft_costs = design.N_PANELS * THETA_soft_costs[0] + permit_difficulty * THETA_soft_costs[1];
-    
-    
-    design.total_costs = (design.hard_costs + design.soft_costs) * THETA_profit[0];
-
-
-    
+    ac_estimate_price(design, project_);
     
     
 }
+
+
+
+void
+SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<PVProject> project_)
+{
+    double costs = 0.0;
+    //costs of the system
+    //number of panels at their price at manufacturer
+    //number of inverters at their price at manufacturer
+    costs += design.N_PANELS * design.PV_module->p_sem;
+
+    switch (design.inverter->technology) {
+        case ESEIInverterType::Micro:
+        case ESEIInverterType::PoweOptimizer:
+            costs += design.N_PANELS * design.inverter->p_sem;
+            break;
+        case ESEIInverterType::Central:
+            costs += design.inverter->p_sem;
+            break;
+        default:
+            break;
+    }
+    
+    
+    
+    
+    //cost of installation
+    //time for installation
+    double wage = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+    costs += complexity_install_prior * wage;
+    
+    
+    //no assumptions on the design of a project specific time
+    
+    
+    
+    //length of permitting - assume 1 person per project
+    //average of 25 days for interconnection
+    auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+    auto total_project_time = permit_difficulty_scale * design.permit_difficulty + params[EParamTypes::SEILeadInProjectTime];
+    
+    
+    //assume that 1 person per project for the whole duration as a sales rep
+    costs += wage * total_project_time * 1;
+    
+    
+    
+    //profit  margin on costs
+    design.total_costs = costs * (1 + THETA_profit[0]);
+    
+    
+ 
+    
+    
+}
+
+
+
 
 
 /**
@@ -465,9 +527,9 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     //loan annuity - equivalent to
     auto loan_amount = design.total_costs;
     auto interest_rate_loan = WorldSettings::instance().params_exog[EParamTypes::AverageInterestRateLoan]; //yearly terms
-    double warranty_length = design.PV_module->warranty_length;
+    double warranty_length = WorldSettings::instance().params_exog[EParamTypes::PVModuleWarrantyLength] * constants::NUMBER_TICKS_IN_YEAR;  //originally in yearly terms
     //assumed that it is equal to warranty ... BIG ASSUMPTION
-    auto loan_length = warranty_length / 52; //yearly dimension, divide by number of weeks in a year
+    auto loan_length = warranty_length / constants::NUMBER_TICKS_IN_YEAR; //yearly dimension, divide by number of weeks in a year
     
     int NUMBER_MONTHS_IN_YEAR = 12;
     auto N_loan = loan_length * NUMBER_MONTHS_IN_YEAR;
@@ -476,7 +538,6 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     double potential_energy_costs = 0.0;
     double realized_energy_income = 0.0;
     
-    //MARK: cont. think about using warranty length here or maybe some generalized value
     //It is fixed 25 years in conjoint 
     for (auto i = 0; i < warranty_length; ++i)
     {

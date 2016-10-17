@@ -253,6 +253,9 @@ namespace solar_core
         
         TimeUnit ac_designs; /*!< last time information about SEM was updated */
         
+        double complexity_install_prior =  0.0; /*!< time for installation of 1 PV project, labor*hours */
+        
+        
         //@}
         
         

@@ -39,6 +39,7 @@ namespace solar_core
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
         const double NUMBER_DAYS_IN_YEAR = 365.25;
         const double NUMBER_DAYS_IN_TICK = 365.25;
+        const double NUMBER_TICKS_IN_YEAR = 52.0;
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const double NUMBER_SQM_IN_SQF = 0.09290304;
@@ -151,6 +152,9 @@ namespace solar_core
         RoofAge,
         
         
+        /**  Globally set warranty length of PV modules */
+        PVModuleWarrantyLength,
+        
         
         /** Homeowner non-compensatory decisions: ratings screening rule */
         HONCDecisionSEIRating,
@@ -158,6 +162,7 @@ namespace solar_core
         
         /** Homeowner installer decision: utility of other options */
         HOSEIDecisionUtilityNone,
+        
         
         /** Resulting estimate of the utility for an option */
         HOSEIDecisionEstimatedUtility,
@@ -723,6 +728,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::energytoco2")
             {
                 return EParamTypes::EnergyToCO2;
+            }
+            else if (param_type == "eparamtypes::pvmodulewarrantylength")
+            {
+                return EParamTypes::PVModuleWarrantyLength;
             }
             else if (param_type == "eparamtypes::hodecpreliminaryquote")
             {

@@ -357,7 +357,14 @@ W::life()
     };
 }
 
-void W::ac_update_tick(){}
+void W::ac_update_tick()
+{
+    
+    
+    //MARK: cont. add update of labor price
+    
+    
+}
 
 
 void

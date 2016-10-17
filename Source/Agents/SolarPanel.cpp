@@ -65,7 +65,7 @@ SolarModule::SolarModule(const PropertyTree& pt_)
     p_sem = pt_.get<double>("Price (from manufacturer)");
     length = pt_.get<double>("Length");
     width = pt_.get<double>("Width");
-    warranty_length = pt_.get<double>("Warranty length");
+    warranty_length = WorldSettings::instance().params_exog[EParamTypes::PVModuleWarrantyLength];
     manufacturer_id = pt_.get<std::string>("Manufacturer Id");
     degradation = pt_.get<double>("Degradation after 10 years");
     
@@ -96,7 +96,12 @@ SolarModule::SolarModule(const PropertyTree& pt_)
 }
 
 
-SolarModuleBL::SolarModuleBL(const PropertyTree& pt_):SolarModule(pt_){}
+SolarModuleBL::SolarModuleBL(const PropertyTree& pt_):SolarModule(pt_)
+{
+    warranty_length = pt_.get<double>("Warranty length");
+
+
+}
 
 void SolarModuleBL::init()
 {
