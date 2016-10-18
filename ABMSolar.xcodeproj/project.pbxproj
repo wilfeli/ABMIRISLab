@@ -102,6 +102,11 @@
 		EDD3766A1D320954008705B8 /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
 		EDD3766D1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
 		EDD3766E1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
+		EDD8C1081DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C1091DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10A1DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10B1DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10C1DB5B7DC0064C297 /* VectorMath.h in Headers */ = {isa = PBXBuildFile; fileRef = EDD8C1071DB5B7DC0064C297 /* VectorMath.h */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -2123,6 +2128,8 @@
 		EDD376791D3429B0008705B8 /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
 		EDD3767B1D3429B0008705B8 /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
 		EDD3767C1D3429B0008705B8 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
+		EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorMath.cpp; sourceTree = "<group>"; };
+		EDD8C1071DB5B7DC0064C297 /* VectorMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorMath.h; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -8466,6 +8473,8 @@
 				ED438B621D09F78E00CE1EA7 /* Simulation.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
+				EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */,
+				EDD8C1071DB5B7DC0064C297 /* VectorMath.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -13289,6 +13298,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD8C10C1DB5B7DC0064C297 /* VectorMath.h in Headers */,
 				ED5624261D56756200FF25BA /* UI_Python.h in Headers */,
 				ED5624511D583C5800FF25BA /* model.h in Headers */,
 			);
@@ -13423,6 +13433,7 @@
 				ED2BC14A1D4BACA300B96FB1 /* error_code.cpp in Sources */,
 				ED2BC14B1D4BACA300B96FB1 /* H.cpp in Sources */,
 				ED2BC14C1D4BACA300B96FB1 /* IRandom.cpp in Sources */,
+				EDD8C10A1DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				ED2BC14D1D4BACA300B96FB1 /* G.cpp in Sources */,
 				ED2BC14E1D4BACA300B96FB1 /* SolarPanel.cpp in Sources */,
 				ED2BC14F1D4BACA300B96FB1 /* WEE.cpp in Sources */,
@@ -13468,6 +13479,7 @@
 				ED56242F1D58261000FF25BA /* IAgent.cpp in Sources */,
 				ED5624301D58261000FF25BA /* SEI.cpp in Sources */,
 				ED5624311D58261000FF25BA /* SEIBL.cpp in Sources */,
+				EDD8C10B1DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				ED5624321D58261000FF25BA /* SEM.cpp in Sources */,
 				ED5624331D58261000FF25BA /* SEMBL.cpp in Sources */,
 				ED5624341D58261000FF25BA /* SolarPanel.cpp in Sources */,
@@ -13515,6 +13527,7 @@
 				ED3EA2181C9F440000C2B70E /* G.cpp in Sources */,
 				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
 				EDD376611D320283008705B8 /* WEE.cpp in Sources */,
+				EDD8C1081DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
@@ -13577,6 +13590,7 @@
 				EDD376661D320347008705B8 /* H.cpp in Sources */,
 				EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */,
 				EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */,
+				EDD8C1091DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				EDC006B81CEFF00B0024347C /* HelperW.cpp in Sources */,
 				EDDE578B1CDEF359005D1C49 /* Log.cpp in Sources */,
 				EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */,

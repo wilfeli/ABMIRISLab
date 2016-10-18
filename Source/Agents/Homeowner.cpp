@@ -201,59 +201,65 @@ Homeowner::dec_evaluate_online_quotes()
 
 
 
+double
+Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA)
+{
+    double utility = 0.0;
+    
+    //here installers are evaluated
+    //preliminary quote will have general savings estimation
+    //collect all parameters for decisions
+    utility += THETA[EParamTypes::SEIRating][0] * project->sei->params[EParamTypes::SEIRating];
+    
+    //discrete variables have position in the vector of coefficients as their value. Fragile.
+    utility += THETA[EParamTypes::SEIInteractionType][project->sei->params[EParamTypes::SEIInteractionType]];
+    
+    
+    //number inside is type of equipment - directly corresponds to the position in the vector
+    utility += THETA[EParamTypes::SEIEquipmentType][project->sei->params[EParamTypes::SEIEquipmentType]];
+    
+    //estimated project total time
+    //LeadIn time if fixed for each installer and is an estimation
+    //Permitting time depends on the location, but is an estimate
+    utility += THETA[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
+    
+    //warranty
+    //MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
+    utility += THETA[EParamTypes::SEIWarranty][project->preliminary_quote->params[EParamTypes::SEIWarranty]];
+    
+    
+    //savings are estimated for an average homeowner
+    utility += THETA[EParamTypes::HOSEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
+    
+    return utility
+    
+}
+
+
+
+double
+Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
+{
+    return estimate_sei_utility_from_params(project, THETA_installers);
+    
+    
+}
 
 
 
 void
 Homeowner::dec_evaluate_preliminary_quotes()
 {
-    auto pdf_error = boost::uniform_01<>();
-    auto rng_error = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand_ho->rng, pdf_error);
-    double error = 0.0;
-    double utility = 0.0;
     double utility_none = THETA_installers[EParamTypes::HOSEIDecisionUtilityNone][0];
+    double error = 0.0;
     
     for (auto& project:pvprojects)
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
-            utility = 0.0;
-            
-            error = rng_error();
-            
-            //here installers are evaluated
-            //preliminary quote will have general savings estimation
-            //collect all parameters for decisions
-            utility += THETA_installers[EParamTypes::SEIRating][0] * project->sei->params[EParamTypes::SEIRating];
-            
-            //discrete variables have position in the vector of coefficients as their value. Fragile.
-            utility += THETA_installers[EParamTypes::SEIInteractionType][project->sei->params[EParamTypes::SEIInteractionType]];
-            
-            
-            //number inside is type of equipment - directly corresponds to the position in the vector
-            utility += THETA_installers[EParamTypes::SEIEquipmentType][project->sei->params[EParamTypes::SEIEquipmentType]];
-            
-            //estimated project total time
-            //LeadIn time if fixed for each installer and is an estimation
-            //Permitting time depends on the location, but is an estimate
-            utility += THETA_installers[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
-            
-            //warranty
-            //MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
-            utility += THETA_installers[EParamTypes::SEIWarranty][project->preliminary_quote->params[EParamTypes::SEIWarranty]];
-            
-            
-            //savings are estimated for an average homeowner
-            utility += THETA_installers[EParamTypes::HOSEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
-            
             //Generate random noise. Generation is here because every choice will regenerate them
-            utility += error;
-            
-            
-            project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility];
-            
-
-            
+            error = w->rand_ho->ru();
+            project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility] = estimate_sei_utility(project) + error;
         };
     
     

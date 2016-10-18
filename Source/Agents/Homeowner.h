@@ -295,6 +295,9 @@ protected:
     
     std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
     
+    typedef std::map<EParamTypes, std::vector<double>> DecisionParams; 
+    
+    
     std::deque<std::shared_ptr<PVProject>> accepted_design;
     
     long n_pending_designs;

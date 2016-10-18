@@ -30,6 +30,26 @@ namespace solar_core
         
         /**
          
+         Empirical distribution for H decision classes
+         
+         
+         */
+        class EmpiricalHUVD
+        {
+        public:
+            std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
+            std::map<std::string, double> HOD_distribution;
+            std::vector<std::string> labels;
+            std::vector<double> cmf{0};
+
+        };
+        
+        
+        
+        
+        
+        /**
+         
          
          Empirical univariate distribution
          

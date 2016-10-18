@@ -185,6 +185,25 @@ namespace solar_core {
         
         
         
+        
+        //@{
+        /**
+         
+         Preferences by H  is assumed to be public knowledge
+         
+         
+         */
+        
+        std::map<EParamTypes, tools::EmpiricalHUVD> ho_decisions; 
+        
+        
+        
+        
+        //@}
+        
+        
+        
+        
     protected:
         
         //@{

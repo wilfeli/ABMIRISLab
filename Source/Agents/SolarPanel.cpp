@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "Tools/WorldSettings.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/SEMBL.h"
 

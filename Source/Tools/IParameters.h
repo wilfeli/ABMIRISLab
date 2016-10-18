@@ -199,6 +199,16 @@ namespace solar_core
         HODesignDecisionEstimatedUtility,
         
         
+        /** Types of decisions */
+        HONCDecision,
+        HOSEIDecision,
+        HODesignDecision, 
+        
+        
+        
+        
+        
+        
         
 		/** If Homeowner is very interested in SP */
         HOMarketingStateHighlyInterested,
@@ -489,6 +499,22 @@ namespace solar_core
         /** Inverter or PV producer  */
         SEMPVProducer,
         SEMInverterProducer,
+        
+        
+        
+        /** Failure rates for PV module, failure rate per year! */
+        SEMFailureRatePVModule,
+        
+        /** Failure rates for central inverter, failure rate per year! */
+        SEMFailureRateInverterCentral,
+        
+        /** Failure rates for power optimizer, failure rate per year! */
+        SEMFailureRateInverterPowerOptimizer,
+        
+        /** Failure rates for micro inverter, failure rate per year! */
+        SEMFailureRateInverterMicro,
+        
+        
         
         
         /** G parameters: processing time before visit is scheduled */
@@ -968,6 +994,22 @@ namespace solar_core
             else if (param_type == "eparamtypes::semlearningprice")
             {
                 return EParamTypes::SEMLearningPrice;
+            }
+            else if (param_type == "eparamtypes::semfailureratepvmodule")
+            {
+                return EParamTypes::SEMFailureRatePVModule;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinvertercentral")
+            {
+                return EParamTypes::SEMFailureRateInverterCentral;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinverterpoweroptimizer")
+            {
+                return EParamTypes::SEMFailureRateInverterPowerOptimizer;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinvertermicro")
+            {
+                return EParamTypes::SEMFailureRateInverterMicro;
             }
             else if (param_type == "eparamtypes::utilitycurrentcapacity")
             {

@@ -573,6 +573,121 @@ SEI::form_financing(std::shared_ptr<PVProject> project_)
     
 }
 
+
+void SEIBL::init_average_pvproject(TDesign* dec_design, std::shared_ptr<PVProject> project, double p)
+{
+    
+    
+    //MARK: cont.
+    //change to actual initialization - need parameters that will be used in estimating final designs
+    
+    
+    
+    ///estimates profit given the proposed price
+    //estimate number of panels for an average utility bill
+    auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    //solar irradiation - average number
+    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
+    
+    
+    int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
+    double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
+    
+    //create average project for this design
+    project->PV_module = dec_design_hat->PV_module;
+    project->N_PANELS = N_PANELS;
+    project->DC_size = DC_size;
+    project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    project->p = DC_size * p;
+    
+    return project;
+    
+}
+
+
+
+/**
+ 
+ 
+ Maximizing profit by changing price
+ 
+ */
+void
+SEI::dec_max_profit()
+{
+    
+    //search over margins on total costs
+    //[0.0, 1.0] at 10% step
+    
+    
+    
+    //total costs are installation costs and marketing and administrative costs
+    
+    //values for central and micro inverters
+    
+    
+    
+    
+    //for each profit margin estimate costs of installation
+    //estimate share of the market that will go to that installer
+    //1 top besides me that is not me, based on shares of the previous x periods, price ? current
+    //either this and none options - easier to do - so make as a first option
+    
+    //
+    //create project for an average homeowner
+    
+    
+    //simplification - assume that there is only 1 class
+    auto label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[0];
+    
+    
+    = new Homeowner();
+    = new House();
+    
+    auto project_central = std::make_shared<PVProject>();
+    auto project_micro = std::make_shared<PVProject>();
+    
+    
+    
+    
+    
+    //how to get utility
+    //use zero H to get estimation of utility for now
+    //not to write the same code twice
+    auto utility = (*w->hos)[0]->estimate_sei_utility_from_params(project, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
+    
+    profit_grid
+    
+    
+    //for central and micro inverter
+    market_share_grid
+    
+    
+    utility_none
+    
+    market_size * share
+    
+    
+    //estimate share of the submarket that will install solar panels
+    
+    //estimate total income from installation - total costs (=costs of installation + marketing and administrative)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
 /**
 
 Here also have buying and payment

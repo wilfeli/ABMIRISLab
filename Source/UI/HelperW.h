@@ -388,41 +388,45 @@ namespace solar_core {
             //read in information about types
             //read json with distribution parameters
             auto path_to_scheme = path_to_dir;
-            path_to_scheme /= "ho-ncdecisions.json";
-            
-            //read json with specification
             PropertyTree pt_decisions;
-            read_json(path_to_scheme.string(), pt_decisions);
+         
+            std::map<EParamTypes, std::string> decision {{EParamTypes::HONCDecision, "ho-ncdecisions.json"},{EParamTypes::HOSEIDecision, "ho-installerdecisions.json"},{EParamTypes::HODesignDecision, "ho-designdecisions.json"}};
             
-
-            //each item is a map that describes preferences
-            //outer map describes classes of preferences
-            std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
-            std::map<std::string, double> HOD_distribution;
-            std::vector<std::string> labels;
-            std::vector<double> cmf{0};
             
             EParamTypes attribute;
-            for (const auto& node: pt)
+            for (auto iter:decision)
             {
-                //read distribution of classes
-                for (auto& node_dist:node.second.get_child("scheme"))
+                //create distribution
+                w->ho_decisions[iter.first] = new tools::EmpiricalHUVD();
+                
+                path_to_scheme = path_to_dir;
+                path_to_scheme /= iter.second;
+                
+                //read json with specification
+                read_json(path_to_scheme.string(), pt_decisions);
+                
+                
+                for (const auto& node: pt)
                 {
-                    attribute = EnumFactory::ToEParamTypes(node_dist.first);
-                    serialize::deserialize(node_dist.second, HOD_distribution_scheme[node.first][attribute]);
+                    //read distribution of classes
+                    for (auto& node_dist:node.second.get_child("scheme"))
+                    {
+                        attribute = EnumFactory::ToEParamTypes(node_dist.first);
+                        serialize::deserialize(node_dist.second, w->ho_decisions[iter.first]->HOD_distribution_scheme[node.first][attribute]);
+                    };
+                    
+                    
+                    //read class preferences
+                    w->ho_decisions[iter.first]->HOD_distribution[node.first] = node.second.get<double>("frequency");
+                    //create labels and cmf to generate class labels
+                    w->ho_decisions[iter.first]->labels.push_back(node.first);
+                    w->ho_decisions[iter.first]->cmf.push_back(w->ho_decisions[iter.first]->cmf.back() + w->ho_decisions[iter.first]->HOD_distribution[node.first]);
                 };
-                
-                
-                //read class preferences
-                HOD_distribution[node.first] = node.second.get<double>("frequency");
-                //create labels and cmf to generate class labels
-                labels.push_back(node.first);
-                cmf.push_back(cmf.back() + HOD_distribution[node.first]);
             };
             
             
-            //read other parameters and save them to proper thetas
             
+            //read other parameters and save them to proper thetas
             
             //create HO
             std::string label;
@@ -432,16 +436,25 @@ namespace solar_core {
                 //draw next uniform
                 u_i = w->rand_ho->ru();
                 //generate class label given frequencies
-                label = labels[tools::get_inverse_index(cmf, u_i)];
+                label = w->ho_decisions[EParamTypes::HONCDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HONCDecision]->cmf, u_i)];
                 
                 //assume the same parameters for each class
-                (*hos)[i]->THETA_NCDecisions = HOD_distribution_scheme[label];
+                (*hos)[i]->THETA_NCDecisions = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label];
                 
                 
-                //get classes for other parameters
-                //MARK: cont.
+                //generate class label given frequencies
+                label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HOSEIDecision]->cmf, u_i)];
                 
+                //assume the same parameters for each class
+                (*hos)[i]->THETA_SEIDecisions = w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label];
+
                 
+                //generate class label given frequencies
+                label = w->ho_decisions[EParamTypes::HODesignDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HODesignDecision]->cmf, u_i)];
+                
+                //assume the same parameters for each class
+                (*hos)[i]->THETA_DesignDecisions = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
+
                 
             };
             
