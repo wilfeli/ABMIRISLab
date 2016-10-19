@@ -21,7 +21,7 @@ using namespace solar_core;
 
 std::set<EParamTypes> Homeowner::project_states_to_delete{EParamTypes::ClosedProject};
 
-
+Homeowner::Homeowner(){}
 
 
 Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
@@ -231,7 +231,7 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
     //savings are estimated for an average homeowner
     utility += THETA[EParamTypes::HOSEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
     
-    return utility
+    return utility;
     
 }
 
@@ -247,8 +247,7 @@ Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 
 
 
-void
-Homeowner::dec_evaluate_preliminary_quotes()
+void Homeowner::dec_evaluate_preliminary_quotes()
 {
     double utility_none = THETA_installers[EParamTypes::HOSEIDecisionUtilityNone][0];
     double error = 0.0;
@@ -321,6 +320,47 @@ Homeowner::dec_evaluate_preliminary_quotes()
     
 }
 
+
+double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA)
+{
+    double utility = 0.0;
+    
+    //efficiency
+    utility += THETA[EParamTypes::HODesignDecisionPanelEfficiency][0] * project->design->design->PV_module->efficiency;
+    
+    //visibility
+    utility += THETA[EParamTypes::HODesignDecisionPanelVisibility][project->design->design->PV_module->visibility];
+    
+    //inverter type
+    utility += THETA[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
+    
+    //number of failures
+    utility += THETA[EParamTypes::HODesignDecisionFailures][0] * project->design->design->failure_rate;
+    
+    //emmision levels
+    utility += THETA[EParamTypes::HODesignDecisionCO2][0] * project->design->design->co2_equivalent;
+    
+    //savings are estimated for an average homeowner
+    utility += THETA[EParamTypes::HODesignDecisionEstimatedNetSavings][0] * project->design->design->total_net_savings;
+    
+    return utility;
+    
+    
+}
+
+
+
+
+
+double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
+{
+    return estimate_design_utility_from_params(project, THETA_design);
+    
+    
+}
+
+
+
 /**
  
  
@@ -328,13 +368,9 @@ Homeowner::dec_evaluate_preliminary_quotes()
 
  
 */
-void
-Homeowner::dec_evaluate_designs()
+void Homeowner::dec_evaluate_designs()
 {
-    auto pdf_error = boost::uniform_01<>();
-    auto rng_error = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(w->rand_ho->rng, pdf_error);
     double error = 0.0;
-    double utility = 0.0;
     double utility_none = THETA_design[EParamTypes::HODesignDecisionUtilityNone][0];
     
     
@@ -343,33 +379,8 @@ Homeowner::dec_evaluate_designs()
 
         if (project->state_project == EParamTypes::DraftedDesign)
         {
-            utility = 0.0;
-            error = rng_error();
-            
-            //efficiency
-            utility += THETA_design[EParamTypes::HODesignDecisionPanelEfficiency][0] * project->design->design->PV_module->efficiency;
-            
-            //visibility
-            utility += THETA_design[EParamTypes::HODesignDecisionPanelVisibility][project->design->design->PV_module->visibility];
-            
-            //inverter type
-            utility += THETA_design[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
-            
-            //number of failures
-            //MARK: cont.
-            utility += THETA_design[EParamTypes::HODesignDecisionFailures][0] * project->design->design->failure_rate;
-            
-            //emmision levels
-            utility += THETA_design[EParamTypes::HODesignDecisionCO2][0] * project->design->design->co2_equivalent;
-            
-            //savings are estimated for an average homeowner
-            utility += THETA_installers[EParamTypes::HODesignDecisionEstimatedNetSavings][0] * project->design->design->total_net_savings;
-            
-            utility += error;
-
-
-            project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = utility;
-           
+            error = w->rand_ho->ru();
+            project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = estimate_sei_utility(project) + error;
         };
     };
     

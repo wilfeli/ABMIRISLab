@@ -13,6 +13,9 @@
 using namespace solar_core;
 
 
+House::House(){}
+
+
 House::House(const PropertyTree& pt_)
 {
     roof_age = pt_.get<double>("roof_age");

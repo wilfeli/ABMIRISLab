@@ -15,7 +15,7 @@
 #include "Tools/ExternalIncludes.h"
 #include "Tools/IParameters.h"
 #include "Tools/IRandom.h"
-
+#include "Tools/Simulation.h"
 
 namespace solar_ui
 {
@@ -50,6 +50,7 @@ namespace solar_core {
     {
         friend class MarketingInst;
         friend class solar_ui::UI;
+        friend class SEI;
     public:
         //@{
         /**
@@ -194,7 +195,7 @@ namespace solar_core {
          
          */
         
-        std::map<EParamTypes, tools::EmpiricalHUVD> ho_decisions; 
+        std::map<EParamTypes, tools::EmpiricalHUVD*> ho_decisions;
         
         
         

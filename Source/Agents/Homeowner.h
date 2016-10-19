@@ -51,6 +51,7 @@ class PVProject;
 class Homeowner: public IAgent
 {
     friend class W;
+    friend class SEI;
 public:
     
     //@{
@@ -71,7 +72,7 @@ public:
      
      */
     
-    
+    Homeowner();
     Homeowner(const PropertyTree& pt_, W* w_);
     void init(W* w_);
     
@@ -284,7 +285,22 @@ protected:
     
     virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further. Uses non-compensatory ruels here */
     
+    
+    double estimate_sei_utility(std::shared_ptr<PVProject> project); /*!< estimate utility from param */
+    
+    typedef std::map<EParamTypes, std::vector<double>> DecisionParams;
+    
+    double estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA); /*!< here is for C_API and generally API */
+    
+    
     virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be pursued further. Will correspond to SEI conjoint. Will pick best from here and request actual quotes with site visit. */
+    
+    
+    
+    
+    double estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA);
+    double estimate_design_utility(std::shared_ptr<PVProject> project);
+    
     
     void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
     
@@ -295,7 +311,7 @@ protected:
     
     std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
     
-    typedef std::map<EParamTypes, std::vector<double>> DecisionParams; 
+
     
     
     std::deque<std::shared_ptr<PVProject>> accepted_design;

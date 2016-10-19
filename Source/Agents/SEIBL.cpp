@@ -25,6 +25,7 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     max_profit = &SEIBL::max_profit_GS;
     
     //pregenerate range of prices
+    //CAREFUL as price range is set in the code instead of being a parameter
     int64_t N = 100;
     double p_min = 2.0;
     double p_max = 10.0;

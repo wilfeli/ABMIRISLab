@@ -115,6 +115,7 @@ namespace solar_core
         double hard_costs = 0.0;
         double soft_costs = 0.0;
         double total_costs = 0.0;
+        double raw_costs = 0.0;
         double total_savings = 0.0;
         double total_net_savings = 0.0;
         double energy_savings_money = 0.0;

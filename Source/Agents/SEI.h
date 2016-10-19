@@ -211,7 +211,7 @@ namespace solar_core
          */
         
         virtual std::shared_ptr<MesMarketingSEIOnlineQuote> form_online_quote(std::shared_ptr<PVProject> project_); /*!< @DevStage2 think about transforming this call into interface based one, with agent_in replaced by interface and it being virtual method from the general interface. But virtual call might be more costly and unnecessary in this case, as structure of who will be requesting quotes does not change. */
-        virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_);
+        virtual std::shared_ptr<MesMarketingSEIPreliminaryQuote> form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_margin);
         
         
         std::vector<std::vector<std::weak_ptr<PVProject>>> schedule_visits; /*!< schedule for visits for the preliminary quote, length is equal to the MaxLengthWaitPreliminaryQuote */
@@ -231,14 +231,14 @@ namespace solar_core
          */
         
         
-        virtual std::vector<std::shared_ptr<MesDesign>> form_design(std::shared_ptr<PVProject> project_); /*!< creates design based on the project's parameters */
+        virtual std::vector<std::shared_ptr<MesDesign>> form_design(std::shared_ptr<PVProject> project_, double profit_margin); /*!< creates design based on the project's parameters */
         
         std::map<EParamTypes, std::shared_ptr<SolarModule>> dec_solar_modules; /*!< choices for different modules to create design with */
         std::map<EParamTypes, std::shared_ptr<Inverter>> dec_inverters; /*!< choices for different inverters to create design with */
         typedef std::pair<EParamTypes, std::shared_ptr<SolarModule>> IterTypeDecSM;
         typedef std::pair<EParamTypes, std::shared_ptr<Inverter>> IterTypeDecInverter;
         
-        void form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter,PVDesign& design); /*!< forms design for specific parameters */
+        void form_design_for_params(std::shared_ptr<const PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, double profit_margin, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter,PVDesign& design); /*!< forms design for specific parameters */
         
         
         std::vector<double> dec_project_percentages; /*!< percentage of a utility bill to cover */
@@ -247,8 +247,8 @@ namespace solar_core
         std::vector<double> THETA_profit; /*!< THETA[0] - profit margin */
         
         
-        void ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_); /*!< estimate savings for the project */
-        void ac_estimate_price(PVDesign& design, std::shared_ptr<PVProject> project_); /*!< estimate price from costs */
+        void ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> project_); /*!< estimate savings for the project */
+        void ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> project_, double profit_margin); /*!< estimate price from costs */
         
         void form_financing(std::shared_ptr<PVProject> project_); /*!< create financing options to choose from */
         
@@ -328,6 +328,22 @@ namespace solar_core
         //@}
         
         
+        //@{
+        /**
+         
+         Calculations of a profit
+         
+         */
+        
+        
+        void dec_max_profit(); /*!< profit maximization, for now just one huge method with GS algorithm */
+        Eigen::MatrixXd profit_grid; /*!< preallocated space for profit calculation */
+        
+        
+        
+        
+        //@}
+        
         
         //@{
         /**
@@ -337,6 +353,13 @@ namespace solar_core
          */
         
         virtual void ac_update_tick(); /*!< update internals for the tick */
+        
+        
+        
+        
+        
+        
+        
         
         //@}
         

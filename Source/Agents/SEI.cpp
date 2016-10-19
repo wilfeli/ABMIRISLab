@@ -26,6 +26,25 @@ std::set<EParamTypes> SEI::project_states_to_delete{EParamTypes::ClosedProject};
 SEI::SEI(const PropertyTree& pt_, W* w_)
 {
     w = w_;
+
+    
+    //pregenerate range of prices
+    int64_t N = 100;
+    double THETA_min = 0.0;
+    double THETA_max = 1.0;
+    double step_size = (THETA_max - THETA_min)/N;
+    
+    profit_grid.resize(N+1, 2);
+    
+    for (auto i = 0; i < N + 1; ++i)
+    {
+        profit_grid(i,0) = THETA_min + i * step_size;
+    };
+
+    
+    
+    
+    
     
     //location
     location_x = pt_.get<long>("location_x");
@@ -215,7 +234,7 @@ SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
 
 
 std::shared_ptr<MesMarketingSEIPreliminaryQuote>
-SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
+SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_margin)
 {
     //from params get stuff such as average price per watt, price of a standard unit
     auto mes = std::make_shared<MesMarketingSEIPreliminaryQuote>();
@@ -254,7 +273,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
     
     //assume that project is offered at 100% of utility bill
     //only 1 solar module per installer
-    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), *(dec_inverters.find(EParamTypes::TechnologyInverterCentral)), design);
+    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], profit_margin, *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), *(dec_inverters.find(EParamTypes::TechnologyInverterCentral)), design);
     
 
     
@@ -317,7 +336,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_)
  
 */
 std::vector<std::shared_ptr<MesDesign>>
-SEI::form_design(std::shared_ptr<PVProject> project_)
+SEI::form_design(std::shared_ptr<PVProject> project_, double profit_margin)
 {
     
     //depending on the required size
@@ -340,7 +359,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
                 //create design
                 auto design = PVDesign();
                 
-                form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, iter, iter_inv, design);
+                form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, profit_margin, iter, iter_inv, design);
                 
                 ac_estimate_savings(design, project_);
                 
@@ -352,7 +371,6 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
     
     //sort by savings and present best option
     ///@DevStage2 bootstrap here for different savings dynamics depending on parameters
-    
     std::sort(designs.begin(), designs.end(), [&](PVDesign &lhs, PVDesign &rhs){
         return lhs.total_net_savings > rhs.total_net_savings;
     });
@@ -368,7 +386,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_)
 
 
 void
-SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
+SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, double profit_margin, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
 {
     
     double demand_adjusted = demand / (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
@@ -431,7 +449,7 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
             break;
     }
     
-    ac_estimate_price(design, project_);
+    ac_estimate_price(design, project_, profit_margin);
     
     
 }
@@ -439,7 +457,7 @@ SEI::form_design_for_params(std::shared_ptr<PVProject> project_, double demand, 
 
 
 void
-SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<PVProject> project_)
+SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> project_, double profit_margin)
 {
     double costs = 0.0;
     //costs of the system
@@ -484,9 +502,9 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     
     //profit  margin on costs
-    design.total_costs = costs * (1 + THETA_profit[0]);
+    design.total_costs = costs * (1 + profit_margin);
     
-    
+    design.raw_costs = costs;
  
     
     
@@ -504,7 +522,7 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<PVProject> project_)
  
 */
 void
-SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
+SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> project_)
 {
     //estimate savings for each project
     //get price of kW from the utility, assume increase due to inflation
@@ -533,7 +551,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
     
     int NUMBER_MONTHS_IN_YEAR = 12;
     auto N_loan = loan_length * NUMBER_MONTHS_IN_YEAR;
-    auto loan_annuity = (interest_rate_loan/NUMBER_MONTHS_IN_YEAR)/(1 - std::pow((1 + interest_rate_loan/NUMBER_MONTHS_IN_YEAR), -N_loan))*loan_amount;
+    auto loan_annuity = (interest_rate_loan/NUMBER_MONTHS_IN_YEAR)/(1 - std::pow((1 + interest_rate_loan/NUMBER_MONTHS_IN_YEAR), - N_loan))*loan_amount;
     auto total_production = 0.0;
     double potential_energy_costs = 0.0;
     double realized_energy_income = 0.0;
@@ -562,46 +580,13 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<PVProject> project_)
 
 
 
-void
-SEI::form_financing(std::shared_ptr<PVProject> project_)
+void SEI::form_financing(std::shared_ptr<PVProject> project_)
 {
     project_->financing = std::make_shared<MesFinance>();
     
     //assume that whole sum is due on the beginning of the project
     project_->financing->schedule_payments = {project_->design->design->total_costs};
     
-    
-}
-
-
-void SEIBL::init_average_pvproject(TDesign* dec_design, std::shared_ptr<PVProject> project, double p)
-{
-    
-    
-    //MARK: cont.
-    //change to actual initialization - need parameters that will be used in estimating final designs
-    
-    
-    
-    ///estimates profit given the proposed price
-    //estimate number of panels for an average utility bill
-    auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
-    //solar irradiation - average number
-    auto solar_irradiation = WorldSettings::instance().params_exog[EParamTypes::AverageSolarIrradiation];
-    
-    
-    int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
-    
-    double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
-    
-    //create average project for this design
-    project->PV_module = dec_design_hat->PV_module;
-    project->N_PANELS = N_PANELS;
-    project->DC_size = DC_size;
-    project->AC_size = project->DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
-    project->p = DC_size * p;
-    
-    return project;
     
 }
 
@@ -613,8 +598,7 @@ void SEIBL::init_average_pvproject(TDesign* dec_design, std::shared_ptr<PVProjec
  Maximizing profit by changing price
  
  */
-void
-SEI::dec_max_profit()
+void SEI::dec_max_profit()
 {
     
     //search over margins on total costs
@@ -626,60 +610,159 @@ SEI::dec_max_profit()
     
     //values for central and micro inverters
     
-    
-    
-    
     //for each profit margin estimate costs of installation
     //estimate share of the market that will go to that installer
     //1 top besides me that is not me, based on shares of the previous x periods, price ? current
     //either this and none options - easier to do - so make as a first option
     
-    //
-    //create project for an average homeowner
-    
-    
-    //simplification - assume that there is only 1 class
+
+    //simplification - assume that there is only 1 class, pick first class
     auto label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[0];
+
+    //create project for an average homeowner
+    //dummy agent with house size
+    auto agent = new Homeowner();
+    auto house = new House();
+    agent->house = house;
+    //and dummy location
+    //use zero H to get location for now
+    agent->location_x = (*w->hos)[0]->location_x;
+    agent->location_y = (*w->hos)[0]->location_y;
+    
+    //electricity bill is average
+    auto agent_state = std::make_shared<MesStateBaseHO>();
+    agent_state->params[EParamTypes::ElectricityBill] = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+    
+   
+    //house->roof_size = WorldSettings::instance().params_exog[EParamTypes::AverageRoofSize];
+    //set to nonbinding constraint
+    house->roof_size = 1000000;
     
     
-    = new Homeowner();
-    = new House();
+    int64_t N_SEI_i = 2;
     
-    auto project_central = std::make_shared<PVProject>();
-    auto project_micro = std::make_shared<PVProject>();
+    //generic project for PV with design variations
+    auto project_generic = std::make_shared<PVProject>();
+    auto project_sei_i = std::make_shared<PVProject>();
+    project_generic->agent = agent;
+    project_generic->state_base_agent = agent_state;
+    project_generic->sei = this;
+    project_sei_i->agent = agent;
+    project_sei_i->state_base_agent = agent_state;
     
+    //two random agents to use as alternatives for estimating market share
+    auto max_ = w->seis->size() - 1;
+    auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
+
+    std::vector<int64_t> sei_i;
+    for (auto j = 0; j < N_SEI_i; ++j)
+    {
+        sei_i.push_back(rng_i());
+    };
     
+    double utility_den = 0.0;
+    double utility_nom = 0.0;
+    double utility_i = 0.0;
+    double share_sei = 0.0;
+    double share_design = 0.0;
+    double income = 0.0;
+    double expences = 0.0;
+    double qn = 0.0;
     
+    for (auto i = 0; i < profit_grid.rows(); ++i)
+    {
+        //profit margin to check - profit_grid(i,0)
+        //preliminary quote with new price
+        project_generic->preliminary_quote = form_preliminary_quote(project_generic, profit_grid(i,0));
+        
+        
+        //estimate market size
+        //draw other sei, request preliminary  params for quote, assume that price is fixed?
+        //use the same project
+        utility_den = 0.0;
+        for (auto i_sei:sei_i)
+        {
+            project_sei_i->sei = (*w->seis)[i_sei];
+            project_sei_i->preliminary_quote = (*w->seis)[i_sei]->form_preliminary_quote(project_generic, (*w->seis)[i_sei]->THETA_profit[0]);
+            //estimate utility
+            //use zero H to get estimation of utility for now
+            utility_den += (*w->hos)[0]->estimate_sei_utility_from_params(project_sei_i, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
+            
+        };
+        
+        //utility of none
+        utility_den += w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label][EParamTypes::HOSEIDecisionUtilityNone][0];
+        
+        //estimate own utility
+        utility_nom = (*w->hos)[0]->estimate_sei_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
+        
+        //estimate share
+        share_sei = utility_nom/utility_den;
+        
+        
+        
+        //@DevStage3 price might change if switch to multiple threads and have simulateneous profit max of multiple installers. Any way may end up with having to look at the share of installer with new price
+
+        
+        utility_den = 0.0;
+        //initialize designs with micro and central inverter
+        auto designs = form_design(project_generic, profit_grid(i,0));
+        std::vector<double> shares_design;
+        for (auto design:designs)
+        {
+            //update design for new parameters
+            project_generic->design = design;
+            
+            utility_i = (*w->hos)[0]->estimate_design_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label]);
+            
+            utility_den += utility_i;
+            
+            shares_design.push_back(utility_i);
+        };
+        
+        
+        //utility of none
+        utility_den += w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label][EParamTypes::HODesignDecisionUtilityNone][0];
+        
+        
+        for (auto j = 0; j < shares_design.size(); ++j)
+        {
+            //update to the share from raw utility
+            //estimate share of the submarket that will install solar panels with particular design
+            shares_design[i] = shares_design[i]/utility_den;
+            
+            //calculate total sales
+            qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[i];
+            
+            //calculate income for this design type
+            income += designs[i]->design->total_costs * qn;
+            
+            //calculate costs for this type
+            expences += designs[i]->design->raw_costs * qn;
+            
+        };
+        
+        //marketing costs - fixed number of hours in labor units
+        expences += params[EParamTypes::SEITimeLUForMarketing] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+        
+        //general administrative costs
+        expences += params[EParamTypes::SEITimeLUForAdministration] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+
+        
+        //estimate total income from installation - total costs (=costs of installation + marketing and administrative)
+        profit_grid(0,1) = income - expences;
+        
+        
+    };
     
-    
-    //how to get utility
-    //use zero H to get estimation of utility for now
-    //not to write the same code twice
-    auto utility = (*w->hos)[0]->estimate_sei_utility_from_params(project, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
-    
-    profit_grid
-    
-    
-    //for central and micro inverter
-    market_share_grid
-    
-    
-    utility_none
-    
-    market_size * share
-    
-    
-    //estimate share of the submarket that will install solar panels
-    
-    //estimate total income from installation - total costs (=costs of installation + marketing and administrative)
-    
-    
-    
-    
-    
-    
-    
-    
+
+    Eigen::MatrixXd::Index maxRow, maxCol;
+    double max = profit_grid.col(1).maxCoeff(&maxRow, &maxCol);
+
+    //updating profit margin
+    THETA_profit[0] = profit_grid(maxRow,0);
+
     
 }
 
@@ -819,7 +902,7 @@ SEI::act_tick()
             //just processing time
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote])
             {
-                auto mes = form_preliminary_quote(project);
+                auto mes = form_preliminary_quote(project, THETA_profit[0]);
                 project->preliminary_quote = mes;
                 project->state_project = EParamTypes::ProvidedPreliminaryQuote;
                 project->agent->receive_preliminary_quote(project);
@@ -874,7 +957,7 @@ SEI::act_tick()
             //if enough time has elapsed
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForDesign])
             {
-                auto mess = form_design(project);
+                auto mess = form_design(project, THETA_profit[0]);
                 project->state_project = EParamTypes::DraftedDesign;
                 project->design = mess[0];
                 form_financing(project);
