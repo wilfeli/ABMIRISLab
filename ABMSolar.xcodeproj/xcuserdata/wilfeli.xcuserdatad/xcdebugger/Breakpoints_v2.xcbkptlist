@@ -717,7 +717,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
             endingLineNumber = "335"
-            landmarkName = "Homeowner::dec_evaluate_designs()"
+            landmarkName = "Homeowner::estimate_design_utility_from_params(std::shared_ptr&lt;PVProject&gt; project, DecisionParams&amp; THETA)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
