@@ -94,6 +94,9 @@ SEM::init(W* w_)
 
 void SEM::init_world_connections()
 {
+    //MARK: cont. add price setting for inverters and PV modules
+    
+    
 }
 
 

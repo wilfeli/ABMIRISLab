@@ -185,26 +185,11 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
     auto mes = std::make_shared<MesMarketingSEIOnlineQuote>();
     
 
-    ///@wp for now it is price per watt
-    double p;
-    /// in kWh
-    //ElectricityBill in dollars, ElectricityPriceUCDemand in dollars per kWh
-    auto estimated_demand  = project_->state_base_agent->params[EParamTypes::ElectricityBill] / WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
-    if (estimated_demand <= params[EParamTypes::AveragePVCapacity])
-    {
-        //if standard panel gives enough capacity - install it as a unit
-        p = params[EParamTypes::EstimatedPricePerWatt] * params[EParamTypes::AveragePVCapacity] * constants::NUMBER_WATTS_IN_KILOWATT;
-    }
-    else
-    {
-        //if it is not enough use industry price per watt and estimated electricity demand from the utility bill
-        p = params[EParamTypes::EstimatedPricePerWatt] * estimated_demand * constants::NUMBER_WATTS_IN_KILOWATT;
-    };
+
+    //MARK: cont.
+    //is used in non-compensatory decision making, will be on generic parameters of sei
     
-    mes->params[EParamTypes::OnlineQuotePrice] = p;
     
-    //MARK: cont. for now estimated savings are put at zero, but need to feel in actual estimation of savings. Might take it from actual interview
-    mes->params[EParamTypes::OnlineQuoteEstimatedSavings] = 0.0;
     
     return mes;
 }
@@ -377,8 +362,8 @@ SEI::form_design(std::shared_ptr<PVProject> project_, double profit_margin)
     
     
     std::vector<std::shared_ptr<MesDesign>> mess;
-    mess.push_back(std::make_shared<MesDesign>(designs[0]));
-    mess.push_back(std::make_shared<MesDesign>(designs[1]));
+    mess.push_back(std::make_shared<MesDesign>(std::make_shared<PVDesign>(designs[0])));
+    mess.push_back(std::make_shared<MesDesign>(std::make_shared<PVDesign>(designs[1])));
     
         
     return mess;

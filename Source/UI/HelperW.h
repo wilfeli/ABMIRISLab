@@ -9,6 +9,7 @@
 #ifndef __ABMSolar__HelperW__
 #define __ABMSolar__HelperW__
 
+#include "Tools/ParsingTools.h"
 #include "Tools/ExternalIncludes.h"
 #include "Tools/Serialize.h"
 #include "Tools/IRandom.h"
@@ -235,7 +236,7 @@ namespace solar_core {
     {
     public:
 
-        std::vector<SEI*>* create_seis(PropertyTree& pt, std::string mode_, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
+        std::vector<SEI*>* create_seis(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
             std::vector<SEI*>* seis;
             
@@ -254,15 +255,68 @@ namespace solar_core {
             //parameters
             //read file from params for seis - create sei from it
             
+            
+            //read from file parameters,
+            //convert into enums for types
+            //depending on the type of techonology assign efficiency from database
+            //draw random until efficiency is in the range required for this type of installer
+            //for inverters - assume that all use both types of inverters for now - connect randomly to inverters?
+            
+            
+            
+            auto path_to_data = path_to_dir;
+            path_to_data /= "df_installers.csv";
+            
+            //read file
+            std::vector<std::vector<std::string>>* parsed_file = new std::vector<std::vector<std::string>>();
+            tools::parse_csv_file(path_to_data.string(), parsed_file);
+
+            
+        
+            
+            
+            std::map<std::string, int64_t> column_names  {{"Name", 0},
+                                                            {"Module_Name_1", 1},
+                                                            {"Efficiency", 2},
+                                                            {"Inverter_Name_1", 3},
+                                                            {"Inverter_Type_1", 4},
+                                                            {"Inverter_Name_2", 5},
+                                                            {"Inverter_Type_2", 6},
+                                                            {"Size", 7},
+                                                            {"Rating", 8},
+                                                            {"Interaction", 9},
+                                                            {"Technology", 10},
+                                                            {"LeadInProjectTime", 11},
+                                                            {"Warranty", 12}};
+            
+            std::map<std::string, int64_t> technology_types {{"Traditional" , 0},
+                {"Standard", 1}, {"CuttingEdge", 2}};
+            
+            std::map<std::string, int64_t> interaction_types {{"Independent", 0}, {"Moderate", 1}, {"Collaborative", 2}};
+            
+            
             //list of precreated partial SEI, will add other parameters from json
             //similar to h creation algorithm
             
 
             
+            //read bins for techonology types
+            std::vector<double> technology_efficiency_bins;
+            serialize::deserialize(pt.get_child("technology_efficiency_bins"), technology_efficiency_bins);
+            
+            std::map<std::string, std::vector<double>> technology_bins;
+            
+            technology_bins["Traditional"] = std::vector<double>{0,technology_efficiency_bins[0]};
+            technology_bins["Standard"] = std::vector<double>{technology_efficiency_bins[0], technology_efficiency_bins[1]};
+            technology_bins["CuttingEdge"] = std::vector<double>{technology_efficiency_bins[1], constants::SOLAR_INFINITY()};
+            
+
+            
+            
             //SEM connections PV module and SEM connections Inverter
             auto max_ = w->sems->size() - 1;
             auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_i);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
             int64_t j_sem = 0;
             
             
@@ -281,59 +335,101 @@ namespace solar_core {
                 seis->push_back(new SEI(pt, w));
 
                 
+                
+                //set parameters
+                //rating
+                seis->back()->params[EParamTypes::SEIRating] = std::stod((*parsed_file)[i][column_names["Rating"]]);
+                
+                
+                //Warranty
+                seis->back()->params[EParamTypes::SEIWarranty] = std::stod((*parsed_file)[i][column_names["Warranty"]]);
+                
+                
+                //LeadInProjectTime
+                seis->back()->params[EParamTypes::SEILeadInProjectTime] = std::stod((*parsed_file)[i][column_names["LeadInProjectTime"]]);
+                
+                
+                //interaction type
+                seis->back()->params[EParamTypes::SEIInteractionType] = interaction_types[(*parsed_file)[i][column_names["Interaction"]]];
+                
+                
+                //number specifies type
+                //type of technology
+                seis->back()->params[EParamTypes::SEIEquipmentType] = technology_types[(*parsed_file)[i][column_names["Technology"]]];
+                
+
+                
                 //set manufacturer connection
                 if (pt.get<std::string>("dec_design") == "FORMULA::RANDOM")
                 {
-                    j_sem = rng_i();
                     
-                    if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMPVProducer)
+                    double technology_to_set = 2.0;
+                    double pv_module_to_set = 1.0;
+                    
+                    while ((pv_module_to_set > 0.0) || (technology_to_set > 0.0))
                     {
-                        //connect with first template
-                        //connect to random PV manufacturer
-                        seis->back()->dec_solar_modules[EParamTypes::SEIMidEfficiencyDesign] = (*w->sems)[j_sem]->solar_panel_templates[0];
+                        j_sem = rng_i();
                         
-                    }
-                    else
-                    {
-                        //connect to random Inverter manufacturer
-                        //check inverter type
-                        //keep searching until required type is found
                         
-                        auto inverter_type = (*w->sems)[j_sem]->inverter_templates[0]->technology;
-                        
-                        double technology_to_set = 2.0;
-                        
-                        while (technology_to_set > 0.0)
+                        if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMPVProducer)
                         {
-                            if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMInverterProducer)
+                            
+                            auto cut_off_min = technology_bins[(*parsed_file)[i][column_names["Technology"]]][0];
+                            auto cut_off_max = technology_bins[(*parsed_file)[i][column_names["Technology"]]][1];
+                            
+                            //check efficiency of the first template
+                            if (((*w->sems)[j_sem]->solar_panel_templates[0]->efficiency >= cut_off_min) && ((*w->sems)[j_sem]->solar_panel_templates[0]->efficiency <= cut_off_max))
                             {
-                                if (inverter_type == ESEIInverterType::Central)
+                                //connect with first template
+                                //connect to random PV manufacturer,
+                                seis->back()->dec_solar_modules[EParamTypes::SEIMidEfficiencyDesign] = (*w->sems)[j_sem]->solar_panel_templates[0];
+                                --pv_module_to_set;
+                                
+                            };
+                        }
+                        else
+                        {
+                            //connect to random Inverter manufacturer
+                            //check inverter type
+                            //keep searching until required type is found
+                            auto inverter_type = (*w->sems)[j_sem]->inverter_templates[0]->technology;
+
+                            while (technology_to_set > 0.0)
+                            {
+                                if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMInverterProducer)
                                 {
-                                    if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] == nullptr)
+                                    if (inverter_type == ESEIInverterType::Central)
                                     {
-                                        seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] = (*w->sems)[j_sem]->inverter_templates[0];
-                                        
-                                        --technology_to_set;
+                                        if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] == nullptr)
+                                        {
+                                            seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] = (*w->sems)[j_sem]->inverter_templates[0];
+                                            
+                                            --technology_to_set;
+                                        };
                                     };
+                                    
+                                    if (inverter_type == ESEIInverterType::Micro)
+                                    {
+                                        if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] == nullptr)
+                                        {
+                                            seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] = (*w->sems)[j_sem]->inverter_templates[0];
+                                            --technology_to_set;
+                                        };
+                                    };
+                                    
+                                    j_sem = rng_i();
+                                }
+                                else
+                                {
+                                    j_sem = rng_i();
                                 };
                                 
-                                if (inverter_type == ESEIInverterType::Micro)
-                                {
-                                    if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] == nullptr)
-                                    {
-                                        seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] = (*w->sems)[j_sem]->inverter_templates[0];
-                                        --technology_to_set;
-                                    };
-                                };
-
-                                j_sem = rng_i();
-                            }
-                            else
-                            {
-                                j_sem = rng_i();
                             };
-
+                            
                         };
+
+                        
+                        
                         
                     };
                     
@@ -358,15 +454,156 @@ namespace solar_core {
             
         }
         
-        std::vector<SEM*> create_sems()
+        std::vector<SEM*>* create_sems(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
-            //MARK: cont.
             
-            //create inverter producers as a separate type of sem
             
-            //assign different inverters
+            T* w = static_cast<T*>(w_);
+            auto sems = new std::vector<SEM*>();
             
-            //create PV producers
+            for (auto i = 0; i < w->params_d[EParamTypes::N_SEM]; ++i)
+            {
+                sems->push_back(new SEM(pt, w_));
+            };
+            
+            
+            
+            //create connections
+            auto max_ = WorldSettings::instance().solar_modules.size() - 1;
+            auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sem->rng, pdf_i);
+            
+            //create PV module producer
+            //Every SEM has one solar_module
+            for (auto i = 0; i < w->params_d[EParamTypes::N_SEMPVProducer]; ++i)
+            {
+                auto iter = (*sems)[i];
+                
+                //set PV module
+                while (true)
+                {
+                    auto it = WorldSettings::instance().solar_modules.begin();
+                    std::advance(it, rng_i());
+                    auto module = it->second;
+                    if (module->manufacturer_id == "FORMULA::RANDOM")
+                    {
+                        //could use this module
+                        module->manufacturer = iter;
+                        module->manufacturer_id = module->manufacturer->uid.get_string();
+                        
+                        iter->solar_panel_templates.push_back(module);
+                        iter->init_world_connections();
+                        
+                        //no initialization for the module itself in this simple version
+                        
+                        break;
+                    };
+                };
+                
+                iter->sem_type = EParamTypes::SEMPVProducer;
+
+            };
+            
+            //create inverter producers
+            max_ = WorldSettings::instance().inverters.size() - 1;
+            pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto rng_i_inv = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sem->rng, pdf_i);
+            
+            
+            for (auto i = w->params_d[EParamTypes::N_SEMPVProducer]; i < w->params_d[EParamTypes::N_SEMInverterProducer] + w->params_d[EParamTypes::N_SEMPVProducer]; ++i)
+            {
+                auto iter = (*sems)[i];
+                
+                //set inverter
+                while (true)
+                {
+                    auto it = WorldSettings::instance().inverters.begin();
+                    std::advance(it, rng_i_inv());
+                    auto inverter = it->second;
+                    if (inverter->manufacturer_id == "FORMULA::RANDOM")
+                    {
+                        //could use this inverter
+                        inverter->manufacturer = iter;
+                        inverter->manufacturer_id = inverter->manufacturer->uid.get_string();
+                        
+                        iter->inverter_templates.push_back(inverter);
+                        iter->init_world_connections();
+                        
+                        //no initialization for the inverter itself in this simple version
+                        
+                        break;
+                    };
+                };
+                
+                iter->sem_type = EParamTypes::SEMInverterProducer;
+                
+            };
+
+            
+            int64_t N_Micro = 0;
+            int64_t N_Central = 0;
+            //check that there is at least 1 of each type?
+            for (auto i = 0; i < (*sems).size(); ++i)
+            {
+                switch ((*sems)[i]->inverter_templates[0]->technology)
+                {
+                    case ESEIInverterType::Central:
+                        ++N_Central;
+                        break;
+                    case ESEIInverterType::Micro:
+                        ++N_Micro;
+                        break;
+                    default:
+                        break;
+                };
+            };
+
+            auto type_to_reset = ESEIInverterType::Micro;
+            
+            if (N_Central <= 0.0)
+            {
+                type_to_reset = ESEIInverterType::Central;
+            };
+            
+
+            //draw last sem, check that it is inverter producer and convert into micro
+            auto iter = (*sems).back();
+
+            if (iter->sem_type != EParamTypes::SEMInverterProducer){ throw std::runtime_error("unsupported specification"); };
+            
+            //check that it is not the required type - maybe later, because now it is binary - so no need to check
+
+            
+            //set inverter
+            while (true)
+            {
+                auto it = WorldSettings::instance().inverters.begin();
+                std::advance(it, rng_i_inv());
+                auto inverter = it->second;
+                if ((inverter->manufacturer_id == "FORMULA::RANDOM") && (inverter->technology == type_to_reset))
+                {
+                    //could use this inverter
+                    inverter->manufacturer = iter;
+                    inverter->manufacturer_id = inverter->manufacturer->uid.get_string();
+                    
+                    
+                    //reset old template
+                    iter->inverter_templates[0]->manufacturer = nullptr;
+                    iter->inverter_templates[0]->manufacturer_id = "FORMULA::RANDOM";
+                    
+                    
+                    //set new template
+                    //assume only 1 per manufacturer
+                    iter->inverter_templates[0] = inverter;
+                    iter->init_world_connections();
+                    
+                    //no initialization for the inverter itself in this simple version
+                    
+                    break;
+                };
+            };
+
+            return sems;
             
         }
         

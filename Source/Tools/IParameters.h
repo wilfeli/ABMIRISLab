@@ -126,6 +126,13 @@ namespace solar_core
         /** Number of manufactures to generate */
         N_SEM,
         
+        /** Number of pv module manufactures to generate */
+        N_SEMPVProducer,
+        
+        /** Number of inverter manufactures to generate */
+        N_SEMInverterProducer,
+        
+        
         /** Number of homeowners that are interested in installing */
         N_HOMarketingStateHighlyInterested,
         

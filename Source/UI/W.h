@@ -51,6 +51,7 @@ namespace solar_core {
         friend class MarketingInst;
         friend class solar_ui::UI;
         friend class SEI;
+        template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
         /**

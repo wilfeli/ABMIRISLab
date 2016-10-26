@@ -202,7 +202,9 @@
                   {
                   "PVI-3.0-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-3.0-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {

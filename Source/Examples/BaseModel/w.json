@@ -120,5 +120,7 @@
     },
     "N_HOMarketingStateHighlyInterested": 10,
     "N_SEM": 7,
+    "N_SEMInverterProducer":5,
+    "N_SEMPVProducer":5,
     "SEED": 2012
 }

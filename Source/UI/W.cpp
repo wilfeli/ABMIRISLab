@@ -109,7 +109,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        seis = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_seis(pt, mode_, rng_location_x, rng_location_y, this);
+        seis = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_seis(pt, mode_, path_to_dir,rng_location_x, rng_location_y, this);
         
         
         
@@ -120,31 +120,9 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         path = path_to_template.string();
         read_json(path, pt);
         
-        for (auto i = 0; i < params_d[EParamTypes::N_SEM]; ++i)
-        {
-            sems->push_back(new SEM(pt, this));
-        };
+        sems = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_sems(pt, mode_, path_to_dir,rng_location_x, rng_location_y, this);
         
-
-        max_ = sems->size() - 1;
-        auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-        auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
-
         
-        //set producers
-        for (auto iter: WorldSettings::instance().solar_modules)
-        {
-            if (iter.second->manufacturer_id == "FORMULA::RANDOM")
-            {
-                iter.second->manufacturer = (*sems)[rng_i()];
-                iter.second->manufacturer_id = iter.second->manufacturer->uid.get_string();
-                
-            }
-            else
-            {
-                throw std::runtime_error("unsupported formula");
-            };
-        };
 
         
         
@@ -214,6 +192,8 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     params_d[EParamTypes::N_SEI] = pt.get<long>("N_SEI");
     params_d[EParamTypes::N_SEILarge] = pt.get<long>("N_SEILarge");
     params_d[EParamTypes::N_SEM] = pt.get<long>("N_SEM");
+    params_d[EParamTypes::N_SEMPVProducer] = pt.get<long>("N_SEMPVProducer");
+    params_d[EParamTypes::N_SEMInverterProducer] = pt.get<long>("N_SEMInverterProducer");
     params_d[EParamTypes::N_HO] = pt.get<long>("N_HO");
     params_d[EParamTypes::N_HOMarketingStateHighlyInterested] = pt.get<long>("N_HOMarketingStateHighlyInterested");
     
@@ -257,6 +237,10 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     
     //create existing solar modules
     serialize::deserialize(pt.get_child("solar_modules"), WorldSettings::instance().solar_modules);
+    
+    
+    //create existing inverters
+    serialize::deserialize(pt.get_child("inverters"), WorldSettings::instance().inverters);
     
     
     //create grid

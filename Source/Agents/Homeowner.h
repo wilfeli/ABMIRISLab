@@ -52,6 +52,7 @@ class Homeowner: public IAgent
 {
     friend class W;
     friend class SEI;
+    template <class T1, class T2> friend class HelperWSpecialization;
 public:
     
     //@{
@@ -305,13 +306,13 @@ protected:
     void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
     
     
-    std::map<EParamTypes, std::vector<double>> THETA_installers; /*!< parameters for decision making, from installer conjoint  */
+    std::map<EParamTypes, std::vector<double>> THETA_SEIDecisions; /*!< parameters for decision making, from installer conjoint  */
     
-    std::map<EParamTypes, std::vector<double>> THETA_design; /*!< parameters for decision making  */
+    std::map<EParamTypes, std::vector<double>> THETA_DesignDecisions; /*!< parameters for decision making  */
     
     std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
     
-
+    std::vector<double> THETA_params; /*!< here for consistency with H, is not used */
     
     
     std::deque<std::shared_ptr<PVProject>> accepted_design;

@@ -53,6 +53,7 @@ namespace solar_core
      */
     class SEM
     {
+        template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
         /**

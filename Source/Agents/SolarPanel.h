@@ -37,6 +37,7 @@ namespace solar_core
         std::string name;
         ESEIInverterType technology;
         SEM* manufacturer = nullptr;
+        std::string manufacturer_id = "";
         UID uid; /*!< is default initialized */
         double p_sem; /*!< price as quoted by manufacturer */
     protected:

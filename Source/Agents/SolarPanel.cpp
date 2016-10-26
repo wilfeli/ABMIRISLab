@@ -20,7 +20,7 @@ std::shared_ptr<Inverter>
 Inverter::deserialize(const PropertyTree& pt_)
 {
     //placeholder to be replaced by other type if needed
-    if (pt_.get<std::string>("TYPE") == "solar_core::Inverter")
+    if (pt_.get<std::string>("ClassType") == "solar_core::Inverter")
     {
         return std::make_shared<Inverter>(pt_);
     }
@@ -33,6 +33,7 @@ Inverter::deserialize(const PropertyTree& pt_)
 
 Inverter::Inverter(const PropertyTree& pt_)
 {
+    manufacturer_id = pt_.get<std::string>("Manufacturer Id");
     name = pt_.get<std::string>("Name");
     technology = EnumFactory::ToESEIInverterType(pt_.get<std::string>("Type"));
     

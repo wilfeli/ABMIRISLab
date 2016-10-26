@@ -140,6 +140,7 @@ Homeowner::ac_inf_quoting_sei()
                 //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
                 //
                 marketing_inf->agent->request_online_quote(new_project);
+                break;
             default:
                 break;
         };
@@ -240,7 +241,7 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
 double
 Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 {
-    return estimate_sei_utility_from_params(project, THETA_installers);
+    return estimate_sei_utility_from_params(project, THETA_SEIDecisions);
     
     
 }
@@ -249,7 +250,7 @@ Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 
 void Homeowner::dec_evaluate_preliminary_quotes()
 {
-    double utility_none = THETA_installers[EParamTypes::HOSEIDecisionUtilityNone][0];
+    double utility_none = THETA_SEIDecisions[EParamTypes::HOSEIDecisionUtilityNone][0];
     double error = 0.0;
     
     for (auto& project:pvprojects)
@@ -354,7 +355,7 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 
 double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
 {
-    return estimate_design_utility_from_params(project, THETA_design);
+    return estimate_design_utility_from_params(project, THETA_DesignDecisions);
     
     
 }
@@ -371,7 +372,7 @@ double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
 void Homeowner::dec_evaluate_designs()
 {
     double error = 0.0;
-    double utility_none = THETA_design[EParamTypes::HODesignDecisionUtilityNone][0];
+    double utility_none = THETA_DesignDecisions[EParamTypes::HODesignDecisionUtilityNone][0];
     
     
     for (auto& project:pvprojects)

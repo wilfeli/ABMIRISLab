@@ -157,5 +157,6 @@
                                 25
                                 ],
     "complexity_install_prior": 100,
-    "dec_design": "FORMULA::RANDOM"
+    "dec_design": "FORMULA::RANDOM",
+    "technology_efficiency_bins":[0.15099085485361419, 0.18403666038930716]
 }

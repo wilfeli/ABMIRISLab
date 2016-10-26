@@ -245,6 +245,14 @@ namespace serialize
         {
             out_ = ss.str();
         }
+        
+        static T deserialize_value(const std::string& in_)
+        {
+            T out_ = in_;
+            return out_;
+        }
+        
+        
     };
     
     
