@@ -577,6 +577,18 @@ void SEI::form_financing(std::shared_ptr<PVProject> project_)
 
 
 
+
+
+PVProject* SEI::initialize_default_project()
+{
+    
+}
+
+
+
+
+
+
 /**
  
  
