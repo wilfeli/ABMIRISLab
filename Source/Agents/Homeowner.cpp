@@ -29,7 +29,7 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
     w = w_;
     
     
-    marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
+//    marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
     
     //location
     location_x = pt_.get<long>("location_x");

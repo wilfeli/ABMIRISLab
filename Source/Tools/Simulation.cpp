@@ -27,7 +27,7 @@ tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme
 {
     //read file
     //MARK: cont. change to the pointer
-    std::vector<std::vector<double>>* parsed_file;
+    std::vector<std::vector<double>>* parsed_file = new std::vector<std::vector<double>>();
     std::string path_to_file;
     
     tools::parse_csv_file(path_to_data, parsed_file);

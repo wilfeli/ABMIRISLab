@@ -249,6 +249,13 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     path = path_to_template.string();
     read_json(path, pt);
     world_map = new WorldMap(pt, this);
+    
+    
+    //update permitting difficulty
+    //average permit difficulty is connected to processing time required by g
+    //
+    
+    
 
 }
 
@@ -266,7 +273,7 @@ W::init()
     
     marketing->init(this);
     g->init(this);
-    
+    utility->init(this);
     
     
     for (auto& agent:*hos)
@@ -283,6 +290,21 @@ W::init()
     {
         agent->init(this);
     };
+    
+
+    
+    
+    
+    //update permitting difficulty
+    //average permit difficulty is connected to processing time required by g
+    //
+    int LaborUnitsPerTick = 40;
+    WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty] = ((g->params[EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation]
+    + g->params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit]
+    + g->params[EParamTypes::GProcessingTimeRequiredForProcessingPermit]) +
+     utility->params[EParamTypes::UtilityProcessingTimeRequiredForPermit] ) * LaborUnitsPerTick;
+
+    
     
     
 }

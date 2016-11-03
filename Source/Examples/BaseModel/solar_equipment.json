@@ -210,67 +210,89 @@
                   {
                   "PVI-3.6-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-3.6-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-3.0-OUTD-S-US-A (240V)": {
                   "Name": "PVI-3.0-OUTD-S-US-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "M215-60-2LL-S2X-IG": {
                   "Name": "M215-60-2LL-S2X-IG",
-                  "Type": "Microinverter"
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "M250-60-2LL-S2X (-ZC) (-NA) (240V)": {
                   "Name": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
-                  "Type": "Microinverter"
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SB3000TL-US-22 (240V)": {
                   "Name": "SB3000TL-US-22 (240V)",
-                  "Type": "String inverter"
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SE3800 (240V) w/ -ER-US or A-US": {
                   "Name": "SE3800 (240V) w/ -ER-US or A-US",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-4.2-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-4.2-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SE5000 (240V) w/ -ER-US or A-US": {
                   "Name": "SE5000 (240V) w/ -ER-US or A-US",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-6000-OUTD-US-Z-A (240V)": {
                   "Name": "PVI-6000-OUTD-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-5000-OUTD-US-Z-A (240V)": {
                   "Name": "PVI-5000-OUTD-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SB3800TL-US-22 (240V)": {
                   "Name": "SB3800TL-US-22 (240V)",
-                  "Type": "String inverter"
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   }
                   ]

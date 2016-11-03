@@ -668,6 +668,7 @@ namespace solar_core {
             //create HO
             std::string label;
             double u_i;
+            
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
                 //draw next uniform
@@ -691,6 +692,22 @@ namespace solar_core {
                 
                 //assume the same parameters for each class
                 (*hos)[i]->THETA_DesignDecisions = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
+                
+                
+                if (i < w->params_d[EParamTypes::N_HOMarketingStateHighlyInterested])
+                {
+                    //create few highly interested agents
+                    //set marketing state
+                    (*hos)[i]->marketing_state = EParamTypes::HOMarketingStateHighlyInterested;
+                }
+                else
+                {
+                    (*hos)[i]->marketing_state = EParamTypes::HOMarketingStateNotInterested;
+                };
+
+                
+                
+               
 
                 
             };

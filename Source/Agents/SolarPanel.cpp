@@ -9,6 +9,7 @@
 #include "Tools/WorldSettings.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/SEMBL.h"
+#include "Agents/Homeowner.h"
 
 using namespace solar_core;
 
@@ -122,3 +123,15 @@ void SolarModuleBL::init()
     THETA_complexity[1] = sem->THETA_dist_complexity[SEMBL::N_complexity_params * 3 + 1];
     
 }
+
+
+
+PVProject::~PVProject()
+{
+    if (is_temporary)
+    {
+        delete agent->house;
+        delete agent;
+    };
+}
+

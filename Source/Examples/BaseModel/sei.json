@@ -13,9 +13,6 @@
                "EParamTypes::EstimatedPricePerWatt": 3.5
                },
                {
-               "EParamTypes::SEIMaxNVisitsPerTimeUnit": 5
-               },
-               {
                "EParamTypes::SEIMaxRoofAge": 1040
                },
                {

@@ -213,6 +213,8 @@
 		ED5624101D56644900FF25BA /* UI_Python.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UI_Python.h; sourceTree = "<group>"; };
 		ED5624221D56754800FF25BA /* libeemodel.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libeemodel.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5624281D56944800FF25BA /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = EE/UI/model.h; sourceTree = "<group>"; };
+		ED717D981DCAAEE900C28247 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
+		ED717D991DCAAEE900C28247 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -4668,6 +4670,8 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				ED717D981DCAAEE900C28247 /* joint_distribution.csv */,
+				ED717D991DCAAEE900C28247 /* solar_module.json */,
 				EDCB0C801D9CD1860060E061 /* ho_nc.json */,
 				EDDE739F1D144C5600B3EED5 /* distribution.json */,
 				EDB71E331D02003D002FACDB /* solar_equipment.json */,

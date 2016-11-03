@@ -256,9 +256,22 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
     auto design = PVDesign();
     
+    
+    
+    auto default_project = initialize_default_project();
+    
+    
+    IterTypeDecInverter dec_inverter = *(dec_inverters.find(EParamTypes::TechnologyInverterCentral));
     //assume that project is offered at 100% of utility bill
     //only 1 solar module per installer
-    form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], profit_margin, *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), *(dec_inverters.find(EParamTypes::TechnologyInverterCentral)), design);
+    //decide if it is micro or central based on technology type
+    if  (params[EParamTypes::SEIEquipmentType] == 2.0)
+    {
+        dec_inverter = *(dec_inverters.find(EParamTypes::TechnologyInverterMicro));
+    };
+    
+    
+    form_design_for_params(default_project, demand, solar_irradiation, permit_difficulty, dec_project_percentages[0], profit_margin, *(dec_solar_modules.find(EParamTypes::SEIMidEfficiencyDesign)), dec_inverter, design);
     
 
     
@@ -473,14 +486,14 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     
     //no assumptions on the design of a project specific time
     
-    
+    //MARK: cont. add function that estimates how many people need for supporting that many projects, it will depend on the difficulty and length of the permitting process
     
     //length of permitting - assume 1 person per project
     //average of 25 days for interconnection
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
     auto total_project_time = permit_difficulty_scale * design.permit_difficulty + params[EParamTypes::SEILeadInProjectTime];
     
-    
+    //MARK: cont. 
     //assume that 1 person per project for the whole duration as a sales rep
     costs += wage * total_project_time * 1;
     
@@ -560,6 +573,8 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
     
     //adjustment for opportunity costs for diverting money into this investment
     design.total_net_savings = (realized_energy_income - loan_annuity * N_loan)/potential_energy_costs;
+    
+    //MARK: cont. check numbers
     design.co2_equivalent = total_production/WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2];
 }
 
@@ -579,9 +594,37 @@ void SEI::form_financing(std::shared_ptr<PVProject> project_)
 
 
 
-PVProject* SEI::initialize_default_project()
+std::shared_ptr<PVProject> SEI::initialize_default_project()
 {
+    //create project for an average homeowner
+    //dummy agent with house size
+    auto agent = new Homeowner();
+    auto house = new House();
+    agent->house = house;
+    //and dummy location
+    //use zero H to get location for now
+    agent->location_x = (*w->hos)[0]->location_x;
+    agent->location_y = (*w->hos)[0]->location_y;
     
+    //electricity bill is average
+    auto agent_state = std::make_shared<MesStateBaseHO>();
+    agent_state->params[EParamTypes::ElectricityBill] = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+    
+    
+    //house->roof_size = WorldSettings::instance().params_exog[EParamTypes::AverageRoofSize];
+    //set to nonbinding constraint
+    house->roof_size = 1000000;
+
+    
+    auto project_generic = std::make_shared<PVProject>();
+    project_generic->is_temporary = true;
+    
+    
+    project_generic->agent = agent;
+    project_generic->state_base_agent = agent_state;
+    project_generic->sei = this;
+
+    return project_generic;
 }
 
 
@@ -729,7 +772,7 @@ void SEI::dec_max_profit()
             //estimate share of the submarket that will install solar panels with particular design
             shares_design[i] = shares_design[i]/utility_den;
             
-            //calculate total sales
+            ///calculate total sales
             qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[i];
             
             //calculate income for this design type

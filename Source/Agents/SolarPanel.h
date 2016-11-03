@@ -165,6 +165,11 @@ namespace solar_core
     class PVProject
     {
     public:
+        
+        PVProject() = default;
+        
+        ~PVProject();
+        
         Homeowner* agent;/*!< for whom this project is created */
         std::shared_ptr<MesStateBaseHO> state_base_agent;/*!< additional information about the agent for whom this project is made */
         TimeUnit begin_time;
@@ -181,6 +186,8 @@ namespace solar_core
         TimeUnit ac_hh_time = 0; /*!< time of a last action on the project by h */
         TimeUnit ac_accepted_time = 0; /*!< when when the project was accepted */
         TimeUnit ac_utility_time = 0; /*! when request was accepted by utility company */
+        
+        bool is_temporary = false;
         
     protected:
         

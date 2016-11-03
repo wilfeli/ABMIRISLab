@@ -256,6 +256,8 @@ namespace solar_core
         
         double complexity_install_prior =  0.0; /*!< time for installation of 1 PV project, labor*hours */
         
+        std::shared_ptr<PVProject> initialize_default_project(); /*!< initializes default project */
+        
         
         //@}
         
@@ -291,6 +293,11 @@ namespace solar_core
         double money = 0.0; 
         
         TimeUnit a_time; /*!< internal agent's timer */
+        
+        
+        
+        double hk_time = 0.0; /*!< amount of hired labor */
+        
         
         
         //@}
