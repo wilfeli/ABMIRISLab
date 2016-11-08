@@ -169,6 +169,9 @@ namespace solar_core {
         void get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_); /*!< is called when project is interconnected to record it */
         
         
+        std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
+        
+        
         //@}
         
         
@@ -224,8 +227,7 @@ namespace solar_core {
         
         
         
-        
-        std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
+
         
         
         

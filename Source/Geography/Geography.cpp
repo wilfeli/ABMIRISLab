@@ -41,6 +41,7 @@ WorldMap::WorldMap(PropertyTree& pt, W* w_)
     for (auto i = 0; i < N_TILE_Y; ++i)
     {
         g_map.push_back({});
+        h_map.push_back({});
         for (auto j = 0; j < N_TILE_X; ++j)
         {
             g_map[i].push_back(new Tile(1.0, 1.0, solar_irradiation, permit_difficulty, requires_permit_visit));

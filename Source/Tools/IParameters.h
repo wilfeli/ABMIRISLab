@@ -442,6 +442,9 @@ namespace solar_core
         /** Parameters of a SEI, frequency of revising designs */
         SEIFrequencyUpdateDesignTemplates,
         
+        /** Parameters of a SEI, frequency of updating pricing */
+        SEIFrequencyDecPrice,
+        
 		/*Could you also use an enumerated class for high efficiency, mid and low efficiency design?*/
 
         /** High efficiency choice of a panel */
@@ -841,6 +844,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::seifrequencyupdatedesigntemplates")
             {
                 return EParamTypes::SEIFrequencyUpdateDesignTemplates;
+            }
+            else if (param_type == "eparamtypes::seifrequencydecprice")
+            {
+                return EParamTypes::SEIFrequencyDecPrice;
             }
             else if (param_type == "eparamtypes::seimaxninstallationspertimeunit")
             {

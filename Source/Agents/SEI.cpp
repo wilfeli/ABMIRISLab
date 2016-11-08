@@ -101,7 +101,7 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     
     
     //set other parameters
-    ac_designs = 0;
+    ac_decprice = 0;
     
     
     sei_type = EnumFactory::ToEParamTypes(pt_.get<std::string>("sei_type"));
@@ -284,7 +284,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     //assume that permit difficulty here in weeks
     //so that total project time is lead time and permitting time summed
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    auto total_project_time = permit_difficulty_scale * permit_difficulty + params[EParamTypes::SEILeadInProjectTime];
+    auto total_project_time = permit_difficulty_scale * permit_difficulty;
     
     mes->params[EParamTypes::PreliminaryQuoteTotalProjectTime] = total_project_time;
     
@@ -491,13 +491,14 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     //length of permitting - assume 1 person per project
     //average of 25 days for interconnection
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    auto total_project_time = permit_difficulty_scale * design.permit_difficulty + params[EParamTypes::SEILeadInProjectTime];
+    auto total_project_time = permit_difficulty_scale * design.permit_difficulty;
     
     //MARK: cont. 
     //assume that 1 person per project for the whole duration as a sales rep
     costs += wage * total_project_time * 1;
     
-    
+    //design costs 
+    costs += wage * params[EParamTypes::SEILeadInProjectTime];
     
     //profit  margin on costs
     design.total_costs = costs * (1 + profit_margin);
@@ -705,7 +706,6 @@ void SEI::dec_max_profit()
     double utility_nom = 0.0;
     double utility_i = 0.0;
     double share_sei = 0.0;
-    double share_design = 0.0;
     double income = 0.0;
     double expences = 0.0;
     double qn = 0.0;
@@ -1148,20 +1148,11 @@ SEI::act_tick()
     //estimate sales given price - estimate share of the market for installer parameters
     //estimate prob to get client given current offerings
     //assume that knows actual utility function
-    
-    
-    
-    
-    
-    
-    
-
-    //MARK: cont. collect information from SEM and update design examples
-    if ((a_time - ac_designs) > params[EParamTypes::SEIFrequencyUpdateDesignTemplates])
+    if ((a_time - ac_decprice) > params[EParamTypes::SEIFrequencyDecPrice])
     {
-        //collect information about current offerings
-        //sort by efficiency
         
+        dec_max_profit();
+        ac_decprice = a_time;
         
         
     };

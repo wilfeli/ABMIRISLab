@@ -37,6 +37,9 @@
                "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
                },
                {
+               "EParamTypes::SEIFrequencyDecPrice":52
+               }
+               {
                "EParamTypes::SEITimeLUForMarketing" : 2500000
                },
                {

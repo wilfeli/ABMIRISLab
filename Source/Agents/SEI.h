@@ -57,6 +57,7 @@ namespace solar_core
      */
     class SEI: public IAgent
     {
+        friend class W;
         template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
@@ -252,7 +253,7 @@ namespace solar_core
         
         void form_financing(std::shared_ptr<PVProject> project_); /*!< create financing options to choose from */
         
-        TimeUnit ac_designs; /*!< last time information about SEM was updated */
+
         
         double complexity_install_prior =  0.0; /*!< time for installation of 1 PV project, labor*hours */
         
@@ -293,7 +294,7 @@ namespace solar_core
         double money = 0.0; 
         
         TimeUnit a_time; /*!< internal agent's timer */
-        
+        TimeUnit ac_decprice; /*!< last time price decision was made */
         
         
         double hk_time = 0.0; /*!< amount of hired labor */

@@ -22,6 +22,7 @@ namespace solar_core
 
     class Utility
     {
+        friend class W;
     public:
         Utility(const PropertyTree& pt_, W* w_);
         void init(W* w_);

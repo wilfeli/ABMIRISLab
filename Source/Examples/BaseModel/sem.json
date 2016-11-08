@@ -13,7 +13,7 @@
                "EParamTypes::SEMNSolarPanelsResearch": 1
                },
                {
-               "EParamTypes::SEMEfficiencyUpgradeResearch" : 0.05
+               "EParamTypes::SEMEfficiencyUpgradeResearch" : 0.025
                },
                {
                "EParamTypes::SEMPriceMarkupEfficiency": 0.1
@@ -22,7 +22,7 @@
                "EParamTypes::SEMPriceBaseEfficiency": 0.15
                },
                {
-               "EParamTypes::SEMFrequencyPriceDecisions":4
+               "EParamTypes::SEMFrequencyPriceDecisions":1040
                },
                {
                "EParamTypes::SEMLearningPrice":0.20

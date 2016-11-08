@@ -179,14 +179,18 @@ namespace solar_core {
             std::vector<double> THETA_params;
             serialize::deserialize(pt.get_child("THETA_params"),THETA_params);
             
-            
+            uint64_t location_x;
+            uint64_t location_y;
             
             //create HO
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
                 //generate location
-                pt.put("location_x", rng_location_x());
-                pt.put("location_y", rng_location_y());
+                location_x = rng_location_x();
+                location_y = rng_location_y();
+                
+                pt.put("location_x", location_x);
+                pt.put("location_y", location_y);
                 
                 
                 //generate House
@@ -209,6 +213,10 @@ namespace solar_core {
                 };
                 
                 hos->back()->THETA_params = THETA_params;
+                
+                
+                //register on the map
+                w->world_map->h_map[location_x][location_y].push_back(hos->back());
                 
             };
             

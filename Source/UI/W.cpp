@@ -379,6 +379,7 @@ W::life_hos()
     
     //@DevStage3 move to main cycle maybe? As of now it will be called only in the very beginning
     //go through Homeowners that indicated desire to request information and inform them that action to request information could be taken
+    //those that are highly interested
     for (auto& agent:get_inf_marketing_sei_agents)
     {
         ///@DevStage3 might consider moving this call to tasks, to speed up cycle. Might not be worth it as have to include the time to set up and tear down the task itself and the calls might be relatively quick. Need to profile this place.
@@ -634,6 +635,9 @@ void
 W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 {
     
+    
+    
+    
 }
 
 
@@ -641,6 +645,15 @@ void
 W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
     interconnected_projects.push_back(project_);
+    auto mes = project_->sei->mes_marketing;
+    auto h = project_->agent;
+    
+    //send info in the net
+    for (agent:world_map->h_map[h->location_x][h->location_y])
+    {
+        agent->get_inf(mes);
+    };
+    
 }
 
 

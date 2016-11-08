@@ -27,15 +27,16 @@ MarketingInst::init(W* w_)
 }
 
 
-
+/**
+ 
+ not used for now
+ 
+ */
 void
 MarketingInst::request_inf_marketing_sei(IAgent* agent_)
 {
-    //push all marketing messages
-    for (auto& mes:marketing_mess)
-    {
-        agent_->get_inf(mes);
-    };
+    //addes for further asynchronous call
+    interested_agents.push_back(agent_);
 }
 
 

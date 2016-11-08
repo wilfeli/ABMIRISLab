@@ -16,6 +16,7 @@ namespace solar_core
 {
     
     class W;
+    class Homeowner;
     
     /**
      
@@ -97,6 +98,9 @@ namespace solar_core
         WorldMap(PropertyTree& pt, W* w_);
         
         std::vector<std::vector<Tile*>> g_map; /*!< grid of location tiles */
+        
+        std::vector<std::vector<std::vector<Homeowner*>>> h_map; /*!< location of h by tile */;
+        
     };
     
     

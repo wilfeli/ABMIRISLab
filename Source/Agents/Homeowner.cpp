@@ -58,6 +58,14 @@ void
 Homeowner::init(W* w_)
 {
     a_time = w_->time;
+    
+    
+    if (marketing_state == EParamTypes::HOMarketingStateHighlyInterested)
+    {
+        //add itself to the list of agents that request initial information
+        w->get_inf_marketing_sei_agents.push_back(this);
+    };
+    
 }
 
 
@@ -99,6 +107,10 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
     ///@DevStage3 check if this agent is interested in the marketing message
 }
 
+/**
+ 
+ Not used now, in case if decide that some agents are actively requesting information
+ */
 void
 Homeowner::ac_inf_marketing_sei()
 {

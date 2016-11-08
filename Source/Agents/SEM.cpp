@@ -187,34 +187,38 @@ SEM::act_tick()
         
     };
     
-    //change prices if demand is changing
-    //@DevStage2 change to avoid check at every cycle
-    if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
+    
+    if (sem_type == EParamTypes::SEMPVProducer)
     {
-        
-        auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
-        auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
-        
-        if (qn_t > 0.0 && qn_t_1 > 0.0)
+        //change prices if demand is changing
+        //@DevStage2 change to avoid check at every cycle
+        if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
         {
-            //base markup is here
-            THETA_profit[0] *= qn_t/qn_t_1;
-        };
-        
-        
-        for (auto iter:prices)
-        {
-            auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
-            auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
             
-            iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+            auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
+            auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
+            
+            if (qn_t > 0.0 && qn_t_1 > 0.0)
+            {
+                //base markup is here
+                THETA_profit[0] *= qn_t/qn_t_1;
+            };
+            
+            
+            for (auto iter:prices)
+            {
+                auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
+                auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+                
+                iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+                
+            };
+            
+            
+            sem_dec_time = a_time;
+            
             
         };
-        
-        
-        sem_dec_time = a_time;
-        
-        
     };
     
     
