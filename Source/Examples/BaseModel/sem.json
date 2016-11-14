@@ -27,8 +27,13 @@
                {
                "EParamTypes::SEMLearningPrice":0.20
                }
-               
-               ],
+               ,
+               {
+               "EParamTypes::SEMMicroInverterBasePrice":150
+               },
+               {
+               "EParamTypes::SEMCentralInverterBasePrice":2500
+               }               ],
     "costs_base":0.39,
     "THETA_profit":[
                     0.35

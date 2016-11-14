@@ -103,6 +103,19 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         
+        
+        //sem.json
+        ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
+        path_to_template = path_to_dir;
+        path_to_template /= "sem.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        
+        sems = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_sems(pt, mode_, path_to_dir,rng_location_x, rng_location_y, this);
+
+        
+        
+        
         //sei.json
         path_to_template = path_to_dir;
         path_to_template /= "sei.json";
@@ -113,17 +126,6 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         
-        //sem.json
-        ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
-        path_to_template = path_to_dir;
-        path_to_template /= "sem.json";
-        path = path_to_template.string();
-        read_json(path, pt);
-        
-        sems = dynamic_cast<HelperWSpecialization<W, BaselineModel>*>(helper_)->create_sems(pt, mode_, path_to_dir,rng_location_x, rng_location_y, this);
-        
-        
-
         
         
         //create G
@@ -649,7 +651,7 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
     auto h = project_->agent;
     
     //send info in the net
-    for (agent:world_map->h_map[h->location_x][h->location_y])
+    for (auto agent:world_map->h_map[h->location_x][h->location_y])
     {
         agent->get_inf(mes);
     };

@@ -2130,6 +2130,10 @@
 		EDD376791D3429B0008705B8 /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
 		EDD3767B1D3429B0008705B8 /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
 		EDD3767C1D3429B0008705B8 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
+		EDD734231DD230F9008F25AB /* Survey */ = {isa = PBXFileReference; lastKnownFileType = text; name = Survey; path = ../WPs/WorkingPaper3/Survey; sourceTree = "<group>"; };
+		EDD734241DD593F7008F25AB /* ho-ncdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-ncdecisions.json"; sourceTree = "<group>"; };
+		EDD734251DD593F7008F25AB /* ho-designdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-designdecisions.json"; sourceTree = "<group>"; };
+		EDD734261DD593F7008F25AB /* ho-installerdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-installerdecisions.json"; sourceTree = "<group>"; };
 		EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorMath.cpp; sourceTree = "<group>"; };
 		EDD8C1071DB5B7DC0064C297 /* VectorMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorMath.h; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
@@ -4670,6 +4674,9 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDD734241DD593F7008F25AB /* ho-ncdecisions.json */,
+				EDD734251DD593F7008F25AB /* ho-designdecisions.json */,
+				EDD734261DD593F7008F25AB /* ho-installerdecisions.json */,
 				ED717D981DCAAEE900C28247 /* joint_distribution.csv */,
 				ED717D991DCAAEE900C28247 /* solar_module.json */,
 				EDCB0C801D9CD1860060E061 /* ho_nc.json */,
@@ -8374,6 +8381,7 @@
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
+				EDD734231DD230F9008F25AB /* Survey */,
 				ED2BC13B1D4BA8DA00B96FB1 /* EE */,
 				EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */,
 				EDDB3FB31C7C402D00A6EA1F /* Products */,

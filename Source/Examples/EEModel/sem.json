@@ -26,6 +26,12 @@
                },
                {
                "EParamTypes::SEMLearningPrice":0.20
+               },
+               {
+               "EParamTypes::SEMMicroInverterBasePrice":150
+               },
+               {
+               "EParamTypes::SEMCentralInverterBasePrice":2500
                }
                
             ],

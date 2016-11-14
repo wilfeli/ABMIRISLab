@@ -44,7 +44,22 @@ WorldMap::WorldMap(PropertyTree& pt, W* w_)
         h_map.push_back({});
         for (auto j = 0; j < N_TILE_X; ++j)
         {
+            h_map[i].push_back({});
             g_map[i].push_back(new Tile(1.0, 1.0, solar_irradiation, permit_difficulty, requires_permit_visit));
+        };
+    };
+    
+}
+
+
+WorldMapSpecialization<WEE>::WorldMapSpecialization(PropertyTree& pt, W* w_):Super(pt, w_)
+{
+    for (auto i = 0; i < g_map.size(); ++i)
+    {
+        h_map.push_back({});
+        for (auto j = 0; j < g_map[i].size(); ++j)
+        {
+            h_map.push_back({});
         };
     };
     

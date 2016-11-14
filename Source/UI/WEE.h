@@ -25,6 +25,7 @@ namespace solar_core {
     class SEMBL;
     class H;
     class ExploreExploit;
+    template<class Param> class WorldMapSpecialization;
     
 
 class WEE: public W
@@ -49,6 +50,21 @@ public:
     virtual void get_state_inf_installed_project(std::shared_ptr<PVProjectFlat> project_);
     double get_inf(EDecParams type_, SEIBL* agent_);
     //@}
+    
+    
+    
+    //@{
+    /**
+     
+     Interactions on geography
+     
+     */
+    
+    WorldMapSpecialization<WEE>* world_map;
+    
+    
+    //@}
+    
     
     //@{
     /**
@@ -98,8 +114,25 @@ public:
     //@}
     
 protected:
+    
+    //@{
+    /**
+     
+     Initialization part
+     
+     */
+    
+    
+    virtual void create_world(boost::filesystem::path& path_to_model_file, boost::filesystem::path& path_to_dir, boost::filesystem::path& path_to_template, PropertyTree& pt, std::map<std::string, std::string>& params_str) override;
+    
+    
+    
+    //@}
 
+    
+    
 
+    typedef W Super;
 
     std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>> installed_projects_time;
     std::vector<std::map<UID, std::vector<std::shared_ptr<PVProjectFlat>>>> installed_projects_history;

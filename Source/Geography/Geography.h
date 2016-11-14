@@ -16,7 +16,9 @@ namespace solar_core
 {
     
     class W;
+    class WEE;
     class Homeowner;
+    class H;
     
     /**
      
@@ -101,6 +103,22 @@ namespace solar_core
         
         std::vector<std::vector<std::vector<Homeowner*>>> h_map; /*!< location of h by tile */;
         
+    };
+    
+    template <class Param>
+    class WorldMapSpecialization: public WorldMap
+    {
+        
+    };
+    
+    
+    template<>
+    class WorldMapSpecialization<WEE>: public WorldMap
+    {
+    public:
+        typedef WorldMap Super;
+        WorldMapSpecialization<WEE>(PropertyTree& pt, W* w_);
+        std::vector<std::vector<std::vector<H*>>> h_map; /*!< location of h by tile */;
     };
     
     

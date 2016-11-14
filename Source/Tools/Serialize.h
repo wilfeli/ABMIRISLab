@@ -503,6 +503,12 @@ namespace serialize
                     double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                     
                     formula = std::to_string(rand_.ru() * (max - min) + min);
+                }
+                else if (formula.find("CUSTOM") != std::string::npos)
+                {
+                    e.assign("CUSTOM");
+                    formula = std::regex_replace(formula, e, "");
+                    //MARK: cont. add log here 
                 };
                 
             };

@@ -518,7 +518,8 @@ namespace solar_core {
             auto rng_i_inv = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sem->rng, pdf_i);
             
             
-            for (auto i = w->params_d[EParamTypes::N_SEMPVProducer]; i < w->params_d[EParamTypes::N_SEMInverterProducer] + w->params_d[EParamTypes::N_SEMPVProducer]; ++i)
+            for (auto i = w->params_d[EParamTypes::N_SEMPVProducer];
+                 i < std::min(w->params_d[EParamTypes::N_SEMInverterProducer] + w->params_d[EParamTypes::N_SEMPVProducer], w->params_d[EParamTypes::N_SEM]); ++i)
             {
                 auto iter = (*sems)[i];
                 
@@ -551,7 +552,7 @@ namespace solar_core {
             int64_t N_Micro = 0;
             int64_t N_Central = 0;
             //check that there is at least 1 of each type?
-            for (auto i = 0; i < (*sems).size(); ++i)
+            for (auto i = w->params_d[EParamTypes::N_SEMPVProducer]; i < (*sems).size(); ++i)
             {
                 switch ((*sems)[i]->inverter_templates[0]->technology)
                 {
@@ -566,49 +567,58 @@ namespace solar_core {
                 };
             };
 
-            auto type_to_reset = ESEIInverterType::Micro;
             
-            if (N_Central <= 0.0)
+            if ((N_Central <= 0.0) || (N_Micro <= 0.0))
             {
-                type_to_reset = ESEIInverterType::Central;
-            };
-            
-
-            //draw last sem, check that it is inverter producer and convert into micro
-            auto iter = (*sems).back();
-
-            if (iter->sem_type != EParamTypes::SEMInverterProducer){ throw std::runtime_error("unsupported specification"); };
-            
-            //check that it is not the required type - maybe later, because now it is binary - so no need to check
-
-            
-            //set inverter
-            while (true)
-            {
-                auto it = WorldSettings::instance().inverters.begin();
-                std::advance(it, rng_i_inv());
-                auto inverter = it->second;
-                if ((inverter->manufacturer_id == "FORMULA::RANDOM") && (inverter->technology == type_to_reset))
+                //here resets only 1 type, as it is assumed that there is at least 1 sem created
+                auto type_to_reset = ESEIInverterType::Micro;
+                
+                if (N_Central <= 0.0)
                 {
-                    //could use this inverter
-                    inverter->manufacturer = iter;
-                    inverter->manufacturer_id = inverter->manufacturer->uid.get_string();
-                    
-                    
-                    //reset old template
-                    iter->inverter_templates[0]->manufacturer = nullptr;
-                    iter->inverter_templates[0]->manufacturer_id = "FORMULA::RANDOM";
-                    
-                    
-                    //set new template
-                    //assume only 1 per manufacturer
-                    iter->inverter_templates[0] = inverter;
-                    iter->init_world_connections();
-                    
-                    //no initialization for the inverter itself in this simple version
-                    
-                    break;
+                    type_to_reset = ESEIInverterType::Central;
                 };
+                
+
+                //draw last sem, check that it is inverter producer and convert into micro
+                auto iter = (*sems).back();
+
+                if (iter->sem_type != EParamTypes::SEMInverterProducer){ throw std::runtime_error("unsupported specification"); };
+                
+                //check that it is not the required type - maybe later, because now it is binary - so no need to check
+
+                auto N_CYCLES = 0;
+                //set inverter
+                //safety valve if there is problem with creating sem
+                while ((true) && (N_CYCLES < 1000))
+                {
+                    auto it = WorldSettings::instance().inverters.begin();
+                    std::advance(it, rng_i_inv());
+                    auto inverter = it->second;
+                    if ((inverter->manufacturer_id == "FORMULA::RANDOM") && (inverter->technology == type_to_reset))
+                    {
+                        //could use this inverter
+                        inverter->manufacturer = iter;
+                        inverter->manufacturer_id = inverter->manufacturer->uid.get_string();
+                        
+                        
+                        //reset old template
+                        iter->inverter_templates[0]->manufacturer = nullptr;
+                        iter->inverter_templates[0]->manufacturer_id = "FORMULA::RANDOM";
+                        
+                        
+                        //set new template
+                        //assume only 1 per manufacturer
+                        iter->inverter_templates[0] = inverter;
+                        iter->init_world_connections();
+                        
+                        //no initialization for the inverter itself in this simple version
+                        
+                        break;
+                    };
+                    ++N_CYCLES;
+                };
+                
+                if (N_CYCLES >= 1000){throw std::runtime_error("could not create SEMS to the specification, imbalanced inverters");};
             };
 
             return sems;
@@ -651,7 +661,7 @@ namespace solar_core {
                 read_json(path_to_scheme.string(), pt_decisions);
                 
                 
-                for (const auto& node: pt)
+                for (const auto& node: pt_decisions)
                 {
                     //read distribution of classes
                     for (auto& node_dist:node.second.get_child("scheme"))

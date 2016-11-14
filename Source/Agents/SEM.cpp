@@ -65,28 +65,35 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
 void
 SEM::init(W* w_)
 {
-    //collect solar panels
-    for (auto iter:WorldSettings::instance().solar_modules)
+    
+    //depending on the type
+    if (sem_type == EParamTypes::SEMPVProducer)
     {
-        if (iter.second->manufacturer == this)
+        //for each solar module create inventories
+        for (auto iter:solar_panel_templates)
         {
-            solar_panel_templates.push_back(iter.second);
+            inventories[iter->name] = N_PANELS_inventories;
+        };
+        
+        //set prices
+        for (auto iter:solar_panel_templates)
+        {
+            auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+        
+            prices[iter->name] = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
         };
     };
     
-    
-    //for each solar module create inventories
-    for (auto iter:solar_panel_templates)
+    if (sem_type == EParamTypes::SEMInverterProducer)
     {
-        inventories[iter->name] = N_PANELS_inventories;
-    };
-    
-    //set prices
-    for (auto iter:solar_panel_templates)
-    {
-        auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
-    
-        prices[iter->name] = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+        if (inverter_templates[0]->technology == ESEIInverterType::Central)
+        {
+            inverter_templates[0]->p_sem = params[EParamTypes::SEMCentralInverterBasePrice];
+        };
+        if (inverter_templates[0]->technology == ESEIInverterType::Micro)
+        {
+            inverter_templates[0]->p_sem = params[EParamTypes::SEMMicroInverterBasePrice];
+        };
     };
     
 }

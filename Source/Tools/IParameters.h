@@ -512,6 +512,12 @@ namespace solar_core
         
         
         
+        /** Base Prices per type */
+        SEMCentralInverterBasePrice,
+        SEMMicroInverterBasePrice,
+        
+        
+        
         /** Failure rates for PV module, failure rate per year! */
         SEMFailureRatePVModule,
         
@@ -809,6 +815,50 @@ namespace solar_core
             {
                 return EParamTypes::HOMarketingStateHighlyInterested;
             }
+            else if (param_type == "eparamtypes::honcdecisionseirating")
+            {
+                return EParamTypes::HONCDecisionSEIRating;
+            }
+            else if (param_type == "eparamtypes::hoseidecisionutilitynone")
+            {
+                return EParamTypes::HOSEIDecisionUtilityNone;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionco2")
+            {
+                return EParamTypes::HODesignDecisionCO2;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionfailures")
+            {
+                return EParamTypes::HODesignDecisionFailures;
+            }
+            else if (param_type == "eparamtypes::hoseidecisiontotalprojecttime")
+            {
+                return EParamTypes::HOSEIDecisionTotalProjectTime;
+            }
+            else if (param_type == "eparamtypes::hoseidecisionestimatednetsavings")
+            {
+                return EParamTypes::HOSEIDecisionEstimatedNetSavings;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionestimatednetsavings")
+            {
+                return EParamTypes::HODesignDecisionEstimatedNetSavings;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisioninvertertype")
+            {
+                return EParamTypes::HODesignDecisionInverterType;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionutilitynone")
+            {
+                return EParamTypes::HODesignDecisionUtilityNone;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionpanelvisibility")
+            {
+                return EParamTypes::HODesignDecisionPanelVisibility;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionpanelefficiency")
+            {
+                return EParamTypes::HODesignDecisionPanelEfficiency;
+            }
             else if (param_type == "eparamtypes::inactivequoting")
             {
                 return EParamTypes::InactiveQuoting;
@@ -888,6 +938,22 @@ namespace solar_core
             else if (param_type == "eparamtypes::seitimeluforadministration")
             {
                 return EParamTypes::SEITimeLUForAdministration;
+            }
+            else if (param_type == "eparamtypes::seiinteractiontype")
+            {
+                return EParamTypes::SEIInteractionType;
+            }
+            else if (param_type == "eparamtypes::seiwarranty")
+            {
+                return EParamTypes::SEIWarranty;
+            }
+            else if (param_type == "eparamtypes::seiequipmenttype")
+            {
+                return EParamTypes::SEIEquipmentType;
+            }
+            else if (param_type == "eparamtypes::seirating")
+            {
+                return EParamTypes::SEIRating;
             }
             else if (param_type == "eparamtypes::n_ho")
             {
@@ -1025,6 +1091,14 @@ namespace solar_core
             {
                 return EParamTypes::SEMFailureRateInverterMicro;
             }
+            else if (param_type == "eparamtypes::semcentralinverterbaseprice")
+            {
+                return EParamTypes::SEMCentralInverterBasePrice;
+            }
+            else if (param_type == "eparamtypes::semmicroinverterbaseprice")
+            {
+                return EParamTypes::SEMMicroInverterBasePrice;
+            }
             else if (param_type == "eparamtypes::utilitycurrentcapacity")
             {
                 return EParamTypes::UtilityCurrentCapacity;
@@ -1040,6 +1114,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::whmaxntodrawpertimeunit")
             {
                 return EParamTypes::WHMaxNToDrawPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::none")
+            {
+                return EParamTypes::None;
             }
             else
             {
@@ -1079,12 +1157,16 @@ namespace solar_core
             {
                 return "EParamTypes::SEILarge";
             }
+            else if (param_ == EParamTypes::None)
+            {
+                return "EParamTypes::None";
+            }
             else
             {
 #ifdef DEBUG
                 throw std::runtime_error("missing conversion");
 #endif
-                return "None";
+                return "EParamTypes::None";
             };
         }
         

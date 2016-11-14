@@ -4,10 +4,14 @@
                           "EParamTypes::SEIMidEfficiencyDesign": "FORMULA::RANDOM"
                           }
                           ],
-    "dec_inverters":[
-                     {"EParamTypes::TechnologyInverterCentral": "FORMULA::RANDOM"},
-                     {"EParamTypes::TechnologyInverterMicro": "FORMULA::RANDOM"}
-    ]
+    "dec_inverters": [
+                      {
+                      "EParamTypes::TechnologyInverterCentral": "FORMULA::RANDOM"
+                      },
+                      {
+                      "EParamTypes::TechnologyInverterMicro": "FORMULA::RANDOM"
+                      }
+                      ],
     "params": [
                {
                "EParamTypes::EstimatedPricePerWatt": 3.5
@@ -37,10 +41,10 @@
                "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
                },
                {
-               "EParamTypes::SEIFrequencyDecPrice":52
-               }
+               "EParamTypes::SEIFrequencyDecPrice": 52
+               },
                {
-               "EParamTypes::SEITimeLUForMarketing" : 2500000
+               "EParamTypes::SEITimeLUForMarketing": 2500000
                },
                {
                "EParamTypes::SEITimeLUForDesign": 350
@@ -50,7 +54,7 @@
                },
                {
                "EParamTypes::SEITimeLUForPermit": 200
-               }
+               },
                {
                "EParamTypes::SEIRating": "FORMULA::p.d.f.::CUSTOM"
                },
@@ -65,11 +69,11 @@
                },
                {
                "EParamTypes::SEIWarranty": "FORMULA::p.d.f.::CUSTOM"
-               },
+               }
                ],
     "mes_marketing": "",
     "dec_project_percentages": [
-                                1.0
+                                1
                                 ],
     "THETA_hard_costs": [
                          "FORMULA::p.d.f.::N_trunc(2.5, 0.05)",
@@ -101,12 +105,13 @@
                                ]
     },
     "THETA_Demand": [],
-    "X":[1.0,
-         0.1,
-         1.0,
-         0.1,
-         1.0
-         ],
+    "X": [
+          1,
+          0.1,
+          1,
+          0.1,
+          1
+          ],
     "Mu_0": [
              -0.005,
              1.25,
@@ -158,5 +163,8 @@
                                 ],
     "complexity_install_prior": 100,
     "dec_design": "FORMULA::RANDOM",
-    "technology_efficiency_bins":[0.15099085485361419, 0.18403666038930716]
+    "technology_efficiency_bins": [
+                                   0.1509908548536142,
+                                   0.18403666038930716
+                                   ]
 }
