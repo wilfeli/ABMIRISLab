@@ -155,7 +155,7 @@ G::act_tick()
     {
         if (project->state_project == EParamTypes::RequestedPermitForInstallation)
         {
-            auto project_permitting_time = params[EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
+            double project_permitting_time = params[EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation] * w->world_map->g_map[project->agent->location_y][project->agent->location_x]->permit_difficulty;
             if ((a_time - project->ac_g_time) >= project_permitting_time)
             {
                 //grant permit
@@ -174,7 +174,7 @@ G::act_tick()
             if ((a_time - project->ac_g_time) >= project_scheduling_time)
             {
                 bool FLAG_SCHEDULED_VISIT = false;
-                std::size_t i_offset;
+                std::size_t i_offset = 0;
                 std::size_t i;
                 std::weak_ptr<PVProject> w_project = project;
                 while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_visits.size())

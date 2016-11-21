@@ -99,6 +99,10 @@ int main(int argc, const char * argv[])
     
     solar_ui::UI* ui = new solar_ui::UI();
     
+    //initialize ui
+    ui->init(w);
+
+    
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;
     

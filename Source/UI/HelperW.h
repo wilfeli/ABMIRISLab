@@ -246,7 +246,7 @@ namespace solar_core {
 
         std::vector<SEI*>* create_seis(PropertyTree& pt, std::string mode_, boost::filesystem::path& path_to_dir, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_x, boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>& rng_location_y, W* w_)
         {
-            std::vector<SEI*>* seis;
+            std::vector<SEI*>* seis = new std::vector<SEI*>{};
             
             T* w = static_cast<T*>(w_);
             
@@ -283,19 +283,19 @@ namespace solar_core {
         
             
             
-            std::map<std::string, int64_t> column_names  {{"Name", 0},
-                                                            {"Module_Name_1", 1},
-                                                            {"Efficiency", 2},
-                                                            {"Inverter_Name_1", 3},
-                                                            {"Inverter_Type_1", 4},
-                                                            {"Inverter_Name_2", 5},
-                                                            {"Inverter_Type_2", 6},
-                                                            {"Size", 7},
-                                                            {"Rating", 8},
-                                                            {"Interaction", 9},
-                                                            {"Technology", 10},
-                                                            {"LeadInProjectTime", 11},
-                                                            {"Warranty", 12}};
+            std::map<std::string, int64_t> column_names  {{"Name", 1},
+                                                            {"Module_Name_1", 2},
+                                                            {"Efficiency", 3},
+                                                            {"Inverter_Name_1", 4},
+                                                            {"Inverter_Type_1", 5},
+                                                            {"Inverter_Name_2", 6},
+                                                            {"Inverter_Type_2", 7},
+                                                            {"Size", 8},
+                                                            {"Rating", 9},
+                                                            {"Interaction", 10},
+                                                            {"Technology", 11},
+                                                            {"LeadInProjectTime", 12},
+                                                            {"Warranty", 13}};
             
             std::map<std::string, int64_t> technology_types {{"Traditional" , 0},
                 {"Standard", 1}, {"CuttingEdge", 2}};
@@ -323,12 +323,15 @@ namespace solar_core {
             
             //SEM connections PV module and SEM connections Inverter
             auto max_ = w->sems->size() - 1;
-            auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
+            auto min_ = w->params_d[EParamTypes::N_SEMPVProducer];
+            auto pdf_i = boost::uniform_int<uint64_t>(0, min_ - 1);
             auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
             int64_t j_sem = 0;
             
-            
-            
+            //SEM connection Inverter
+            auto pdf_i_inverter = boost::uniform_int<uint64_t>(min_, max_);
+            auto rng_i_inverter = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i_inverter);
+            int64_t j_sem_inverter = w->params_d[EParamTypes::N_SEMPVProducer];
             
             for (auto i = 0; i < w->params_d[EParamTypes::N_SEI]; ++i)
             {
@@ -374,7 +377,7 @@ namespace solar_core {
                     double technology_to_set = 2.0;
                     double pv_module_to_set = 1.0;
                     
-                    while ((pv_module_to_set > 0.0) || (technology_to_set > 0.0))
+                    while (pv_module_to_set > 0.0)
                     {
                         j_sem = rng_i();
                         
@@ -395,50 +398,40 @@ namespace solar_core {
                                 
                             };
                         }
-                        else
+                    };
+                    
+                    while (technology_to_set > 0.0)
+                    {
+                        j_sem_inverter = rng_i_inverter();
+                    
+                        if ((*w->sems)[j_sem_inverter]->sem_type == EParamTypes::SEMInverterProducer)
                         {
                             //connect to random Inverter manufacturer
                             //check inverter type
                             //keep searching until required type is found
-                            auto inverter_type = (*w->sems)[j_sem]->inverter_templates[0]->technology;
+                            auto inverter_type = (*w->sems)[j_sem_inverter]->inverter_templates[0]->technology;
 
-                            while (technology_to_set > 0.0)
+
+                            if (inverter_type == ESEIInverterType::Central)
                             {
-                                if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMInverterProducer)
+                                if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] == nullptr)
                                 {
-                                    if (inverter_type == ESEIInverterType::Central)
-                                    {
-                                        if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] == nullptr)
-                                        {
-                                            seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] = (*w->sems)[j_sem]->inverter_templates[0];
-                                            
-                                            --technology_to_set;
-                                        };
-                                    };
+                                    seis->back()->dec_inverters[EParamTypes::TechnologyInverterCentral] = (*w->sems)[j_sem_inverter]->inverter_templates[0];
                                     
-                                    if (inverter_type == ESEIInverterType::Micro)
-                                    {
-                                        if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] == nullptr)
-                                        {
-                                            seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] = (*w->sems)[j_sem]->inverter_templates[0];
-                                            --technology_to_set;
-                                        };
-                                    };
-                                    
-                                    j_sem = rng_i();
-                                }
-                                else
-                                {
-                                    j_sem = rng_i();
+                                    --technology_to_set;
                                 };
-                                
+                            };
+                            
+                            if (inverter_type == ESEIInverterType::Micro)
+                            {
+                                if (seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] == nullptr)
+                                {
+                                    seis->back()->dec_inverters[EParamTypes::TechnologyInverterMicro] = (*w->sems)[j_sem_inverter]->inverter_templates[0];
+                                    --technology_to_set;
+                                };
                             };
                             
                         };
-
-                        
-                        
-                        
                     };
                     
                     
@@ -449,16 +442,14 @@ namespace solar_core {
                 };
             };
             
+            for (auto& sei:(*seis))
+            {
+                std::cout << sei->THETA_profit[0] << std::endl;
+            };
+            
 
-            
-            
-            
             return seis;
 
-            
-            
-            
-            
             
         }
         
@@ -687,6 +678,11 @@ namespace solar_core {
             std::string label;
             double u_i;
             
+            
+            auto i_5 = 0;
+            auto i_4 = 0;
+            auto i_3 = 0;
+            
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
                 //draw next uniform
@@ -696,6 +692,21 @@ namespace solar_core {
                 
                 //assume the same parameters for each class
                 (*hos)[i]->THETA_NCDecisions = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label];
+                
+                
+                if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 5.0)
+                {
+                    ++i_5;
+                    
+                }
+                else if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 4.0)
+                {
+                    ++i_4;
+                }
+                else
+                {
+                    ++i_3;
+                };
                 
                 
                 //generate class label given frequencies
@@ -732,6 +743,10 @@ namespace solar_core {
             
 
             //@DevStage3 if decide to have random utility  - when generating H assign utility from the description of a probability distribution
+            
+            
+            std::cout << i_5 << " " << i_4 << " " << i_3 << std::endl;
+            
             
             return hos;
 

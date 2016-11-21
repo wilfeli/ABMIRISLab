@@ -129,34 +129,50 @@ Homeowner::ac_inf_quoting_sei()
     {
         auto marketing_inf = get_inf_marketing_sei.front();
         
-        //create project
-        //create new project
-        auto new_project = std::make_shared<PVProject>();
-        //request additional information
-        new_project->agent = this;
-        new_project->begin_time = a_time;
-        new_project->sei = marketing_inf->agent;
-        //save project
-        pvprojects.push_back(new_project);
-        marketing_inf->agent->get_project(new_project);
         
-        //uses online quote to gather general information to just narrow down the possible pool of projects
-        //will use non-compensatory rules here
-        switch (marketing_state)
+        
+        //check that it is new sei
+        auto sei = std::find_if(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &project){
+            if (project)
+            {
+                return project->sei == marketing_inf->agent;
+            }
+            else
+            {
+                return false;
+            };});
+        
+        
+        if (sei == pvprojects.end())
         {
-            case EParamTypes::HOMarketingStateHighlyInterested:
-            case EParamTypes::HOMarketingStateInterested:
-                //request online quotes, assume that it is general information to narrow down pool of installers
-                //requests online quote, it will be provided in a separate call
-                new_project->state_project = EParamTypes::RequestedOnlineQuote;
-                //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
-                //
-                marketing_inf->agent->request_online_quote(new_project);
-                break;
-            default:
-                break;
+            //create project
+            //create new project
+            auto new_project = std::make_shared<PVProject>();
+            //request additional information
+            new_project->agent = this;
+            new_project->begin_time = a_time;
+            new_project->sei = marketing_inf->agent;
+            //save project
+            pvprojects.push_back(new_project);
+            marketing_inf->agent->get_project(new_project);
+            
+            //uses online quote to gather general information to just narrow down the possible pool of projects
+            //will use non-compensatory rules here
+            switch (marketing_state)
+            {
+                case EParamTypes::HOMarketingStateHighlyInterested:
+                case EParamTypes::HOMarketingStateInterested:
+                    //request online quotes, assume that it is general information to narrow down pool of installers
+                    //requests online quote, it will be provided in a separate call
+                    new_project->state_project = EParamTypes::RequestedOnlineQuote;
+                    //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
+                    //
+                    marketing_inf->agent->request_online_quote(new_project);
+                    break;
+                default:
+                    break;
+            };
         };
-        
         get_inf_marketing_sei.pop_front();
     };
     
@@ -185,7 +201,7 @@ Homeowner::dec_evaluate_online_quotes()
     {
         //check if is in the pool
         //check on Customer rating
-        if (pvprojects[i]->sei->params[EParamTypes::SEIRating] >= THETA_NCDecisions[EParamTypes::SEIRating][0])
+        if (pvprojects[i]->sei->params[EParamTypes::SEIRating] >= THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0])
         {
             pool[i] = true;
         };
@@ -587,16 +603,17 @@ Homeowner::act_tick()
         //initiates and continues collection of quoting information
         ac_inf_quoting_sei();
     }
-    else
+    else if (quote_state != EParamTypes::HOWaitingOnPreliminaryQuotes)
     {
         //moves to the evaluation stage
         dec_evaluate_online_quotes();
+        quote_state = EParamTypes::HOWaitingOnPreliminaryQuotes;
     };
     
     
     //evaluates preliminary quotes and commits to the project
-    //once all requested quotes are in - evaluate offerings
-    if (n_preliminary_quotes >= n_preliminary_quotes_requested)
+    //once all requested quotes are in - evaluate offering
+    if ((n_preliminary_quotes >= n_preliminary_quotes_requested) && (n_preliminary_quotes > 0.0))
     {
         dec_evaluate_preliminary_quotes();
     };

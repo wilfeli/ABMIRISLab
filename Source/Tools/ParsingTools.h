@@ -28,7 +28,14 @@ namespace solar_core
 //            const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
 //            const std::regex re{"(\d+)(,\s*\d+)*"};
             const std::regex re("[\\s,]+");
-//            auto n = 0;
+            
+//            const std::regex re("[^,]+");
+            
+//            const std::regex re("[^,\s][^\,]*[^,\s]*");
+
+            
+            
+            auto n = 0;
             
             //skip first line
             std::getline(in_file, s);

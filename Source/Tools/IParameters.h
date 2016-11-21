@@ -241,6 +241,11 @@ namespace solar_core
         InactiveQuoting,
         
         
+        HOWaitingOnPreliminaryQuotes,
+        
+        
+        
+        
         /** State of a quoting stage for HO: decision on reroofing old roof */
         HODecisionReroof,
         
@@ -942,6 +947,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::seiinteractiontype")
             {
                 return EParamTypes::SEIInteractionType;
+            }
+            else if (param_type == "eparamtypes::seileadinprojecttime")
+            {
+                return EParamTypes::SEILeadInProjectTime;
             }
             else if (param_type == "eparamtypes::seiwarranty")
             {

@@ -399,8 +399,9 @@ W::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto& agent:active_hos)
+            for (auto i = 0; i < active_hos.size(); ++i)
             {
+                auto agent = active_hos[i];
                 if (agent)
                 {
                     if (agent->marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)

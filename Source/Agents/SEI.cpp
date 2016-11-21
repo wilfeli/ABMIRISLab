@@ -189,6 +189,9 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
     //MARK: cont.
     //is used in non-compensatory decision making, will be on generic parameters of sei
     
+    //create general price estimate for project
+    
+    
     
     
     return mes;
@@ -497,8 +500,8 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     //assume that 1 person per project for the whole duration as a sales rep
     costs += wage * total_project_time * 1;
     
-    //design costs 
-    costs += wage * params[EParamTypes::SEILeadInProjectTime];
+    //design costs, 40 for number of hours in a tick, if tick is one week
+    costs += wage * params[EParamTypes::SEILeadInProjectTime] * 40;
     
     //profit  margin on costs
     design.total_costs = costs * (1 + profit_margin);
@@ -534,19 +537,19 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
 
     //simple calculation when HO owns the system
     auto inflation = WorldSettings::instance().params_exog[EParamTypes::InflationRate];
-    auto CPI = 1;
-    auto AC_size_t = design.AC_size;
+    double CPI = 1.0;
+    auto AC_size_t = design.AC_size/constants::NUMBER_WATTS_IN_KILOWATT;
     //difference in definitions
     auto degradation_t = std::exp(std::log((1 - design.PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
     auto production_t = 0.0;
     
     
-    //loan annuity - equivalent to
-    auto loan_amount = design.total_costs;
+    //loan annuity - equivalent
+    auto loan_amount = design.total_costs * (1 - WorldSettings::instance().params_exog[EParamTypes::GFederalTaxIncentive]);
     auto interest_rate_loan = WorldSettings::instance().params_exog[EParamTypes::AverageInterestRateLoan]; //yearly terms
-    double warranty_length = WorldSettings::instance().params_exog[EParamTypes::PVModuleWarrantyLength] * constants::NUMBER_TICKS_IN_YEAR;  //originally in yearly terms
+    double warranty_length = WorldSettings::instance().params_exog[EParamTypes::PVModuleWarrantyLength];  //originally in yearly terms
     //assumed that it is equal to warranty ... BIG ASSUMPTION
-    auto loan_length = warranty_length / constants::NUMBER_TICKS_IN_YEAR; //yearly dimension, divide by number of weeks in a year
+    auto loan_length = warranty_length; //yearly dimension, divide by number of weeks in a year
     
     int NUMBER_MONTHS_IN_YEAR = 12;
     auto N_loan = loan_length * NUMBER_MONTHS_IN_YEAR;
@@ -564,11 +567,11 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
         total_production += production_t;
         
         //how much have payed if decided to go without solar
-        potential_energy_costs += design.AC_size * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        potential_energy_costs += production_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
         //how much could make if sell energy and decide not to use it
         realized_energy_income += production_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
         AC_size_t = AC_size_t * degradation_t;
-        CPI = CPI * inflation;
+        CPI = CPI * (1 + inflation);
     };
     
     
@@ -576,7 +579,7 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
     design.total_net_savings = (realized_energy_income - loan_annuity * N_loan)/potential_energy_costs;
     
     //MARK: cont. check numbers
-    design.co2_equivalent = total_production/WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2];
+    design.co2_equivalent = total_production/warranty_length*WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
 }
 
 
@@ -960,7 +963,7 @@ SEI::act_tick()
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
-                std::size_t i_offset;
+                std::size_t i_offset = 0;
                 std::size_t i;
                 std::weak_ptr<PVProject> w_project = project;
                 while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_visits.size())
@@ -983,8 +986,9 @@ SEI::act_tick()
                                 project->ac_sei_time = a_time;
                             }
                         };
-                        ++i_offset;
                     };
+                    
+                    ++i_offset;
                 };
             };
         };
@@ -1041,7 +1045,7 @@ SEI::act_tick()
         {
             //schedule installation
             bool FLAG_SCHEDULED_VISIT = false;
-            std::size_t i_offset;
+            std::size_t i_offset = 0;
             std::size_t i;
             std::weak_ptr<PVProject> w_project = project;
             while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_installations.size())

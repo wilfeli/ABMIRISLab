@@ -2110,7 +2110,6 @@
 		EDC006B31CECB4EB0024347C /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = w.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDC006B51CEFF00A0024347C /* HelperW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperW.cpp; sourceTree = "<group>"; };
 		EDC006B61CEFF00A0024347C /* HelperW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HelperW.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		EDCB0C801D9CD1860060E061 /* ho_nc.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ho_nc.json; sourceTree = "<group>"; };
 		EDD3765F1D320283008705B8 /* WEE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = WEE.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EDD376601D320283008705B8 /* WEE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WEE.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDD376631D320346008705B8 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H.cpp; sourceTree = "<group>"; };
@@ -4679,7 +4678,6 @@
 				EDD734261DD593F7008F25AB /* ho-installerdecisions.json */,
 				ED717D981DCAAEE900C28247 /* joint_distribution.csv */,
 				ED717D991DCAAEE900C28247 /* solar_module.json */,
-				EDCB0C801D9CD1860060E061 /* ho_nc.json */,
 				EDDE739F1D144C5600B3EED5 /* distribution.json */,
 				EDB71E331D02003D002FACDB /* solar_equipment.json */,
 				ED95AE121CE521580074845C /* utility.json */,

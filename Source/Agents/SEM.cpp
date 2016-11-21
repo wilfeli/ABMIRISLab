@@ -80,7 +80,12 @@ SEM::init(W* w_)
         {
             auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
         
-            prices[iter->name] = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+            double panel_watts = iter->efficiency * (iter->length * iter->width/1000000)*1000;
+            
+            prices[iter->name] = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1))) * panel_watts;
+            
+            iter->p_sem = prices[iter->name];
+            
         };
     };
     
@@ -218,6 +223,9 @@ SEM::act_tick()
                 auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
                 
                 iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+                
+                WorldSettings::instance().solar_modules[iter.first]->p_sem = iter.second;
+                
                 
             };
             

@@ -71,12 +71,22 @@ MarketingInst::act_tick()
     auto pdf_agents = boost::uniform_int<uint64_t>(0, w->hos->size()-1);
     auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_market->rng, pdf_agents);
     
+    
+    std::set<std::size_t> j_used;
+    
     std::size_t j = 0;
 //    std::cout << WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit] << std::endl;
 //    std::cout << w->hhs.size();
     for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit]; ++i)
     {
         j = rng_agents();
+#ifdef DEBUG
+//        if (j_used.find(j) != j_used.end())
+//        {
+//            std::cout << "already used " << j << std::endl;
+//        };
+#endif
+        j_used.insert(j);
         //push all marketing messages
         for (auto& mes:marketing_mess)
         {
