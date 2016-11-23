@@ -2110,6 +2110,7 @@
 		EDC006B31CECB4EB0024347C /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = w.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDC006B51CEFF00A0024347C /* HelperW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperW.cpp; sourceTree = "<group>"; };
 		EDC006B61CEFF00A0024347C /* HelperW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HelperW.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EDD179D11DE4C4E700752C03 /* df_installers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = df_installers.csv; sourceTree = "<group>"; };
 		EDD3765F1D320283008705B8 /* WEE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = WEE.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EDD376601D320283008705B8 /* WEE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WEE.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDD376631D320346008705B8 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H.cpp; sourceTree = "<group>"; };
@@ -4673,6 +4674,7 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDD179D11DE4C4E700752C03 /* df_installers.csv */,
 				EDD734241DD593F7008F25AB /* ho-ncdecisions.json */,
 				EDD734251DD593F7008F25AB /* ho-designdecisions.json */,
 				EDD734261DD593F7008F25AB /* ho-installerdecisions.json */,

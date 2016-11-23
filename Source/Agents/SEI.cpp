@@ -134,6 +134,15 @@ SEI::init(W *w_)
     //send marketing information out
     w->marketing->get_marketing_inf_sei(mes_marketing);
     
+    
+    
+    //check that parameter is reasonable, if not - raise an error
+    if (params[EParamTypes::SEIMaxNInstallationsPerTimeUnit] <= 0.0)
+    {
+        throw std::runtime_error("no installation slots");
+    };
+    
+    
 }
 
 
@@ -287,7 +296,12 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     //assume that permit difficulty here in weeks
     //so that total project time is lead time and permitting time summed
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    auto total_project_time = permit_difficulty_scale * permit_difficulty;
+    auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK;
+    
+    if (total_project_time > 24)
+    {
+        throw std::runtime_error("Too long project time");
+    };
     
     mes->params[EParamTypes::PreliminaryQuoteTotalProjectTime] = total_project_time;
     
@@ -493,6 +507,7 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     
     //length of permitting - assume 1 person per project
     //average of 25 days for interconnection
+    //in LU
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
     auto total_project_time = permit_difficulty_scale * design.permit_difficulty;
     
@@ -591,6 +606,7 @@ void SEI::form_financing(std::shared_ptr<PVProject> project_)
     //assume that whole sum is due on the beginning of the project
     project_->financing->schedule_payments = {project_->design->design->total_costs};
     
+    project_->financing->state_payments = EParamTypes::None;
     
 }
 
@@ -857,10 +873,15 @@ SEI::install_project(std::shared_ptr<PVProject> project)
 
 
 
-void
-SEI::get_payment(std::shared_ptr<MesPayment> mes_)
+bool
+SEI::get_payment(std::shared_ptr<MesPayment> mes_, std::shared_ptr<PVProject> project_)
 {
     money += mes_->q;
+    
+    project_->financing->state_payments = EParamTypes::PaymentsOnTime;
+    
+    //mark as payed
+    return true;
 }
 
 
@@ -963,7 +984,7 @@ SEI::act_tick()
             if ((a_time - project->ac_sei_time) >= params[EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit])
             {
                 bool FLAG_SCHEDULED_VISIT = false;
-                std::size_t i_offset = 0;
+                std::size_t i_offset = 1;
                 std::size_t i;
                 std::weak_ptr<PVProject> w_project = project;
                 while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_visits.size())
@@ -1045,7 +1066,7 @@ SEI::act_tick()
         {
             //schedule installation
             bool FLAG_SCHEDULED_VISIT = false;
-            std::size_t i_offset = 0;
+            std::size_t i_offset = 1;
             std::size_t i;
             std::weak_ptr<PVProject> w_project = project;
             while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_installations.size())
@@ -1068,8 +1089,8 @@ SEI::act_tick()
                             project->ac_sei_time = a_time;
                         }
                     };
-                    ++i_offset;
                 };
+                ++i_offset;
             };
         };
         

@@ -140,7 +140,7 @@ namespace solar_core
          */
         
         
-        void get_payment(std::shared_ptr<MesPayment> mes_);
+        bool get_payment(std::shared_ptr<MesPayment> mes_, std::shared_ptr<PVProject> project_);
         
         
         //@}

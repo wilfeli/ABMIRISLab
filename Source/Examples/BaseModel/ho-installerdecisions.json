@@ -1,1 +1,36 @@
-{"type1": {"scheme": {"EParamTypes::SEIInteractionType": [0.2, 0.2, 0.2], "EParamTypes::HOSEIDecisionTotalProjectTime": [0.5], "EParamTypes::HOSEIDecisionEstimatedNetSavings": [0.7], "EParamTypes::SEIWarranty": [0.2, 0.2, 0.2], "EParamTypes::HOSEIDecisionUtilityNone": [1.0], "EParamTypes::SEIEquipmentType": [0.1, 0.1, 0.1], "EParamTypes::SEIRating": [0.3, 0.3, 0.3]}, "frequency": 1.0}}
+{
+    "type1": {
+        "scheme": {
+            "EParamTypes::SEIInteractionType": [
+                                                -0.0257858,
+                                                -0.0189546,
+                                                0.0447404
+                                                ],
+            "EParamTypes::HOSEIDecisionTotalProjectTime": [
+                                                           -0.0859221
+                                                           ],
+            "EParamTypes::HOSEIDecisionEstimatedNetSavings": [
+                                                              0.0909747
+                                                              ],
+            "EParamTypes::SEIWarranty": [
+                                         0.0923132,
+                                         0.0923132,
+                                         0.0923132
+                                         ],
+            "EParamTypes::HOSEIDecisionUtilityNone": [
+                                                      -0.9765452
+                                                      ],
+            "EParamTypes::SEIEquipmentType": [
+                                              -0.261923,
+                                              0.0331093,
+                                              0.2288137
+                                              ],
+            "EParamTypes::SEIRating": [
+                                       -1.2898035,
+                                       0.4060867,
+                                       0.8837168
+                                       ]
+        },
+        "frequency": 1
+    }
+}

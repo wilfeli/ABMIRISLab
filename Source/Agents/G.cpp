@@ -174,7 +174,7 @@ G::act_tick()
             if ((a_time - project->ac_g_time) >= project_scheduling_time)
             {
                 bool FLAG_SCHEDULED_VISIT = false;
-                std::size_t i_offset = 0;
+                std::size_t i_offset = 1;
                 std::size_t i;
                 std::weak_ptr<PVProject> w_project = project;
                 while (!FLAG_SCHEDULED_VISIT && i_offset < schedule_visits.size())
@@ -197,11 +197,12 @@ G::act_tick()
                                 project->ac_g_time = a_time;
                             }
                         };
-                        i_offset++;
                     };
+                    i_offset++;
                 };
             };
         };
+        
         if (project->state_project == EParamTypes::CollectedInfPermitVisit)
         {
             //if permit was requested - check that processing time after request has elapsed

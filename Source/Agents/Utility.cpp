@@ -38,6 +38,16 @@ Utility::Utility(const PropertyTree& pt_, W* w_)
         THETA_dec.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
     }
     
+
+    
+    
+    //form set with "closed" states
+    project_states_to_delete.insert(EParamTypes::GrantedPermitForInterconnection);
+    project_states_to_delete.insert(EParamTypes::ClosedProject);
+
+    
+    
+    
 }
 
 void
@@ -63,6 +73,24 @@ Utility::ac_update_tick()
 {
     
     a_time = w->time;
+    
+    
+    pending_pvprojects_lock.lock();
+    //pove pending projects into active projects
+    pending_pvprojects.insert(pending_pvprojects.end(), pending_pvprojects_to_add.begin(), pending_pvprojects_to_add.end());
+    pending_pvprojects_to_add.clear();
+    
+    //remove all projects that are granted permit
+    
+    
+    pending_pvprojects.erase(std::remove_if(pending_pvprojects.begin(), pending_pvprojects.end(),
+                                            [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pending_pvprojects.end());
+    
+    
+    pending_pvprojects_lock.unlock();
+    
+    
+    
 }
 
 

@@ -35,7 +35,7 @@
                "EParamTypes::SEIProcessingTimeRequiredForDesign": 1
                },
                {
-               "EParamTypes::SEIMaxNInstallationsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(1,4)"
+               "EParamTypes::SEIMaxNInstallationsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(10,10)"
                },
                {
                "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10

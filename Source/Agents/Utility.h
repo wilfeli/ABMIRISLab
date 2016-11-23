@@ -43,6 +43,7 @@ namespace solar_core
         std::mutex pending_pvprojects_lock;
       
         std::vector<double> THETA_dec; /*!< parameters for decisions, here THETA[0] - parameter for exponential distribution */
+        std::set<EParamTypes> project_states_to_delete;
         
         
     };

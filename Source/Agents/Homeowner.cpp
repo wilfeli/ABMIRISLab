@@ -238,7 +238,7 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
     //here installers are evaluated
     //preliminary quote will have general savings estimation
     //collect all parameters for decisions
-    utility += THETA[EParamTypes::SEIRating][0] * project->sei->params[EParamTypes::SEIRating];
+    utility += THETA[EParamTypes::SEIRating][project->sei->params[EParamTypes::SEIRating] - 3];
     
     //discrete variables have position in the vector of coefficients as their value. Fragile.
     utility += THETA[EParamTypes::SEIInteractionType][project->sei->params[EParamTypes::SEIInteractionType]];
@@ -250,11 +250,18 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
     //estimated project total time
     //LeadIn time if fixed for each installer and is an estimation
     //Permitting time depends on the location, but is an estimate
-    utility += THETA[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime];
+    int NUMBER_TICKS_IN_MONTH = 4;
+    utility += THETA[EParamTypes::HOSEIDecisionTotalProjectTime][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH;
     
     //warranty
     //MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
-    utility += THETA[EParamTypes::SEIWarranty][project->preliminary_quote->params[EParamTypes::SEIWarranty]];
+    //MARK: ERRORS IN LOGIC
+//    std::map<double, int64_t> warranty_map{{5.0, 0.0}, {15.0, 1.0}, {25.0, 2.0}};
+//    utility += THETA[EParamTypes::SEIWarranty][warranty_map[project->preliminary_quote->params[EParamTypes::SEIWarranty]]];
+    
+    
+    //continious case
+    utility += THETA[EParamTypes::SEIWarranty][0] * project->preliminary_quote->params[EParamTypes::SEIWarranty];
     
     
     //savings are estimated for an average homeowner
@@ -629,14 +636,22 @@ Homeowner::act_tick()
     
     for (auto& project:accepted_design)
     {
-        //@DevStage2 need to double check to see if sending payments before system is installed
-        if (auto payment = project->financing->schedule_payments[a_time - project->ac_accepted_time] > 0)
+        //search
+        for (long i = 0; i < std::min((long)project->financing->schedule_payments.size(), (long)(a_time - project->ac_accepted_time + 1)); ++i)
         {
-            //make payment
-            //assume that have enough money
-            auto mes = std::make_shared<MesPayment>(payment);
-            project->sei->get_payment(mes);
+            if (auto payment = project->financing->schedule_payments[i] > 0)
+            {
+                //make payment
+                //assume that have enough money
+                auto mes = std::make_shared<MesPayment>(payment);
+                if (project->sei->get_payment(mes, project))
+                {
+                    project->financing->schedule_payments[i] = 0.0;
+                };
+            };
         };
+    
+        
     };
     
     //@DevStage2 if there is an accepted project - check if needs to make payments

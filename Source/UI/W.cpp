@@ -299,12 +299,10 @@ W::init()
     
     //update permitting difficulty
     //average permit difficulty is connected to processing time required by g
-    //
-    int LaborUnitsPerTick = 40;
     WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty] = ((g->params[EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation]
     + g->params[EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit]
     + g->params[EParamTypes::GProcessingTimeRequiredForProcessingPermit]) +
-     utility->params[EParamTypes::UtilityProcessingTimeRequiredForPermit] ) * LaborUnitsPerTick;
+     utility->params[EParamTypes::UtilityProcessingTimeRequiredForPermit] ) * constants::LABOR_UNITS_PER_TICK;
 
     
     

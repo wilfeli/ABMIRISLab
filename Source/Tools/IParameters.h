@@ -40,6 +40,7 @@ namespace solar_core
         const double NUMBER_DAYS_IN_YEAR = 365.25;
         const double NUMBER_DAYS_IN_TICK = 365.25;
         const double NUMBER_TICKS_IN_YEAR = 52.0;
+        const int LABOR_UNITS_PER_TICK = 40;
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const double NUMBER_SQM_IN_SQF = 0.09290304;
@@ -1119,6 +1120,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::utilityprocessingtimerequiredforpermit")
             {
                 return EParamTypes::UtilityProcessingTimeRequiredForPermit;
+            }
+            else if (param_type == "eparamtypes::gprocessingtimerequiredforgrantingpermitforinstallation")
+            {
+                return EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation;
             }
             else if (param_type == "eparamtypes::whmaxntodrawpertimeunit")
             {
