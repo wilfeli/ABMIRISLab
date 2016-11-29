@@ -245,6 +245,35 @@ namespace solar_core {
         std::vector<Homeowner*> active_hos; /*!< active portion of all Hs to be ticked over */
         
         
+        
+        
+        
+        //@{
+        /**
+         
+         Managing concurrency
+         
+         */
+        
+        
+        int64_t TICKS_BEFORE_CLEAR = 100;
+        int64_t i_TICKS_BEFORE_CLEAR;
+        
+        //@}
+        
+        //@{
+        /**
+         
+         Data collection
+         
+         */
+        
+        
+        std::vector<std::map<EParamTypes, double>> history_decisions; 
+        
+        //@}
+        
+        
     };
     
     

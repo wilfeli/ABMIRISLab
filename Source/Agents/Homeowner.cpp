@@ -333,6 +333,10 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     {
         decision->state_project = EParamTypes::AcceptedPreliminaryQuote;
         decision->sei->accepted_preliminary_quote(decision);
+    }
+    else
+    {
+        w->get_state_inf(this, EParamTypes::HOMarketingStateDroppedOutSEIStage);
     };
     
     

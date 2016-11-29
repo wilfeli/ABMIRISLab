@@ -34,7 +34,7 @@ namespace solar_core
     {
     public:
         virtual ~MarketingInst() = default;
-        MarketingInst(W* w_);
+        MarketingInst(const PropertyTree& pt_, W* w_);
         void init(W* w_);
         virtual void act_tick() override; /*!< */
         
@@ -52,14 +52,17 @@ namespace solar_core
         
         
     protected:
+        double distance(double x1, double y1, double x2, double y2);
+        
         std::vector<IAgent*> interested_agents; /*!< Vector of agents that are interested in receiving marketing information  */
         
-        std::map<std::string, double> params; /*!<   */
+        std::map<EParamTypes, double> params; /*!<   */
         
         std::vector<std::shared_ptr<MesMarketingSEI>> marketing_mess; /*!< marketing messages from SEI */
         
-        
         W* w;
+        
+        std::mutex lock;
     };
     
     

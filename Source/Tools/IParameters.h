@@ -232,6 +232,12 @@ namespace solar_core
         
         /** If Homeowner is already installed */
         HOMarketingStateCommitedToInstallation,
+        
+        
+        /** If Homeowner decided to drop out at SEI conjoint stage  */
+        HOMarketingStateDroppedOutSEIStage,
+        
+        
 
         
         /** State of a quoting stage for HO: actively requesting information */
@@ -257,6 +263,12 @@ namespace solar_core
         
         /** Thetas for decisions: decision on preliminary quotes */
         HODecPreliminaryQuote,
+        
+        
+        /** Number of active agents per tick, used in data collection */
+        HONumberActiveAgents,
+        
+        
         
         
         /** State of a Project: preliminary quotes has been requested via online */
@@ -565,13 +577,21 @@ namespace solar_core
         UtilityCurrentCapacity,
         
         
+        /** Marketing part: number of HO to draw per unit of time to push marketing information */
+        MarketingMaxNToDrawPerTimeUnit,
+        
+        
+        /** Market, maximum distance to accept sei offer */
+        MarketingSEIMaxDistance,
+        
+        
+        
+        
         /** State of Payments: all payments on time */
         PaymentsOnTime,
         
         
-        
-        /** Marketing part: number of HO to draw per unit of time to push marketing information */
-        MarketingMaxNToDrawPerTimeUnit,
+
         
         
         /** Technology block: inverters technology type standard */
@@ -1028,6 +1048,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::gfederaltaxincentive")
             {
                 return EParamTypes::GFederalTaxIncentive;
+            }
+            else if (param_type == "eparamtypes::marketingseimaxdistance")
+            {
+                return EParamTypes::MarketingSEIMaxDistance;
             }
             else if (param_type == "eparamtypes::dctoacloss")
             {

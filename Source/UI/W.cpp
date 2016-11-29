@@ -147,7 +147,12 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
         
         
         //create marketing
-        marketing = new MarketingInst(this);
+        //market.json
+        path_to_template = path_to_dir;
+        path_to_template /= "market.json";
+        path = path_to_template.string();
+        read_json(path, pt);
+        marketing = new MarketingInst(pt, this);
         
         
         
@@ -370,6 +375,27 @@ void W::ac_update_tick()
     //MARK: cont. add update of labor price
     
     
+    
+    
+    
+    
+    int64_t N_ACTIVE_AGENTS = 0;
+    
+    //collect statistics
+    for (auto agent:active_hos)
+    {
+        if (agent)
+        {
+            ++N_ACTIVE_AGENTS;
+        };
+    };
+    
+    history_decisions.push_back({{EParamTypes::HOMarketingStateDroppedOutSEIStage, 0.0}});
+    
+    
+    history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
+    
+    
 }
 
 
@@ -420,7 +446,17 @@ W::life_hos()
         };
         
         
-        //@DevStage3 add cleaning of active_hos from time to time based on timer
+        //cleaning of active_hos from time to time based on timer
+        ++i_TICKS_BEFORE_CLEAR;
+        if (i_TICKS_BEFORE_CLEAR >= TICKS_BEFORE_CLEAR)
+        {
+            //clear vector
+            active_hos.erase(std::remove_if(active_hos.begin(), active_hos.end(),
+                                     [&](Homeowner* x) -> bool { return !(x); }), active_hos.end());
+            
+            i_TICKS_BEFORE_CLEAR = 0;
+        };
+        
         
         
         while (!FLAG_H_TICK && !FLAG_IS_STOPPED)
@@ -621,6 +657,15 @@ W::get_state_inf(Homeowner* agent_, EParamTypes state_)
             break;
         case EParamTypes::HOMarketingStateCommitedToInstallation:
             break;
+            
+#ifdef DEBUG
+        case EParamTypes::HOMarketingStateDroppedOutSEIStage:
+            //count number of dropped out agents at every tick
+            history_decisions.back()[EParamTypes::HOMarketingStateDroppedOutSEIStage] += 1;
+            
+            
+            break;
+#endif
         default:
             break;
             
@@ -664,4 +709,4 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 
 
 
-
+EParamTypes::HOMarketingStateDroppedOutSEIStage

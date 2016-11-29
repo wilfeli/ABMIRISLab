@@ -9,14 +9,29 @@
 #include "UI/W.h"
 #include "Institutions/MarketingSystem.h"
 #include "Institutions/IMessage.h"
+#include "Tools/Serialize.h"
 #include "Tools/WorldSettings.h"
 #include "Agents/Homeowner.h"
+#include "Agents/SEI.h"
 
 
 using namespace solar_core;
 
-MarketingInst::MarketingInst(W* w_)
+MarketingInst::MarketingInst(const PropertyTree& pt_, W* w_)
 {
+    
+    //read parameters
+    std::map<std::string, std::string> params_str;
+    serialize::deserialize(pt_.get_child("params"), params_str);
+    
+    ///@DevStage2 move to W to speed up, but test before that
+    for (auto& iter:params_str)
+    {
+        params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand_market);
+    };
+    
+    
+    
     w = w_;
 }
 
@@ -32,16 +47,16 @@ MarketingInst::init(W* w_)
  not used for now
  
  */
-void
-MarketingInst::request_inf_marketing_sei(IAgent* agent_)
+void MarketingInst::request_inf_marketing_sei(IAgent* agent_)
 {
+    lock.lock();
     //addes for further asynchronous call
     interested_agents.push_back(agent_);
+    lock.unlock();
 }
 
 
-void
-MarketingInst::get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_)
+void MarketingInst::get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_)
 {
     marketing_mess.push_back(mes_);
 }
@@ -49,8 +64,7 @@ MarketingInst::get_marketing_inf_sei(std::shared_ptr<MesMarketingSEI> mes_)
 
 
 
-void
-MarketingInst::act_tick()
+void MarketingInst::act_tick()
 {
 
     
@@ -64,6 +78,12 @@ MarketingInst::act_tick()
         };
         
     };
+    
+    lock.lock();
+    interested_agents.clear();
+    lock.unlock();
+    
+    
     
     
     
@@ -90,7 +110,13 @@ MarketingInst::act_tick()
         //push all marketing messages
         for (auto& mes:marketing_mess)
         {
-            (*w->hos)[j]->get_inf(mes);
+            
+            //check that it is in the vicinity
+            if (distance((*w->hos)[j]->location_x, (*w->hos)[j]->location_y, mes->agent->location_x, mes->agent->location_y) <= params[EParamTypes::MarketingSEIMaxDistance])
+            {
+                (*w->hos)[j]->get_inf(mes);
+            };
+            
         };
 
     };
@@ -99,4 +125,17 @@ MarketingInst::act_tick()
     
     
 }
+
+
+
+
+
+double MarketingInst::distance(double x1, double y1, double x2, double y2)
+{
+    
+    return std::pow(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2), 0.5);
+
+}
+
+
 

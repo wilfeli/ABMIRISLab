@@ -444,7 +444,7 @@ namespace solar_core {
             
             for (auto& sei:(*seis))
             {
-                std::cout << sei->THETA_profit[0] << std::endl;
+                std::cout << "Profit margin: " << sei->THETA_profit[0] << std::endl;
             };
             
 
@@ -744,8 +744,6 @@ namespace solar_core {
 
             //@DevStage3 if decide to have random utility  - when generating H assign utility from the description of a probability distribution
             
-            
-            std::cout << i_5 << " " << i_4 << " " << i_3 << std::endl;
             
             
             return hos;
