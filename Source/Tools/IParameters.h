@@ -1187,6 +1187,106 @@ namespace solar_core
             {
                 return "EParamTypes::HODecPreliminaryQuote";
             }
+            else if (param_ == EParamTypes::RequestedOnlineQuote)
+            {
+                return "EParamTypes::RequestedOnlineQuote";
+            }
+            else if (param_ == EParamTypes::RequestedPreliminaryQuote)
+            {
+                return "EParamTypes::RequestedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::ProvidedOnlineQuote)
+            {
+                return "EParamTypes::ProvidedOnlineQuote";
+            }
+            else if (param_ == EParamTypes::ProvidedPreliminaryQuote)
+            {
+                return "EParamTypes::ProvidedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::ScheduledFirstSiteVisit)
+            {
+                return "EParamTypes::ScheduledFirstSiteVisit";
+            }
+            else if (param_ == EParamTypes::CollectedInfFirstSiteVisit)
+            {
+                return "EParamTypes::CollectedInfFirstSiteVisit";
+            }
+            else if (param_ == EParamTypes::RequiredHOReroof)
+            {
+                return "EParamTypes::RequiredHOReroof";
+            }
+            else if (param_ == EParamTypes::WaitingHOReroof)
+            {
+                return "EParamTypes::WaitingHOReroof";
+            }
+            else if (param_ == EParamTypes::AcceptedPreliminaryQuote)
+            {
+                return "EParamTypes::AcceptedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::DraftedDesign)
+            {
+                return "EParamTypes::DraftedDesign";
+            }
+            else if (param_ == EParamTypes::AcceptedDesign)
+            {
+                return "EParamTypes::AcceptedDesign";
+            }
+            else if (param_ == EParamTypes::RequestedPermit)
+            {
+                return "EParamTypes::RequestedPermit";
+            }
+            else if (param_ == EParamTypes::ScheduledPermitVisit)
+            {
+                return "EParamTypes::ScheduledPermitVisit";
+            }
+            else if (param_ == EParamTypes::CollectedInfPermitVisit)
+            {
+                return "EParamTypes::CollectedInfPermitVisit";
+            }
+            else if (param_ == EParamTypes::ScheduledInstallation)
+            {
+                return "EParamTypes::ScheduledInstallation";
+            }
+            else if (param_ == EParamTypes::ScheduleInstallation)
+            {
+                return "EParamTypes::ScheduleInstallation";
+            }
+            else if (param_ == EParamTypes::PendingMaterials)
+            {
+                return "EParamTypes::PendingMaterials";
+            }
+            else if (param_ == EParamTypes::Installed)
+            {
+                return "EParamTypes::Installed";
+            }
+            else if (param_ == EParamTypes::RequestedPermitForInstallation)
+            {
+                return "EParamTypes::RequestedPermitForInstallation";
+            }
+            else if (param_ == EParamTypes::GrantedPermitForInstallation)
+            {
+                return "EParamTypes::GrantedPermitForInstallation";
+            }
+            else if (param_ == EParamTypes::RequestedInspectionAfterInstallation)
+            {
+                return "EParamTypes::RequestedInspectionAfterInstallation";
+            }
+            else if (param_ == EParamTypes::PassedInspectionAfterInstallation)
+            {
+                return "EParamTypes::PassedInspectionAfterInstallation";
+            }
+            else if (param_ == EParamTypes::RequestedPermitForInterconnection)
+            {
+                return "EParamTypes::RequestedPermitForInterconnection";
+            }
+            else if (param_ == EParamTypes::GrantedPermitForInterconnection)
+            {
+                return "EParamTypes::GrantedPermitForInterconnection";
+            }
+            else if (param_ == EParamTypes::ClosedProject)
+            {
+                return "EParamTypes::ClosedProject";
+            }
             else if (param_ == EParamTypes::SEISmall)
             {
                 return "EParamTypes::SEISmall";

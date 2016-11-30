@@ -19,6 +19,7 @@ using namespace solar_core;
 
 MarketingInst::MarketingInst(const PropertyTree& pt_, W* w_)
 {
+    w = w_;
     
     //read parameters
     std::map<std::string, std::string> params_str;
@@ -29,10 +30,6 @@ MarketingInst::MarketingInst(const PropertyTree& pt_, W* w_)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand_market);
     };
-    
-    
-    
-    w = w_;
 }
 
 
@@ -113,6 +110,10 @@ void MarketingInst::act_tick()
             
             //check that it is in the vicinity
             if (distance((*w->hos)[j]->location_x, (*w->hos)[j]->location_y, mes->agent->location_x, mes->agent->location_y) <= params[EParamTypes::MarketingSEIMaxDistance])
+            {
+                (*w->hos)[j]->get_inf(mes);
+            }
+            else if (mes->agent->sei_type == EParamTypes::SEILarge)
             {
                 (*w->hos)[j]->get_inf(mes);
             };

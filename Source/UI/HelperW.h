@@ -332,10 +332,25 @@ namespace solar_core {
             auto pdf_i_inverter = boost::uniform_int<uint64_t>(min_, max_);
             auto rng_i_inverter = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i_inverter);
             int64_t j_sem_inverter = w->params_d[EParamTypes::N_SEMPVProducer];
+            int64_t i_N_SEILarge = 0;
             
             for (auto i = 0; i < w->params_d[EParamTypes::N_SEI]; ++i)
             {
                 //put sei_type
+                //assume that it is large, assign type if needed
+                if ( i_N_SEILarge < w->params_d[EParamTypes::N_SEILarge])
+                {
+                    //mark as SEILarge if appropriate and need them
+                    if (std::stod((*parsed_file)[i][column_names["Size"]]) > 1000.0)
+                    {
+                        pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::SEILarge));
+                        ++i_N_SEILarge;
+                    };
+                    
+                };
+                
+                
+                
                 pt.put("sei_type", EnumFactory::FromEParamTypes(EParamTypes::None));
                 
                 //generate location

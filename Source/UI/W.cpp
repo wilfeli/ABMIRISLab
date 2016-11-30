@@ -374,10 +374,14 @@ void W::ac_update_tick()
     
     //MARK: cont. add update of labor price
     
+#ifdef DEBUG
+    if (history_decisions.size() > 0)
+    {
+        std::cout << "Dropout rate at tick "<< time << " " << history_decisions.back()[EParamTypes::HOMarketingStateDroppedOutSEIStage] << std::endl;
+    };
+#endif
     
-    
-    
-    
+    history_projects.push_back(std::map<EParamTypes, double>{});
     
     int64_t N_ACTIVE_AGENTS = 0;
     
@@ -387,6 +391,21 @@ void W::ac_update_tick()
         if (agent)
         {
             ++N_ACTIVE_AGENTS;
+            
+            
+            //count number of projects and their state
+            for (auto project:agent->pvprojects)
+            {
+                
+                if (history_projects.back().find(project->state_project) == history_projects.back().end())
+                {
+                    history_projects.back()[project->state_project] = 0.0;
+                };
+                
+                history_projects.back()[project->state_project] += 1;
+                
+            };
+            
         };
     };
     
@@ -394,6 +413,18 @@ void W::ac_update_tick()
     
     
     history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
+    
+    
+#ifdef DEBUG
+    std::cout << "N active agents at tick "<< time << " " << N_ACTIVE_AGENTS << std::endl;
+#endif
+    
+    
+    
+    for (auto iter:history_projects.back())
+    {
+        std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+    };
     
     
 }
@@ -709,4 +740,4 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 
 
 
-EParamTypes::HOMarketingStateDroppedOutSEIStage
+

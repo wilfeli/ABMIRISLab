@@ -1,10 +1,10 @@
 {
     "params": [
                {
-               "N_ITERATIONS": 30
+               "N_ITERATIONS": 50
                }
                ],
-    "N_SEILarge": 0,
+    "N_SEILarge": 1,
     "N_HO": 1000,
     "N_SEI": 3,
     "WorldSettings": {

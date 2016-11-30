@@ -37,6 +37,7 @@ namespace solar_core
     class MesDesign;
     class MesPayment;
     class W;
+    class MarketingInst;
     class Homeowner;
     
     
@@ -58,6 +59,7 @@ namespace solar_core
     class SEI: public IAgent
     {
         friend class W;
+        friend class MarketingInst;
         template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
