@@ -305,8 +305,12 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
     mes->params[EParamTypes::PreliminaryQuoteTotalProjectTime] = total_project_time;
     
-    //MARK: cont. change to savings percent. Add calculation of savings
+
     mes->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] = design.total_net_savings;
+    
+    //add total price 
+    mes->params[EParamTypes::]
+    
     
     
     mes->params[EParamTypes::SEIWarranty] = params[EParamTypes::SEIWarranty];
@@ -404,7 +408,9 @@ void
 SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, double profit_margin, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
 {
     
-    double demand_adjusted = demand / (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    double demand_adjusted = demand; // / (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
+    
+    static int64_t N_HUGE_SYSTEMS = 0;
     
     design.solar_irradiation = solar_irradiation;
     
@@ -412,6 +418,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     
     
     double N_PANELS = std::ceil(demand_adjusted * project_percentage / ((solar_irradiation) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    
     
     //size of one panel
     double module_area = iter.second->length * iter.second->width / 1000000;
@@ -422,8 +429,25 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     double roof_area = constants::NUMBER_SQM_IN_SQF * project_->agent->house->roof_size;
     double available_area = std::min(roof_area, system_area);
     
+    
+    
+    if (roof_area < 500)
+    {
+        std::cout << system_area/roof_area << std::endl;
+    };
+    
+    if (system_area > (roof_area/2.0))
+    {
+        std::cout << "not enought space on roof " << "N huge systems " << N_HUGE_SYSTEMS <<  std::endl;
+        
+        ++N_HUGE_SYSTEMS;
+        
+    };
+    
+    
+    
     //update to the actual available area
-    N_PANELS = std::ceil(available_area/module_area);
+    N_PANELS = std::floor(available_area/module_area);
     design.N_PANELS = N_PANELS;
     
     design.PV_module = iter.second;
@@ -433,14 +457,18 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     design.DC_size = design.N_PANELS * iter.second->efficiency * iter.second->length * iter.second->width / 1000;
     
     
+    //restrict to 10kW
+    design.DC_size = std::min(10000.0, design.DC_size);
+    
+    
+    design.N_PANELS = design.DC_size / (iter.second->efficiency * iter.second->length * iter.second->width) * 1000;
+    
+    
     //MARK: cont. check if need to target 100% of demand with DC or already with adjusted AC size?
     design.AC_size = design.DC_size * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
     
     
     design.co2_equivalent = 0.0;
-    
-    
-    
     
     
     //failure rate for main part of the system
@@ -595,6 +623,14 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
     
     //MARK: cont. check numbers
     design.co2_equivalent = total_production/warranty_length*WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
+    
+#ifdef DEBUG
+    if (design.total_net_savings < 0.1)
+    {
+        std::cout << "low net savings" << std::endl;
+    };
+#endif
+    
 }
 
 

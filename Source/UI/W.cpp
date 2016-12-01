@@ -15,6 +15,7 @@
 #include "Tools/Serialize.h"
 
 #include "UI/W.h"
+#include "Institutions/IMessage.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/ParsingTools.h"
 #include "Tools/Simulation.h"
@@ -385,6 +386,8 @@ void W::ac_update_tick()
     
     int64_t N_ACTIVE_AGENTS = 0;
     
+    history_decisions.push_back({{EParamTypes::HOMarketingStateDroppedOutSEIStage, 0.0}});
+    
     //collect statistics
     for (auto agent:active_hos)
     {
@@ -392,6 +395,12 @@ void W::ac_update_tick()
         {
             ++N_ACTIVE_AGENTS;
             
+            if (history_decisions.back().find(agent->marketing_state) == history_decisions.back().end())
+            {
+                history_decisions.back()[agent->marketing_state] = 0.0;
+            };
+            
+            history_decisions.back()[agent->marketing_state] += 1.0;
             
             //count number of projects and their state
             for (auto project:agent->pvprojects)
@@ -402,14 +411,14 @@ void W::ac_update_tick()
                     history_projects.back()[project->state_project] = 0.0;
                 };
                 
-                history_projects.back()[project->state_project] += 1;
+                history_projects.back()[project->state_project] += 1.0;
                 
             };
             
         };
     };
     
-    history_decisions.push_back({{EParamTypes::HOMarketingStateDroppedOutSEIStage, 0.0}});
+    
     
     
     history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
@@ -417,7 +426,7 @@ void W::ac_update_tick()
     
 #ifdef DEBUG
     std::cout << "N active agents at tick "<< time << " " << N_ACTIVE_AGENTS << std::endl;
-#endif
+
     
     
     
@@ -425,6 +434,18 @@ void W::ac_update_tick()
     {
         std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
     };
+    
+    
+    for (auto& iter:history_decisions.back())
+    {
+        std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+    };
+    
+
+    
+    std::cout << "Number of installed projects: " << interconnected_projects.size() << std::endl;
+    
+#endif
     
     
 }
@@ -456,7 +477,7 @@ W::life_hos()
             
             for (auto i = 0; i < active_hos.size(); ++i)
             {
-                auto agent = active_hos[i];
+                auto& agent = active_hos[i];
                 if (agent)
                 {
                     if (agent->marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)
@@ -722,6 +743,7 @@ void
 W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
     interconnected_projects.push_back(project_);
+    
     auto mes = project_->sei->mes_marketing;
     auto h = project_->agent;
     

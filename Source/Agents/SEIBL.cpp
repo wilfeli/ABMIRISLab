@@ -152,8 +152,21 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     
     
     //update to the actual available area
-    N_PANELS = std::ceil(available_area/module_area);
+    N_PANELS = std::floor(available_area/module_area);
     DC_size = N_PANELS * dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width / 1000;
+    
+    
+
+    if (DC_size > 10.0)
+    {
+        //restrict to 10kW
+        DC_size = std::min(10.0, DC_size);
+        
+        
+        N_PANELS = DC_size / (dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width) * 1000;
+    };
+
+    
     
     
     //price per watt is predetermined by the optimality choice
@@ -590,6 +603,18 @@ PVProjectFlat* SEIBL::init_average_pvproject(TDesign* dec_design_hat, PVProjectF
     int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     
     double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
+    
+    
+    if (DC_size > 10000.0)
+    {
+        //restrict to 10kW
+        DC_size = std::min(10000.0, DC_size);
+        
+        
+        N_PANELS = DC_size / (dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width) * 1000;
+    };
+    
+    
     
     //create average project for this design
     project->PV_module = dec_design_hat->PV_module;

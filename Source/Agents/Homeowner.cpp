@@ -28,9 +28,6 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
 {
     w = w_;
     
-    
-//    marketing_state = EnumFactory::ToEParamTypes(pt_.get<std::string>("marketing_state"));
-    
     //location
     location_x = pt_.get<long>("location_x");
     location_y = pt_.get<long>("location_y");
@@ -65,6 +62,7 @@ Homeowner::init(W* w_)
         //add itself to the list of agents that request initial information
         w->get_inf_marketing_sei_agents.push_back(this);
     };
+    
     
 }
 
@@ -205,6 +203,9 @@ Homeowner::dec_evaluate_online_quotes()
         {
             pool[i] = true;
         };
+        
+        
+        
     };
     
     
@@ -283,8 +284,53 @@ Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 
 
 
+void Homeowner::dec_evaluate_online_quotes_nc()
+{
+    //here additional NCDec after get generic prices
+    
+    
+    auto pool = std::vector<bool>(pvprojects.size(), false);
+    
+    for (auto i = 0; i < pvprojects.size(); ++i)
+    {
+        //check if is in the pool
+        //check on Customer rating
+        if (pvprojects[i]->preliminary_quote->params[EParamTypes::] >= THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0])
+        {
+            pool[i] = true;
+        };
+        
+        
+        
+    };
+    
+    
+    
+    for (auto i = 0; i < pool.size(); ++i)
+    {
+        //pool is now narrowed down to the subset of all open projects
+        if (!pool[i])
+        {
+            pvprojects[i]->state_project = EParamTypes::ClosedProject;
+        };
+        
+    };
+
+    
+    
+}
+
+
+
 void Homeowner::dec_evaluate_preliminary_quotes()
 {
+    
+    //have NC Decisions continued here
+    
+    
+    
+    
+    
     double utility_none = THETA_SEIDecisions[EParamTypes::HOSEIDecisionUtilityNone][0];
     double error = 0.0;
     
@@ -324,6 +370,10 @@ void Homeowner::dec_evaluate_preliminary_quotes()
             {
                 decision = project;
                 break;
+            }
+            else
+            {
+                std::cout << "bad design" << std::endl;
             };
         }
     };

@@ -256,7 +256,7 @@ namespace solar_core {
          */
         
         
-        int64_t TICKS_BEFORE_CLEAR = 100;
+        int64_t TICKS_BEFORE_CLEAR = 30;
         int64_t i_TICKS_BEFORE_CLEAR;
         
         //@}

@@ -1175,9 +1175,21 @@ namespace solar_core
             {
                 return "EParamTypes::HOMarketingStateHighlyInterested";
             }
+            else if (param_ == EParamTypes::HONumberActiveAgents)
+            {
+                return "EParamTypes::HONumberActiveAgents";
+            }
             else if (param_ == EParamTypes::HOMarketingStateInterested)
             {
                 return "EParamTypes::HOMarketingStateInterested";
+            }
+            else if (param_ == EParamTypes::HOMarketingStateDroppedOutSEIStage)
+            {
+                return "EParamTypes::HOMarketingStateDroppedOutSEIStage";
+            }
+            else if (param_ == EParamTypes::HOMarketingStateCommitedToInstallation)
+            {
+                return "EParamTypes::HOMarketingStateCommitedToInstallation";
             }
             else if (param_ == EParamTypes::HOMarketingStateNotInterested)
             {
