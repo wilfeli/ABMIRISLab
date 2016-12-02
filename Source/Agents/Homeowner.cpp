@@ -295,7 +295,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
     {
         //check if is in the pool
         //check on Customer rating
-        if (pvprojects[i]->preliminary_quote->params[EParamTypes::] >= THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0])
+        if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] >= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
         {
             pool[i] = true;
         };
@@ -407,6 +407,8 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     //exit evaluation stage
     n_preliminary_quotes = 0;
     
+    quote_state = EParamTypes::HOWaitingOnDesigns;
+    
     
 }
 
@@ -470,7 +472,7 @@ void Homeowner::dec_evaluate_designs()
         if (project->state_project == EParamTypes::DraftedDesign)
         {
             error = w->rand_ho->ru();
-            project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = estimate_sei_utility(project) + error;
+            project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = estimate_design_utility(project) + error;
         };
     };
     
@@ -535,6 +537,9 @@ void Homeowner::dec_evaluate_designs()
     };
     
     
+    //exit design stage
+    n_pending_designs = 0;
+    quote_state = EParamTypes::HOEvaluatedDesigns;
     
 }
 
@@ -664,7 +669,7 @@ Homeowner::act_tick()
         //initiates and continues collection of quoting information
         ac_inf_quoting_sei();
     }
-    else if (quote_state != EParamTypes::HOWaitingOnPreliminaryQuotes)
+    else if ((quote_state != EParamTypes::HOWaitingOnPreliminaryQuotes) && (quote_state != EParamTypes::HOEvaluatedDesigns))
     {
         //moves to the evaluation stage
         dec_evaluate_online_quotes();
@@ -682,10 +687,12 @@ Homeowner::act_tick()
     
     
     //evaluates designs
-    if (n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])
+    if ((n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])  && (quote_state != EParamTypes::HOEvaluatedDesigns))
     {
         dec_evaluate_designs();
     };
+    
+    
     
     
     for (auto& project:accepted_design)

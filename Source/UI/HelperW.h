@@ -71,6 +71,8 @@ namespace solar_core {
             //will draw electricity bill for each, roof size as a constant percent of a house size, income
             auto formula_roof_age = pt.get<std::string>("House.roof_age");
             auto formula_roof_size = pt.get<std::string>("House.roof_size");
+            auto formula_roof_effective_size = pt.get<std::string>("House.roof_effective_size");
+            auto roof_effective_size_coef = 0.0;
             auto roof_size_coef = 0.0;
             auto roof_age_coef = 0.0;
             std::regex e("");
@@ -83,7 +85,7 @@ namespace solar_core {
             {
                 e.assign("FORMULA\\u003A\\u003Ahouse_size\\u003A\\u003A");
                 formula_roof_size = std::regex_replace(formula_roof_size, e, "");
-                roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *(w->rand));
+                roof_size_coef = serialize::solve_str_formula<double>(formula_roof_size, *(w->rand_ho));
             };
             
             auto roof_size = [&coef = roof_size_coef](double house_size)->double {return coef*house_size;};
@@ -96,10 +98,28 @@ namespace solar_core {
             {
                 e.assign("FORMULA\\u003A\\u003Ahouse_age\\u003A\\u003A");
                 formula_roof_age = std::regex_replace(formula_roof_age, e, "");
-                roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *(w->rand));
+                roof_age_coef = serialize::solve_str_formula<double>(formula_roof_age, *(w->rand_ho));
             };
             
             auto roof_age = [&coef = roof_age_coef](double house_age)->double {return coef*house_age;};
+            
+            
+            
+            if (formula_roof_effective_size.find("FORMULA::") == std::string::npos)
+            {
+                throw std::runtime_error("unsupported hh specification rule");
+            }
+            else
+            {
+                e.assign("FORMULA\\u003A\\u003A");
+                formula_roof_effective_size = std::regex_replace(formula_roof_effective_size, e, "");
+                roof_effective_size_coef = serialize::solve_str_formula<double>(formula_roof_effective_size, *(w->rand_ho));
+            };
+            
+            auto roof_effective_size = [&coef = roof_effective_size_coef]()->double {return coef;};
+
+            
+            
             
             
             //in the order of drawing for now
@@ -199,7 +219,7 @@ namespace solar_core {
                 pt.put("House.roof_size", std::max(0.0, roof_size((*xs)[i][0])));
                 pt.put("House.roof_age", std::max(0.0, roof_age((*xs)[i][1])));
                 pt.put("House.house_size", (*xs)[i][0]);
-                
+                pt.put("House.roof_effective_size", roof_effective_size());
                 
                 //read configuration file
                 //replace parameters if necessary
@@ -224,6 +244,7 @@ namespace solar_core {
             delete e_dist;
             delete xs;
             delete param_values;
+            
             return hos;
 
             

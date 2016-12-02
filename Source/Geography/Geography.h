@@ -59,7 +59,7 @@ namespace solar_core
         double roof_age; /*!< age of a house's roof in years (not required to be whole years) */
         double roof_size; /*!< size of a roof, in m^2 */
         double house_size; /*!< size of a house in ? */
-        
+        double roof_effective_size = 0.0; /*!< effective size of a roof - taken into account orientation and general shape, percent of roof_size */
         
         
     };

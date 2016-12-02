@@ -147,7 +147,7 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     //system area size
     double system_area = N_PANELS * module_area;
     //convert sq.feet into sq. meters
-    double roof_area = constants::NUMBER_SQM_IN_SQF * agent_->house->roof_size;
+    double roof_area = constants::NUMBER_SQM_IN_SQF * agent_->house->roof_size * agent_->house->roof_effective_size;
     double available_area = std::min(roof_area, system_area);
     
     
@@ -157,10 +157,10 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     
     
 
-    if (DC_size > 10.0)
+    if (DC_size > 10000.0)
     {
         //restrict to 10kW
-        DC_size = std::min(10.0, DC_size);
+        DC_size = std::min(10000.0, DC_size);
         
         
         N_PANELS = DC_size / (dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width) * 1000;

@@ -285,7 +285,7 @@ protected:
      */
     
     virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further. Uses non-compensatory ruels here */
-    
+    void dec_evaluate_online_quotes_nc(); /** nc decisions continued */
     
     double estimate_sei_utility(std::shared_ptr<PVProject> project); /*!< estimate utility from param */
     
@@ -318,6 +318,10 @@ protected:
     std::deque<std::shared_ptr<PVProject>> accepted_design;
     
     long n_pending_designs;
+    
+    
+
+    
 
     
     //@}

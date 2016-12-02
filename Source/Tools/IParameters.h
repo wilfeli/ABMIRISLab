@@ -166,7 +166,11 @@ namespace solar_core
         
         /** Homeowner non-compensatory decisions: ratings screening rule */
         HONCDecisionSEIRating,
-    
+        
+        
+        /** Homeowner non-compensatory decisions: total price */
+        HONCDecisionTotalPrice,
+        
         
         /** Homeowner installer decision: utility of other options */
         HOSEIDecisionUtilityNone,
@@ -248,9 +252,16 @@ namespace solar_core
         InactiveQuoting,
         
         
+        /** State of a quoting stage for HO: waiting for preliminary quotes */
         HOWaitingOnPreliminaryQuotes,
         
         
+        /** State of a quoting stage for HO: waiting for designs */
+        HOWaitingOnDesigns,
+        
+        
+        /** State of a quoting stage for HO: waiting for permitting */
+        HOEvaluatedDesigns,
         
         
         /** State of a quoting stage for HO: decision on reroofing old roof */
@@ -367,6 +378,9 @@ namespace solar_core
         
         /** Preliminary estimation of savings based on utility bill after site visit, net expression */
         PreliminaryQuoteEstimatedNetSavings,
+        
+        
+
 
         
         /** Estimated total project time for the location - general estimate */

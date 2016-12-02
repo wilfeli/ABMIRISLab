@@ -63,7 +63,7 @@
                         "EParamTypes::ElectricityPriceUCDemand": 0.15
                         },
                         {
-                        "EParamTypes::ElectricityPriceUCSupply": 0.10
+                        "EParamTypes::ElectricityPriceUCSupply": 0.15
                         },
                         {
                         "EParamTypes::InflationRate": 0.02

@@ -742,7 +742,7 @@ W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 void
 W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
-    interconnected_projects.push_back(project_);
+    interconnected_projects.insert(project_);
     
     auto mes = project_->sei->mes_marketing;
     auto h = project_->agent;

@@ -21,7 +21,7 @@
 
 using namespace solar_core;
 
-std::set<EParamTypes> SEI::project_states_to_delete{EParamTypes::ClosedProject};
+std::set<EParamTypes> SEI::project_states_to_delete{EParamTypes::ClosedProject, EParamTypes::GrantedPermitForInterconnection};
 
 SEI::SEI(const PropertyTree& pt_, W* w_)
 {
@@ -287,7 +287,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
 
     
-    ac_estimate_savings(design, project_);
+    ac_estimate_savings(design, demand, project_);
 
 
     mes->params[EParamTypes::PreliminaryQuotePrice] = design.total_costs;
@@ -307,9 +307,6 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
 
     mes->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] = design.total_net_savings;
-    
-    //add total price 
-    mes->params[EParamTypes::]
     
     
     
@@ -380,7 +377,7 @@ SEI::form_design(std::shared_ptr<PVProject> project_, double profit_margin)
                 
                 form_design_for_params(project_, demand, solar_irradiation, permit_difficulty, project_percentage, profit_margin, iter, iter_inv, design);
                 
-                ac_estimate_savings(design, project_);
+                ac_estimate_savings(design, demand, project_);
                 
                 designs.push_back(design);
                 
@@ -426,7 +423,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     //system area size
     double system_area = N_PANELS * module_area;
     //convert sq.feet into sq. meters
-    double roof_area = constants::NUMBER_SQM_IN_SQF * project_->agent->house->roof_size;
+    double roof_area = constants::NUMBER_SQM_IN_SQF * project_->agent->house->roof_size * project_->agent->house->roof_effective_size;
     double available_area = std::min(roof_area, system_area);
     
     
@@ -436,7 +433,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
         std::cout << system_area/roof_area << std::endl;
     };
     
-    if (system_area > (roof_area/2.0))
+    if (system_area > roof_area)
     {
         std::cout << "not enought space on roof " << "N huge systems " << N_HUGE_SYSTEMS <<  std::endl;
         
@@ -567,7 +564,7 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
  
 */
 void
-SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> project_)
+SEI::ac_estimate_savings(PVDesign& design, double demand_, std::shared_ptr<const PVProject> project_)
 {
     //estimate savings for each project
     //get price of kW from the utility, assume increase due to inflation
@@ -585,6 +582,11 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
     //difference in definitions
     auto degradation_t = std::exp(std::log((1 - design.PV_module->degradation))/WorldSettings::instance().params_exog[EParamTypes::DegradationDefinitionLength]);
     auto production_t = 0.0;
+    
+    
+    //annual consumption
+    double consumption_t = demand_ * constants::NUMBER_DAYS_IN_YEAR;
+    
     
     
     //loan annuity - equivalent
@@ -609,8 +611,8 @@ SEI::ac_estimate_savings(PVDesign& design, std::shared_ptr<const PVProject> proj
         production_t = AC_size_t * design.solar_irradiation * constants::NUMBER_DAYS_IN_YEAR;
         total_production += production_t;
         
-        //how much have payed if decided to go without solar
-        potential_energy_costs += production_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
+        //how much have payed if decided to go without solar - need demand here
+        potential_energy_costs += consumption_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
         //how much could make if sell energy and decide not to use it
         realized_energy_income += production_t * CPI * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply];
         AC_size_t = AC_size_t * degradation_t;
@@ -667,9 +669,9 @@ std::shared_ptr<PVProject> SEI::initialize_default_project()
     agent_state->params[EParamTypes::ElectricityBill] = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
     
     
-    //house->roof_size = WorldSettings::instance().params_exog[EParamTypes::AverageRoofSize];
     //set to nonbinding constraint
     house->roof_size = 1000000;
+    house->roof_effective_size = 1.0;
 
     
     auto project_generic = std::make_shared<PVProject>();
@@ -730,9 +732,10 @@ void SEI::dec_max_profit()
     agent_state->params[EParamTypes::ElectricityBill] = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] * WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand];
     
    
-    //house->roof_size = WorldSettings::instance().params_exog[EParamTypes::AverageRoofSize];
+
     //set to nonbinding constraint
     house->roof_size = 1000000;
+    house->roof_effective_size = 1.0;
     
     
     int64_t N_SEI_i = 2;
