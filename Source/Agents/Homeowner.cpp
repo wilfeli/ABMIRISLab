@@ -84,13 +84,13 @@ void
 Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
 
-    //saves information about advertising agent only if not already commited to installing project
-    ///No mutex guards as only other operation is popping from the front, which does not invalidate anything
     
-    if (marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)
+    //saves information about advertising agent only if not already commited to installing project
+    if ((marketing_state != EParamTypes::HOMarketingStateNotAccepting) && (quote_state != EParamTypes::HOStateCommitedToInstallation))
     {
         get_inf_marketing_sei.push_back(mes_);
         
+        //inform world that is now active, if was inactive before
         if (marketing_state != EParamTypes::HOMarketingStateInterested)
         {
             marketing_state = EParamTypes::HOMarketingStateInterested;
@@ -150,26 +150,18 @@ Homeowner::ac_inf_quoting_sei()
             new_project->agent = this;
             new_project->begin_time = a_time;
             new_project->sei = marketing_inf->agent;
+            
+            
+            ///requests online quote, it will be provided in a separate call
+            new_project->state_project = EParamTypes::RequestedOnlineQuote;
+            //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
+            marketing_inf->agent->request_online_quote(new_project);
+            
+            
             //save project
             pvprojects.push_back(new_project);
             marketing_inf->agent->get_project(new_project);
             
-            //uses online quote to gather general information to just narrow down the possible pool of projects
-            //will use non-compensatory rules here
-            switch (marketing_state)
-            {
-                case EParamTypes::HOMarketingStateHighlyInterested:
-                case EParamTypes::HOMarketingStateInterested:
-                    //request online quotes, assume that it is general information to narrow down pool of installers
-                    //requests online quote, it will be provided in a separate call
-                    new_project->state_project = EParamTypes::RequestedOnlineQuote;
-                    //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
-                    //
-                    marketing_inf->agent->request_online_quote(new_project);
-                    break;
-                default:
-                    break;
-            };
         };
         get_inf_marketing_sei.pop_front();
     };
@@ -203,9 +195,7 @@ Homeowner::dec_evaluate_online_quotes()
         {
             pool[i] = true;
         };
-        
-        
-        
+
     };
     
     
@@ -227,6 +217,35 @@ Homeowner::dec_evaluate_online_quotes()
         };
         
     };
+    
+    
+    
+    if ((n_preliminary_quotes_requested <= 0.0) && (pool.size() > 0.0))
+    {
+        quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
+        
+        clean_after_dropout();
+    
+        
+#ifdef DEBUG
+        std::cout << THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] << std::endl;
+#endif
+        
+    }
+    else
+    {
+        quote_state = EParamTypes::HOStateWaitingOnPreliminaryQuotes;
+        marketing_state = EParamTypes::HOMarketingStateNotAccepting;
+    };
+    
+    
+    if (pool.size() == 0.0)
+    {
+        throw std::runtime_error("too early for evaluation stage");
+    };
+    
+    
+    
 }
 
 
@@ -325,7 +344,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
 void Homeowner::dec_evaluate_preliminary_quotes()
 {
     
-    //have NC Decisions continued here
+    //MARK: cont. have NC Decisions continued here
     
     
     
@@ -383,10 +402,15 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     {
         decision->state_project = EParamTypes::AcceptedPreliminaryQuote;
         decision->sei->accepted_preliminary_quote(decision);
+        quote_state = EParamTypes::HOStateWaitingOnDesigns;
     }
     else
     {
-        w->get_state_inf(this, EParamTypes::HOMarketingStateDroppedOutSEIStage);
+        quote_state = EParamTypes::HOStateDroppedOutSEIStage;
+        clean_after_dropout();
+#ifdef DEBUG
+        w->get_state_inf(this, quote_state);
+#endif
     };
     
     
@@ -406,11 +430,10 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     
     //exit evaluation stage
     n_preliminary_quotes = 0;
-    
-    quote_state = EParamTypes::HOWaitingOnDesigns;
-    
+    n_preliminary_quotes_requested = 0;
     
 }
+
 
 
 double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA)
@@ -514,12 +537,16 @@ void Homeowner::dec_evaluate_designs()
         
         accepted_design.push_back(decision);
         
-        //stop accepting marketing from SEI
-        marketing_state = EParamTypes::HOMarketingStateCommitedToInstallation;
+        quote_state = EParamTypes::HOStateCommitedToInstallation;
         
         //tell world that stopped accepting offers
-        w->get_state_inf(this, marketing_state);
+        w->get_state_inf(this, quote_state);
 
+    }
+    else
+    {
+        quote_state = EParamTypes::HOStateDroppedOutDesignStage;
+        clean_after_dropout();
     };
     
     
@@ -539,7 +566,7 @@ void Homeowner::dec_evaluate_designs()
     
     //exit design stage
     n_pending_designs = 0;
-    quote_state = EParamTypes::HOEvaluatedDesigns;
+    
     
 }
 
@@ -618,6 +645,33 @@ Homeowner::dec_project_reroof(std::shared_ptr<PVProject> project)
 
 
 
+
+
+void Homeowner::clean_after_dropout()
+{
+    
+    //close all projects
+    //close other projects
+    for(auto& project:pvprojects)
+    {
+        project->state_project = EParamTypes::ClosedProject;
+    };
+
+    
+    
+    //null all timers
+    quote_stage_timer = 0;
+    
+    n_preliminary_quotes = 0;
+    n_preliminary_quotes_requested = 0;
+    
+    marketing_state = EParamTypes::None;
+
+    
+}
+
+
+
 void
 Homeowner::ac_update_tick()
 {
@@ -661,19 +715,23 @@ Homeowner::ac_update_tick()
 void
 Homeowner::act_tick()
 {
+
     //update internals for the tick
     ac_update_tick();
     
-    if (quote_stage_timer < WorldSettings::instance().constraints[EConstraintParams::MaxNTicksToCollectQuotes])
+    if ((quote_stage_timer < WorldSettings::instance().constraints[EConstraintParams::MaxNTicksToCollectQuotes]) && (marketing_state == EParamTypes::HOMarketingStateInterested))
     {
         //initiates and continues collection of quoting information
         ac_inf_quoting_sei();
+        quote_state = EParamTypes::HOStateWaitingOnOnlineQuotes;
     }
-    else if ((quote_state != EParamTypes::HOWaitingOnPreliminaryQuotes) && (quote_state != EParamTypes::HOEvaluatedDesigns))
+    else if (quote_state == EParamTypes::HOStateWaitingOnOnlineQuotes)
     {
+        //no longer accepting new information
+        marketing_state = EParamTypes::HOMarketingStateNotAccepting;
         //moves to the evaluation stage
         dec_evaluate_online_quotes();
-        quote_state = EParamTypes::HOWaitingOnPreliminaryQuotes;
+
     };
     
     
@@ -686,8 +744,10 @@ Homeowner::act_tick()
     
     
     
+    
     //evaluates designs
-    if ((n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])  && (quote_state != EParamTypes::HOEvaluatedDesigns))
+    //all sei send the same number of proposals in this case
+    if (n_pending_designs >= WorldSettings::instance().constraints[EConstraintParams::MinNReceivedDesings])
     {
         dec_evaluate_designs();
     };

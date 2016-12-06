@@ -232,36 +232,55 @@ namespace solar_core
         
         /** If Homeowner is not interested in installing SP */
         HOMarketingStateNotInterested,
+        
+        
+        /*!< If Homeowner in other stages and not open to new marketing */
+        HOMarketingStateNotAccepting,
 
         
         /** If Homeowner is already installed */
-        HOMarketingStateCommitedToInstallation,
+        HOStateCommitedToInstallation,
+        
+        
+        
+        /** If Homeowner is finished installing */
+        HOStateInterconnected,
         
         
         /** If Homeowner decided to drop out at SEI conjoint stage  */
-        HOMarketingStateDroppedOutSEIStage,
+        HOStateDroppedOutSEIStage,
         
         
+        /** If Homeowner decided to drop out at NC Decision stage  */
+        HOStateDroppedOutNCDecStage,
 
+
+        /** If Homeowner decided to drop out at Design stage  */
+        HOStateDroppedOutDesignStage,
+        
         
         /** State of a quoting stage for HO: actively requesting information */
-        ActiveQuoting,
+        HOStateActiveQuoting,
         
         
         /** State of a quoting stage for HO: not requesting quotes, might be analysing them or committed to the project */
-        InactiveQuoting,
+        HOStateInactiveQuoting,
+        
+        
+        /** State of a quoting stage for HO: waits for online quotes to be provided */
+        HOStateWaitingOnOnlineQuotes,
         
         
         /** State of a quoting stage for HO: waiting for preliminary quotes */
-        HOWaitingOnPreliminaryQuotes,
+        HOStateWaitingOnPreliminaryQuotes,
         
         
         /** State of a quoting stage for HO: waiting for designs */
-        HOWaitingOnDesigns,
+        HOStateWaitingOnDesigns,
         
         
         /** State of a quoting stage for HO: waiting for permitting */
-        HOEvaluatedDesigns,
+        HOStateEvaluatedDesigns,
         
         
         /** State of a quoting stage for HO: decision on reroofing old roof */
@@ -899,9 +918,9 @@ namespace solar_core
             {
                 return EParamTypes::HODesignDecisionPanelEfficiency;
             }
-            else if (param_type == "eparamtypes::inactivequoting")
+            else if (param_type == "eparamtypes::hostateinactivequoting")
             {
-                return EParamTypes::InactiveQuoting;
+                return EParamTypes::HOStateInactiveQuoting;
             }
             else if (param_type == "eparamtypes::seihighefficiencydesign")
             {
@@ -1197,17 +1216,41 @@ namespace solar_core
             {
                 return "EParamTypes::HOMarketingStateInterested";
             }
-            else if (param_ == EParamTypes::HOMarketingStateDroppedOutSEIStage)
+            else if (param_ == EParamTypes::HOStateDroppedOutSEIStage)
             {
-                return "EParamTypes::HOMarketingStateDroppedOutSEIStage";
+                return "EParamTypes::HOStateDroppedOutSEIStage";
             }
-            else if (param_ == EParamTypes::HOMarketingStateCommitedToInstallation)
+            else if (param_ == EParamTypes::HOStateDroppedOutNCDecStage)
             {
-                return "EParamTypes::HOMarketingStateCommitedToInstallation";
+                return "EParamTypes::HOStateDroppedOutNCDecStage";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnOnlineQuotes)
+            {
+                return "EParamTypes::HOStateWaitingOnOnlineQuotes";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnPreliminaryQuotes)
+            {
+                return "EParamTypes::HOStateWaitingOnPreliminaryQuotes";
+            }
+            else if (param_ == EParamTypes::HOStateDroppedOutDesignStage)
+            {
+                return "EParamTypes::HOStateDroppedOutDesignStage";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnDesigns)
+            {
+                return "EParamTypes::HOStateWaitingOnDesigns";
+            }
+            else if (param_ == EParamTypes::HOStateCommitedToInstallation)
+            {
+                return "EParamTypes::HOStateCommitedToInstallation";
             }
             else if (param_ == EParamTypes::HOMarketingStateNotInterested)
             {
                 return "EParamTypes::HOMarketingNotInterested";
+            }
+            else if (param_ == EParamTypes::HOMarketingStateNotAccepting)
+            {
+                return "EParamTypes::HOMarketingStateNotAccepting";
             }
             else if (param_ == EParamTypes::HODecPreliminaryQuote)
             {

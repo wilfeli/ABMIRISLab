@@ -375,22 +375,20 @@ void W::ac_update_tick()
     
     //MARK: cont. add update of labor price
     
-#ifdef DEBUG
-    if (history_decisions.size() > 0)
-    {
-        std::cout << "Dropout rate at tick "<< time << " " << history_decisions.back()[EParamTypes::HOMarketingStateDroppedOutSEIStage] << std::endl;
-    };
-#endif
     
     history_projects.push_back(std::map<EParamTypes, double>{});
+    history_decisions.push_back(std::map<EParamTypes, double>{});
     
     int64_t N_ACTIVE_AGENTS = 0;
     
-    history_decisions.push_back({{EParamTypes::HOMarketingStateDroppedOutSEIStage, 0.0}});
     
     //collect statistics
-    for (auto agent:active_hos)
+//    for (auto agent:active_hos)
+//    {
+    
+    for (auto agent:*hos)
     {
+        
         if (agent)
         {
             ++N_ACTIVE_AGENTS;
@@ -401,6 +399,17 @@ void W::ac_update_tick()
             };
             
             history_decisions.back()[agent->marketing_state] += 1.0;
+            
+            
+            if (history_decisions.back().find(agent->quote_state) == history_decisions.back().end())
+            {
+                history_decisions.back()[agent->quote_state] = 0.0;
+            };
+            
+            history_decisions.back()[agent->quote_state] += 1.0;
+            
+            
+            
             
             //count number of projects and their state
             for (auto project:agent->pvprojects)
@@ -420,11 +429,11 @@ void W::ac_update_tick()
     
     
     
-    
+#ifdef DEBUG
     history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
     
     
-#ifdef DEBUG
+
     std::cout << "N active agents at tick "<< time << " " << N_ACTIVE_AGENTS << std::endl;
 
     
@@ -465,6 +474,13 @@ W::life_hos()
     };
     
     
+    std::set<EParamTypes> dropped_out_states
+    {
+        EParamTypes::HOStateDroppedOutSEIStage,
+        EParamTypes::HOStateDroppedOutNCDecStage,
+        EParamTypes::HOStateDroppedOutDesignStage,
+        EParamTypes::HOStateInterconnected
+    };
     
     
     //go through part of agents and call act_tick - staged action for them
@@ -480,7 +496,7 @@ W::life_hos()
                 auto& agent = active_hos[i];
                 if (agent)
                 {
-                    if (agent->marketing_state != EParamTypes::HOMarketingStateCommitedToInstallation)
+                    if (dropped_out_states.find(agent->quote_state) == dropped_out_states.end())
                     {
                         //get tick
                         agent->act_tick();
@@ -707,17 +723,6 @@ W::get_state_inf(Homeowner* agent_, EParamTypes state_)
         case EParamTypes::HOMarketingStateInterested:
             active_hos.push_back(agent_);
             break;
-        case EParamTypes::HOMarketingStateCommitedToInstallation:
-            break;
-            
-#ifdef DEBUG
-        case EParamTypes::HOMarketingStateDroppedOutSEIStage:
-            //count number of dropped out agents at every tick
-            history_decisions.back()[EParamTypes::HOMarketingStateDroppedOutSEIStage] += 1;
-            
-            
-            break;
-#endif
         default:
             break;
             
@@ -743,6 +748,9 @@ void
 W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
     interconnected_projects.insert(project_);
+    
+    project_->agent->quote_state = EParamTypes::HOStateInterconnected;
+    
     
     auto mes = project_->sei->mes_marketing;
     auto h = project_->agent;

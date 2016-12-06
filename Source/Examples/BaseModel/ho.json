@@ -22,7 +22,7 @@
         "roof_size": "FORMULA::house_size::0.5",
         "roof_effective_size": "FORMULA::0.5"
     },
-    "quote_state": "EParamTypes::InactiveQuoting",
+    "quote_state": "EParamTypes::None",
     "THETA_design": [
                      {
                      "EParamTypes::HODecPreliminaryQuote": [

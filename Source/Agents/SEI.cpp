@@ -29,9 +29,9 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
 
     
     //pregenerate range of prices
-    int64_t N = 100;
+    int64_t N = 10;
     double THETA_min = 0.0;
-    double THETA_max = 1.0;
+    double THETA_max = 2.0;
     double step_size = (THETA_max - THETA_min)/N;
     
     profit_grid.resize(N+1, 2);
@@ -737,7 +737,7 @@ void SEI::dec_max_profit()
     house->roof_size = 1000000;
     house->roof_effective_size = 1.0;
     
-    
+    //number of alternatives to be used in estimating demand share
     int64_t N_SEI_i = 2;
     
     //generic project for PV with design variations
@@ -770,6 +770,12 @@ void SEI::dec_max_profit()
     
     for (auto i = 0; i < profit_grid.rows(); ++i)
     {
+        //
+        income = 0.0;
+        expences = 0.0;
+        
+        
+        
         //profit margin to check - profit_grid(i,0)
         //preliminary quote with new price
         project_generic->preliminary_quote = form_preliminary_quote(project_generic, profit_grid(i,0));
@@ -806,6 +812,13 @@ void SEI::dec_max_profit()
         utility_den = 0.0;
         //initialize designs with micro and central inverter
         auto designs = form_design(project_generic, profit_grid(i,0));
+        
+        if (profit_grid(i,0) >= 0.9)
+        {
+            std::cout << designs[0]->design->total_net_savings << std::endl;
+        };
+        
+        
         std::vector<double> shares_design;
         for (auto design:designs)
         {
@@ -828,16 +841,16 @@ void SEI::dec_max_profit()
         {
             //update to the share from raw utility
             //estimate share of the submarket that will install solar panels with particular design
-            shares_design[i] = shares_design[i]/utility_den;
+            shares_design[j] = shares_design[j]/utility_den;
             
             ///calculate total sales
-            qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[i];
+            qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j];
             
             //calculate income for this design type
-            income += designs[i]->design->total_costs * qn;
+            income += designs[j]->design->total_costs * qn;
             
             //calculate costs for this type
-            expences += designs[i]->design->raw_costs * qn;
+            expences += designs[j]->design->raw_costs * qn;
             
         };
         
@@ -849,7 +862,7 @@ void SEI::dec_max_profit()
 
         
         //estimate total income from installation - total costs (=costs of installation + marketing and administrative)
-        profit_grid(0,1) = income - expences;
+        profit_grid(i,1) = income - expences;
         
         
     };
@@ -858,8 +871,21 @@ void SEI::dec_max_profit()
     Eigen::MatrixXd::Index maxRow, maxCol;
     double max = profit_grid.col(1).maxCoeff(&maxRow, &maxCol);
 
+    
+    
+#ifdef DEBUG
+    for (auto i = 0; i < profit_grid.rows(); ++i)
+    {
+        std::cout << "Profit margin: " << profit_grid(i, 0) << "Profit: " << profit_grid(i, 1) << std::endl;
+    };
+#endif
+    
+    
     //updating profit margin
     THETA_profit[0] = profit_grid(maxRow,0);
+    
+    delete agent;
+    delete house;
 
     
 }

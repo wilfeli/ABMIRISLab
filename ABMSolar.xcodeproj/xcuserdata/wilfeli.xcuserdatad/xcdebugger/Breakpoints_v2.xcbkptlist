@@ -774,11 +774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Tools/IParameters.h"
-            timestampString = "502342044.443292"
+            timestampString = "502395647.653911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1326"
-            endingLineNumber = "1326"
+            startingLineNumber = "1364"
+            endingLineNumber = "1364"
             landmarkName = "FromEParamTypes(EParamTypes param_)"
             landmarkType = "5">
             <Locations>
@@ -900,11 +900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "Homeowner::dec_evaluate_online_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -964,11 +964,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "Homeowner::dec_evaluate_online_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -980,11 +980,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "Homeowner::dec_evaluate_online_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -996,11 +996,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
+            startingLineNumber = "1029"
+            endingLineNumber = "1029"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1108,11 +1108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "692"
-            endingLineNumber = "692"
+            startingLineNumber = "754"
+            endingLineNumber = "754"
             landmarkName = "Homeowner::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1124,11 +1124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "684"
-            endingLineNumber = "684"
+            startingLineNumber = "744"
+            endingLineNumber = "744"
             landmarkName = "Homeowner::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1140,11 +1140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "Homeowner::dec_evaluate_online_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1156,13 +1156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "561"
-            endingLineNumber = "561"
-            landmarkName = "Homeowner::receive_preliminary_quote(std::shared_ptr&lt;PVProject&gt; project_)"
-            landmarkType = "5">
+            startingLineNumber = "590"
+            endingLineNumber = "590">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1172,11 +1170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1012"
-            endingLineNumber = "1012"
+            startingLineNumber = "1039"
+            endingLineNumber = "1039"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
             <Locations>
@@ -1218,11 +1216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1011"
-            endingLineNumber = "1011"
+            startingLineNumber = "1038"
+            endingLineNumber = "1038"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1234,11 +1232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502346525.147684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "Homeowner::dec_evaluate_preliminary_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1250,11 +1248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1022"
-            endingLineNumber = "1022"
+            startingLineNumber = "1049"
+            endingLineNumber = "1049"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1266,11 +1264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1028"
-            endingLineNumber = "1028"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1282,11 +1280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1061"
-            endingLineNumber = "1061"
+            startingLineNumber = "1088"
+            endingLineNumber = "1088"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1298,11 +1296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1067"
-            endingLineNumber = "1067"
+            startingLineNumber = "1094"
+            endingLineNumber = "1094"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1314,11 +1312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "Homeowner::dec_evaluate_designs()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1330,11 +1328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1098"
-            endingLineNumber = "1098"
+            startingLineNumber = "1125"
+            endingLineNumber = "1125"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1346,11 +1344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1099"
-            endingLineNumber = "1099"
+            startingLineNumber = "1126"
+            endingLineNumber = "1126"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1362,11 +1360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1110"
-            endingLineNumber = "1110"
+            startingLineNumber = "1137"
+            endingLineNumber = "1137"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1442,11 +1440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1113"
-            endingLineNumber = "1113"
+            startingLineNumber = "1140"
+            endingLineNumber = "1140"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1458,11 +1456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1168"
-            endingLineNumber = "1168"
+            startingLineNumber = "1195"
+            endingLineNumber = "1195"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1474,11 +1472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1184"
-            endingLineNumber = "1184"
+            startingLineNumber = "1211"
+            endingLineNumber = "1211"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1490,11 +1488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1194"
-            endingLineNumber = "1194"
+            startingLineNumber = "1221"
+            endingLineNumber = "1221"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1506,11 +1504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "703"
-            endingLineNumber = "703"
+            startingLineNumber = "765"
+            endingLineNumber = "765"
             landmarkName = "Homeowner::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1602,11 +1600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1149"
-            endingLineNumber = "1149"
+            startingLineNumber = "1176"
+            endingLineNumber = "1176"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1618,11 +1616,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1150"
-            endingLineNumber = "1150"
+            startingLineNumber = "1177"
+            endingLineNumber = "1177"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1650,11 +1648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1155"
-            endingLineNumber = "1155"
+            startingLineNumber = "1182"
+            endingLineNumber = "1182"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1666,11 +1664,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502346525.147684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "Homeowner::estimate_sei_utility_from_params(std::shared_ptr&lt;PVProject&gt; project, DecisionParams&amp; THETA)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1682,11 +1680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502346525.147684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "Homeowner::estimate_sei_utility_from_params(std::shared_ptr&lt;PVProject&gt; project, DecisionParams&amp; THETA)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1714,11 +1712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/W.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502395050.325882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
             landmarkName = "W::life_hos()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1730,11 +1728,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/W.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502395050.325882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
             landmarkName = "W::life_hos()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1746,11 +1744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEI.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1063"
-            endingLineNumber = "1063"
+            startingLineNumber = "1090"
+            endingLineNumber = "1090"
             landmarkName = "SEI::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1794,11 +1792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502346525.147684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "Homeowner::dec_evaluate_preliminary_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1810,11 +1808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "Homeowner::dec_evaluate_preliminary_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1826,11 +1824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502299209.111035"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "Homeowner::dec_evaluate_preliminary_quotes()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1954,11 +1952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "Homeowner::estimate_design_utility_from_params(std::shared_ptr&lt;PVProject&gt; project, DecisionParams&amp; THETA)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1970,12 +1968,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/Homeowner.cpp"
-            timestampString = "502342044.443292"
+            timestampString = "502394394.042269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
             landmarkName = "Homeowner::dec_evaluate_designs()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/UI/W.cpp"
+            timestampString = "502395050.325882"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "746"
+            endingLineNumber = "746"
+            landmarkName = "W::get_state_inf_interconnected_project(std::shared_ptr&lt;PVProject&gt; project_)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/Homeowner.cpp"
+            timestampString = "502396144.822192"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
+            landmarkName = "Homeowner::dec_evaluate_designs()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/G.cpp"
+            timestampString = "502396376.695716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "G::act_tick()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502689383.065952"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1170"
+            endingLineNumber = "1170"
+            landmarkName = "SEI::act_tick()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/Utility.cpp"
+            timestampString = "502396846.90437"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "Utility::act_tick()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "40"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Institutions/MarketingSystem.cpp"
+            timestampString = "502397885.474921"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "MarketingInst::act_tick()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1985,13 +2079,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/UI/W.cpp"
-            timestampString = "502304338.829698"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502689383.065952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
-            landmarkName = "W::get_state_inf_interconnected_project(std::shared_ptr&lt;PVProject&gt; project_)"
+            startingLineNumber = "1244"
+            endingLineNumber = "1244"
+            landmarkName = "SEI::act_tick()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502688887.235406"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
+            landmarkName = "SEI::dec_max_profit()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502689383.065952"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "885"
+            endingLineNumber = "885"
+            landmarkName = "SEI::dec_max_profit()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502689383.065952"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "865"
+            endingLineNumber = "865"
+            landmarkName = "SEI::dec_max_profit()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEI.cpp"
+            timestampString = "502689397.078859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
+            landmarkName = "SEI::dec_max_profit()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

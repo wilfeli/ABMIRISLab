@@ -319,7 +319,7 @@ protected:
     
     long n_pending_designs;
     
-    
+    void clean_after_dropout();
 
     
 
