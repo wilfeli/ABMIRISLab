@@ -1988,9 +1988,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "746"
-            endingLineNumber = "746"
-            landmarkName = "W::get_state_inf_interconnected_project(std::shared_ptr&lt;PVProject&gt; project_)"
-            landmarkType = "5">
+            endingLineNumber = "746">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

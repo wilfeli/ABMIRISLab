@@ -1,1 +1,31 @@
-{"type1": {"scheme": {"EParamTypes::HODesignDecisionCO2": [0.2], "EParamTypes::HODesignDecisionFailures": [0.3], "EParamTypes::HODesignDecisionEstimatedNetSavings": [0.5], "EParamTypes::HODesignDecisionInverterType": [0.1, 0.1, 0.1], "EParamTypes::HODesignDecisionUtilityNone": [1.0], "EParamTypes::HODesignDecisionPanelVisibility": [0.5, 0.5], "EParamTypes::HODesignDecisionPanelEfficiency": [1.0]}, "frequency": 1.0}}
+{
+    "type1": {
+        "scheme": {
+            "EParamTypes::HODesignDecisionCO2": [
+                                                 0.046339
+                                                 ],
+            "EParamTypes::HODesignDecisionFailures": [
+                                                      -0.588766
+                                                      ],
+            "EParamTypes::HODesignDecisionEstimatedNetSavings": [
+                                                                 3.6514
+                                                                 ],
+            "EParamTypes::HODesignDecisionInverterType": [
+                                                          -0.266429,
+                                                          -0.055935,
+                                                          0.210494
+                                                          ],
+            "EParamTypes::HODesignDecisionUtilityNone": [
+                                                         0.563993
+                                                         ],
+            "EParamTypes::HODesignDecisionPanelVisibility": [
+                                                             -0.238446,
+                                                             0.238446
+                                                             ],
+            "EParamTypes::HODesignDecisionPanelEfficiency": [
+                                                             9.1732
+                                                             ]
+        },
+        "frequency": 1
+    }
+}

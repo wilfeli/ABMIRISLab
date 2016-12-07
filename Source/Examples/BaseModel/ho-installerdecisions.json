@@ -7,28 +7,28 @@
                                                 0.0447404
                                                 ],
             "EParamTypes::HOSEIDecisionTotalProjectTime": [
-                                                           -0.0859221
+                                                           -0.1481597
                                                            ],
             "EParamTypes::HOSEIDecisionEstimatedNetSavings": [
-                                                              0.0909747
+                                                              3.64675
                                                               ],
             "EParamTypes::SEIWarranty": [
-                                         0.0923132,
-                                         0.0923132,
-                                         0.0923132
+                                         0.0746770,
+                                         0.0746770,
+                                         0.0746770
                                          ],
             "EParamTypes::HOSEIDecisionUtilityNone": [
-                                                      -0.9765452
+                                                      0.5197628
                                                       ],
             "EParamTypes::SEIEquipmentType": [
-                                              -0.261923,
-                                              0.0331093,
-                                              0.2288137
+                                              -0.2166887,
+                                              -0.0079533,
+                                              0.224642
                                               ],
             "EParamTypes::SEIRating": [
-                                       -1.2898035,
-                                       0.4060867,
-                                       0.8837168
+                                       -1.0403794,
+                                       0.2408452,
+                                       0.7995342
                                        ]
         },
         "frequency": 1
