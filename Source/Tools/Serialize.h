@@ -265,7 +265,36 @@ namespace serialize
         {
             for (auto& item : pt)
             {
-                r.push_back(item.second.get_value<T>());
+				try
+				{
+					r.push_back(item.second.get_value<T>());
+				}
+				catch (const std::exception&)
+				{
+					if (item.second.get_value<std::string>() == "inf")
+					{
+						r.push_back(std::numeric_limits<T>::infinity());
+					};
+				}
+				catch (...) 
+				{
+					if (item.second.get_value<std::string>() == "inf")
+					{
+						r.push_back(std::numeric_limits<T>::infinity());
+					};
+				}
+
+
+				//try {
+				//	r.push_back(item.second.get_value<T>());
+				//{
+				//catch (...) {
+				//	//check if it is infinity value
+				//	if (item.second.get_value<std::string>() == "inf") 
+				//	{
+				//		r.push_back(std::numeric_limits<T>::infinity());
+				//	};
+				//};
             };
         }
         

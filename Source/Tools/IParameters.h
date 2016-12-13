@@ -408,7 +408,8 @@ namespace solar_core
         
         
         
-        
+        /**  For testing purposes, coef in demand equation  */
+        EstimatedDemandCoefficientNCDec,
         
         
         /** Industry standard price per watt that is used in estimating installation cost */
@@ -878,6 +879,10 @@ namespace solar_core
             {
                 return EParamTypes::HONCDecisionSEIRating;
             }
+            else if (param_type == "eparamtypes::honcdecisiontotalprice")
+            {
+                return EParamTypes::HONCDecisionTotalPrice;
+            }
             else if (param_type == "eparamtypes::hoseidecisionutilitynone")
             {
                 return EParamTypes::HOSEIDecisionUtilityNone;
@@ -969,6 +974,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::seimaxroofage")
             {
                 return EParamTypes::SEIMaxRoofAge;
+            }
+            else if (param_type == "eparamtypes::estimateddemandcoefficientncdec")
+            {
+                return EParamTypes::EstimatedDemandCoefficientNCDec;
             }
             else if (param_type == "eparamtypes::seiprocessingtimerequiredfordesign")
             {
@@ -1243,6 +1252,10 @@ namespace solar_core
             else if (param_ == EParamTypes::HOStateCommitedToInstallation)
             {
                 return "EParamTypes::HOStateCommitedToInstallation";
+            }
+            else if (param_ == EParamTypes::HOStateInterconnected)
+            {
+                return "EParamTypes::HOStateInterconnected";
             }
             else if (param_ == EParamTypes::HOMarketingStateNotInterested)
             {

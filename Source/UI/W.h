@@ -48,6 +48,10 @@ namespace solar_core {
     
     class W
     {
+#ifdef DEBUG
+        friend class Homeowner;
+#endif
+        
         friend class MarketingInst;
         friend class solar_ui::UI;
         friend class SEI;

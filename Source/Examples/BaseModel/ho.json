@@ -20,7 +20,7 @@
     "House": {
         "roof_age": "FORMULA::house_age::0.5",
         "roof_size": "FORMULA::house_size::0.5",
-        "roof_effective_size": "FORMULA::0.5"
+        "roof_effective_size": "FORMULA::0.75"
     },
     "quote_state": "EParamTypes::None",
     "THETA_design": [

@@ -97,12 +97,42 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
             //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
             w->get_state_inf(this, marketing_state);
         };
+        
+        
+#ifdef DEBUG
+        //check if is in active agents, should be by now?
+        bool FLAG_IN_ACTIVE = false;
+        for (auto agent:*w->hos)
+        {
+            if (agent == this)
+            {
+                FLAG_IN_ACTIVE = true;
+                break;
+            };
+            
+        };
+        
+        if (!FLAG_IN_ACTIVE)
+        {
+            throw std::runtime_error("did not add inself into active agents");
+        };
+#endif
+        
+        
     };
     
     ///@DevStage2 might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
     
     
     ///@DevStage3 check if this agent is interested in the marketing message
+    
+    
+    
+    
+
+    
+    
+    
 }
 
 /**
@@ -306,36 +336,68 @@ Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 void Homeowner::dec_evaluate_online_quotes_nc()
 {
     //here additional NCDec after get generic prices
-    
-    
     auto pool = std::vector<bool>(pvprojects.size(), false);
     
     for (auto i = 0; i < pvprojects.size(); ++i)
     {
         //check if is in the pool
         //check on Customer rating
-        if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] >= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
+        if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
         {
             pool[i] = true;
         };
-        
-        
-        
     };
-    
     
     
     for (auto i = 0; i < pool.size(); ++i)
     {
-        //pool is now narrowed down to the subset of all open projects
-        if (!pool[i])
+        //pool is now narrowed down to the subset of all open projects, request further information from them (without site visit for this step)
+        if (pool[i])
+        {
+            auto project = pvprojects[i];
+            project->state_project = EParamTypes::RequestedPreliminaryQuote;
+            project->sei->request_preliminary_quote(project);
+            
+            //update number of requested quotes
+            ++n_preliminary_quotes_requested;
+        }
+        else
         {
             pvprojects[i]->state_project = EParamTypes::ClosedProject;
         };
         
     };
-
     
+    
+    
+    if ((n_preliminary_quotes_requested <= 0.0) && (pool.size() > 0.0))
+    {
+        quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
+        
+        clean_after_dropout();
+        
+        
+#ifdef DEBUG
+        std::cout << THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] << std::endl;
+#endif
+        
+    }
+    else
+    {
+        quote_state = EParamTypes::HOStateWaitingOnPreliminaryQuotes;
+        marketing_state = EParamTypes::HOMarketingStateNotAccepting;
+    };
+    
+#ifdef DEBUG
+    if (pool.size() == 0.0)
+    {
+        throw std::runtime_error("too early for evaluation stage");
+    };
+#endif
+    
+    
+    
+
     
 }
 
@@ -345,9 +407,12 @@ void Homeowner::dec_evaluate_preliminary_quotes()
 {
     
     //MARK: cont. have NC Decisions continued here
+    dec_evaluate_online_quotes_nc();
     
-    
-    
+    if (quote_state == EParamTypes::HOStateDroppedOutNCDecStage)
+    {
+        return;
+    };
     
     
     double utility_none = THETA_SEIDecisions[EParamTypes::HOSEIDecisionUtilityNone][0];

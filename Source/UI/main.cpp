@@ -66,6 +66,10 @@ int main(int argc, const char * argv[])
 #ifdef _WIN64
 	if (_access(path_to_model_file.string().c_str(), 00) != -1)
 #endif
+
+#ifdef _WIN32
+	if (_access(path_to_model_file.string().c_str(), 00) != -1)
+#endif
 	{
     }
     else

@@ -39,6 +39,7 @@ namespace solar_core
     class W;
     class MarketingInst;
     class Homeowner;
+    class Utility;
     
     
     /**
@@ -58,6 +59,9 @@ namespace solar_core
      */
     class SEI: public IAgent
     {
+#ifdef DEBUG
+        friend class Utility;
+#endif
         friend class W;
         friend class MarketingInst;
         template <class T1, class T2> friend class HelperWSpecialization;

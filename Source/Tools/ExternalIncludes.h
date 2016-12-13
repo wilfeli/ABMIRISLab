@@ -26,6 +26,7 @@
 #include <stack>
 #include <set>
 #include <regex>
+#include <mutex>
 
 
 #include <boost/property_tree/ptree.hpp>

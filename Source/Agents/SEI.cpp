@@ -781,6 +781,20 @@ void SEI::dec_max_profit()
         project_generic->preliminary_quote = form_preliminary_quote(project_generic, profit_grid(i,0));
         
         
+        //estimate non-compensatory decisions for sei
+#ifdef DEBUG
+        //for testing purposes
+        //share of the market as a function of price?
+        
+        double share_nc = 0.0;
+        
+        share_nc = 0.83 - params[EParamTypes::EstimatedDemandCoefficientNCDec] * project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice];
+        
+#endif
+        
+        
+        
+        
         //estimate market size
         //draw other sei, request preliminary  params for quote, assume that price is fixed?
         //use the same project
@@ -813,10 +827,12 @@ void SEI::dec_max_profit()
         //initialize designs with micro and central inverter
         auto designs = form_design(project_generic, profit_grid(i,0));
         
+#ifdef DEBUG
         if (profit_grid(i,0) >= 0.9)
         {
             std::cout << designs[0]->design->total_net_savings << std::endl;
         };
+#endif
         
         
         std::vector<double> shares_design;
@@ -836,6 +852,9 @@ void SEI::dec_max_profit()
         //utility of none
         utility_den += w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label][EParamTypes::HODesignDecisionUtilityNone][0];
         
+#ifdef DEBUG
+        double total_design_share = 0.0;
+#endif
         
         for (auto j = 0; j < shares_design.size(); ++j)
         {
@@ -843,9 +862,15 @@ void SEI::dec_max_profit()
             //estimate share of the submarket that will install solar panels with particular design
             shares_design[j] = shares_design[j]/utility_den;
             
-            ///calculate total sales
-            qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j];
+#ifdef DEBUG
+            total_design_share += shares_design[j];
+#endif
             
+#ifdef DEBUG
+            ///calculate total sales
+            //MARK: adjustment for NC Decisions only for DEBUG mode, CAREFUL will through otherwise
+            qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j] * share_nc;
+#endif
             //calculate income for this design type
             income += designs[j]->design->total_costs * qn;
             
@@ -865,6 +890,11 @@ void SEI::dec_max_profit()
         profit_grid(i,1) = income - expences;
         
         
+#ifdef DEBUG
+        std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
+#endif
+        
+        
     };
     
 
@@ -876,7 +906,7 @@ void SEI::dec_max_profit()
 #ifdef DEBUG
     for (auto i = 0; i < profit_grid.rows(); ++i)
     {
-        std::cout << "Profit margin: " << profit_grid(i, 0) << "Profit: " << profit_grid(i, 1) << std::endl;
+        std::cout << "Profit margin: " << profit_grid(i, 0) << " Profit: " << profit_grid(i, 1) << std::endl;
     };
 #endif
     
@@ -1177,10 +1207,7 @@ SEI::act_tick()
             project->state_project = EParamTypes::RequestedPermitForInterconnection;
         };
         
-        if (project->state_project == EParamTypes::GrantedPermitForInterconnection)
-        {
-            w->get_state_inf_interconnected_project(project);
-        };
+
         
         
         

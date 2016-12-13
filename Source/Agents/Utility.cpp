@@ -8,6 +8,7 @@
 
 #include "Tools/Serialize.h"
 #include "Agents/Utility.h"
+#include "Agents/SEI.h"
 #include "Agents/SolarPanel.h"
 #include "Institutions/IMessage.h"
 #include "UI/W.h"
@@ -127,6 +128,28 @@ Utility::act_tick()
                     {
                         //grant permit
                         project->state_project = EParamTypes::GrantedPermitForInterconnection;
+                        
+                        w->get_state_inf_interconnected_project(project);
+                        
+//#ifdef DEBUG
+//                        //check if sei has this project
+//                        bool FLAG_HAS_PROJECT = false;
+//                        
+//                        for (auto& project_test:project->sei->pvprojects)
+//                        {
+//                            if (project_test == project)
+//                            {
+//                                FLAG_HAS_PROJECT = true;
+//                            };
+//                        };
+//                        
+//                        if (!FLAG_HAS_PROJECT)
+//                        {
+//                            throw std::runtime_error("mismatching projects");
+//                        };
+//                        
+//#endif
+                        
                         
                         //MARK: cont. update current capacity, decrease by interconnected amount 
                     };
