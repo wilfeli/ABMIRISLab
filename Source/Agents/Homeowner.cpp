@@ -94,13 +94,14 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         if (marketing_state != EParamTypes::HOMarketingStateInterested)
         {
             marketing_state = EParamTypes::HOMarketingStateInterested;
+            quote_state = EParamTypes::None;
             //tell world that is now interested, that it is moved to the list of active agents. Once the project is finished it will be moved from the list of active agents
             w->get_state_inf(this, marketing_state);
         };
         
         
 #ifdef DEBUG
-        //check if is in active agents, should be by now?
+        //check if is in active agents, should be by now
         bool FLAG_IN_ACTIVE = false;
         for (auto agent:*w->hos)
         {
@@ -257,10 +258,6 @@ Homeowner::dec_evaluate_online_quotes()
         clean_after_dropout();
     
         
-#ifdef DEBUG
-        std::cout << THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] << std::endl;
-#endif
-        
     }
     else
     {
@@ -345,10 +342,17 @@ void Homeowner::dec_evaluate_online_quotes_nc()
         if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
         {
             pool[i] = true;
-        };
+        }
+#ifdef DEBUG
+        else
+        {
+            std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
+        }
+#endif
+        ;
     };
     
-    
+    int64_t N_CLOSED_PROJECTS = 0;
     for (auto i = 0; i < pool.size(); ++i)
     {
         //pool is now narrowed down to the subset of all open projects, request further information from them (without site visit for this step)
@@ -364,6 +368,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
         else
         {
             pvprojects[i]->state_project = EParamTypes::ClosedProject;
+            ++N_CLOSED_PROJECTS;
         };
         
     };
@@ -373,14 +378,13 @@ void Homeowner::dec_evaluate_online_quotes_nc()
     if ((n_preliminary_quotes_requested <= 0.0) && (pool.size() > 0.0))
     {
         quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
-        
         clean_after_dropout();
-        
-        
-#ifdef DEBUG
-        std::cout << THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] << std::endl;
-#endif
-        
+    }
+    else if (N_CLOSED_PROJECTS >= pool.size())
+    {
+        //if all projects are closed - dropped out
+        quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
+        clean_after_dropout();
     }
     else
     {
@@ -406,7 +410,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
 void Homeowner::dec_evaluate_preliminary_quotes()
 {
     
-    //MARK: cont. have NC Decisions continued here
+    //NC Decisions are continued here
     dec_evaluate_online_quotes_nc();
     
     if (quote_state == EParamTypes::HOStateDroppedOutNCDecStage)
@@ -722,6 +726,11 @@ void Homeowner::clean_after_dropout()
         project->state_project = EParamTypes::ClosedProject;
     };
 
+    pvprojects_lock.lock();
+    //delete closed projects
+    pvprojects.erase(std::remove_if(pvprojects.begin(), pvprojects.end(),
+                                    [&](std::shared_ptr<PVProject> x) -> bool { return (project_states_to_delete.find(x->state_project) != project_states_to_delete.end()); }), pvprojects.end());
+    pvprojects_lock.unlock();
     
     
     //null all timers

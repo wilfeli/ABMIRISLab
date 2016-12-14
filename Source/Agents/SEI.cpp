@@ -239,7 +239,8 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
     //MARK: cont. create preliminary quote estimate from real data
     //by default provide prelminary quote, but in some cases refuse to proceed with the project and close it
-    //is here because otherwise later assigning will override this
+    //is here because otherwise later assigning in case of reroofing will override this
+    //MARK: cont. sort reroofing logic
     project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
     
     //@DevStage3 think about changing location of this request. For now it is assumed that SEI bails out if roof is too old by its standards
@@ -260,6 +261,21 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
     //forms design by default, for an average demand
     auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    
+    //depending on the global switch - use own demand parameters or global demand parameters
+    if (WorldSettings::instance().params_exog[EParamTypes::SEIAverageDemandInPreliminaryQuote] == 0.0)
+    {
+        demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
+    };
+
+#ifdef DEBUG
+    if (demand < 15.0)
+    {
+        std::cout << "Small project" << std::endl;
+    };
+#endif
+    
+    
     //amount of solar irradiation in Wh/m2/day
     auto solar_irradiation = w->get_solar_irradiation(project_->agent->location_x, project_->agent->location_y);
     //distribution of permit length difficulty coefficient in different locations
@@ -291,17 +307,20 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
 
 
     mes->params[EParamTypes::PreliminaryQuotePrice] = design.total_costs;
+    mes->params[EParamTypes::PreliminaryQuoteDCSize] = design.DC_size;
     
     
     //assume that permit difficulty here in weeks
     //so that total project time is lead time and permitting time summed
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
     auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK;
-    
+
+#ifdef DEBUG
     if (total_project_time > 24)
     {
-        throw std::runtime_error("Too long project time");
+        throw std::runtime_error("Project time is too long");
     };
+#endif
     
     mes->params[EParamTypes::PreliminaryQuoteTotalProjectTime] = total_project_time;
     
@@ -427,7 +446,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     double available_area = std::min(roof_area, system_area);
     
     
-    
+#ifdef DEBUG
     if (roof_area < 500)
     {
         std::cout << system_area/roof_area << std::endl;
@@ -440,11 +459,20 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
         ++N_HUGE_SYSTEMS;
         
     };
-    
+#endif
     
     
     //update to the actual available area
     N_PANELS = std::floor(available_area/module_area);
+    
+    
+#ifdef DEBUG
+    if (N_PANELS <= 0.0)
+    {
+        throw std::runtime_error("Zero panels for the system");
+    };
+#endif
+    
     design.N_PANELS = N_PANELS;
     
     design.PV_module = iter.second;
@@ -626,12 +654,12 @@ SEI::ac_estimate_savings(PVDesign& design, double demand_, std::shared_ptr<const
     //MARK: cont. check numbers
     design.co2_equivalent = total_production/warranty_length*WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
     
-#ifdef DEBUG
-    if (design.total_net_savings < 0.1)
-    {
-        std::cout << "low net savings" << std::endl;
-    };
-#endif
+//#ifdef DEBUG
+//    if (design.total_net_savings < 0.1)
+//    {
+//        std::cout << "low net savings" << std::endl;
+//    };
+//#endif
     
 }
 
@@ -1037,6 +1065,17 @@ SEI::act_tick()
 {
     //update internals for the tick
     ac_update_tick();
+    
+#ifdef DEBUG
+    for (auto& project:pvprojects)
+    {
+        if (project->state_project == EParamTypes::ClosedProject)
+        {
+            throw std::runtime_error("Closed project in SEI");
+        };
+    };
+#endif
+    
     
     //MARK: cont. sort out timing of updating projects - general timing of messages in the timeline
     

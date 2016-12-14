@@ -391,7 +391,19 @@ void W::ac_update_tick()
         
         if (agent)
         {
-            ++N_ACTIVE_AGENTS;
+            
+            
+            
+            
+            
+            
+            if ((agent->marketing_state == EParamTypes::HOMarketingStateInterested) || ((agent->marketing_state == EParamTypes::HOMarketingStateNotAccepting) && (agent->quote_state != EParamTypes::HOStateCommitedToInstallation)))
+            {
+                ++N_ACTIVE_AGENTS;
+            };
+            
+            
+
             
             if (history_decisions.back().find(agent->marketing_state) == history_decisions.back().end())
             {

@@ -390,6 +390,9 @@ namespace solar_core
         /** Estimated price of installation after the preliminary quote with site visit was made*/
         PreliminaryQuotePrice,
         
+        /** Preliminary size of a system */
+        PreliminaryQuoteDCSize,
+        
         
         /** Preliminary estimation of savings based on utility bill after site visit */
         PreliminaryQuoteEstimatedSavings,
@@ -496,6 +499,10 @@ namespace solar_core
         
         /** Parameters of a SEI, frequency of updating pricing */
         SEIFrequencyDecPrice,
+        
+        /**  If use customer specific consumption data in preliminary quotes */
+        SEIAverageDemandInPreliminaryQuote,
+        
         
 		/*Could you also use an enumerated class for high efficiency, mid and low efficiency design?*/
 
@@ -974,6 +981,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::seimaxroofage")
             {
                 return EParamTypes::SEIMaxRoofAge;
+            }
+            else if (param_type == "eparamtypes::seiaveragedemandinpreliminaryquote")
+            {
+                return EParamTypes::SEIAverageDemandInPreliminaryQuote;
             }
             else if (param_type == "eparamtypes::estimateddemandcoefficientncdec")
             {

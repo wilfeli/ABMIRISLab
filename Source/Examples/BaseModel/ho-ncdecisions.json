@@ -16,7 +16,7 @@
                                                    3
                                                    ],
             "EParamTypes::HONCDecisionTotalPrice":[
-                                                   20000
+                                                   30000
                                                    ]
         },
         "frequency": 0.1
@@ -27,7 +27,7 @@
                                                    4
                                                    ],
             "EParamTypes::HONCDecisionTotalPrice":[
-                                                   15000
+                                                   25000
                                                    ]
         },
         "frequency": 0.5

@@ -14,7 +14,7 @@
                       ],
     "params": [
                {
-               "EParamTypes::EstimatedDemandCoefficientNCDec": 1.6e-5
+               "EParamTypes::EstimatedDemandCoefficientNCDec": 0.0000166
                },
                {
                "EParamTypes::EstimatedPricePerWatt": 3.5

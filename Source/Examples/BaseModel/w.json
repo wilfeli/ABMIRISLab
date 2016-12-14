@@ -115,6 +115,9 @@
                         },
                         {
                         "EParamTypes::PVModuleWarrantyLength": 25.0
+                        },
+                        {
+                        "EParamTypes::SEIAverageDemandInPreliminaryQuote":0.0
                         }
                         ]
     },
