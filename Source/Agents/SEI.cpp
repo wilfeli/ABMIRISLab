@@ -211,8 +211,42 @@ SEI::form_online_quote(std::shared_ptr<PVProject> project_)
 void
 SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
 {
+    //check age
+    auto house = project_->agent->house;
+    double roof_age = 0.0;
+    
+    //calculate final roof age
+    if (house->FLAG_RELATIVE_TIME)
+    {
+        roof_age = a_time - house->time_update;
+    }
+    else
+    {
+        roof_age = house->roof_age + a_time;
+    };
+    
+    if (roof_age >= WorldSettings::instance().THETA_roof_update[0])
+    {
+        //see if decides to update (over the past period, so that all roofs are updated)
+        if (w->rand_sei->ru() <= WorldSettings::instance().THETA_roof_update[1])
+        {
+            //decided to update
+            house->FLAG_RELATIVE_TIME = true;
+            house->time_update = a_time;
+            roof_age = 0.0;
+        };
+        
+    };
+    
+    
+    
+    
+    
+    
+    
+    
     //add information to the parameters of an agent
-    project_->state_base_agent->params[EParamTypes::RoofAge] = project_->agent->house->roof_age;
+    project_->state_base_agent->params[EParamTypes::RoofAge] = roof_age;
     
     
     //if age > age threshold - ask if is willing to reroof
@@ -256,6 +290,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
         else
         {
             project_->state_project = EParamTypes::ClosedProject;
+            project_->ac_sei_time = a_time;
         };
     };
     
@@ -1069,7 +1104,7 @@ SEI::act_tick()
 #ifdef DEBUG
     for (auto& project:pvprojects)
     {
-        if (project->state_project == EParamTypes::ClosedProject)
+        if ((project->state_project == EParamTypes::ClosedProject) && (project->ac_hh_time != a_time))
         {
             throw std::runtime_error("Closed project in SEI");
         };
@@ -1094,7 +1129,7 @@ SEI::act_tick()
         };
         
         
-        //if visited site and processing time for preliminary quote has elapsed -  form preliminary quote
+        //if processing time for preliminary quote has elapsed -  form preliminary quote
         if (project->state_project == EParamTypes::RequestedPreliminaryQuote)
         {
             //just processing time

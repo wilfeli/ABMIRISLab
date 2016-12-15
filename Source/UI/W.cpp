@@ -233,6 +233,15 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     
     serialize::deserialize(pt.get_child("params"),params);
     
+    
+    
+    //add parameters for roof updating
+    serialize::deserialize(pt.get_child("WorldSettings.THETA_roof_update"), WorldSettings::instance().THETA_roof_update);
+    
+    
+    
+    
+    
     //set internals
     time = 0;
     

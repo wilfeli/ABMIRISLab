@@ -245,6 +245,7 @@ Homeowner::dec_evaluate_online_quotes()
         else
         {
             pvprojects[i]->state_project = EParamTypes::ClosedProject;
+            pvprojects[i]->ac_hh_time = a_time;
         };
         
     };
@@ -254,10 +255,7 @@ Homeowner::dec_evaluate_online_quotes()
     if ((n_preliminary_quotes_requested <= 0.0) && (pool.size() > 0.0))
     {
         quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
-        
         clean_after_dropout();
-    
-        
     }
     else
     {
@@ -334,22 +332,30 @@ void Homeowner::dec_evaluate_online_quotes_nc()
 {
     //here additional NCDec after get generic prices
     auto pool = std::vector<bool>(pvprojects.size(), false);
+    int64_t N_PASSED_PROJECTS = 0;
+    int64_t N_ELIGIBLE_PROJECTS = 0;
     
     for (auto i = 0; i < pvprojects.size(); ++i)
     {
-        //check if is in the pool
-        //check on Customer rating
-        if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
+        //if there is quote
+        if (pvprojects[i]->preliminary_quote)
         {
-            pool[i] = true;
-        }
-#ifdef DEBUG
-        else
-        {
-            std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
-        }
-#endif
-        ;
+            ++N_ELIGIBLE_PROJECTS;
+            //check if is in the pool
+            //check on Customer rating
+            if (pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] <= THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0])
+            {
+                pool[i] = true;
+                ++N_PASSED_PROJECTS;
+            }
+    #ifdef DEBUG
+            else
+            {
+                std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
+            }
+    #endif
+            ;
+        };
     };
     
     int64_t N_CLOSED_PROJECTS = 0;
@@ -358,16 +364,17 @@ void Homeowner::dec_evaluate_online_quotes_nc()
         //pool is now narrowed down to the subset of all open projects, request further information from them (without site visit for this step)
         if (pool[i])
         {
-            auto project = pvprojects[i];
-            project->state_project = EParamTypes::RequestedPreliminaryQuote;
-            project->sei->request_preliminary_quote(project);
+//            auto project = pvprojects[i];
+//            project->state_project = EParamTypes::RequestedPreliminaryQuote;
+//            project->sei->request_preliminary_quote(project);
             
             //update number of requested quotes
-            ++n_preliminary_quotes_requested;
+//            ++n_preliminary_quotes_requested;
         }
         else
         {
             pvprojects[i]->state_project = EParamTypes::ClosedProject;
+            pvprojects[i]->ac_hh_time = a_time;
             ++N_CLOSED_PROJECTS;
         };
         
@@ -375,12 +382,12 @@ void Homeowner::dec_evaluate_online_quotes_nc()
     
     
     
-    if ((n_preliminary_quotes_requested <= 0.0) && (pool.size() > 0.0))
+    if ((N_PASSED_PROJECTS <= 0.0) && (N_ELIGIBLE_PROJECTS > 0.0))
     {
         quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
         clean_after_dropout();
     }
-    else if (N_CLOSED_PROJECTS >= pool.size())
+    else if (N_CLOSED_PROJECTS >= N_ELIGIBLE_PROJECTS)
     {
         //if all projects are closed - dropped out
         quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
@@ -491,6 +498,7 @@ void Homeowner::dec_evaluate_preliminary_quotes()
             if (project != decision)
             {
                 project->state_project = EParamTypes::ClosedProject;
+                project->ac_hh_time = a_time;
             };
         };
         
@@ -500,6 +508,7 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     //exit evaluation stage
     n_preliminary_quotes = 0;
     n_preliminary_quotes_requested = 0;
+    
     
 }
 
@@ -614,6 +623,7 @@ void Homeowner::dec_evaluate_designs()
     }
     else
     {
+        //MARK: cont. add decision timing to hh and check that project is closed next tick after hh decision to close it
         quote_state = EParamTypes::HOStateDroppedOutDesignStage;
         clean_after_dropout();
     };
@@ -627,6 +637,7 @@ void Homeowner::dec_evaluate_designs()
             if (project != decision)
             {
                 project->state_project = EParamTypes::ClosedProject;
+                project->ac_hh_time = a_time;
             };
         };
         
@@ -654,6 +665,22 @@ Homeowner::receive_design(std::shared_ptr<PVProject> project_)
 void
 Homeowner::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
+
+    
+#ifdef DEBUG
+    if (n_preliminary_quotes_requested <= 0.0)
+    {
+        throw std::runtime_error("mismatched number of quotes");
+    };
+    
+    if (n_preliminary_quotes > n_preliminary_quotes_requested)
+    {
+        std::cout << "mismatched number of quotes" << std::endl;
+    };
+    
+#endif
+    
+    
     ++n_preliminary_quotes;
 }
 
@@ -724,6 +751,7 @@ void Homeowner::clean_after_dropout()
     for(auto& project:pvprojects)
     {
         project->state_project = EParamTypes::ClosedProject;
+        project->ac_hh_time = a_time;
     };
 
     pvprojects_lock.lock();

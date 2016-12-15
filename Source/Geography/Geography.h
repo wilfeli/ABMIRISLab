@@ -60,7 +60,9 @@ namespace solar_core
         double roof_size; /*!< size of a roof, in m^2 */
         double house_size; /*!< size of a house in ? */
         double roof_effective_size = 0.0; /*!< effective size of a roof - taken into account orientation and general shape, percent of roof_size */
-        
+        bool FLAG_RELATIVE_TIME = false;
+        TimeUnit time_update = 0;
+        double cuurent_age = 0;
         
     };
     
