@@ -164,6 +164,11 @@ Homeowner::ac_inf_quoting_sei()
         auto sei = std::find_if(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &project){
             if (project)
             {
+                while (!marketing_inf)
+                {
+                    //spinning lock, for the case when push is not finished into get_inf_marketing_sei
+                    //otherwise might throw when size for get_inf_marketing_sei is already updated, but pointer is not set up yet
+                };
                 return project->sei == marketing_inf->agent;
             }
             else
@@ -736,7 +741,7 @@ bool
 Homeowner::dec_project_reroof(std::shared_ptr<PVProject> project)
 {
     //MARK: cont.
-    return false;
+    return true;
 }
 
 

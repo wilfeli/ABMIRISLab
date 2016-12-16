@@ -250,7 +250,7 @@ SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
     
     
     //if age > age threshold - ask if is willing to reroof
-    if (project_->state_base_agent->params[EParamTypes::RoofAge] > params[EParamTypes::SEIMaxRoofAge])
+    if (project_->state_base_agent->params[EParamTypes::RoofAge] > params[EParamTypes::SEIMaxRoofAge] / constants::NUMBER_TICKS_IN_YEAR)
     {
         
         auto dec = project_->agent->dec_project_reroof(project_);
@@ -274,25 +274,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     //MARK: cont. create preliminary quote estimate from real data
     //by default provide prelminary quote, but in some cases refuse to proceed with the project and close it
     //is here because otherwise later assigning in case of reroofing will override this
-    //MARK: cont. sort reroofing logic
-    project_->state_project = EParamTypes::ProvidedPreliminaryQuote;
-    
-    //@DevStage3 think about changing location of this request. For now it is assumed that SEI bails out if roof is too old by its standards
-    //if roof is old and refuses to reroof - close project
-    if (project_->state_project == EParamTypes::RequiredHOReroof)
-    {
-        //if agrees to reroof - transfer into waiting state
-        //otherwise mark as closed
-        if (project_->state_base_agent->params[EParamTypes::HODecisionReroof])
-        {
-            project_->state_project = EParamTypes::WaitingHOReroof;
-        }
-        else
-        {
-            project_->state_project = EParamTypes::ClosedProject;
-            project_->ac_sei_time = a_time;
-        };
-    };
+
     
     //forms design by default, for an average demand
     auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
@@ -1137,6 +1119,7 @@ SEI::act_tick()
             {
                 auto mes = form_preliminary_quote(project, THETA_profit[0]);
                 project->preliminary_quote = mes;
+                
                 project->state_project = EParamTypes::ProvidedPreliminaryQuote;
                 project->agent->receive_preliminary_quote(project);
                 project->ac_sei_time = a_time;
@@ -1185,7 +1168,7 @@ SEI::act_tick()
         
         
         
-        
+        //here it is assumed that is not waiting for reroofing, as it will be handled separately
         if (project->state_project == EParamTypes::CollectedInfFirstSiteVisit)
         {
             //if enough time has elapsed
@@ -1296,7 +1279,26 @@ SEI::act_tick()
         if (project)
         {
             collect_inf_site_visit(project);
-            project->state_project = EParamTypes::CollectedInfFirstSiteVisit;
+        
+            //@DevStage3 think about changing location of this request. For now it is assumed that SEI bails out if roof is too old by its standards
+            //if roof is old and refuses to reroof - close project
+            if (project->state_project == EParamTypes::RequiredHOReroof)
+            {
+                //if agrees to reroof - transfer into waiting state
+                //otherwise mark as closed
+                if (project->state_base_agent->params[EParamTypes::HODecisionReroof])
+                {
+                    project->state_project = EParamTypes::WaitingHOReroof;
+                }
+                else
+                {
+                    project->state_project = EParamTypes::ClosedProject;
+                };
+            }
+            else
+            {
+                project->state_project = EParamTypes::CollectedInfFirstSiteVisit;
+            };
             project->ac_sei_time = a_time;
         };
     };
