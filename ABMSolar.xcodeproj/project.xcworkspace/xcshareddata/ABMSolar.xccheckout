@@ -12,6 +12,8 @@
 	<dict>
 		<key>1ABBEFDE7F25C69F9C4970B3F2DB1190F0E57356</key>
 		<string>github.com:wilfeli/ABMIRISLab.git</string>
+		<key>254CB2B88A92C10637F15DA9FE8C5C4A49D06343</key>
+		<string>https://github.com/wilfeli/abm-solar-wps.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ABMSolar.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>1ABBEFDE7F25C69F9C4970B3F2DB1190F0E57356</key>
 		<string>../..</string>
+		<key>254CB2B88A92C10637F15DA9FE8C5C4A49D06343</key>
+		<string>../../../WPs</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:wilfeli/ABMIRISLab.git</string>
@@ -35,6 +39,14 @@
 			<string>1ABBEFDE7F25C69F9C4970B3F2DB1190F0E57356</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ABMIRISLab</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>254CB2B88A92C10637F15DA9FE8C5C4A49D06343</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WPs</string>
 		</dict>
 	</array>
 </dict>

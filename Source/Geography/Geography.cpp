@@ -13,11 +13,15 @@
 using namespace solar_core;
 
 
+House::House(){}
+
+
 House::House(const PropertyTree& pt_)
 {
     roof_age = pt_.get<double>("roof_age");
     roof_size = pt_.get<double>("roof_size");
     house_size = pt_.get<double>("house_size");
+    roof_effective_size = pt_.get<double>("roof_effective_size");
     
 }
 
@@ -38,9 +42,25 @@ WorldMap::WorldMap(PropertyTree& pt, W* w_)
     for (auto i = 0; i < N_TILE_Y; ++i)
     {
         g_map.push_back({});
+        h_map.push_back({});
         for (auto j = 0; j < N_TILE_X; ++j)
         {
+            h_map[i].push_back({});
             g_map[i].push_back(new Tile(1.0, 1.0, solar_irradiation, permit_difficulty, requires_permit_visit));
+        };
+    };
+    
+}
+
+
+WorldMapSpecialization<WEE>::WorldMapSpecialization(PropertyTree& pt, W* w_):Super(pt, w_)
+{
+    for (auto i = 0; i < g_map.size(); ++i)
+    {
+        h_map.push_back({});
+        for (auto j = 0; j < g_map[i].size(); ++j)
+        {
+            h_map.push_back({});
         };
     };
     

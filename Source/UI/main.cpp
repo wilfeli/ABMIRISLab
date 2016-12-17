@@ -66,6 +66,10 @@ int main(int argc, const char * argv[])
 #ifdef _WIN64
 	if (_access(path_to_model_file.string().c_str(), 00) != -1)
 #endif
+
+#ifdef _WIN32
+	if (_access(path_to_model_file.string().c_str(), 00) != -1)
+#endif
 	{
     }
     else
@@ -98,6 +102,10 @@ int main(int argc, const char * argv[])
     w->FLAG_IS_PAUSED = false;
     
     solar_ui::UI* ui = new solar_ui::UI();
+    
+    //initialize ui
+    ui->init(w);
+
     
     //start threads with fs, bs, main cycle, markets
     std::vector<std::thread> threads;

@@ -45,15 +45,15 @@ protected:
     
     
     
-    class MesSellOrder
-    {
-    public:
-        MesSellOrder(std::string item_, double qn_, SEI* buyer_):item(item_), qn(qn_), buyer(buyer_){};
-        std::string item;
-        double qn;
-        SEI* buyer;
-    protected:
-    };
+class MesSellOrder
+{
+public:
+    MesSellOrder(std::string item_, double qn_, SEI* buyer_):item(item_), qn(qn_), buyer(buyer_){};
+    std::string item;
+    double qn;
+    SEI* buyer;
+protected:
+};
     
     
 class MesDesign
@@ -61,6 +61,7 @@ class MesDesign
 public:
     MesDesign(std::shared_ptr<PVDesign> design_): design(design_){}
     std::shared_ptr<PVDesign> design;
+    std::map<EParamTypes, double> params; /*!< other parameters of a design */
 protected:
 };
     

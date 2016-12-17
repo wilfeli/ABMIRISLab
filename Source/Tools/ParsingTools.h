@@ -20,7 +20,7 @@ namespace solar_core
         
         
         template <class T>
-        void parse_csv_file(std::string path_to_file, std::vector<std::vector<T>>& parsed_file)
+        void parse_csv_file(std::string path_to_file, std::vector<std::vector<T>>* parsed_file)
         {
             //read path to the saved w file
             std::ifstream in_file(path_to_file);
@@ -28,7 +28,14 @@ namespace solar_core
 //            const std::regex re{"((?:[^\\\\,]|\\\\.)*?)(?:,|$)"};
 //            const std::regex re{"(\d+)(,\s*\d+)*"};
             const std::regex re("[\\s,]+");
-//            auto n = 0;
+            
+//            const std::regex re("[^,]+");
+            
+//            const std::regex re("[^,\s][^\,]*[^,\s]*");
+
+            
+            
+            auto n = 0;
             
             //skip first line
             std::getline(in_file, s);
@@ -36,12 +43,10 @@ namespace solar_core
             //extract information from .model file
             while (std::getline(in_file, s))
             {
-                parsed_file.push_back(std::vector<T>{});
+                parsed_file->push_back(std::vector<T>{});
                 const std::sregex_token_iterator end;
                 
                 //skip first column
-                
-                
                 for (std::sregex_token_iterator iter(s.begin(), s.end(), re, -1); iter != end; ++iter)
                 {
                     
@@ -54,7 +59,7 @@ namespace solar_core
 //                    
 //#endif
                     
-                    parsed_file.back().push_back(serialize::DeserializeValue<T>::deserialize_value(*iter));
+                    parsed_file->back().push_back(serialize::DeserializeValue<T>::deserialize_value(*iter));
                 };
                 
             };

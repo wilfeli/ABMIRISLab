@@ -19,6 +19,7 @@ namespace solar_core
 {
     
     class SolarModule;
+    class Inverter;
     
     /**
      
@@ -59,6 +60,9 @@ namespace solar_core
         
         std::map<std::string, std::shared_ptr<SolarModule>> solar_modules; /*!< list of available solar modules */
         
+        std::map<std::string, std::shared_ptr<Inverter>> inverters; /*!< list of available Inverters */
+        
+        std::vector<double> THETA_roof_update;
         
         
         //@}

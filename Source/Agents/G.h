@@ -38,6 +38,7 @@ namespace solar_core
      */
     class G
     {
+        friend class W;
     public:
         //@{
         /**

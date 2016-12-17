@@ -30,6 +30,26 @@ namespace solar_core
         
         /**
          
+         Empirical distribution for H decision classes
+         
+         
+         */
+        class EmpiricalHUVD
+        {
+        public:
+            std::map<std::string, std::map<EParamTypes, std::vector<double>>> HOD_distribution_scheme;
+            std::map<std::string, double> HOD_distribution;
+            std::vector<std::string> labels;
+            std::vector<double> cmf{0};
+
+        };
+        
+        
+        
+        
+        
+        /**
+         
          
          Empirical univariate distribution
          
@@ -74,7 +94,7 @@ namespace solar_core
         
         EmpiricalMVD* create_joint_distribution(std::string path_to_scheme, std::string path_to_data);
         
-        void calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM);
+        void calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>* parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM);
         
         std::vector<long> collapse_pmf(std::vector<long>& i_x, EmpiricalUVD* dist, EmpiricalMVD* pmf);
         

@@ -39,6 +39,8 @@ namespace solar_core
         const double NUMBER_DAYS_IN_MONTH = 30.4375;
         const double NUMBER_DAYS_IN_YEAR = 365.25;
         const double NUMBER_DAYS_IN_TICK = 365.25;
+        const double NUMBER_TICKS_IN_YEAR = 52.0;
+        const int LABOR_UNITS_PER_TICK = 40;
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
         const double NUMBER_SQM_IN_SQF = 0.09290304;
@@ -125,12 +127,18 @@ namespace solar_core
         /** Number of manufactures to generate */
         N_SEM,
         
+        /** Number of pv module manufactures to generate */
+        N_SEMPVProducer,
+        
+        /** Number of inverter manufactures to generate */
+        N_SEMInverterProducer,
+        
+        
         /** Number of homeowners that are interested in installing */
         N_HOMarketingStateHighlyInterested,
         
         /** Number of potential buyers */
         TotalPVMarketSize,
-        
         
         
         /** Historical penetration level */
@@ -140,9 +148,6 @@ namespace solar_core
         /** Labor price for the installers - qualified labor */
         LaborPrice,
         
-        
-        
-        
         /** Electricity Bill */
         ElectricityBill,
         
@@ -150,12 +155,73 @@ namespace solar_core
         /** Roof size */
         RoofSize,
         
+        
         /** Roof age */
         RoofAge,
         
         
-		/*Why couldn't we use an enum class to show different levels of interest for HOMarketingState?*/
-		
+        /**  Globally set warranty length of PV modules */
+        PVModuleWarrantyLength,
+        
+        
+        /** Homeowner non-compensatory decisions: ratings screening rule */
+        HONCDecisionSEIRating,
+        
+        
+        /** Homeowner non-compensatory decisions: total price */
+        HONCDecisionTotalPrice,
+        
+        
+        /** Homeowner installer decision: utility of other options */
+        HOSEIDecisionUtilityNone,
+        
+        
+        /** Resulting estimate of the utility for an option */
+        HOSEIDecisionEstimatedUtility,
+        
+        /** Decision on net savings */
+        HOSEIDecisionEstimatedNetSavings,
+        
+        /** Decisions on the length of the project */
+        HOSEIDecisionTotalProjectTime,
+        
+        
+        /**  Utiilty of alternative */
+        HODesignDecisionUtilityNone,
+        
+        /** Decision on panels efficiency */
+        HODesignDecisionPanelEfficiency,
+        
+        /** Is property of a specific panel */
+        HODesignDecisionPanelVisibility,
+        
+        /** Decision on inverter type */
+        HODesignDecisionInverterType,
+        
+        /** Is property of a design as a whole */
+        HODesignDecisionFailures,
+        
+        /** Is property of a design as a whole. Calculated from expected produced enegry */
+        HODesignDecisionCO2,
+        
+        /** Decisions on savings of the whole istallation */
+        HODesignDecisionEstimatedNetSavings,
+        
+        /** Resulting estimate of the utility for an option */
+        HODesignDecisionEstimatedUtility,
+        
+        
+        /** Types of decisions */
+        HONCDecision,
+        HOSEIDecision,
+        HODesignDecision, 
+        
+        
+        
+        
+        
+        
+        
 		/** If Homeowner is very interested in SP */
         HOMarketingStateHighlyInterested,
         
@@ -165,19 +231,56 @@ namespace solar_core
         
         
         /** If Homeowner is not interested in installing SP */
-        HOMarketingNotInterested,
+        HOMarketingStateNotInterested,
+        
+        
+        /*!< If Homeowner in other stages and not open to new marketing */
+        HOMarketingStateNotAccepting,
 
         
         /** If Homeowner is already installed */
-        HOMarketingCommitedToInstallation,
+        HOStateCommitedToInstallation,
+        
+        
+        
+        /** If Homeowner is finished installing */
+        HOStateInterconnected,
+        
+        
+        /** If Homeowner decided to drop out at SEI conjoint stage  */
+        HOStateDroppedOutSEIStage,
+        
+        
+        /** If Homeowner decided to drop out at NC Decision stage  */
+        HOStateDroppedOutNCDecStage,
 
+
+        /** If Homeowner decided to drop out at Design stage  */
+        HOStateDroppedOutDesignStage,
+        
         
         /** State of a quoting stage for HO: actively requesting information */
-        ActiveQuoting,
+        HOStateActiveQuoting,
         
         
         /** State of a quoting stage for HO: not requesting quotes, might be analysing them or committed to the project */
-        InactiveQuoting,
+        HOStateInactiveQuoting,
+        
+        
+        /** State of a quoting stage for HO: waits for online quotes to be provided */
+        HOStateWaitingOnOnlineQuotes,
+        
+        
+        /** State of a quoting stage for HO: waiting for preliminary quotes */
+        HOStateWaitingOnPreliminaryQuotes,
+        
+        
+        /** State of a quoting stage for HO: waiting for designs */
+        HOStateWaitingOnDesigns,
+        
+        
+        /** State of a quoting stage for HO: waiting for permitting */
+        HOStateEvaluatedDesigns,
         
         
         /** State of a quoting stage for HO: decision on reroofing old roof */
@@ -190,6 +293,12 @@ namespace solar_core
         
         /** Thetas for decisions: decision on preliminary quotes */
         HODecPreliminaryQuote,
+        
+        
+        /** Number of active agents per tick, used in data collection */
+        HONumberActiveAgents,
+        
+        
         
         
         /** State of a Project: preliminary quotes has been requested via online */
@@ -281,9 +390,29 @@ namespace solar_core
         /** Estimated price of installation after the preliminary quote with site visit was made*/
         PreliminaryQuotePrice,
         
+        /** Preliminary size of a system */
+        PreliminaryQuoteDCSize,
+        
         
         /** Preliminary estimation of savings based on utility bill after site visit */
         PreliminaryQuoteEstimatedSavings,
+        
+        
+        /** Preliminary estimation of savings based on utility bill after site visit, net expression */
+        PreliminaryQuoteEstimatedNetSavings,
+        
+        
+
+
+        
+        /** Estimated total project time for the location - general estimate */
+        PreliminaryQuoteTotalProjectTime,
+        
+        
+        
+        
+        /**  For testing purposes, coef in demand equation  */
+        EstimatedDemandCoefficientNCDec,
         
         
         /** Industry standard price per watt that is used in estimating installation cost */
@@ -310,6 +439,10 @@ namespace solar_core
         DCtoACLoss,
         
         
+        /** Convertion from kWh into acres of forest for CO2 */
+        EnergyToCO2,
+        
+        
         /** Length of a definition for degradation rate */
         DegradationDefinitionLength,
         
@@ -321,6 +454,26 @@ namespace solar_core
         
         /** Large SEI */
         SEILarge,
+        
+        
+        /** Parameters of a SEI: rating */
+        SEIRating,
+        
+        
+        /** Parameters of a SEI: type of interaction */
+        SEIInteractionType,
+        
+        
+        /** Parameters of a SEI: equipment type*/
+        SEIEquipmentType,
+        
+        
+        /** Parameters of a SEI: lead in time before project could moved into permitting phase*/
+        SEILeadInProjectTime,
+        
+        
+        /** Parameters of a SEI: type of warranty*/
+        SEIWarranty,
 
         
         /** Parameters of a SEI, such as processing time before preliminary quote is formed after site visit */
@@ -343,6 +496,13 @@ namespace solar_core
 
         /** Parameters of a SEI, frequency of revising designs */
         SEIFrequencyUpdateDesignTemplates,
+        
+        /** Parameters of a SEI, frequency of updating pricing */
+        SEIFrequencyDecPrice,
+        
+        /**  If use customer specific consumption data in preliminary quotes */
+        SEIAverageDemandInPreliminaryQuote,
+        
         
 		/*Could you also use an enumerated class for high efficiency, mid and low efficiency design?*/
 
@@ -404,6 +564,34 @@ namespace solar_core
         /** SEM parameter: Learning rate for production of new panels, basically price decrease rate */
         SEMLearningPrice,
         
+        
+        /** Inverter or PV producer  */
+        SEMPVProducer,
+        SEMInverterProducer,
+        
+        
+        
+        /** Base Prices per type */
+        SEMCentralInverterBasePrice,
+        SEMMicroInverterBasePrice,
+        
+        
+        
+        /** Failure rates for PV module, failure rate per year! */
+        SEMFailureRatePVModule,
+        
+        /** Failure rates for central inverter, failure rate per year! */
+        SEMFailureRateInverterCentral,
+        
+        /** Failure rates for power optimizer, failure rate per year! */
+        SEMFailureRateInverterPowerOptimizer,
+        
+        /** Failure rates for micro inverter, failure rate per year! */
+        SEMFailureRateInverterMicro,
+        
+        
+        
+        
         /** G parameters: processing time before visit is scheduled */
         GProcessingTimeRequiredForSchedulingPermitVisit,
         
@@ -430,21 +618,33 @@ namespace solar_core
         UtilityCurrentCapacity,
         
         
-        /** State of Payments: all payments on time */
-        PaymentsOnTime,
-        
-        
-        
         /** Marketing part: number of HO to draw per unit of time to push marketing information */
         MarketingMaxNToDrawPerTimeUnit,
         
         
+        /** Market, maximum distance to accept sei offer */
+        MarketingSEIMaxDistance,
+        
+        
+        
+        
+        /** State of Payments: all payments on time */
+        PaymentsOnTime,
+        
+        
+
+        
+        
         /** Technology block: inverters technology type standard */
-        TechnologyInverterStandard,
+        TechnologyInverterCentral,
         
         
         /** Technology block: inverters technology type micro */
         TechnologyInverterMicro,
+        
+        
+        /** Technology block: inverters technology type micro */
+        TechnologyInverterPowerOptimizer,
         
         
         /** Number of H to draw per tick for EE model */
@@ -538,6 +738,45 @@ namespace solar_core
     
     
     
+    /** All in terms of efficiency only  */
+    enum class ESEIEquipmentType: int64_t
+    {
+        
+        /**  Least advanced */
+        Traditional = 0,
+        
+        /**  Mid range */
+        Standard = 1,
+        
+        /**  Most advanced */
+        CuttingEdge = 2,
+        
+        /** Empty enum for completeness  */
+        None = -1
+    };
+    
+    
+    
+    enum class ESEIInverterType: int64_t
+    {
+        
+        Central = 0,
+        
+        
+        PoweOptimizer = 1,
+        
+        
+        Micro = 2,
+        
+        
+        
+        /** Empty enum for completeness  */
+        None = -1
+        
+    };
+    
+    
+    
     
     enum class EDecParams: int64_t
     {
@@ -595,6 +834,14 @@ namespace solar_core
             {
                 return EParamTypes::N_H;
             }
+            else if (param_type == "eparamtypes::energytoco2")
+            {
+                return EParamTypes::EnergyToCO2;
+            }
+            else if (param_type == "eparamtypes::pvmodulewarrantylength")
+            {
+                return EParamTypes::PVModuleWarrantyLength;
+            }
             else if (param_type == "eparamtypes::hodecpreliminaryquote")
             {
                 return EParamTypes::HODecPreliminaryQuote;
@@ -635,9 +882,57 @@ namespace solar_core
             {
                 return EParamTypes::HOMarketingStateHighlyInterested;
             }
-            else if (param_type == "eparamtypes::inactivequoting")
+            else if (param_type == "eparamtypes::honcdecisionseirating")
             {
-                return EParamTypes::InactiveQuoting;
+                return EParamTypes::HONCDecisionSEIRating;
+            }
+            else if (param_type == "eparamtypes::honcdecisiontotalprice")
+            {
+                return EParamTypes::HONCDecisionTotalPrice;
+            }
+            else if (param_type == "eparamtypes::hoseidecisionutilitynone")
+            {
+                return EParamTypes::HOSEIDecisionUtilityNone;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionco2")
+            {
+                return EParamTypes::HODesignDecisionCO2;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionfailures")
+            {
+                return EParamTypes::HODesignDecisionFailures;
+            }
+            else if (param_type == "eparamtypes::hoseidecisiontotalprojecttime")
+            {
+                return EParamTypes::HOSEIDecisionTotalProjectTime;
+            }
+            else if (param_type == "eparamtypes::hoseidecisionestimatednetsavings")
+            {
+                return EParamTypes::HOSEIDecisionEstimatedNetSavings;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionestimatednetsavings")
+            {
+                return EParamTypes::HODesignDecisionEstimatedNetSavings;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisioninvertertype")
+            {
+                return EParamTypes::HODesignDecisionInverterType;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionutilitynone")
+            {
+                return EParamTypes::HODesignDecisionUtilityNone;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionpanelvisibility")
+            {
+                return EParamTypes::HODesignDecisionPanelVisibility;
+            }
+            else if (param_type == "eparamtypes::hodesigndecisionpanelefficiency")
+            {
+                return EParamTypes::HODesignDecisionPanelEfficiency;
+            }
+            else if (param_type == "eparamtypes::hostateinactivequoting")
+            {
+                return EParamTypes::HOStateInactiveQuoting;
             }
             else if (param_type == "eparamtypes::seihighefficiencydesign")
             {
@@ -671,6 +966,10 @@ namespace solar_core
             {
                 return EParamTypes::SEIFrequencyUpdateDesignTemplates;
             }
+            else if (param_type == "eparamtypes::seifrequencydecprice")
+            {
+                return EParamTypes::SEIFrequencyDecPrice;
+            }
             else if (param_type == "eparamtypes::seimaxninstallationspertimeunit")
             {
                 return EParamTypes::SEIMaxNInstallationsPerTimeUnit;
@@ -682,6 +981,14 @@ namespace solar_core
             else if (param_type == "eparamtypes::seimaxroofage")
             {
                 return EParamTypes::SEIMaxRoofAge;
+            }
+            else if (param_type == "eparamtypes::seiaveragedemandinpreliminaryquote")
+            {
+                return EParamTypes::SEIAverageDemandInPreliminaryQuote;
+            }
+            else if (param_type == "eparamtypes::estimateddemandcoefficientncdec")
+            {
+                return EParamTypes::EstimatedDemandCoefficientNCDec;
             }
             else if (param_type == "eparamtypes::seiprocessingtimerequiredfordesign")
             {
@@ -710,6 +1017,26 @@ namespace solar_core
             else if (param_type == "eparamtypes::seitimeluforadministration")
             {
                 return EParamTypes::SEITimeLUForAdministration;
+            }
+            else if (param_type == "eparamtypes::seiinteractiontype")
+            {
+                return EParamTypes::SEIInteractionType;
+            }
+            else if (param_type == "eparamtypes::seileadinprojecttime")
+            {
+                return EParamTypes::SEILeadInProjectTime;
+            }
+            else if (param_type == "eparamtypes::seiwarranty")
+            {
+                return EParamTypes::SEIWarranty;
+            }
+            else if (param_type == "eparamtypes::seiequipmenttype")
+            {
+                return EParamTypes::SEIEquipmentType;
+            }
+            else if (param_type == "eparamtypes::seirating")
+            {
+                return EParamTypes::SEIRating;
             }
             else if (param_type == "eparamtypes::n_ho")
             {
@@ -775,6 +1102,10 @@ namespace solar_core
             {
                 return EParamTypes::GFederalTaxIncentive;
             }
+            else if (param_type == "eparamtypes::marketingseimaxdistance")
+            {
+                return EParamTypes::MarketingSEIMaxDistance;
+            }
             else if (param_type == "eparamtypes::dctoacloss")
             {
                 return EParamTypes::DCtoACLoss;
@@ -831,6 +1162,30 @@ namespace solar_core
             {
                 return EParamTypes::SEMLearningPrice;
             }
+            else if (param_type == "eparamtypes::semfailureratepvmodule")
+            {
+                return EParamTypes::SEMFailureRatePVModule;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinvertercentral")
+            {
+                return EParamTypes::SEMFailureRateInverterCentral;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinverterpoweroptimizer")
+            {
+                return EParamTypes::SEMFailureRateInverterPowerOptimizer;
+            }
+            else if (param_type == "eparamtypes::semfailurerateinvertermicro")
+            {
+                return EParamTypes::SEMFailureRateInverterMicro;
+            }
+            else if (param_type == "eparamtypes::semcentralinverterbaseprice")
+            {
+                return EParamTypes::SEMCentralInverterBasePrice;
+            }
+            else if (param_type == "eparamtypes::semmicroinverterbaseprice")
+            {
+                return EParamTypes::SEMMicroInverterBasePrice;
+            }
             else if (param_type == "eparamtypes::utilitycurrentcapacity")
             {
                 return EParamTypes::UtilityCurrentCapacity;
@@ -843,9 +1198,17 @@ namespace solar_core
             {
                 return EParamTypes::UtilityProcessingTimeRequiredForPermit;
             }
+            else if (param_type == "eparamtypes::gprocessingtimerequiredforgrantingpermitforinstallation")
+            {
+                return EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation;
+            }
             else if (param_type == "eparamtypes::whmaxntodrawpertimeunit")
             {
                 return EParamTypes::WHMaxNToDrawPerTimeUnit;
+            }
+            else if (param_type == "eparamtypes::none")
+            {
+                return EParamTypes::None;
             }
             else
             {
@@ -865,17 +1228,157 @@ namespace solar_core
             {
                 return "EParamTypes::HOMarketingStateHighlyInterested";
             }
+            else if (param_ == EParamTypes::HONumberActiveAgents)
+            {
+                return "EParamTypes::HONumberActiveAgents";
+            }
             else if (param_ == EParamTypes::HOMarketingStateInterested)
             {
                 return "EParamTypes::HOMarketingStateInterested";
             }
-            else if (param_ == EParamTypes::HOMarketingNotInterested)
+            else if (param_ == EParamTypes::HOStateDroppedOutSEIStage)
+            {
+                return "EParamTypes::HOStateDroppedOutSEIStage";
+            }
+            else if (param_ == EParamTypes::HOStateDroppedOutNCDecStage)
+            {
+                return "EParamTypes::HOStateDroppedOutNCDecStage";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnOnlineQuotes)
+            {
+                return "EParamTypes::HOStateWaitingOnOnlineQuotes";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnPreliminaryQuotes)
+            {
+                return "EParamTypes::HOStateWaitingOnPreliminaryQuotes";
+            }
+            else if (param_ == EParamTypes::HOStateDroppedOutDesignStage)
+            {
+                return "EParamTypes::HOStateDroppedOutDesignStage";
+            }
+            else if (param_ == EParamTypes::HOStateWaitingOnDesigns)
+            {
+                return "EParamTypes::HOStateWaitingOnDesigns";
+            }
+            else if (param_ == EParamTypes::HOStateCommitedToInstallation)
+            {
+                return "EParamTypes::HOStateCommitedToInstallation";
+            }
+            else if (param_ == EParamTypes::HOStateInterconnected)
+            {
+                return "EParamTypes::HOStateInterconnected";
+            }
+            else if (param_ == EParamTypes::HOMarketingStateNotInterested)
             {
                 return "EParamTypes::HOMarketingNotInterested";
+            }
+            else if (param_ == EParamTypes::HOMarketingStateNotAccepting)
+            {
+                return "EParamTypes::HOMarketingStateNotAccepting";
             }
             else if (param_ == EParamTypes::HODecPreliminaryQuote)
             {
                 return "EParamTypes::HODecPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::RequestedOnlineQuote)
+            {
+                return "EParamTypes::RequestedOnlineQuote";
+            }
+            else if (param_ == EParamTypes::RequestedPreliminaryQuote)
+            {
+                return "EParamTypes::RequestedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::ProvidedOnlineQuote)
+            {
+                return "EParamTypes::ProvidedOnlineQuote";
+            }
+            else if (param_ == EParamTypes::ProvidedPreliminaryQuote)
+            {
+                return "EParamTypes::ProvidedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::ScheduledFirstSiteVisit)
+            {
+                return "EParamTypes::ScheduledFirstSiteVisit";
+            }
+            else if (param_ == EParamTypes::CollectedInfFirstSiteVisit)
+            {
+                return "EParamTypes::CollectedInfFirstSiteVisit";
+            }
+            else if (param_ == EParamTypes::RequiredHOReroof)
+            {
+                return "EParamTypes::RequiredHOReroof";
+            }
+            else if (param_ == EParamTypes::WaitingHOReroof)
+            {
+                return "EParamTypes::WaitingHOReroof";
+            }
+            else if (param_ == EParamTypes::AcceptedPreliminaryQuote)
+            {
+                return "EParamTypes::AcceptedPreliminaryQuote";
+            }
+            else if (param_ == EParamTypes::DraftedDesign)
+            {
+                return "EParamTypes::DraftedDesign";
+            }
+            else if (param_ == EParamTypes::AcceptedDesign)
+            {
+                return "EParamTypes::AcceptedDesign";
+            }
+            else if (param_ == EParamTypes::RequestedPermit)
+            {
+                return "EParamTypes::RequestedPermit";
+            }
+            else if (param_ == EParamTypes::ScheduledPermitVisit)
+            {
+                return "EParamTypes::ScheduledPermitVisit";
+            }
+            else if (param_ == EParamTypes::CollectedInfPermitVisit)
+            {
+                return "EParamTypes::CollectedInfPermitVisit";
+            }
+            else if (param_ == EParamTypes::ScheduledInstallation)
+            {
+                return "EParamTypes::ScheduledInstallation";
+            }
+            else if (param_ == EParamTypes::ScheduleInstallation)
+            {
+                return "EParamTypes::ScheduleInstallation";
+            }
+            else if (param_ == EParamTypes::PendingMaterials)
+            {
+                return "EParamTypes::PendingMaterials";
+            }
+            else if (param_ == EParamTypes::Installed)
+            {
+                return "EParamTypes::Installed";
+            }
+            else if (param_ == EParamTypes::RequestedPermitForInstallation)
+            {
+                return "EParamTypes::RequestedPermitForInstallation";
+            }
+            else if (param_ == EParamTypes::GrantedPermitForInstallation)
+            {
+                return "EParamTypes::GrantedPermitForInstallation";
+            }
+            else if (param_ == EParamTypes::RequestedInspectionAfterInstallation)
+            {
+                return "EParamTypes::RequestedInspectionAfterInstallation";
+            }
+            else if (param_ == EParamTypes::PassedInspectionAfterInstallation)
+            {
+                return "EParamTypes::PassedInspectionAfterInstallation";
+            }
+            else if (param_ == EParamTypes::RequestedPermitForInterconnection)
+            {
+                return "EParamTypes::RequestedPermitForInterconnection";
+            }
+            else if (param_ == EParamTypes::GrantedPermitForInterconnection)
+            {
+                return "EParamTypes::GrantedPermitForInterconnection";
+            }
+            else if (param_ == EParamTypes::ClosedProject)
+            {
+                return "EParamTypes::ClosedProject";
             }
             else if (param_ == EParamTypes::SEISmall)
             {
@@ -885,12 +1388,16 @@ namespace solar_core
             {
                 return "EParamTypes::SEILarge";
             }
+            else if (param_ == EParamTypes::None)
+            {
+                return "EParamTypes::None";
+            }
             else
             {
 #ifdef DEBUG
                 throw std::runtime_error("missing conversion");
 #endif
-                return "None";
+                return "EParamTypes::None";
             };
         }
         
@@ -945,6 +1452,51 @@ namespace solar_core
             };
 
         }
+        
+        
+        
+        
+        
+        static ESEIInverterType ToESEIInverterType(std::string param_)
+        {
+            //case insensitive
+            std::transform(param_.begin(), param_.end(), param_.begin(), ::tolower);
+            
+            if (param_ == "eseiinvertertype::central")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "single-phase string inverter")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "string inverter")
+            {
+                return ESEIInverterType::Central;
+            }
+            else if (param_ == "eseiinvertertype::poweoptimizer")
+            {
+                return ESEIInverterType::PoweOptimizer;
+            }
+            else if (param_ == "eseiinvertertype::micro")
+            {
+                return ESEIInverterType::Micro;
+            }
+            else if (param_ == "microinverter")
+            {
+                return ESEIInverterType::Micro;
+            }
+            else
+            {
+#ifdef DEBUG
+                std::cout << param_;
+                throw std::runtime_error("missing conversion");
+#endif
+                return ESEIInverterType::None;
+            };
+
+        }
+        
         
     };
     

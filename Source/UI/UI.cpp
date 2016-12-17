@@ -45,7 +45,7 @@ UI::save(std::string path_to_save_file_)
     //go through all installed projects and sort them by the date they were installed
     for (auto& project:w->interconnected_projects)
     {
-        save_data_raw[project->ac_sei_time].push_back(project);
+        save_data_raw[project->ac_utility_time].push_back(project);
     };
     
     

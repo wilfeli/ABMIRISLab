@@ -245,6 +245,14 @@ namespace serialize
         {
             out_ = ss.str();
         }
+        
+        static T deserialize_value(const std::string& in_)
+        {
+            T out_ = in_;
+            return out_;
+        }
+        
+        
     };
     
     
@@ -257,7 +265,36 @@ namespace serialize
         {
             for (auto& item : pt)
             {
-                r.push_back(item.second.get_value<T>());
+				try
+				{
+					r.push_back(item.second.get_value<T>());
+				}
+				catch (const std::exception&)
+				{
+					if (item.second.get_value<std::string>() == "inf")
+					{
+						r.push_back(std::numeric_limits<T>::infinity());
+					};
+				}
+				catch (...) 
+				{
+					if (item.second.get_value<std::string>() == "inf")
+					{
+						r.push_back(std::numeric_limits<T>::infinity());
+					};
+				}
+
+
+				//try {
+				//	r.push_back(item.second.get_value<T>());
+				//{
+				//catch (...) {
+				//	//check if it is infinity value
+				//	if (item.second.get_value<std::string>() == "inf") 
+				//	{
+				//		r.push_back(std::numeric_limits<T>::infinity());
+				//	};
+				//};
             };
         }
         
@@ -495,6 +532,12 @@ namespace serialize
                     double max = std::stod(formula.substr(formula.find(",") + 1, formula.find(",") - formula.find(")") - 1));
                     
                     formula = std::to_string(rand_.ru() * (max - min) + min);
+                }
+                else if (formula.find("CUSTOM") != std::string::npos)
+                {
+                    e.assign("CUSTOM");
+                    formula = std::regex_replace(formula, e, "");
+                    //MARK: cont. add log here 
                 };
                 
             };

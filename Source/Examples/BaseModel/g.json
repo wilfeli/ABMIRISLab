@@ -8,6 +8,8 @@
                },
                {
                "EParamTypes::GProcessingTimeRequiredForProcessingPermit":2
+               },
+               {"EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation":2
                }
                ]
 }

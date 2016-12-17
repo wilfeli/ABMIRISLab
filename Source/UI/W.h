@@ -15,7 +15,7 @@
 #include "Tools/ExternalIncludes.h"
 #include "Tools/IParameters.h"
 #include "Tools/IRandom.h"
-
+#include "Tools/Simulation.h"
 
 namespace solar_ui
 {
@@ -48,8 +48,14 @@ namespace solar_core {
     
     class W
     {
+#ifdef DEBUG
+        friend class Homeowner;
+#endif
+        
         friend class MarketingInst;
         friend class solar_ui::UI;
+        friend class SEI;
+        template <class T1, class T2> friend class HelperWSpecialization;
     public:
         //@{
         /**
@@ -167,6 +173,9 @@ namespace solar_core {
         void get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_); /*!< is called when project is interconnected to record it */
         
         
+        std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
+        
+        
         //@}
         
         
@@ -180,6 +189,25 @@ namespace solar_core {
         G* g; /*!< government */
         MarketingInst* marketing;
         Utility* utility; 
+        //@}
+        
+        
+        
+        
+        
+        //@{
+        /**
+         
+         Preferences by H  is assumed to be public knowledge
+         
+         
+         */
+        
+        std::map<EParamTypes, tools::EmpiricalHUVD*> ho_decisions;
+        
+        
+        
+        
         //@}
         
         
@@ -203,23 +231,53 @@ namespace solar_core {
         
         
         
-        
-        std::deque<IAgent*> get_inf_marketing_sei_agents; /*!< Agents that requested information, inform SEI that there is request for information for this agent */
-        
+
         
         
-        std::vector<Homeowner*> hos;/*!< all H agents */
-        std::vector<SEI*> seis;/*!< all SEI agents */
-        std::vector<SEM*> sems; /*!< all SEM */
+        
+        std::vector<Homeowner*>* hos;/*!< all H agents */
+        std::vector<SEI*>* seis;/*!< all SEI agents */
+        std::vector<SEM*>* sems; /*!< all SEM */
         /*!< H agents that are active, @DevStage3 think about splitting more fine grained */
         
 
         std::map<EParamTypes, double> params_d; /*!< have numerical values to parameters */
         
-        std::vector<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
+        std::set<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
+        
+        
+        std::vector<Homeowner*> active_hos; /*!< active portion of all Hs to be ticked over */
         
         
         
+        
+        
+        //@{
+        /**
+         
+         Managing concurrency
+         
+         */
+        
+        
+        int64_t TICKS_BEFORE_CLEAR = 30;
+        int64_t i_TICKS_BEFORE_CLEAR;
+        
+        //@}
+        
+        //@{
+        /**
+         
+         Data collection
+         
+         */
+        
+        
+        std::vector<std::map<EParamTypes, double>> history_decisions; 
+        
+        std::vector<std::map<EParamTypes, double>> history_projects;
+        
+        //@}
         
         
     };
