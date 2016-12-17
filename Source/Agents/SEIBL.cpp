@@ -25,6 +25,7 @@ SEIBL::SEIBL(const PropertyTree& pt_, WEE* w_):SEI(pt_, w_)
     max_profit = &SEIBL::max_profit_GS;
     
     //pregenerate range of prices
+    //CAREFUL as price range is set in the code instead of being a parameter
     int64_t N = 100;
     double p_min = 2.0;
     double p_max = 10.0;
@@ -146,13 +147,26 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     //system area size
     double system_area = N_PANELS * module_area;
     //convert sq.feet into sq. meters
-    double roof_area = constants::NUMBER_SQM_IN_SQF * agent_->house->roof_size;
+    double roof_area = constants::NUMBER_SQM_IN_SQF * agent_->house->roof_size * agent_->house->roof_effective_size;
     double available_area = std::min(roof_area, system_area);
     
     
     //update to the actual available area
-    N_PANELS = std::ceil(available_area/module_area);
+    N_PANELS = std::floor(available_area/module_area);
     DC_size = N_PANELS * dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width / 1000;
+    
+    
+
+    if (DC_size > 10000.0)
+    {
+        //restrict to 10kW
+        DC_size = std::min(10000.0, DC_size);
+        
+        
+        N_PANELS = DC_size / (dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width) * 1000;
+    };
+
+    
     
     
     //price per watt is predetermined by the optimality choice
@@ -589,6 +603,18 @@ PVProjectFlat* SEIBL::init_average_pvproject(TDesign* dec_design_hat, PVProjectF
     int N_PANELS = std::ceil(demand / ((solar_irradiation) * dec_design_hat->PV_module->efficiency * (dec_design_hat->PV_module->length * dec_design_hat->PV_module->width/1000000) * (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     
     double DC_size = N_PANELS * dec_design_hat->PV_module->efficiency * dec_design_hat->PV_module->length * dec_design_hat->PV_module->width / 1000;
+    
+    
+    if (DC_size > 10000.0)
+    {
+        //restrict to 10kW
+        DC_size = std::min(10000.0, DC_size);
+        
+        
+        N_PANELS = DC_size / (dec_design->PV_module->efficiency * dec_design->PV_module->length * dec_design->PV_module->width) * 1000;
+    };
+    
+    
     
     //create average project for this design
     project->PV_module = dec_design_hat->PV_module;

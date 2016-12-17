@@ -65,28 +65,40 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
 void
 SEM::init(W* w_)
 {
-    //collect solar panels
-    for (auto iter:WorldSettings::instance().solar_modules)
+    
+    //depending on the type
+    if (sem_type == EParamTypes::SEMPVProducer)
     {
-        if (iter.second->manufacturer == this)
+        //for each solar module create inventories
+        for (auto iter:solar_panel_templates)
         {
-            solar_panel_templates.push_back(iter.second);
+            inventories[iter->name] = N_PANELS_inventories;
+        };
+        
+        //set prices
+        for (auto iter:solar_panel_templates)
+        {
+            auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+        
+            double panel_watts = iter->efficiency * (iter->length * iter->width/1000000)*1000;
+            
+            prices[iter->name] = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1))) * panel_watts;
+            
+            iter->p_sem = prices[iter->name];
+            
         };
     };
     
-    
-    //for each solar module create inventories
-    for (auto iter:solar_panel_templates)
+    if (sem_type == EParamTypes::SEMInverterProducer)
     {
-        inventories[iter->name] = N_PANELS_inventories;
-    };
-    
-    //set prices
-    for (auto iter:solar_panel_templates)
-    {
-        auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
-    
-        prices[iter->name] = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+        if (inverter_templates[0]->technology == ESEIInverterType::Central)
+        {
+            inverter_templates[0]->p_sem = params[EParamTypes::SEMCentralInverterBasePrice];
+        };
+        if (inverter_templates[0]->technology == ESEIInverterType::Micro)
+        {
+            inverter_templates[0]->p_sem = params[EParamTypes::SEMMicroInverterBasePrice];
+        };
     };
     
 }
@@ -94,6 +106,9 @@ SEM::init(W* w_)
 
 void SEM::init_world_connections()
 {
+    //MARK: cont. add price setting for inverters and PV modules
+    
+    
 }
 
 
@@ -184,34 +199,41 @@ SEM::act_tick()
         
     };
     
-    //change prices if demand is changing
-    //@DevStage2 change to avoid check at every cycle
-    if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
+    
+    if (sem_type == EParamTypes::SEMPVProducer)
     {
-        
-        auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
-        auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
-        
-        if (qn_t > 0.0 && qn_t_1 > 0.0)
+        //change prices if demand is changing
+        //@DevStage2 change to avoid check at every cycle
+        if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
         {
-            //base markup is here
-            THETA_profit[0] *= qn_t/qn_t_1;
-        };
-        
-        
-        for (auto iter:prices)
-        {
-            auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
-            auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
             
-            iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+            auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
+            auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
+            
+            if (qn_t > 0.0 && qn_t_1 > 0.0)
+            {
+                //base markup is here
+                THETA_profit[0] *= qn_t/qn_t_1;
+            };
+            
+            
+            for (auto iter:prices)
+            {
+                auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
+                auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+                
+                iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
+                
+                WorldSettings::instance().solar_modules[iter.first]->p_sem = iter.second;
+                
+                
+            };
+            
+            
+            sem_dec_time = a_time;
+            
             
         };
-        
-        
-        sem_dec_time = a_time;
-        
-        
     };
     
     

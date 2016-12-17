@@ -32,8 +32,14 @@ namespace solar_core
     class Inverter
     {
     public:
+        static std::shared_ptr<Inverter> deserialize(const PropertyTree& pt_);
+        Inverter(const PropertyTree& pt_);
         std::string name;
-        EParamTypes technology; 
+        ESEIInverterType technology;
+        SEM* manufacturer = nullptr;
+        std::string manufacturer_id = "";
+        UID uid; /*!< is default initialized */
+        double p_sem; /*!< price as quoted by manufacturer */
     protected:
         
         
@@ -60,7 +66,8 @@ namespace solar_core
         std::string manufacturer_id = "";
         SEM* manufacturer = nullptr;
         double degradation = 0.0;
-        UID uid;
+        double visibility = 0.0; /** zero means high visibility as it is assumed that people prefer low visibility */
+        UID uid; /*!< is default initialized */
         
         
         
@@ -102,14 +109,20 @@ namespace solar_core
         double solar_irradiation = 0.0;
         double permit_difficulty = 0.0;
         std::shared_ptr<SolarModule> PV_module;
+        std::shared_ptr<Inverter> inverter;
         double N_PANELS = 0.0;
         double DC_size = 0.0;
         double AC_size = 0.0;
         double hard_costs = 0.0;
         double soft_costs = 0.0;
         double total_costs = 0.0;
+        double raw_costs = 0.0;
         double total_savings = 0.0;
+        double total_net_savings = 0.0;
         double energy_savings_money = 0.0;
+        double failure_rate = 0.0; /*!< number of failures per tick */
+        double co2_equivalent = 0.0; /*!< savings of CO2 per tick */
+       
         
         
     protected:
@@ -152,6 +165,11 @@ namespace solar_core
     class PVProject
     {
     public:
+        
+        PVProject() = default;
+        
+        ~PVProject();
+        
         Homeowner* agent;/*!< for whom this project is created */
         std::shared_ptr<MesStateBaseHO> state_base_agent;/*!< additional information about the agent for whom this project is made */
         TimeUnit begin_time;
@@ -168,6 +186,8 @@ namespace solar_core
         TimeUnit ac_hh_time = 0; /*!< time of a last action on the project by h */
         TimeUnit ac_accepted_time = 0; /*!< when when the project was accepted */
         TimeUnit ac_utility_time = 0; /*! when request was accepted by utility company */
+        
+        bool is_temporary = false;
         
     protected:
         

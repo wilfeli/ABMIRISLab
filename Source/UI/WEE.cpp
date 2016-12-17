@@ -88,12 +88,9 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
         auto pdf_location_y = boost::uniform_int<uint64_t>(0, max_);
         auto rng_location_y = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_location_y);
 
-        
 
-//#ifndef DEBUG
         hos = dynamic_cast<HelperWSpecialization<WEE, ExploreExploit>*>(helper_)->create_hos(pt, mode_, path_to_dir, rng_location_x, rng_location_y, this);
         
-//#endif
         
         //sem.json
         ///@DevStage2 each sem will pick initial templates by name? - could make it base creation mode
@@ -133,6 +130,37 @@ WEE::WEE(std::string path_, HelperW* helper_, std::string mode_)
     };
 
 }
+
+
+
+
+
+
+void WEE::create_world(boost::filesystem::path& path_to_model_file, boost::filesystem::path& path_to_dir, boost::filesystem::path& path_to_template, PropertyTree& pt, std::map<std::string, std::string>& params_str)
+{
+    Super::create_world(path_to_model_file, path_to_dir, path_to_template, pt, params_str);
+    
+    
+    //intrusive setting h_map;
+    //create grid
+    path_to_template = path_to_dir;
+    path_to_template /= "geography.json";
+    auto path = path_to_template.string();
+    read_json(path, pt);
+    world_map = new WorldMapSpecialization<WEE>(pt, this);
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
 
 
 void

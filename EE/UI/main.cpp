@@ -128,7 +128,7 @@ void* init_model(int argc, const char** argv)
     
     solar_ui::UIBL* ui = new solar_ui::UIBL();
     
-    //initialize world
+    //initialize ui
     ui->init(w);
     
     return ui;

@@ -102,6 +102,11 @@
 		EDD3766A1D320954008705B8 /* SEIBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD376671D320954008705B8 /* SEIBL.cpp */; };
 		EDD3766D1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
 		EDD3766E1D321BDC008705B8 /* SEMBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD3766B1D321BDC008705B8 /* SEMBL.cpp */; };
+		EDD8C1081DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C1091DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10A1DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10B1DB5B7DC0064C297 /* VectorMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */; };
+		EDD8C10C1DB5B7DC0064C297 /* VectorMath.h in Headers */ = {isa = PBXBuildFile; fileRef = EDD8C1071DB5B7DC0064C297 /* VectorMath.h */; };
 		EDDA11661C8512D400763818 /* MarketingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11651C8512D400763818 /* MarketingSystem.cpp */; };
 		EDDA11691C85131100763818 /* IAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA11671C85131100763818 /* IAgent.cpp */; };
 		EDDA116C1C85145300763818 /* IInstitute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDA116A1C85145300763818 /* IInstitute.cpp */; };
@@ -208,6 +213,8 @@
 		ED5624101D56644900FF25BA /* UI_Python.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UI_Python.h; sourceTree = "<group>"; };
 		ED5624221D56754800FF25BA /* libeemodel.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libeemodel.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5624281D56944800FF25BA /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = EE/UI/model.h; sourceTree = "<group>"; };
+		ED717D981DCAAEE900C28247 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
+		ED717D991DCAAEE900C28247 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -2097,13 +2104,13 @@
 		EDC006AB1CECB4EB0024347C /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDC006AC1CECB4EB0024347C /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
 		EDC006AD1CECB4EB0024347C /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = hh.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
-		EDC006AE1CECB4EB0024347C /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
 		EDC006AF1CECB4EB0024347C /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
 		EDC006B01CECB4EB0024347C /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
 		EDC006B21CECB4EB0024347C /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
 		EDC006B31CECB4EB0024347C /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = w.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDC006B51CEFF00A0024347C /* HelperW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperW.cpp; sourceTree = "<group>"; };
 		EDC006B61CEFF00A0024347C /* HelperW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HelperW.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EDD179D11DE4C4E700752C03 /* df_installers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = df_installers.csv; sourceTree = "<group>"; };
 		EDD3765F1D320283008705B8 /* WEE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = WEE.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EDD376601D320283008705B8 /* WEE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WEE.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDD376631D320346008705B8 /* H.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H.cpp; sourceTree = "<group>"; };
@@ -2117,13 +2124,19 @@
 		EDD376721D3429B0008705B8 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDD376731D3429B0008705B8 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
 		EDD376741D3429B0008705B8 /* ho.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ho.json; sourceTree = "<group>"; };
-		EDD376751D3429B0008705B8 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
 		EDD376761D3429B0008705B8 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
 		EDD376771D3429B0008705B8 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
 		EDD376781D3429B0008705B8 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
 		EDD376791D3429B0008705B8 /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
 		EDD3767B1D3429B0008705B8 /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
 		EDD3767C1D3429B0008705B8 /* w.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = w.json; sourceTree = "<group>"; };
+		EDD5BE521DECA44500051790 /* market.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = market.json; sourceTree = "<group>"; };
+		EDD734231DD230F9008F25AB /* Survey */ = {isa = PBXFileReference; lastKnownFileType = text; name = Survey; path = ../WPs/WorkingPaper3/Survey; sourceTree = "<group>"; };
+		EDD734241DD593F7008F25AB /* ho-ncdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-ncdecisions.json"; sourceTree = "<group>"; };
+		EDD734251DD593F7008F25AB /* ho-designdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-designdecisions.json"; sourceTree = "<group>"; };
+		EDD734261DD593F7008F25AB /* ho-installerdecisions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ho-installerdecisions.json"; sourceTree = "<group>"; };
+		EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorMath.cpp; sourceTree = "<group>"; };
+		EDD8C1071DB5B7DC0064C297 /* VectorMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorMath.h; sourceTree = "<group>"; };
 		EDDA11651C8512D400763818 /* MarketingSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarketingSystem.cpp; sourceTree = "<group>"; };
 		EDDA11671C85131100763818 /* IAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgent.cpp; sourceTree = "<group>"; };
 		EDDA11681C85131100763818 /* IAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IAgent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -4596,14 +4609,13 @@
 		EDDE57911CE0F03F005D1C49 /* SEIMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SEIMock.h; path = Tests/Agents/SEIMock.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDDE57941CE17D3D005D1C49 /* ParsingTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParsingTools.cpp; sourceTree = "<group>"; };
 		EDDE57951CE17D3D005D1C49 /* ParsingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParsingTools.h; sourceTree = "<group>"; };
-		EDDE57981CE21A55005D1C49 /* inverters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = inverters.json; sourceTree = "<group>"; };
 		EDDE57AB1CE2E99D005D1C49 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
 		EDDE57AC1CE2E99D005D1C49 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		EDDE57AF1CE3A234005D1C49 /* ID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ID.cpp; sourceTree = "<group>"; };
 		EDDE57B01CE3A234005D1C49 /* ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID.h; sourceTree = "<group>"; };
 		EDDE739F1D144C5600B3EED5 /* distribution.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = distribution.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDE03ADC1CB8070500C79A22 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
-		EDE03ADD1CB8070500C79A22 /* hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = hh.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		EDE03ADD1CB8070500C79A22 /* ho.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = ho.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDE03ADE1CB8070500C79A22 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
 		EDE03ADF1CB8070500C79A22 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
 		EDE03AE01CB8184C00C79A22 /* Serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serialize.h; sourceTree = "<group>"; };
@@ -4663,15 +4675,21 @@
 		ED0E14141C98BD2B00A41B24 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDD5BE521DECA44500051790 /* market.json */,
+				EDD179D11DE4C4E700752C03 /* df_installers.csv */,
+				EDD734241DD593F7008F25AB /* ho-ncdecisions.json */,
+				EDD734251DD593F7008F25AB /* ho-designdecisions.json */,
+				EDD734261DD593F7008F25AB /* ho-installerdecisions.json */,
+				ED717D981DCAAEE900C28247 /* joint_distribution.csv */,
+				ED717D991DCAAEE900C28247 /* solar_module.json */,
 				EDDE739F1D144C5600B3EED5 /* distribution.json */,
 				EDB71E331D02003D002FACDB /* solar_equipment.json */,
 				ED95AE121CE521580074845C /* utility.json */,
-				EDDE57981CE21A55005D1C49 /* inverters.json */,
 				EDDE578C1CDEF5FC005D1C49 /* basemodel.model */,
 				EDE03AE31CBB395B00C79A22 /* geography.json */,
 				ED0E14151C98BD2B00A41B24 /* w.json */,
 				EDE03ADC1CB8070500C79A22 /* g.json */,
-				EDE03ADD1CB8070500C79A22 /* hh.json */,
+				EDE03ADD1CB8070500C79A22 /* ho.json */,
 				EDE03ADE1CB8070500C79A22 /* sei.json */,
 				EDE03ADF1CB8070500C79A22 /* sem.json */,
 			);
@@ -8336,7 +8354,6 @@
 				EDC006AB1CECB4EB0024347C /* g.json */,
 				EDC006AC1CECB4EB0024347C /* geography.json */,
 				EDC006AD1CECB4EB0024347C /* hh.json */,
-				EDC006AE1CECB4EB0024347C /* inverters.json */,
 				EDC006AF1CECB4EB0024347C /* sei.json */,
 				EDC006B01CECB4EB0024347C /* sem.json */,
 				EDC006B21CECB4EB0024347C /* utility.json */,
@@ -8353,7 +8370,6 @@
 				EDD376721D3429B0008705B8 /* g.json */,
 				EDD376731D3429B0008705B8 /* geography.json */,
 				EDD376741D3429B0008705B8 /* ho.json */,
-				EDD376751D3429B0008705B8 /* inverters.json */,
 				EDD376761D3429B0008705B8 /* joint_distribution.csv */,
 				EDD376771D3429B0008705B8 /* sei.json */,
 				EDD376781D3429B0008705B8 /* sem.json */,
@@ -8367,6 +8383,7 @@
 		EDDB3FA91C7C402D00A6EA1F = {
 			isa = PBXGroup;
 			children = (
+				EDD734231DD230F9008F25AB /* Survey */,
 				ED2BC13B1D4BA8DA00B96FB1 /* EE */,
 				EDDE4C4B1CDE6B3B005D1C49 /* gtest.framework */,
 				EDDB3FB31C7C402D00A6EA1F /* Products */,
@@ -8470,6 +8487,8 @@
 				ED438B621D09F78E00CE1EA7 /* Simulation.h */,
 				EDDC11C21C8EAF5F005670BD /* WorldSettings.cpp */,
 				EDDC11C31C8EAF5F005670BD /* WorldSettings.h */,
+				EDD8C1061DB5B7DC0064C297 /* VectorMath.cpp */,
+				EDD8C1071DB5B7DC0064C297 /* VectorMath.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -13293,6 +13312,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD8C10C1DB5B7DC0064C297 /* VectorMath.h in Headers */,
 				ED5624261D56756200FF25BA /* UI_Python.h in Headers */,
 				ED5624511D583C5800FF25BA /* model.h in Headers */,
 			);
@@ -13427,6 +13447,7 @@
 				ED2BC14A1D4BACA300B96FB1 /* error_code.cpp in Sources */,
 				ED2BC14B1D4BACA300B96FB1 /* H.cpp in Sources */,
 				ED2BC14C1D4BACA300B96FB1 /* IRandom.cpp in Sources */,
+				EDD8C10A1DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				ED2BC14D1D4BACA300B96FB1 /* G.cpp in Sources */,
 				ED2BC14E1D4BACA300B96FB1 /* SolarPanel.cpp in Sources */,
 				ED2BC14F1D4BACA300B96FB1 /* WEE.cpp in Sources */,
@@ -13472,6 +13493,7 @@
 				ED56242F1D58261000FF25BA /* IAgent.cpp in Sources */,
 				ED5624301D58261000FF25BA /* SEI.cpp in Sources */,
 				ED5624311D58261000FF25BA /* SEIBL.cpp in Sources */,
+				EDD8C10B1DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				ED5624321D58261000FF25BA /* SEM.cpp in Sources */,
 				ED5624331D58261000FF25BA /* SEMBL.cpp in Sources */,
 				ED5624341D58261000FF25BA /* SolarPanel.cpp in Sources */,
@@ -13519,6 +13541,7 @@
 				ED3EA2181C9F440000C2B70E /* G.cpp in Sources */,
 				EDDC11C71C8F9FF7005670BD /* SolarPanel.cpp in Sources */,
 				EDD376611D320283008705B8 /* WEE.cpp in Sources */,
+				EDD8C1081DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				EDDB3FE81C7DA16200A6EA1F /* main.cpp in Sources */,
 				EDDC11C11C8E9D6D005670BD /* SEI.cpp in Sources */,
 				EDE03AE51CBB3A5400C79A22 /* Geography.cpp in Sources */,
@@ -13581,6 +13604,7 @@
 				EDD376661D320347008705B8 /* H.cpp in Sources */,
 				EDDE4C3F1CDE682E005D1C49 /* IMessage.cpp in Sources */,
 				EDDE4C401CDE682E005D1C49 /* IAgent.cpp in Sources */,
+				EDD8C1091DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				EDC006B81CEFF00B0024347C /* HelperW.cpp in Sources */,
 				EDDE578B1CDEF359005D1C49 /* Log.cpp in Sources */,
 				EDDE4C421CDE682E005D1C49 /* Serialize.cpp in Sources */,

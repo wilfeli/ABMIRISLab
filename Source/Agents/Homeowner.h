@@ -51,6 +51,8 @@ class PVProject;
 class Homeowner: public IAgent
 {
     friend class W;
+    friend class SEI;
+    template <class T1, class T2> friend class HelperWSpecialization;
 public:
     
     //@{
@@ -71,7 +73,7 @@ public:
      
      */
     
-    
+    Homeowner();
     Homeowner(const PropertyTree& pt_, W* w_);
     void init(W* w_);
     
@@ -150,6 +152,9 @@ public:
      
      */
     
+    
+    void get_project(std::shared_ptr<PVProject> project_);
+    
     virtual void receive_design(std::shared_ptr<PVProject> project_); /*!< is informed that design is received */
     //@DevStage2 is this just step in process? would we be able to incorporate minor design decisions like color as well as a decision to just go with what the installer thinks is best
     //@}
@@ -202,7 +207,7 @@ protected:
     //@{
     /**
     
-     Section with general parameters that describe hh
+     Section with general parameters that describe ho
      
     */
     
@@ -217,14 +222,14 @@ protected:
     /**
      
      Section with information relevant to potential and active projects
-	 //should this type of section be in H or SEI?
      
      */
-    
+
     
     std::vector<std::shared_ptr<PVProject>> pvprojects; /*!< list of active and potential PV projects */
     
-    
+    std::vector<std::shared_ptr<PVProject>> pvprojects_to_add;
+    std::mutex pvprojects_lock;
     
     //@}
     
@@ -246,13 +251,11 @@ protected:
     
     std::deque<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing information from SEI agents that this agent is interested in geting quotes from */
     
-    std::deque<std::shared_ptr<MesMarketingSEIPreliminaryQuote>> preliminary_quotes; /*!< have list of active quotes that need to be acted upon @DevStage2 think about replacing raw pointer with. @DevStage2 choose between week_ptr and shared_ptr need to think about ownership in time and time of destruction for these messages. */
-    
     EParamTypes marketing_state; /*!< could be interested, very interested or not */
     
     //@}
     
-    
+     
     
     //@{
     /**
@@ -269,6 +272,7 @@ protected:
     
     long quote_stage_timer; /*!< number of ticks spent in a quoting stage */
     long n_preliminary_quotes; /*!< number of preliminary quotes */
+    long n_preliminary_quotes_requested; /*!< number of requested quotes from installers, equal to total pool size */
 
     
     //@}
@@ -276,33 +280,59 @@ protected:
     //@{
     /**
      
-     Section relevant to design stage
+     Section with agent's internal decisions
      
      */
     
+    virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further. Uses non-compensatory ruels here */
+    void dec_evaluate_online_quotes_nc(); /** nc decisions continued */
+    
+    double estimate_sei_utility(std::shared_ptr<PVProject> project); /*!< estimate utility from param */
+    
+    typedef std::map<EParamTypes, std::vector<double>> DecisionParams;
+    
+    double estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA); /*!< here is for C_API and generally API */
+    
+    
+    virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be pursued further. Will correspond to SEI conjoint. Will pick best from here and request actual quotes with site visit. */
+    
+    
+    
+    
+    double estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA);
+    double estimate_design_utility(std::shared_ptr<PVProject> project);
+    
+    
     void dec_evaluate_designs(); /*!< picks best design according to the internal preferences */ 
     
-    std::deque<std::shared_ptr<PVProject>> accepted_design; //why is this coming from a deque?
+    
+    std::map<EParamTypes, std::vector<double>> THETA_SEIDecisions; /*!< parameters for decision making, from installer conjoint  */
+    
+    std::map<EParamTypes, std::vector<double>> THETA_DesignDecisions; /*!< parameters for decision making  */
+    
+    std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
+    
+    std::vector<double> THETA_params; /*!< here for consistency with H, is not used */
+    
+    
+    std::deque<std::shared_ptr<PVProject>> accepted_design;
+    
     long n_pending_designs;
     
-    std::map<EParamTypes, std::vector<double>> THETA_design; /*!< parameters for decision making  */
+    void clean_after_dropout();
+
     
-    
+
     
     //@}
+    
     
     //@{
     /**
      
-     Section with agent's internals //internal preferences? what is the difference between this section and parameters of H
+     Section with general tick actions and agent's bookeeping 
      
      */
-    
-    
-    virtual void dec_evaluate_online_quotes(); /*!< eveluate online quotes - which to be persued further */
-    virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be persued further */
-    
-    /*!< GUID research. Boost GUID is almost unique, uses machine and time, so could be repeated if used across machines or time is changed  */
     
     virtual void update_params(); /*!< is called when some part of parameters is updated that is not saved in the main map with parameters. Is used to keep all parameters synchronized. */
     

@@ -26,7 +26,8 @@ tools::EmpiricalMVD::~EmpiricalMVD()
 tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme, std::string path_to_data)
 {
     //read file
-    std::vector<std::vector<double>> parsed_file;
+    //MARK: cont. change to the pointer
+    std::vector<std::vector<double>>* parsed_file = new std::vector<std::vector<double>>();
     std::string path_to_file;
     
     tools::parse_csv_file(path_to_data, parsed_file);
@@ -109,7 +110,7 @@ tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme
     int64_t bin = 0;
     int64_t i = 0;
     //reverse order
-    for (auto x_i:parsed_file)
+    for (auto x_i:(*parsed_file))
     {
         for (auto j = 0; j < x_i.size() - 1; ++j)
         {
@@ -159,7 +160,7 @@ tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme
 
 
 void
-tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>& parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM)
+tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>* parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM)
 {
     freq_n = std::vector<long>(bins.size(), 0);
     auto i_pos = 0;

@@ -22,6 +22,7 @@ namespace solar_core
 
     class Utility
     {
+        friend class W;
     public:
         Utility(const PropertyTree& pt_, W* w_);
         void init(W* w_);
@@ -42,6 +43,7 @@ namespace solar_core
         std::mutex pending_pvprojects_lock;
       
         std::vector<double> THETA_dec; /*!< parameters for decisions, here THETA[0] - parameter for exponential distribution */
+        std::set<EParamTypes> project_states_to_delete;
         
         
     };

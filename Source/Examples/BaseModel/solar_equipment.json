@@ -3,6 +3,7 @@
     "solar_modules": [
                       {
                       "REC260PE": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "REC260PE",
                       "PTC Power Rating": "234.4",
                       "STC Power Rating": "260.0",
@@ -22,6 +23,7 @@
                       },
                       {
                       "KU260-6XPA": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "KU260-6XPA",
                       "http": "http://www.solarhub.com/product-catalog/pv-modules/58689-KU260-6XPA-Kyocera-Solar",
                       "STC Power Rating": "260.0",
@@ -39,6 +41,7 @@
                       },
                       {
                       "KU265-6ZPA": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "KU265-6ZPA",
                       "STC Power Rating": "265.0",
                       "Length": "1637.0",
@@ -55,6 +58,7 @@
                       },
                       {
                       "SPR-230NE-BLK-D": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SPR-230NE-BLK-D",
                       "STC Power Rating": "230.0",
                       "Length": "1559",
@@ -68,11 +72,14 @@
                       "90% Power Output Warranty Period": "10",
                       "80% Power Output Warranty Period": "25",
                       "Degradation after 10 years": 0.1,
-                      "Price (from reseller)": "450"
+                      "Price (from reseller)": "450",
+                      "Color": "Black",
+                      "Pattern": "Solid"
                       }
                       },
                       {
                       "SW 280 Mono Black": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SW 280 Mono Black",
                       "STC Power Rating": "280.0",
                       "Length": "1675",
@@ -90,6 +97,7 @@
                       },
                       {
                       "SPR-X20-250-BLK": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SPR-X20-250-BLK",
                       "STC Power Rating": "250.0",
                       "Length": "1559",
@@ -106,6 +114,7 @@
                       },
                       {
                       "Q.PRO BFR - G3 260": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "Q.PRO BFR - G3 260",
                       "STC Power Rating": "260.0",
                       "Length": "1670",
@@ -122,6 +131,7 @@
                       },
                       {
                       "SPR-X21-345": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SPR-X21-345",
                       "STC Power Rating": "345",
                       "Length": "1559",
@@ -138,6 +148,7 @@
                       },
                       {
                       "REC275TP": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "REC275TP",
                       "STC Power Rating": "275",
                       "Length": "1665",
@@ -154,6 +165,7 @@
                       },
                       {
                       "SW 275 Mono Black": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SW 275 Mono Black",
                       "STC Power Rating": "275",
                       "Length": "1675",
@@ -170,6 +182,7 @@
                       },
                       {
                       "SW250 Poly": {
+                      "TYPE":"solar_core::SolarModuleBL",
                       "Name": "SW250 Poly",
                       "STC Power Rating": "250",
                       "Length": "1675",
@@ -189,73 +202,97 @@
                   {
                   "PVI-3.0-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-3.0-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-3.6-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-3.6-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-3.0-OUTD-S-US-A (240V)": {
                   "Name": "PVI-3.0-OUTD-S-US-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "M215-60-2LL-S2X-IG": {
                   "Name": "M215-60-2LL-S2X-IG",
-                  "Type": "Microinverter"
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "M250-60-2LL-S2X (-ZC) (-NA) (240V)": {
                   "Name": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
-                  "Type": "Microinverter"
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SB3000TL-US-22 (240V)": {
                   "Name": "SB3000TL-US-22 (240V)",
-                  "Type": "String inverter"
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SE3800 (240V) w/ -ER-US or A-US": {
                   "Name": "SE3800 (240V) w/ -ER-US or A-US",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-4.2-OUTD-S-US-Z-A (240V)": {
                   "Name": "PVI-4.2-OUTD-S-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SE5000 (240V) w/ -ER-US or A-US": {
                   "Name": "SE5000 (240V) w/ -ER-US or A-US",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-6000-OUTD-US-Z-A (240V)": {
                   "Name": "PVI-6000-OUTD-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "PVI-5000-OUTD-US-Z-A (240V)": {
                   "Name": "PVI-5000-OUTD-US-Z-A (240V)",
-                  "Type": "Single-phase string inverter"
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   },
                   {
                   "SB3800TL-US-22 (240V)": {
                   "Name": "SB3800TL-US-22 (240V)",
-                  "Type": "String inverter"
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
                   }
                   }
                   ]

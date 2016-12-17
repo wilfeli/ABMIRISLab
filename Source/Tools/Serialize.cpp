@@ -243,9 +243,15 @@ serialize::solve_formula(std::string str_)
 {
     //algortithm to solve formula
     auto rpn = infixToRPN_SYAlg(str_);
-    auto result = evaluate_rpn(rpn);
     
-    return result;
+    if (rpn.size() > 0.0)
+    {
+        return evaluate_rpn(rpn);
+    }
+    else
+    {
+        return 0.0;
+    }
 }
 
 

@@ -16,6 +16,9 @@ namespace solar_core
 {
     
     class W;
+    class WEE;
+    class Homeowner;
+    class H;
     
     /**
      
@@ -51,12 +54,15 @@ namespace solar_core
     class House
     {
     public:
+        House();
         House(const PropertyTree& pt_);
         double roof_age; /*!< age of a house's roof in years (not required to be whole years) */
         double roof_size; /*!< size of a roof, in m^2 */
         double house_size; /*!< size of a house in ? */
-        
-        
+        double roof_effective_size = 0.0; /*!< effective size of a roof - taken into account orientation and general shape, percent of roof_size */
+        bool FLAG_RELATIVE_TIME = false;
+        TimeUnit time_update = 0;
+        double cuurent_age = 0;
         
     };
     
@@ -96,6 +102,25 @@ namespace solar_core
         WorldMap(PropertyTree& pt, W* w_);
         
         std::vector<std::vector<Tile*>> g_map; /*!< grid of location tiles */
+        
+        std::vector<std::vector<std::vector<Homeowner*>>> h_map; /*!< location of h by tile */;
+        
+    };
+    
+    template <class Param>
+    class WorldMapSpecialization: public WorldMap
+    {
+        
+    };
+    
+    
+    template<>
+    class WorldMapSpecialization<WEE>: public WorldMap
+    {
+    public:
+        typedef WorldMap Super;
+        WorldMapSpecialization<WEE>(PropertyTree& pt, W* w_);
+        std::vector<std::vector<std::vector<H*>>> h_map; /*!< location of h by tile */;
     };
     
     
