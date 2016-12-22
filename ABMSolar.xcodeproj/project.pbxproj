@@ -214,7 +214,6 @@
 		ED5624221D56754800FF25BA /* libeemodel.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libeemodel.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5624281D56944800FF25BA /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = EE/UI/model.h; sourceTree = "<group>"; };
 		ED717D981DCAAEE900C28247 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
-		ED717D991DCAAEE900C28247 /* solar_module.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_module.json; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -2098,6 +2097,8 @@
 		ED749B2C1CDD830E00FB61FB /* cpu_timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cpu_timer.cpp; sourceTree = "<group>"; };
 		ED749B7D1CDD991500FB61FB /* SEM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEM.cpp; sourceTree = "<group>"; };
 		ED95AE121CE521580074845C /* utility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = utility.json; sourceTree = "<group>"; };
+		EDB3C59E1E0646C2004A2B29 /* distribution_hh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = distribution_hh.json; sourceTree = "<group>"; };
+		EDB3C59F1E0646C2004A2B29 /* joint_distribution_hh.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution_hh.csv; sourceTree = "<group>"; };
 		EDB71E331D02003D002FACDB /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
 		EDB71E341D020047002FACDB /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
 		EDC006AA1CECB4EB0024347C /* unittestmodel.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unittestmodel.model; sourceTree = "<group>"; };
@@ -2120,11 +2121,9 @@
 		EDD3766B1D321BDC008705B8 /* SEMBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SEMBL.cpp; sourceTree = "<group>"; };
 		EDD3766C1D321BDC008705B8 /* SEMBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMBL.h; sourceTree = "<group>"; };
 		EDD376701D3429B0008705B8 /* eemodel.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eemodel.model; sourceTree = "<group>"; };
-		EDD376711D3429B0008705B8 /* distribution.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = distribution.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		EDD376721D3429B0008705B8 /* g.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = g.json; sourceTree = "<group>"; };
 		EDD376731D3429B0008705B8 /* geography.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = geography.json; sourceTree = "<group>"; };
 		EDD376741D3429B0008705B8 /* ho.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ho.json; sourceTree = "<group>"; };
-		EDD376761D3429B0008705B8 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
 		EDD376771D3429B0008705B8 /* sei.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sei.json; sourceTree = "<group>"; };
 		EDD376781D3429B0008705B8 /* sem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sem.json; sourceTree = "<group>"; };
 		EDD376791D3429B0008705B8 /* solar_equipment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solar_equipment.json; sourceTree = "<group>"; };
@@ -4681,7 +4680,6 @@
 				EDD734251DD593F7008F25AB /* ho-designdecisions.json */,
 				EDD734261DD593F7008F25AB /* ho-installerdecisions.json */,
 				ED717D981DCAAEE900C28247 /* joint_distribution.csv */,
-				ED717D991DCAAEE900C28247 /* solar_module.json */,
 				EDDE739F1D144C5600B3EED5 /* distribution.json */,
 				EDB71E331D02003D002FACDB /* solar_equipment.json */,
 				ED95AE121CE521580074845C /* utility.json */,
@@ -8365,12 +8363,12 @@
 		EDD3766F1D3429B0008705B8 /* EEModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDB3C59E1E0646C2004A2B29 /* distribution_hh.json */,
+				EDB3C59F1E0646C2004A2B29 /* joint_distribution_hh.csv */,
 				EDD376701D3429B0008705B8 /* eemodel.model */,
-				EDD376711D3429B0008705B8 /* distribution.json */,
 				EDD376721D3429B0008705B8 /* g.json */,
 				EDD376731D3429B0008705B8 /* geography.json */,
 				EDD376741D3429B0008705B8 /* ho.json */,
-				EDD376761D3429B0008705B8 /* joint_distribution.csv */,
 				EDD376771D3429B0008705B8 /* sei.json */,
 				EDD376781D3429B0008705B8 /* sem.json */,
 				EDD376791D3429B0008705B8 /* solar_equipment.json */,

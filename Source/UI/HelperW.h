@@ -61,9 +61,9 @@ namespace solar_core {
             
             //read json with distribution parameters
             auto path_to_data = path_to_dir;
-            path_to_data /= "joint_distribution.csv";
+            path_to_data /= "joint_distribution_hh.csv";
             auto path_to_scheme = path_to_dir;
-            path_to_scheme /= "distribution.json";
+            path_to_scheme /= "distribution_hh.json";
             
             
             auto e_dist = tools::create_joint_distribution(path_to_scheme.string(), path_to_data.string());
@@ -165,7 +165,7 @@ namespace solar_core {
                             {
                                 for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
                                 {
-                                    (*param_values)[name][i] = (*xs)[i][4];
+                                    (*param_values)[name][i] = (*xs)[i][4] * WorldSettings::instance().params_exog[EParamTypes::MedianIncomeToUSCoefficient];
                                 };
                             }
                             else if (name == EParamTypes::ElectricityConsumption)

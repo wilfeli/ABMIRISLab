@@ -141,6 +141,8 @@ void WEE::create_world(boost::filesystem::path& path_to_model_file, boost::files
     Super::create_world(path_to_model_file, path_to_dir, path_to_template, pt, params_str);
     
     
+
+    
     //intrusive setting h_map;
     //create grid
     path_to_template = path_to_dir;

@@ -60,7 +60,7 @@ WorldMapSpecialization<WEE>::WorldMapSpecialization(PropertyTree& pt, W* w_):Sup
         h_map.push_back({});
         for (auto j = 0; j < g_map[i].size(); ++j)
         {
-            h_map.push_back({});
+            h_map[i].push_back({});
         };
     };
     

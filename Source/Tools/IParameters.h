@@ -107,6 +107,10 @@ namespace solar_core
         AverageElectricityDemandHistoricalGrowth,
         
         
+        /** Adjustment for income level for the simulated state relative to US median income */
+        MedianIncomeToUSCoefficient,
+        
+        
         /** Average loan length */
         AverageLoanLength,
         
@@ -869,6 +873,10 @@ namespace solar_core
             else if (param_type == "eparamtypes::averageelectricitydemandhistoricalgrowth")
             {
                 return EParamTypes::AverageElectricityDemandHistoricalGrowth;
+            }
+            else if (param_type == "eparamtypes::medianincometouscoefficient")
+            {
+                return EParamTypes::MedianIncomeToUSCoefficient;
             }
             else if (param_type == "eparamtypes::penetrationlevel")
             {

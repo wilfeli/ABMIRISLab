@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495565194.331728"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "555"
-            endingLineNumber = "555"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
             landmarkName = "WEE::get_inf(EDecParams type_, SEIBL* agent_)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495996894.846805"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "580"
+            endingLineNumber = "580"
             landmarkName = "WEE::ac_update_tick()"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495996894.846805"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575">
+            startingLineNumber = "577"
+            endingLineNumber = "577">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495996894.846805"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "587"
-            endingLineNumber = "587">
+            startingLineNumber = "589"
+            endingLineNumber = "589">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495565194.331728"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "WEE::life_seis()"
             landmarkType = "5">
          </BreakpointContent>
@@ -278,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495565194.331728"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
             landmarkName = "WEE::life_sems()"
             landmarkType = "5">
          </BreakpointContent>
@@ -534,11 +534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/WEE.cpp"
-            timestampString = "495565081.724275"
+            timestampString = "504041213.628754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "WEE::init()"
             landmarkType = "5">
          </BreakpointContent>
@@ -774,11 +774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Tools/IParameters.h"
-            timestampString = "503378380.771294"
+            timestampString = "503730439.307328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1388"
-            endingLineNumber = "1388"
+            startingLineNumber = "1396"
+            endingLineNumber = "1396"
             landmarkName = "FromEParamTypes(EParamTypes param_)"
             landmarkType = "5">
             <Locations>
@@ -1742,7 +1742,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Agents/SEIBL.cpp"
@@ -2362,6 +2362,114 @@
             startingLineNumber = "1289"
             endingLineNumber = "1289"
             landmarkName = "SEI::act_tick()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/UI/HelperW.h"
+            timestampString = "503639741.833951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "create_hos(PropertyTree&amp; pt, std::string mode_, boost::filesystem::path&amp; path_to_dir, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, W* w_)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::vector&lt;solar_core::H*, std::__1::allocator&lt;solar_core::H*&gt; &gt;* solar_core::HelperWSpecialization&lt;solar_core::WEE, solar_core::CoreModel&gt;::create_hos&lt;solar_core::H&gt;(boost::property_tree::basic_ptree&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::less&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, boost::filesystem::path&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, solar_core::W*)"
+                  moduleName = "SolarEE"
+                  urlString = "file:///Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/HelperW.h"
+                  timestampString = "503893090.477777"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "372">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::vector&lt;solar_core::Homeowner*, std::__1::allocator&lt;solar_core::Homeowner*&gt; &gt;* solar_core::HelperWSpecialization&lt;solar_core::W, solar_core::CoreModel&gt;::create_hos&lt;solar_core::Homeowner&gt;(boost::property_tree::basic_ptree&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::less&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, boost::filesystem::path&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, solar_core::W*)"
+                  moduleName = "SolarEE"
+                  urlString = "file:///Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/HelperW.h"
+                  timestampString = "503893090.478038"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "372">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/UI/HelperW.h"
+            timestampString = "503639742.636913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "create_hos(PropertyTree&amp; pt, std::string mode_, boost::filesystem::path&amp; path_to_dir, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_x, boost::variate_generator&lt;boost::mt19937&amp;, boost::uniform_int&lt;uint64_t&gt;&gt;&amp; rng_location_y, W* w_)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::vector&lt;solar_core::H*, std::__1::allocator&lt;solar_core::H*&gt; &gt;* solar_core::HelperWSpecialization&lt;solar_core::WEE, solar_core::CoreModel&gt;::create_hos&lt;solar_core::H&gt;(boost::property_tree::basic_ptree&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::less&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, boost::filesystem::path&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, solar_core::W*)"
+                  moduleName = "SolarEE"
+                  urlString = "file:///Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/HelperW.h"
+                  timestampString = "503893090.47931"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "427">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::vector&lt;solar_core::Homeowner*, std::__1::allocator&lt;solar_core::Homeowner*&gt; &gt;* solar_core::HelperWSpecialization&lt;solar_core::W, solar_core::CoreModel&gt;::create_hos&lt;solar_core::Homeowner&gt;(boost::property_tree::basic_ptree&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::less&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, boost::filesystem::path&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, boost::random::variate_generator&lt;boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;, boost::uniform_int&lt;unsigned long long&gt; &gt;&amp;, solar_core::W*)"
+                  moduleName = "SolarEE"
+                  urlString = "file:///Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/UI/HelperW.h"
+                  timestampString = "503893090.479592"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "427">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/UI/WEE.cpp"
+            timestampString = "504041203.088735"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "WEE::create_world(boost::filesystem::path&amp; path_to_model_file, boost::filesystem::path&amp; path_to_dir, boost::filesystem::path&amp; path_to_template, PropertyTree&amp; pt, std::map&lt;std::string, std::string&gt;&amp; params_str)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
