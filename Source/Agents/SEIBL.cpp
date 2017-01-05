@@ -1142,7 +1142,6 @@ void SEIBL::wm_update_internal()
         double n = a_time;
         double N = n0 + n - 1;
         
-#ifdef DEBUG
         if (n > 0)
         {
             //updated parameter for reputation
@@ -1157,6 +1156,9 @@ void SEIBL::wm_update_internal()
                 THETA_reputation[0] = 1+1/k;
             };
         };
+        
+#ifdef DEBUG
+        std::cout << "installer: " << uid.get_string() << " " << THETA_reputation[0] << std::endl;
 #endif
    };
 

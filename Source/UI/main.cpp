@@ -38,9 +38,14 @@
 #include "UI/HelperW.h"
 
 
-#ifdef _WIN64
+#ifdef _WIN64 
 #include  <io.h>
 #endif
+
+#ifdef _WIN32
+#include <io.h>
+#endif
+
 
 using namespace solar_core;
 
