@@ -100,7 +100,7 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         };
         
         
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         //check if is in active agents, should be by now
         bool FLAG_IN_ACTIVE = false;
         for (auto agent:*w->hos)
@@ -353,7 +353,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
                 pool[i] = true;
                 ++N_PASSED_PROJECTS;
             }
-    #ifdef DEBUG
+    #ifdef ABMS_DEBUG_MODE
             else
             {
                 std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
@@ -404,7 +404,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
         marketing_state = EParamTypes::HOMarketingStateNotAccepting;
     };
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (pool.size() == 0.0)
     {
         throw std::runtime_error("too early for evaluation stage");
@@ -489,7 +489,7 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     {
         quote_state = EParamTypes::HOStateDroppedOutSEIStage;
         clean_after_dropout();
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         w->get_state_inf(this, quote_state);
 #endif
     };
@@ -672,7 +672,7 @@ Homeowner::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 {
 
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (n_preliminary_quotes_requested <= 0.0)
     {
         throw std::runtime_error("mismatched number of quotes");

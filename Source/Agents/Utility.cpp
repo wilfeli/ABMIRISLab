@@ -131,7 +131,7 @@ Utility::act_tick()
                         
                         w->get_state_inf_interconnected_project(project);
                         
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //                        //check if sei has this project
 //                        bool FLAG_HAS_PROJECT = false;
 //                        

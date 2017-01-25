@@ -423,6 +423,12 @@ namespace solar_core {
                             
                             auto cut_off_min = technology_bins[(*parsed_file)[i][column_names["Technology"]]][0];
                             auto cut_off_max = technology_bins[(*parsed_file)[i][column_names["Technology"]]][1];
+
+
+							//adjust cut_offs for efficiency adjustment of a scenario
+							cut_off_min *= WorldSettings::instance().params_exog[EParamTypes::ScenarioEfficiencyAdjustment];
+							cut_off_max *= WorldSettings::instance().params_exog[EParamTypes::ScenarioEfficiencyAdjustment];
+
                             
                             //check efficiency of the first template
                             if (((*w->sems)[j_sem]->solar_panel_templates[0]->efficiency >= cut_off_min) && ((*w->sems)[j_sem]->solar_panel_templates[0]->efficiency <= cut_off_max))
@@ -530,6 +536,8 @@ namespace solar_core {
                         iter->init_world_connections();
                         
                         //no initialization for the module itself in this simple version
+						//for simulations - shift efficiencies? to see if it changes penetration level
+						module->efficiency *= WorldSettings::instance().params_exog[EParamTypes::ScenarioEfficiencyAdjustment];
                         
                         break;
                     };

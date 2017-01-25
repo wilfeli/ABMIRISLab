@@ -59,7 +59,7 @@ namespace solar_core
      */
     class SEI: public IAgent
     {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         friend class Utility;
 #endif
         friend class W;

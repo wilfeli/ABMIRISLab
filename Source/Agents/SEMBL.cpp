@@ -10,6 +10,7 @@
 #include "UI/WEE.h"
 #include "Agents/SEMBL.h"
 #include "Agents/SolarPanel.h"
+#include "Physics/SolarPanelBL.h"
 
 using namespace solar_core;
 
@@ -213,7 +214,7 @@ void SEMBL::act_tick()
     new_pv->THETA_complexity[1] = THETA_dist_complexity[N_complexity_params * 3 + 1];
     
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    std::cout << new_pv->THETA_reliability[0] << " " << new_pv->THETA_complexity[0] << " " << new_pv->THETA_complexity[1] << std::endl;
 //#endif
     

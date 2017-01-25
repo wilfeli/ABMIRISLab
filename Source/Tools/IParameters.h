@@ -19,7 +19,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <Eigen/Dense>
 
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
 
 #include <iostream>
 
@@ -107,6 +107,9 @@ namespace solar_core
         AverageElectricityDemandHistoricalGrowth,
         
         
+		/** Adjustment for baseline efficiencies to test different scenarios  */
+		ScenarioEfficiencyAdjustment,
+
         /** Adjustment for income level for the simulated state relative to US median income */
         MedianIncomeToUSCoefficient,
         
@@ -858,6 +861,10 @@ namespace solar_core
             {
                 return EParamTypes::ElectricityBill;
             }
+			else if (param_type == "eparamtypes::scenarioefficiencyadjustment") 
+			{
+				return EParamTypes::ScenarioEfficiencyAdjustment;
+			}
             else if (param_type == "eparamtypes::averageelectricitydemand")
             {
                 return EParamTypes::AverageElectricityDemand;
@@ -1220,7 +1227,7 @@ namespace solar_core
             }
             else
             {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
                 std::cout << param_type;
                 throw std::runtime_error("missing conversion");
 #endif
@@ -1402,7 +1409,7 @@ namespace solar_core
             }
             else
             {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
                 throw std::runtime_error("missing conversion");
 #endif
                 return "EParamTypes::None";
@@ -1452,7 +1459,7 @@ namespace solar_core
             }
             else
             {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
                 std::cout << param_type;
                 throw std::runtime_error("missing conversion");
 #endif
@@ -1496,7 +1503,7 @@ namespace solar_core
             }
             else
             {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
                 std::cout << param_;
                 throw std::runtime_error("missing conversion");
 #endif

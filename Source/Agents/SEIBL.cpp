@@ -118,6 +118,9 @@ void SEIBL::init(WEE* w_)
     designs[dec_design->PV_module->uid] = dec_design;
     
     
+	//create its own rng 
+	rand = new IRandom(w->rand_sei->ru());
+
     
 }
 
@@ -249,7 +252,7 @@ double SEIBL::irr_secant(PVProjectFlat* project)
     {
         //assume that it this case no solution could be found, return -100 as a proxy to -inf
         r_n1 = -100.0;
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //        std::cout << "negative NPV at zero" << std::endl;
 //#endif
         
@@ -261,7 +264,7 @@ double SEIBL::irr_secant(PVProjectFlat* project)
         {
             //MARK: cont. need to handle +inf if no solution to NPV_purchase = 0.0
             r_n1 = r_n - NPV_purchase(project, r_n) * (r_n - r_n_1)/(NPV_purchase(project, r_n) - NPV_purchase(project, r_n_1));
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //            std::cout << i << ": " << r_n1 << ", " << r_n << ", " << r_n_1 << std::endl;
 //#endif
             r_n_1 = r_n;
@@ -336,7 +339,7 @@ double SEIBL::NPV_purchase(PVProjectFlat* project, double irr)
     };
     
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    std::cout << NPV_purchase << " for " << irr << std::endl;
 //#endif
     
@@ -371,7 +374,7 @@ TDesign* SEIBL::dec_base()
 
     auto max_ = w->sems->size() - 1;
     auto pdf_i = boost::uniform_int<uint64_t>(0, max_);
-    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
+    auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(rand->rng, pdf_i);
     
     auto i = rng_i();
     
@@ -421,7 +424,7 @@ TDesign* SEIBL::dec_base()
         
         
         
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //        
 //        std::cout << "profit " << profit_time << "  " << profit_new << "price " << p_n << std::endl;
 //        
@@ -430,7 +433,7 @@ TDesign* SEIBL::dec_base()
         
         
         //draw and see if switches
-        if (w->rand_sei->ru() <= p_switch)
+        if (rand->ru() <= p_switch)
         {
             //inform SEM about switch
             dynamic_cast<SEMBL*>(dec_design->PV_module->manufacturer)->remove_connection(dec_design->PV_module);
@@ -440,7 +443,7 @@ TDesign* SEIBL::dec_base()
             dec = test_design;
             test_design->p_design = p_n1;
             
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //            std::cout<< "switch from " << dec_design->PV_module->efficiency << " to " << test_design->PV_module->efficiency << std::endl;
 //#endif
         }
@@ -519,7 +522,7 @@ double SEIBL::max_profit_GD(TDesign* dec_design_hat, PVProjectFlat* project)
     double x_old = params[EParamTypes::EstimatedPricePerWatt]; // The value does not matter as long as abs(x_new - x_old) > precision
     double x_new = x_old + epsilon; // The algorithm starts here
     double gamma = 0.00000001; //step size
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    std::cout << std::fixed << std::setprecision(12) << gamma << std::endl;
 //#endif
 
@@ -537,7 +540,7 @@ double SEIBL::max_profit_GD(TDesign* dec_design_hat, PVProjectFlat* project)
         //10.0 is upper bound, take them from actual data and adjust for inflation for 25 years
         f_der = f_derivative(epsilon, dec_design_hat, project, x_old);
         
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //        std::cout << f_der << std::endl;
 //        std::cout << std::fixed << std::setprecision(8) << f_der * gamma << std::endl;
 //        std::cout << std::fixed << std::setprecision(2) << x_old + f_der * gamma << std::endl;
@@ -559,7 +562,7 @@ double SEIBL::max_profit_GS(TDesign* dec_design_hat, PVProjectFlat* project)
     for (auto i = 0; i < profit_grid.rows(); ++i)
     {
         profit_grid(i,1) = est_profit(dec_design_hat, project, profit_grid(i,0));
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //        std::cout << profit_grid(i,0) << ":" << profit_grid(i,1) << std::endl;
 //#endif
     };
@@ -571,7 +574,7 @@ double SEIBL::max_profit_GS(TDesign* dec_design_hat, PVProjectFlat* project)
 
     
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    std::cout << std::fixed << std::setprecision(8) << max << std::endl;
 //    
 //#endif
@@ -643,7 +646,9 @@ double SEIBL::est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* pro
                                      THETA_demand[2] * (THETA_reputation[0] != 1.0? THETA_reputation[1]/(THETA_reputation[0] - 1) : 1.0) +
                                      THETA_demand[3] * X(0, 3) +
                                      THETA_demand[4] * X(0, 4), 0.0), 1.0);
-    
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << N_hat << std::endl; 
+#endif
     
     //adjust for the general market size
     N_hat = std::ceil(N_hat * WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize]);
@@ -673,7 +678,7 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
     auto N_hat = est_demand_from_params(dec_design_hat, project, p);
     
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    //for testing purposes
 //    N_hat = 1.0;
 //#endif
@@ -781,12 +786,12 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
     //draw time before next maintenance
     auto rng_THETA_reliability = [&]()
     {
-        return w->rand_sei->r_pareto_2(dec_design_hat->THETA_reliability[1], dec_design_hat->THETA_reliability[0]);
+        return rand->r_pareto_2(dec_design_hat->THETA_reliability[1], dec_design_hat->THETA_reliability[0]);
     };
     
 
     auto pdf_THETA_complexity_base = boost::random::student_t_distribution<>(2 * dec_design_hat->THETA_complexity[2]);
-    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(w->rand_sei->rng, pdf_THETA_complexity_base);
+    auto rng_THETA_complexity_base = boost::variate_generator<boost::mt19937&, boost::random::student_t_distribution<>>(rand->rng, pdf_THETA_complexity_base);
     auto rng_THETA_complexity = [&]()
     {
         return dec_design_hat->THETA_complexity[0] + rng_THETA_complexity_base() * (dec_design_hat->THETA_complexity[3] * (dec_design_hat->THETA_complexity[1] + 1))/(dec_design_hat->THETA_complexity[1] * dec_design_hat->THETA_complexity[2]);
@@ -844,7 +849,7 @@ double SEIBL::est_maintenance(TDesign* dec_design_hat, std::size_t N_hat, double
     //final estmate for the discounted maintenance costs
     maintenance_hat = (N_hat_i > 0)?(maintenance_hat * N_hat / N_hat_i)/(N_trials): 0.0;
 
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    std::cout << maintenance_hat << " for " << N_hat << std::endl;
 //#endif
     
@@ -885,19 +890,19 @@ SEIBL::wm_update_external()
     b_0 = b_n;
     
 
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
 //    std::cout << "wm update "<< std::endl;
 #endif
     //data generating will be MVS - take mean from there - see predictions using BLR
     for (auto i = 0; i < THETA_demand.size() ; ++i)
     {
         THETA_demand[i] = Mu_0[i];
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
 //        std::cout << THETA_demand[i] << " ";
 #endif
     };
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
 //    std::cout << std::endl;
 #endif
     
@@ -918,7 +923,7 @@ void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit ti
     auto rng_THETA_reliability = [&](double lambda)
     {
         
-        return boost::variate_generator<boost::mt19937&, boost::exponential_distribution<>>(w->rand_sei->rng, boost::exponential_distribution<>(lambda))();
+        return boost::variate_generator<boost::mt19937&, boost::exponential_distribution<>>(rand->rng, boost::exponential_distribution<>(lambda))();
     };
 
     
@@ -952,7 +957,7 @@ void SEIBL::projects_update()
     
     for (const auto& iter:designs)
     {
-        rngs_THETA_reliability_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>(&w->rand_sei->rng, boost::exponential_distribution<>(iter.second->PV_module->THETA_reliability[0]))));
+        rngs_THETA_reliability_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::exponential_distribution<>>(&rand->rng, boost::exponential_distribution<>(iter.second->PV_module->THETA_reliability[0]))));
     };
 
     
@@ -973,7 +978,7 @@ void SEIBL::projects_update()
     auto rngs_THETA_complexity_base = new std::map<UID, boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>*>();
     for (auto iter:designs)
     {
-        rngs_THETA_complexity_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>(&w->rand_sei->rng, boost::normal_distribution<>(0.0, 1.0))));
+        rngs_THETA_complexity_base->emplace(std::make_pair(iter.first, new boost::variate_generator<boost::mt19937*, boost::normal_distribution<>>(&rand->rng, boost::normal_distribution<>(0.0, 1.0))));
     };
     
     
@@ -1014,9 +1019,15 @@ void SEIBL::projects_update()
     };
     
     
-#ifdef DEBUG
+
     
 //    std::cout << designs[dec_design->PV_module->uid]->THETA_reliability[0] << " "<< designs[dec_design->PV_module->uid]->THETA_reliability[1]  << std::endl;
+    
+    
+#ifdef DEBUG 
+//    std::cout << uid.get_string() << ": " << failures.size() << std::endl;
+#endif
+    
     
     //updates Gamma - prior to Gamma posterior, with Exponential data
     for (auto failure:failures)
@@ -1032,7 +1043,7 @@ void SEIBL::projects_update()
     
     
     
-#endif
+
     
     
     double mu_complexity_n = 0.0;
@@ -1057,12 +1068,12 @@ void SEIBL::projects_update()
         beta_complexity_n = design->THETA_complexity[3] + 0.5 * (centered.transpose() * centered)(0,0) + 0.5 * (n * design->THETA_complexity[1]) / (design->THETA_complexity[1]+ n) * std::pow(X_bar - design->THETA_complexity[0], 0.5);
         
         
-#ifdef DEBUG
+
         design->THETA_complexity[0] = mu_complexity_n;
         design->THETA_complexity[1] = v_complexity_n;
         design->THETA_complexity[2] = alpha_complexity_n;
         design->THETA_complexity[3] = beta_complexity_n;
-#endif
+
         
         
     };
@@ -1157,9 +1168,9 @@ void SEIBL::wm_update_internal()
             };
         };
         
-#ifdef DEBUG
-        std::cout << "installer: " << uid.get_string() << " " << THETA_reputation[0] << std::endl;
-#endif
+//#ifdef ABMS_DEBUG_MODE
+//        std::cout << "installer: " << uid.get_string() << " " << THETA_reputation[0] << std::endl;
+//#endif
    };
 
 
@@ -1192,7 +1203,7 @@ void SEIBL::act_tick()
     auto dec = dec_base();
 //    TDesign* dec = dec_design;
     
-    //switch to new offering, lock as simulateneously is offering projects to H
+    //switch to new offering, lock as simultaneously is offering projects to H
     lock.lock();
     if (dec_design != dec)
     {

@@ -102,8 +102,11 @@ UIBL::save(std::string path_to_save_file_)
         
         
         //save efficiencies of the panels
+		//save reliabilities of the panels
         (*save_data)[i].insert((*save_data)[i].end(), w->history_data[i].begin(), w->history_data[i].end());
         
+
+		//save reliabilities of the panels
         
     };
     
@@ -160,6 +163,7 @@ UIBL::save(std::string path_to_save_file_)
             out_file << ((h->params[solar_core::EParamTypes::Income] > 10000000)? 10000000 : h->params[solar_core::EParamTypes::Income]) << ",";
             out_file << h->params[solar_core::EParamTypes::ElectricityBill] << ",";
             out_file << h->house->house_size << ",";
+            out_file << (h->time_installed) << ",";
             out_file << ((h->FLAG_INSTALLED_SYSTEM)? 1: 0);
             out_file << std::endl;
         };

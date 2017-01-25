@@ -142,6 +142,9 @@ void WEE::create_world(boost::filesystem::path& path_to_model_file, boost::files
     
     
 
+    //need one rand for each agent or guard with locks, or will have random bug 
+    
+    
     
     //intrusive setting h_map;
     //create grid
@@ -261,6 +264,7 @@ WEE::init()
         {
             ++N_installed;
             (*hos)[j_h]->FLAG_INSTALLED_SYSTEM = true;
+            (*hos)[j_h]->time_installed = -1;
         };
     };
     
@@ -271,7 +275,7 @@ WEE::init()
 
 
 
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     N_installed = 0;
     
     //calculate number of preinstalled projects
@@ -619,7 +623,7 @@ void WEE::ac_update_wm()
 
     
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    //higher is better
 //    std::cout << "reputation" << std::endl;
 //    std::cout<< time << std::endl;
@@ -630,7 +634,7 @@ void WEE::ac_update_wm()
 //#endif
 //    
 //    
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    //lower is better
 //    std::cout << "reliablity" << std::endl;
 //    for (std::size_t i = 0; i < sems->size(); ++i)
@@ -652,7 +656,10 @@ void WEE::ac_update_wm()
         history_data.back().push_back(sei->dec_design->PV_module->efficiency);
     };
     
-    
+	for (auto& sei : *seis)
+	{
+		history_data.back().push_back(sei->dec_design->PV_module->THETA_reliability[0]);
+	};
 
     
     
@@ -668,7 +675,10 @@ WEE::save_end_data()
     {
         history_data.back().push_back(sei->dec_design->PV_module->efficiency);
     };
-
+	for (auto& sei : *seis)
+	{
+		history_data.back().push_back(sei->dec_design->PV_module->THETA_reliability[0]);
+	};
 }
 
 

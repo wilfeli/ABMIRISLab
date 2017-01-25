@@ -97,7 +97,7 @@ void MarketingInst::act_tick()
     for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit]; ++i)
     {
         j = rng_agents();
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
 //        if (j_used.find(j) != j_used.end())
 //        {
 //            std::cout << "already used " << j << std::endl;

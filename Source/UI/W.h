@@ -48,7 +48,7 @@ namespace solar_core {
     
     class W
     {
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         friend class Homeowner;
 #endif
         

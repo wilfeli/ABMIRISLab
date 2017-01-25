@@ -68,12 +68,8 @@ int main(int argc, const char * argv[])
     if (access(path_to_model_file.string().c_str(), F_OK) != -1)
 #endif
 
-#ifdef _WIN64
-	if (_access(path_to_model_file.string().c_str(), 00) != -1)
-#endif
-
-#ifdef _WIN32
-	if (_access(path_to_model_file.string().c_str(), 00) != -1)
+#if defined (_WIN64) || defined (_WIN32)
+		if (_access(path_to_model_file.string().c_str(), 00) != -1)
 #endif
 	{
     }

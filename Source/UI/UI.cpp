@@ -90,7 +90,7 @@ UI::save(std::string path_to_save_file_)
     boost::filesystem::path path(path_to_save_file_);
     boost::filesystem::path path_to_dir = path.parent_path();
     boost::uuids::uuid file_name_short = boost::uuids::random_generator()();
-    std::string file_name = boost::uuids::to_string(file_name_short) + ".csv";
+    std::string file_name = boost::uuids::to_string(file_name_short) + "_w.csv";
     boost::filesystem::path path_tmp = path_to_dir;
     path_tmp /= file_name;
     
@@ -109,7 +109,7 @@ UI::save(std::string path_to_save_file_)
     };
     
 
- 
+	out_file.close();
 
     
 }

@@ -50,7 +50,7 @@ namespace solar_core
                 for (std::sregex_token_iterator iter(s.begin(), s.end(), re, -1); iter != end; ++iter)
                 {
                     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //                    if (n < 20)
 //                    {
 //                        std::cout << iter->str() << std::endl;
@@ -66,7 +66,7 @@ namespace solar_core
             
             
             
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //            
 //            for (auto i = 0; i < 10; ++i)
 //            {

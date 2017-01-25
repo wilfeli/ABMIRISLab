@@ -166,15 +166,29 @@ int C_API_run_model_steps(void* ui_, int N)
     func = &WEE::life_sems;
     threads.push_back(std::thread(func, w));
     
+	char mbstr[100];
+#if defined(__APPLE__)
+	time_t rawtime;
+	tm* timeinfo;
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+#endif   
+
+#if defined(_WIN64) || defined(_WIN32)
+
+
+	time_t rawtime;
+	::time(&rawtime);
+	tm timeinfo;
+	localtime_s(&timeinfo, &rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", &timeinfo);
+#endif
     
-    time_t rawtime;
-    tm* timeinfo;
-    
-    time (&rawtime);
-    timeinfo = localtime(&rawtime);
-    
-    char mbstr[100];
-    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "started running" << std::endl;
     
     // work for the workers to finish
@@ -182,10 +196,21 @@ int C_API_run_model_steps(void* ui_, int N)
     {
         t.join();
     };
-    
+
+#if defined(__APPLE__)
     time (&rawtime);
     timeinfo = localtime(&rawtime);
     std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+#endif
+
+#if defined(_WIN64) || defined(_WIN32)
+	::time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", &timeinfo);
+#endif
+
+
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
     
     return 0;
@@ -218,14 +243,27 @@ int run_model(void* ui_)
     threads.push_back(std::thread(func, w));
     
     
-    time_t rawtime;
-    tm* timeinfo;
-    
-    time (&rawtime);
-    timeinfo = localtime(&rawtime);
-    
-    char mbstr[100];
-    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+	char mbstr[100];
+#if defined(__APPLE__)
+	time_t rawtime;
+	tm* timeinfo;
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+#endif   
+
+#if defined(_WIN64) || defined(_WIN32)
+
+
+	time_t rawtime;
+	::time(&rawtime);
+	tm timeinfo;
+	localtime_s(&timeinfo, &rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", &timeinfo);
+#endif
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "started running" << std::endl;
     
     // work for the workers to finish
@@ -234,9 +272,12 @@ int run_model(void* ui_)
         t.join();
     };
     
-    time (&rawtime);
-    timeinfo = localtime(&rawtime);
-    std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", timeinfo);
+#if defined(_WIN64) || defined(_WIN32)
+	::time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+
+	std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", &timeinfo);
+#endif
     std::cout << "time: " <<  mbstr << " "<< "INFO: " << "stopped running" << std::endl;
     
     

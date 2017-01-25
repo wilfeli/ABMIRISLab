@@ -6,6 +6,8 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+#include "Tools/ExternalIncludes.h"
+
 #include "Tools/Serialize.h"
 #include "Tools/IParameters.h"
 #include "Tools/WorldSettings.h"
@@ -227,6 +229,7 @@ SEI::collect_inf_site_visit(std::shared_ptr<PVProject> project_)
     
     if (roof_age >= WorldSettings::instance().THETA_roof_update[0])
     {
+		//TODO using same rng could create errors if access at the same time 
         //see if decides to update (over the past period, so that all roofs are updated)
         if (w->rand_sei->ru() <= WorldSettings::instance().THETA_roof_update[1])
         {
@@ -285,7 +288,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
         demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
     };
 
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (demand < 15.0)
     {
         std::cout << "Small project" << std::endl;
@@ -332,7 +335,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
     auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK;
 
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (total_project_time > 24)
     {
         throw std::runtime_error("Project time is too long");
@@ -463,7 +466,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     double available_area = std::min(roof_area, system_area);
     
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (roof_area < 500)
     {
         std::cout << system_area/roof_area << std::endl;
@@ -483,7 +486,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     N_PANELS = std::floor(available_area/module_area);
     
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     if (N_PANELS <= 0.0)
     {
         throw std::runtime_error("Zero panels for the system");
@@ -524,6 +527,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
             break;
         case ESEIInverterType::PoweOptimizer:
             //add both micro and central failure rates
+			//TODO check that it is reasonable assumption to have both of them here
             design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterCentral];
             design.failure_rate += WorldSettings::instance().params_exog[EParamTypes::SEMFailureRateInverterPowerOptimizer] * design.N_PANELS;
             break;
@@ -671,7 +675,7 @@ SEI::ac_estimate_savings(PVDesign& design, double demand_, std::shared_ptr<const
     //MARK: cont. check numbers
     design.co2_equivalent = total_production/warranty_length*WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
     
-//#ifdef DEBUG
+//#ifdef ABMS_DEBUG_MODE
 //    if (design.total_net_savings < 0.1)
 //    {
 //        std::cout << "low net savings" << std::endl;
@@ -827,7 +831,7 @@ void SEI::dec_max_profit()
         
         
         //estimate non-compensatory decisions for sei
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         //for testing purposes
         //share of the market as a function of price?
         
@@ -872,7 +876,7 @@ void SEI::dec_max_profit()
         //initialize designs with micro and central inverter
         auto designs = form_design(project_generic, profit_grid(i,0));
         
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         if (profit_grid(i,0) >= 0.9)
         {
             std::cout << designs[0]->design->total_net_savings << std::endl;
@@ -897,7 +901,7 @@ void SEI::dec_max_profit()
         //utility of none
         utility_den += w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label][EParamTypes::HODesignDecisionUtilityNone][0];
         
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         double total_design_share = 0.0;
 #endif
         
@@ -907,11 +911,11 @@ void SEI::dec_max_profit()
             //estimate share of the submarket that will install solar panels with particular design
             shares_design[j] = shares_design[j]/utility_den;
             
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
             total_design_share += shares_design[j];
 #endif
             
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
             ///calculate total sales
             //MARK: adjustment for NC Decisions only for DEBUG mode, CAREFUL will through otherwise
             qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j] * share_nc;
@@ -935,7 +939,7 @@ void SEI::dec_max_profit()
         profit_grid(i,1) = income - expences;
         
         
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
         std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
 #endif
         
@@ -1083,7 +1087,7 @@ SEI::act_tick()
     //update internals for the tick
     ac_update_tick();
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     for (auto& project:pvprojects)
     {
         if ((project->state_project == EParamTypes::ClosedProject) && (project->ac_hh_time != a_time))

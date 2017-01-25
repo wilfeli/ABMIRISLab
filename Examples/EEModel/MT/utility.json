@@ -1,0 +1,17 @@
+{
+    "params": [
+               {
+               "EParamTypes::UtilityProcessingTimeRequiredForPermit": 1
+               },
+               {
+               "EParamTypes::UtilityMaxCapacity":20000000
+               },
+               {
+               "EParamTypes::UtilityCurrentCapacity":15000000
+               }
+               ],
+    "THETA_dec":[
+                2.0
+    ]
+
+}

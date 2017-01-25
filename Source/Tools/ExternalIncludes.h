@@ -9,6 +9,9 @@
 #ifndef ABMSolar_ExternalIncludes_h
 #define ABMSolar_ExternalIncludes_h
 
+
+#define ABMS_DEBUG_MODE
+
 #include <cstdint>
 #include <cstdlib>
 #include <istream>

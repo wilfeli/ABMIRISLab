@@ -450,7 +450,7 @@ void W::ac_update_tick()
     
     
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
     
     

@@ -13,7 +13,7 @@
 #include "Tools/ID.h"
 #include "UI/UI_Python.h"
 #include <Eigen/Dense>
-
+#include "Physics/SolarPanelBL.h"
 
 namespace solar_core {
     class H;
@@ -145,7 +145,7 @@ namespace solar_core
         
         std::vector<std::shared_ptr<PVProjectFlat>> pvprojects; /*!< list of active and potential PV projects */
         
-        
+		IRandom* rand = nullptr;
         
         //@{
         /**
