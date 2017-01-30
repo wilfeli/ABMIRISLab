@@ -662,6 +662,36 @@ void WEE::ac_update_wm()
 	};
 
     
+    for (auto& sem:*sems)
+    {
+        if (sem->solar_panel_templates.at(EDecParams::NewTechnology))
+        {
+            history_data.back().push_back(sem->solar_panel_templates[EDecParams::NewTechnology]->efficiency);
+        }
+        else
+        {
+            history_data.back().push_back(-1.0);
+        };
+    };
+    
+    for (auto& sem:*sems)
+    {
+        if (sem->solar_panel_templates.at(EDecParams::NewTechnology))
+        {
+            history_data.back().push_back(sem->solar_panel_templates[EDecParams::NewTechnology]->THETA_reliability[0]);
+        }
+        else
+        {
+            history_data.back().push_back(-1.0);
+        };
+    };
+    
+    for (auto& sei : *seis)
+    {
+        history_data.back().push_back(sei->pvprojects.size());
+    };
+    
+    
     
 }
 
@@ -679,6 +709,38 @@ WEE::save_end_data()
 	{
 		history_data.back().push_back(sei->dec_design->PV_module->THETA_reliability[0]);
 	};
+    
+    for (auto& sem:*sems)
+    {
+        if (sem->solar_panel_templates.at(EDecParams::NewTechnology))
+        {
+            history_data.back().push_back(sem->solar_panel_templates[EDecParams::NewTechnology]->efficiency);
+        }
+        else
+        {
+            history_data.back().push_back(-1.0);
+        };
+    };
+    
+    for (auto& sem:*sems)
+    {
+        if (sem->solar_panel_templates.at(EDecParams::NewTechnology))
+        {
+            history_data.back().push_back(sem->solar_panel_templates[EDecParams::NewTechnology]->THETA_reliability[0]);
+        }
+        else
+        {
+            history_data.back().push_back(-1.0);
+        };
+    };
+    
+    for (auto& sei : *seis)
+    {
+        history_data.back().push_back(sei->pvprojects.size());
+    };
+    
+
+    
 }
 
 

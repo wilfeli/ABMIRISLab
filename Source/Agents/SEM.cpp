@@ -78,7 +78,7 @@ SEM::init(W* w_)
         //set prices
         for (auto iter:solar_panel_templates)
         {
-            auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
+            auto efficiency_differential = iter->efficiency/params[EParamTypes::SEMPriceBaseEfficiency]/WorldSettings::instance().params_exog[EParamTypes::ScenarioEfficiencyAdjustment];
         
             double panel_watts = iter->efficiency * (iter->length * iter->width/1000000)*1000;
             

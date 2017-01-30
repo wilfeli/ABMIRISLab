@@ -90,6 +90,8 @@
 		ED56244E1D582E7F00FF25BA /* windows_file_codecvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749A9C1CDD830E00FB61FB /* windows_file_codecvt.cpp */; };
 		ED5624501D582EA000FF25BA /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B0D1CDD830E00FB61FB /* error_code.cpp */; };
 		ED5624511D583C5800FF25BA /* model.h in Headers */ = {isa = PBXBuildFile; fileRef = ED5624281D56944800FF25BA /* model.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED71A0F71E38F58100768269 /* SolarPanelBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED71A0F51E38F58100768269 /* SolarPanelBL.cpp */; };
+		ED71A0F81E38F58100768269 /* SolarPanelBL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED71A0F51E38F58100768269 /* SolarPanelBL.cpp */; };
 		ED749B7E1CDD991500FB61FB /* SEM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED749B7D1CDD991500FB61FB /* SEM.cpp */; };
 		EDC006B41CED792C0024347C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDDE4C4F1CDE7067005D1C49 /* main.cpp */; };
 		EDC006B71CEFF00A0024347C /* HelperW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDC006B51CEFF00A0024347C /* HelperW.cpp */; };
@@ -214,6 +216,8 @@
 		ED5624221D56754800FF25BA /* libeemodel.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libeemodel.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5624281D56944800FF25BA /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = EE/UI/model.h; sourceTree = "<group>"; };
 		ED717D981DCAAEE900C28247 /* joint_distribution.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = joint_distribution.csv; sourceTree = "<group>"; };
+		ED71A0F51E38F58100768269 /* SolarPanelBL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SolarPanelBL.cpp; path = Physics/SolarPanelBL.cpp; sourceTree = "<group>"; };
+		ED71A0F61E38F58100768269 /* SolarPanelBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SolarPanelBL.h; path = Physics/SolarPanelBL.h; sourceTree = "<group>"; };
 		ED7492FC1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
 		ED7492FE1CDD830700FB61FB /* address.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = address.hpp; sourceTree = "<group>"; };
 		ED7492FF1CDD830700FB61FB /* align.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = align.hpp; sourceTree = "<group>"; };
@@ -4711,6 +4715,15 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		ED71A0F41E38F56700768269 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				ED71A0F51E38F58100768269 /* SolarPanelBL.cpp */,
+				ED71A0F61E38F58100768269 /* SolarPanelBL.h */,
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
 		ED7492F91CDD830700FB61FB /* boost_1_57_0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -8404,6 +8417,7 @@
 		EDDB3FD91C7DA16200A6EA1F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				ED71A0F41E38F56700768269 /* Physics */,
 				EDDB3FDA1C7DA16200A6EA1F /* Agents */,
 				ED0E14131C98BD2B00A41B24 /* Examples */,
 				EDDFEBF61CC2E01D005580A5 /* ExternalTools */,
@@ -13445,6 +13459,7 @@
 				ED2BC14A1D4BACA300B96FB1 /* error_code.cpp in Sources */,
 				ED2BC14B1D4BACA300B96FB1 /* H.cpp in Sources */,
 				ED2BC14C1D4BACA300B96FB1 /* IRandom.cpp in Sources */,
+				ED71A0F81E38F58100768269 /* SolarPanelBL.cpp in Sources */,
 				EDD8C10A1DB5B7DC0064C297 /* VectorMath.cpp in Sources */,
 				ED2BC14D1D4BACA300B96FB1 /* G.cpp in Sources */,
 				ED2BC14E1D4BACA300B96FB1 /* SolarPanel.cpp in Sources */,
@@ -13522,6 +13537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDE57B11CE3A234005D1C49 /* ID.cpp in Sources */,
+				ED71A0F71E38F58100768269 /* SolarPanelBL.cpp in Sources */,
 				EDDE57A31CE2D51E005D1C49 /* codecvt_error_category.cpp in Sources */,
 				EDDE57A41CE2D51E005D1C49 /* operations.cpp in Sources */,
 				EDD376691D320954008705B8 /* SEIBL.cpp in Sources */,

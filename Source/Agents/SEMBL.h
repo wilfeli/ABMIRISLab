@@ -10,6 +10,8 @@
 #define __ABMSolar__SEMBL__
 
 
+#define TEST_PRICING
+
 #include "Agents/SEM.h"
 
 namespace solar_core
@@ -90,6 +92,7 @@ protected:
     
     
     double p_baseline = 150.0; /*!< base price for the panel, constant for now for simplicity */
+    double p_baseline_per_watt = 0.0;
     static int N_complexity_params; // Dimensionality (rows)
     
 };

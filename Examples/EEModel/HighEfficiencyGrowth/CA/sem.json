@@ -43,7 +43,7 @@
     "N_PANELS_inventories":1000,
     "money": "FORMULA::p.d.f.::u(10000, 50000)",
     "THETA_dist_efficiency":[
-                             0.0075,
+                             0.01,
                              0.0025,
                            0.16
     ],

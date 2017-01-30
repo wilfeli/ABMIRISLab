@@ -63,7 +63,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Source/Examples/BaseModel/basemodel.model"
+            argument = "/Users/wilfeli/Dropbox/ABM/SolarPanels/ABMIRISLab/Examples/BaseModel/basemodel.model"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

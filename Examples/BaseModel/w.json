@@ -1,5 +1,5 @@
 {
-  "N_HO": 100,
+  "N_HO": 1000,
   "N_HOMarketingStateHighlyInterested": 10,
   "N_SEI": 3,
   "N_SEILarge": 1,
@@ -125,7 +125,7 @@
         "EParamTypes::SEIAverageDemandInPreliminaryQuote": 0.0
       },
       {
-        "EParamTypes::ScenarioEfficiencyAdjustment":1.5  
+        "EParamTypes::ScenarioEfficiencyAdjustment":1.0  
       }
     ],
     "THETA_roof_update": [

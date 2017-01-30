@@ -172,9 +172,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "861"
-            endingLineNumber = "861"
-            landmarkName = "SEIBL::wm_update_external()"
-            landmarkType = "5">
+            endingLineNumber = "861">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -244,7 +242,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/UI/UI.cpp"
@@ -429,7 +427,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "658"
             endingLineNumber = "658"
-            landmarkName = "SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double p, bool debug_flag)"
+            landmarkName = "SEIBL::est_demand_from_params(TDesign* dec_design_hat, PVProjectFlat* project, double p)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2534,9 +2532,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1186"
-            endingLineNumber = "1186"
-            landmarkName = "SEIBL::act_tick()"
-            landmarkType = "5">
+            endingLineNumber = "1186">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2600,6 +2596,22 @@
             startingLineNumber = "110"
             endingLineNumber = "110"
             landmarkName = "Homeowner::get_inf(std::shared_ptr&lt;MesMarketingSEI&gt; mes_)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Agents/SEMBL.cpp"
+            timestampString = "507184187.352698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "SEMBL::init_world_connections()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

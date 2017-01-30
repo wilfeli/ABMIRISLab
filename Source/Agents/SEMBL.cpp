@@ -85,6 +85,7 @@ void SEMBL::init_world_connections()
     
     p_baseline = panel_watts * p_per_watt;
     
+    p_baseline_per_watt = p_per_watt;
     
     solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = panel_watts * p_per_watt;
     
@@ -144,6 +145,9 @@ void SEMBL::ac_update_tick()
     
     //update p_baseline for learning rate
     p_baseline = p_baseline * (1 - params[EParamTypes::SEMLearningPrice]);
+    
+    //update price per watt for learning rate
+    p_baseline_per_watt *= (1 - params[EParamTypes::SEMLearningPrice]);
     
 }
 
@@ -228,8 +232,18 @@ void SEMBL::act_tick()
     new_pv->uid = UID();
     
     
+
+    
+
+    
     //update price
     new_pv->p_sem = p_baseline;
+    
+    
+#ifdef TEST_PRICING
+    //update price
+    new_pv->p_sem = p_baseline_per_watt * new_pv->efficiency * (new_pv->length * new_pv->width/1000000)*1000;
+#endif
     
     lock.lock();
     solar_panel_templates[EDecParams::NewTechnology] = new_pv;
