@@ -6,6 +6,10 @@
 //  Copyright (c) 2016 IRIS Lab. All rights reserved.
 //
 
+
+#pragma warning (push)
+#pragma warning (disable : 4068) /* disable unknown pragma warnings */
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-function"
 
@@ -1528,6 +1532,8 @@ namespace solar_core
 
 } //end of namespace solar_core
 
+
 #pragma clang diagnostic pop
+#pragma warning (pop)
 
 #endif

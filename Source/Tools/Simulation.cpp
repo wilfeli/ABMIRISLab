@@ -143,6 +143,13 @@ tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme
             {
                 e_dist->mvd[i]->cond_values.push_back(value);
                 e_dist->mvd[i]->cond_values.back().push_back(value_add);
+
+#ifdef ABMS_DEBUG_MODE
+				if (e_dist->mvd[i]->cond_values.back().size() > 1000000) 
+				{
+					std::cout << "something is wrong" << std::endl;
+				};
+#endif
             };
         };
         

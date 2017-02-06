@@ -24,7 +24,7 @@ std::set<EParamTypes> Homeowner::project_states_to_delete{EParamTypes::ClosedPro
 Homeowner::Homeowner(){}
 
 
-Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
+Homeowner::Homeowner(const PropertyTree& pt_, W* w_) :a_time{ 0 }, get_inf_marketing_sei{10, nullptr}
 {
     w = w_;
     
@@ -47,7 +47,14 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_)
     
     project_states_to_delete.insert(EParamTypes::ClosedProject);
 
-    
+	std::size_t N_MARKETING_FROM_SEI_INIT_HO = 10;
+	//reserve some space 
+	
+	for (auto i = 0; i < N_MARKETING_FROM_SEI_INIT_HO; ++i) 
+	{
+		get_inf_marketing_sei.push_back(nullptr);
+		index_inf_marketing_sei.push_back(i);
+	};
 }
 
 
@@ -88,7 +95,16 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
     //saves information about advertising agent only if not already commited to installing project
     if ((marketing_state != EParamTypes::HOMarketingStateNotAccepting) && (quote_state != EParamTypes::HOStateCommitedToInstallation))
     {
-        get_inf_marketing_sei.push_back(mes_);
+		if (!index_inf_marketing_sei.empty())
+		{
+			auto index = index_inf_marketing_sei.front();
+			get_inf_marketing_sei[index] = mes_;
+			index_inf_marketing_sei.pop_front();
+		}
+		else 
+		{
+			get_inf_marketing_sei.push_back(mes_);
+		};
         
         //inform world that is now active, if was inactive before
         if (marketing_state != EParamTypes::HOMarketingStateInterested)
@@ -152,56 +168,58 @@ Homeowner::ac_inf_marketing_sei()
 void
 Homeowner::ac_inf_quoting_sei()
 {
-    //requests quotes from SEI
-    //will narrow down pool after gathering some information
-    while (!get_inf_marketing_sei.empty())
-    {
-        auto marketing_inf = get_inf_marketing_sei.front();
-        
-        
-        
-        //check that it is new sei
-        auto sei = std::find_if(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &project){
-            if (project)
-            {
-                while (!marketing_inf)
-                {
-                    //spinning lock, for the case when push is not finished into get_inf_marketing_sei
-                    //otherwise might throw when size for get_inf_marketing_sei is already updated, but pointer is not set up yet
-                };
-                return project->sei == marketing_inf->agent;
-            }
-            else
-            {
-                return false;
-            };});
-        
-        
-        if (sei == pvprojects.end())
-        {
-            //create project
-            //create new project
-            auto new_project = std::make_shared<PVProject>();
-            //request additional information
-            new_project->agent = this;
-            new_project->begin_time = a_time;
-            new_project->sei = marketing_inf->agent;
-            
-            
-            ///requests online quote, it will be provided in a separate call
-            new_project->state_project = EParamTypes::RequestedOnlineQuote;
-            //assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
-            marketing_inf->agent->request_online_quote(new_project);
-            
-            
-            //save project
-            pvprojects.push_back(new_project);
-            marketing_inf->agent->get_project(new_project);
-            
-        };
-        get_inf_marketing_sei.pop_front();
-    };
-    
+	//requests quotes from SEI
+	//will narrow down pool after gathering some information
+	for (auto i = 0; i < get_inf_marketing_sei.size(); ++i) 
+	{
+		//check that it is valid information
+		if (get_inf_marketing_sei[i]) 
+		{
+			const auto marketing_inf = get_inf_marketing_sei[i];
+			//check that it is new sei
+			auto sei = std::find_if(pvprojects.begin(), pvprojects.end(), [&](std::shared_ptr<PVProject> &project) {
+				if (project)
+				{
+					return project->sei == marketing_inf->agent;
+				}
+				else
+				{
+					return false;
+				}; });
+
+
+			if (sei == pvprojects.end())
+			{
+				//create project
+				//create new project
+				auto new_project = std::make_shared<PVProject>();
+				//request additional information
+				new_project->agent = this;
+				new_project->begin_time = a_time;
+				new_project->sei = marketing_inf->agent;
+
+
+				///requests online quote, it will be provided in a separate call
+				new_project->state_project = EParamTypes::RequestedOnlineQuote;
+				//assumes that there is some interest on part of an agent by the looks of it,  but in reality is used just for asynchronous calls to SEI
+				marketing_inf->agent->request_online_quote(new_project);
+
+
+				//save project
+				pvprojects.push_back(new_project);
+				marketing_inf->agent->get_project(new_project);
+
+			};
+
+
+			//add to empty pull
+			get_inf_marketing_sei[i] = nullptr;
+			index_inf_marketing_sei.push_back(i);
+
+		};
+	};
+
+
     
     //tick stage timer
     ++quote_stage_timer;
@@ -473,7 +491,7 @@ void Homeowner::dec_evaluate_preliminary_quotes()
             }
             else
             {
-                std::cout << "bad design" << std::endl;
+                std::cout << "Utility of none higher than designs" << std::endl;
             };
         }
     };

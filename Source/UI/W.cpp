@@ -19,6 +19,7 @@
 #include "Tools/WorldSettings.h"
 #include "Tools/ParsingTools.h"
 #include "Tools/Simulation.h"
+#include "Tools/Log.h"
 #include "Geography/Geography.h"
 #include "Institutions/MarketingSystem.h"
 #include "Agents/IAgent.h"
@@ -61,7 +62,10 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
     boost::filesystem::path path_to_dir = path_to_model_file.parent_path();
     boost::filesystem::path path_to_template;
     std::string path;
-    //    Log::instance(path_);
+
+#ifdef ABMS_DEBUG_MODE
+    Log::instance(path_);
+#endif
     
     //preallocate stuff
     PropertyTree pt;
@@ -401,11 +405,6 @@ void W::ac_update_tick()
         if (agent)
         {
             
-            
-            
-            
-            
-            
             if ((agent->marketing_state == EParamTypes::HOMarketingStateInterested) || ((agent->marketing_state == EParamTypes::HOMarketingStateNotAccepting) && (agent->quote_state != EParamTypes::HOStateCommitedToInstallation)))
             {
                 ++N_ACTIVE_AGENTS;
@@ -451,29 +450,58 @@ void W::ac_update_tick()
     
     
 #ifdef ABMS_DEBUG_MODE
+
+	std::stringstream ss;
+
     history_decisions.back()[EParamTypes::HONumberActiveAgents] += N_ACTIVE_AGENTS;
     
     
 
     std::cout << "N active agents at tick "<< time << " " << N_ACTIVE_AGENTS << std::endl;
-
+	ss << "N active agents at tick " << time << " " << N_ACTIVE_AGENTS << std::endl;
     
+	//save information to log file
+	Log::instance().log(ss.str(), "INFO: ");
+	ss.str(std::string());
+	ss.clear();
     
     
     for (auto iter:history_projects.back())
     {
         std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+		//save information to log file
+		Log::instance().log(ss.str(), "INFO: ");
+		ss.str(std::string());
+		ss.clear();
     };
     
     
     for (auto& iter:history_decisions.back())
     {
         std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+
+		//save information to log file
+		Log::instance().log(ss.str(), "INFO: ");
+		ss.str(std::string());
+		ss.clear();
     };
     
 
     
     std::cout << "Number of installed projects: " << interconnected_projects.size() << std::endl;
+	ss << "Number of installed projects: " << interconnected_projects.size() << std::endl;
+	//save information to log file
+	Log::instance().log(ss.str(), "INFO: ");
+
+
+	//flash ss string 
+	//reset stream
+	//see http://stackoverflow.com/questions/2848087/how-to-clear-stringstream
+	//Typically to 'reset' a stringstream you need to both reset the underlying sequence to an empty string with str and to clear any fail and eof flags with clear.
+	ss.str(std::string());
+	ss.clear();
     
 #endif
     

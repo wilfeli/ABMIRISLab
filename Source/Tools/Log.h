@@ -24,30 +24,36 @@ namespace solar_core
     
     class Log
     {
-    public:
-        
-        static Log& instance();
-        static Log& instance(std::string path_);
-        
-        void log(std::string mes_, std::string mes_type_ = "ERROR: ");
-        
-        //@{
-        /**
-         *
-         * Parameteres, setting up, etc. section
-         *
-         *
-         *
-         *
-         */
-        void log();
-        
-        //@}
-        
-    private:
-        Log(std::string path_);
-        
-        std::string path_to_log_file = "../Logs/world_log.log";/*!< is created during run, has current time stamp */
+	public:
+
+		static Log& instance();
+		static Log& instance(std::string path_);
+
+		void log(std::string mes_, std::string mes_type_ = "ERROR: ");
+
+		/**
+		*
+		* Parameteres, setting up, etc. section
+		*
+		*
+		*
+		*
+		*/
+
+
+	private:
+		Log(std::string path_);
+		~Log();
+
+		std::ofstream log_file;
+
+#ifdef __APPLE__ 
+		std::string path_to_log_file = "../Logs/world_log.log";/*!< is created during run, has current time stamp */
+#endif
+
+#if defined (_WIN64) || defined (_WIN32)
+		std::string path_to_log_file = "..\\Logs\\world_log.log";/*!< is created during run, has current time stamp */
+#endif
         
     };
 
