@@ -11,6 +11,7 @@
 #include "Tools/Serialize.h"
 #include "Tools/IParameters.h"
 #include "Tools/WorldSettings.h"
+#include "Tools/Log.h"
 #include "UI/W.h"
 #include "Agents/SEM.h"
 #include "Agents/SEI.h"
@@ -31,7 +32,7 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
 
     
     //pregenerate range of prices
-    int64_t N = 10;
+    int64_t N = 20;
     double THETA_min = 0.0;
     double THETA_max = 2.0;
     double step_size = (THETA_max - THETA_min)/N;
@@ -281,7 +282,15 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     
     //forms design by default, for an average demand
     auto demand = WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand]/constants::NUMBER_DAYS_IN_MONTH;
-    
+   
+#ifdef ABMS_DEBUG_MODE
+
+	//change to the actual electricity bill 
+	demand = project_->state_base_agent->params[EParamTypes::ElectricityBill] / WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] / constants::NUMBER_DAYS_IN_MONTH;
+
+#endif // ABMS_DEBUG_MODE
+
+
     //depending on the global switch - use own demand parameters or global demand parameters
     if (WorldSettings::instance().params_exog[EParamTypes::SEIAverageDemandInPreliminaryQuote] == 0.0)
     {
@@ -291,7 +300,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
 #ifdef ABMS_DEBUG_MODE
     if (demand < 15.0)
     {
-        std::cout << "Small project" << std::endl;
+//        std::cout << "Small project" << std::endl;
     };
 #endif
     
@@ -469,14 +478,22 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
 #ifdef ABMS_DEBUG_MODE
     if (roof_area < 500)
     {
-        std::cout << system_area/roof_area << std::endl;
+//        std::cout << system_area/roof_area << std::endl;
     };
     
     if (system_area > roof_area)
     {
-        std::cout << "not enought space on roof " << "N huge systems " << N_HUGE_SYSTEMS <<  std::endl;
+//        std::cout << "not enought space on roof " << "N huge systems " << N_HUGE_SYSTEMS <<  std::endl;
         
         ++N_HUGE_SYSTEMS;
+
+		std::stringstream ss;
+		ss << "N huge systems at tick " << a_time << " : " << N_HUGE_SYSTEMS;
+
+		//save information to log file
+		Log::instance().log(ss.str(), "INFO: ");
+		ss.str(std::string());
+		ss.clear();
         
     };
 #endif
@@ -489,7 +506,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
 #ifdef ABMS_DEBUG_MODE
     if (N_PANELS <= 0.0)
     {
-        throw std::runtime_error("Zero panels for the system");
+//        throw std::runtime_error("Zero panels for the system");
     };
 #endif
     
@@ -594,8 +611,17 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     
     //profit  margin on costs
     design.total_costs = costs * (1 + profit_margin);
-    
-    design.raw_costs = costs;
+	design.raw_costs = costs;
+
+	if (design.N_PANELS <= 0.0) 
+	{
+		//failsafe against zero systems
+		design.total_costs = 10 * 100000;
+		design.raw_costs = 10 * 100000;
+	};
+
+
+
  
     
     
@@ -834,7 +860,7 @@ void SEI::dec_max_profit()
 #ifdef ABMS_DEBUG_MODE
         //for testing purposes
         //share of the market as a function of price?
-        
+        //TODO ask Qifang to calculate hard data from the actual survey - how many agree for different prices
         double share_nc = 0.0;
         
         share_nc = 0.83 - params[EParamTypes::EstimatedDemandCoefficientNCDec] * project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice];
@@ -879,7 +905,7 @@ void SEI::dec_max_profit()
 #ifdef ABMS_DEBUG_MODE
         if (profit_grid(i,0) >= 0.9)
         {
-            std::cout << designs[0]->design->total_net_savings << std::endl;
+//            std::cout << designs[0]->design->total_net_savings << std::endl;
         };
 #endif
         
@@ -940,7 +966,7 @@ void SEI::dec_max_profit()
         
         
 #ifdef ABMS_DEBUG_MODE
-        std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
+//        std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
 #endif
         
         
@@ -952,10 +978,10 @@ void SEI::dec_max_profit()
 
     
     
-#ifdef DEBUG
+#ifdef ABMS_DEBUG_MODE
     for (auto i = 0; i < profit_grid.rows(); ++i)
     {
-        std::cout << "Profit margin: " << profit_grid(i, 0) << " Profit: " << profit_grid(i, 1) << std::endl;
+//        std::cout << "Profit margin: " << profit_grid(i, 0) << " Profit: " << profit_grid(i, 1) << std::endl;
     };
 #endif
     
@@ -1347,7 +1373,22 @@ SEI::act_tick()
     //assume that knows actual utility function
     if ((a_time - ac_decprice) > params[EParamTypes::SEIFrequencyDecPrice])
     {
-        
+		//SEM connections PV module and SEM connections Inverter
+		auto max_ = w->sems->size() - 1;
+		auto min_ = w->params_d[EParamTypes::N_SEMPVProducer];
+		auto pdf_i = boost::uniform_int<uint64_t>(0, min_ - 1);
+		auto rng_i = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand_sei->rng, pdf_i);
+		int64_t j_sem = 0;
+		//switch to new panel
+		j_sem = rng_i();
+
+
+		if ((*w->sems)[j_sem]->solar_panel_templates[0]->efficiency > dec_solar_modules[EParamTypes::SEIMidEfficiencyDesign]->efficiency)
+		{
+			dec_solar_modules[EParamTypes::SEIMidEfficiencyDesign] = (*w->sems)[j_sem]->solar_panel_templates[0];
+		};
+
+
         dec_max_profit();
         ac_decprice = a_time;
         
@@ -1356,6 +1397,7 @@ SEI::act_tick()
     
     
     
+
     
     
     

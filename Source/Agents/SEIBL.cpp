@@ -399,16 +399,87 @@ TDesign* SEIBL::dec_base()
     
     if (test_design->PV_module != nullptr)
     {
-        
+ 
+#define ABMSOLAR_RELBASE
+//#define ABMSOLAR_RELPAST
+#ifdef ABMSOLAR_RELBASE
         //reset to presets
         //might be using SEM specific prior for new models? later
         test_design->THETA_reliability = THETA_reliability_prior;
         test_design->THETA_complexity = THETA_complexity_prior;
         test_design->complexity_install = complexity_install_prior;
-        //assume price is the same for everyone
-        test_design->p_module = test_design->PV_module->p_sem;
         
-        
+#endif        
+
+
+#ifdef ABMSOLAR_RELPAST
+		//reset to current estimate
+		test_design->THETA_reliability = dec_design_hat->THETA_reliability;
+		test_design->THETA_complexity = dec_design_hat->THETA_complexity;
+		test_design->complexity_install = dec_design_hat->complexity_install;
+
+#endif
+
+//#define ABMSOLAR_RELMEAN
+#ifdef ABMSOLAR_RELMEAN
+		auto VECTOR_LENGTH_REL = dec_design_hat->THETA_reliability.size();
+		auto VECTOR_LENGTH_COM = dec_design_hat->THETA_complexity.size();
+		//go over all sei and average over their prior - here, because it is a HACK
+		std::vector<double> THETA_reliability_acc(VECTOR_LENGTH_REL, 0.0);
+		std::vector<double> THETA_complexity_acc(VECTOR_LENGTH_COM, 0.0);
+
+		for (auto sei : *w->get_seis()) 
+		{
+			//get current design 
+			if (sei->dec_design)
+			{
+				for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+				{
+					THETA_reliability_acc[i] += sei->dec_design->THETA_reliability[i];
+				};
+			}
+			else 
+			{
+				for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+				{
+					THETA_reliability_acc[i] += THETA_reliability_prior[i];
+				};
+			};
+			if (sei->dec_design)
+			{
+				for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+				{
+					THETA_complexity_acc[i] += sei->dec_design->THETA_complexity[i];
+				};
+			}
+			else
+			{
+				for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+				{
+					THETA_complexity_acc[i] += THETA_complexity_prior[i];
+				};
+			};
+			
+		};
+
+		for (auto i = 0; i < VECTOR_LENGTH_REL; ++i) 
+		{
+			THETA_reliability_acc[i] = THETA_reliability_acc[i] / VECTOR_LENGTH_REL;
+		};
+		for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+		{
+			THETA_complexity_acc[i] = THETA_complexity_acc[i] / VECTOR_LENGTH_COM;
+		};
+		
+		test_design->THETA_reliability = THETA_reliability_acc;
+		test_design->THETA_complexity = THETA_complexity_acc;
+		test_design->complexity_install = dec_design_hat->complexity_install;
+
+#endif
+
+		//assume price is the same for everyone
+		test_design->p_module = test_design->PV_module->p_sem;
+
         p_n1 = (this->*max_profit)(test_design, average_project);
         
         //evaluate new design

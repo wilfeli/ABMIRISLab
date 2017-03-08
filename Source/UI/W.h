@@ -274,8 +274,8 @@ namespace solar_core {
         
         
         std::vector<std::map<EParamTypes, double>> history_decisions; 
-        
         std::vector<std::map<EParamTypes, double>> history_projects;
+		std::vector<std::vector<double>> history_sei;
         
         //@}
         

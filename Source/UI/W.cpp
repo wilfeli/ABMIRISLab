@@ -383,43 +383,28 @@ W::life()
 }
 
 void W::ac_update_tick()
-{
-    
-    
+{ 
     //MARK: cont. add update of labor price
-    
-    
     history_projects.push_back(std::map<EParamTypes, double>{});
     history_decisions.push_back(std::map<EParamTypes, double>{});
     
     int64_t N_ACTIVE_AGENTS = 0;
     
-    
-    //collect statistics
-//    for (auto agent:active_hos)
-//    {
-    
     for (auto agent:*hos)
     {
-        
         if (agent)
-        {
-            
+        {       
             if ((agent->marketing_state == EParamTypes::HOMarketingStateInterested) || ((agent->marketing_state == EParamTypes::HOMarketingStateNotAccepting) && (agent->quote_state != EParamTypes::HOStateCommitedToInstallation)))
             {
                 ++N_ACTIVE_AGENTS;
             };
-            
-            
 
-            
             if (history_decisions.back().find(agent->marketing_state) == history_decisions.back().end())
             {
                 history_decisions.back()[agent->marketing_state] = 0.0;
             };
             
-            history_decisions.back()[agent->marketing_state] += 1.0;
-            
+            history_decisions.back()[agent->marketing_state] += 1.0;           
             
             if (history_decisions.back().find(agent->quote_state) == history_decisions.back().end())
             {
@@ -427,27 +412,24 @@ void W::ac_update_tick()
             };
             
             history_decisions.back()[agent->quote_state] += 1.0;
-            
-            
-            
-            
+                 
             //count number of projects and their state
             for (auto project:agent->pvprojects)
-            {
-                
+            {   
                 if (history_projects.back().find(project->state_project) == history_projects.back().end())
                 {
                     history_projects.back()[project->state_project] = 0.0;
                 };
-                
                 history_projects.back()[project->state_project] += 1.0;
-                
-            };
-            
+            }; 
         };
     };
     
-    
+	history_sei.push_back({});
+	for (auto agent:*seis) 
+	{
+		history_sei.back().push_back(agent->THETA_profit[0]);
+	};
     
 #ifdef ABMS_DEBUG_MODE
 
@@ -457,8 +439,8 @@ void W::ac_update_tick()
     
     
 
-    std::cout << "N active agents at tick "<< time << " " << N_ACTIVE_AGENTS << std::endl;
-	ss << "N active agents at tick " << time << " " << N_ACTIVE_AGENTS << std::endl;
+    std::cout << "N active agents at tick "<< time << " : " << N_ACTIVE_AGENTS << std::endl;
+	ss << "N active agents at tick " << time << " : " << N_ACTIVE_AGENTS;
     
 	//save information to log file
 	Log::instance().log(ss.str(), "INFO: ");
@@ -468,8 +450,8 @@ void W::ac_update_tick()
     
     for (auto iter:history_projects.back())
     {
-        std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
-		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+//        std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second;
 		//save information to log file
 		Log::instance().log(ss.str(), "INFO: ");
 		ss.str(std::string());
@@ -479,8 +461,8 @@ void W::ac_update_tick()
     
     for (auto& iter:history_decisions.back())
     {
-        std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
-		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+ //       std::cout <<  EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second << std::endl;
+		ss << EnumFactory::FromEParamTypes(iter.first) << " : " << iter.second;
 
 		//save information to log file
 		Log::instance().log(ss.str(), "INFO: ");
@@ -490,8 +472,8 @@ void W::ac_update_tick()
     
 
     
-    std::cout << "Number of installed projects: " << interconnected_projects.size() << std::endl;
-	ss << "Number of installed projects: " << interconnected_projects.size() << std::endl;
+//    std::cout << "Number of installed projects: " << interconnected_projects.size() << std::endl;
+	ss << "Number of installed projects: " << interconnected_projects.size();
 	//save information to log file
 	Log::instance().log(ss.str(), "INFO: ");
 

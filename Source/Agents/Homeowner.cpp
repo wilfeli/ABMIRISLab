@@ -334,6 +334,19 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
     
     //savings are estimated for an average homeowner
     utility += THETA[EParamTypes::HOSEIDecisionEstimatedNetSavings][0] * project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
+
+
+#ifdef ABMS_DEBUG_MODE
+	if (project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] < 0.0)
+	{
+//		throw std::runtime_error("Negative savings passing DecSEI");
+	}
+	else 
+	{
+//		std::cout << "Positive savigns with low electricity prices" << std::endl; 
+	};
+#endif
+
     
     return utility;
     
@@ -374,7 +387,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
     #ifdef ABMS_DEBUG_MODE
             else
             {
-                std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
+//                std::cout << "Project price: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] << " Threshold price: " << THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice][0] << " Price per watt: " << pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / pvprojects[i]->preliminary_quote->params[EParamTypes::PreliminaryQuoteDCSize] << std::endl;
             }
     #endif
             ;
@@ -486,12 +499,21 @@ void Homeowner::dec_evaluate_preliminary_quotes()
         {
             if (project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility] >= utility_none)
             {
-                decision = project;
+				decision = project;
+#ifdef ABMS_DEBUG_MODE
+				//check that it is positive savings
+				if (project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] <= 0.0)
+				{
+					decision = nullptr;
+				};
+
+#endif
+                
                 break;
             }
             else
             {
-                std::cout << "Utility of none higher than designs" << std::endl;
+//                std::cout << "Utility of none higher than designs" << std::endl;
             };
         }
     };
@@ -502,6 +524,8 @@ void Homeowner::dec_evaluate_preliminary_quotes()
         decision->state_project = EParamTypes::AcceptedPreliminaryQuote;
         decision->sei->accepted_preliminary_quote(decision);
         quote_state = EParamTypes::HOStateWaitingOnDesigns;
+
+
     }
     else
     {
@@ -623,6 +647,15 @@ void Homeowner::dec_evaluate_designs()
             if (project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] >= utility_none)
             {
                 decision = project;
+
+#ifdef ABMS_DEBUG_MODE
+				//do not accept negative savings
+				if (project->design->design->total_net_savings <= 0.0)
+				{
+					decision = nullptr;
+				};
+
+#endif // ABMS_DEBUG_MODE
                 break;
             };
         }

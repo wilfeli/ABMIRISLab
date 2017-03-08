@@ -122,7 +122,7 @@
     "FORMULA::1.0"
   ],
   "THETA_profit": [
-    "FORMULA::p.d.f.::N_trunc(0.3, 0.05)"
+    "FORMULA::p.d.f.::N_trunc(0.8, 0.05)"
   ],
   "THETA_reliability_prior": [
     1,

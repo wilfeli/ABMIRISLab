@@ -73,10 +73,14 @@ public:
      
      */
     
+	
+
     
     std::vector<SEMBL*>* sems; /*!< all SEM */
     std::vector<H*>* hos;/*!< all H agents */
     std::vector<SEIBL*>* seis;/*!< all SEI agents */
+
+	std::vector<SEIBL*>* const get_seis() const { return seis; };
     //@}
     
     

@@ -199,7 +199,7 @@ SEM::act_tick()
         
     };
     
-    
+    //TODO: currently not active as does not record number of sales (sell_SolarModule is not called), so it is not triggered
     if (sem_type == EParamTypes::SEMPVProducer)
     {
         //change prices if demand is changing

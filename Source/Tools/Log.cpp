@@ -56,8 +56,14 @@ Log::Log(std::string path_) {
 		boost::filesystem::path path(path_);
 		path_to_log_file_ = boost::filesystem::path(path.parent_path().make_preferred());
 
+
+		boost::uuids::uuid file_name_short = boost::uuids::random_generator()();
+		std::string file_name = boost::uuids::to_string(file_name_short) + "_log.log";
+
+		//TODO change to save location
+		//Added versioning
 		path_to_log_file_ /= "Logs";
-		path_to_log_file_ /= "world_log.log";
+		path_to_log_file_ /= file_name;
 	}
 	else
 	{
@@ -157,21 +163,24 @@ Log::log(std::string mes_, std::string mes_type_) {
 	tm timeinfo;
 	auto err = localtime_s(&timeinfo, &rawtime);
 
-#ifdef GAIM_DEBUG_MODE
+#ifdef ABMS_DEBUG_MODE
 #if defined(_WIN64) || defined(_WIN32)
 	if (err)
 	{
 		OutputDebugString("Invalid argument to localtime_s.");
-	}
+	};
 #endif
 #endif
 
 	if (!err)
 	{
 		std::strftime(mbstr, sizeof(mbstr), "%a %F %T ", &timeinfo);
-#endif
-		log_file << "time: " << mbstr << " " << mes_type_ << mes_ << std::endl;
 	};
+#endif
+
+
+	log_file << "time: " << mbstr << " " << mes_type_ << mes_ << std::endl;
+
 
 
 
