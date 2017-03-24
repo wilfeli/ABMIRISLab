@@ -6,7 +6,7 @@
   "N_SEM": 12,
   "N_SEMInverterProducer": 5,
   "N_SEMPVProducer": 10,
-  "params": [ { "N_ITERATIONS": 50 } ],
+  "params": [ { "N_ITERATIONS": 260 } ],
   "SEED": 2012,
   "WorldSettings": {
     "params_exog": [
@@ -47,7 +47,7 @@
       { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
       { "EConstraintParams::MinNReceivedDesings": 2 },
       { "EConstraintParams::MaxNTicksToCollectQuotes": 10 },
-      { "EConstraintParams:MinNReceivedPreliminaryQuotes": 2 },
+      { "EConstraintParams::MinNReceivedPreliminaryQuotes": 2 },
       { "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes": 2 },
       { "EConstraintParams::MaxNOpenProjectsHO": 10 }
     ]

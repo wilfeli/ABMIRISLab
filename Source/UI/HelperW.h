@@ -711,6 +711,21 @@ namespace solar_core {
                     //create labels and cmf to generate class labels
                     w->ho_decisions[iter.first]->labels.push_back(node.first);
                     w->ho_decisions[iter.first]->cmf.push_back(w->ho_decisions[iter.first]->cmf.back() + w->ho_decisions[iter.first]->HOD_distribution[node.first]);
+
+
+					//create splines parameters 
+					//read distribution of classes
+
+					//create space for x_i
+					w->ho_decisions[iter.first]->HO_x_i.push_back(decltype(w->ho_decisions[iter.first]->HO_x_i.back()){});
+
+					//read spline points 
+					for (auto& node_dist : node.second.get_child("spline_points"))
+					{
+						attribute = EnumFactory::ToEParamTypes(node_dist.first);
+						serialize::deserialize(node_dist.second, w->ho_decisions[iter.first]->HO_x_i.back()[attribute]);
+					};
+
                 };
             };
             
@@ -779,7 +794,7 @@ namespace solar_core {
                 };
 
                 
-                
+                //? link to the scheme for parameters??? 
                
 
                 

@@ -206,7 +206,9 @@ SEM::act_tick()
         //@DevStage2 change to avoid check at every cycle
         if (((a_time - sem_dec_time) >= params[EParamTypes::SEMFrequencyPriceDecisions]) && (a_time >= 2))
         {
-            
+ 
+//#define ABMS_UPDATE_SEM
+#ifdef ABMS_UPDATE_SEM
             auto qn_t = history_sales[(a_time - 1) % history_sales.size()];
             auto qn_t_1 = history_sales[(a_time - 2) % history_sales.size()];
             
@@ -215,18 +217,22 @@ SEM::act_tick()
                 //base markup is here
                 THETA_profit[0] *= qn_t/qn_t_1;
             };
-            
+#endif            
             
             for (auto iter:prices)
             {
-                auto efficiency = WorldSettings::instance().solar_modules[iter.first]->efficiency;
-                auto efficiency_differential = efficiency/params[EParamTypes::SEMPriceBaseEfficiency];
-                
-                iter.second = costs_base * THETA_profit[0] * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1)));
-                
-                WorldSettings::instance().solar_modules[iter.first]->p_sem = iter.second;
-                
-                
+				auto efficiency_differential = 
+					WorldSettings::instance().solar_modules[iter.first]->efficiency / 
+					params[EParamTypes::SEMPriceBaseEfficiency] / 
+					WorldSettings::instance().params_exog[EParamTypes::ScenarioEfficiencyAdjustment];
+				double panel_watts = WorldSettings::instance().solar_modules[iter.first]->efficiency * 
+					(WorldSettings::instance().solar_modules[iter.first]->length *  
+						WorldSettings::instance().solar_modules[iter.first]->width / 1000000) * 1000;
+                iter.second = costs_base * 
+					(1 + THETA_profit[0]) * 
+					(1 + params[EParamTypes::SEMPriceMarkupEfficiency] * 
+						std::pow(-1, 1 - std::signbit(efficiency_differential - 1))) * panel_watts;
+                WorldSettings::instance().solar_modules[iter.first]->p_sem = iter.second;   
             };
             
             

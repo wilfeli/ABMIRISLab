@@ -243,10 +243,10 @@ namespace solar_core {
 
         std::map<EParamTypes, double> params_d; /*!< have numerical values to parameters */
         
-        std::set<std::shared_ptr<PVProject>> interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
+        std::set<std::shared_ptr<PVProject>>* interconnected_projects; /*!< @DevStage2 think here, might change to weak_ptr, but will pay the cost of checking each time if it is still alive */
         
         
-        std::vector<Homeowner*> active_hos; /*!< active portion of all Hs to be ticked over */
+        std::vector<Homeowner*>* active_hos; /*!< active portion of all Hs to be ticked over */
         
         
         

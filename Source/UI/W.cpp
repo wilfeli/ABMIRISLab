@@ -276,6 +276,15 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     //average permit difficulty is connected to processing time required by g
     //
     
+
+
+
+	//allocate interconnected projects 
+	interconnected_projects = new std::set<std::shared_ptr<PVProject>>();
+
+	//allocate active agents
+	active_hos = new std::vector<Homeowner*>(params_d[EParamTypes::N_HO]/2, nullptr);
+
     
 
 }
@@ -385,6 +394,17 @@ W::life()
 void W::ac_update_tick()
 { 
     //MARK: cont. add update of labor price
+//#define ABMS_CPI_UPDATE
+#ifdef ABMS_CPI_UPDATE
+	//update world parameters for inflation
+	WorldSettings::instance().params_exog[EParamTypes::LaborPrice] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+	WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]);
+
+	//assume electricity prices are also updated
+	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+#endif
+
     history_projects.push_back(std::map<EParamTypes, double>{});
     history_decisions.push_back(std::map<EParamTypes, double>{});
     
@@ -439,7 +459,7 @@ void W::ac_update_tick()
     
     
 
-    std::cout << "N active agents at tick "<< time << " : " << N_ACTIVE_AGENTS << std::endl;
+//    std::cout << "N active agents at tick "<< time << " : " << N_ACTIVE_AGENTS << std::endl;
 	ss << "N active agents at tick " << time << " : " << N_ACTIVE_AGENTS;
     
 	//save information to log file
@@ -473,7 +493,7 @@ void W::ac_update_tick()
 
     
 //    std::cout << "Number of installed projects: " << interconnected_projects.size() << std::endl;
-	ss << "Number of installed projects: " << interconnected_projects.size();
+	ss << "Number of installed projects: " << interconnected_projects->size();
 	//save information to log file
 	Log::instance().log(ss.str(), "INFO: ");
 
@@ -522,9 +542,9 @@ W::life_hos()
             ++notified_counter;
             FLAG_H_TICK = false;
             
-            for (auto i = 0; i < active_hos.size(); ++i)
+            for (auto i = 0; i < active_hos->size(); ++i)
             {
-                auto& agent = active_hos[i];
+                auto& agent = (*active_hos)[i];
                 if (agent)
                 {
                     if (dropped_out_states.find(agent->quote_state) == dropped_out_states.end())
@@ -550,8 +570,8 @@ W::life_hos()
         if (i_TICKS_BEFORE_CLEAR >= TICKS_BEFORE_CLEAR)
         {
             //clear vector
-            active_hos.erase(std::remove_if(active_hos.begin(), active_hos.end(),
-                                     [&](Homeowner* x) -> bool { return !(x); }), active_hos.end());
+            active_hos->erase(std::remove_if(active_hos->begin(), active_hos->end(),
+                                     [&](Homeowner* x) -> bool { return !(x); }), active_hos->end());
             
             i_TICKS_BEFORE_CLEAR = 0;
         };
@@ -752,7 +772,7 @@ W::get_state_inf(Homeowner* agent_, EParamTypes state_)
     {
         case EParamTypes::HOMarketingStateHighlyInterested:
         case EParamTypes::HOMarketingStateInterested:
-            active_hos.push_back(agent_);
+            active_hos->push_back(agent_);
             break;
         default:
             break;
@@ -778,7 +798,7 @@ W::get_state_inf_installed_project(std::shared_ptr<PVProject> project_)
 void
 W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 {
-    interconnected_projects.insert(project_);
+    interconnected_projects->insert(project_);
     
     project_->agent->quote_state = EParamTypes::HOStateInterconnected;
     

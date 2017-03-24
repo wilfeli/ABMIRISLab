@@ -360,6 +360,28 @@ tools::get_inverse_index(std::vector<double>& cmf, double u_i)
     
     //breaks when crossed over, so returns step back
     return i - 1;
+
+
+	////here implement nlog(n) algorithm 
+	//long count, step;
+	//count = cmf.size();
+	//long it = 0;
+	//long first = 0;
+
+	//while (count > 0) {
+	//	it = first;
+	//	step = count / 2;
+	//	it += step;
+	//	if (cmf[it] < u_i) {
+	//		first = ++it;
+	//		count -= step + 1;
+	//	}
+	//	else
+	//		count = step;
+	//}
+	//return first - 1;
+
+
 }
 
 
@@ -386,5 +408,143 @@ tools::get_inverse_value_exp(std::vector<double>& theta_bin, double u_i)
     return ret;
 }
 
+void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
+{
+
+	std::vector<double> x_i;
+	std::vector<double> y_i;
+	std::vector<double> a_i;
+	std::vector<double> b_i, d_i, h_i, alpha_i = std::vector<double>(0.0);
+	std::vector<double> c_i, l_i, mu_i, z_i = std::vector<double>(0.0);
+
+	long n = 0;
+	//for each label 
+
+	//get x_i, y_i 
+	for (long label_i = 0; label_i < labels.size(); ++label_i) 
+	{
+		//only calculate splines for keys in HO_x_i
+		
+		for (auto iter : HO_x_i[label_i]) 
+		{
+			x_i = HO_x_i[label_i][iter.first];
+			//HO_y_i will be in HOD_distribution_scheme
+			y_i = HOD_distribution_scheme[labels[label_i]][iter.first];
+
+			n = y_i.size();
+
+			//calculate spline points
+			//1.
+			a_i = y_i;
+
+			//2.
+			b_i = std::vector<double>(n - 1, 0.0);
+			d_i = std::vector<double>(n - 1, 0.0);
+			h_i = std::vector<double>(n - 1, 0.0);
+
+			c_i = std::vector<double>(n, 0.0);
+			l_i = std::vector<double>(n, 0.0);
+			mu_i = std::vector<double>(n, 0.0);
+			z_i = std::vector<double>(n, 0.0);
+
+			
+			for (long i = 0; i < n - 1; ++i) 
+			{
+				//3.
+				h_i[i] = x_i[i+1] - x_i[i];
+			};
+
+			for (long i = 1; i < n - 1; ++i)
+			{
+				//4.
+				alpha_i[i] = 3 / h_i[i] * (a_i[i + 1] - a_i[i]) - 3 / h_i[i - 1] * (a_i[i] - a_i[i - 1]);
+			};
+
+			l_i[0] = 1.0;
+
+			for (long i = 1; i < n - 1; ++i)
+			{
+				//7.
+				l_i[i] = 2 * (x_i[i + 1] - x_i[i - 1] - h_i[i - 1] * mu_i[i - 1]);
+				mu_i[i] = h_i[i] - l_i[i];
+				z_i[i] = (alpha_i[i] - h_i[i-1]*z_i[i-1]) / l_i[i];
+			};
+			//8.
+			l_i[n - 1] = 1.0;
+			for (long j = n - 2; j >= 0; --j)
+			{
+				c_i[j] = z_i[j] - mu_i[j] * c_i[j + 1];
+				b_i[j] = (a_i[j + 1] - a_i[j]) / h_i[j] - h_i[j] * (c_i[j + 1] + 2 * c_i[j]) / 3;
+				d_i[j] = (c_i[j+1] - c_i[j]) / (3 * h_i[j]);
+			};
+
+			//save into map
+			//assume that map is precreated to the number of labels
+			HO_coefs[label_i][iter.first] = std::vector<std::vector<double>>(4, std::vector<double>{});
+			//a
+			HO_coefs[label_i][iter.first][0] = a_i;
+			//b
+			HO_coefs[label_i][iter.first][1] = b_i;
+			//c
+			HO_coefs[label_i][iter.first][2] = c_i;
+			//d
+			HO_coefs[label_i][iter.first][3] = d_i;
+		};
+
+		
+
+	};
 
 
+
+}
+
+double solar_core::tools::EmpiricalHUVD::get_spline_value(EParamTypes param_, double x_i, long label_i)
+{
+	//
+	//find position for x in the spline? 
+	double y_i = 0.0;
+	long n = HO_x_i[label_i][param_].size();
+	std::vector<double>::const_iterator it;
+	it = std::lower_bound(HO_x_i[label_i][param_].begin(), HO_x_i[label_i][param_].end(), x_i);
+	int idx = std::max(int(it - HO_x_i[label_i][param_].begin()) - 1, 0);
+	double h = 0.0;
+	h = x_i - HO_x_i[label_i][param_][idx];
+
+	//interpolate to the left
+	if (x_i < HO_x_i[label_i][param_][0]) 
+	{
+		//only x, x^2 
+		//assume that S''(a)=S''(b)=0 - so d_j = 0 and thus no h^3
+		y_i = HO_coefs[label_i][param_][0][0]
+			+ HO_coefs[label_i][param_][0][1] * h
+			+ HO_coefs[label_i][param_][0][2] * h * h;
+
+	}
+	else if (x_i > HO_x_i[label_i][param_].back())
+	{
+		//only x, x^2
+		//only x, x^2 
+		y_i = HO_coefs[label_i][param_][n - 1][0]
+			+ HO_coefs[label_i][param_][n - 1][1] * h
+			+ HO_coefs[label_i][param_][n - 1][2] * h * h;
+
+	}
+	else 
+	{
+		//all x, x^2, x^3
+		y_i = HO_coefs[label_i][param_][idx][0]
+			+ HO_coefs[label_i][param_][idx][1] * h
+			+ HO_coefs[label_i][param_][idx][2] * h * h
+			+ HO_coefs[label_i][param_][idx][3] * h * h * h;
+
+	};
+
+	//interpolate to the right
+
+	//interpolate
+
+
+
+	return y_i;
+}

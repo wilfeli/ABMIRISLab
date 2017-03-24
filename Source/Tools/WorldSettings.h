@@ -63,7 +63,9 @@ namespace solar_core
         std::map<std::string, std::shared_ptr<Inverter>> inverters; /*!< list of available Inverters */
         
         std::vector<double> THETA_roof_update;
-        
+
+		
+
         
         //@}
         

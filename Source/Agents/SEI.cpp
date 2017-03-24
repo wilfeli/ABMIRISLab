@@ -533,7 +533,7 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     design.co2_equivalent = 0.0;
     
     
-    //failure rate for main part of the system
+    //failure rate for main part of the system in yearly terms
     //if it is central inverter - add number of panels  and raw central inverter failure rate
     
     design.failure_rate = 0.0;
@@ -634,9 +634,19 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
 /**
  
  
+ how much save
+ numerator
+ old bill - new bill
+ = old bill - (elect buy - adj from utility)
+ = adj from utility
+
+ assumptions elect buy = old bill , i.e. 100% consume outside of production window
  
+ assumption adjustment for loan payments
+
  
- 
+ denominator
+ old bill
 */
 void
 SEI::ac_estimate_savings(PVDesign& design, double demand_, std::shared_ptr<const PVProject> project_)
@@ -699,7 +709,7 @@ SEI::ac_estimate_savings(PVDesign& design, double demand_, std::shared_ptr<const
     design.total_net_savings = (realized_energy_income - loan_annuity * N_loan)/potential_energy_costs;
     
     //MARK: cont. check numbers
-    design.co2_equivalent = total_production/warranty_length*WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
+    design.co2_equivalent = total_production/warranty_length * WorldSettings::instance().params_exog[EParamTypes::EnergyToCO2]/1000;
     
 //#ifdef ABMS_DEBUG_MODE
 //    if (design.total_net_savings < 0.1)
@@ -880,15 +890,15 @@ void SEI::dec_max_profit()
             project_sei_i->preliminary_quote = (*w->seis)[i_sei]->form_preliminary_quote(project_generic, (*w->seis)[i_sei]->THETA_profit[0]);
             //estimate utility
             //use zero H to get estimation of utility for now
-            utility_den += (*w->hos)[0]->estimate_sei_utility_from_params(project_sei_i, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
+            utility_den += std::exp((*w->hos)[0]->estimate_sei_utility_from_params(project_sei_i, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]));
             
         };
         
         //utility of none
-        utility_den += w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label][EParamTypes::HOSEIDecisionUtilityNone][0];
+        utility_den += std::exp(w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label][EParamTypes::HOSEIDecisionUtilityNone][0]);
         
         //estimate own utility
-        utility_nom = (*w->hos)[0]->estimate_sei_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]);
+        utility_nom = std::exp((*w->hos)[0]->estimate_sei_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]));
         
         //estimate share
         share_sei = utility_nom/utility_den;
@@ -918,14 +928,14 @@ void SEI::dec_max_profit()
             
             utility_i = (*w->hos)[0]->estimate_design_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label]);
             
-            utility_den += utility_i;
+            utility_den += std::exp(utility_i);
             
             shares_design.push_back(utility_i);
         };
         
         
         //utility of none
-        utility_den += w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label][EParamTypes::HODesignDecisionUtilityNone][0];
+        utility_den += std::exp(w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label][EParamTypes::HODesignDecisionUtilityNone][0]);
         
 #ifdef ABMS_DEBUG_MODE
         double total_design_share = 0.0;

@@ -26,6 +26,12 @@
                                                              9.1732
                                                              ]
         },
-        "frequency": 1
+      "frequency": 1,
+      "spline_points": {
+        "EParamTypes::HODesignDecisionEstimatedNetSavings": [
+          0.1,
+          0.8
+        ]
+      }
     }
 }

@@ -25,7 +25,8 @@ namespace solar_core
     namespace tools
     {
         
-        
+		typedef std::map<EParamTypes, std::vector<std::vector<double>>> DecisionSplineParams;
+		typedef std::map<EParamTypes, std::vector<double>> SplineEnds;
         
         
         /**
@@ -41,6 +42,17 @@ namespace solar_core
             std::map<std::string, double> HOD_distribution;
             std::vector<std::string> labels;
             std::vector<double> cmf{0};
+
+
+			/*
+			* Subsection with splines for Homeowner
+			*
+			*/
+			std::vector<std::map<EParamTypes, std::vector<double>>> HO_x_i; /*!< end points for each type of HO, for each part of utility estimate */
+			std::vector<std::map<EParamTypes, std::vector<std::vector<double>>>> HO_coefs; /*!< a,b,c,d for each HO type for each part of utility estimate for each spline */
+
+			void calculate_spline_coefs();
+			double get_spline_value(EParamTypes param_, double x_i, long label_i); /*!< gets index in HO_coefs for this parameters and this value */
 
         };
         

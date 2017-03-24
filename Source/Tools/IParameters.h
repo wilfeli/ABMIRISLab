@@ -1445,7 +1445,7 @@ namespace solar_core
             {
                 return EConstraintParams::MaxNTicksToCollectQuotes;
             }
-            else if (param_type == "econstraintparams:minnreceivedpreliminaryquotes")
+            else if (param_type == "econstraintparams::minnreceivedpreliminaryquotes")
             {
                 return EConstraintParams::MinNReceivedPreliminaryQuotes;
             }

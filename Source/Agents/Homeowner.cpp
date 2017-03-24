@@ -10,10 +10,13 @@
 #include "Institutions/MarketingSystem.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/Serialize.h"
+#include "Tools/Log.h"
 #include "UI/W.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/Homeowner.h"
 #include "Agents/SEI.h"
+
+#define ABMS_FUDGING_UTILITY
 
 using namespace solar_core;
 
@@ -347,6 +350,32 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
 	};
 #endif
 
+
+
+#ifdef ABMS_FUDGING_UTILITY
+	//warranty 
+	//auto
+
+
+	//savings 
+	//skip
+
+
+
+	//project time
+	//0.5 - 4
+	if ((project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH > 4) 
+		|| (project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH < 0.5))
+	{
+		throw std::runtime_error("error in fudging");
+	};
+
+
+
+
+#endif
+
+
     
     return utility;
     
@@ -452,6 +481,9 @@ void Homeowner::dec_evaluate_online_quotes_nc()
 
 void Homeowner::dec_evaluate_preliminary_quotes()
 {
+#ifdef ABMS_DEBUG_MODE
+	bool FLAG_FUDGING_NUMBERS = false; 
+#endif
     
     //NC Decisions are continued here
     dec_evaluate_online_quotes_nc();
@@ -461,16 +493,17 @@ void Homeowner::dec_evaluate_preliminary_quotes()
         return;
     };
     
-    
-    double utility_none = THETA_SEIDecisions[EParamTypes::HOSEIDecisionUtilityNone][0];
-    double error = 0.0;
+	double error = 0.0;
+	error = -std::log(1 / w->rand_ho->ru() - 1);
+    double utility_none = THETA_SEIDecisions[EParamTypes::HOSEIDecisionUtilityNone][0] + error;
+	
     
     for (auto& project:pvprojects)
     {
         if (project->state_project == EParamTypes::ProvidedPreliminaryQuote)
         {
             //Generate random noise. Generation is here because every choice will regenerate them
-            error = w->rand_ho->ru();
+            error = - std::log(1/w->rand_ho->ru() - 1);
             project->preliminary_quote->params[EParamTypes::HOSEIDecisionEstimatedUtility] = estimate_sei_utility(project) + error;
         };
     
@@ -504,6 +537,7 @@ void Homeowner::dec_evaluate_preliminary_quotes()
 				//check that it is positive savings
 				if (project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings] <= 0.0)
 				{
+					FLAG_FUDGING_NUMBERS = true;
 					decision = nullptr;
 				};
 
@@ -530,6 +564,17 @@ void Homeowner::dec_evaluate_preliminary_quotes()
     else
     {
         quote_state = EParamTypes::HOStateDroppedOutSEIStage;
+
+
+#ifdef ABMS_DEBUG_MODE
+		if (FLAG_FUDGING_NUMBERS)
+		{
+			quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
+		};
+
+#endif
+
+
         clean_after_dropout();
 #ifdef ABMS_DEBUG_MODE
         w->get_state_inf(this, quote_state);
@@ -575,7 +620,8 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
     utility += THETA[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
     
     //number of failures
-    utility += THETA[EParamTypes::HODesignDecisionFailures][0] * project->design->design->failure_rate;
+	//here need 5 years because it is what is asked in the survey
+    utility += THETA[EParamTypes::HODesignDecisionFailures][0] * 5 * project->design->design->failure_rate;
     
     //emmision levels
     utility += THETA[EParamTypes::HODesignDecisionCO2][0] * project->design->design->co2_equivalent;
@@ -583,10 +629,120 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
     //savings are estimated for an average homeowner
     utility += THETA[EParamTypes::HODesignDecisionEstimatedNetSavings][0] * project->design->design->total_net_savings;
     
+
+
+#ifdef ABMS_FUDGING_UTILITY
+	//constrain efficiency 
+	//15.5 - 25
+	if (project->design->design->PV_module->efficiency > 25)
+	{
+		throw std::runtime_error("error in fudging");
+	};
+
+	//visibility
+	//auto
+
+	//inverter type 
+	//auto
+
+	//number of failures 
+	//0 - 3 in five years
+	if ((5 * project->design->design->failure_rate) > 3)
+	{
+		throw std::runtime_error("error in fudging");
+	};
+
+
+	//emission levels
+	//3 - 9
+	if (project->design->design->co2_equivalent < 3)
+	{
+		std::stringstream ss;
+
+		ss << "Too low co2 savings at tick " << w->time << " : " << project->design->design->co2_equivalent;
+
+		//save information to log file
+		Log::instance().log(ss.str(), "INFO: ");
+		ss.str(std::string());
+		ss.clear();
+
+		//add to utility fudging
+		//fudge the numbers 
+		utility += THETA[EParamTypes::HODesignDecisionCO2][0] * (3.0 - project->design->design->co2_equivalent);
+
+	}
+	else if (project->design->design->co2_equivalent > 9)
+	{
+		std::stringstream ss;
+
+		ss << "Too high co2 savings at tick " << w->time << " : " << project->design->design->co2_equivalent;
+
+		//save information to log file
+		Log::instance().log(ss.str(), "INFO: ");
+		ss.str(std::string());
+		ss.clear();
+
+		//fudge the numbers 
+		utility -= THETA[EParamTypes::HODesignDecisionCO2][0] * (project->design->design->co2_equivalent - 9.0);
+
+	};
+		
+
+
+	//savings?
+	//10 - 70
+
+
+
+
+#endif
+
+
+
+
+
+
+
+
     return utility;
     
     
 }
+
+
+
+
+double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject> project, 
+														long label_i)
+{
+	//for each part - get spline index for x
+	//get spline coefs from spline index
+	//get y from spline coefs and x 
+
+
+	double utility = 0.0;
+	double x_i = 0.0;
+	double y_i = 0.0;
+	EParamTypes param = EParamTypes::None;
+
+	//efficiency
+	x_i = project->design->design->PV_module->efficiency;
+	param = EParamTypes::HODesignDecisionPanelEfficiency;
+
+	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
+
+	utility += y_i;
+
+	//calculate y = f(splines, x)
+
+	//MARK: cont. 
+	
+
+}
+
+
+
+
 
 
 
@@ -596,6 +752,19 @@ double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
 {
     return estimate_design_utility_from_params(project, THETA_DesignDecisions);
     
+
+
+	//get link to the spline scheme to use
+
+	//label for the scheme index
+	auto label = w->ho_decisions[EParamTypes::HODesignDecision]->labels[decision_scheme_DesignDecision];
+
+	//splines coefs
+	auto spline_scheme = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
+
+	//pointer to the dist to get spline index? 
+	auto THETA = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
+
     
 }
 
@@ -610,8 +779,12 @@ double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
 */
 void Homeowner::dec_evaluate_designs()
 {
+#ifdef ABMS_DEBUG_MODE
+	bool FLAG_FUDGING_NUMBERS = false;
+#endif
     double error = 0.0;
-    double utility_none = THETA_DesignDecisions[EParamTypes::HODesignDecisionUtilityNone][0];
+	error = -std::log(1 / w->rand_ho->ru() - 1);
+    double utility_none = THETA_DesignDecisions[EParamTypes::HODesignDecisionUtilityNone][0] + error;
     
     
     for (auto& project:pvprojects)
@@ -619,7 +792,7 @@ void Homeowner::dec_evaluate_designs()
 
         if (project->state_project == EParamTypes::DraftedDesign)
         {
-            error = w->rand_ho->ru();
+            error = -std::log(1 / w->rand_ho->ru() - 1);
             project->design->params[EParamTypes::HODesignDecisionEstimatedUtility] = estimate_design_utility(project) + error;
         };
     };
@@ -653,6 +826,7 @@ void Homeowner::dec_evaluate_designs()
 				if (project->design->design->total_net_savings <= 0.0)
 				{
 					decision = nullptr;
+					FLAG_FUDGING_NUMBERS = true; 
 				};
 
 #endif // ABMS_DEBUG_MODE
@@ -676,11 +850,79 @@ void Homeowner::dec_evaluate_designs()
         //tell world that stopped accepting offers
         w->get_state_inf(this, quote_state);
 
+#ifdef ABMS_DEBUG_MODE
+		std::stringstream ss;
+		//check if it is negative savings
+		if (decision->design->design->total_net_savings <= 0.1)
+		{
+			auto demand = decision->state_base_agent->params[EParamTypes::ElectricityBill]
+				/ WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] 
+				/ constants::NUMBER_DAYS_IN_MONTH;
+
+			
+
+			//record utility bill, price of the system, total net savings, roof size?
+			ss << decision->design->design->DC_size;
+
+			ss << " ";
+
+			ss << decision->design->design->total_costs; 
+
+			ss << " ";
+
+			//price per watt
+			ss << decision->design->design->total_costs / decision->design->design->DC_size;
+
+			ss << " ";
+
+			ss << demand;
+
+			ss << " ";
+
+			ss << constants::NUMBER_SQM_IN_SQF * decision->agent->house->roof_size * decision->agent->house->roof_effective_size;
+
+			ss << " ";
+
+			ss << decision->design->design->total_net_savings;
+			
+			//save information to log file
+			Log::instance().log(ss.str(), "INFO: NEGATIVE SAVINGS ");
+			ss.str(std::string());
+			ss.clear();
+		};
+
+
+		if (decision->design->design->N_PANELS <= 10) 
+		{
+			//check its size
+			ss << decision->design->design->N_PANELS;
+			//save information to log file
+			Log::instance().log(ss.str(), "INFO: SMALL SYSTEM ");
+			ss.str(std::string());
+			ss.clear();
+		};
+
+
+
+#endif
+
     }
     else
     {
-        //MARK: cont. add decision timing to hh and check that project is closed next tick after hh decision to close it
-        quote_state = EParamTypes::HOStateDroppedOutDesignStage;
+        
+		//MARK: cont. add decision timing to hh and check that project is closed next tick after hh decision to close it
+		quote_state = EParamTypes::HOStateDroppedOutDesignStage;
+
+#ifdef ABMS_DEBUG_MODE
+		if (FLAG_FUDGING_NUMBERS) 
+		{
+			quote_state = EParamTypes::HOStateDroppedOutNCDecStage;
+		};
+
+#endif
+		
+
+
         clean_after_dropout();
     };
     

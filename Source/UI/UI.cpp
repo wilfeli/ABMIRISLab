@@ -43,7 +43,7 @@ UI::save(std::string path_to_save_file_)
     auto save_data_raw = new std::vector<std::deque<std::shared_ptr<solar_core::PVProject>>>(simulation_length, {});
     
     //go through all installed projects and sort them by the date they were installed
-    for (auto& project:w->interconnected_projects)
+    for (auto& project:*(w->interconnected_projects))
     {
         (*save_data_raw)[project->ac_utility_time].push_back(project);
     };
@@ -60,7 +60,7 @@ UI::save(std::string path_to_save_file_)
     double average_price_per_watt = 0.0;
     double accum_price_per_watt = 0.0;
     double price_per_watt = 0.0;
-    for (auto i = 0; i < (*save_data_raw).size(); ++i)
+    for (long i = 0; i < simulation_length - 1; ++i)
     {
 		(*save_data)[i][0] = i;
         N_INSTALLED_PROJECTS = (*save_data_raw)[i].size();
