@@ -28,6 +28,8 @@ namespace solar_core
 		TimeUnit maintenance_time_1;
 		double maintenance_complexity;
 		double p; /*!< total price for this project */
+		double hard_costs = 0.0;
+		double soft_costs = 0.0;
 
 	};
 

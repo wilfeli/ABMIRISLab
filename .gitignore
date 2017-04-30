@@ -91,6 +91,7 @@ ipch/
 *.vspx
 *.sap
 
+
 # TFS 2012 Local Workspace
 $tf/
 
@@ -286,3 +287,7 @@ Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+
+#Simulation results
+*.csv

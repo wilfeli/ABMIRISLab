@@ -408,6 +408,17 @@ tools::get_inverse_value_exp(std::vector<double>& theta_bin, double u_i)
     return ret;
 }
 
+
+/**
+
+Algorithm is taken from :
+https://en.wikipedia.org/w/index.php?title=Spline_%28mathematics%29&oldid=288288033#Algorithm_for_computing_natural_cubic_splines
+
+also references
+https://github.com/ttk592/spline to double check logic
+
+
+*/
 void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
 {
 
@@ -425,7 +436,7 @@ void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
 	{
 		//only calculate splines for keys in HO_x_i
 		
-		for (auto iter : HO_x_i[label_i]) 
+		for (auto iter : HO_x_i[label_i])
 		{
 			x_i = HO_x_i[label_i][iter.first];
 			//HO_y_i will be in HOD_distribution_scheme
@@ -441,17 +452,19 @@ void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
 			b_i = std::vector<double>(n - 1, 0.0);
 			d_i = std::vector<double>(n - 1, 0.0);
 			h_i = std::vector<double>(n - 1, 0.0);
+			alpha_i = std::vector<double>(n - 1, 0.0);
+
 
 			c_i = std::vector<double>(n, 0.0);
 			l_i = std::vector<double>(n, 0.0);
 			mu_i = std::vector<double>(n, 0.0);
 			z_i = std::vector<double>(n, 0.0);
 
-			
-			for (long i = 0; i < n - 1; ++i) 
+
+			for (long i = 0; i < n - 1; ++i)
 			{
 				//3.
-				h_i[i] = x_i[i+1] - x_i[i];
+				h_i[i] = x_i[i + 1] - x_i[i];
 			};
 
 			for (long i = 1; i < n - 1; ++i)
@@ -460,15 +473,23 @@ void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
 				alpha_i[i] = 3 / h_i[i] * (a_i[i + 1] - a_i[i]) - 3 / h_i[i - 1] * (a_i[i] - a_i[i - 1]);
 			};
 
+
+
 			l_i[0] = 1.0;
 
 			for (long i = 1; i < n - 1; ++i)
 			{
 				//7.
-				l_i[i] = 2 * (x_i[i + 1] - x_i[i - 1] - h_i[i - 1] * mu_i[i - 1]);
-				mu_i[i] = h_i[i] - l_i[i];
+				l_i[i] = 2 * (x_i[i + 1] - x_i[i - 1]) - h_i[i - 1] * mu_i[i - 1];
+				mu_i[i] = h_i[i] / l_i[i];
 				z_i[i] = (alpha_i[i] - h_i[i-1]*z_i[i-1]) / l_i[i];
 			};
+
+
+
+
+
+
 			//8.
 			l_i[n - 1] = 1.0;
 			for (long j = n - 2; j >= 0; --j)
@@ -478,15 +499,29 @@ void solar_core::tools::EmpiricalHUVD::calculate_spline_coefs()
 				d_i[j] = (c_i[j+1] - c_i[j]) / (3 * h_i[j]);
 			};
 
+
+//#ifdef ABMS_DEBUG_MODE
+//			//tests for calculations
+//			if (iter.first == EParamTypes::HODesignDecisionEstimatedNetSavings)
+//			{
+//				for (long i = 0; i < n - 1; ++i)
+//				{
+//					std::cout << c_i[i] << " " << b_i[i] << " " << d_i[i] << std::endl;
+//				};
+//			};
+//#endif
+
+
 			//save into map
 			//assume that map is precreated to the number of labels
+			HO_coefs.push_back({});
 			HO_coefs[label_i][iter.first] = std::vector<std::vector<double>>(4, std::vector<double>{});
 			//a
-			HO_coefs[label_i][iter.first][0] = a_i;
+			HO_coefs[label_i][iter.first][0] = std::vector<double>(a_i.begin(), a_i.begin() +  (n - 1));
 			//b
 			HO_coefs[label_i][iter.first][1] = b_i;
 			//c
-			HO_coefs[label_i][iter.first][2] = c_i;
+			HO_coefs[label_i][iter.first][2] = std::vector<double>(c_i.begin(), c_i.begin() + (n - 1));
 			//d
 			HO_coefs[label_i][iter.first][3] = d_i;
 		};
@@ -511,39 +546,47 @@ double solar_core::tools::EmpiricalHUVD::get_spline_value(EParamTypes param_, do
 	double h = 0.0;
 	h = x_i - HO_x_i[label_i][param_][idx];
 
+//#ifdef ABMS_DEBUG_MODE
+//	std::cout << x_i << std::endl;
+//	std::cout << HO_x_i[label_i][param_][0] << std::endl;
+//#endif
+
 	//interpolate to the left
 	if (x_i < HO_x_i[label_i][param_][0]) 
 	{
 		//only x, x^2 
 		//assume that S''(a)=S''(b)=0 - so d_j = 0 and thus no h^3
 		y_i = HO_coefs[label_i][param_][0][0]
-			+ HO_coefs[label_i][param_][0][1] * h
-			+ HO_coefs[label_i][param_][0][2] * h * h;
+			+ HO_coefs[label_i][param_][1][0] * h
+			+ HO_coefs[label_i][param_][2][0] * h * h;
 
 	}
 	else if (x_i > HO_x_i[label_i][param_].back())
 	{
 		//only x, x^2
 		//only x, x^2 
-		y_i = HO_coefs[label_i][param_][n - 1][0]
-			+ HO_coefs[label_i][param_][n - 1][1] * h
-			+ HO_coefs[label_i][param_][n - 1][2] * h * h;
+		y_i = HO_coefs[label_i][param_][0][n - 1]
+			+ HO_coefs[label_i][param_][1][n - 1] * h
+			+ HO_coefs[label_i][param_][2][n - 1] * h * h;
 
 	}
 	else 
 	{
 		//all x, x^2, x^3
-		y_i = HO_coefs[label_i][param_][idx][0]
-			+ HO_coefs[label_i][param_][idx][1] * h
-			+ HO_coefs[label_i][param_][idx][2] * h * h
-			+ HO_coefs[label_i][param_][idx][3] * h * h * h;
+		y_i = HO_coefs[label_i][param_][0][idx]
+			+ HO_coefs[label_i][param_][1][idx] * h
+			+ HO_coefs[label_i][param_][2][idx] * h * h
+			+ HO_coefs[label_i][param_][3][idx] * h * h * h;
 
 	};
 
 	//interpolate to the right
 
 	//interpolate
-
+//#ifdef ABMS_DEBUG_MODE
+//	std::cout << idx << std::endl;
+//	std::cout << y_i << std::endl;
+//#endif
 
 
 	return y_i;

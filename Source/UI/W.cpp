@@ -185,7 +185,10 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     std::string w_file_name = "";
     if (parsed_model.count("path_to_save") > 0)
     {
-        params["path_to_save"] = parsed_model["path_to_save"];
+		//here convert into usable format
+		//set path_to_log_file
+		boost::filesystem::path path_to_save(parsed_model["path_to_save"]);
+        params["path_to_save"] = path_to_save.make_preferred().string();
     }
     else
     {
@@ -217,6 +220,14 @@ void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesys
     rand_g = new IRandom(pt.get<double>("SEED"));
     rand_market = new IRandom(pt.get<double>("SEED"));
     rand_utility = new IRandom(pt.get<double>("SEED"));
+
+	//save seed
+	params["SEED"] = pt.get<std::string>("SEED");
+
+
+
+	//save type of a simulation run
+	params["ParametersCode"] = pt.get<std::string>("ParametersCode");
     
     //create parameters
     serialize::deserialize(pt.get_child("WorldSettings.params_exog"),params_str);
@@ -811,6 +822,11 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
     {
         agent->get_inf(mes);
     };
+
+#ifdef ABMS_SEI_TEST
+	std::cout << project_->design->design->raw_costs << std::endl;
+#endif
+
     
 }
 

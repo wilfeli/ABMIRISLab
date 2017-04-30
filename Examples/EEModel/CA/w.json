@@ -8,6 +8,7 @@
   "N_SEMPVProducer": 5,
   "params": [ { "N_ITERATIONS": 20 } ],
   "SEED": 2012,
+  "ParametersCode": "",
   "WorldSettings": {
     "constraints": [
       { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
@@ -18,7 +19,7 @@
       { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
       { "EConstraintParams::MinNReceivedDesings": 2 },
       { "EConstraintParams::MaxNTicksToCollectQuotes": 10 },
-      { "EConstraintParams:MinNReceivedPreliminaryQuotes": 2 },
+      { "EConstraintParams::MinNReceivedPreliminaryQuotes": 2 },
       { "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes": 2 },
       { "EConstraintParams::MaxNOpenProjectsHO": 10 }
     ],

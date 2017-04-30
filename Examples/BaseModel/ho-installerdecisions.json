@@ -7,15 +7,22 @@
                                                 0.0447404
                                                 ],
             "EParamTypes::HOSEIDecisionTotalProjectTime": [
-                                                           -0.1481597
+              0.2162717,
+              0.1642472,
+              -0.1312343,
+              -0.2492846
                                                            ],
             "EParamTypes::HOSEIDecisionEstimatedNetSavings": [
-                                                              3.64675
+              -1.4238250,
+              -0.3606947,
+              0.5267347,
+              0.2153476,
+              1.0424374
                                                               ],
             "EParamTypes::SEIWarranty": [
-                                         0.0746770,
-                                         0.0746770,
-                                         0.0746770
+                                          -0.8250069,
+                                         0.0709633,
+                                         0.7540436
                                          ],
             "EParamTypes::HOSEIDecisionUtilityNone": [
                                                       0.5197628
@@ -31,6 +38,21 @@
                                        0.7995342
                                        ]
         },
-        "frequency": 1
+      "frequency": 1,
+      "spline_points": {
+        "EParamTypes::HOSEIDecisionEstimatedNetSavings": [
+          0.1,
+          0.25,
+          0.4,
+          0.55,
+          0.7
+        ],
+        "EParamTypes::HOSEIDecisionTotalProjectTime": [
+          0.5,
+          1.0,
+          2.0,
+          4.0
+        ]
+      }
     }
 }

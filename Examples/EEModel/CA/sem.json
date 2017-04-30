@@ -4,6 +4,7 @@
   "N_PANELS_inventories": 1000,
   "N_solar_panel_templates": 3,
   "p_baseline": 150.0,
+  "p_per_watt": 0.65,
   "params": [
     {
       "EParamTypes::SEMFrequencyProduction": 1

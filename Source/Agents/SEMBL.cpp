@@ -36,6 +36,7 @@ SEMBL::SEMBL(const PropertyTree& pt_, W* w_): SEM(pt_, w_), mean_rw_complexity_d
     
     //assume that it is price per efficiency unit
     p_baseline = pt_.get<double>("p_baseline");
+	p_baseline_per_watt = pt_.get<double>("p_per_watt");
     
     //generate from THETA_dist_complexity
     for (auto i = 0; i < N_complexity_params * N_complexity_params; ++i)
@@ -79,6 +80,10 @@ void SEMBL::init_world_connections()
 {
     auto PV_module = solar_panel_templates.at(EDecParams::CurrentTechnology);
     //calculate price for this starting efficiency
+
+#define ABMS_PRICE_TESTING
+
+#ifndef ABMS_PRICE_TESTING
     double p_per_watt = -1.3126 + (PV_module->efficiency/0.15) * 1.8135;
     //total number of watts
     double panel_watts = PV_module->efficiency * (PV_module->length * PV_module->width/1000000)*1000;
@@ -86,6 +91,20 @@ void SEMBL::init_world_connections()
     p_baseline = panel_watts * p_per_watt;
     
     p_baseline_per_watt = p_per_watt;
+
+#endif
+
+#ifdef ABMS_PRICE_TESTING
+	//different type of price initialization
+	double panel_watts = PV_module->efficiency * (PV_module->length * PV_module->width / 1000000) * 1000;
+	
+	double p_per_watt = p_baseline_per_watt;
+
+	p_baseline = panel_watts * p_per_watt;
+
+
+#endif
+
     
     solar_panel_templates.at(EDecParams::CurrentTechnology)->p_sem = panel_watts * p_per_watt;
     
@@ -144,7 +163,7 @@ void SEMBL::ac_update_tick()
     
     
     //update p_baseline for learning rate
-    p_baseline = p_baseline * (1 - params[EParamTypes::SEMLearningPrice]);
+//    p_baseline = p_baseline * (1 - params[EParamTypes::SEMLearningPrice]);
     
     //update price per watt for learning rate
     p_baseline_per_watt *= (1 - params[EParamTypes::SEMLearningPrice]);
@@ -237,13 +256,16 @@ void SEMBL::act_tick()
 
     
     //update price
-    new_pv->p_sem = p_baseline;
+//    new_pv->p_sem = p_baseline;
     
     
-#ifdef TEST_PRICING
+	//MARK: check which one price update is meant to be 
+
+
     //update price
+	//use here price per watt as a basic feature
     new_pv->p_sem = p_baseline_per_watt * new_pv->efficiency * (new_pv->length * new_pv->width/1000000)*1000;
-#endif
+
     
     lock.lock();
     solar_panel_templates[EDecParams::NewTechnology] = new_pv;

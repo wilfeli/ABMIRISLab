@@ -486,7 +486,7 @@ namespace solar_core {
             
             for (auto& sei:(*seis))
             {
-                std::cout << "Profit margin: " << sei->THETA_profit[0] << std::endl;
+//                std::cout << "Profit margin: " << sei->THETA_profit[0] << std::endl;
             };
             
 
@@ -682,7 +682,7 @@ namespace solar_core {
          
             std::map<EParamTypes, std::string> decision {{EParamTypes::HONCDecision, "ho-ncdecisions.json"},{EParamTypes::HOSEIDecision, "ho-installerdecisions.json"},{EParamTypes::HODesignDecision, "ho-designdecisions.json"}};
             
-            
+            //read decision templates
             EParamTypes attribute;
             for (auto iter:decision)
             {
@@ -717,16 +717,22 @@ namespace solar_core {
 					//read distribution of classes
 
 					//create space for x_i
-					w->ho_decisions[iter.first]->HO_x_i.push_back(decltype(w->ho_decisions[iter.first]->HO_x_i.back()){});
+					w->ho_decisions[iter.first]->HO_x_i.push_back({});
 
-					//read spline points 
-					for (auto& node_dist : node.second.get_child("spline_points"))
+					//read spline points
+					if (node.second.get_child_optional("spline_points"))
 					{
-						attribute = EnumFactory::ToEParamTypes(node_dist.first);
-						serialize::deserialize(node_dist.second, w->ho_decisions[iter.first]->HO_x_i.back()[attribute]);
+						for (auto& node_dist : node.second.get_child("spline_points"))
+						{
+							attribute = EnumFactory::ToEParamTypes(node_dist.first);
+							serialize::deserialize(node_dist.second, w->ho_decisions[iter.first]->HO_x_i.back()[attribute]);
+						};
 					};
-
                 };
+
+				//calculate spline coefs 
+				w->ho_decisions[iter.first]->calculate_spline_coefs();
+
             };
             
             
@@ -735,6 +741,7 @@ namespace solar_core {
             
             //create HO
             std::string label;
+			long label_i = 0;
             double u_i;
             
             
@@ -769,17 +776,25 @@ namespace solar_core {
                 
                 
                 //generate class label given frequencies
-                label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HOSEIDecision]->cmf, u_i)];
+				label_i = tools::get_inverse_index(w->ho_decisions[EParamTypes::HOSEIDecision]->cmf, u_i);
+                label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[label_i];
                 
                 //assume the same parameters for each class
                 (*hos)[i]->THETA_SEIDecisions = w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label];
 
+				//link to the scheme for parameters
+				(*hos)[i]->decision_scheme_SEIDecision = label_i;
+
                 
                 //generate class label given frequencies
-                label = w->ho_decisions[EParamTypes::HODesignDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HODesignDecision]->cmf, u_i)];
+				label_i = tools::get_inverse_index(w->ho_decisions[EParamTypes::HODesignDecision]->cmf, u_i);
+                label = w->ho_decisions[EParamTypes::HODesignDecision]->labels[label_i];
                 
                 //assume the same parameters for each class
                 (*hos)[i]->THETA_DesignDecisions = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
+
+				//link to the scheme for parameters
+				(*hos)[i]->decision_scheme_DesignDecision = label_i;
                 
                 
                 if (i < w->params_d[EParamTypes::N_HOMarketingStateHighlyInterested])
@@ -794,8 +809,7 @@ namespace solar_core {
                 };
 
                 
-                //? link to the scheme for parameters??? 
-               
+
 
                 
             };
@@ -914,7 +928,10 @@ namespace solar_core {
                     seis->back()->THETA_exploration = THETA_exploiter;
                 };
                 
-                
+
+				//set learning mode
+				seis->back()->LearningMode = pt.get<std::string>("LearningMode");
+
 
                 
                 //set manufacturer connection

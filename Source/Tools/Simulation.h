@@ -51,7 +51,7 @@ namespace solar_core
 			std::vector<std::map<EParamTypes, std::vector<double>>> HO_x_i; /*!< end points for each type of HO, for each part of utility estimate */
 			std::vector<std::map<EParamTypes, std::vector<std::vector<double>>>> HO_coefs; /*!< a,b,c,d for each HO type for each part of utility estimate for each spline */
 
-			void calculate_spline_coefs();
+			void calculate_spline_coefs(); /*!< calculate coefs for given values of x,y */
 			double get_spline_value(EParamTypes param_, double x_i, long label_i); /*!< gets index in HO_coefs for this parameters and this value */
 
         };

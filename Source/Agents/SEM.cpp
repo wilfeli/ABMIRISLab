@@ -82,10 +82,18 @@ SEM::init(W* w_)
         
             double panel_watts = iter->efficiency * (iter->length * iter->width/1000000)*1000;
             
-            prices[iter->name] = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, 1 - std::signbit(efficiency_differential - 1))) * panel_watts;
+            prices[iter->name] = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, std::signbit(efficiency_differential - 1))) * panel_watts;
             
             iter->p_sem = prices[iter->name];
             
+
+//#ifdef ABMS_SEI_TEST
+//			double price_per_watt = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, std::signbit(efficiency_differential - 1)));
+//			std::cout << iter->efficiency << " " << panel_watts << " " << iter->p_sem << " " << price_per_watt << std::endl;
+//			std::cout << (1 + THETA_profit[0]) << " " << 1 + params[EParamTypes::SEMPriceMarkupEfficiency] << " " << std::pow(-1, 1 - std::signbit(efficiency_differential - 1)) << std::endl;
+//
+//#endif
+
         };
     };
     

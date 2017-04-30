@@ -29,11 +29,45 @@ UIBL::init(solar_core::WEE *w_)
     w = w_;
 };
 
+/**
 
 
+Get soft costs 
+
+each project - check that price stays the same during simulation run 
+have installer - link by uid?
+
+
+price is either per watt or cost based 
+
+
+get hard costs for each project = module price * N_modules
+
+average for period for installer? 
+save all raw info?
+
+
+
+
+write to them about memory corruption
+
+save everything about costs of the project 
+
+
+record seed 
+time stamps
+
+check return value
+
+
+*/
 void
 UIBL::save(std::string path_to_save_file_)
 {
+
+	std::vector<std::string> save_file_names;
+
+
     if (path_to_save_file_ == "")
     {
         path_to_save_file_ = w->params["path_to_save"];
@@ -108,6 +142,11 @@ UIBL::save(std::string path_to_save_file_)
 
 		//save reliabilities of the panels
         
+
+
+
+
+
     };
     
     //convert to path, get parent path
@@ -117,15 +156,61 @@ UIBL::save(std::string path_to_save_file_)
     std::string file_name = boost::uuids::to_string(file_name_short) + "_w.csv";
     boost::filesystem::path path_tmp = path_to_dir;
     path_tmp /= file_name;
-    
+	save_file_names.push_back(file_name);
     std::ofstream out_file(path_tmp.string());
-    
+
+
+	if (!out_file)
+	{
+		out_file.close();
+		//create location for saves in the directory with setup files? 
+		//set path_to_save_file
+		path = boost::filesystem::path(w->base_path);
+		//path to the directory with model file, save here in case there are save errors 
+		auto path_to_save_file = boost::filesystem::path(path.parent_path().make_preferred());
+
+		path_to_save_file /= "Saves";
+		path_to_save_file /= file_name;
+
+
+		path_to_dir = path_to_save_file.parent_path();
+
+		//for appending to old file use std::ofstream::app    
+		//overwrite old file
+		out_file.open(path_to_save_file.string(), std::ofstream::trunc);
+
+		if (out_file)
+		{
+		}
+		else
+		{
+			out_file.close();
+
+			//create directory if needed
+			boost::filesystem::path dir = path_to_save_file.parent_path();
+
+			if (!(boost::filesystem::exists(dir)))
+			{
+				boost::filesystem::create_directory(dir);
+			};
+
+			out_file.open(path_to_save_file.string(), std::ofstream::trunc);
+
+			if (!out_file)
+			{
+				throw std::runtime_error("Can not create save file");
+			};
+		};
+
+
+	};
+
+
+
     if (out_file)
     {
         
         //MARK: cont. write column names
-        
-        
         for (auto i = 0; i < (*save_data).size(); ++i)
         {
             for (auto j = 0; j < (*save_data)[i].size(); ++j)
@@ -153,7 +238,7 @@ UIBL::save(std::string path_to_save_file_)
     path_tmp = path_to_dir;
     path_tmp /= file_name;
     out_file.open(path_tmp.string());
-    
+	save_file_names.push_back(file_name);
 
     if (out_file)
     {
@@ -169,5 +254,66 @@ UIBL::save(std::string path_to_save_file_)
         };
     };
     
+	out_file.close();
+
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_pv.csv";
+	path_tmp = path_to_dir;
+	path_tmp /= file_name;
+	out_file.open(path_tmp.string());
+	save_file_names.push_back(file_name);
+
+	if (out_file)
+	{
+
+
+		for (auto i = 0; i < save_data_raw.size(); ++i)
+		{
+			for (auto& project : save_data_raw[i])
+			{
+				//hard costs if installed 
+				//soft costs if installed
+				//price if installed 
+				//installer uid 
+				out_file << project->p << ",";
+				out_file << project->hard_costs << ",";
+				out_file << project->soft_costs << ",";
+				out_file << project->begin_time << ",";
+				//as sei are created in a fixed order lowest uid will mean sei[0] and so on
+				out_file << project->sei->uid.get_string();
+				out_file << std::endl;
+			};
+		};
+	};
+
+
+
+	out_file.close();
+
+
+
+	
+
+
+
+	//save conf data about simulation results
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_conf.log";
+	path_tmp = path_to_dir;
+	path_tmp /= file_name;
+	out_file.open(path_tmp.string());
+	save_file_names.push_back(file_name);
+
+	if (out_file)
+	{
+		for (auto name:save_file_names) 
+		{
+			out_file << name << std::endl;
+		};
+		out_file << "SEED " << w->params["SEED"] << " ";
+		out_file << "Parameters Code: " << w->params["ParametersCode"];
+	};
+
+	out_file.close();
     
 }

@@ -119,7 +119,7 @@ namespace solar_core
          
          */
         
-
+		std::string LearningMode = ""; /*!< type of learning to be done, control reliability learning*/
         
         
         std::map<UID, TDesign*>  designs;  /** have current estimates on system design parameters for different learning distributions. UID of a solar_module here */

@@ -145,5 +145,6 @@
                                 25
                                 ],
     "complexity_install_prior": 100,
-    "dec_design": "FORMULA::RANDOM"
+  "dec_design": "FORMULA::RANDOM",
+    "LearningMode": "RelBase"
 }

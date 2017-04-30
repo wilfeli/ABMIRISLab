@@ -294,6 +294,8 @@ protected:
 
     
     double estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA); /*!< here is for C_API and generally API */
+
+	double estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, long label_i);
     
     
     virtual void dec_evaluate_preliminary_quotes(); /*!< eveluate preliminary quotes - which to be pursued further. Will correspond to SEI conjoint. Will pick best from here and request actual quotes with site visit. */
@@ -302,7 +304,7 @@ protected:
     
     
     double estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA);
-	double estimate_design_utility_from_params(std::shared_ptr<PVProject> project, DecisionParams& THETA, DecisionSplineParams& SPLINES, SplineEnds& SPLINES_X);
+	double estimate_design_utility_from_params(std::shared_ptr<PVProject> project, long label_i);
     double estimate_design_utility(std::shared_ptr<PVProject> project);
     
     
@@ -316,8 +318,8 @@ protected:
     std::map<EParamTypes, std::vector<double>> THETA_NCDecisions; /*!< parameters for non-compensatory decision making  */
     
 
-	int decision_scheme_SEIDecision = 0; /*!< points to the specific decision scheme in the selection of them */
-	int decision_scheme_DesignDecision = 0; /*!< points to the specific decision scheme in the selection of them */
+	long decision_scheme_SEIDecision = 0; /*!< points to the specific decision scheme in the selection of them */
+	long decision_scheme_DesignDecision = 0; /*!< points to the specific decision scheme in the selection of them */
 
 
 

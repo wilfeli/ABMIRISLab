@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6E6718E-3E3A-4A34-8619-E6D559342A52}</ProjectGuid>
+    <RootNamespace>EEModel</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\CoreSolarModel\CoreSolarModel.vcxitems" Label="Shared" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\EE\;$(ProjectDir)..\Source\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\EE\;$(ProjectDir)..\Source\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\EE\;$(ProjectDir)..\Source\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\EE\;$(ProjectDir)..\Source\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "$(ProjectDir)..\..\solar-model\Model\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\EE\UI\model.h" />
+    <ClInclude Include="..\Source\Agents\SEIBL.h" />
+    <ClInclude Include="..\Source\Agents\SEMBL.h" />
+    <ClInclude Include="..\Source\Physics\SolarPanelBL.h" />
+    <ClInclude Include="..\Source\UI\UIBL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\EE\UI\main.cpp" />
+    <ClCompile Include="..\Source\Agents\H.cpp" />
+    <ClCompile Include="..\Source\Agents\SEIBL.cpp" />
+    <ClCompile Include="..\Source\Agents\SEMBL.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\codecvt_error_category.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\operations.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\path.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\path_traits.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\portability.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\unique_path.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\utf8_codecvt_facet.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\filesystem\src\windows_file_codecvt.cpp" />
+    <ClCompile Include="..\Source\ExternalTools\boost_1_60_0\libs\system\src\error_code.cpp" />
+    <ClCompile Include="..\Source\Physics\SolarPanelBL.cpp" />
+    <ClCompile Include="..\Source\UI\UIBL.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Examples\EEModel\CA\distribution_hh.json" />
+    <None Include="..\Examples\EEModel\CA\eemodel.model" />
+    <None Include="..\Examples\EEModel\CA\g.json" />
+    <None Include="..\Examples\EEModel\CA\geography.json" />
+    <None Include="..\Examples\EEModel\CA\ho.json" />
+    <None Include="..\Examples\EEModel\CA\joint_distribution_hh.csv" />
+    <None Include="..\Examples\EEModel\CA\sei.json" />
+    <None Include="..\Examples\EEModel\CA\sem.json" />
+    <None Include="..\Examples\EEModel\CA\solar_equipment.json" />
+    <None Include="..\Examples\EEModel\CA\utility.json" />
+    <None Include="..\Examples\EEModel\CA\w.json" />
+    <None Include="..\Examples\EEModel\MA\distribution.json" />
+    <None Include="..\Examples\EEModel\MA\distribution_hh.json" />
+    <None Include="..\Examples\EEModel\MA\eemodel.model" />
+    <None Include="..\Examples\EEModel\MA\g.json" />
+    <None Include="..\Examples\EEModel\MA\geography.json" />
+    <None Include="..\Examples\EEModel\MA\ho.json" />
+    <None Include="..\Examples\EEModel\MA\joint_distribution_hh.csv" />
+    <None Include="..\Examples\EEModel\MA\sei.json" />
+    <None Include="..\Examples\EEModel\MA\sem.json" />
+    <None Include="..\Examples\EEModel\MA\solar_equipment.json" />
+    <None Include="..\Examples\EEModel\MA\utility.json" />
+    <None Include="..\Examples\EEModel\MA\w.json" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

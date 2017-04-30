@@ -1,7 +1,7 @@
 {
   "N_HO": 1000,
   "N_HOMarketingStateHighlyInterested": 10,
-  "N_SEI": 3,
+  "N_SEI": 1,
   "N_SEILarge": 1,
   "N_SEM": 12,
   "N_SEMInverterProducer": 5,
@@ -35,9 +35,8 @@
       { "EParamTypes::SEMFailureRateInverterPowerOptimizer": 0.003 },
       { "EParamTypes::PVModuleWarrantyLength": 25.0 },
       { "EParamTypes::SEIAverageDemandInPreliminaryQuote": 0.0 },
-      { "EParamTypes::ScenarioEfficiencyAdjustment": 1.0 }
+      { "EParamTypes::ScenarioEfficiencyAdjustment": 1.15 }
     ],
-    "THETA_roof_update": [ 15.0, 0.8 ],
     "constraints": [
       { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
       { "EConstraintParams::MaxLengthPlanInstallations": 10 },
@@ -50,6 +49,7 @@
       { "EConstraintParams::MinNReceivedPreliminaryQuotes": 2 },
       { "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes": 2 },
       { "EConstraintParams::MaxNOpenProjectsHO": 10 }
-    ]
+    ],
+    "THETA_roof_update": [ 15.0, 0.8 ]
   }
 }

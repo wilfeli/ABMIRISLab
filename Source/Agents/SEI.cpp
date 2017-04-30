@@ -801,6 +801,7 @@ void SEI::dec_max_profit()
 
     //simplification - assume that there is only 1 class, pick first class
     auto label = w->ho_decisions[EParamTypes::HOSEIDecision]->labels[0];
+	auto label_i = 0;
 
     //create project for an average homeowner
     //dummy agent with house size
@@ -888,9 +889,18 @@ void SEI::dec_max_profit()
         {
             project_sei_i->sei = (*w->seis)[i_sei];
             project_sei_i->preliminary_quote = (*w->seis)[i_sei]->form_preliminary_quote(project_generic, (*w->seis)[i_sei]->THETA_profit[0]);
-            //estimate utility
+            
+#ifndef ABMS_SPLINES
+			//estimate utility
             //use zero H to get estimation of utility for now
             utility_den += std::exp((*w->hos)[0]->estimate_sei_utility_from_params(project_sei_i, w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme[label]));
+#endif
+
+#ifdef ABMS_SPLINES
+
+			utility_den += std::exp((*w->hos)[0]->estimate_sei_utility_from_params(project_sei_i, label_i));
+
+#endif
             
         };
         
@@ -915,7 +925,7 @@ void SEI::dec_max_profit()
 #ifdef ABMS_DEBUG_MODE
         if (profit_grid(i,0) >= 0.9)
         {
-//            std::cout << designs[0]->design->total_net_savings << std::endl;
+ //           std::cout << designs[0]->design->total_net_savings << std::endl;
         };
 #endif
         
@@ -926,7 +936,15 @@ void SEI::dec_max_profit()
             //update design for new parameters
             project_generic->design = design;
             
+#ifndef ABMS_SPLINES
             utility_i = (*w->hos)[0]->estimate_design_utility_from_params(project_generic, w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label]);
+#endif
+
+#ifdef ABMS_SPLINES
+
+			utility_i = (*w->hos)[0]->estimate_design_utility_from_params(project_generic, label_i);
+
+#endif
             
             utility_den += std::exp(utility_i);
             
@@ -945,7 +963,7 @@ void SEI::dec_max_profit()
         {
             //update to the share from raw utility
             //estimate share of the submarket that will install solar panels with particular design
-            shares_design[j] = shares_design[j]/utility_den;
+            shares_design[j] = std::exp(shares_design[j])/utility_den;
             
 #ifdef ABMS_DEBUG_MODE
             total_design_share += shares_design[j];
@@ -955,6 +973,7 @@ void SEI::dec_max_profit()
             ///calculate total sales
             //MARK: adjustment for NC Decisions only for DEBUG mode, CAREFUL will through otherwise
             qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j] * share_nc;
+//			std::cout << qn << std::endl; 
 #endif
             //calculate income for this design type
             income += designs[j]->design->total_costs * qn;
@@ -998,6 +1017,12 @@ void SEI::dec_max_profit()
     
     //updating profit margin
     THETA_profit[0] = profit_grid(maxRow,0);
+
+
+
+#ifdef ABMS_SEI_TEST
+	THETA_profit[0] = 1.0;
+#endif
     
     delete agent;
     delete house;

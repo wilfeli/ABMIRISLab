@@ -219,6 +219,13 @@ SEIBL::form_design_for_params(H* agent_, std::shared_ptr<PVProjectFlat> project)
     project->p = p;
     project->PV_module = dec_design->PV_module;
     project->sei = this;
+
+
+	//save other information 
+	project->hard_costs = N_PANELS * dec_design->p_module;
+	project->soft_costs = costs - project->hard_costs;
+		
+
     
     //find irr
     //secant method
@@ -400,82 +407,83 @@ TDesign* SEIBL::dec_base()
     if (test_design->PV_module != nullptr)
     {
  
-#define ABMSOLAR_RELBASE
-//#define ABMSOLAR_RELPAST
-#ifdef ABMSOLAR_RELBASE
-        //reset to presets
-        //might be using SEM specific prior for new models? later
-        test_design->THETA_reliability = THETA_reliability_prior;
-        test_design->THETA_complexity = THETA_complexity_prior;
-        test_design->complexity_install = complexity_install_prior;
-        
-#endif        
 
-
-#ifdef ABMSOLAR_RELPAST
-		//reset to current estimate
-		test_design->THETA_reliability = dec_design_hat->THETA_reliability;
-		test_design->THETA_complexity = dec_design_hat->THETA_complexity;
-		test_design->complexity_install = dec_design_hat->complexity_install;
-
-#endif
-
-//#define ABMSOLAR_RELMEAN
-#ifdef ABMSOLAR_RELMEAN
-		auto VECTOR_LENGTH_REL = dec_design_hat->THETA_reliability.size();
-		auto VECTOR_LENGTH_COM = dec_design_hat->THETA_complexity.size();
-		//go over all sei and average over their prior - here, because it is a HACK
-		std::vector<double> THETA_reliability_acc(VECTOR_LENGTH_REL, 0.0);
-		std::vector<double> THETA_complexity_acc(VECTOR_LENGTH_COM, 0.0);
-
-		for (auto sei : *w->get_seis()) 
+		if (LearningMode == "RelBase") 
 		{
-			//get current design 
-			if (sei->dec_design)
+			//reset to presets
+			//might be using SEM specific prior for new models? later
+			test_design->THETA_reliability = THETA_reliability_prior;
+			test_design->THETA_complexity = THETA_complexity_prior;
+			test_design->complexity_install = complexity_install_prior;
+		};
+
+
+		if (LearningMode == "RelPast") 
+		{
+			//reset to current estimate
+			test_design->THETA_reliability = dec_design_hat->THETA_reliability;
+			test_design->THETA_complexity = dec_design_hat->THETA_complexity;
+			test_design->complexity_install = dec_design_hat->complexity_install;
+		};
+
+
+		if (LearningMode == "RealMean") 
+		{
+			auto VECTOR_LENGTH_REL = dec_design_hat->THETA_reliability.size();
+			auto VECTOR_LENGTH_COM = dec_design_hat->THETA_complexity.size();
+			//go over all sei and average over their prior - here, because it is a HACK
+			std::vector<double> THETA_reliability_acc(VECTOR_LENGTH_REL, 0.0);
+			std::vector<double> THETA_complexity_acc(VECTOR_LENGTH_COM, 0.0);
+
+			for (auto sei : *w->get_seis())
 			{
-				for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+				//get current design 
+				if (sei->dec_design)
 				{
-					THETA_reliability_acc[i] += sei->dec_design->THETA_reliability[i];
-				};
-			}
-			else 
-			{
-				for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+					for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+					{
+						THETA_reliability_acc[i] += sei->dec_design->THETA_reliability[i];
+					};
+				}
+				else
 				{
-					THETA_reliability_acc[i] += THETA_reliability_prior[i];
+					for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
+					{
+						THETA_reliability_acc[i] += THETA_reliability_prior[i];
+					};
 				};
+				if (sei->dec_design)
+				{
+					for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+					{
+						THETA_complexity_acc[i] += sei->dec_design->THETA_complexity[i];
+					};
+				}
+				else
+				{
+					for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+					{
+						THETA_complexity_acc[i] += THETA_complexity_prior[i];
+					};
+				};
+
 			};
-			if (sei->dec_design)
+
+			for (auto i = 0; i < VECTOR_LENGTH_REL; ++i)
 			{
-				for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
-				{
-					THETA_complexity_acc[i] += sei->dec_design->THETA_complexity[i];
-				};
-			}
-			else
-			{
-				for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
-				{
-					THETA_complexity_acc[i] += THETA_complexity_prior[i];
-				};
+				THETA_reliability_acc[i] = THETA_reliability_acc[i] / VECTOR_LENGTH_REL;
 			};
-			
+			for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
+			{
+				THETA_complexity_acc[i] = THETA_complexity_acc[i] / VECTOR_LENGTH_COM;
+			};
+
+			test_design->THETA_reliability = THETA_reliability_acc;
+			test_design->THETA_complexity = THETA_complexity_acc;
+			test_design->complexity_install = dec_design_hat->complexity_install;
 		};
 
-		for (auto i = 0; i < VECTOR_LENGTH_REL; ++i) 
-		{
-			THETA_reliability_acc[i] = THETA_reliability_acc[i] / VECTOR_LENGTH_REL;
-		};
-		for (auto i = 0; i < VECTOR_LENGTH_COM; ++i)
-		{
-			THETA_complexity_acc[i] = THETA_complexity_acc[i] / VECTOR_LENGTH_COM;
-		};
-		
-		test_design->THETA_reliability = THETA_reliability_acc;
-		test_design->THETA_complexity = THETA_complexity_acc;
-		test_design->complexity_install = dec_design_hat->complexity_install;
 
-#endif
 
 		//assume price is the same for everyone
 		test_design->p_module = test_design->PV_module->p_sem;
@@ -1009,7 +1017,9 @@ void SEIBL::install_project(std::shared_ptr<PVProjectFlat> project_, TimeUnit ti
     
     w->get_state_inf_installed_project(project_);
     
+	pvprojects_lock.lock();
     pvprojects.push_back(project_);
+	pvprojects_lock.unlock();
     
 }
 
@@ -1053,7 +1063,7 @@ void SEIBL::projects_update()
     };
     
     
-    
+	pvprojects_lock.lock();
     auto i_max = pvprojects.size() - 1;
     for (int64_t i = i_max; i >= 0; --i)
     {
@@ -1088,7 +1098,7 @@ void SEIBL::projects_update()
             pvprojects[i]->production_time = 1.0; // always up, no failures this year
         };
     };
-    
+	pvprojects_lock.unlock();
     
 
     

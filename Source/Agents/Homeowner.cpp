@@ -96,7 +96,7 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 
     
     //saves information about advertising agent only if not already commited to installing project
-    if ((marketing_state != EParamTypes::HOMarketingStateNotAccepting) && (quote_state != EParamTypes::HOStateCommitedToInstallation))
+    if ((marketing_state != EParamTypes::HOMarketingStateNotAccepting) && (quote_state != EParamTypes::HOStateCommitedToInstallation) && (quote_state != EParamTypes::HOStateInterconnected))
     {
 		if (!index_inf_marketing_sei.empty())
 		{
@@ -383,12 +383,82 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
 
 
 
+
+double
+Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project,
+											long label_i)
+{
+
+	double utility = 0.0;
+	double x_i = 0.0;
+	double y_i = 0.0;
+	EParamTypes param = EParamTypes::None;
+	auto THETA = w->ho_decisions[EParamTypes::HOSEIDecision]->HOD_distribution_scheme
+		[w->ho_decisions[EParamTypes::HOSEIDecision]->labels[label_i]];
+
+
+
+	//here installers are evaluated
+	//preliminary quote will have general savings estimation
+	//collect all parameters for decisions
+	utility += THETA[EParamTypes::SEIRating][project->sei->params[EParamTypes::SEIRating] - 3];
+
+	//discrete variables have position in the vector of coefficients as their value. Fragile.
+	utility += THETA[EParamTypes::SEIInteractionType][project->sei->params[EParamTypes::SEIInteractionType]];
+
+
+	//number inside is type of equipment - directly corresponds to the position in the vector
+	utility += THETA[EParamTypes::SEIEquipmentType][project->sei->params[EParamTypes::SEIEquipmentType]];
+
+	//estimated project total time
+	//LeadIn time if fixed for each installer and is an estimation
+	//Permitting time depends on the location, but is an estimate
+	int NUMBER_TICKS_IN_MONTH = 4;
+	x_i = project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH;
+	param = EParamTypes::HOSEIDecisionTotalProjectTime;
+	y_i = w->ho_decisions[EParamTypes::HOSEIDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
+
+	//warranty
+	//MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
+	//MARK: ERRORS IN LOGIC
+	std::map<double, int64_t> warranty_map{{5.0, 0.0}, {15.0, 1.0}, {25.0, 2.0}};
+	utility += THETA[EParamTypes::SEIWarranty][warranty_map[project->preliminary_quote->params[EParamTypes::SEIWarranty]]];
+
+
+	////continious case
+	//utility += THETA[EParamTypes::SEIWarranty][0] * project->preliminary_quote->params[EParamTypes::SEIWarranty];
+
+
+	//savings are estimated for an average homeowner
+	x_i = project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
+	param = EParamTypes::HOSEIDecisionEstimatedNetSavings;
+	y_i = w->ho_decisions[EParamTypes::HOSEIDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
+
+
+
+
+	return utility;
+
+}
+
+
+
+
+
 double
 Homeowner::estimate_sei_utility(std::shared_ptr<PVProject> project)
 {
-    return estimate_sei_utility_from_params(project, THETA_SEIDecisions);
     
     
+#ifndef ABMS_SPLINES
+	return estimate_sei_utility_from_params(project, THETA_SEIDecisions);
+#endif
+
+#ifdef ABMS_SPLINES
+	return estimate_sei_utility_from_params(project, decision_scheme_SEIDecision);
+#endif    
 }
 
 
@@ -724,20 +794,53 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 	double x_i = 0.0;
 	double y_i = 0.0;
 	EParamTypes param = EParamTypes::None;
+	auto THETA = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme
+		[w->ho_decisions[EParamTypes::HODesignDecision]->labels[label_i]];
 
 	//efficiency
 	x_i = project->design->design->PV_module->efficiency;
 	param = EParamTypes::HODesignDecisionPanelEfficiency;
-
 	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
 
-	utility += y_i;
+	//visibility
+	utility += THETA[EParamTypes::HODesignDecisionPanelVisibility][project->design->design->PV_module->visibility];
 
-	//calculate y = f(splines, x)
+	//inverter type
+	utility += THETA[EParamTypes::HODesignDecisionInverterType][static_cast<int64_t>(project->design->design->inverter->technology)];
 
-	//MARK: cont. 
+	//number of failures
+	//here need 5 years because it is what is asked in the survey
+	x_i = 5 * project->design->design->failure_rate;
+	param = EParamTypes::HODesignDecisionFailures;
+	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
+
+	
+	//emmision levels
+	x_i = project->design->design->co2_equivalent;
+	param = EParamTypes::HODesignDecisionCO2;
+	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
 	
 
+	//savings are estimated for an average homeowner
+	x_i = project->design->design->total_net_savings;
+	param = EParamTypes::HODesignDecisionEstimatedNetSavings;
+	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
+	utility += y_i * x_i;
+
+
+	//if (x_i > 0.1) 
+	//{
+	//	std::cout << x_i << std::endl;
+	//	std::cout << utility << std::endl;
+	//};
+
+
+
+	
+	return utility;
 }
 
 
@@ -750,21 +853,17 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 
 double Homeowner::estimate_design_utility(std::shared_ptr<PVProject> project)
 {
+
+
+
+
+#ifndef ABMS_SPLINES
     return estimate_design_utility_from_params(project, THETA_DesignDecisions);
-    
+#endif
 
-
-	//get link to the spline scheme to use
-
-	//label for the scheme index
-	auto label = w->ho_decisions[EParamTypes::HODesignDecision]->labels[decision_scheme_DesignDecision];
-
-	//splines coefs
-	auto spline_scheme = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
-
-	//pointer to the dist to get spline index? 
-	auto THETA = w->ho_decisions[EParamTypes::HODesignDecision]->HOD_distribution_scheme[label];
-
+#ifdef ABMS_SPLINES
+	return estimate_design_utility_from_params(project, decision_scheme_DesignDecision);
+#endif
     
 }
 
