@@ -12,6 +12,7 @@
 #include "Agents/Homeowner.h"
 #include "Physics/SolarPanelBL.h"
 
+
 using namespace solar_core;
 
 double SolarModule::initialization_tolerance = 0.1;
@@ -33,12 +34,37 @@ Inverter::deserialize(const PropertyTree& pt_)
 }
 
 
+std::shared_ptr<Inverter>
+Inverter::deserialize(const DocumentNode& pt_)
+{
+	//placeholder to be replaced by other type if needed
+	if (tools::get_string(pt_["ClassType"]) == "solar_core::Inverter")
+	{
+		return std::make_shared<Inverter>(pt_);
+	}
+	else
+	{
+		return std::make_shared<Inverter>(pt_);
+	};
+}
+
+
+
 Inverter::Inverter(const PropertyTree& pt_)
 {
     manufacturer_id = pt_.get<std::string>("Manufacturer Id");
     name = pt_.get<std::string>("Name");
     technology = EnumFactory::ToESEIInverterType(pt_.get<std::string>("Type"));
     
+}
+
+
+Inverter::Inverter(const DocumentNode& pt_)
+{
+	manufacturer_id = tools::get_string(pt_["Manufacturer Id"]);
+	name = tools::get_string(pt_["Name"]);
+	technology = EnumFactory::ToESEIInverterType(tools::get_string(pt_["Type"]));
+
 }
 
 
@@ -57,7 +83,20 @@ SolarModule::deserialize(const PropertyTree& pt_)
     };
 }
 
+std::shared_ptr<SolarModule>
+SolarModule::deserialize(const DocumentNode& pt_)
+{
 
+	if (tools::get_string(pt_["TYPE"]) == "solar_core::SolarModuleBL")
+	{
+
+		return std::make_shared<SolarModuleBL>(pt_);
+	}
+	else
+	{
+		return std::make_shared<SolarModule>(pt_);
+	};
+}
 
 
 
@@ -99,7 +138,43 @@ SolarModule::SolarModule(const PropertyTree& pt_)
     
 }
 
+SolarModule::SolarModule(const DocumentNode& pt_)
+{
+	name = tools::get_string(pt_["Name"]);
+	efficiency = tools::get_double(pt_["Peak Efficiency"]);
+	STC_power_rating = tools::get_double(pt_["STC Power Rating"]);
+	p_sem = tools::get_double(pt_["Price (from manufacturer)"]);
+	length = tools::get_double(pt_["Length"]);
+	width = tools::get_double(pt_["Width"]);
+	warranty_length = WorldSettings::instance().params_exog[EParamTypes::PVModuleWarrantyLength];
+	manufacturer_id = tools::get_string(pt_["Manufacturer Id"]);
+	degradation = tools::get_double(pt_["Degradation after 10 years"]);
 
+
+	//added double check on parameters consistency
+	double STC_power_rating_from_ef = efficiency * length * width / 1000;
+
+
+	if (std::abs(STC_power_rating_from_ef - STC_power_rating) > initialization_tolerance)
+	{
+		throw std::runtime_error("inconsistent solar panel parameters");
+	};
+
+
+	//convert multiple parameters into indicator of visiibility
+	std::string color = tools::get_string(pt_["Color"]);
+	std::string pattern = tools::get_string(pt_["Pattern"]);
+
+	//depending on the pattern will become low visibility
+	if ((pattern == "Solid") || (pattern == "Lines"))
+	{
+		visibility = 1.0;
+	};
+
+
+
+
+}
 
 
 

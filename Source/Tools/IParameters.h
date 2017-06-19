@@ -708,8 +708,11 @@ namespace solar_core
         SEMMaxLengthRecordHistory,
         
         
-        
-        
+
+
+
+        /** Fixed in simulations profit margin */
+		SEIProfitMargin,
         
         /** Empty enum for completeness */
         None,
@@ -818,6 +821,10 @@ namespace solar_core
     
     typedef int64_t TimeUnit;
     typedef boost::property_tree::ptree PropertyTree; //container for parameters, properties
+
+	typedef rapidjson::Document DocumentRJ; /*!< container for json from rapidjson library */
+	typedef rapidjson::GenericValue<rapidjson::UTF8<>> DocumentNode;
+
     typedef Eigen::MatrixXd ThetaType; //one of containers for parameters
     typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, 1> SEIWMDataType; //one of containers for parameters
     typedef Eigen::Matrix<double, constants::N_BETA_SEI_WM, constants::N_BETA_SEI_WM> SEIWMMatrixd;
@@ -1461,6 +1468,10 @@ namespace solar_core
             {
                 return EConstraintParams::SEMMaxLengthRecordHistory;
             }
+			else if (param_type == "econstraintparams::seiprofitmargin") 
+			{
+				return EConstraintParams::SEIProfitMargin;
+			}
             else
             {
 #ifdef ABMS_DEBUG_MODE

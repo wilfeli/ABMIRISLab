@@ -30,6 +30,8 @@
     <ClInclude Include="..\Source\Institutions\IInstitute.h" />
     <ClInclude Include="..\Source\Institutions\IMessage.h" />
     <ClInclude Include="..\Source\Institutions\MarketingSystem.h" />
+    <ClInclude Include="..\Source\Tools\RJTools.h" />
+    <ClInclude Include="..\Source\Tools\SerializeRJ.h" />
     <ClInclude Include="..\Source\Tools\Documentation.h" />
     <ClInclude Include="..\Source\Tools\EnumTools.h" />
     <ClInclude Include="..\Source\Tools\ExternalIncludes.h" />
@@ -46,6 +48,7 @@
     <ClInclude Include="..\Source\UI\HelperW.h" />
     <ClInclude Include="..\Source\UI\UI.h" />
     <ClInclude Include="..\Source\UI\W.h" />
+    <ClInclude Include="..\Source\UI\WRJ.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Agents\G.cpp" />
@@ -75,6 +78,7 @@
     <ClCompile Include="..\Source\Tools\IRandom.cpp" />
     <ClCompile Include="..\Source\Tools\Log.cpp" />
     <ClCompile Include="..\Source\Tools\ParsingTools.cpp" />
+    <ClCompile Include="..\Source\Tools\RJTools.cpp" />
     <ClCompile Include="..\Source\Tools\Serialize.cpp" />
     <ClCompile Include="..\Source\Tools\Simulation.cpp" />
     <ClCompile Include="..\Source\Tools\VectorMath.cpp" />
@@ -83,6 +87,7 @@
     <ClCompile Include="..\Source\UI\main.cpp" />
     <ClCompile Include="..\Source\UI\UI.cpp" />
     <ClCompile Include="..\Source\UI\W.cpp" />
+    <ClCompile Include="..\Source\UI\WRJ.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Examples\BaseModel\basemodel.model" />
@@ -149,17 +154,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -176,7 +176,11 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
 
 
 
-void W::create_world(boost::filesystem::path& path_to_model_file, boost::filesystem::path& path_to_dir, boost::filesystem::path& path_to_template, PropertyTree& pt, std::map<std::string, std::string>& params_str)
+void W::create_world(boost::filesystem::path& path_to_model_file, 
+	boost::filesystem::path& path_to_dir, 
+	boost::filesystem::path& path_to_template, 
+	PropertyTree& pt, 
+	std::map<std::string, std::string>& params_str)
 {
     std::map<std::string, std::string> parsed_model;
     

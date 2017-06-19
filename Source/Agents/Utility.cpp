@@ -7,6 +7,7 @@
 //
 
 #include "Tools/Serialize.h"
+#include "Tools/SerializeRJ.h"
 #include "Agents/Utility.h"
 #include "Agents/SEI.h"
 #include "Agents/SolarPanel.h"
@@ -49,6 +50,41 @@ Utility::Utility(const PropertyTree& pt_, W* w_)
     
     
     
+}
+
+
+Utility::Utility(const DocumentRJ& pt_, W* w_)
+{
+	w = w_;
+
+	//read parameters
+	std::map<std::string, std::string> params_str;
+	serialize::deserialize(pt_["params"], params_str);
+
+	///@DevStage2 move to W to speed up, but test before that
+	for (auto& iter : params_str)
+	{
+		params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+	};
+
+
+	std::vector<std::string> THETA_dec_str;
+	serialize::deserialize(pt_["THETA_dec"], THETA_dec_str);
+	for (auto& iter : THETA_dec_str)
+	{
+		THETA_dec.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+	}
+
+
+
+
+	//form set with "closed" states
+	project_states_to_delete.insert(EParamTypes::GrantedPermitForInterconnection);
+	project_states_to_delete.insert(EParamTypes::ClosedProject);
+
+
+
+
 }
 
 void

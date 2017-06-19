@@ -20,6 +20,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <functional>
 #include <sstream>
 #include <string>
 #include <memory>
@@ -42,5 +43,10 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+
+
+#include <rapidjson/document.h>
+#include <rapidjson/istreamwrapper.h>
+
 
 #endif

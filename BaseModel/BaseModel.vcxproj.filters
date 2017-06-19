@@ -135,6 +135,15 @@
     <ClInclude Include="..\Source\Agents\SEMBL.h">
       <Filter>Header Files\Agents</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Tools\SerializeRJ.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\UI\WRJ.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Tools\RJTools.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Tools\WorldSettings.cpp">
@@ -241,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Agents\SEMBL.cpp">
       <Filter>Source Files\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UI\WRJ.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Tools\RJTools.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

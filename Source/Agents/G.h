@@ -48,6 +48,7 @@ namespace solar_core
          */
         
         G(const PropertyTree& pt_, W* w_);
+		G(const DocumentRJ & pt_, W * w_);
         void init(W* w_);
         virtual void act_tick() ;
         //@}

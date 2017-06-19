@@ -75,6 +75,7 @@ public:
     
     Homeowner();
     Homeowner(const PropertyTree& pt_, W* w_);
+	Homeowner(const DocumentRJ & pt_, W * w_);
     void init(W* w_);
     
     //@}

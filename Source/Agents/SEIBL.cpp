@@ -1218,11 +1218,14 @@ void SEIBL::wm_update_internal()
     //update Inv-Gamma with new estimate in THETA_reputation, given the new data point
     //assume method of moments with only parameter being  \f$/alpha \$f
     double mean = 0.0;
-    int64_t i_max = pvprojects.size() - 1;
+    
+	pvprojects_lock.lock();
+	int64_t i_max = pvprojects.size() - 1;
     for(auto i = 0; i < i_max ; ++i)
     {
         mean += pvprojects[i]->production_time;
     };
+	pvprojects_lock.unlock();
     
     if (i_max > 0)
     {

@@ -10,6 +10,8 @@
 #include "Institutions/MarketingSystem.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/Serialize.h"
+#include "Tools/SerializeRJ.h"
+#include "Tools/RJTools.h"
 #include "Tools/Log.h"
 #include "UI/W.h"
 #include "Agents/SolarPanel.h"
@@ -54,6 +56,41 @@ Homeowner::Homeowner(const PropertyTree& pt_, W* w_) :a_time{ 0 }, get_inf_marke
 	//reserve some space 
 	
 	for (auto i = 0; i < N_MARKETING_FROM_SEI_INIT_HO; ++i) 
+	{
+		get_inf_marketing_sei.push_back(nullptr);
+		index_inf_marketing_sei.push_back(i);
+	};
+}
+
+Homeowner::Homeowner(const DocumentRJ& pt_, W* w_):a_time{ 0 }, get_inf_marketing_sei{ 10, nullptr }
+{
+
+
+	w = w_;
+
+	//location
+	location_x = tools::get_double(pt_["location_x"]);
+	location_y = tools::get_double(pt_["location_y"]);
+
+	//House
+	house = new House(pt_["House"]);
+
+	quote_state = EnumFactory::ToEParamTypes(tools::get_string(pt_["quote_state"]));
+
+	schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+	i_schedule_visits = 0;
+
+	quote_stage_timer = 0;
+	n_preliminary_quotes = 0;
+	n_pending_designs = 0;
+	n_preliminary_quotes_requested = 0;
+
+	project_states_to_delete.insert(EParamTypes::ClosedProject);
+
+	std::size_t N_MARKETING_FROM_SEI_INIT_HO = 10;
+	//reserve some space 
+
+	for (auto i = 0; i < N_MARKETING_FROM_SEI_INIT_HO; ++i)
 	{
 		get_inf_marketing_sei.push_back(nullptr);
 		index_inf_marketing_sei.push_back(i);
@@ -417,7 +454,9 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project,
 	x_i = project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH;
 	param = EParamTypes::HOSEIDecisionTotalProjectTime;
 	y_i = w->ho_decisions[EParamTypes::HOSEIDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+
+	//it is part worth, so no multiplication here
+	utility += y_i;
 
 	//warranty
 	//MARK: CAREFULL Warranty is in month in SEI definition and in years in conjoint
@@ -434,7 +473,7 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project,
 	x_i = project->preliminary_quote->params[EParamTypes::PreliminaryQuoteEstimatedNetSavings];
 	param = EParamTypes::HOSEIDecisionEstimatedNetSavings;
 	y_i = w->ho_decisions[EParamTypes::HOSEIDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+	utility += y_i;
 
 
 
@@ -801,7 +840,7 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 	x_i = project->design->design->PV_module->efficiency;
 	param = EParamTypes::HODesignDecisionPanelEfficiency;
 	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+	utility += y_i;
 
 	//visibility
 	utility += THETA[EParamTypes::HODesignDecisionPanelVisibility][project->design->design->PV_module->visibility];
@@ -814,21 +853,21 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 	x_i = 5 * project->design->design->failure_rate;
 	param = EParamTypes::HODesignDecisionFailures;
 	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+	utility += y_i;
 
 	
 	//emmision levels
 	x_i = project->design->design->co2_equivalent;
 	param = EParamTypes::HODesignDecisionCO2;
 	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+	utility += y_i;
 	
 
 	//savings are estimated for an average homeowner
 	x_i = project->design->design->total_net_savings;
 	param = EParamTypes::HODesignDecisionEstimatedNetSavings;
 	y_i = w->ho_decisions[EParamTypes::HODesignDecision]->get_spline_value(param, x_i, label_i);
-	utility += y_i * x_i;
+	utility += y_i;
 
 
 	//if (x_i > 0.1) 

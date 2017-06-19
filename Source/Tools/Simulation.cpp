@@ -10,6 +10,7 @@
 #include "Tools/Serialize.h"
 #include "Tools/ParsingTools.h"
 #include "Tools/IRandom.h"
+#include "Tools/RJTools.h"
 
 using namespace solar_core;
 
@@ -165,9 +166,156 @@ tools::EmpiricalMVD* tools::create_joint_distribution(std::string path_to_scheme
 }
 
 
+tools::EmpiricalMVD* tools::create_joint_distribution_rj(std::string path_to_scheme, std::string path_to_data)
+{
+	//read file
+	//MARK: cont. change to the pointer
+	std::vector<std::vector<double>>* parsed_file = new std::vector<std::vector<double>>();
+	std::string path_to_file;
+
+	tools::parse_csv_file(path_to_data, parsed_file);
+
+
+	//read file with specification
+	//assume each high level has a name for the variable in joint distribution
+	//iterate over them, get N_BINS,
+
+	DocumentRJ pt;
+	tools::read_json_rj(path_to_scheme, pt);
+
+	EmpiricalMVD* e_dist = new EmpiricalMVD();
+
+	std::vector<long> N_BINS;
+	std::vector<int64_t> N_BINS_CUM;
+
+	//total number of bins
+	N_BINS_CUM.push_back(1);
+
+	for (const auto& node : pt.GetObject())
+	{
+		e_dist->mvd.push_back(new EmpiricalUVD());
+		N_BINS.push_back(tools::get_long(node.value["N_BINS"]));
+
+		//get bin values if discrete, otherwise assume it will be just numbers
+		if (tools::get_string(node.value["type"]) == "continuous")
+		{
+			e_dist->mvd.back()->type = ERandomParams::ContinuousDiscretized;
+			//bin edges
+			serialize::deserialize(node.value["BIN_ENDS"], e_dist->mvd.back()->bin_ends);
+		}
+		else
+		{
+			e_dist->mvd.back()->type = ERandomParams::Discrete;
+		};
+
+		//read BIN_VALUES from the file
+		serialize::deserialize(node.value["values"], e_dist->mvd.back()->bin_values);
+
+		for (auto i = 0; i < e_dist->mvd.back()->bin_values.size(); ++i)
+		{
+			e_dist->mvd.back()->bin_values_map[e_dist->mvd.back()->bin_values[i]] = i;
+		};
+
+
+		//read name from the file
+		e_dist->mvd.back()->name = get_string(node.value["name"]);
+	};
+
+	for (auto i = 0; i < N_BINS.size(); ++i)
+	{
+		//MARK: change to push back
+		N_BINS_CUM.push_back(N_BINS_CUM[i] * N_BINS[N_BINS.size() - 1 - i]);
+	};
+
+
+
+	//joint distribution table
+	e_dist->values = std::vector<std::vector<long>>(N_BINS_CUM.back(), std::vector<long>(N_BINS.size(), 0.0));
+
+
+	for (int64_t i = 0; i < e_dist->values.size(); ++i)
+	{
+		for (int64_t j = 0; j < N_BINS.size(); ++j)
+		{
+			//
+			auto N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+			auto i_sub = i % (N_TAILS * N_BINS[j]);
+			long k = i_sub / N_TAILS;
+			e_dist->values[i][j] = k; //from what bin to take values    //BIN_VALUES[j][k];
+		};
+	};
+
+
+	//create vector of frequencies
+	e_dist->freq = std::vector<long>(N_BINS_CUM.back(), 0);
+
+	int64_t N_TAILS = 0;
+	int64_t bin = 0;
+	int64_t i = 0;
+	//reverse order
+	for (auto x_i : (*parsed_file))
+	{
+		for (auto j = 0; j < x_i.size() - 1; ++j)
+		{
+			N_TAILS = N_BINS_CUM[N_BINS_CUM.size() - 2 - j];
+			bin = e_dist->mvd[j]->bin_values_map[x_i[j + 1]];
+			i += bin * N_TAILS;
+		};
+		e_dist->freq[i] += 1;
+		i = 0;
+	};
+
+	//store index into actual bin values
+	for (auto value_add = 0; value_add < e_dist->mvd[0]->bin_values.size(); ++value_add)
+	{
+		e_dist->mvd[0]->cond_values.push_back(std::vector<long>{});
+		e_dist->mvd[0]->cond_values.back().push_back(value_add);
+
+		//calculate conditional pmf
+		calculate_pmf(e_dist->mvd[0]->cond_values, parsed_file, e_dist->mvd[0]->cond_freq, e_dist, N_BINS_CUM);
+
+	};
+
+	//take table from the previous one and multiply by own values
+	for (auto i = 1; i < e_dist->mvd.size(); ++i)
+	{
+		//take previous distribution and multiply by own bin values
+		for (auto value : e_dist->mvd[i - 1]->cond_values)
+		{
+			for (auto value_add = 0; value_add< e_dist->mvd[i]->bin_values.size(); ++value_add)
+			{
+				e_dist->mvd[i]->cond_values.push_back(value);
+				e_dist->mvd[i]->cond_values.back().push_back(value_add);
+
+#ifdef ABMS_DEBUG_MODE
+				if (e_dist->mvd[i]->cond_values.back().size() > 1000000)
+				{
+					std::cout << "something is wrong" << std::endl;
+				};
+#endif
+			};
+		};
+
+		//calculate conditional pmf
+		calculate_pmf(e_dist->mvd[i]->cond_values, parsed_file, e_dist->mvd[i]->cond_freq, e_dist, N_BINS_CUM);
+
+	};
+
+	//save information about tail length
+	e_dist->n_bins_cum = N_BINS_CUM;
+
+	return e_dist;
+}
+
+
+
 
 void
-tools::calculate_pmf(std::vector<std::vector<long>>& bins, std::vector<std::vector<double>>* parsed_file, std::vector<long>& freq_n, EmpiricalMVD* e_dist, std::vector<int64_t>& N_BINS_CUM)
+tools::calculate_pmf(std::vector<std::vector<long>>& bins, 
+	std::vector<std::vector<double>>* parsed_file, 
+	std::vector<long>& freq_n, 
+	EmpiricalMVD* e_dist, 
+	std::vector<int64_t>& N_BINS_CUM)
 {
     freq_n = std::vector<long>(bins.size(), 0);
     auto i_pos = 0;

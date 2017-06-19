@@ -37,6 +37,7 @@ namespace solar_core
 	{
 	public:
 		SolarModuleBL(const PropertyTree& pt_);
+		SolarModuleBL(const DocumentNode & pt_);
 		/*!< uses manufacturer priors to specialize itself */
 		void init();
 		/** parameters of a true reliability distribution (exponential) */

@@ -9,6 +9,7 @@
 #include "Tools/ExternalIncludes.h"
 
 #include "Tools/Serialize.h"
+#include "Tools/SerializeRJ.h"
 #include "Tools/IParameters.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/Log.h"
@@ -127,6 +128,126 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     
 
 }
+
+
+SEI::SEI(const DocumentRJ& pt_, W* w_)
+{
+	w = w_;
+
+
+	//pregenerate range of prices
+	int64_t N = 20;
+	double THETA_min = 0.0;
+	double THETA_max = 2.0;
+	double step_size = (THETA_max - THETA_min) / N;
+
+	profit_grid.resize(N + 1, 2);
+
+	for (auto i = 0; i < N + 1; ++i)
+	{
+		profit_grid(i, 0) = THETA_min + i * step_size;
+	};
+
+	auto get_double = &serialize::GetNodeValue<double>::get_value;
+	auto get_string = [](const DocumentNode& node_) -> std::string {
+		if (node_.IsString())
+		{
+			return std::string(node_.GetString());
+		}
+		else
+		{
+			if (node_.IsNumber())
+			{
+				return std::to_string(node_.GetDouble());
+			}
+			else
+			{
+				//return empty string
+				return std::string();
+			};
+		};
+	};
+
+	//location
+	location_x = get_double(pt_["location_x"]);
+	location_y = get_double(pt_["location_y"]);
+
+
+	//read solar modules to be used in decisions
+	std::map<std::string, std::string> dec_solar_modules_str;
+	serialize::deserialize(pt_["dec_solar_modules"], dec_solar_modules_str);
+
+
+	for (auto& iter : dec_solar_modules_str)
+	{
+		dec_solar_modules[EnumFactory::ToEParamTypes(iter.first)] = WorldSettings::instance().solar_modules[iter.second];
+	};
+
+	serialize::deserialize(pt_["dec_project_percentages"], dec_project_percentages);
+
+	//complexity of installation in labor*hours
+	complexity_install_prior = get_double(pt_["complexity_install_prior"]);
+
+
+	std::vector<std::string> THETA_hard_costs_str;
+	serialize::deserialize(pt_["THETA_hard_costs"], THETA_hard_costs_str);
+
+	for (auto& iter : THETA_hard_costs_str)
+	{
+		THETA_hard_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+	}
+
+	std::vector<std::string> THETA_soft_costs_str;
+	serialize::deserialize(pt_["THETA_soft_costs"], THETA_soft_costs_str);
+	for (auto& iter : THETA_soft_costs_str)
+	{
+		THETA_soft_costs.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+	}
+
+	std::vector<std::string> THETA_profit_str;
+	serialize::deserialize(pt_["THETA_profit"], THETA_profit_str);
+	for (auto& iter : THETA_profit_str)
+	{
+		THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+	}
+
+
+
+	schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+	i_schedule_visits = 0;
+
+
+	schedule_installations = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthPlanInstallations], std::vector<std::weak_ptr<PVProject>>{});
+	i_schedule_installations = 0;
+
+
+
+	//set other parameters
+	ac_decprice = 0;
+
+
+	sei_type = EnumFactory::ToEParamTypes(get_string(pt_["sei_type"]));
+	money = serialize::solve_str_formula<double>(get_string(pt_["money"]), *w->rand);
+	a_time = 0;
+
+
+	//read parameters
+	std::map<std::string, std::string> params_str;
+	serialize::deserialize(pt_["params"], params_str);
+
+	///@DevStage2 move to W to speed up, but test before that
+	for (auto& iter : params_str)
+	{
+		params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+	};
+
+	mes_marketing = std::make_shared<MesMarketingSEI>(this, sei_type);
+
+
+
+}
+
+
 
 
 void
@@ -1021,7 +1142,7 @@ void SEI::dec_max_profit()
 
 
 #ifdef ABMS_SEI_TEST
-	THETA_profit[0] = 1.0;
+	THETA_profit[0] = WorldSettings::instance().constraints[EConstraintParams::SEIProfitMargin];
 #endif
     
     delete agent;

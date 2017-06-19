@@ -12,6 +12,7 @@
 #include "Agents/SolarPanel.h"
 #include "Institutions/IMessage.h"
 #include "Tools/Serialize.h"
+#include "Tools/SerializeRJ.h"
 
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
@@ -58,6 +59,67 @@ SEM::SEM(const PropertyTree& pt_, W* w_)
     sem_dec_time = 0;
     a_time = w->time;
     
+}
+
+SEM::SEM(const DocumentRJ& pt_, W* w_)
+{
+
+	auto get_double = &serialize::GetNodeValue<double>::get_value;
+	auto get_string = [](const DocumentNode& node_) -> std::string {
+		if (node_.IsString())
+		{
+			return std::string(node_.GetString());
+		}
+		else
+		{
+			if (node_.IsNumber())
+			{
+				return std::to_string(node_.GetDouble());
+			}
+			else
+			{
+				//return empty string
+				return std::string();
+			};
+		};
+	};
+
+	w = w_;
+
+	history_sales = std::vector<double>(WorldSettings::instance().constraints[EConstraintParams::SEMMaxLengthRecordHistory], 0.0);
+
+
+
+	//read parameters
+	std::map<std::string, std::string> params_str;
+	serialize::deserialize(pt_["params"], params_str);
+
+	///@DevStage2 move to W to speed up, but test before that
+	for (auto& iter : params_str)
+	{
+		params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand);
+	};
+
+
+	std::vector<std::string> THETA_profit_str;
+	serialize::deserialize(pt_["THETA_profit"], THETA_profit_str);
+	for (auto& iter : THETA_profit_str)
+	{
+		THETA_profit.push_back(serialize::solve_str_formula<double>(iter, *w->rand));
+	}
+
+	money = serialize::solve_str_formula<double>(get_string(pt_["money"]), *w->rand);
+
+	costs_base = serialize::solve_str_formula<double>(get_string(pt_["costs_base"]), *w->rand);
+
+
+	N_PANELS_inventories = get_double(pt_["N_PANELS_inventories"]);
+
+	sem_production_time = -params[EParamTypes::SEMFrequencyProduction];
+	sem_research_time = 0;
+	sem_dec_time = 0;
+	a_time = w->time;
+
 }
 
 

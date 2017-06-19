@@ -25,7 +25,8 @@ namespace solar_core
         friend class W;
     public:
         Utility(const PropertyTree& pt_, W* w_);
-        void init(W* w_);
+		Utility(const DocumentRJ & pt_, W * w_);
+		void init(W* w_);
         void act_tick();
         
         void request_permit_for_interconnection(std::shared_ptr<PVProject> project_);

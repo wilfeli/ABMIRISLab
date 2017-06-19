@@ -12,6 +12,15 @@ SolarModuleBL::SolarModuleBL(const PropertyTree& pt_) :SolarModule(pt_)
 
 }
 
+
+
+SolarModuleBL::SolarModuleBL(const DocumentNode& pt_) :SolarModule(pt_)
+{
+	warranty_length = tools::get_double(pt_["Warranty length"]);
+
+
+}
+
 void SolarModuleBL::init()
 {
 	//

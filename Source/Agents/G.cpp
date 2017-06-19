@@ -9,6 +9,7 @@
 #include "UI/W.h"
 #include "Tools/WorldSettings.h"
 #include "Tools/Serialize.h"
+#include "Tools/SerializeRJ.h"
 #include "Agents/G.h"
 #include "Agents/SolarPanel.h"
 #include "Agents/Homeowner.h"
@@ -49,6 +50,41 @@ G::G(const PropertyTree& pt_, W* w_)
     
     
     
+}
+
+
+G::G(const DocumentRJ& pt_, W* w_)
+{
+	w = w_;
+
+	//create empty container
+	schedule_visits = std::vector<std::vector<std::weak_ptr<PVProject>>>(WorldSettings::instance().constraints[EConstraintParams::MaxLengthWaitPreliminaryQuote], std::vector<std::weak_ptr<PVProject>>{});
+	i_schedule_visits = 0;
+
+
+	//read parameters
+	std::map<std::string, std::string> params_str;
+	serialize::deserialize(pt_["params"], params_str);
+
+	///@DevStage2 move to W to speed up, but test before that
+	for (auto& iter : params_str)
+	{
+		params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand_g);
+	};
+
+
+	//form set with "closed" states
+	project_states_to_delete.insert(EParamTypes::GrantedPermitForInstallation);
+	project_states_to_delete.insert(EParamTypes::GrantedPermitForInterconnection);
+	project_states_to_delete.insert(EParamTypes::ClosedProject);
+	project_states_to_delete.insert(EParamTypes::Installed);
+	project_states_to_delete.insert(EParamTypes::PassedInspectionAfterInstallation);
+	project_states_to_delete.insert(EParamTypes::RequestedPermitForInterconnection);
+	project_states_to_delete.insert(EParamTypes::ScheduledInstallation);
+	project_states_to_delete.insert(EParamTypes::ScheduleInstallation);
+
+
+
 }
 
 

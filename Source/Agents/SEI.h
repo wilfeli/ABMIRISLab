@@ -73,6 +73,7 @@ namespace solar_core
          
          */
         SEI(const PropertyTree& pt_, W* w_);
+		SEI(const DocumentRJ & pt_, W * w_);
         virtual void init(W* w_); /*!< Initialization step */
         
         

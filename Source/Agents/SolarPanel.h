@@ -12,6 +12,7 @@
 #include "Tools/ExternalIncludes.h"
 #include "Tools/ID.h"
 #include "Tools/IParameters.h"
+#include "Tools/RJTools.h"
 
 namespace solar_core
 {
@@ -33,7 +34,9 @@ namespace solar_core
     {
     public:
         static std::shared_ptr<Inverter> deserialize(const PropertyTree& pt_);
+		static std::shared_ptr<Inverter> deserialize(const DocumentNode & pt_);
         Inverter(const PropertyTree& pt_);
+		Inverter(const DocumentNode & pt_);
         std::string name;
         ESEIInverterType technology;
         SEM* manufacturer = nullptr;
@@ -53,7 +56,10 @@ namespace solar_core
 
         static double initialization_tolerance;
         static std::shared_ptr<SolarModule> deserialize(const PropertyTree& pt_);
+		static std::shared_ptr<SolarModule> deserialize(const DocumentNode & pt_);
         SolarModule(const PropertyTree& pt_);
+
+		SolarModule(const DocumentNode & pt_);
         
         
         std::string name;

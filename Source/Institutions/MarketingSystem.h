@@ -35,6 +35,7 @@ namespace solar_core
     public:
         virtual ~MarketingInst() = default;
         MarketingInst(const PropertyTree& pt_, W* w_);
+		MarketingInst(const DocumentRJ & pt_, W * w_);
         void init(W* w_);
         virtual void act_tick() override; /*!< */
         

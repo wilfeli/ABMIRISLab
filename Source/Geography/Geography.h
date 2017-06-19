@@ -56,6 +56,7 @@ namespace solar_core
     public:
         House();
         House(const PropertyTree& pt_);
+		House(const DocumentNode & pt_);
         double roof_age; /*!< age of a house's roof in years (not required to be whole years) */
         double roof_size; /*!< size of a roof, in m^2 */
         double house_size; /*!< size of a house in ? */
@@ -100,6 +101,7 @@ namespace solar_core
     {
     public:
         WorldMap(PropertyTree& pt, W* w_);
+		WorldMap(DocumentRJ & pt, W * w_);
         
         std::vector<std::vector<Tile*>> g_map; /*!< grid of location tiles */
         

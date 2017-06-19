@@ -34,6 +34,7 @@
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include "UI/W.h"
+#include "UI/WRJ.h"
 #include "UI/UI.h"
 #include "UI/HelperW.h"
 
@@ -92,6 +93,17 @@ int main(int argc, const char * argv[])
         //initialize world
         w->init();
     }
+	//when use rapidjson for json parsing
+	else if (MODE == "NEW_RJ") 
+	{
+		auto helper = new solar_core::HelperWSpecialization<solar_core::W, solar_core::BaselineModelRJ>();
+
+		//create world
+		w = new WRJ(path_to_model_file.string(), helper, "NEW");
+
+		//initialize world
+		w->init();
+	}
     else
     {
         throw std::runtime_error("Unsupported mode");
