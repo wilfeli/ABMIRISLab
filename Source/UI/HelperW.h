@@ -51,7 +51,89 @@ namespace solar_core {
     {
     public:
         
-        
+		void save_hs_to_csv(std::vector<std::vector<double>>* save_data, std::string path_to_save_file_)
+		{
+			if (path_to_save_file_ == "")
+			{
+				path_to_save_file_ = w->params["path_to_save"];
+			};
+
+
+			//convert to path, get parent path
+			boost::filesystem::path path(path_to_save_file_);
+			boost::filesystem::path path_to_dir = path.parent_path();
+			boost::uuids::uuid file_name_short = "homeowners";
+			std::string file_name = boost::uuids::to_string(file_name_short) + ".csv";
+			boost::filesystem::path path_tmp = path_to_dir;
+			path_tmp /= file_name;
+
+			std::ofstream out_file(path_tmp.string());
+
+			if (!out_file)
+			{
+				out_file.close();
+				//create location for saves in the directory with setup files? 
+				//set path_to_save_file
+				path = boost::filesystem::path(w->base_path);
+				//path to the directory with model file, save here in case there are save errors 
+				auto path_to_save_file = boost::filesystem::path(path.parent_path().make_preferred());
+
+				path_to_save_file /= "Saves";
+				path_to_save_file /= file_name;
+
+
+				//for appending to old file use std::ofstream::app    
+				//overwrite old file
+				out_file.open(path_to_save_file.string(), std::ofstream::trunc);
+
+				if (out_file)
+				{
+				}
+				else
+				{
+					out_file.close();
+
+					//create directory if needed
+					boost::filesystem::path dir = path_to_save_file.parent_path();
+
+					if (!(boost::filesystem::exists(dir)))
+					{
+						boost::filesystem::create_directory(dir);
+					};
+
+					out_file.open(path_to_save_file.string(), std::ofstream::trunc);
+
+					if (!out_file)
+					{
+						throw std::runtime_error("Can not create save file");
+					};
+				};
+			};
+
+
+
+			if (out_file)
+			{
+				for (auto i = 0; i < (*save_data).size(); ++i)
+				{
+					for (auto j = 0; j <(*save_data)[i].size(); ++j)
+					{
+						out_file << (*save_data)[i][j];
+						if (j != (*save_data)[i].size() - 1)
+						{
+							out_file << ",";
+						};
+					};
+					out_file << std::endl;
+				};
+			}
+
+
+			out_file.close();
+
+
+
+		}
 
         template <class TA>
         std::vector<TA*>* create_hos(PropertyTree& pt, 
@@ -142,6 +224,9 @@ namespace solar_core {
             };
             
             
+			//here save to csv
+			save_hs_to_csv(xs, "");
+
             
             //read other parameters
             serialize::deserialize(pt.get_child("params"), params_str);
@@ -350,6 +435,9 @@ namespace solar_core {
 			{
 				xs->push_back(tools::draw_joint_distribution(e_dist, w->rand));
 			};
+
+
+			//save xs for later reuse
 
 
 

@@ -583,7 +583,13 @@ SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double de
     design.permit_difficulty = permit_difficulty;
     
     
-    double N_PANELS = std::ceil(demand_adjusted * project_percentage / ((solar_irradiation) * iter.second->efficiency * (iter.second->length * iter.second->width/1000000) * ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
+    double N_PANELS = std::ceil(
+		demand_adjusted 
+		* project_percentage 
+		/ ((solar_irradiation) 
+			* iter.second->efficiency 
+			* (iter.second->length * iter.second->width/1000000) 
+			* ( 1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss])));
     
     
     //size of one panel

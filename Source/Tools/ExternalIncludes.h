@@ -12,7 +12,7 @@
 
 #define ABMS_DEBUG_MODE
 #define ABMS_SPLINES
-#define ABMS_SEI_TEST
+//#define ABMS_SEI_TEST
 
 #include <cstdint>
 #include <cstdlib>

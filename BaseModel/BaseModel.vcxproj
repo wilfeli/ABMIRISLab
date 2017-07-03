@@ -106,6 +106,7 @@
     <None Include="..\Examples\BaseModel\solar_equipment.json" />
     <None Include="..\Examples\BaseModel\utility.json" />
     <None Include="..\Examples\BaseModel\w.json" />
+    <None Include="..\Source\Tests\simple-model.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B4520E93-A777-49D0-A371-9A501DC4D5C3}</ProjectGuid>
