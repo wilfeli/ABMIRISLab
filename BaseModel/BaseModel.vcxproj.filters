@@ -310,7 +310,7 @@
     <None Include="..\Examples\BaseModel\joint_distribution_hh.csv">
       <Filter>Resource Files\BaseModel</Filter>
     </None>
-    <None Include="..\Source\Tests\simple-model.py">
+    <None Include="..\..\solar-model\Model\simple_model.py">
       <Filter>Source Files\Tests</Filter>
     </None>
   </ItemGroup>

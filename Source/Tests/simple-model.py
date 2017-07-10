@@ -126,11 +126,15 @@ class Model:
 
     def tearup_model(self):
 
-        global settings = Settings()
-        global tools = MathTools()
+        global settings
+        settings = Settings()
+        global tools
+        tools = MathTools()
 
-        global NUMBER_DAYS_IN_MONTH = 30.4375
-        global NUMBER_DAYS_IN_YEAR = 365.25
+        global NUMBER_DAYS_IN_MONTH
+        NUMBER_DAYS_IN_MONTH = 30.4375
+        global NUMBER_DAYS_IN_YEAR
+        NUMBER_DAYS_IN_YEAR = 365.25
 
         self.systems = []
 

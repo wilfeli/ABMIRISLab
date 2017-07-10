@@ -90,6 +90,9 @@
     <ClCompile Include="..\Source\UI\WRJ.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\solar-model\Model\simple_model.py">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="..\Examples\BaseModel\basemodel.model" />
     <None Include="..\Examples\BaseModel\df_installers.csv" />
     <None Include="..\Examples\BaseModel\distribution_hh.json" />
@@ -106,7 +109,6 @@
     <None Include="..\Examples\BaseModel\solar_equipment.json" />
     <None Include="..\Examples\BaseModel\utility.json" />
     <None Include="..\Examples\BaseModel\w.json" />
-    <None Include="..\Source\Tests\simple-model.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B4520E93-A777-49D0-A371-9A501DC4D5C3}</ProjectGuid>

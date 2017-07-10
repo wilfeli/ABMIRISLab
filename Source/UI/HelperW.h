@@ -51,8 +51,9 @@ namespace solar_core {
     {
     public:
         
-		void save_hs_to_csv(std::vector<std::vector<double>>* save_data, std::string path_to_save_file_)
+		void save_hs_to_csv(std::vector<std::vector<double>>* save_data, std::string path_to_save_file_, W* w_)
 		{
+			T* w = static_cast<T*>(w_);
 			if (path_to_save_file_ == "")
 			{
 				path_to_save_file_ = w->params["path_to_save"];
@@ -62,8 +63,8 @@ namespace solar_core {
 			//convert to path, get parent path
 			boost::filesystem::path path(path_to_save_file_);
 			boost::filesystem::path path_to_dir = path.parent_path();
-			boost::uuids::uuid file_name_short = "homeowners";
-			std::string file_name = boost::uuids::to_string(file_name_short) + ".csv";
+			std::string file_name_short = "homeowners";
+			std::string file_name = file_name_short + ".csv";
 			boost::filesystem::path path_tmp = path_to_dir;
 			path_tmp /= file_name;
 
@@ -225,7 +226,7 @@ namespace solar_core {
             
             
 			//here save to csv
-			save_hs_to_csv(xs, "");
+			save_hs_to_csv(xs, "", w_);
 
             
             //read other parameters

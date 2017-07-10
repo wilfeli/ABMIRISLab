@@ -713,9 +713,9 @@ double solar_core::tools::EmpiricalHUVD::get_spline_value(EParamTypes param_, do
 	{
 		//only x, x^2
 		//only x, x^2 
-		y_i = HO_coefs[label_i][param_][0][n - 1]
-			+ HO_coefs[label_i][param_][1][n - 1] * h
-			+ HO_coefs[label_i][param_][2][n - 1] * h * h;
+		y_i = HO_coefs[label_i][param_][0][n - 2]
+			+ HO_coefs[label_i][param_][1][n - 2] * h
+			+ HO_coefs[label_i][param_][2][n - 2] * h * h;
 
 	}
 	else 
