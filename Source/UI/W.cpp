@@ -828,7 +828,7 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
     };
 
 #ifdef ABMS_SEI_TEST
-	std::cout << project_->design->design->raw_costs << std::endl;
+	std::cout << project_->design->design->total_net_savings << std::endl;
 #endif
 
     

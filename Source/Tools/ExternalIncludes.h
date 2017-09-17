@@ -13,6 +13,7 @@
 #define ABMS_DEBUG_MODE
 #define ABMS_SPLINES
 //#define ABMS_SEI_TEST
+//#define ABMS_H_SAVE
 
 #include <cstdint>
 #include <cstdlib>
@@ -33,6 +34,9 @@
 #include <set>
 #include <regex>
 #include <mutex>
+
+
+#include <boost/math/special_functions/beta.hpp>
 
 
 #include <boost/property_tree/ptree.hpp>

@@ -131,7 +131,7 @@ void
 Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
 {
 
-    
+	index_inf_marketing_sei_lock.lock();
     //saves information about advertising agent only if not already commited to installing project
     if ((marketing_state != EParamTypes::HOMarketingStateNotAccepting) && (quote_state != EParamTypes::HOStateCommitedToInstallation) && (quote_state != EParamTypes::HOStateInterconnected))
     {
@@ -178,6 +178,7 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         
     };
     
+	index_inf_marketing_sei_lock.unlock();
     ///@DevStage2 might be add saving of the time of the marketing message, in this case it will be saved in the form of transformed marketing messages because original message will time stamped at the moment of creation (almost at the beginning of the simulation)
     
     
@@ -254,7 +255,9 @@ Homeowner::ac_inf_quoting_sei()
 
 			//add to empty pull
 			get_inf_marketing_sei[i] = nullptr;
+			index_inf_marketing_sei_lock.lock();
 			index_inf_marketing_sei.push_back(i);
+			index_inf_marketing_sei_lock.unlock();
 
 		};
 	};
@@ -278,18 +281,19 @@ Homeowner::dec_evaluate_online_quotes()
     //second by customer rating
     //there will be groups of non-compensatory rules, each Homeowner belongs to one of the groups
     
-    
+    //TODO clean up to initialize to true
     auto pool = std::vector<bool>(pvprojects.size(), false);
     
     for (auto i = 0; i < pvprojects.size(); ++i)
     {
         //check if is in the pool
         //check on Customer rating
-        if (pvprojects[i]->sei->params[EParamTypes::SEIRating] >= THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0])
-        {
-            pool[i] = true;
-        };
+        //if (pvprojects[i]->sei->params[EParamTypes::SEIRating] >= THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0])
+        //{
+        //    pool[i] = true;
+        //};
 
+		pool[i] = true;
     };
     
     
@@ -1106,7 +1110,8 @@ Homeowner::receive_preliminary_quote(std::shared_ptr<PVProject> project_)
 #ifdef ABMS_DEBUG_MODE
     if (n_preliminary_quotes_requested <= 0.0)
     {
-        throw std::runtime_error("mismatched number of quotes");
+		//TODO: check why throwing here
+//        throw std::runtime_error("mismatched number of quotes");
     };
     
     if (n_preliminary_quotes > n_preliminary_quotes_requested)

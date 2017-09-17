@@ -136,7 +136,7 @@ SEI::SEI(const DocumentRJ& pt_, W* w_)
 
 
 	//pregenerate range of prices
-	int64_t N = 20;
+	int64_t N = 40;
 	double THETA_min = 0.0;
 	double THETA_max = 2.0;
 	double step_size = (THETA_max - THETA_min) / N;
@@ -413,7 +413,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
 
 
     //depending on the global switch - use own demand parameters or global demand parameters
-    if (WorldSettings::instance().params_exog[EParamTypes::SEIAverageDemandInPreliminaryQuote] == 0.0)
+    if (WorldSettings::instance().params_exog[EParamTypes::SEIAverageDemandInPreliminaryQuote] == 1.0)
     {
         demand = project_->state_base_agent->params[EParamTypes::ElectricityBill]/WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand]/constants::NUMBER_DAYS_IN_MONTH;
     };
@@ -463,7 +463,7 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     //assume that permit difficulty here in weeks
     //so that total project time is lead time and permitting time summed
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
-    auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK;
+    auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK + params[EParamTypes::SEILeadInProjectTime];
 
 #ifdef ABMS_DEBUG_MODE
     if (total_project_time > 24)
@@ -734,11 +734,18 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     costs += wage * total_project_time * 1;
     
     //design costs, 40 for number of hours in a tick, if tick is one week
-    costs += wage * params[EParamTypes::SEILeadInProjectTime] * 40;
+    costs += wage * params[EParamTypes::SEILeadInProjectTime] * constants::LABOR_UNITS_PER_TICK;
     
     //profit  margin on costs
     design.total_costs = costs * (1 + profit_margin);
 	design.raw_costs = costs;
+
+#ifdef ABMS_SEI_TEST
+	//alternative way with fixed price per watt
+	design.total_costs = design.DC_size * WorldSettings::instance().constraints[EConstraintParams::SEIPricePerWatt];
+#endif
+
+
 
 	if (design.N_PANELS <= 0.0) 
 	{
@@ -1001,8 +1008,15 @@ void SEI::dec_max_profit()
         //TODO ask Qifang to calculate hard data from the actual survey - how many agree for different prices
         double share_nc = 0.0;
         
-        share_nc = 0.83 - params[EParamTypes::EstimatedDemandCoefficientNCDec] * project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice];
-        
+//        share_nc = 0.83 - params[EParamTypes::EstimatedDemandCoefficientNCDec] * project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice];
+//		share_nc = 1.0 - params[EParamTypes::EstimatedDemandCoefficientNCDec] * project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice];
+
+		double x = project_generic->preliminary_quote->params[EParamTypes::PreliminaryQuotePrice] / constants::NCDECISION_PRICE_NORMALIZATION;
+		x = (x >= 1.0) ? 0.99 : x;
+		double a = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label][EParamTypes::HONCDecisionTotalPrice][0];
+		double b = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label][EParamTypes::HONCDecisionTotalPrice][1];
+		share_nc = 1.0 - boost::math::ibeta(a, b, x);
+
 #endif
         
         
@@ -1280,7 +1294,7 @@ SEI::act_tick()
     {
         if ((project->state_project == EParamTypes::ClosedProject) && (project->ac_hh_time != a_time))
         {
-            throw std::runtime_error("Closed project in SEI");
+//            throw std::runtime_error("Closed project in SEI");
         };
     };
 #endif

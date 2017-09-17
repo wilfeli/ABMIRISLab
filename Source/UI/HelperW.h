@@ -224,10 +224,10 @@ namespace solar_core {
                 xs->push_back(tools::draw_joint_distribution(e_dist, w->rand));
             };
             
-            
+#ifdef ABMS_H_TEST            
 			//here save to csv
 			save_hs_to_csv(xs, "", w_);
-
+#endif
             
             //read other parameters
             serialize::deserialize(pt.get_child("params"), params_str);
@@ -1071,29 +1071,45 @@ namespace solar_core {
             
             for (auto i = 0; i < w->params_d[EParamTypes::N_HO]; ++i)
             {
+
+				//TODO: redo this part for fitting to distribution 
+
+
                 //draw next uniform
                 u_i = w->rand_ho->ru();
                 //generate class label given frequencies
                 label = w->ho_decisions[EParamTypes::HONCDecision]->labels[tools::get_inverse_index(w->ho_decisions[EParamTypes::HONCDecision]->cmf, u_i)];
                 
                 //assume the same parameters for each class
-                (*hos)[i]->THETA_NCDecisions = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label];
+//                (*hos)[i]->THETA_NCDecisions = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label];
                 
                 
-                if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 5.0)
-                {
-                    ++i_5;
-                    
-                }
-                else if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 4.0)
-                {
-                    ++i_4;
-                }
-                else
-                {
-                    ++i_3;
-                };
+                //if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 5.0)
+                //{
+                //    ++i_5;
+                //    
+                //}
+                //else if ((*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionSEIRating][0] >= 4.0)
+                //{
+                //    ++i_4;
+                //}
+                //else
+                //{
+                //    ++i_3;
+                //};
                 
+
+				auto pdf_THETA_NCDecisions = boost::random::beta_distribution<>(
+									w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label][EParamTypes::HONCDecisionTotalPrice][0],
+									w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label][EParamTypes::HONCDecisionTotalPrice][1]);
+				auto rng_THETA_NCDecisions = boost::variate_generator<boost::mt19937&, boost::random::beta_distribution<>>(w->rand_ho->rng, pdf_THETA_NCDecisions);
+
+				//draw threshold price 
+
+				(*hos)[i]->THETA_NCDecisions[EParamTypes::HONCDecisionTotalPrice].push_back(rng_THETA_NCDecisions() * constants::NCDECISION_PRICE_NORMALIZATION);
+
+
+
                 
                 //generate class label given frequencies
 				label_i = tools::get_inverse_index(w->ho_decisions[EParamTypes::HOSEIDecision]->cmf, u_i);

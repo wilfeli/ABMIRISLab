@@ -1,30 +1,15 @@
 {
-  "N_HO": 1000,
+  "N_HO": 5000,
   "N_HOMarketingStateHighlyInterested": 10,
-  "N_SEI": 3,
+  "N_SEI": 10,
   "N_SEILarge": 1,
-  "N_SEM": 12,
+  "N_SEM": 15,
   "N_SEMInverterProducer": 5,
   "N_SEMPVProducer": 10,
   "ParametersCode": "",
   "params": [ { "N_ITERATIONS": 260 } ],
-  "SEED": 2012,
+  "SEED": 100,
   "WorldSettings": {
-    "constraints": [
-      { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
-      { "EConstraintParams::MaxLengthPlanInstallations": 10 },
-      { "EConstraintParams::MaxLengthWaitPermitVisit": 10 },
-      { "EConstraintParams::SEMMaxLengthRecordHistory": 10 },
-      { "EConstraintParams::MinNReceivedDesings": 2 },
-      { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
-      { "EConstraintParams::MinNReceivedDesings": 2 },
-      { "EConstraintParams::MaxNTicksToCollectQuotes": 10 },
-      { "EConstraintParams::MinNReceivedPreliminaryQuotes": 2 },
-      { "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes": 2 },
-      { "EConstraintParams::MaxNOpenProjectsHO": 10 },
-      { "EConstraintParams::SEIProfitMargin": 0.75 }
-    ],
-    "THETA_roof_update": [ 15.0, 0.8 ],
     "params_exog": [
       { "EParamTypes::AverageElectricityDemand": 900 },
       { "EParamTypes::AverageElectricityDemandGrowthRate": 0.003 },
@@ -34,7 +19,7 @@
       { "EParamTypes::ElectricityPriceUCDemand": 0.15 },
       { "EParamTypes::ElectricityPriceUCSupply": 0.15 },
       { "EParamTypes::InflationRate": 0.02 },
-      { "EParamTypes::MarketingMaxNToDrawPerTimeUnit": 100 },
+      { "EParamTypes::MarketingMaxNToDrawPerTimeUnit": 50 },
       { "EParamTypes::DegradationDefinitionLength": 10 },
       { "EParamTypes::WHMaxNToDrawPerTimeUnit": 100 },
       { "EParamTypes::AverageSolarIrradiation": 6 },
@@ -51,7 +36,24 @@
       { "EParamTypes::SEMFailureRateInverterPowerOptimizer": 0.003 },
       { "EParamTypes::PVModuleWarrantyLength": 25.0 },
       { "EParamTypes::SEIAverageDemandInPreliminaryQuote": 0.0 },
-      { "EParamTypes::ScenarioEfficiencyAdjustment": 1.25 }
+      { "EParamTypes::ScenarioEfficiencyAdjustment": 1.0 },
+      { "EParamTypes::MedianIncomeToUSCoefficient" : 1.156}
+    ],
+    "THETA_roof_update": [ 15.0, 0.8 ],
+    "constraints": [
+      { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
+      { "EConstraintParams::MaxLengthPlanInstallations": 10 },
+      { "EConstraintParams::MaxLengthWaitPermitVisit": 10 },
+      { "EConstraintParams::SEMMaxLengthRecordHistory": 10 },
+      { "EConstraintParams::MinNReceivedDesings": 2 },
+      { "EConstraintParams::MaxLengthWaitPreliminaryQuote": 10 },
+      { "EConstraintParams::MinNReceivedDesings": 2 },
+      { "EConstraintParams::MaxNTicksToCollectQuotes": 10 },
+      { "EConstraintParams::MinNReceivedPreliminaryQuotes": 2 },
+      { "EConstraintParams::MaxNRequestedPreliminaryFromOnlineQuotes": 2 },
+      { "EConstraintParams::MaxNOpenProjectsHO": 10 },
+      { "EConstraintParams::SEIProfitMargin": 0.75 },
+      { "EConstraintParams::SEIPricePerWatt": 3.5 }
     ]
   }
 }

@@ -44,6 +44,7 @@ namespace solar_core
         const double NUMBER_DAYS_IN_YEAR = 365.25;
         const double NUMBER_DAYS_IN_TICK = 365.25;
         const double NUMBER_TICKS_IN_YEAR = 52.0;
+		const double NCDECISION_PRICE_NORMALIZATION = 50000;
         const int LABOR_UNITS_PER_TICK = 40;
         const std::size_t POOL_SIZE = 100000;
         const int NUMBER_WATTS_IN_KILOWATT = 1000;
@@ -711,8 +712,13 @@ namespace solar_core
 
 
 
-        /** Fixed in simulations profit margin */
+        /** Fixed in test simulations profit margin */
 		SEIProfitMargin,
+
+		/** Fixed in test simulations profit margin */
+		SEIPricePerWatt,
+
+
         
         /** Empty enum for completeness */
         None,
@@ -1471,6 +1477,10 @@ namespace solar_core
 			else if (param_type == "econstraintparams::seiprofitmargin") 
 			{
 				return EConstraintParams::SEIProfitMargin;
+			}
+			else if (param_type == "econstraintparams::seipriceperwatt")
+			{
+				return EConstraintParams::SEIPricePerWatt;
 			}
             else
             {

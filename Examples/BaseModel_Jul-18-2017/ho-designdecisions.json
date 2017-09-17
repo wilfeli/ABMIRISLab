@@ -1,0 +1,20 @@
+{
+  "type1": {
+    "scheme": {
+      "EParamTypes::HODesignDecisionCO2": [-0.3055, 0.116, 0.1895],
+      "EParamTypes::HODesignDecisionFailures": [0.7706, 0.3286, -0.355, -0.7442],
+      "EParamTypes::HODesignDecisionEstimatedNetSavings": [-1.8082, -0.4341, 0.2591, 0.5651, 1.4181],
+      "EParamTypes::HODesignDecisionInverterType": [-0.4409, 0.3638, 0.0771],
+      "EParamTypes::HODesignDecisionUtilityNone": [0.0968],
+      "EParamTypes::HODesignDecisionPanelVisibility": [-0.1161, 0.1161],
+      "EParamTypes::HODesignDecisionPanelEfficiency": [-0.4468, -0.2272, 0.0215, 0.2763, 0.3763]
+    },
+    "frequency": 1,
+    "spline_points": {
+      "EParamTypes::HODesignDecisionEstimatedNetSavings": [0.1, 0.25, 0.4, 0.55, 0.7],
+      "EParamTypes::HODesignDecisionPanelEfficiency": [0.155, 0.18, 0.205, 0.23, 0.25],
+      "EParamTypes::HODesignDecisionCO2": [3, 6, 9],
+      "EParamTypes::HODesignDecisionFailures": [0, 1, 2, 3]
+    }
+  }
+}

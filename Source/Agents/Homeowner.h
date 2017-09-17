@@ -252,7 +252,7 @@ protected:
     
     std::vector<std::shared_ptr<MesMarketingSEI>> get_inf_marketing_sei; /*!< stores list of marketing information from SEI agents that this agent is interested in geting quotes from */
 	std::deque<int> index_inf_marketing_sei; /*!<  List of free indixes for information from sei.*/
-
+	std::mutex index_inf_marketing_sei_lock;
     EParamTypes marketing_state; /*!< could be interested, very interested or not */
     
     //@}

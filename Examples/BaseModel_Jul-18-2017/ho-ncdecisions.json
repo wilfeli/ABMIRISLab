@@ -1,0 +1,10 @@
+{
+    "type1": {
+        "scheme": {
+            "EParamTypes::HONCDecisionTotalPrice":[
+                                                   1.74, 3.84
+                                                   ]
+        },
+        "frequency": 1.0
+    }
+}

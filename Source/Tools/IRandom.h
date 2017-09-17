@@ -16,6 +16,7 @@
 #include <boost/random/normal_distribution.hpp>
 #include <boost/random/gamma_distribution.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
+#include <boost/random/beta_distribution.hpp>
 #include "Tools/IParameters.h"
 #include "Tools/ExternalIncludes.h"
 

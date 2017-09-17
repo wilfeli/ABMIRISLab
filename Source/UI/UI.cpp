@@ -8,6 +8,8 @@
 
 #include "UI/UI.h"
 #include "UI/W.h"
+#include "Agents/Homeowner.h"
+#include "Agents/SEI.h"
 #include <boost/filesystem.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
@@ -83,7 +85,15 @@ UI::save(std::string path_to_save_file_)
         average_price_per_watt = accum_price_per_watt/total_watt;
         
 		(*save_data)[i][3] = average_price_per_watt;
-		(*save_data)[i][4] = price_per_watt/save_data_raw[i].size();
+		if (save_data_raw[i].size() != 0.0) 
+		{
+			(*save_data)[i][4] = price_per_watt / save_data_raw[i].size();
+		}
+		else 
+		{
+			(*save_data)[i][4] = std::numeric_limits<double>::quiet_NaN();
+		};
+		
 
 		(*save_data)[i].insert((*save_data)[i].end(), w->history_sei[i].begin(), w->history_sei[i].end());
         
@@ -96,6 +106,7 @@ UI::save(std::string path_to_save_file_)
     std::string file_name = boost::uuids::to_string(file_name_short) + "_w.csv";
     boost::filesystem::path path_tmp = path_to_dir;
     path_tmp /= file_name;
+	auto path_to_save_file = path_tmp;
     
     std::ofstream out_file(path_tmp.string());
     
@@ -106,7 +117,7 @@ UI::save(std::string path_to_save_file_)
 		//set path_to_save_file
 		path = boost::filesystem::path(w->base_path);
 		//path to the directory with model file, save here in case there are save errors 
-		auto path_to_save_file = boost::filesystem::path(path.parent_path().make_preferred());
+		path_to_save_file = boost::filesystem::path(path.parent_path().make_preferred());
 
 		path_to_save_file /= "Saves";
 		path_to_save_file /= file_name;
@@ -161,5 +172,114 @@ UI::save(std::string path_to_save_file_)
 
 	out_file.close();
 
+
+	//save file with information about simulation run
+	//seed, type of a run 
+	path_tmp = path_to_save_file.parent_path();
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_params.log";
+	path_tmp /= file_name;
+
+	out_file.open(path_tmp.string());
+	if (out_file)
+	{
+		out_file << w->params["SEED"] << std::endl;
+		out_file << w->params["ParametersCode"] << std::endl;
+	};
+	out_file.close();
+
+
+	//go through all projects and save location of installation and price 
+	//create new file
+
+	path_tmp = path_to_save_file.parent_path();
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_pr.csv";
+	path_tmp /= file_name;
+
+	out_file.open(path_tmp.string());
+
+
+
+	if (out_file)
+	{
+		auto price_per_watt = 0.0;
+		for (auto& project : *(w->interconnected_projects))
+		{
+			//time, location_x, location_y, installer id, price_per_watt, size, 
+			out_file << project->ac_utility_time << ",";
+			out_file << project->agent->location_x << ",";
+			out_file << project->agent->location_y << ",";
+			out_file << project->sei->uid.get_string() << ",";
+			price_per_watt = project->design->design->total_costs / project->design->design->DC_size;
+			out_file << price_per_watt << ",";
+			out_file << project->design->design->DC_size << std::endl;
+
+
+		};
+
+	};
+
+	out_file.close();
+
+	path_tmp = path_to_save_file.parent_path();
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_loc_h.csv";
+	path_tmp /= file_name;
+
+	out_file.open(path_tmp.string());
+
+	auto save_data_loc = new std::vector<std::vector<double>>(w->world_map->g_map.size(), std::vector<double>(w->world_map->g_map.back().size(), 0.0));
+
+	//save h location
+	if (out_file)
+	{
+		for (auto& row : w->world_map->h_map) 
+		{
+			for (auto& tile:row) 
+			{
+				out_file << tile.size() << ",";
+			};
+			out_file << std::endl;
+		};
+	}
+
+	out_file.close();
+
+
+
+	path_tmp = path_to_save_file.parent_path();
+	file_name_short = boost::uuids::random_generator()();
+	file_name = boost::uuids::to_string(file_name_short) + "_loc_sei.csv";
+	path_tmp /= file_name;
+
+	out_file.open(path_tmp.string());
+
+	//save sei location
+	for (auto& sei:(*w->seis)) 
+	{
+		(*save_data_loc)[(long)sei->location_x][(long)sei->location_y] += 1.0;
+	};
+
+
+	if (out_file)
+	{
+		for (auto i = 0; i < (*save_data_loc).size(); ++i)
+		{
+			for (auto j = 0; j <(*save_data_loc)[i].size(); ++j)
+			{
+				out_file << (*save_data_loc)[i][j];
+				if (j != (*save_data_loc)[i].size() - 1)
+				{
+					out_file << ",";
+				};
+			};
+			out_file << std::endl;
+		};
+	}
+
+	delete save_data;
+	delete save_data_loc;
+	delete save_data_raw;
     
 }

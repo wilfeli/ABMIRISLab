@@ -1,0 +1,35 @@
+{
+    "type3": {
+        "scheme": {
+            "EParamTypes::HONCDecisionSEIRating": [
+                                                   3
+                                                   ],
+            "EParamTypes::HONCDecisionTotalPrice":[
+                                                   55000
+                                                   ]
+        },
+        "frequency": 0.98
+    },
+    "type1": {
+        "scheme": {
+            "EParamTypes::HONCDecisionSEIRating": [
+                                                   3
+                                                   ],
+            "EParamTypes::HONCDecisionTotalPrice":[
+                                                   55000
+                                                   ]
+        },
+        "frequency": 0.01
+    },
+    "type2": {
+        "scheme": {
+            "EParamTypes::HONCDecisionSEIRating": [
+                                                   3
+                                                   ],
+            "EParamTypes::HONCDecisionTotalPrice":[
+                                                   55000
+                                                   ]
+        },
+        "frequency": 0.01
+    }
+}

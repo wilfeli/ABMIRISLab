@@ -107,7 +107,7 @@ namespace serialize
 
 	/**
 
-	General template for serializatio of a map
+	General template for deserializatio of a map
 	*/
 	template<class K, class V, class Enable = void>
 	class DeserializeRJMap

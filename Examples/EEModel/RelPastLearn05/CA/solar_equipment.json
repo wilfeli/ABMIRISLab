@@ -1,0 +1,299 @@
+{
+    "COMMENT": "",
+    "solar_modules": [
+                      {
+                      "REC260PE": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "REC260PE",
+                      "PTC Power Rating": "234.4",
+                      "STC Power Rating": "260.0",
+                      "STC Power per unit of area": "157.6",
+                      "Peak Efficiency": "0.1576",
+                      "Length": "1665",
+                      "Width": "991",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Price (from reseller)": "290",
+                      "Warranty length": "25.0",
+                      "Color": "Black",
+                      "Pattern": "Window-paint",
+                      "Degradation after 10 years": 0.1,
+                      "http": "http://www.solardesigntool.com/components/module-panel-solar/REC-Solar/2481/REC260PE/specification-data-sheet.html"
+                      }
+                      },
+                      {
+                      "KU260-6XPA": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "KU260-6XPA",
+                      "http": "http://www.solarhub.com/product-catalog/pv-modules/58689-KU260-6XPA-Kyocera-Solar",
+                      "STC Power Rating": "260.0",
+                      "Length": "1637.0",
+                      "Width": "969.0",
+                      "Color": "Black",
+                      "Pattern": "Window-paint",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Price (from reseller)": "300",
+                      "Peak Efficiency": "0.1639",
+                      "Degradation after 10 years": 0.089,
+                      "Warranty length": "25.0"
+                      }
+                      },
+                      {
+                      "KU265-6ZPA": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "KU265-6ZPA",
+                      "STC Power Rating": "265.0",
+                      "Length": "1637.0",
+                      "Width": "969.0",
+                      "Peak Efficiency": "0.1670",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Price (from reseller)": "265",
+                      "Color": "Black",
+                      "Degradation after 10 years": 0.089,
+                      "Pattern": "Window-paint"
+                      }
+                      },
+                      {
+                      "SPR-230NE-BLK-D": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SPR-230NE-BLK-D",
+                      "STC Power Rating": "230.0",
+                      "Length": "1559",
+                      "Width": "708",
+                      "Peak Efficiency": "0.2084",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Type": "Monocrystalline Silicon",
+                      "http": "http://www.solardesigntool.com/components/module-panel-solar/Sunpower/2639/SPR-230NE-BLK-D/specification-data-sheet.html",
+                      "90% Power Output Warranty Period": "10",
+                      "80% Power Output Warranty Period": "25",
+                      "Degradation after 10 years": 0.1,
+                      "Price (from reseller)": "450",
+                      "Color": "Black",
+                      "Pattern": "Solid"
+                      }
+                      },
+                      {
+                      "SW 280 Mono Black": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SW 280 Mono Black",
+                      "STC Power Rating": "280.0",
+                      "Length": "1675",
+                      "Width": "1001",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.167",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Pattern": "Lines",
+                      "http": "http://www.solardesigntool.com/components/module-panel-solar/Solar-World/2641/SW-280-Mono-Black/specification-data-sheet.html",
+                      "Degradation after 10 years": 0.068,
+                      "Price (from reseller)": "350"
+                      }
+                      },
+                      {
+                      "SPR-X20-250-BLK": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SPR-X20-250-BLK",
+                      "STC Power Rating": "250.0",
+                      "Length": "1559",
+                      "Width": "798",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.201",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Pattern": "Solid",
+                      "Degradation after 10 years": 0.069,
+                      "Price (from reseller)": "500"
+                      }
+                      },
+                      {
+                      "Q.PRO BFR - G3 260": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "Q.PRO BFR - G3 260",
+                      "STC Power Rating": "260.0",
+                      "Length": "1670",
+                      "Width": "1000",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.1557",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Pattern": "Window-paint",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.08,
+                      "Price (from reseller)": "240"
+                      }
+                      },
+                      {
+                      "SPR-X21-345": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SPR-X21-345",
+                      "STC Power Rating": "345",
+                      "Length": "1559",
+                      "Width": "1046",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.2116",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Pattern": "Window-paint",
+                      "Degradation after 10 years": 0.069,
+                      "Price (from reseller)": "690"
+                      }
+                      },
+                      {
+                      "REC275TP": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "REC275TP",
+                      "STC Power Rating": "275",
+                      "Length": "1665",
+                      "Width": "991",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.1667",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Pattern": "Window-paint",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.1,
+                      "Price (from reseller)": "250"
+                      }
+                      },
+                      {
+                      "SW 275 Mono Black": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SW 275 Mono Black",
+                      "STC Power Rating": "275",
+                      "Length": "1675",
+                      "Width": "1001",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.1640",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Pattern": "Lines",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.068,
+                      "Price (from reseller)": "330"
+                      }
+                      },
+                      {
+                      "SW250 Poly": {
+                      "TYPE":"solar_core::SolarModuleBL",
+                      "Name": "SW250 Poly",
+                      "STC Power Rating": "250",
+                      "Length": "1675",
+                      "Width": "1001",
+                      "Color": "Black",
+                      "Peak Efficiency": "0.1491",
+                      "Pattern": "Window-paint",
+                      "Manufacturer Id": "FORMULA::RANDOM",
+                      "Price (from manufacturer)": "1.0",
+                      "Warranty length": "25.0",
+                      "Degradation after 10 years": 0.068,
+                      "Price (from reseller)": "250"
+                      }
+                      }
+                      ],
+    "inverters": [
+                  {
+                  "PVI-3.0-OUTD-S-US-Z-A (240V)": {
+                  "Name": "PVI-3.0-OUTD-S-US-Z-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "PVI-3.6-OUTD-S-US-Z-A (240V)": {
+                  "Name": "PVI-3.6-OUTD-S-US-Z-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "PVI-3.0-OUTD-S-US-A (240V)": {
+                  "Name": "PVI-3.0-OUTD-S-US-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "M215-60-2LL-S2X-IG": {
+                  "Name": "M215-60-2LL-S2X-IG",
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "M250-60-2LL-S2X (-ZC) (-NA) (240V)": {
+                  "Name": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+                  "Type": "Microinverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "SB3000TL-US-22 (240V)": {
+                  "Name": "SB3000TL-US-22 (240V)",
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "SE3800 (240V) w/ -ER-US or A-US": {
+                  "Name": "SE3800 (240V) w/ -ER-US or A-US",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "PVI-4.2-OUTD-S-US-Z-A (240V)": {
+                  "Name": "PVI-4.2-OUTD-S-US-Z-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "SE5000 (240V) w/ -ER-US or A-US": {
+                  "Name": "SE5000 (240V) w/ -ER-US or A-US",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "PVI-6000-OUTD-US-Z-A (240V)": {
+                  "Name": "PVI-6000-OUTD-US-Z-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "PVI-5000-OUTD-US-Z-A (240V)": {
+                  "Name": "PVI-5000-OUTD-US-Z-A (240V)",
+                  "Type": "Single-phase string inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  },
+                  {
+                  "SB3800TL-US-22 (240V)": {
+                  "Name": "SB3800TL-US-22 (240V)",
+                  "Type": "String inverter",
+                  "Manufacturer Id": "FORMULA::RANDOM",
+                  "ClassType":"solar_core::Inverter"
+                  }
+                  }
+                  ]
+}
