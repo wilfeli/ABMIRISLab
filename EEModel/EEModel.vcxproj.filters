@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{42016949-469a-4261-ac0e-87588a5082b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\RelBaseLearn08">
+      <UniqueIdentifier>{38e53c2d-5625-459b-8466-cee7938b51bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\RelBaseLearn08\CA">
+      <UniqueIdentifier>{d00365a2-f9e9-4685-9861-764c4fed76bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\EE\UI\main.cpp">
@@ -160,6 +166,42 @@
     </None>
     <None Include="..\Examples\EEModel\MA\w.json">
       <Filter>Resource Files\Examples\MA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\distribution.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\distribution_hh.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\eemodel.model">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\g.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\geography.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\ho.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\joint_distribution_hh.csv">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\sei.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\sem.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\solar_equipment.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\utility.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Sep-19-2017\RelBaseLearn08\CA\w.json">
+      <Filter>Resource Files\RelBaseLearn08\CA</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
