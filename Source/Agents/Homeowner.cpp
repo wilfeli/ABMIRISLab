@@ -238,7 +238,10 @@ Homeowner::ac_inf_quoting_sei()
 				new_project->agent = this;
 				new_project->begin_time = a_time;
 				new_project->sei = marketing_inf->agent;
-
+				if (marketing_inf->message_type == "direct") 
+				{
+					new_project->is_direct_marketing = true;
+				};
 
 				///requests online quote, it will be provided in a separate call
 				new_project->state_project = EParamTypes::RequestedOnlineQuote;

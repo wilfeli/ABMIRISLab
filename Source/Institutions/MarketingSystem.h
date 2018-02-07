@@ -51,13 +51,14 @@ namespace solar_core
         void request_inf_marketing_sei(IAgent* agent_); /*!< marketing information from SEI is requested by agent */
         //@}
         
+		std::map<EParamTypes, double> params; /*!<   */
         
     protected:
         double distance(double x1, double y1, double x2, double y2);
         
         std::vector<IAgent*> interested_agents; /*!< Vector of agents that are interested in receiving marketing information  */
         
-        std::map<EParamTypes, double> params; /*!<   */
+
         
         std::vector<std::shared_ptr<MesMarketingSEI>> marketing_mess; /*!< marketing messages from SEI */
         

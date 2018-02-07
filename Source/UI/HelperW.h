@@ -1027,7 +1027,10 @@ namespace solar_core {
                     
                     
                     //read class preferences
-                    w->ho_decisions[iter.first]->HOD_distribution[node.first] = node.second.get<double>("frequency");
+					std::vector<double> frequencies;
+					serialize::deserialize(node.second.get_child("frequency"), frequencies);
+//                    w->ho_decisions[iter.first]->HOD_distribution[node.first] = node.second.get<double>("frequency");
+					w->ho_decisions[iter.first]->HOD_distribution[node.first] = frequencies[0];
                     //create labels and cmf to generate class labels
                     w->ho_decisions[iter.first]->labels.push_back(node.first);
                     w->ho_decisions[iter.first]->cmf.push_back(w->ho_decisions[iter.first]->cmf.back() + w->ho_decisions[iter.first]->HOD_distribution[node.first]);
@@ -1637,7 +1640,7 @@ namespace solar_core {
 
 
 					//read class preferences
-					w->ho_decisions[iter.first]->HOD_distribution[std::string(node.name.GetString())] = tools::get_double(node.value["frequency"]);
+					w->ho_decisions[iter.first]->HOD_distribution[std::string(node.name.GetString())] = tools::get_double(node.value["frequency"][0]);
 					//create labels and cmf to generate class labels
 					w->ho_decisions[iter.first]->labels.push_back(std::string(node.name.GetString()));
 					w->ho_decisions[iter.first]->cmf.push_back(w->ho_decisions[iter.first]->cmf.back() + w->ho_decisions[iter.first]->HOD_distribution[std::string(node.name.GetString())]);

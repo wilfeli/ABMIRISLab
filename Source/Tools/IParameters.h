@@ -539,8 +539,8 @@ namespace solar_core
         
         SEITimeLUForAdministration,
         
-        
-        
+        /** If Prices are sticky in the model */
+		SEIStickyPrices,
         
         
         
@@ -637,7 +637,8 @@ namespace solar_core
         /** Market, maximum distance to accept sei offer */
         MarketingSEIMaxDistance,
         
-        
+		/** Distance to tell neighbours */
+		MarketingHMaxDistance,
         
         
         /** State of Payments: all payments on time */
@@ -1082,6 +1083,10 @@ namespace solar_core
             {
                 return EParamTypes::N_SEILarge;
             }
+			else if (param_type == "eparamtypes::seistickyprices")
+			{
+				return EParamTypes::SEIStickyPrices;
+			}
             else if (param_type == "eparamtypes::n_sem")
             {
                 return EParamTypes::N_SEM;
@@ -1158,6 +1163,10 @@ namespace solar_core
             {
                 return EParamTypes::MarketingMaxNToDrawPerTimeUnit;
             }
+			else if (param_type == "eparamtypes::marketinghmaxdistance") 
+			{
+				return EParamTypes::MarketingHMaxDistance;
+			}
             else if (param_type == "eparamtypes::semefficiencyupgraderesearch")
             {
                 return EParamTypes::SEMEfficiencyUpgradeResearch;
@@ -1420,6 +1429,10 @@ namespace solar_core
             {
                 return "EParamTypes::SEILarge";
             }
+			else if (param_ == EParamTypes::SEIStickyPrices)
+			{
+				return "EParamTypes::SEIStickyPrices";
+			}
             else if (param_ == EParamTypes::None)
             {
                 return "EParamTypes::None";

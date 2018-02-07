@@ -63,9 +63,7 @@ W::W(std::string path_, HelperW* helper_, std::string mode_)
     boost::filesystem::path path_to_template;
     std::string path;
 
-#ifdef ABMS_DEBUG_MODE
-    Log::instance(path_);
-#endif
+
     
     //preallocate stuff
     PropertyTree pt;
@@ -198,6 +196,10 @@ void W::create_world(boost::filesystem::path& path_to_model_file,
     {
         throw std::runtime_error("Wrong configuration file");
     };
+
+#ifdef ABMS_LOG_MODE
+	Log::instance(params["path_to_save"]);
+#endif
     
     
     path_to_template = path_to_dir;
@@ -818,17 +820,29 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
     project_->agent->quote_state = EParamTypes::HOStateInterconnected;
     
     
-    auto mes = project_->sei->mes_marketing;
+    auto mes = project_->sei->mes_marketing_direct;
     auto h = project_->agent;
     
     //send info in the net
-    for (auto agent:world_map->h_map[h->location_x][h->location_y])
-    {
-        agent->get_inf(mes);
-    };
+
+	//have reach here 
+	auto reach = marketing->params[EParamTypes::MarketingHMaxDistance];
+	for (auto i = std::max(0.0, h->location_x-reach); i < std::min(double(world_map->h_map.size()), h->location_x + reach); i++)
+	{
+		for (auto j = std::max(0.0, h->location_y - reach); j < std::min(double(world_map->h_map[0].size()), h->location_y + reach); j++)
+		{
+			//check validity 
+			for (auto agent : world_map->h_map[i][j])
+			{
+				agent->get_inf(mes);
+			};
+		};
+	};
+
+    
 
 #ifdef ABMS_SEI_TEST
-	std::cout << project_->design->design->total_net_savings << std::endl;
+//	std::cout << project_->design->design->total_net_savings << std::endl;
 #endif
 
     

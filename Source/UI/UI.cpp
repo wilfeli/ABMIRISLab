@@ -206,15 +206,15 @@ UI::save(std::string path_to_save_file_)
 		auto price_per_watt = 0.0;
 		for (auto& project : *(w->interconnected_projects))
 		{
-			//time, location_x, location_y, installer id, price_per_watt, size, 
+			//time, location_x, location_y, installer id, price_per_watt, size, type
 			out_file << project->ac_utility_time << ",";
 			out_file << project->agent->location_x << ",";
 			out_file << project->agent->location_y << ",";
 			out_file << project->sei->uid.get_string() << ",";
 			price_per_watt = project->design->design->total_costs / project->design->design->DC_size;
 			out_file << price_per_watt << ",";
-			out_file << project->design->design->DC_size << std::endl;
-
+			out_file << project->design->design->DC_size << ",";
+			out_file << project->is_direct_marketing << std::endl;
 
 		};
 

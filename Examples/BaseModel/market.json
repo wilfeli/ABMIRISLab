@@ -1,7 +1,10 @@
 {
     "params": [
-               {
-               "EParamTypes::MarketingSEIMaxDistance": 3
-               }
-               ]
+      {
+        "EParamTypes::MarketingSEIMaxDistance": 3
+      },
+      {
+        "EParamTypes::MarketingHMaxDistance": 1
+      }
+     ]
 }

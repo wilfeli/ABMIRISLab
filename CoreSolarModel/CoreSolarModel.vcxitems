@@ -30,6 +30,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\IRandom.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\Log.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\ParsingTools.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\RJTools.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\Serialize.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\Simulation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\VectorMath.cpp" />

@@ -84,6 +84,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\UI\WEE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Source\Tools\RJTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\Source\Agents\Utility.h">

@@ -78,9 +78,20 @@ public:
     MesMarketingSEI(SEI* agent_, const EParamTypes& sei_type_):agent(agent_), sei_type(sei_type_){}
     SEI* agent; /*!< agent whose marketing information is presented */
     EParamTypes sei_type; /*!< depending on the type will have online quotes or not */
+	std::string message_type = "sei";
     
 };
 
+class MesMarketingSEIDirect : public MesMarketingSEI
+{
+public:
+	MesMarketingSEIDirect(SEI* agent_, const EParamTypes& sei_type_): 
+		MesMarketingSEI(agent_, sei_type_)
+	{
+		message_type = "direct";
+	}
+	
+};
 
 
 /**

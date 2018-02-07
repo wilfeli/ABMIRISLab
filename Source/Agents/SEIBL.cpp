@@ -1283,23 +1283,29 @@ void SEIBL::act_tick()
         wm_update_internal();
     };
     
-    //make price decision, based on the switching or not
-    auto dec = dec_base();
-//    TDesign* dec = dec_design;
-    
-    //switch to new offering, lock as simultaneously is offering projects to H
-    lock.lock();
-    if (dec_design != dec)
-    {
-        dec_design = dec;
-        designs[dec->PV_module->uid] = dec;
-        params[EParamTypes::EstimatedPricePerWatt] = dec_design->p_design;
-        
-//        std::cout << "switched " << uid.get_string() << std::endl;
-        
-    };
-    lock.unlock();
-    
+//	if (a_time > 0)
+//	{
+		//make price decision, based on the switching or not
+		auto dec = dec_base();
+		//    TDesign* dec = dec_design;
+
+			//switch to new offering, lock as simultaneously is offering projects to H
+		lock.lock();
+		if (dec_design != dec)
+		{
+			dec_design = dec;
+			designs[dec->PV_module->uid] = dec;
+			params[EParamTypes::EstimatedPricePerWatt] = dec_design->p_design;
+
+			//        std::cout << "switched " << uid.get_string() << std::endl;
+
+		};
+		lock.unlock();
+//	}
+//	else 
+//	{
+		
+//	};
     
 }
 

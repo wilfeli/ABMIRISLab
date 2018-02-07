@@ -586,7 +586,9 @@ void WEE::ac_update_tick()
     //update world parameters for inflation
     WorldSettings::instance().params_exog[EParamTypes::LaborPrice] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
     WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]);
-    
+//	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+//	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+
     ac_update_wm();
 }
 

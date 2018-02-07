@@ -1,5 +1,5 @@
 {
-  "costs_base": 0.39,
+  "costs_base": 0.2,
   "money": "FORMULA::p.d.f.::u(10000, 50000)",
   "N_PANELS_inventories": 1000,
   "N_solar_panel_templates": 3,

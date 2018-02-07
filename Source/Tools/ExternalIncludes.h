@@ -11,8 +11,10 @@
 
 
 #define ABMS_DEBUG_MODE
+#define ABMS_LOG_MODE
 #define ABMS_SPLINES
-//#define ABMS_SEI_TEST
+#define ABMS_SEI_TEST
+#define ABMS_STICKY_PRICES
 //#define ABMS_H_SAVE
 
 #include <cstdint>

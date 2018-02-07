@@ -164,6 +164,8 @@ namespace solar_core
         TimeUnit ac_utility_time = 0; /*! when request was accepted by utility company */
         
         bool is_temporary = false;
+		bool is_test_project = false; 
+		bool is_direct_marketing = false;
         
     protected:
         

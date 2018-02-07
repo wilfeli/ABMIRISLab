@@ -242,7 +242,7 @@ SEI::SEI(const DocumentRJ& pt_, W* w_)
 	};
 
 	mes_marketing = std::make_shared<MesMarketingSEI>(this, sei_type);
-
+	mes_marketing_direct = std::make_shared<MesMarketingSEIDirect>(this, sei_type);
 
 
 }
@@ -571,7 +571,16 @@ SEI::form_design(std::shared_ptr<PVProject> project_, double profit_margin)
 
 
 void
-SEI::form_design_for_params(std::shared_ptr<const PVProject> project_, double demand, double solar_irradiation, double permit_difficulty, double project_percentage, double profit_margin, const IterTypeDecSM& iter, const IterTypeDecInverter& iter_inverter, PVDesign& design)
+SEI::form_design_for_params(
+	std::shared_ptr<const PVProject> project_, 
+	double demand, 
+	double solar_irradiation, 
+	double permit_difficulty, 
+	double project_percentage, 
+	double profit_margin, 
+	const IterTypeDecSM& iter, 
+	const IterTypeDecInverter& iter_inverter, 
+	PVDesign& design)
 {
     
     double demand_adjusted = demand; // / (1 - WorldSettings::instance().params_exog[EParamTypes::DCtoACLoss]);
@@ -740,9 +749,26 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     design.total_costs = costs * (1 + profit_margin);
 	design.raw_costs = costs;
 
-#ifdef ABMS_SEI_TEST
+#ifdef ABMS_STICKY_PRICES
 	//alternative way with fixed price per watt
-	design.total_costs = design.DC_size * WorldSettings::instance().constraints[EConstraintParams::SEIPricePerWatt];
+//	design.total_costs = design.DC_size * WorldSettings::instance().constraints[EConstraintParams::SEIPricePerWatt];
+	double price_per_watt = design.total_costs / design.DC_size;
+	double total_costs = THETA_profit[2] * design.DC_size;
+	//if (std::abs(price_per_watt - THETA_profit[2]) > 0.5)
+	//{
+	//	std::cout << price_per_watt << " " << profit_margin  
+	//		<< " " << design.total_costs 
+	//		<< " " << total_costs << std::endl; 
+	//};
+
+	//compare to stored price per watt 
+//	design.total_costs = total_costs;
+
+	if (!(project_->is_test_project)) 
+	{
+		design.total_costs = total_costs;
+	};
+
 #endif
 
 
@@ -968,6 +994,7 @@ void SEI::dec_max_profit()
     project_generic->sei = this;
     project_sei_i->agent = agent;
     project_sei_i->state_base_agent = agent_state;
+	project_generic->is_test_project = true;
     
     //two random agents to use as alternatives for estimating market share
     auto max_ = w->seis->size() - 1;
@@ -1157,12 +1184,26 @@ void SEI::dec_max_profit()
     
     
     //updating profit margin
-    THETA_profit[0] = profit_grid(maxRow,0);
+	update_theta_profit_sticky(profit_grid(maxRow,0));
 
 
 
-#ifdef ABMS_SEI_TEST
-	THETA_profit[0] = WorldSettings::instance().constraints[EConstraintParams::SEIProfitMargin];
+#ifdef ABMS_STICKY_PRICES
+//	THETA_profit[0] = WorldSettings::instance().constraints[EConstraintParams::SEIProfitMargin];
+
+	auto designs = form_design(project_generic, profit_grid(maxRow, 0));
+	auto THETA_price = designs[0]->design->total_costs / designs[0]->design->DC_size;
+	if (params[EParamTypes::SEIStickyPrices])
+	{
+		//use partial update to profit margins to make it more like today 
+		THETA_profit[2] = THETA_profit[2] * THETA_profit[1] + THETA_price * (1 - THETA_profit[1]);
+	}
+	else
+	{
+		THETA_profit[2] = THETA_price;
+	};
+
+
 #endif
     
     delete agent;
@@ -1172,7 +1213,19 @@ void SEI::dec_max_profit()
 }
 
 
-
+void SEI::update_theta_profit_sticky(double THETA_profit_t_1) 
+{
+	if (params[EParamTypes::SEIStickyPrices])
+	{
+		//use partial update to profit margins to make it more like today 
+		THETA_profit[0] = THETA_profit[0] * THETA_profit[1] + THETA_profit_t_1 * (1 - THETA_profit[1]);
+	}
+	else 
+	{
+		THETA_profit[0] = THETA_profit_t_1;
+	};
+	
+}
 
 
 

@@ -207,7 +207,7 @@ namespace solar_core
          */
         
         std::shared_ptr<MesMarketingSEI> mes_marketing; /*!< Contains basic marketing information. is created with agent and updated to reflect new marketing policy */
-        
+		std::shared_ptr<MesMarketingSEIDirect> mes_marketing_direct; /*!< is used when H sends information directly*/
         
         //@}
         
@@ -352,6 +352,7 @@ namespace solar_core
         
         
         void dec_max_profit(); /*!< profit maximization, for now just one huge method with GS algorithm */
+		void update_theta_profit_sticky(double THETA_profit_t_1);
         Eigen::MatrixXd profit_grid; /*!< preallocated space for profit calculation */
         
         
