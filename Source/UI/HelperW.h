@@ -728,16 +728,26 @@ namespace solar_core {
                     double technology_to_set = 2.0;
                     double pv_module_to_set = 1.0;
                     
-                    while (pv_module_to_set > 0.0)
+
+					long N_trials = 0;
+					long N_max_trials = 100;
+					auto current_techonology = (*parsed_file)[i][column_names["Technology"]];
+
+                    while (pv_module_to_set > 0.0) 
                     {
                         j_sem = rng_i();
+						++N_trials;
                         
-                        
+						if (N_trials > N_max_trials) 
+						{
+							current_techonology = "Standard";
+						};
+
                         if ((*w->sems)[j_sem]->sem_type == EParamTypes::SEMPVProducer)
                         {
                             
-                            auto cut_off_min = technology_bins[(*parsed_file)[i][column_names["Technology"]]][0];
-                            auto cut_off_max = technology_bins[(*parsed_file)[i][column_names["Technology"]]][1];
+                            auto cut_off_min = technology_bins[current_techonology][0];
+                            auto cut_off_max = technology_bins[current_techonology][1];
 
 
 							//adjust cut_offs for efficiency adjustment of a scenario
@@ -754,7 +764,10 @@ namespace solar_core {
                                 --pv_module_to_set;
                                 
                             };
-                        }
+						};
+
+
+						//if it is 
                     };
                     
                     while (technology_to_set > 0.0)
@@ -1148,11 +1161,60 @@ namespace solar_core {
                 };
 
                 
-
+				
 
                 
             };
             
+
+			//assign already installed projects 
+			auto N_installed = 0;
+			int64_t N_pre_installed = hos->size() * WorldSettings::instance().params_exog[EParamTypes::PenetrationLevel];
+			std::size_t j_h = 0;
+			auto max_N_trials = 10000;
+			int64_t N_trials = 0;
+
+
+			//randomly select agents and push marketing information
+			auto pdf_agents = boost::uniform_int<uint64_t>(0, hos->size() - 1);
+			auto rng_agents = boost::variate_generator<boost::mt19937&, boost::uniform_int<uint64_t>>(w->rand->rng, pdf_agents);
+
+			while (N_installed < N_pre_installed)
+			{
+				//check that it doesn't have installation already
+				while (true)
+				{
+					//pick h randomly
+					j_h = rng_agents();
+
+					//check that doesn't have installed system
+					if (!((*hos)[j_h]->quote_state == EParamTypes::HOStateInterconnected)) 
+					{
+						break;
+					};
+
+
+					++N_trials;
+					if (N_trials > max_N_trials)
+					{
+						break;
+					};
+				};
+
+				//mark as having a system
+				(*hos)[j_h]->quote_state == EParamTypes::HOStateInterconnected;
+
+				//update number of installs
+				++N_installed;
+
+				if (N_trials > max_N_trials)
+				{
+					break;
+				};
+			};
+
+
+
 
             //@DevStage3 if decide to have random utility  - when generating H assign utility from the description of a probability distribution
             

@@ -115,6 +115,10 @@ namespace solar_core
 		/** Adjustment for baseline efficiencies to test different scenarios  */
 		ScenarioEfficiencyAdjustment,
 
+		/** Adjustment for policies*/
+		ScenarioPolicyAdjustment,
+
+
         /** Adjustment for income level for the simulated state relative to US median income */
         MedianIncomeToUSCoefficient,
         
@@ -270,6 +274,18 @@ namespace solar_core
         /** If Homeowner decided to drop out at Design stage  */
         HOStateDroppedOutDesignStage,
         
+
+		/** If Homeowner decided to drop out at SEI conjoint stage at the tick  */
+		HOStateDroppedOutTickSEIStage,
+
+
+		/** If Homeowner decided to drop out at NC Decision stage at the tick */
+		HOStateDroppedOutTickNCDecStage,
+
+
+		/** If Homeowner decided to drop out at Design stage at the tick */
+		HOStateDroppedOutTickDesignStage,
+
         
         /** State of a quoting stage for HO: actively requesting information */
         HOStateActiveQuoting,
@@ -542,8 +558,13 @@ namespace solar_core
         /** If Prices are sticky in the model */
 		SEIStickyPrices,
         
+		/**  BOS prices */
+		SEIBOSPrice,
         
-        
+		/** Parameter for profit max*/
+		SEIThetaMin,
+
+		SEIThetaMax,
         
         
         
@@ -883,6 +904,10 @@ namespace solar_core
 			{
 				return EParamTypes::ScenarioEfficiencyAdjustment;
 			}
+			else if (param_type == "eparamtypes::scenariopolicyadjustment")
+			{
+				return EParamTypes::ScenarioPolicyAdjustment;
+			}
             else if (param_type == "eparamtypes::averageelectricitydemand")
             {
                 return EParamTypes::AverageElectricityDemand;
@@ -1087,6 +1112,18 @@ namespace solar_core
 			{
 				return EParamTypes::SEIStickyPrices;
 			}
+			else if (param_type == "eparamtypes::seibosprice")
+			{
+				return EParamTypes::SEIBOSPrice;
+			}
+			else if (param_type == "eparamtypes::seithetamin")
+			{
+				return EParamTypes::SEIThetaMin;
+			}
+			else if (param_type == "eparamtypes::seithetamax")
+			{
+				return EParamTypes::SEIThetaMax;
+			}
             else if (param_type == "eparamtypes::n_sem")
             {
                 return EParamTypes::N_SEM;
@@ -1285,6 +1322,22 @@ namespace solar_core
             {
                 return "EParamTypes::HOStateDroppedOutNCDecStage";
             }
+			else if (param_ == EParamTypes::HOStateDroppedOutDesignStage)
+			{
+				return "EParamTypes::HOStateDroppedOutDesignStage";
+			}
+			else if (param_ == EParamTypes::HOStateDroppedOutTickSEIStage)
+			{
+				return "EParamTypes::HOStateDroppedOutTickSEIStage";
+			}
+			else if (param_ == EParamTypes::HOStateDroppedOutTickNCDecStage)
+			{
+				return "EParamTypes::HOStateDroppedOutTickNCDecStage";
+			}
+			else if (param_ == EParamTypes::HOStateDroppedOutTickDesignStage)
+			{
+				return "EParamTypes::HOStateDroppedOutTickDesignStage";
+			}
             else if (param_ == EParamTypes::HOStateWaitingOnOnlineQuotes)
             {
                 return "EParamTypes::HOStateWaitingOnOnlineQuotes";
@@ -1292,10 +1345,6 @@ namespace solar_core
             else if (param_ == EParamTypes::HOStateWaitingOnPreliminaryQuotes)
             {
                 return "EParamTypes::HOStateWaitingOnPreliminaryQuotes";
-            }
-            else if (param_ == EParamTypes::HOStateDroppedOutDesignStage)
-            {
-                return "EParamTypes::HOStateDroppedOutDesignStage";
             }
             else if (param_ == EParamTypes::HOStateWaitingOnDesigns)
             {
@@ -1432,6 +1481,18 @@ namespace solar_core
 			else if (param_ == EParamTypes::SEIStickyPrices)
 			{
 				return "EParamTypes::SEIStickyPrices";
+			}
+			else if (param_ == EParamTypes::SEIBOSPrice)
+			{
+				return "EParamTypes::SEIBOSPrice";
+			}
+			else if (param_ == EParamTypes::SEIThetaMin)
+			{
+				return "EParamTypes::SEIThetaMin";
+			}
+			else if (param_ == EParamTypes::SEIThetaMax)
+			{
+				return "EParamTypes::SEIThetaMax";
 			}
             else if (param_ == EParamTypes::None)
             {

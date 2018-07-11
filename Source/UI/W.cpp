@@ -411,15 +411,18 @@ W::life()
 void W::ac_update_tick()
 { 
     //MARK: cont. add update of labor price
-//#define ABMS_CPI_UPDATE
+#define ABMS_CPI_UPDATE
 #ifdef ABMS_CPI_UPDATE
-	//update world parameters for inflation
-	WorldSettings::instance().params_exog[EParamTypes::LaborPrice] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
-	WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]);
+	if (((time % 52) == 0) && (time != 52))
+	{
+		//update world parameters for inflation
+		WorldSettings::instance().params_exog[EParamTypes::LaborPrice] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+		WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::AverageElectricityDemandGrowthRate]);
 
-	//assume electricity prices are also updated
-	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
-	WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+		//assume electricity prices are also updated
+		WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCDemand] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+		WorldSettings::instance().params_exog[EParamTypes::ElectricityPriceUCSupply] *= (1 + WorldSettings::instance().params_exog[EParamTypes::InflationRate]);
+	};
 #endif
 
     history_projects.push_back(std::map<EParamTypes, double>{});
@@ -427,6 +430,12 @@ void W::ac_update_tick()
     
     int64_t N_ACTIVE_AGENTS = 0;
     
+
+	history_decisions.back()[EParamTypes::HOStateDroppedOutTickNCDecStage] = 0.0;
+	history_decisions.back()[EParamTypes::HOStateDroppedOutTickSEIStage] = 0.0;
+	history_decisions.back()[EParamTypes::HOStateDroppedOutTickDesignStage] = 0.0;
+
+
     for (auto agent:*hos)
     {
         if (agent)
@@ -449,6 +458,30 @@ void W::ac_update_tick()
             };
             
             history_decisions.back()[agent->quote_state] += 1.0;
+
+			//add tracking of new dropouts 
+			if (agent->a_time == time) 
+			{
+				if ((agent->quote_state == EParamTypes::HOStateDroppedOutNCDecStage) || (agent->quote_state == EParamTypes::HOStateDroppedOutSEIStage) || (agent->quote_state == EParamTypes::HOStateDroppedOutDesignStage)) 
+				{
+					if (agent->quote_state == EParamTypes::HOStateDroppedOutNCDecStage) 
+					{
+						history_decisions.back()[EParamTypes::HOStateDroppedOutTickNCDecStage] += 1.0;
+					};
+					if (agent->quote_state == EParamTypes::HOStateDroppedOutSEIStage)
+					{
+						history_decisions.back()[EParamTypes::HOStateDroppedOutTickSEIStage] += 1.0;
+					};
+					if (agent->quote_state == EParamTypes::HOStateDroppedOutDesignStage)
+					{
+						history_decisions.back()[EParamTypes::HOStateDroppedOutTickDesignStage] += 1.0;
+					};
+				 
+				};
+
+			};
+
+
                  
             //count number of projects and their state
             for (auto project:agent->pvprojects)
@@ -819,6 +852,9 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
     
     project_->agent->quote_state = EParamTypes::HOStateInterconnected;
     
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << project_->design->design->raw_costs / project_->design->design->total_costs << std::endl; 
+#endif // ABMS_DEBUG_MODE
     
     auto mes = project_->sei->mes_marketing_direct;
     auto h = project_->agent;
@@ -827,14 +863,28 @@ W::get_state_inf_interconnected_project(std::shared_ptr<PVProject> project_)
 
 	//have reach here 
 	auto reach = marketing->params[EParamTypes::MarketingHMaxDistance];
-	for (auto i = std::max(0.0, h->location_x-reach); i < std::min(double(world_map->h_map.size()), h->location_x + reach); i++)
+
+	//tell only share of them 
+	double p = marketing->params[EParamTypes::MarketingMaxNToDrawPerTimeUnit] / hos->size();
+	//check that it is valid pdf
+	auto pdf_p = boost::uniform_01<>();
+	auto rng_p = boost::variate_generator<boost::mt19937&, boost::uniform_01<>>(rand_market->rng, pdf_p);
+
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << reach << std::endl;
+#endif
+
+	for (auto i = std::max(0.0, h->location_x - reach); i <= std::min(double(world_map->h_map.size() - 1), h->location_x + reach); i++)
 	{
-		for (auto j = std::max(0.0, h->location_y - reach); j < std::min(double(world_map->h_map[0].size()), h->location_y + reach); j++)
+		for (auto j = std::max(0.0, h->location_y - reach); j <= std::min(double(world_map->h_map[0].size() - 1), h->location_y + reach); j++)
 		{
 			//check validity 
 			for (auto agent : world_map->h_map[i][j])
 			{
-				agent->get_inf(mes);
+				if (rng_p() < p)
+				{
+					agent->get_inf(mes);
+				};
 			};
 		};
 	};

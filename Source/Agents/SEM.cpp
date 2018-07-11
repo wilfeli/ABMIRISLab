@@ -137,6 +137,10 @@ SEM::init(W* w_)
             inventories[iter->name] = N_PANELS_inventories;
         };
         
+
+		//set prices based on type of producer 
+
+
         //set prices
         for (auto iter:solar_panel_templates)
         {
@@ -144,7 +148,15 @@ SEM::init(W* w_)
         
             double panel_watts = iter->efficiency * (iter->length * iter->width/1000000)*1000;
             
-            prices[iter->name] = costs_base * (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, std::signbit(efficiency_differential - 1))) * panel_watts;
+			double policy_price = costs_base;
+			if (iter->origin == "Domestic") 
+			{
+				policy_price = WorldSettings::instance().params_exog[EParamTypes::ScenarioPolicyAdjustment];
+			};
+
+
+            prices[iter->name] = policy_price 
+								* (1 + THETA_profit[0]) * (1 + params[EParamTypes::SEMPriceMarkupEfficiency] * std::pow(-1, std::signbit(efficiency_differential - 1))) * panel_watts;
             
             iter->p_sem = prices[iter->name];
             

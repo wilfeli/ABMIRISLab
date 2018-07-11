@@ -32,23 +32,9 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     w = w_;
 
     
-    //pregenerate range of prices
-    int64_t N = 20;
-    double THETA_min = 0.0;
-    double THETA_max = 2.0;
-    double step_size = (THETA_max - THETA_min)/N;
-    
-    profit_grid.resize(N+1, 2);
-    
-    for (auto i = 0; i < N + 1; ++i)
-    {
-        profit_grid(i,0) = THETA_min + i * step_size;
-    };
 
-    
-    
-    
-    
+
+     
     
     //location
     location_x = pt_.get<long>("location_x");
@@ -124,8 +110,26 @@ SEI::SEI(const PropertyTree& pt_, W* w_)
     };
 
     mes_marketing = std::make_shared<MesMarketingSEI>(this, sei_type);
+	mes_marketing_direct = std::make_shared<MesMarketingSEIDirect>(this, sei_type);
     
-    
+
+	//pregenerate range of prices
+	int64_t N = 20;
+	double THETA_min = params[EParamTypes::SEIThetaMin];
+	double THETA_max = params[EParamTypes::SEIThetaMax];
+	double step_size = (THETA_max - THETA_min) / N;
+
+	profit_grid.resize(N + 1, 2);
+
+	for (auto i = 0; i < N + 1; ++i)
+	{
+		profit_grid(i, 0) = THETA_min + i * step_size;
+	};
+
+
+#ifdef ABMS_DEBUG_MODE
+	//std::cout << mes_marketing_direct->message_type << std::endl; 
+#endif
 
 }
 
@@ -135,18 +139,7 @@ SEI::SEI(const DocumentRJ& pt_, W* w_)
 	w = w_;
 
 
-	//pregenerate range of prices
-	int64_t N = 40;
-	double THETA_min = 0.0;
-	double THETA_max = 2.0;
-	double step_size = (THETA_max - THETA_min) / N;
 
-	profit_grid.resize(N + 1, 2);
-
-	for (auto i = 0; i < N + 1; ++i)
-	{
-		profit_grid(i, 0) = THETA_min + i * step_size;
-	};
 
 	auto get_double = &serialize::GetNodeValue<double>::get_value;
 	auto get_string = [](const DocumentNode& node_) -> std::string {
@@ -245,6 +238,20 @@ SEI::SEI(const DocumentRJ& pt_, W* w_)
 	mes_marketing_direct = std::make_shared<MesMarketingSEIDirect>(this, sei_type);
 
 
+	//pregenerate range of prices
+	int64_t N = 40;
+	double THETA_min = params[EParamTypes::SEIThetaMin];
+	double THETA_max = params[EParamTypes::SEIThetaMax];
+	double step_size = (THETA_max - THETA_min) / N;
+
+	profit_grid.resize(N + 1, 2);
+
+	for (auto i = 0; i < N + 1; ++i)
+	{
+		profit_grid(i, 0) = THETA_min + i * step_size;
+	};
+
+
 }
 
 
@@ -263,7 +270,9 @@ SEI::init(W *w_)
     //check that parameter is reasonable, if not - raise an error
     if (params[EParamTypes::SEIMaxNInstallationsPerTimeUnit] <= 0.0)
     {
-        throw std::runtime_error("no installation slots");
+		//use default param for small installers
+		params[EParamTypes::SEIMaxNInstallationsPerTimeUnit] = 10;
+        //throw std::runtime_error("no installation slots");
     };
     
     
@@ -463,12 +472,15 @@ SEI::form_preliminary_quote(std::shared_ptr<PVProject> project_, double profit_m
     //assume that permit difficulty here in weeks
     //so that total project time is lead time and permitting time summed
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
+
+	//std::cout << permit_difficulty << std::endl;
+
     auto total_project_time = permit_difficulty_scale * permit_difficulty/constants::LABOR_UNITS_PER_TICK + params[EParamTypes::SEILeadInProjectTime];
 
 #ifdef ABMS_DEBUG_MODE
     if (total_project_time > 24)
     {
-        throw std::runtime_error("Project time is too long");
+//        throw std::runtime_error("Project time is too long");
     };
 #endif
     
@@ -719,7 +731,8 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
             break;
     }
     
-    
+    //cost of BOS
+	costs += design.DC_size * params[EParamTypes::SEIBOSPrice]; 
     
     
     //cost of installation
@@ -727,7 +740,10 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     double wage = WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
     costs += complexity_install_prior * wage;
     
-    
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << "Install shoud be sensible " << complexity_install_prior * wage / design.DC_size << std::endl;
+#endif
+
     //no assumptions on the design of a project specific time
     
     //MARK: cont. add function that estimates how many people need for supporting that many projects, it will depend on the difficulty and length of the permitting process
@@ -739,11 +755,20 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     auto total_project_time = permit_difficulty_scale * design.permit_difficulty;
     
     //MARK: cont. 
-    //assume that 1 person per project for the whole duration as a sales rep
-    costs += wage * total_project_time * 1;
+    //assume that 1 person per 10 projects for the whole duration as a sales rep
+    costs += wage * total_project_time * 0.1;
     
-    //design costs, 40 for number of hours in a tick, if tick is one week
-    costs += wage * params[EParamTypes::SEILeadInProjectTime] * constants::LABOR_UNITS_PER_TICK;
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << "Permit should be sensible 0.09 " << wage * total_project_time * 0.1 / design.DC_size << std::endl;
+#endif
+
+
+    //design costs, 40 for number of hours in a tick, if tick is one week, 1 designer per 10 projects 
+    costs += wage * params[EParamTypes::SEILeadInProjectTime] * constants::LABOR_UNITS_PER_TICK * 0.1;
+
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << "Design shoud be sensible " << wage * params[EParamTypes::SEILeadInProjectTime] * constants::LABOR_UNITS_PER_TICK * 0.1 / design.DC_size << std::endl;
+#endif
     
     //profit  margin on costs
     design.total_costs = costs * (1 + profit_margin);
@@ -756,9 +781,9 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
 	double total_costs = THETA_profit[2] * design.DC_size;
 	//if (std::abs(price_per_watt - THETA_profit[2]) > 0.5)
 	//{
-	//	std::cout << price_per_watt << " " << profit_margin  
-	//		<< " " << design.total_costs 
-	//		<< " " << total_costs << std::endl; 
+		//std::cout << price_per_watt << " " << profit_margin  
+		//	<< " " << design.total_costs 
+		//	<< " " << total_costs << std::endl; 
 	//};
 
 	//compare to stored price per watt 
@@ -771,7 +796,7 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
 
 #endif
 
-
+	//std::cout << design.total_costs << std::endl;
 
 	if (design.N_PANELS <= 0.0) 
 	{
@@ -921,6 +946,7 @@ std::shared_ptr<PVProject> SEI::initialize_default_project()
     
     auto project_generic = std::make_shared<PVProject>();
     project_generic->is_temporary = true;
+	project_generic->is_test_project = true;
     
     
     project_generic->agent = agent;
@@ -1044,6 +1070,13 @@ void SEI::dec_max_profit()
 		double b = w->ho_decisions[EParamTypes::HONCDecision]->HOD_distribution_scheme[label][EParamTypes::HONCDecisionTotalPrice][1];
 		share_nc = 1.0 - boost::math::ibeta(a, b, x);
 
+
+
+
+#ifdef ABMS_DEBUG_MODE
+//		std::cout << share_nc << " " << x << std::endl;
+#endif
+
 #endif
         
         
@@ -1141,7 +1174,7 @@ void SEI::dec_max_profit()
             ///calculate total sales
             //MARK: adjustment for NC Decisions only for DEBUG mode, CAREFUL will through otherwise
             qn = WorldSettings::instance().params_exog[EParamTypes::TotalPVMarketSize] * share_sei * shares_design[j] * share_nc;
-//			std::cout << qn << std::endl; 
+//			std::cout << share_sei  << " " << shares_design[j] << " " << qn << std::endl;
 #endif
             //calculate income for this design type
             income += designs[j]->design->total_costs * qn;
@@ -1152,10 +1185,10 @@ void SEI::dec_max_profit()
         };
         
         //marketing costs - fixed number of hours in labor units
-        expences += params[EParamTypes::SEITimeLUForMarketing] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+//        expences += params[EParamTypes::SEITimeLUForMarketing] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
         
         //general administrative costs
-        expences += params[EParamTypes::SEITimeLUForAdministration] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
+//        expences += params[EParamTypes::SEITimeLUForAdministration] * WorldSettings::instance().params_exog[EParamTypes::LaborPrice];
 
         
         //estimate total income from installation - total costs (=costs of installation + marketing and administrative)
@@ -1163,7 +1196,8 @@ void SEI::dec_max_profit()
         
         
 #ifdef ABMS_DEBUG_MODE
-//        std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
+//      std::cout << "total design share for profit margin: "<< profit_grid(i, 0) << ": " << total_design_share << std::endl;
+//		std::cout << income << " " << expences << std::endl;
 #endif
         
         
@@ -1180,6 +1214,7 @@ void SEI::dec_max_profit()
     {
 //        std::cout << "Profit margin: " << profit_grid(i, 0) << " Profit: " << profit_grid(i, 1) << std::endl;
     };
+	
 #endif
     
     
@@ -1193,6 +1228,11 @@ void SEI::dec_max_profit()
 
 	auto designs = form_design(project_generic, profit_grid(maxRow, 0));
 	auto THETA_price = designs[0]->design->total_costs / designs[0]->design->DC_size;
+
+#ifdef ABMS_DEBUG_MODE
+//	std::cout << THETA_price << std::endl;
+#endif
+
 	if (params[EParamTypes::SEIStickyPrices])
 	{
 		//use partial update to profit margins to make it more like today 

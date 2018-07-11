@@ -837,7 +837,7 @@ double SEIBL::est_profit(TDesign* dec_design_hat, PVProjectFlat* project, double
     
     if (debug_flag)
     {
-        std::cout << "maintenance at " << w->time <<" " << maintenance << std::endl;
+        // std::cout << "maintenance at " << w->time <<" " << maintenance << std::endl;
     };
     
 

@@ -171,7 +171,7 @@ Homeowner::get_inf(std::shared_ptr<MesMarketingSEI> mes_)
         
         if (!FLAG_IN_ACTIVE)
         {
-            throw std::runtime_error("did not add inself into active agents");
+            //throw std::runtime_error("did not add inself into active agents");
         };
 #endif
         
@@ -336,7 +336,7 @@ Homeowner::dec_evaluate_online_quotes()
     
     if (pool.size() == 0.0)
     {
-        throw std::runtime_error("too early for evaluation stage");
+        //throw std::runtime_error("too early for evaluation stage");
     };
     
     
@@ -411,7 +411,7 @@ Homeowner::estimate_sei_utility_from_params(std::shared_ptr<PVProject> project, 
 	if ((project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH > 4) 
 		|| (project->preliminary_quote->params[EParamTypes::PreliminaryQuoteTotalProjectTime] / NUMBER_TICKS_IN_MONTH < 0.5))
 	{
-		throw std::runtime_error("error in fudging");
+		//throw std::runtime_error("error in fudging");
 	};
 
 
@@ -583,7 +583,7 @@ void Homeowner::dec_evaluate_online_quotes_nc()
 #ifdef ABMS_DEBUG_MODE
     if (pool.size() == 0.0)
     {
-        throw std::runtime_error("too early for evaluation stage");
+        //throw std::runtime_error("too early for evaluation stage");
     };
 #endif
     
@@ -752,7 +752,7 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 	//15.5 - 25
 	if (project->design->design->PV_module->efficiency > 25)
 	{
-		throw std::runtime_error("error in fudging");
+		//throw std::runtime_error("error in fudging");
 	};
 
 	//visibility
@@ -765,7 +765,7 @@ double Homeowner::estimate_design_utility_from_params(std::shared_ptr<PVProject>
 	//0 - 3 in five years
 	if ((5 * project->design->design->failure_rate) > 3)
 	{
-		throw std::runtime_error("error in fudging");
+		//throw std::runtime_error("error in fudging");
 	};
 
 
@@ -1213,6 +1213,7 @@ void Homeowner::clean_after_dropout()
     
     marketing_state = EParamTypes::None;
 
+	ac_time = a_time;
     
 }
 

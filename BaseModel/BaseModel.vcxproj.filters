@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{aafad6a7-a8b0-46d7-9d4b-c8e44f7c6373}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Ver02">
+      <UniqueIdentifier>{f856503c-c073-4568-ab6f-7da3418317f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Agents\G.h">
@@ -312,6 +315,57 @@
     </None>
     <None Include="..\..\solar-model\Model\simple_model.py">
       <Filter>Source Files\Tests</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\basemodel.model">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\df_installers.csv">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\distribution_hh.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\g.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\geography.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\ho.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\ho-designdecisions.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\ho-installerdecisions.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\homeowners.csv">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\ho-ncdecisions.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\joint_distribution_hh.csv">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\market.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\sei.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\sem.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\solar_equipment.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\utility.json">
+      <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\BaseModel\BaseVer02\CA\w.json">
+      <Filter>Resource Files\Ver02</Filter>
     </None>
   </ItemGroup>
 </Project>

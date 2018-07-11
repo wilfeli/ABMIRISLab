@@ -289,5 +289,8 @@ Intermediate/*
 DerivedDataCache/*
 
 
+#Saves
+Saves/*
+
 #Simulation results
 *.csv

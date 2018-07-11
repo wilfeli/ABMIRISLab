@@ -65,6 +65,7 @@ namespace solar_core
         W* w;
         
         std::mutex lock;
+
     };
     
     

@@ -352,6 +352,7 @@ protected:
     virtual void ac_update_tick(); /*!< update internals for the tick */
     
     TimeUnit a_time; /*!< internal agent's timer */
+	TimeUnit ac_time; /*!< keeps track of the last time of the decision for dropping out onlyS*/
     //@}
     
     

@@ -63,6 +63,7 @@ namespace solar_core
         
         
         std::string name;
+		std::string origin;
         double efficiency;
         double STC_power_rating;
         double p_sem; /*!< price as quoted by manufacturer */

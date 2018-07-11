@@ -103,6 +103,7 @@ SolarModule::deserialize(const DocumentNode& pt_)
 SolarModule::SolarModule(const PropertyTree& pt_)
 {
     name = pt_.get<std::string>("Name");
+	origin = pt_.get<std::string>("Origin");
     efficiency = pt_.get<double>("Peak Efficiency");
     STC_power_rating = pt_.get<double>("STC Power Rating");
     p_sem = pt_.get<double>("Price (from manufacturer)");
@@ -141,6 +142,7 @@ SolarModule::SolarModule(const PropertyTree& pt_)
 SolarModule::SolarModule(const DocumentNode& pt_)
 {
 	name = tools::get_string(pt_["Name"]);
+	origin = tools::get_string(pt_["Origin"]);
 	efficiency = tools::get_double(pt_["Peak Efficiency"]);
 	STC_power_rating = tools::get_double(pt_["STC Power Rating"]);
 	p_sem = tools::get_double(pt_["Price (from manufacturer)"]);

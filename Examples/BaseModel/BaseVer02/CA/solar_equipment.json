@@ -98,7 +98,7 @@
       }
     }
   ],
- "solar_modules": [
+  "solar_modules": [
     {
       "REC260PE": {
         "TYPE": "solar_core::SolarModuleBL",
@@ -256,6 +256,78 @@
       "REC275TP": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "REC275TP",
+        "Origin": "Import",
+        "STC Power Rating": "275",
+        "Length": "1665",
+        "Width": "991",
+        "Color": "Black",
+        "Peak Efficiency": "0.1667",
+        "Manufacturer Id": "FORMULA::RANDOM",
+        "Pattern": "Window-paint",
+        "Price (from manufacturer)": "1.0",
+        "Warranty length": "25.0",
+        "Degradation after 10 years": 0.1,
+        "Price (from reseller)": "250"
+      }
+    },
+    {
+      "REC275T1": {
+        "TYPE": "solar_core::SolarModuleBL",
+        "Name": "REC275T1",
+        "Origin": "Import",
+        "STC Power Rating": "275",
+        "Length": "1665",
+        "Width": "991",
+        "Color": "Black",
+        "Peak Efficiency": "0.1667",
+        "Manufacturer Id": "FORMULA::RANDOM",
+        "Pattern": "Window-paint",
+        "Price (from manufacturer)": "1.0",
+        "Warranty length": "25.0",
+        "Degradation after 10 years": 0.1,
+        "Price (from reseller)": "250"
+      }
+    },
+    {
+      "REC275T2": {
+        "TYPE": "solar_core::SolarModuleBL",
+        "Name": "REC275T2",
+        "Origin": "Import",
+        "STC Power Rating": "275",
+        "Length": "1665",
+        "Width": "991",
+        "Color": "Black",
+        "Peak Efficiency": "0.1667",
+        "Manufacturer Id": "FORMULA::RANDOM",
+        "Pattern": "Window-paint",
+        "Price (from manufacturer)": "1.0",
+        "Warranty length": "25.0",
+        "Degradation after 10 years": 0.1,
+        "Price (from reseller)": "250"
+      }
+    },
+    {
+      "REC275T3": {
+        "TYPE": "solar_core::SolarModuleBL",
+        "Name": "REC275T3",
+        "Origin": "Import",
+        "STC Power Rating": "275",
+        "Length": "1665",
+        "Width": "991",
+        "Color": "Black",
+        "Peak Efficiency": "0.1667",
+        "Manufacturer Id": "FORMULA::RANDOM",
+        "Pattern": "Window-paint",
+        "Price (from manufacturer)": "1.0",
+        "Warranty length": "25.0",
+        "Degradation after 10 years": 0.1,
+        "Price (from reseller)": "250"
+      }
+    },
+        {
+      "REC275T4": {
+        "TYPE": "solar_core::SolarModuleBL",
+        "Name": "REC275T4",
         "Origin":  "Import",
         "STC Power Rating": "275",
         "Length": "1665",

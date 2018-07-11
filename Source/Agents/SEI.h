@@ -32,6 +32,7 @@ namespace solar_core
      
      */
     class MesMarketingSEI;
+	class MesMarketingSEIDirect;
     class MesMarketingSEIOnlineQuote;
     class MesMarketingSEIPreliminaryQuote;
     class MesDesign;

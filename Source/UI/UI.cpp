@@ -85,9 +85,9 @@ UI::save(std::string path_to_save_file_)
         average_price_per_watt = accum_price_per_watt/total_watt;
         
 		(*save_data)[i][3] = average_price_per_watt;
-		if (save_data_raw[i].size() != 0.0) 
+		if ((*save_data_raw)[i].size() != 0.0)
 		{
-			(*save_data)[i][4] = price_per_watt / save_data_raw[i].size();
+			(*save_data)[i][4] = price_per_watt / (*save_data_raw)[i].size();
 		}
 		else 
 		{
@@ -214,6 +214,10 @@ UI::save(std::string path_to_save_file_)
 			price_per_watt = project->design->design->total_costs / project->design->design->DC_size;
 			out_file << price_per_watt << ",";
 			out_file << project->design->design->DC_size << ",";
+			out_file << project->design->design->PV_module->origin << ",";
+			out_file << project->design->design->PV_module->efficiency << ",";
+			out_file << project->sei->params[solar_core::EParamTypes::SEIEquipmentType] << ",";
+			out_file << project->sei->params[solar_core::EParamTypes::SEIInteractionType] << ",";
 			out_file << project->is_direct_marketing << std::endl;
 
 		};

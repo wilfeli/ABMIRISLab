@@ -31,6 +31,14 @@ MarketingInst::MarketingInst(const PropertyTree& pt_, W* w_)
     {
         params[EnumFactory::ToEParamTypes(iter.first)] = serialize::solve_str_formula<double>(iter.second, *w->rand_market);
     };
+
+	params[EParamTypes::MarketingMaxNToDrawPerTimeUnit] = WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit];
+#ifdef ABMS_DEBUG_MODE
+	//for (auto& iter : params) 
+	//{
+	//	std::cout << iter.first << " " << iter.second << std::endl; 
+	//};
+#endif
 }
 
 MarketingInst::MarketingInst(const DocumentRJ& pt_, W* w_)
@@ -110,7 +118,7 @@ void MarketingInst::act_tick()
     std::size_t j = 0;
 //    std::cout << WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit] << std::endl;
 //    std::cout << w->hhs.size();
-    for (auto i = 0; i < WorldSettings::instance().params_exog[EParamTypes::MarketingMaxNToDrawPerTimeUnit]; ++i)
+    for (auto i = 0; i < params[EParamTypes::MarketingMaxNToDrawPerTimeUnit]; ++i)
     {
         j = rng_agents();
 #ifdef ABMS_DEBUG_MODE

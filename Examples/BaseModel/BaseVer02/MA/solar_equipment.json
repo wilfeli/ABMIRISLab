@@ -98,12 +98,11 @@
       }
     }
   ],
- "solar_modules": [
+  "solar_modules": [
     {
       "REC260PE": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "REC260PE",
-        "Origin":  "Import",
         "PTC Power Rating": "234.4",
         "STC Power Rating": "260.0",
         "STC Power per unit of area": "157.6",
@@ -124,7 +123,6 @@
       "KU260-6XPA": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "KU260-6XPA",
-        "Origin":  "Import",
         "http": "http://www.solarhub.com/product-catalog/pv-modules/58689-KU260-6XPA-Kyocera-Solar",
         "STC Power Rating": "260.0",
         "Length": "1637.0",
@@ -143,7 +141,6 @@
       "KU265-6ZPA": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "KU265-6ZPA",
-        "Origin":  "Import",
         "STC Power Rating": "265.0",
         "Length": "1637.0",
         "Width": "969.0",
@@ -161,7 +158,6 @@
       "SPR-230NE-BLK-D": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SPR-230NE-BLK-D",
-        "Origin":  "Domestic",
         "STC Power Rating": "230.0",
         "Length": "1559",
         "Width": "708",
@@ -183,7 +179,6 @@
       "SW 280 Mono Black": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SW 280 Mono Black",
-        "Origin":  "Domestic",
         "STC Power Rating": "280.0",
         "Length": "1675",
         "Width": "1001",
@@ -202,7 +197,6 @@
       "SPR-X20-250-BLK": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SPR-X20-250-BLK",
-        "Origin":  "Domestic",
         "STC Power Rating": "250.0",
         "Length": "1559",
         "Width": "798",
@@ -220,7 +214,6 @@
       "Q.PRO BFR - G3 260": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "Q.PRO BFR - G3 260",
-        "Origin":  "Import",
         "STC Power Rating": "260.0",
         "Length": "1670",
         "Width": "1000",
@@ -238,7 +231,6 @@
       "SPR-X21-345": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SPR-X21-345",
-        "Origin":  "Domestic",
         "STC Power Rating": "345",
         "Length": "1559",
         "Width": "1046",
@@ -256,7 +248,6 @@
       "REC275TP": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "REC275TP",
-        "Origin":  "Import",
         "STC Power Rating": "275",
         "Length": "1665",
         "Width": "991",
@@ -274,7 +265,6 @@
       "SW 275 Mono Black": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SW 275 Mono Black",
-        "Origin":  "Domestic",
         "STC Power Rating": "275",
         "Length": "1675",
         "Width": "1001",
@@ -292,7 +282,6 @@
       "SW250 Poly": {
         "TYPE": "solar_core::SolarModuleBL",
         "Name": "SW250 Poly",
-        "Origin":  "Import",
         "STC Power Rating": "250",
         "Length": "1675",
         "Width": "1001",

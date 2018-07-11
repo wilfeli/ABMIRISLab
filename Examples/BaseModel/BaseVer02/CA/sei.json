@@ -62,19 +62,19 @@
       "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
     },
     {
-      "EParamTypes::SEIFrequencyDecPrice": 5
+      "EParamTypes::SEIFrequencyDecPrice": 52
     },
     {
       "EParamTypes::SEITimeLUForMarketing": 2500000
     },
     {
-      "EParamTypes::SEITimeLUForDesign": 350
+      "EParamTypes::SEITimeLUForDesign": 250
     },
     {
       "EparamTypes::SEITimeLUForAdministration": 2000000
     },
     {
-      "EParamTypes::SEITimeLUForPermit": 200
+      "EParamTypes::SEITimeLUForPermit": 100
     },
     {
       "EParamTypes::SEIRating": "FORMULA::p.d.f.::CUSTOM"
@@ -92,7 +92,16 @@
       "EParamTypes::SEIWarranty": "FORMULA::p.d.f.::CUSTOM"
     },
     {
-      "EParamTypes::SEIStickyPrices": 1 
+      "EParamTypes::SEIStickyPrices": 1
+    },
+    {
+      "EParamTypes::SEIBOSPrice": 0.31
+    },
+    {
+      "EParamTypes::SEIThetaMin": 0.5
+    },
+    {
+      "EParamTypes::SEIThetaMax": 3.0
     }
   ],
   "technology_efficiency_bins": [
@@ -125,8 +134,8 @@
     "FORMULA::1.0"
   ],
   "THETA_profit": [
-    "FORMULA::p.d.f.::N_trunc(0.2, 0.05)",
-    0.1,
+    "FORMULA::p.d.f.::N_trunc(0.5, 0.05)",
+    0.5,
     2.8
   ],
   "THETA_reliability_prior": [
