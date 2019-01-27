@@ -1,0 +1,18 @@
+{
+  "type1": {
+    "scheme": {
+      "EParamTypes::SEIInteractionType": [-0.1372, 0.0489, 0.0884],
+      "EParamTypes::HOSEIDecisionTotalProjectTime": [0.158, 0.2038, -0.0623, -0.2995],
+      "EParamTypes::HOSEIDecisionEstimatedNetSavings": [-1.8048, -0.5059, 0.2713, 0.4857, 1.5537],
+      "EParamTypes::SEIWarranty": [-0.9385, 0.1549, 0.7836],
+      "EParamTypes::HOSEIDecisionUtilityNone": [0.1378],
+      "EParamTypes::SEIEquipmentType": [0.1495, -0.0188, -0.1307],
+      "EParamTypes::SEIRating": [-0.8314, 0.1341, 0.6973]
+    },
+    "frequency": 1,
+    "spline_points": {
+      "EParamTypes::HOSEIDecisionEstimatedNetSavings": [0.1, 0.25, 0.4, 0.55, 0.7],
+      "EParamTypes::HOSEIDecisionTotalProjectTime": [0.5, 1, 2, 4]
+    }
+  }
+}

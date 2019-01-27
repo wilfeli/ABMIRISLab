@@ -50,13 +50,13 @@
       "EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit": 1
     },
     {
-      "EparamTypes::SEIMaxNVisitsPerTimeUnit": 10
+      "EparamTypes::SEIMaxNVisitsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(100,10)"
     },
     {
       "EParamTypes::SEIProcessingTimeRequiredForDesign": 1
     },
     {
-      "EParamTypes::SEIMaxNInstallationsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(10,10)"
+      "EParamTypes::SEIMaxNInstallationsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(100,10)"
     },
     {
       "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10

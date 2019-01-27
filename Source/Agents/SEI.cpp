@@ -753,6 +753,8 @@ SEI::ac_estimate_price(PVDesign& design, std::shared_ptr<const PVProject> projec
     //in LU
     auto permit_difficulty_scale = WorldSettings::instance().params_exog[EParamTypes::AveragePermitDifficulty];
     auto total_project_time = permit_difficulty_scale * design.permit_difficulty;
+
+//	std::cout << permit_difficulty_scale << std::endl;
     
     //MARK: cont. 
     //assume that 1 person per 10 projects for the whole duration as a sales rep

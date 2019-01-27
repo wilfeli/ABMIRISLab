@@ -5,6 +5,14 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseEEModel|Win32">
+      <Configuration>ReleaseEEModel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseEEModel|x64">
+      <Configuration>ReleaseEEModel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseTestInit|Win32">
       <Configuration>ReleaseTestInit</Configuration>
       <Platform>Win32</Platform>
@@ -101,6 +109,7 @@
     <None Include="..\..\solar-model\Model\simple_model.py">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="..\Examples\BaseModel\basemodel.model" />
     <None Include="..\Examples\BaseModel\BaseVer02\CA\basemodel.model" />
@@ -135,6 +144,18 @@
     <None Include="..\Examples\BaseModel\solar_equipment.json" />
     <None Include="..\Examples\BaseModel\utility.json" />
     <None Include="..\Examples\BaseModel\w.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\distribution.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\distribution_hh.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\eemodel.model" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\g.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\geography.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\ho.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\joint_distribution_hh.csv" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\sei.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\sem.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\solar_equipment.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\utility.json" />
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\w.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B4520E93-A777-49D0-A371-9A501DC4D5C3}</ProjectGuid>
@@ -158,6 +179,11 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -169,6 +195,11 @@
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
@@ -187,6 +218,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -194,6 +228,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -209,6 +246,10 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -216,6 +257,9 @@
     <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|x64'">
+    <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|x64'">
     <IncludePath>$(ProjectDir)..\Source;$(ProjectDir)..\Source\ExternalTools\Eigen;$(ProjectDir)..\Source\ExternalTools\boost_1_60_0;$(ProjectDir)..\..\..\..\aimacro\rapidjson\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -262,6 +306,21 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -276,6 +335,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTestInit|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "$(ProjectDir)..\..\solar-model\Model\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEEModel|x64'">
     <ClCompile>
       <PreprocessorDefinitions>BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

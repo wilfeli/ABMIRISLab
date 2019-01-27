@@ -1,0 +1,39 @@
+{
+  "params": [
+    {
+      "EParamTypes::ElectricityBill": "FORMULA::p.d.f.::CUSTOM"
+    },
+    {
+      "EParamTypes::ElectricityConsumption": "FORMULA::p.d.f.::CUSTOM"
+    },
+    {
+      "EParamTypes::Income": "FORMULA::p.d.f.::CUSTOM"
+    },
+    {
+      "EParamTypes::HOMaxNVisitsPerTimeUnit": 5
+    },
+    {
+      "EParamTypes::CreditScore": 680
+    }
+  ],
+  "location": "FORMULA::p.d.f.::u_int(0, size)",
+  "House": {
+    "roof_age": "FORMULA::house_age::0.5",
+    "roof_size": "FORMULA::house_size::0.5",
+    "roof_effective_size": "FORMULA::0.25"
+  },
+  "quote_state": "EParamTypes::None",
+  "THETA_design": [
+    {
+      "EParamTypes::HODecPreliminaryQuote": [
+        "FORMULA::p.d.f.::u(0, 1)"
+      ]
+    }
+  ],
+  "THETA_params": [
+    1.5,
+    2,
+    0.02,
+    0.5
+  ]
+}

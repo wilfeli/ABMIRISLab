@@ -58,6 +58,9 @@
     <Filter Include="Resource Files\Ver02">
       <UniqueIdentifier>{f856503c-c073-4568-ab6f-7da3418317f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\EEModel">
+      <UniqueIdentifier>{7dd907dc-f9e6-4def-91d4-93c2a309b1ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Agents\G.h">
@@ -366,6 +369,42 @@
     </None>
     <None Include="..\Examples\BaseModel\BaseVer02\CA\w.json">
       <Filter>Resource Files\Ver02</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\distribution.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\distribution_hh.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\eemodel.model">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\g.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\geography.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\ho.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\joint_distribution_hh.csv">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\sei.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\sem.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\solar_equipment.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\utility.json">
+      <Filter>Resource Files\EEModel</Filter>
+    </None>
+    <None Include="..\Examples\EEModel_Jul-12-2018\RelBaseLearn08\CA\w.json">
+      <Filter>Resource Files\EEModel</Filter>
     </None>
   </ItemGroup>
 </Project>

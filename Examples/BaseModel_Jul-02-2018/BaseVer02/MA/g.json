@@ -1,0 +1,15 @@
+{
+    "params": [
+               {
+               "EParamTypes::GProcessingTimeRequiredForSchedulingPermitVisit": 2
+               },
+               {
+               "EParamTypes:GMaxNVisitsPerTimeUnit":100
+               },
+               {
+               "EParamTypes::GProcessingTimeRequiredForProcessingPermit":2
+               },
+               {"EParamTypes::GProcessingTimeRequiredForGrantingPermitForInstallation":2
+               }
+               ]
+}

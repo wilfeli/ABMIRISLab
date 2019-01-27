@@ -1,0 +1,150 @@
+{
+    "dec_solar_modules": [
+                          {
+                          "EParamTypes::SEIHighEfficiencyDesign": "REC260PE"
+                          },
+                          {
+                          "EParamTypes::SEIMidEfficiencyDesign": "REC260PE"
+                          },
+                          {
+                          "EParamTypes::SEILowEfficiencyDesign": "REC260PE"
+                          }
+                          ],
+    "params": [
+               {
+               "EParamTypes::EstimatedPricePerWatt": 2.8
+               },
+               {
+               "EParamTypes::SEIMaxNVisitsPerTimeUnit": 5
+               },
+               {
+               "EParamTypes::SEIMaxRoofAge": 1040
+               },
+               {
+               "EParamTypes::AveragePVCapacity": 5
+               },
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForPreliminaryQuote": 0
+               },
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForSchedulingFirstSiteVisit": 1
+               },
+               {
+               "EparamTypes::SEIMaxNVisitsPerTimeUnit": 10
+               },
+               {
+               "EParamTypes::SEIProcessingTimeRequiredForDesign": 1
+               },
+               {
+               "EParamTypes::SEIMaxNInstallationsPerTimeUnit": "FORMULA::p.d.f.::N_trunc(1,4)"
+               },
+               {
+               "EParamTypes::SEIFrequencyUpdateDesignTemplates": 10
+               },
+               {
+               "EParamTypes::SEITimeLUForMarketing" : 2500000
+               },
+               {
+               "EParamTypes::SEITimeLUForDesign": 350
+               },
+               {
+               "EparamTypes::SEITimeLUForAdministration": 2000000
+               },
+               {
+               "EParamTypes::SEITimeLUForPermit": 200
+               }
+               ],
+    "mes_marketing": "",
+    "dec_project_percentages": [
+                                0.5,
+                                0.8,
+                                1
+                                ],
+    "THETA_hard_costs": [
+                         "FORMULA::p.d.f.::N_trunc(2.5, 0.05)",
+                         "FORMULA::p.d.f.::N_trunc(-0.5, 0.05)"
+                         ],
+    "THETA_soft_costs": [
+                         "FORMULA::p.d.f.::N_trunc(100, 0.05)",
+                         "FORMULA::p.d.f.::N_trunc(150, 0.05)"
+                         ],
+    "THETA_profit": [
+                     "FORMULA::p.d.f.::N_trunc(0.3, 0.05)"
+                     ],
+    "THETA_reputation": [
+                         1,
+                         1
+                         ],
+    "THETA_exploration": {
+        "FORMULA::explorer": [
+                              1,
+                              0.25,
+                              5
+                              ],
+        "Share::explorer": 0.5,
+        "FORMULA::exploiter": [
+                               1.5,
+                               0.5,
+                               5
+                               ]
+    },
+    "THETA_Demand": [],
+    "X":[1.0,
+         0.1,
+         1.0,
+         0.1,
+         1.0
+    ],
+    "Mu_0": [
+             -0.005,
+             1.25,
+             0.005,
+             -0.5,
+             -0.005
+             ],
+    "Mu_0_scale_factor": 4.75,
+    "V_0": [
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.5
+            ],
+    "a_0": 1,
+    "b_0": 1,
+    "money": "FORMULA::p.d.f.::u(0, 10000)",
+    "location": "FORMULA::p.d.f.::u_int(0, size)",
+    "THETA_complexity_prior": [
+                               50,
+                               1,
+                               1,
+                               50
+                               ],
+    "THETA_reliability_prior": [
+                                1,
+                                25
+                                ],
+    "complexity_install_prior": 100,
+  "dec_design": "FORMULA::RANDOM",
+    "LearningMode": "RelBase"
+}
